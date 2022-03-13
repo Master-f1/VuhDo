@@ -68,7 +68,7 @@ VUHDO_I18N_RANK = "Уровень";
 
 -- Chat messages
 -- @EXACT = false
-VUHDO_I18N_COMMAND_LIST = "\n|cffffe566 - [ Команды VuhDo ] -|r";
+VUHDO_I18N_COMMAND_LIST = "|cffffe566 - [ Команды VuhDo ] -|r";
 VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566opt|r[ions] - настройки VuhDo";
 VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566res|r[et] - сбросить позицию панелей";
 VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566lock|r - вкл/выкл закрепление панелей";
@@ -80,16 +80,16 @@ VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566role|r - сб�
 VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566aegis x|r - Установить чувствительность обнаружения";
 VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566help,?|r - список данных команд\n";
 
-VUHDO_I18N_BAD_COMMAND = "Плохой аргумент! Введите '/vuhdo help' или '/vd ?' для получения списка команд.";
-VUHDO_I18N_CHAT_SHOWN = "|cffffe566shown|r.";
-VUHDO_I18N_CHAT_HIDDEN = "|cffffe566hidden|r.";
+VUHDO_I18N_BAD_COMMAND = "Неверно! Введите '/vuhdo help' или '/vd ?' для получения списка команд.";
+VUHDO_I18N_CHAT_SHOWN = "|cffffe566показать|r.";
+VUHDO_I18N_CHAT_HIDDEN = "|cffffe566скрыть|r.";
 VUHDO_I18N_MM_ICON = "Иконка у миникарты: ";
 VUHDO_I18N_MTS_BROADCASTED = "Основные танки переданы в рейд";
-VUHDO_I18N_PANELS_SHOWN = "Панель исцеления: |cffffe566shown|r.";
-VUHDO_I18N_PANELS_HIDDEN = "Панель исцеления: |cffffe566hidden|r.";
+VUHDO_I18N_PANELS_SHOWN = "Панель исцеления: |cffffe566показать|r.";
+VUHDO_I18N_PANELS_HIDDEN = "Панель исцеления: |cffffe566скрыть|r.";
 VUHDO_I18N_LOCK_PANELS_PRE = "Позиция панели: ";
-VUHDO_I18N_LOCK_PANELS_LOCKED = "|cffffe566locked|r.";
-VUHDO_I18N_LOCK_PANELS_UNLOCKED = "|cffffe566unlocked|r.";
+VUHDO_I18N_LOCK_PANELS_LOCKED = "|cffffe566заблокировать|r.";
+VUHDO_I18N_LOCK_PANELS_UNLOCKED = "|cffffe566разблокировать|r.";
 VUHDO_I18N_PANELS_RESET = "Позиция панели сброшена.";
 
 
@@ -97,7 +97,7 @@ VUHDO_I18N_PANELS_RESET = "Позиция панели сброшена.";
 -- @EXACT = false
 VUHDO_I18N_ROLE = "Роль";
 VUHDO_I18N_PRIVATE_TANK = "Личный танк";
-VUHDO_I18N_SET_BUFF = "Назначте баф";
+VUHDO_I18N_SET_BUFF = "Назначьте баф";
 
 
 -- Minimap
@@ -175,7 +175,7 @@ BINDING_NAME_VUHDO_KEY_ASSIGN_16 = "Мышь 16";
 BINDING_NAME_VUHDO_KEY_ASSIGN_SMART_BUFF = "Быстрый Бафф";
 
 VUHDO_I18N_MOUSE_OVER_BINDING = "Клавиши";
-VUHDO_I18N_UNASSIGNED = "(неназначенный)";
+VUHDO_I18N_UNASSIGNED = "(неназначенно)";
 
 
 -- #+V1.89
@@ -187,7 +187,7 @@ VUHDO_I18N_VEHICLES = "Транспорт";
 
 
 -- #+v1.94
-VUHDO_I18N_DEFAULT_RES_ANNOUNCE = "Вернись к жизни, прошу тебя!";
+VUHDO_I18N_DEFAULT_RES_ANNOUNCE = "Вернись к жизни!";
 
 -- #v+1.151
 VUHDO_I18N_MAIN_ASSISTS = "Помощник";
@@ -227,14 +227,14 @@ VUHDO_I18N_BUFF_ASSIGN_2 = "|r был назначен на |cffffe566";
 VUHDO_I18N_BUFF_ASSIGN_3 = "|r";
 VUHDO_I18N_RESS_ERR_1 = "Не может воскресить, ";
 VUHDO_I18N_RESS_ERR_2 = " встал призраком.";
-VUHDO_I18N_MACRO_KEY_ERR_1 = "ERROR: Keyboard mouse-over macro size exceeds limit for spell: ";
+VUHDO_I18N_MACRO_KEY_ERR_1 = "Ошибка: Keyboard mouse-over macro size exceeds limit for spell: ";
 VUHDO_I18N_MACRO_KEY_ERR_2 = "/256 Персонажи). Попробуйте уменьшить варианты автоматического пожара!!!";
-VUHDO_I18N_MACRO_NUM_ERR = "Maximum number of macros per character exceeded! Can't create Мышь macro for: ";
-VUHDO_I18N_SMARTBUFF_ERR_1 = "VuhDo: Unable to smart buff in combat!";
-VUHDO_I18N_SMARTBUFF_ERR_2 = "VuhDo: No buff target available for ";
-VUHDO_I18N_SMARTBUFF_ERR_3 = " players out of range for ";
-VUHDO_I18N_SMARTBUFF_ERR_4 = "VuhDo: No buff to cast.";
-VUHDO_I18N_SMARTBUFF_OKAY_1 = "VuhDo: Buffing |cffffffff";
+VUHDO_I18N_MACRO_NUM_ERR = "Максимальное количество макросов на персонаже! Не могу создать макрос для: ";
+VUHDO_I18N_SMARTBUFF_ERR_1 = "VuhDo: Невозможно использовать автобафф в бою!";
+VUHDO_I18N_SMARTBUFF_ERR_2 = "VuhDo: Цель недоступна для баффа ";
+VUHDO_I18N_SMARTBUFF_ERR_3 = " Игроки вне зоны для ";
+VUHDO_I18N_SMARTBUFF_ERR_4 = "VuhDo: Нет баффа.";
+VUHDO_I18N_SMARTBUFF_OKAY_1 = "VuhDo: Бафф есть |cffffffff";
 VUHDO_I18N_SMARTBUFF_OKAY_2 = "|r on ";
 VUHDO_I18N_SET_BUFF_TARGET_1 = "Настройка бафа цели для ";
 VUHDO_I18N_SET_BUFF_TARGET_2 = " to ";

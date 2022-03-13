@@ -273,7 +273,7 @@
             </Anchors>
             <Layers>
               <Layer>
-                <FontString name="$parentLabel" text="VUHDO_I18N_ORDERING" justifyH="LEFT" inherits="VuDoDefaultTitleFontTemplate">
+                <FontString name="$parentLabel" text="VUHDO_I18N_MOVE" justifyH="LEFT" inherits="VuDoDefaultTitleFontTemplate">
                 </FontString>
               </Layer>
             </Layers>
