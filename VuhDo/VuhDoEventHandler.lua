@@ -691,7 +691,7 @@ function VUHDO_slashCmd(aCommand)
 		--		end
 		--		VUHDO_seeProfiler();
 	elseif (aCommand == "?" or strfind(tCommandWord, "help") or aCommand == "") then
-		local tLines = VUHDO_splitString(VUHDO_I18N_COMMAND_LIST, "�");
+		local tLines = VUHDO_splitString(VUHDO_I18N_COMMAND_LIST, "");
 		local tCurLine;
 		for _, tCurLine in ipairs(tLines) do
 			VUHDO_MsgC(tCurLine);
