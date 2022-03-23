@@ -7,7 +7,6 @@ local twipe = table.wipe;
 local ceil = ceil;
 local pairs = pairs;
 
---
 local tModelArray;
 local tKeyArray;
 local tCnt;
@@ -31,7 +30,6 @@ function VUHDO_clearUndefinedModelEntries()
 
 end
 
---
 local tCnt;
 function VUHDO_initPanelModels()
 	twipe(VUHDO_PANEL_MODELS);
@@ -41,7 +39,6 @@ function VUHDO_initPanelModels()
 	end
 end
 
---
 local tIsShowModel;
 local tIsOmitEmpty;
 local tPanelNum, tModelArray;
@@ -76,6 +73,5 @@ function VUHDO_initDynamicPanelModels()
 				end
 			end
 		end
-
 	end
 end
