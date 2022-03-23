@@ -6,7 +6,6 @@ local pairs = pairs;
 
 VUHDO_PROFILES = {};
 
---
 VUHDO_DEBUG_AUTO_ARRANG = nil;
 VUHDO_IS_SHOWN_BY_GROUP = true;
 local tNumMembers;
@@ -68,14 +67,11 @@ function VUHDO_getAutoProfile()
 	return nil, nil;
 end
 
----------------------------------------------------------------------------------
-
 VUHDO_PROFILE_MODEL_MATCH_ALL = 0;
 VUHDO_PROFILE_MODEL_MATCH_CLASS = 1;
 VUHDO_PROFILE_MODEL_MATCH_TOON = 2;
 VUHDO_PROFILE_MODEL_MATCH_NEVER = 99;
 
---
 local tIndex, tValue;
 function VUHDO_getProfileNamed(aName)
 	for tIndex, tValue in pairs(VUHDO_PROFILES) do
@@ -86,7 +82,6 @@ function VUHDO_getProfileNamed(aName)
 	return nil, nil;
 end
 
---
 local function VUHDO_createNewProfile(aName)
 	local _, tProfile = VUHDO_getProfileNamed(VUHDO_CONFIG["CURRENT_PROFILE"]);
 	return {
@@ -105,7 +100,6 @@ local function VUHDO_createNewProfile(aName)
 
 end
 
---
 local function VUHDO_createNewProfileName(aName)
 	local tIdx = 1;
 	local tProfile = {};
@@ -123,7 +117,6 @@ end
 
 local VUHDO_TARGET_PROFILE_NAME = nil;
 
---
 local function VUHDO_askSaveProfileCallback(aButtonNum)
 	if (1 == aButtonNum) then -- Copy
 		VUHDO_TARGET_PROFILE_NAME = VUHDO_createNewProfileName(VUHDO_TARGET_PROFILE_NAME);
@@ -143,7 +136,6 @@ local function VUHDO_askSaveProfileCallback(aButtonNum)
 	VUHDO_updateProfileSelectCombo();
 end
 
---
 function VUHDO_saveProfile(aName)
 	local tExistingIndex, tExistingProfile = VUHDO_getProfileNamed(aName);
 	if (tExistingProfile ~= nil) then
@@ -151,10 +143,7 @@ function VUHDO_saveProfile(aName)
 
 		if (tExistingProfile["ORIGINATOR_TOON"] ~= VUHDO_PLAYER_NAME and not VUHDO_CONFIG["IS_ALWAYS_OVERWRITE_PROFILE"]) then
 
-			VuhDoThreeSelectFrameText:SetText(VUHDO_I18N_PROFILE_OVERWRITE_1 .. " \"" .. aName .. "\" " ..
-			VUHDO_I18N_PROFILE_OVERWRITE_2 .. " (" ..
-			tExistingProfile["ORIGINATOR_TOON"] .. ")." ..
-			VUHDO_I18N_PROFILE_OVERWRITE_3);
+			VuhDoThreeSelectFrameText:SetText(VUHDO_I18N_PROFILE_OVERWRITE_1 .. " \"" .. aName .. "\" " .. VUHDO_I18N_PROFILE_OVERWRITE_2 .. " (" .. tExistingProfile["ORIGINATOR_TOON"] .. ")." .. VUHDO_I18N_PROFILE_OVERWRITE_3);
 			VuhDoThreeSelectFrameButton1:SetText(VUHDO_I18N_COPY);
 			VuhDoThreeSelectFrameButton2:SetText(VUHDO_I18N_OVERWRITE);
 			VuhDoThreeSelectFrameButton3:SetText(VUHDO_I18N_DISCARD);
@@ -169,7 +158,6 @@ function VUHDO_saveProfile(aName)
 	end
 end
 
---
 function VUHDO_saveCurrentProfile()
 	local _, tProfile = VUHDO_getProfileNamed(VUHDO_CONFIG["CURRENT_PROFILE"]);
 	if (tProfile ~= nil and not tProfile["LOCKED"]) then
@@ -177,7 +165,6 @@ function VUHDO_saveCurrentProfile()
 	end
 end
 
---
 function VUHDO_saveCurrentProfilePanelPosition(aPanelNum)
 	local _, tProfile = VUHDO_getProfileNamed(VUHDO_CONFIG["CURRENT_PROFILE"]);
 	if (tProfile ~= nil and tProfile["PANEL_SETUP"] ~= nil) then
@@ -185,7 +172,6 @@ function VUHDO_saveCurrentProfilePanelPosition(aPanelNum)
 	end
 end
 
---
 local function VUHDO_isProfileRuleAllowed(tRule, aClass, aToon)
 	if (VUHDO_PROFILE_MODEL_MATCH_ALL == tRule) then
 		return true;
@@ -271,7 +257,6 @@ local VUHDO_PROFILE_MODEL = {
 	}
 };
 
---
 local tOriginatorClass = nil;
 local tOriginatorToon = nil;
 local function VUHDO_smartLoadFromProfile(aDestArray, aSourceArray, aProfileModel, aDerivedRule)
@@ -305,8 +290,7 @@ local function VUHDO_smartLoadFromProfile(aDestArray, aSourceArray, aProfileMode
 			if ("table" == type(tSourceValue)) then
 
 				if ("table" == type(tDestValue)) then
-					aDestArray[tKey] = VUHDO_smartLoadFromProfile(aDestArray[tKey], aSourceArray[tKey], tSubModel,
-						tRootRule or aDerivedRule);
+					aDestArray[tKey] = VUHDO_smartLoadFromProfile(aDestArray[tKey], aSourceArray[tKey], tSubModel, tRootRule or aDerivedRule);
 					-- else
 					-- VUHDO_Msg("Data structures incompatible in field: " .. tKey);
 				end
@@ -324,7 +308,6 @@ local function VUHDO_smartLoadFromProfile(aDestArray, aSourceArray, aProfileMode
 	return aDestArray;
 end
 
---
 local function VUHDO_fixDominantProfileSettings(aProfile)
 	local tCnt;
 
@@ -337,7 +320,6 @@ local function VUHDO_fixDominantProfileSettings(aProfile)
 	end
 end
 
---
 function VUHDO_loadProfileNoInit(aName)
 	local tIndex, tProfile = VUHDO_getProfileNamed(aName);
 	if (tIndex == nil) then
@@ -348,27 +330,19 @@ function VUHDO_loadProfileNoInit(aName)
 	tOriginatorClass = tProfile["ORIGINATOR_CLASS"];
 	tOriginatorToon = tProfile["ORIGINATOR_TOON"];
 
-	VUHDO_CONFIG = VUHDO_smartLoadFromProfile(VUHDO_CONFIG, tProfile["CONFIG"], VUHDO_PROFILE_MODEL["CONFIG"],
-	VUHDO_PROFILE_MODEL_MATCH_ALL);
-	VUHDO_PANEL_SETUP = VUHDO_smartLoadFromProfile(VUHDO_PANEL_SETUP, tProfile["PANEL_SETUP"],
-	VUHDO_PROFILE_MODEL["PANEL_SETUP"], VUHDO_PROFILE_MODEL_MATCH_ALL);
-	VUHDO_POWER_TYPE_COLORS = VUHDO_smartLoadFromProfile(VUHDO_POWER_TYPE_COLORS, tProfile["POWER_TYPE_COLORS"],
-	VUHDO_PROFILE_MODEL["POWER_TYPE_COLORS"], VUHDO_PROFILE_MODEL_MATCH_ALL);
-	VUHDO_SPELL_CONFIG = VUHDO_smartLoadFromProfile(VUHDO_SPELL_CONFIG, tProfile["SPELL_CONFIG"],
-	VUHDO_PROFILE_MODEL["SPELL_CONFIG"], VUHDO_PROFILE_MODEL_MATCH_ALL);
-	VUHDO_BUFF_SETTINGS = VUHDO_smartLoadFromProfile(VUHDO_BUFF_SETTINGS, tProfile["BUFF_SETTINGS"],
-	VUHDO_PROFILE_MODEL["BUFF_SETTINGS"], VUHDO_PROFILE_MODEL_MATCH_ALL);
-	VUHDO_BUFF_ORDER = VUHDO_smartLoadFromProfile(VUHDO_BUFF_ORDER, tProfile["BUFF_ORDER"],
-	VUHDO_PROFILE_MODEL["BUFF_ORDER"], VUHDO_PROFILE_MODEL_MATCH_ALL);
-	VUHDO_INDICATOR_CONFIG = VUHDO_smartLoadFromProfile(VUHDO_INDICATOR_CONFIG, tProfile["INDICATOR_CONFIG"],
-	VUHDO_PROFILE_MODEL["INDICATOR_CONFIG"], VUHDO_PROFILE_MODEL_MATCH_ALL);
+	VUHDO_CONFIG = VUHDO_smartLoadFromProfile(VUHDO_CONFIG, tProfile["CONFIG"], VUHDO_PROFILE_MODEL["CONFIG"], VUHDO_PROFILE_MODEL_MATCH_ALL);
+	VUHDO_PANEL_SETUP = VUHDO_smartLoadFromProfile(VUHDO_PANEL_SETUP, tProfile["PANEL_SETUP"], VUHDO_PROFILE_MODEL["PANEL_SETUP"], VUHDO_PROFILE_MODEL_MATCH_ALL);
+	VUHDO_POWER_TYPE_COLORS = VUHDO_smartLoadFromProfile(VUHDO_POWER_TYPE_COLORS, tProfile["POWER_TYPE_COLORS"], VUHDO_PROFILE_MODEL["POWER_TYPE_COLORS"], VUHDO_PROFILE_MODEL_MATCH_ALL);
+	VUHDO_SPELL_CONFIG = VUHDO_smartLoadFromProfile(VUHDO_SPELL_CONFIG, tProfile["SPELL_CONFIG"], VUHDO_PROFILE_MODEL["SPELL_CONFIG"], VUHDO_PROFILE_MODEL_MATCH_ALL);
+	VUHDO_BUFF_SETTINGS = VUHDO_smartLoadFromProfile(VUHDO_BUFF_SETTINGS, tProfile["BUFF_SETTINGS"], VUHDO_PROFILE_MODEL["BUFF_SETTINGS"], VUHDO_PROFILE_MODEL_MATCH_ALL);
+	VUHDO_BUFF_ORDER = VUHDO_smartLoadFromProfile(VUHDO_BUFF_ORDER, tProfile["BUFF_ORDER"], VUHDO_PROFILE_MODEL["BUFF_ORDER"], VUHDO_PROFILE_MODEL_MATCH_ALL);
+	VUHDO_INDICATOR_CONFIG = VUHDO_smartLoadFromProfile(VUHDO_INDICATOR_CONFIG, tProfile["INDICATOR_CONFIG"], VUHDO_PROFILE_MODEL["INDICATOR_CONFIG"], VUHDO_PROFILE_MODEL_MATCH_ALL);
 
 	VUHDO_fixDominantProfileSettings(tProfile);
 	VUHDO_CONFIG["CURRENT_PROFILE"] = aName;
 	VUHDO_Msg(VUHDO_I18N_PROFILE_LOADED .. aName);
 end
 
---
 function VUHDO_loadProfile(aName)
 	VUHDO_loadProfileNoInit(aName);
 	VUHDO_initAllBurstCaches();
@@ -403,8 +377,8 @@ function VUHDO_importSkinsArrangements()
 					["NAME"] = tName,
 					["ORIGINATOR_CLASS"] = -1,
 					["ORIGINATOR_TOON"] = "*ImportBot*",
-					["PANEL_SETUP"] = { },
-					["BUFF_SETTINGS"] = { }
+					["PANEL_SETUP"] = {},
+					["BUFF_SETTINGS"] = {}
 				};
 
 				for tCnt = 1, VUHDO_MAX_PANELS do
@@ -413,7 +387,7 @@ function VUHDO_importSkinsArrangements()
 
 				tProfile["BUFF_SETTINGS"]["CONFIG"] = VUHDO_deepCopyTable(tArrangement["DATA"]["BUFF_CONFIG"]);
 				tinsert(VUHDO_PROFILES, tProfile);
-				--VUHDO_Msg("Profile import: " .. tName);
+				-- VUHDO_Msg("Profile import: " .. tName);
 			end
 		end
 		if (VUHDO_CONFIG["AUTO_ARRANGEMENTS"] ~= nil) then
@@ -425,4 +399,4 @@ function VUHDO_importSkinsArrangements()
 		VUHDO_CONFIG["CURRENT_ARRANGEMENT"] = nil
 	end
 end
---]]
+]]
