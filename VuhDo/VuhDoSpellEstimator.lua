@@ -21,7 +21,7 @@ VUHDO_GCD_SPELLS = {
 	["PALADIN"] = GetSpellInfo(635), -- Holy Light
 	["MAGE"] = GetSpellInfo(133), -- Fire Ball
 	["WARLOCK"] = GetSpellInfo(686), -- Shadow Bolt
-	["SHAMAN"] = GetSpellInfo(331), -- Healing Wave
+	["SHAMAN"] = GetSpellInfo(331), --  Healing Wave
 	["DRUID"] = GetSpellInfo(5185), -- Healing Touch
 	["PRIEST"] = GetSpellInfo(2050), -- Lesser Heal
 	["DEATHKNIGHT"] = GetSpellInfo(48266) -- Blood Presence
@@ -32,20 +32,18 @@ local GetSpellName = GetSpellName;
 local GetSpellInfo = GetSpellInfo;
 local pairs = pairs;
 
---[[
-	target
-	type
-	casttime (auto)
-	regulartime
-	lasts
-	nobonus
-	icon (auto)
-	present (auto)
-	<rangx>.average (auto)
-	<rangx>.level {}
-	<rangx>.present (auto)
-	<rangx>.bonus
-]]
+-- target
+-- type
+-- casttime (auto)
+-- regulartime
+-- lasts
+-- nobonus
+-- icon (auto)
+-- present (auto)
+-- <rangx>.average (auto)
+-- <rangx>.level { }
+-- <rangx>.present (auto)
+-- <rangx>.bonus
 
 -- All healing spells and their ranks we will take notice of
 VUHDO_SPELLS = {
@@ -232,12 +230,12 @@ VUHDO_SPELLS = {
 	},
 
 	-- custom
-	[VUHDO_SPELL_ID_POAK] = {-- Weapon proc
+	[VUHDO_SPELL_ID_POAK] = { -- Weapon proc
 		["target"] = VUHDO_SPELL_TARGET_TARGET,
 		["type"] = VUHDO_SPELL_TYPE_HOT,
 		["nodefault"] = true
 	},
-	[VUHDO_SPELL_ID_FOUNTAIN_OF_LIGHT] = {-- Weapon proc
+	[VUHDO_SPELL_ID_FOUNTAIN_OF_LIGHT] = { -- Weapon proc
 		["target"] = VUHDO_SPELL_TARGET_TARGET,
 		["type"] = VUHDO_SPELL_TYPE_HOT,
 		["nodefault"] = true
