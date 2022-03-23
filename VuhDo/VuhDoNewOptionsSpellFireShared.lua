@@ -1,6 +1,5 @@
---
 function VUHDO_activateLayout(aName)
-  local tCnt;
+	local tCnt;
 	VUHDO_SPELL_ASSIGNMENTS = VUHDO_deepCopyTable(VUHDO_SPELL_LAYOUTS[aName]["MOUSE"]);
 	if (VUHDO_SPELL_LAYOUTS[aName]["HOSTILE_MOUSE"] ~= nil) then
 		VUHDO_HOSTILE_SPELL_ASSIGNMENTS = VUHDO_deepCopyTable(VUHDO_SPELL_LAYOUTS[aName]["HOSTILE_MOUSE"]);
