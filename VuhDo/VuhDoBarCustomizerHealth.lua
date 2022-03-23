@@ -1,6 +1,6 @@
 local VUHDO_NAME_TEXTS = {};
 
--- BURST CACHE ---------------------------------------------------
+-- BURST CACHE
 
 local VUHDO_getHealthBar;
 local VUHDO_getBarText;
@@ -86,8 +86,6 @@ function VUHDO_customHealthInitBurst()
 	twipe(VUHDO_NAME_TEXTS);
 end
 
-----------------------------------------------------
-
 function VUHDO_resetNameTextCache()
 	twipe(VUHDO_NAME_TEXTS);
 end
@@ -96,7 +94,6 @@ local tIncColor = {
 	["useBackground"] = true
 };
 
---
 local function VUHDO_getUnitHealthModiPercent(anInfo, aModifier)
 	if (anInfo["healthmax"] == 0) then
 		return 0;
@@ -105,7 +102,6 @@ local function VUHDO_getUnitHealthModiPercent(anInfo, aModifier)
 	end
 end
 
---
 local tOpacity;
 local function VUHDO_setStatusBarColor(aBar, aColor)
 	if (aColor["useOpacity"]) then
@@ -121,7 +117,6 @@ local function VUHDO_setStatusBarColor(aBar, aColor)
 	end
 end
 
---
 local function VUHDO_getKiloText(aNumber, aSetup)
 	if (abs(aNumber) < 100 or aSetup["LIFE_TEXT"]["verbose"]) then
 		return aNumber;
@@ -130,7 +125,6 @@ local function VUHDO_getKiloText(aNumber, aSetup)
 	return floor(aNumber * 0.01) * 0.1 .. "k";
 end
 
---
 local tOverheal;
 local tRatio;
 local tIsOverhealText;
@@ -195,8 +189,7 @@ local function _VUHDO_updateIncHeal(aUnit)
 						VUHDO_getOverhealPanel(VUHDO_getHealthBar(tButton, 1)):SetScale(1.5 * tScale);
 					end
 
-					VUHDO_getOverhealText(VUHDO_getHealthBar(tButton, 1)):SetText(
-						"+" .. floor(tOverheal * 0.01) * 0.1 .. "k");
+					VUHDO_getOverhealText(VUHDO_getHealthBar(tButton, 1)):SetText("+" .. floor(tOverheal * 0.01) * 0.1 .. "k");
 				else
 					VUHDO_getOverhealText(VUHDO_getHealthBar(tButton, 1)):SetText("");
 				end
@@ -218,7 +211,6 @@ local function _VUHDO_updateIncHeal(aUnit)
 	end
 end
 
---
 local function VUHDO_updateIncHeal(aUnit)
 	_VUHDO_updateIncHeal(aUnit)
 
@@ -231,7 +223,6 @@ local function VUHDO_updateIncHeal(aUnit)
 	end
 end
 
---
 VUHDO_CUSTOM_INFO = {
 	["number"] = 1,
 	["range"] = true,
@@ -255,7 +246,6 @@ VUHDO_CUSTOM_INFO = {
 };
 local VUHDO_CUSTOM_INFO = VUHDO_CUSTOM_INFO;
 
---
 local tUnit;
 local function VUHDO_getDisplayUnit(aButton)
 	tUnit = aButton:GetAttribute("unit");
@@ -274,7 +264,6 @@ local function VUHDO_getDisplayUnit(aButton)
 	end
 end
 
---
 local tMissLife;
 local tIsName, tIsLife, tIsLifeInName;
 local tTextString;
@@ -309,8 +298,7 @@ function VUHDO_customizeText(aButton, aMode, anIsTarget)
 	tSetup = VUHDO_PANEL_SETUP[VUHDO_BUTTON_CACHE[aButton]];
 	tLifeConfig = tSetup["LIFE_TEXT"];
 
-	tIsHideIrrel = tLifeConfig["hideIrrelevant"] and VUHDO_getUnitHealthPercent(tInfo) >=
-					   VUHDO_CONFIG["EMERGENCY_TRIGGER"];
+	tIsHideIrrel = tLifeConfig["hideIrrelevant"] and VUHDO_getUnitHealthPercent(tInfo) >= VUHDO_CONFIG["EMERGENCY_TRIGGER"];
 	tIsShowLife = tLifeConfig["show"] and not tIsHideIrrel;
 
 	tIsLifeInName = tLifeConfig["show"] and (1 == tLifeConfig["position"] -- VUHDO_LT_POS_RIGHT
@@ -364,9 +352,9 @@ function VUHDO_customizeText(aButton, aMode, anIsTarget)
 				tTextString = "d/c-" .. tTextString;
 			elseif (tInfo["dead"]) then
 				if (UnitIsGhost(tUnit)) then
-					tTextString = "|cffff0000ghost|r-" .. tTextString;
+					tTextString = VUHDO_I18N_TT_GHOST .. tTextString;
 				else
-					tTextString = "rip-" .. tTextString;
+					tTextString = VUHDO_I18N_TT_DEAD .. tTextString;
 				end
 			else
 				if ("focus" == tUnit) then
@@ -374,7 +362,7 @@ function VUHDO_customizeText(aButton, aMode, anIsTarget)
 				elseif ("target" == tUnit) then
 					tTextString = "|cffff0000tar|r-" .. tTextString;
 				elseif (tInfo["afk"]) then
-					tTextString = "afk-" .. tTextString;
+					tTextString = VUHDO_I18N_TT_AFK .. tTextString;
 				elseif (tOwnerInfo ~= nil and tOwnerInfo["isVehicle"]) then
 					tTextString = "|cffff0000pet|r-" .. tTextString;
 				end
@@ -405,8 +393,7 @@ function VUHDO_customizeText(aButton, aMode, anIsTarget)
 				tLifeString = "";
 			end
 		else -- VUHDO_LT_MODE_LEFT
-			tLifeString = VUHDO_getKiloText(tLifeAmount, tSetup) .. " / " ..
-							  VUHDO_getKiloText(tInfo["healthmax"], tSetup);
+			tLifeString = VUHDO_getKiloText(tLifeAmount, tSetup) .. " / " .. VUHDO_getKiloText(tInfo["healthmax"], tSetup);
 		end
 
 		if (not tIsLifeInName) then
@@ -425,8 +412,7 @@ function VUHDO_customizeText(aButton, aMode, anIsTarget)
 	-- Aggro Text
 	if (tIsName) then
 		if (tInfo["aggro"] and sIsAggroText) then
-			tTextString = "|cffff2020" .. VUHDO_THREAT_CFG["AGGRO_TEXT_LEFT"] .. "|r" .. tTextString .. "|cffff2020" ..
-							  VUHDO_THREAT_CFG["AGGRO_TEXT_RIGHT"] .. "|r";
+			tTextString = "|cffff2020" .. VUHDO_THREAT_CFG["AGGRO_TEXT_LEFT"] .. "|r" .. tTextString .. "|cffff2020" .. VUHDO_THREAT_CFG["AGGRO_TEXT_RIGHT"] .. "|r";
 		end
 
 		VUHDO_getBarText(tHealthBar):SetText(tTextString);
@@ -435,7 +421,6 @@ end
 
 local VUHDO_customizeText = VUHDO_customizeText;
 
---
 local tInfo;
 function VUHDO_customizeBarSize(aButton)
 	_, tInfo = VUHDO_getDisplayUnit(aButton);
@@ -456,7 +441,6 @@ function VUHDO_customizeBarSize(aButton)
 	end
 end
 
---
 local tFlashBar;
 local tScaling;
 local function VUHDO_customizeDamageFlash(aButton, aLossPercent)
@@ -469,10 +453,8 @@ local function VUHDO_customizeDamageFlash(aButton, aLossPercent)
 	end
 end
 
---
 local tAllButtons, tButton, tHealthBar, tQuota, tTargetQuota;
-function VUHDO_healthBarBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, aCounter, aMaxValue, aColor, aBuffName,
-	aBouquetName, aLevel, aCurrValue2)
+function VUHDO_healthBarBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, aCounter, aMaxValue, aColor, aBuffName, aBouquetName, aLevel, aCurrValue2)
 	aMaxValue = aMaxValue or 0;
 	aCurrValue = aCurrValue or 0;
 
@@ -498,10 +480,8 @@ function VUHDO_healthBarBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, a
 					if (aColor ~= nil) then
 						tHealthBar:SetStatusBarColor(aColor["R"], aColor["G"], aColor["B"], aColor["O"]);
 						if (aColor["useText"]) then
-							VUHDO_getBarText(tHealthBar):SetTextColor(aColor["TR"], aColor["TG"], aColor["TB"],
-								aColor["TO"]);
-							VUHDO_getLifeText(tHealthBar):SetTextColor(aColor["TR"], aColor["TG"], aColor["TB"],
-								aColor["TO"]);
+							VUHDO_getBarText(tHealthBar):SetTextColor(aColor["TR"], aColor["TG"], aColor["TB"], aColor["TO"]);
+							VUHDO_getLifeText(tHealthBar):SetTextColor(aColor["TR"], aColor["TG"], aColor["TB"], aColor["TO"]);
 						end
 					end
 					tHealthBar:SetValue(tQuota);
@@ -548,9 +528,7 @@ function VUHDO_healthBarBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, a
 
 end
 
---
-function VUHDO_healthBarBouquetCallbackCustom(aUnit, anIsActive, anIcon, aCurrValue, aCounter, aMaxValue, aColor,
-	aBuffName, aBouquetName)
+function VUHDO_healthBarBouquetCallbackCustom(aUnit, anIsActive, anIcon, aCurrValue, aCounter, aMaxValue, aColor, aBuffName, aBouquetName)
 	aMaxValue = aMaxValue or 0;
 	aCurrValue = aCurrValue or 0;
 
@@ -576,10 +554,8 @@ function VUHDO_healthBarBouquetCallbackCustom(aUnit, anIsActive, anIcon, aCurrVa
 					if (aColor ~= nil) then
 						tHealthBar:SetStatusBarColor(aColor["R"], aColor["G"], aColor["B"], aColor["O"]);
 						if (aColor["useText"]) then
-							VUHDO_getBarText(tHealthBar):SetTextColor(aColor["TR"], aColor["TG"], aColor["TB"],
-								aColor["TO"]);
-							VUHDO_getLifeText(tHealthBar):SetTextColor(aColor["TR"], aColor["TG"], aColor["TB"],
-								aColor["TO"]);
+							VUHDO_getBarText(tHealthBar):SetTextColor(aColor["TR"], aColor["TG"], aColor["TB"], aColor["TO"]);
+							VUHDO_getLifeText(tHealthBar):SetTextColor(aColor["TR"], aColor["TG"], aColor["TB"], aColor["TO"]);
 						end
 					end
 					tHealthBar:SetValue(tQuota);
@@ -591,10 +567,8 @@ function VUHDO_healthBarBouquetCallbackCustom(aUnit, anIsActive, anIcon, aCurrVa
 	end
 end
 
---
 local tAllButtons, tButton, tAggroBar;
-function VUHDO_aggroBarBouquetCallback(aUnit, anIsActive, anIcon, aTimer, aCounter, aDuration, aColor, aBuffName,
-	aBouquetName)
+function VUHDO_aggroBarBouquetCallback(aUnit, anIsActive, anIcon, aTimer, aCounter, aDuration, aColor, aBuffName, aBouquetName)
 	tAllButtons = VUHDO_getUnitButtons(aUnit);
 	if (tAllButtons ~= nil) then
 		for _, tButton in pairs(tAllButtons) do
@@ -609,10 +583,8 @@ function VUHDO_aggroBarBouquetCallback(aUnit, anIsActive, anIcon, aTimer, aCount
 	end
 end
 
---
 local tAllButtons, tButton, tBar, tQuota;
-function VUHDO_backgroundBarBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, aCounter, aMaxValue, aColor,
-	aBuffName, aBouquetName)
+function VUHDO_backgroundBarBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, aCounter, aMaxValue, aColor, aBuffName, aBouquetName)
 	aMaxValue = aMaxValue or 0;
 	aCurrValue = aCurrValue or 0;
 
@@ -640,7 +612,6 @@ function VUHDO_backgroundBarBouquetCallback(aUnit, anIsActive, anIcon, aCurrValu
 	end
 end
 
---
 local tTexture;
 local tIcon;
 local tUnit;
@@ -662,7 +633,6 @@ function VUHDO_customizeHealButton(aButton)
 end
 local VUHDO_customizeHealButton = VUHDO_customizeHealButton;
 
---
 local tInfo, tCnt, tAlpha;
 local function VUHDO_customizeDebuffIconsRange(aButton)
 	_, tInfo = VUHDO_getDisplayUnit(aButton);
@@ -680,7 +650,6 @@ local function VUHDO_customizeDebuffIconsRange(aButton)
 	end
 end
 
---
 local tInfo;
 local tAllButtons;
 local tButton;
@@ -722,7 +691,7 @@ function VUHDO_updateHealthBarsFor(aUnit, anUpdateMode)
 
 	elseif (5 == anUpdateMode) then -- VUHDO_UPDATE_RANGE
 		for _, tButton in pairs(tAllButtons) do
-			VUHDO_customizeText(tButton, 7, false); -- f�r d/c tag -- VUHDO_UPDATE_AGGRO
+			VUHDO_customizeText(tButton, 7, false); -- for d/c tag -- VUHDO_UPDATE_AGGRO
 			VUHDO_customizeDebuffIconsRange(tButton);
 		end
 
@@ -755,9 +724,9 @@ function VUHDO_updateHealthBarsFor(aUnit, anUpdateMode)
 		VUHDO_updateIncHeal(aUnit);
 	end
 
-	------------------
-	-- In-Raid Targets
-	------------------
+---------------------
+-- In-Raid Targets --
+---------------------
 
 	tAllButtons = VUHDO_IN_RAID_TARGET_BUTTONS[tInfo["name"]];
 	if (tAllButtons == nil) then
@@ -786,7 +755,6 @@ function VUHDO_updateHealthBarsFor(aUnit, anUpdateMode)
 	end
 end
 
---
 local VUHDO_getHealButton = VUHDO_getHealButton;
 local tButton;
 local tUnit;
@@ -795,7 +763,7 @@ function VUHDO_updateAllPanelBars(aPanelNum)
 	tPanelButtons = VUHDO_getPanelButtons(aPanelNum);
 	for _, tButton in pairs(tPanelButtons) do
 		if (tButton:GetAttribute("unit") == nil) then
-			break
+			break;
 		end
 		VUHDO_customizeHealButton(tButton);
 	end
@@ -808,7 +776,6 @@ function VUHDO_updateAllPanelBars(aPanelNum)
 end
 local VUHDO_updateAllPanelBars = VUHDO_updateAllPanelBars;
 
---
 local tCnt;
 VUHDO_REMOVE_HOTS = true;
 function VUHDO_updateAllRaidBars()
@@ -828,3 +795,4 @@ function VUHDO_updateAllRaidBars()
 		VUHDO_REMOVE_HOTS = true;
 	end
 end
+
