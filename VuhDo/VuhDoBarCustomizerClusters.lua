@@ -7,7 +7,6 @@ local sClusterConfig;
 
 local VUHDO_CLUSTER_UNIT = nil;
 
---
 local twipe = table.wipe;
 local pairs = pairs;
 
@@ -24,7 +23,7 @@ local VUHDO_updateBouquetsForEvent;
 local VUHDO_getBarIcon;
 local VUHDO_getBarIconTimer;
 
-local sHealthLimit
+local sHealthLimit;
 local sIsRaid;
 local sThreshFair;
 local sThreshGood;
@@ -65,7 +64,6 @@ function VUHDO_customClustersInitBurst()
 	sHotSlots = VUHDO_PANEL_SETUP["HOTS"]["SLOTS"];
 end
 
---
 local tHotName;
 local tIndex;
 local tIcon;
@@ -95,7 +93,6 @@ local function VUHDO_customizeClusterIcons(aButton, aNumLow, anInfo)
 	end
 end
 
---
 local tDestCluster = {};
 local tInfo, tSrcInfo, tNumArray;
 local tSrcGroup;
@@ -131,7 +128,6 @@ local function VUHDO_getDestCluster(aUnit, anArray)
 	return tNumArray;
 end
 
---
 local tInfo, tNumLow;
 local tAllButtons, tButton, tInfo;
 function VUHDO_updateAllClusterIcons(aUnit)
@@ -154,7 +150,6 @@ function VUHDO_updateAllClusterIcons(aUnit)
 	end
 end
 
---
 local tUnit;
 local tAllButtons, tButton;
 function VUHDO_removeAllClusterHighlights()
@@ -166,7 +161,6 @@ function VUHDO_removeAllClusterHighlights()
 end
 local VUHDO_removeAllClusterHighlights = VUHDO_removeAllClusterHighlights;
 
---
 local tUnit, tAllButtons, tButton;
 local tClusterBorder;
 function VUHDO_highlightClusterFor(aUnit)
@@ -182,14 +176,12 @@ function VUHDO_highlightClusterFor(aUnit)
 	end
 end
 
---
 function VUHDO_updateClusterHighlights()
 	if (VUHDO_CLUSTER_UNIT ~= nil) then
 		VUHDO_highlightClusterFor(VUHDO_CLUSTER_UNIT);
 	end
 end
 
---
 function VUHDO_resetClusterUnit()
 	VUHDO_CLUSTER_UNIT = nil;
 end
@@ -199,7 +191,6 @@ function VUHDO_getNumInUnitCluster(aUnit)
 	return VUHDO_NUM_IN_UNIT_CLUSTER[aUnit] or 0;
 end
 
---
 function VUHDO_getIsInHiglightCluster(aUnit)
 	if (VUHDO_HIGLIGHT_NUM < sThreshFair) then
 		return false;
@@ -208,10 +199,8 @@ function VUHDO_getIsInHiglightCluster(aUnit)
 	return VUHDO_HIGLIGHT_CLUSTER[aUnit] ~= nil;
 end
 
---
 local tAllButtons, tButton, tBorder;
-function VUHDO_clusterBorderBouquetCallback(aUnit, anIsActive, anIcon, aTimer, aCounter, aDuration, aColor, aBuffName,
-	aBouquetName)
+function VUHDO_clusterBorderBouquetCallback(aUnit, anIsActive, anIcon, aTimer, aCounter, aDuration, aColor, aBuffName, aBouquetName)
 	tAllButtons = VUHDO_getUnitButtons(aUnit);
 	if (tAllButtons ~= nil) then
 		for _, tButton in pairs(tAllButtons) do
