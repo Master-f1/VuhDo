@@ -1,729 +1,656 @@
-VUHDO_BOUQUET_CUSTOM_TYPE_PERCENT = 1;
-VUHDO_BOUQUET_CUSTOM_TYPE_PLAYERS = 2;
-VUHDO_BOUQUET_CUSTOM_TYPE_STATUSBAR = 3;
-VUHDO_BOUQUET_CUSTOM_TYPE_BRIGHTNESS = 4;
-
-VUHDO_FORCE_RESET = false;
-
 local table = table;
 local floor = floor;
 local select = select;
-local GetRaidTargetIndex = GetRaidTargetIndex;
+local strfind = strfind;
+local twipe = table.wipe;
+local pairs = pairs;
+local _ = _;
 
+local VUHDO_MY_AND_OTHERS_HOTS = {};
+local VUHDO_MY_HOTS = {};
+local VUHDO_OTHER_HOTS = {};
+local VUHDO_BOUQUETS = {};
 local VUHDO_RAID = {};
-local VUHDO_RESSING_NAMES = {};
+local VUHDO_CONFIG = {};
+local VUHDO_BOUQUET_BUFFS_SPECIAL = {};
+local VUHDO_CUSTOM_ICONS;
+local VUHDO_CUSTOM_INFO;
 
-local VUHDO_getOtherPlayersHotInfo;
-local VUHDO_getChosenDebuffInfo;
-local VUHDO_getCurrentPlayerTarget;
-local VUHDO_getCurrentMouseOver;
-local VUHDO_getDistanceBetween;
-local VUHDO_isUnitSwiftmendable;
-local VUHDO_getNumInUnitCluster;
-local VUHDO_getIsInHiglightCluster;
-local VUHDO_getDebuffColor;
-local VUHDO_getCurrentBouquetColor;
-local VUHDO_getIncHealOnUnit;
-local VUHDO_getUnitDebuffSchoolInfos;
-local VUHDO_getCurrentBouquetStacks;
-local VUHDO_getIncHealOnUnit;
-local sIsInverted;
-local sBarColors;
-
-----------------------------------------------------------
-
-function VUHDO_bouquetValidatorsInitBurst()
+function VUHDO_bouquetsInitBurst()
+	VUHDO_MY_AND_OTHERS_HOTS = VUHDO_GLOBAL["VUHDO_MY_AND_OTHERS_HOTS"];
+	VUHDO_MY_HOTS = VUHDO_GLOBAL["VUHDO_MY_HOTS"];
+	VUHDO_OTHER_HOTS = VUHDO_GLOBAL["VUHDO_OTHER_HOTS"];
+	VUHDO_BOUQUETS = VUHDO_GLOBAL["VUHDO_BOUQUETS"];
 	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
-	VUHDO_RESSING_NAMES = VUHDO_GLOBAL["VUHDO_RESSING_NAMES"];
-
-	VUHDO_getOtherPlayersHotInfo = VUHDO_GLOBAL["VUHDO_getOtherPlayersHotInfo"];
-	VUHDO_getChosenDebuffInfo = VUHDO_GLOBAL["VUHDO_getChosenDebuffInfo"];
-	VUHDO_getCurrentPlayerTarget = VUHDO_GLOBAL["VUHDO_getCurrentPlayerTarget"];
-	VUHDO_getCurrentMouseOver = VUHDO_GLOBAL["VUHDO_getCurrentMouseOver"];
-	VUHDO_getDistanceBetween = VUHDO_GLOBAL["VUHDO_getDistanceBetween"];
-	VUHDO_isUnitSwiftmendable = VUHDO_GLOBAL["VUHDO_isUnitSwiftmendable"];
-	VUHDO_getNumInUnitCluster = VUHDO_GLOBAL["VUHDO_getNumInUnitCluster"];
-	VUHDO_getIsInHiglightCluster = VUHDO_GLOBAL["VUHDO_getIsInHiglightCluster"];
-	VUHDO_getDebuffColor = VUHDO_GLOBAL["VUHDO_getDebuffColor"];
-	VUHDO_getCurrentBouquetColor = VUHDO_GLOBAL["VUHDO_getCurrentBouquetColor"];
-	VUHDO_getIncHealOnUnit = VUHDO_GLOBAL["VUHDO_getIncHealOnUnit"];
-	VUHDO_getUnitDebuffSchoolInfos = VUHDO_GLOBAL["VUHDO_getUnitDebuffSchoolInfos"];
-	VUHDO_getCurrentBouquetStacks = VUHDO_GLOBAL["VUHDO_getCurrentBouquetStacks"];
-	VUHDO_getIncHealOnUnit = VUHDO_GLOBAL["VUHDO_getIncHealOnUnit"];
-
-	sIsInverted = VUHDO_INDICATOR_CONFIG["CUSTOM"]["HEALTH_BAR"]["invertGrowth"];
-	sBarColors = VUHDO_PANEL_SETUP["BAR_COLORS"];
+	VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
+	VUHDO_CUSTOM_ICONS = VUHDO_GLOBAL["VUHDO_CUSTOM_ICONS"];
+	VUHDO_BOUQUET_BUFFS_SPECIAL = VUHDO_GLOBAL["VUHDO_BOUQUET_BUFFS_SPECIAL"];
+	VUHDO_CUSTOM_INFO = VUHDO_GLOBAL["VUHDO_CUSTOM_INFO"];
 end
 
-----------------------------------------------------------
+local tValue;
+local function VUHDO_getColorHash(aColor)
+	tValue = (aColor["R"] or 0) * 0.0001 + (aColor["G"] or 0) * 0.001 + (aColor["B"] or 0) * 0.01 + (aColor["O"] or 0) * 0.1 + (aColor["TR"] or 0) + (aColor["TG"] or 0) * 10 + (aColor["TB"] or 0) * 100 + (aColor["TO"] or 0) * 1000;
 
-local VUHDO_ICONS_BY_ROLE = {
-	[VUHDO_ID_MELEE_TANK] = "Interface\\AddOns\\VuhDo\\Images\\roleicons\\tank",
-	[VUHDO_ID_MELEE_DAMAGE] = "Interface\\AddOns\\VuhDo\\Images\\roleicons\\damage",
-	[VUHDO_ID_RANGED_DAMAGE] = "Interface\\AddOns\\VuhDo\\Images\\roleicons\\damage",
-	[VUHDO_ID_RANGED_HEAL] = "Interface\\AddOns\\VuhDo\\Images\\roleicons\\healer"
-};
-
-local VUHDO_ICONS_BY_RAID_ICON = {
-	[1] = "Interface\\AddOns\\VuhDo\\Images\\raidicons\\0",
-	[2] = "Interface\\AddOns\\VuhDo\\Images\\raidicons\\1",
-	[3] = "Interface\\AddOns\\VuhDo\\Images\\raidicons\\2",
-	[4] = "Interface\\AddOns\\VuhDo\\Images\\raidicons\\3",
-	[5] = "Interface\\AddOns\\VuhDo\\Images\\raidicons\\4",
-	[6] = "Interface\\AddOns\\VuhDo\\Images\\raidicons\\5",
-	[7] = "Interface\\AddOns\\VuhDo\\Images\\raidicons\\6",
-	[8] = "Interface\\AddOns\\VuhDo\\Images\\raidicons\\7"
-};
-
-local VUHDO_ICONS_BY_CLASS_ID = {
-	[VUHDO_ID_WARRIORS] = "Interface\\AddOns\\VuhDo\\Images\\classicons\\warrior",
-	[VUHDO_ID_ROGUES] = "Interface\\AddOns\\VuhDo\\Images\\classicons\\rogue",
-	[VUHDO_ID_HUNTERS] = "Interface\\AddOns\\VuhDo\\Images\\classicons\\hunter",
-	[VUHDO_ID_PALADINS] = "Interface\\AddOns\\VuhDo\\Images\\classicons\\paladin",
-	[VUHDO_ID_MAGES] = "Interface\\AddOns\\VuhDo\\Images\\classicons\\mage",
-	[VUHDO_ID_WARLOCKS] = "Interface\\AddOns\\VuhDo\\Images\\classicons\\warlock",
-	[VUHDO_ID_SHAMANS] = "Interface\\AddOns\\VuhDo\\Images\\classicons\\shaman",
-	[VUHDO_ID_DRUIDS] = "Interface\\AddOns\\VuhDo\\Images\\classicons\\druid",
-	[VUHDO_ID_PRIESTS] = "Interface\\AddOns\\VuhDo\\Images\\classicons\\priest",
-	[VUHDO_ID_DEATH_KNIGHT] = "Interface\\AddOns\\VuhDo\\Images\\classicons\\deathknight"
-};
-
-local VUHDO_CHARGE_COLORS = {"HOT_CHARGE_1", "HOT_CHARGE_2", "HOT_CHARGE_3", "HOT_CHARGE_4"};
-
---
-local tCopy = {};
-local tEmptyColor = {};
-local function VUHDO_copyColor(aColor)
-	if (aColor == nil) then
-		return tEmptyColor;
+	if (aColor["useText"]) then
+		tValue = tValue + 10000;
 	end
-	tCopy["R"], tCopy["G"], tCopy["B"], tCopy["O"] = aColor["R"], aColor["G"], aColor["B"], aColor["O"];
-	tCopy["TR"], tCopy["TG"], tCopy["TB"], tCopy["TO"] = aColor["TR"], aColor["TG"], aColor["TB"], aColor["TO"];
-	tCopy["useBackground"], tCopy["useText"], tCopy["useOpacity"] = aColor["useBackground"], aColor["useText"],
-		aColor["useOpacity"];
-	return tCopy;
+	if (aColor["useBackground"]) then
+		tValue = tValue + 20000;
+	end
+	if (aColor["useOpacity"]) then
+		tValue = tValue + 40000;
+	end
+
+	return tValue;
 end
 
---
-local tSummand;
-local function VUHDO_brightenColor(aColor, aFactor)
-	if (aColor == nil) then
+local VUHDO_LAST_EVALUATED_BOUQUETS = {};
+local tHasChanged, tCnt, tLastTime, tArg;
+local function VUHDO_hasBouquetChanged(aUnit, aBouquetName, ...)
+	if (VUHDO_LAST_EVALUATED_BOUQUETS[aBouquetName] == nil) then
+		VUHDO_LAST_EVALUATED_BOUQUETS[aBouquetName] = {};
+	end
+
+	tLastTime = VUHDO_LAST_EVALUATED_BOUQUETS[aBouquetName][aUnit];
+	if (tLastTime == nil) then
+		VUHDO_LAST_EVALUATED_BOUQUETS[aBouquetName][aUnit] = {};
+		return true;
+	end
+
+	tHasChanged = false;
+	for tCnt = 1, 6 do
+		tArg = select(tCnt, ...);
+
+		if (tLastTime[tCnt] ~= tArg) then
+			tHasChanged = true;
+			tLastTime[tCnt] = tArg;
+		end
+	end
+
+	return tHasChanged;
+end
+
+local tColor, tMode;
+local tModi, tInvModi;
+local tR1, tG1, tB1;
+local tR2, tG2, tB2;
+local tTR1, tTG1, tTB1, tO1;
+local tTR2, tTG2, tTB2, tO2;
+local tGood, tFair, tLow;
+local tDestColor = {["useBackground"] = true, ["useOpacity"] = true};
+local tRadio;
+local function VUHDO_getBouquetStatusBarColor(anEntry, aSpecialInfo, aUnit, aValue, aMaxValue)
+	tRadio = anEntry["custom"]["radio"];
+	if (1 == tRadio) then -- solid
+		return anEntry["color"];
+	elseif (2 == tRadio) then -- class color
+		tColor = VUHDO_USER_CLASS_COLORS[VUHDO_RAID[aUnit]["classId"]] or anEntry["color"];
+		tFactor = anEntry["custom"]["bright"];
+		tDestColor["R"], tDestColor["G"], tDestColor["B"], tDestColor["O"]
+			= tColor["R"] * tFactor, tColor["G"] * tFactor, tColor["B"] * tFactor, tColor["O"];
+		return tDestColor;
+	else -- 3 == gradient
+		tModi = ((aValue / aMaxValue) ^ 1.7) * 2;
+		tFair = anEntry["custom"]["grad_med"];
+		if (tModi > 1) then
+			tGood = anEntry["color"];
+			tR1, tG1, tB1, tO1 = tGood["R"], tGood["G"], tGood["B"], tGood["O"];
+			tR2, tG2, tB2, tO2 = tFair["R"], tFair["G"], tFair["B"], tFair["O"];
+			tModi = tModi - 1;
+		else
+			tLow = anEntry["custom"]["grad_low"];
+			tR1, tG1, tB1, tO1 = tFair["R"], tFair["G"], tFair["B"], tFair["O"];
+			tR2, tG2, tB2, tO2 = tLow["R"], tLow["G"], tLow["B"], tLow["O"];
+		end
+
+		tInvModi = 1 - tModi;
+		tDestColor["R"] = tR2 * tInvModi + tR1 * tModi;
+		tDestColor["G"] = tG2 * tInvModi + tG1 * tModi;
+		tDestColor["B"] = tB2 * tInvModi + tB1 * tModi;
+		tDestColor["O"] = tO2 * tInvModi + tO1 * tModi;
+		return tDestColor;
+	end
+end
+
+
+
+-- For Buffs/Debuffs vertex color is white
+local tDefaultBouquetColor = {
+	["R"] = 1, ["G"] = 1, ["B"] = 1, ["O"] = 1,
+	["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
+	["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
+};
+
+local tBouquet, tInfos, tName, tSpecial;
+local tIsActive, tIcon, tTimer, tCounter, tDuration, tBuffInfo, tHasChanged, tColor, tTimer2;
+local tType, tBuffTimer, tBuffDuration, tBuffIsActive;
+local tCnt, tAnzInfos;
+local tColor, tIcon;
+local tEmptyColor = {};
+local tEmpty = {};
+local txActive;
+local txIcon;
+local txColor;
+local txCounter, txTimer, txDuration;
+local txName;
+local txLevel;
+local txTimer2;
+local tDestColor = {};
+local tFactor;
+
+function VUHDO_getCurrentBouquetColor()
+	return txColor;
+end
+
+function VUHDO_getCurrentBouquetStacks()
+	return txCounter;
+end
+
+local tInfo, tUnit;
+local tEmptyInfo = {};
+local function VUHDO_evaluateBouquet(aUnit, aBouquetName)
+
+	if ((VUHDO_RAID[aUnit] or tEmptyInfo)["isVehicle"]) then
+		tUnit = VUHDO_RAID[aUnit]["petUnit"];
+	else
+		tUnit = aUnit
+	end
+	tInfo = VUHDO_RAID[tUnit];
+
+	if (tInfo == nil) then
+		tHasChanged = VUHDO_hasBouquetChanged(aUnit, aBouquetName, false, nil, nil, nil, nil, nil);
+		return false, nil, nil, nil, nil, nil, nil, tHasChanged, 0;
+	end
+
+	txActive = false;
+	txIcon, txColor, txName = nil, nil, nil;
+	txCounter, txTimer, txDuration, txTimer2, txLevel = 0, 0, 0, 0, 0;
+
+	tBouquet = VUHDO_BOUQUETS["STORED"][aBouquetName];
+	tAnzInfos = #tBouquet;
+
+	for tCnt = tAnzInfos, 1, -1 do
+		tInfos = tBouquet[tCnt];
+		tSpecial = VUHDO_BOUQUET_BUFFS_SPECIAL[tInfos["name"]];
+		if (tSpecial ~= nil) then
+			tName = nil;
+
+			tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tTimer2 = tSpecial["validator"](tInfo, tInfos);
+
+			if (tIsActive) then
+				if (tColor == nil) then
+					if (3 == tSpecial["custom_type"]) then -- VUHDO_BOUQUET_CUSTOM_TYPE_STATUSBAR
+						tColor = VUHDO_getBouquetStatusBarColor(tInfos, tSpecial, tUnit, tTimer, tDuration);
+					else
+						tColor = tInfos["color"];
+					end
+				elseif (4 == tSpecial["custom_type"]) then -- VUHDO_BOUQUET_CUSTOM_TYPE_BRIGHTNESS
+					tFactor = tInfos["custom"]["bright"];
+					if (tColor["useBackground"]) then
+						tColor["R"], tColor["G"], tColor["B"] = tColor["R"] * tFactor, tColor["G"] * tFactor, tColor["B"] * tFactor;
+					end
+					if (tColor["useText"]) then
+						tColor["TR"], tColor["TG"], tColor["TB"] = tColor["TR"] * tFactor, tColor["TG"] * tFactor, tColor["TB"] * tFactor;
+					end
+				end
+
+				if (tColor["useText"]) then
+					tColor["useText"] = tInfos["color"]["useText"];
+				end
+				if (tColor["useBackground"]) then
+					tColor["useBackground"] = tInfos["color"]["useBackground"];
+				end
+				if (tColor["useOpacity"]) then
+					tColor["useOpacity"] = tInfos["color"]["useOpacity"];
+				end
+
+			end
+		else -- Buff/Debuff
+			tName = tInfos["name"];
+			if (tInfos["mine"] and tInfos["others"]) then
+				tBuffInfo = (VUHDO_MY_AND_OTHERS_HOTS[tUnit] or tEmpty)[tName];
+			elseif (tInfos["mine"]) then
+				tBuffInfo = (VUHDO_MY_HOTS[tUnit] or tEmpty)[tName];
+			elseif (tInfos["others"]) then
+				tBuffInfo = (VUHDO_OTHER_HOTS[tUnit] or tEmpty)[tName];
+			else
+				tBuffInfo = nil;
+			end
+
+			tIsActive = tBuffInfo ~= nil;
+			if (tIsActive) then
+				tIcon, tTimer, tCounter, tDuration = tBuffInfo[3], tBuffInfo[1], tBuffInfo[2], tBuffInfo[4];
+				if (tTimer ~= nil) then
+					tTimer = floor(tTimer * 10) * 0.1;
+				end
+			tColor = tInfos["color"];
+				if (tInfos["icon"] ~= 1) then
+					tIcon = VUHDO_CUSTOM_ICONS[tInfos["icon"]][2];
+				else
+					tColor["isDefault"] = true;
+				end
+			end
+		end
+
+		if (tIsActive) then
+			txActive = true;
+			txName = tName;
+			txLevel = tCnt;
+			-- Icon
+			if (tIcon == nil and tInfos["icon"] ~= 1) then
+				tIcon = VUHDO_CUSTOM_ICONS[tInfos["icon"]][2];
+			end
+			if (tIcon ~= nil) then
+				txIcon = tIcon;
+			end
+			-- Color
+			if (tColor ~= nil) then
+				if (txColor == nil) then
+					twipe(tEmptyColor);
+					txColor = tEmptyColor;
+				end
+				if (tColor["useText"]) then
+					txColor["useText"] = true;
+					txColor["TR"], txColor["TG"], txColor["TB"], txColor["TO"]
+						= tColor["TR"], tColor["TG"], tColor["TB"], tColor["TO"];
+				end
+
+				if (tColor["useBackground"]) then
+					txColor["useBackground"] = true;
+					txColor["R"], txColor["G"], txColor["B"], txColor["O"]
+						= tColor["R"], tColor["G"], tColor["B"], tColor["O"];
+				end
+
+				if (tColor["useOpacity"]) then
+					txColor["useOpacity"] = true;
+					if (tColor["TO"] ~= nil) then
+						txColor["TO"]	= (txColor["TO"] or 1) * tColor["TO"];
+					end
+					if (tColor["O"] ~= nil) then
+						txColor["O"] = (txColor["O"] or 1) * tColor["O"];
+					end
+				end
+
+				txColor["isDefault"] = tColor["isDefault"];
+			else
+				txColor = nil;
+			end
+			-- Stacks
+			tCounter = tCounter or 0;
+			if (tCounter >= 0) then
+				txCounter = tCounter;
+			end
+			-- Timer/Duration
+			tTimer = tTimer or 0;
+			tTimer2 = tTimer2 or 0;
+			tDuration = tDuration or 0;
+			if (tDuration >= 0) then
+				if (tTimer >= 0) then
+					txTimer, txDuration = tTimer, tDuration;
+				end
+				if (tTimer2 >= 0) then
+					txTimer2 = tTimer2;
+				end
+			end
+		end
+	end
+
+	if (txColor == nil) then
+		txColor = tDefaultBouquetColor;
+	end
+
+	if (not txColor["useOpacity"]) then
+		txColor["TO"], txColor["O"] = 1, 1;
+	end
+
+	if (txActive) then
+		tHasChanged = VUHDO_hasBouquetChanged(aUnit, aBouquetName, true, txIcon, txTimer, txCounter, txDuration, VUHDO_getColorHash(txColor));
+		return true, txIcon, txTimer, txCounter, txDuration, txColor, txName, tHasChanged, tAnzInfos - txLevel, txTimer2;
+	else
+		tHasChanged = VUHDO_hasBouquetChanged(aUnit, aBouquetName, false, nil, nil, nil, nil, nil);
+		return false, nil, nil, nil, nil, nil, nil, tHasChanged, tAnzInfos - txLevel, txTimer2;
+	end
+
+end
+
+local VUHDO_REGISTERED_BOUQUETS = {};
+local VUHDO_ACTIVE_BOUQUETS = {};
+
+local function VUHDO_unregisterAllBouquetListeners()
+	twipe(VUHDO_REGISTERED_BOUQUETS);
+end
+
+local tBouquet;
+local tInfos;
+local tName;
+local function VUHDO_activateBuffsInScanner(aBouquetName)
+	tBouquet = VUHDO_BOUQUETS["STORED"][aBouquetName];
+
+	for _, tInfos in pairs(tBouquet) do
+		tName = tInfos["name"];
+		if (not VUHDO_BOUQUET_BUFFS_SPECIAL[tName]) then
+			VUHDO_ACTIVE_HOTS[tName] = true;
+
+			if (tInfos["others"]) then
+				VUHDO_ACTIVE_HOTS_OTHERS[tName] = true;
+			end
+		end
+	end
+end
+
+local tUnit;
+local function VUHDO_registerForBouquet(aBouquetName, anOwnerName, aFunction)
+	if (aBouquetName == nil or strlen(aBouquetName) == 0) then
 		return;
 	end
-	tSummand = aFactor - 1;
-	aColor["R"], aColor["G"], aColor["B"] = (aColor["R"] or 0) + tSummand, (aColor["G"] or 0) + tSummand,
-		(aColor["B"] or 0) + tSummand;
-	return aColor;
-end
 
--- return tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tTimer2
-
---
-local function VUHDO_aggroValidator(anInfo, _)
-	return anInfo["aggro"], nil, -1, -1, -1, nil, nil;
-end
-
---
-local function VUHDO_outOfRangeValidator(anInfo, _)
-	return not anInfo["range"], nil, -1, -1, -1, nil, nil;
-end
-
---
-local function VUHDO_inRangeValidator(anInfo, _)
-	return anInfo["range"], nil, -1, -1, -1, nil, nil;
-end
-
---
-local tDistance;
-local function VUHDO_inYardsRangeValidator(anInfo, someCustom)
-	tDistance = VUHDO_getDistanceBetween("player", anInfo["unit"]);
-	return (tDistance ~= nil) and (tDistance <= someCustom["custom"][1]), nil, -1, -1, -1, nil, nil;
-end
-
---
-local tDistance;
-local function VUHDO_swiftmendValidator(anInfo, _)
-	return VUHDO_isUnitSwiftmendable(anInfo["unit"]), nil, -1, -1, -1, nil, nil;
-end
-
---
-local tOPHotInfo;
-local function VUHDO_otherPlayersHotsValidator(anInfo, _)
-	tOPHotInfo = VUHDO_getOtherPlayersHotInfo(anInfo["unit"]);
-	return tOPHotInfo[1] ~= nil, tOPHotInfo[1], -1, tOPHotInfo[2], -1, nil, nil;
-end
-
---
-local tDebuffInfo;
-local function VUHDO_debuffMagicValidator(anInfo, _)
-	tDebuffInfo = VUHDO_getUnitDebuffSchoolInfos(anInfo["unit"], VUHDO_DEBUFF_TYPE_MAGIC);
-	if (tDebuffInfo[2] ~= nil) then
-		return true, tDebuffInfo[1], tDebuffInfo[2], tDebuffInfo[3], tDebuffInfo[4], nil, nil;
-	else
-		return false, nil, -1, -1, -1;
+	if (VUHDO_BOUQUETS["STORED"][aBouquetName] == nil) then
+		VUHDO_Msg("\"" .. anOwnerName .. "\" tries to hook to bouquet \"" .. aBouquetName .. "\" which doesn't exist!", 1, 0.4, 0.4);
+		return;
 	end
-end
 
---
-local tDebuffInfo;
-local function VUHDO_debuffDiseaseValidator(anInfo, _)
-	tDebuffInfo = VUHDO_getUnitDebuffSchoolInfos(anInfo["unit"], VUHDO_DEBUFF_TYPE_DISEASE);
-	if (tDebuffInfo[2] ~= nil) then
-		return true, tDebuffInfo[1], tDebuffInfo[2], tDebuffInfo[3], tDebuffInfo[4], nil, nil;
-	else
-		return false, nil, -1, -1, -1;
+	if (VUHDO_REGISTERED_BOUQUETS[aBouquetName] == nil) then
+		VUHDO_REGISTERED_BOUQUETS[aBouquetName] = {};
 	end
-end
+	VUHDO_REGISTERED_BOUQUETS[aBouquetName][anOwnerName] = aFunction;
+	VUHDO_activateBuffsInScanner(aBouquetName);
 
---
-local tDebuffInfo;
-local function VUHDO_debuffPoisonValidator(anInfo, _)
-	tDebuffInfo = VUHDO_getUnitDebuffSchoolInfos(anInfo["unit"], VUHDO_DEBUFF_TYPE_POISON);
-	if (tDebuffInfo[2] ~= nil) then
-		return true, tDebuffInfo[1], tDebuffInfo[2], tDebuffInfo[3], tDebuffInfo[4], nil, nil;
-	else
-		return false, nil, -1, -1, -1;
-	end
-end
-
---
-local tDebuffInfo;
-local function VUHDO_debuffCurseValidator(anInfo, _)
-	tDebuffInfo = VUHDO_getUnitDebuffSchoolInfos(anInfo["unit"], VUHDO_DEBUFF_TYPE_CURSE);
-	if (tDebuffInfo[2] ~= nil) then
-		return true, tDebuffInfo[1], tDebuffInfo[2], tDebuffInfo[3], tDebuffInfo[4], nil, nil;
-	else
-		return false, nil, -1, -1, -1;
-	end
-end
-
-local function VUHDO_debuffBarColorValidator(anInfo, _)
-	if (anInfo["charmed"]) then
-		return true, nil, -1, -1, -1, VUHDO_getDebuffColor(anInfo);
-	elseif (0 ~= anInfo["debuff"]) then -- VUHDO_DEBUFF_TYPE_NONE
-		tDebuffInfo = VUHDO_getChosenDebuffInfo(anInfo["unit"]);
-		return true, tDebuffInfo[1], -1, tDebuffInfo[3], -1, VUHDO_getDebuffColor(anInfo), nil;
-	else
-		return false, nil, -1, -1, -1, nil;
-	end
-end
-
---
-local function VUHDO_debuffCharmedValidator(anInfo, _)
-	return anInfo["charmed"], nil, -1, -1, -1, nil, nil;
-end
-
---
-local function VUHDO_deadValidator(anInfo, _)
-	return anInfo["dead"], nil, 100, -1, 100, nil, nil;
-end
-
---
-function VUHDO_disconnectedValidator(anInfo, _)
-	return anInfo == nil or not anInfo["connected"], nil, 100, -1, 100, nil, nil;
-end
-local VUHDO_disconnectedValidator = VUHDO_disconnectedValidator;
-
---
-local function VUHDO_afkValidator(anInfo, _)
-	return anInfo["afk"], nil, -1, -1, -1, nil, nil;
-end
-
---
-local tEmptyInfo = {};
-local function VUHDO_playerTargetValidator(anInfo, _)
-	if (anInfo["isPet"] and (VUHDO_RAID[anInfo["ownerUnit"]] or tEmptyInfo)["isVehicle"]) then
-		return anInfo["ownerUnit"] == VUHDO_getCurrentPlayerTarget(), nil, VUHDO_RAID[anInfo["ownerUnit"]]["health"],
-			-1, VUHDO_RAID[anInfo["ownerUnit"]]["healthmax"], nil, nil;
-	else
-		return anInfo["unit"] == VUHDO_getCurrentPlayerTarget(), nil, anInfo["health"], -1, anInfo["healthmax"], nil,
-			nil;
+	for tUnit, _ in pairs(VUHDO_RAID) do
+		aFunction(tUnit, false, nil, 0, 0, 0, nil, nil, nil);
 	end
 
 end
 
---
-local tEmptyInfo = {};
-local function VUHDO_mouseOverTargetValidator(anInfo, _)
-	if (anInfo["isPet"] and (VUHDO_RAID[anInfo["ownerUnit"]] or tEmptyInfo)["isVehicle"]) then
-		return anInfo["ownerUnit"] == VUHDO_getCurrentMouseOver(), nil, VUHDO_RAID[anInfo["ownerUnit"]]["health"], -1,
-			VUHDO_RAID[anInfo["ownerUnit"]]["healthmax"], nil, nil;
-	else
-		return anInfo["unit"] == VUHDO_getCurrentMouseOver(), nil, anInfo["health"], -1, anInfo["healthmax"], nil, nil;
-	end
-end
+local tCnt, tHotName, tHotSlots, tIndex, tBouquetName;
+local tAlreadyRegistered = {};
+function VUHDO_registerAllBouquets()
+	VUHDO_unregisterAllBouquetListeners();
 
---
-local tMouseOverUnit;
-local function VUHDO_mouseOverGroupValidator(anInfo, _)
-	tMouseOverUnit = VUHDO_getCurrentMouseOver();
-	return VUHDO_RAID[tMouseOverUnit] ~= nil and anInfo["group"] == VUHDO_RAID[tMouseOverUnit]["group"], nil, -1, -1,
-		-1, nil, nil;
-end
-
---
-local function VUHDO_healthBelowValidator(anInfo, someCustom)
-	return 100 * anInfo["health"] / anInfo["healthmax"] < someCustom["custom"][1], nil, -1, -1, -1, nil, nil;
-end
-
---
-local function VUHDO_healthAboveValidator(anInfo, someCustom)
-	return 100 * anInfo["health"] / anInfo["healthmax"] >= someCustom["custom"][1], nil, -1, -1, -1, nil, nil;
-end
-
---
-local function VUHDO_manaBelowValidator(anInfo, someCustom)
-	return anInfo["powertype"] == 0 and 100 * anInfo["power"] / anInfo["powermax"] < someCustom["custom"][1], nil, -1,
-		-1, -1, nil, nil;
-end
-
---
-local function VUHDO_threatAboveValidator(anInfo, someCustom)
-	return anInfo["threatPerc"] > someCustom["custom"][1], nil, -1, -1, -1, nil, nil;
-end
-
---
-local tNumInCluster;
-local function VUHDO_numInClusterValidator(anInfo, someCustom)
-	tNumInCluster = VUHDO_getNumInUnitCluster(anInfo["unit"]);
-	return tNumInCluster >= someCustom["custom"][1], nil, -1, tNumInCluster, -1, nil, nil;
-end
-
---
-local function VUHDO_mouseClusterValidator(anInfo, _)
-	return VUHDO_getIsInHiglightCluster(anInfo["unit"]), nil, -1, -1, -1, nil, nil;
-end
-
---
-local function VUHDO_threatMediumValidator(anInfo, _)
-	return anInfo["threat"] == 2, nil, -1, -1, -1, nil, nil;
-end
-
---
-local function VUHDO_threatHighValidator(anInfo, _)
-	return anInfo["threat"] == 3, nil, -1, -1, -1, nil, nil;
-end
-
---
-local tIsRaidIconColor;
-local tColor, tIcon;
-local function VUHDO_raidTargetValidator(anInfo, _)
-	if (anInfo["raidIcon"] ~= nil) then
-		tIcon = tostring(anInfo["raidIcon"]);
-		tIsRaidIconColor = not sBarColors["RAID_ICONS"]["filterOnly"] or VUHDO_PANEL_SETUP["RAID_ICON_FILTER"][tIcon];
-
-		if (tIsRaidIconColor) then
-			tColor = sBarColors["RAID_ICONS"][tIcon];
-		else
-			tColor = nil;
-		end
-		return tIsRaidIconColor, nil, -1, -1, -1, tColor, nil;
-	else
-		return false, nil, -1, -1, -1, nil, nil;
-	end
-end
-
---
-local tOverheal;
-local function VUHDO_overhealHighlightValidator(anInfo, _)
-	tOverheal = VUHDO_getIncHealOnUnit(anInfo["name"]) + anInfo["health"];
-	if (tOverheal > anInfo["healthmax"]) then
-		VUHDO_brightenColor(VUHDO_getCurrentBouquetColor(), tOverheal / anInfo["healthmax"]);
-	end
-	return false, nil, -1, -1, -1, nil, nil;
-end
-
---
-local tStacks;
-local function VUHDO_stacksColorValidator(anInfo, _)
-	tStacks = VUHDO_getCurrentBouquetStacks() or 0;
-	if (tStacks > 4) then
-		tStacks = 4;
+	if (VUHDO_BOUQUETS["STORED"] == nil) then
+		return;
 	end
 
-	if (tStacks > 1) then
-		return true, nil, -1, -1, -1, VUHDO_copyColor(sBarColors[VUHDO_CHARGE_COLORS[tStacks]]), nil;
-	else
-		return false, nil, -1, -1, -1, nil, nil;
-	end
-end
+	-- Hot Icons+Bars
+	tHotSlots = VUHDO_PANEL_SETUP["HOTS"]["SLOTS"];
 
---
-local tIndex, tFactor, tColor;
-local function VUHDO_emergencyColorValidator(anInfo, someCustom)
-	if (not VUHDO_FORCE_RESET) then
-		tIndex = VUHDO_EMERGENCIES[anInfo["unit"]];
-		if (tIndex ~= nil) then
-			tFactor = 1 / tIndex;
-
-			tColor = VUHDO_copyColor(someCustom["color"]);
-			tColor["R"], tColor["G"], tColor["B"] = (tColor["R"] or 0) * tFactor, (tColor["G"] or 0) * tFactor,
-				(tColor["B"] or 0) * tFactor;
-			return true, nil, -1, -1, -1, tColor;
+	for tIndex, tHotName in pairs(tHotSlots) do
+		if (tHotName ~= nil and "BOUQUET_" == strsub(tHotName, 1, 8)) then
+			VUHDO_registerForBouquet(strsub(tHotName, 9), "HoT " .. tIndex, VUHDO_hotBouquetCallback);
 		end
 	end
 
-	return false, nil, -1, -1, -1, nil, nil;
+	-- Bar (=Outer) Border
+	VUHDO_registerForBouquet(VUHDO_INDICATOR_CONFIG["BOUQUETS"]["BAR_BORDER"], "Outer Border", VUHDO_barBorderBouquetCallback);
+	-- Cluster (=Inner) Border
+	VUHDO_registerForBouquet(VUHDO_INDICATOR_CONFIG["BOUQUETS"]["CLUSTER_BORDER"], "Inner Border", VUHDO_clusterBorderBouquetCallback);
+	-- Swiftmend Indicator
+	VUHDO_registerForBouquet(VUHDO_INDICATOR_CONFIG["BOUQUETS"]["SWIFTMEND_INDICATOR"], "Swiftmend Indicator", VUHDO_swiftmendIndicatorBouquetCallback);
+	-- Aggro Line
+	VUHDO_registerForBouquet(VUHDO_INDICATOR_CONFIG["BOUQUETS"]["AGGRO_BAR"], "Aggro Bar", VUHDO_aggroBarBouquetCallback);
+	-- Mouseover Highlighter
+	VUHDO_registerForBouquet(VUHDO_INDICATOR_CONFIG["BOUQUETS"]["MOUSEOVER_HIGHLIGHT"], "Mouseover Highlight", VUHDO_highlighterBouquetCallback);
+	-- Threat Marks
+	VUHDO_registerForBouquet(VUHDO_INDICATOR_CONFIG["BOUQUETS"]["THREAT_MARK"], "Threat Indicators", VUHDO_threatIndicatorsBouquetCallback);
+	-- Threat Bar
+	VUHDO_registerForBouquet(VUHDO_INDICATOR_CONFIG["BOUQUETS"]["THREAT_BAR"], "Threat Bar", VUHDO_threatBarBouquetCallback);
+	-- Mana Bar
+	VUHDO_registerForBouquet(VUHDO_INDICATOR_CONFIG["BOUQUETS"]["MANA_BAR"], "Mana Bar", VUHDO_manaBarBouquetCallback);
+	-- Background Bar
+	VUHDO_registerForBouquet(VUHDO_INDICATOR_CONFIG["BOUQUETS"]["BACKGROUND_BAR"], "Background Bar", VUHDO_backgroundBarBouquetCallback);
+	-- Health Bar
+	VUHDO_registerForBouquet(VUHDO_INDICATOR_CONFIG["BOUQUETS"]["HEALTH_BAR"], "Health Bar", VUHDO_healthBarBouquetCallback);
+	-- Per panel Health Bars
+	twipe(tAlreadyRegistered);
+	for tCnt = 1, VUHDO_MAX_PANELS do
+		tBouquetName = VUHDO_INDICATOR_CONFIG["BOUQUETS"]["HEALTH_BAR_PANEL"][tCnt];
+		if (VUHDO_PANEL_MODELS[tCnt] ~= nil and tBouquetName ~= ""	and not tAlreadyRegistered[tBouquetName]) then
+			VUHDO_registerForBouquet(tBouquetName, "Health Bar " .. tCnt, VUHDO_healthBarBouquetCallbackCustom);
+			tAlreadyRegistered[tBouquetName] = true;
+		end
+	end
+
+	VUHDO_updateGlobalToggles();
+	VUHDO_initAllEventBouquets();
 end
 
---
-local function VUHDO_resurrectionValidator(anInfo, someCustom)
-	return VUHDO_RESSING_NAMES[anInfo["name"]], nil, -1, -1, -1, nil, nil;
+local VUHDO_EVENT_BOUQUETS = {};
+local tItem, tName, tInterest;
+local function VUHDO_isBouquetInterestedInEvent(aBouquetName, anEventType)
+	if (VUHDO_EVENT_BOUQUETS[aBouquetName] == nil) then
+		VUHDO_EVENT_BOUQUETS[aBouquetName] = {};
+	end
+
+	if (VUHDO_EVENT_BOUQUETS[aBouquetName][anEventType] == nil) then
+		VUHDO_EVENT_BOUQUETS[aBouquetName][anEventType] = 0;
+
+		for _, tItem in pairs(VUHDO_BOUQUETS["STORED"][aBouquetName]) do
+			tName = tItem["name"];
+			if (VUHDO_BOUQUET_BUFFS_SPECIAL[tName] ~= nil) then
+
+		 		for _, tInterest in pairs(VUHDO_BOUQUET_BUFFS_SPECIAL[tName]["interests"]) do
+		 			if (tInterest == anEventType) then
+		 				VUHDO_EVENT_BOUQUETS[aBouquetName][anEventType] = 1;
+		 				break;
+		 			end
+		 		end
+
+			end
+		end
+	end
+
+	return 1 == VUHDO_EVENT_BOUQUETS[aBouquetName][anEventType] or 1 == anEventType; -- VUHDO_UPDATE_ALL
 end
 
--- return tIsActive, tIcon, tTimer, tCounter, tDuration, tColor
+local tAllListeners;
+local tOwner, tDelegate, tInfo;
+local tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, tHasChanged, tImpact, tTimer2;
+local function VUHDO_updateEventBouquet(aUnit, aBouquetName)
 
---
-local function VUHDO_statusHealthValidator(anInfo, _)
-	if (sIsInverted) then
-		return true, nil, anInfo["health"] + VUHDO_getIncHealOnUnit(anInfo["name"]), -1, anInfo["healthmax"], nil,
-			anInfo["health"];
+	tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, tHasChanged, tImpact, tTimer2 = VUHDO_evaluateBouquet(aUnit, aBouquetName);
+	if (not tHasChanged) then
+		return;
+	end
+
+	if (VUHDO_ACTIVE_BOUQUETS[aUnit] == nil) then
+		VUHDO_ACTIVE_BOUQUETS[aUnit] = {};
+	end
+
+	if (tIsActive) then
+		tAllListeners = VUHDO_REGISTERED_BOUQUETS[aBouquetName];
+		for tOwner, tDelegate in pairs(tAllListeners) do
+			tDelegate(aUnit, tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, aBouquetName, tImpact, tTimer2);
+		end
+		VUHDO_ACTIVE_BOUQUETS[aUnit][aBouquetName] = true;
 	else
-		return true, nil, anInfo["health"], -1, anInfo["healthmax"], nil, anInfo["health"];
+		if (VUHDO_ACTIVE_BOUQUETS[aUnit][aBouquetName]) then
+			tAllListeners = VUHDO_REGISTERED_BOUQUETS[aBouquetName];
+			for tOwner, tDelegate in pairs(tAllListeners) do
+				tDelegate(aUnit, tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, aBouquetName, tImpact, tTimer2);
+			end
+			VUHDO_ACTIVE_BOUQUETS[aUnit][aBouquetName] = false;
+		end
 	end
 end
 
---
-local function VUHDO_statusManaValidator(anInfo, _)
-	return anInfo["powertype"] == 0, nil, anInfo["power"], -1, anInfo["powermax"],
-		VUHDO_copyColor(VUHDO_POWER_TYPE_COLORS[0]), nil;
+local tName;
+local function VUHDO_isAnyBouquetInterstedIn(anUpdateMode)
+	for tName, _ in pairs(VUHDO_REGISTERED_BOUQUETS) do
+		if (VUHDO_isBouquetInterestedInEvent(tName, anUpdateMode)) then
+			return true;
+		end
+	end
+
+	return false;
 end
 
---
-local function VUHDO_statusOtherPowersValidator(anInfo, _)
-	return anInfo["powertype"] ~= 0, nil, anInfo["power"], -1, anInfo["powermax"],
-		VUHDO_copyColor(VUHDO_POWER_TYPE_COLORS[anInfo["powertype"] or 0]), nil;
+local tInfo;
+local tAllListeners;
+local tOwner, tDelegate;
+local tName;
+function VUHDO_updateBouquetsForEvent(aUnit, anEventType)
+	tInfo = VUHDO_RAID[aUnit];
+
+	for tName, _ in pairs(VUHDO_REGISTERED_BOUQUETS) do
+		if (VUHDO_isBouquetInterestedInEvent(tName, anEventType)) then
+			if (tInfo ~= nil) then
+				VUHDO_updateEventBouquet(aUnit, tName);
+			elseif (aUnit ~= nil) then -- focus / n/a
+				tAllListeners = VUHDO_REGISTERED_BOUQUETS[tName];
+				for tOwner, tDelegate in pairs(tAllListeners) do
+					tDelegate(aUnit, true, nil, 100, 0, 100, VUHDO_PANEL_SETUP["BAR_COLORS"]["OFFLINE"], nil, nil, 0);
+				end
+			end
+		end
+	end
+end
+local VUHDO_updateBouquetsForEvent = VUHDO_updateBouquetsForEvent;
+
+-- Bei Panel-Redraw aufzurufen
+local tUnit;
+function VUHDO_initAllEventBouquets()
+	twipe(VUHDO_LAST_EVALUATED_BOUQUETS);
+	for tUnit, _ in pairs(VUHDO_RAID) do
+		VUHDO_updateBouquetsForEvent(tUnit, 1); -- VUHDO_UPDATE_ALL
+	end
+
+	VUHDO_updateBouquetsForEvent("focus", 19); -- VUHDO_UPDATE_DC
+	VUHDO_updateBouquetsForEvent("target", 19); -- VUHDO_UPDATE_DC
 end
 
---
-local function VUHDO_statusIncomingValidator(anInfo, _)
-	return true, nil, VUHDO_getIncHealOnUnit(anInfo["name"]), -1, anInfo["healthmax"], nil, nil;
+local VUHDO_CYCLIC_BOUQUETS = {};
+local tItem, tName;
+local function VUHDO_hasCyclic(aBouquetName)
+	if (VUHDO_CYCLIC_BOUQUETS[aBouquetName] == nil) then
+		VUHDO_CYCLIC_BOUQUETS[aBouquetName] = 0;
+
+		for _, tItem in pairs(VUHDO_BOUQUETS["STORED"][aBouquetName]) do
+			tName = tItem["name"];
+			if (VUHDO_BOUQUET_BUFFS_SPECIAL[tName] == nil or VUHDO_BOUQUET_BUFFS_SPECIAL[tName]["updateCyclic"]) then
+				VUHDO_CYCLIC_BOUQUETS[aBouquetName] = 1;
+				break;
+			end
+		end
+
+	end
+
+	return VUHDO_CYCLIC_BOUQUETS[aBouquetName] == 1;
 end
 
---
-local function VUHDO_statusThreatValidator(anInfo, _)
-	return true, nil, anInfo["threatPerc"], -1, 100, nil, nil;
-end
+local tAllListeners, tUnit, tOwner, tDelegate;
+local tIsActive, tIcon, tTimer, tCounter, tDuration, tBuffName, tInfo, tHasChanged, tImpact;
+local function VUHDO_updateCyclicBouquet(aBouquetName, aUnit)
+	tAllListeners = VUHDO_REGISTERED_BOUQUETS[aBouquetName];
 
---
-local tIcon;
-local function VUHDO_classIconValidator(anInfo, _)
-	tIcon = VUHDO_ICONS_BY_CLASS_ID[anInfo["classId"] or -1];
+	if (aUnit == nil) then
+		for tUnit, tInfo in pairs(VUHDO_RAID) do
+			if (VUHDO_ACTIVE_BOUQUETS[tUnit] == nil) then
+				VUHDO_ACTIVE_BOUQUETS[tUnit] = {};
+			end
 
-	if (tIcon ~= nil) then
-		return true, tIcon, -1, -1, -1, nil, nil;
+			tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, tHasChanged, tImpact, tTimer2 = VUHDO_evaluateBouquet(tUnit, aBouquetName);
+			if (tHasChanged) then
+
+				if (tIsActive) then
+					for tOwner, tDelegate in pairs(tAllListeners) do
+						tDelegate(tUnit, tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, aBouquetName, tImpact, tTimer2);
+					end
+					VUHDO_ACTIVE_BOUQUETS[tUnit][aBouquetName] = true;
+				else
+					if (VUHDO_ACTIVE_BOUQUETS[tUnit][aBouquetName]) then
+						for tOwner, tDelegate in pairs(tAllListeners) do
+							tDelegate(tUnit, tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, aBouquetName, tImpact, tTimer2);
+						end
+						VUHDO_ACTIVE_BOUQUETS[tUnit][aBouquetName] = nil;
+					end
+				end
+			end
+		end
 	else
-		return false, nil, -1, -1, -1, nil, nil;
+
+		if (VUHDO_ACTIVE_BOUQUETS[aUnit] == nil) then
+			VUHDO_ACTIVE_BOUQUETS[aUnit] = {};
+		end
+
+		tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, tHasChanged, tImpact, tTimer2 = VUHDO_evaluateBouquet(aUnit, aBouquetName);
+		if (tHasChanged) then
+
+			if (tIsActive) then
+				for tOwner, tDelegate in pairs(tAllListeners) do
+					tDelegate(aUnit, tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, aBouquetName, tImpact, tTimer2);
+				end
+				VUHDO_ACTIVE_BOUQUETS[aUnit][aBouquetName] = true;
+			else
+				if (VUHDO_ACTIVE_BOUQUETS[aUnit][aBouquetName]) then
+					for tOwner, tDelegate in pairs(tAllListeners) do
+						tDelegate(aUnit, tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, aBouquetName, tImpact, tTimer2);
+					end
+					VUHDO_ACTIVE_BOUQUETS[aUnit][aBouquetName] = nil;
+				end
+			end
+		end
 	end
 end
 
---
-local tIcon;
-local function VUHDO_raidIconValidator(anInfo, _)
-	tIcon = VUHDO_ICONS_BY_RAID_ICON[GetRaidTargetIndex(anInfo["unit"]) or -1];
-
-	if (tIcon ~= nil) then
-		return true, tIcon, -1, -1, -1, nil, nil;
-	else
-		return false, nil, -1, -1, -1, nil, nil;
+local tName;
+function VUHDO_updateAllCyclicBouquets(aUnit)
+	for tName, _ in pairs(VUHDO_REGISTERED_BOUQUETS) do
+		if (VUHDO_hasCyclic(tName)) then
+			VUHDO_updateCyclicBouquet(tName, aUnit);
+		end
 	end
 end
 
---
-local tIcon;
-local function VUHDO_roleIconValidator(anInfo, _)
-	tIcon = VUHDO_ICONS_BY_ROLE[anInfo["role"] or -1];
+function VUHDO_bouqetsChanged()
+	twipe(VUHDO_EVENT_BOUQUETS);
+	twipe(VUHDO_CYCLIC_BOUQUETS);
+	twipe(VUHDO_LAST_EVALUATED_BOUQUETS);
+	VUHDO_initFromSpellbook();
+	VUHDO_registerAllBouquets();
+	VUHDO_resetHotBuffCache();
+end
 
-	if (tIcon ~= nil) then
-		return true, tIcon, -1, -1, -1, nil, nil;
+local tSlotNum;
+local function VUHDO_isInAnyHotSlot(aHotName)
+	for tSlotNum = 1, 9 do
+		if (VUHDO_PANEL_SETUP["HOTS"]["SLOTS"][tSlotNum] == aHotName) then
+			return true;
+		end
+	end
+
+	return false;
+end
+
+local tIsInterested, tColor, tCnt;
+function VUHDO_isAnyoneInterstedIn(anUpdateMode)
+	tIsInterested = VUHDO_isAnyBouquetInterstedIn(anUpdateMode);
+
+	if (tIsInterested) then
+		return true;
 	else
-		return false, nil, -1, -1, -1, nil, nil;
+		if (5 == anUpdateMode) then -- VUHDO_UPDATE_RANGE
+			tColor = VUHDO_PANEL_SETUP["BAR_COLORS"]["OUTRANGED"];
+			tIsInterested = tColor["useText"] or tColor["useBackground"] or tColor["useOpacity"];
+
+		elseif (7 == anUpdateMode) then -- VUHDO_UPDATE_AGGRO
+			tIsInterested = VUHDO_CONFIG["THREAT"]["AGGRO_USE_TEXT"];
+
+		elseif (16 == anUpdateMode) then -- VUHDO_UPDATE_NUM_CLUSTER
+			tIsInterested = VUHDO_isInAnyHotSlot("CLUSTER");
+
+		elseif (22 == anUpdateMode) then -- VUHDO_UPDATE_UNIT_TARGET
+			tIsInterested = false;
+
+			for tCnt = 1, 10 do -- VUHDO_MAX_PANELS
+				if (VUHDO_PANEL_MODELS[tCnt] ~= nil) then
+					if (VUHDO_PANEL_SETUP[tCnt]["SCALING"]["showTarget"] or VUHDO_PANEL_SETUP[tCnt]["SCALING"]["showTot"]) then
+						tIsInterested = true;
+						break;
+					end
+				end
+			end
+		end
+
+		return tIsInterested;
 	end
 end
-
---
-local function VUHDO_classColorValidator(anInfo, _)
-	return true, nil, -1, -1, -1, VUHDO_copyColor(VUHDO_USER_CLASS_COLORS[anInfo["classId"]]), nil;
-end
-
---
-local function VUHDO_alwaysTrueValidator(_, _)
-	return true, nil, -1, -1, -1, nil, nil;
-end
-
---
-VUHDO_BOUQUET_BUFFS_SPECIAL = {
-	["AGGRO"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_AGGRO,
-		["validator"] = VUHDO_aggroValidator,
-		["interests"] = {VUHDO_UPDATE_AGGRO}
-	},
-
-	["NO_RANGE"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_OUT_OF_RANGE,
-		["validator"] = VUHDO_outOfRangeValidator,
-		["interests"] = {VUHDO_UPDATE_RANGE}
-	},
-
-	["IN_RANGE"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_IN_RANGE,
-		["validator"] = VUHDO_inRangeValidator,
-		["interests"] = {VUHDO_UPDATE_RANGE}
-	},
-
-	["YARDS_RANGE"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_IN_YARDS,
-		["validator"] = VUHDO_inYardsRangeValidator,
-		["custom_type"] = VUHDO_BOUQUET_CUSTOM_TYPE_PERCENT,
-		["updateCyclic"] = true,
-		["interests"] = {}
-	},
-
-	["OTHER"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_OTHER_HOTS,
-		["validator"] = VUHDO_otherPlayersHotsValidator,
-		["updateCyclic"] = true,
-		["interests"] = {}
-	},
-
-	["SWIFTMEND"] = {
-		["displayName"] = VUHDO_I18N_SWIFTMEND_POSSIBLE,
-		["validator"] = VUHDO_swiftmendValidator,
-		["updateCyclic"] = true,
-		["interests"] = {}
-	},
-
-	["DEBUFF_MAGIC"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_DEBUFF_MAGIC,
-		["validator"] = VUHDO_debuffMagicValidator,
-		["interests"] = {VUHDO_UPDATE_DEBUFF}
-	},
-
-	["DEBUFF_DISEASE"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_DEBUFF_DISEASE,
-		["validator"] = VUHDO_debuffDiseaseValidator,
-		["interests"] = {VUHDO_UPDATE_DEBUFF}
-	},
-
-	["DEBUFF_POISON"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_DEBUFF_POISON,
-		["validator"] = VUHDO_debuffPoisonValidator,
-		["interests"] = {VUHDO_UPDATE_DEBUFF}
-	},
-
-	["DEBUFF_CURSE"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_DEBUFF_CURSE,
-		["validator"] = VUHDO_debuffCurseValidator,
-		["interests"] = {VUHDO_UPDATE_DEBUFF}
-	},
-
-	["DEBUFF_CHARMED"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_CHARMED,
-		["validator"] = VUHDO_debuffCharmedValidator,
-		["interests"] = {VUHDO_UPDATE_DEBUFF}
-	},
-
-	["DEBUFF_BAR_COLOR"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_DEBUFF_BAR_COLOR,
-		["validator"] = VUHDO_debuffBarColorValidator,
-		["custom_type"] = VUHDO_BOUQUET_CUSTOM_TYPE_BRIGHTNESS,
-		["no_color"] = true,
-		["interests"] = {VUHDO_UPDATE_DEBUFF}
-	},
-
-	["DEAD"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_DEAD,
-		["validator"] = VUHDO_deadValidator,
-		["interests"] = {VUHDO_UPDATE_ALIVE}
-	},
-
-	["DISCONNECTED"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_DISCONNECTED,
-		["validator"] = VUHDO_disconnectedValidator,
-		["interests"] = {VUHDO_UPDATE_DC}
-	},
-
-	["AFK"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_AFK,
-		["validator"] = VUHDO_afkValidator,
-		["interests"] = {VUHDO_UPDATE_AFK}
-	},
-
-	["PLAYER_TARGET"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_PLAYER_TARGET,
-		["validator"] = VUHDO_playerTargetValidator,
-		["interests"] = {VUHDO_UPDATE_TARGET}
-	},
-
-	["MOUSE_TARGET"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_MOUSEOVER_TARGET,
-		["validator"] = VUHDO_mouseOverTargetValidator,
-		["interests"] = {VUHDO_UPDATE_MOUSEOVER, VUHDO_UPDATE_HEALTH, VUHDO_UPDATE_HEALTH_MAX}
-	},
-
-	["MOUSE_GROUP"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_MOUSEOVER_GROUP,
-		["validator"] = VUHDO_mouseOverGroupValidator,
-		["interests"] = {VUHDO_UPDATE_MOUSEOVER_GROUP, VUHDO_UPDATE_HEALTH, VUHDO_UPDATE_HEALTH_MAX}
-	},
-
-	["HEALTH_BELOW"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_HEALTH_BELOW,
-		["validator"] = VUHDO_healthBelowValidator,
-		["custom_type"] = VUHDO_BOUQUET_CUSTOM_TYPE_PERCENT,
-		["interests"] = {VUHDO_UPDATE_HEALTH, VUHDO_UPDATE_HEALTH_MAX}
-	},
-
-	["HEALTH_ABOVE"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_HEALTH_ABOVE,
-		["validator"] = VUHDO_healthAboveValidator,
-		["custom_type"] = VUHDO_BOUQUET_CUSTOM_TYPE_PERCENT,
-		["interests"] = {VUHDO_UPDATE_HEALTH, VUHDO_UPDATE_HEALTH_MAX}
-	},
-
-	["MANA_BELOW"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_MANA_BELOW,
-		["validator"] = VUHDO_manaBelowValidator,
-		["custom_type"] = VUHDO_BOUQUET_CUSTOM_TYPE_PERCENT,
-		["interests"] = {VUHDO_UPDATE_MANA}
-	},
-
-	["THREAT_ABOVE"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_THREAT_ABOVE,
-		["validator"] = VUHDO_threatAboveValidator,
-		["custom_type"] = VUHDO_BOUQUET_CUSTOM_TYPE_PERCENT,
-		["interests"] = {VUHDO_UPDATE_THREAT_PERC}
-	},
-
-	["NUM_CLUSTER"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_NUM_IN_CLUSTER,
-		["validator"] = VUHDO_numInClusterValidator,
-		["custom_type"] = VUHDO_BOUQUET_CUSTOM_TYPE_PLAYERS,
-		["interests"] = {VUHDO_UPDATE_NUM_CLUSTER}
-	},
-
-	["MOUSE_CLUSTER"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_MOUSEOVER_CLUSTER,
-		["validator"] = VUHDO_mouseClusterValidator,
-		["updateCyclic"] = true,
-		["interests"] = {VUHDO_UPDATE_MOUSEOVER_CLUSTER}
-	},
-
-	["THREAT_LEVEL_MEDIUM"] = {
-		["displayName"] = VUHDO_I18N_THREAT_LEVEL_MEDIUM,
-		["validator"] = VUHDO_threatMediumValidator,
-		["interests"] = {VUHDO_UPDATE_THREAT_LEVEL}
-	},
-
-	["THREAT_LEVEL_HIGH"] = {
-		["displayName"] = VUHDO_I18N_THREAT_LEVEL_HIGH,
-		["validator"] = VUHDO_threatHighValidator,
-		["interests"] = {VUHDO_UPDATE_THREAT_LEVEL}
-	},
-
-	["RAID_ICON_COLOR"] = {
-		["displayName"] = VUHDO_I18N_UPDATE_RAID_TARGET,
-		["validator"] = VUHDO_raidTargetValidator,
-		["no_color"] = true,
-		["interests"] = {VUHDO_UPDATE_RAID_TARGET}
-	},
-
-	["OVERHEAL_HIGHLIGHT"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_OVERHEAL_HIGHLIGHT,
-		["validator"] = VUHDO_overhealHighlightValidator,
-		["no_color"] = true,
-		["interests"] = {VUHDO_UPDATE_INC}
-	},
-
-	["EMERGENCY_COLOR"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_EMERGENCY_COLOR,
-		["validator"] = VUHDO_emergencyColorValidator,
-		["interests"] = {VUHDO_UPDATE_EMERGENCY}
-	},
-
-	["RESURRECTION"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_RESURRECTION,
-		["validator"] = VUHDO_resurrectionValidator,
-		["interests"] = {VUHDO_UPDATE_RESURRECTION}
-	},
-
-	["STATUS_HEALTH"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_STATUS_HEALTH,
-		["validator"] = VUHDO_statusHealthValidator,
-		["custom_type"] = VUHDO_BOUQUET_CUSTOM_TYPE_STATUSBAR,
-		["interests"] = {VUHDO_UPDATE_HEALTH, VUHDO_UPDATE_HEALTH_MAX, VUHDO_UPDATE_INC}
-	},
-
-	["STATUS_MANA"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_STATUS_MANA,
-		["validator"] = VUHDO_statusManaValidator,
-		["custom_type"] = VUHDO_BOUQUET_CUSTOM_TYPE_STATUSBAR,
-		["no_color"] = true,
-		["interests"] = {VUHDO_UPDATE_MANA, VUHDO_UPDATE_DC}
-	},
-
-	["STATUS_OTHER_POWERS"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_STATUS_OTHER_POWERS,
-		["validator"] = VUHDO_statusOtherPowersValidator,
-		["custom_type"] = VUHDO_BOUQUET_CUSTOM_TYPE_STATUSBAR,
-		["no_color"] = true,
-		["interests"] = {VUHDO_UPDATE_OTHER_POWERS, VUHDO_UPDATE_DC}
-	},
-
-	["STATUS_INCOMING"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_STATUS_INCOMING,
-		["validator"] = VUHDO_statusIncomingValidator,
-		["custom_type"] = VUHDO_BOUQUET_CUSTOM_TYPE_STATUSBAR,
-		["interests"] = {VUHDO_UPDATE_INC}
-	},
-
-	["STATUS_THREAT"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_STATUS_THREAT,
-		["validator"] = VUHDO_statusThreatValidator,
-		["custom_type"] = VUHDO_BOUQUET_CUSTOM_TYPE_STATUSBAR,
-		["interests"] = {VUHDO_UPDATE_THREAT_PERC}
-	},
-
-	["STACKS_COLOR"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_STACKS_COLOR,
-		["validator"] = VUHDO_stacksColorValidator,
-		["updateCyclic"] = true,
-		["no_color"] = true,
-		["interests"] = {}
-	},
-
-	["CLASS_ICON"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_CLASS_ICON,
-		["validator"] = VUHDO_classIconValidator,
-		["no_color"] = true,
-		["interests"] = {}
-	},
-
-	["RAID_ICON"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_RAID_ICON,
-		["validator"] = VUHDO_raidIconValidator,
-		["no_color"] = true,
-		["interests"] = {}
-	},
-
-	["ROLE_ICON"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_ROLE_ICON,
-		["validator"] = VUHDO_roleIconValidator,
-		["no_color"] = true,
-		["interests"] = {}
-	},
-
-	["CLASS_COLOR"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_CLASS_COLOR,
-		["validator"] = VUHDO_classColorValidator,
-		["no_color"] = true,
-		["custom_type"] = VUHDO_BOUQUET_CUSTOM_TYPE_BRIGHTNESS,
-		["interests"] = {}
-	},
-
-	["ALWAYS"] = {
-		["displayName"] = VUHDO_I18N_BOUQUET_ALWAYS,
-		["validator"] = VUHDO_alwaysTrueValidator,
-		["interests"] = {}
-	}
-};
