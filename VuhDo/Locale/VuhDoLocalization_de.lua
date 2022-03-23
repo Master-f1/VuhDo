@@ -1,4 +1,3 @@
-﻿
 if (GetLocale() ~= "deDE") then
 	return;
 end
@@ -12,7 +11,7 @@ end
 -- ü = \195\188
 
 -- @EXACT = true: Translation has to be the exact(!) match in the clients language,
---                beacause it carries technical semantics
+-- beacause it carries technical semantics
 -- @EXACT = false: Translation can be done freely, because text is only descriptive
 
 
@@ -158,7 +157,7 @@ VUHDO_I18N_BUFFC_ASPECT = "02Aspekt";
 
 -- Key Binding Headers/Names
 -- @EXACT = false
-BINDING_HEADER_VUHDO_TITLE = "{ VuhDo - |cffffe566Raid Frames|r }";
+BINDING_HEADER_VUHDO_TITLE = "{VuhDo - |cffffe566Raid Frames|r}";
 BINDING_NAME_VUHDO_KEY_ASSIGN_1 = "Mouse-Over Spruch 1";
 BINDING_NAME_VUHDO_KEY_ASSIGN_2 = "Mouse-Over Spruch 2";
 BINDING_NAME_VUHDO_KEY_ASSIGN_3 = "Mouse-Over Spruch 3";
@@ -308,7 +307,7 @@ VUHDO_I18N_BOUQUET_STATUS_MANA = "Statusbar: Mana %";
 VUHDO_I18N_BOUQUET_STATUS_OTHER_POWERS = "Statusbar: Nicht-Mana %";
 VUHDO_I18N_BOUQUET_STATUS_INCOMING = "Statusbar: Eingehende Heilung %";
 VUHDO_I18N_BOUQUET_STATUS_THREAT = "Statusbar: Bedrohung %";
-VUHDO_I18N_BOUQUET_NEW_ITEM_NAME = "-- (de)buff hier eingeben  --";
+VUHDO_I18N_BOUQUET_NEW_ITEM_NAME = "-- (de)buff hier eingeben --";
 
 
 VUHDO_I18N_DEF_BOUQUET_TANK_COOLDOWNS = "Tank-Cooldowns";
