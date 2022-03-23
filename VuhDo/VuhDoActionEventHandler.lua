@@ -12,8 +12,6 @@ local pairs = pairs;
 
 local VUHDO_CURRENT_MOUSEOVER = nil;
 
-
-
 local VUHDO_updateBouquetsForEvent;
 local VUHDO_highlightClusterFor;
 local VUHDO_showTooltip;
@@ -24,7 +22,6 @@ local VUHDO_getHealthBar;
 local VUHDO_resolveButtonUnit;
 local VUHDO_setupSmartCast;
 local VUHDO_updateDirectionFrame;
-
 
 local VUHDO_SPELL_CONFIG;
 local VUHDO_SPELL_ASSIGNMENTS;
@@ -52,16 +49,10 @@ function VUHDO_actionEventHandlerInitBurst()
 	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
 end
 
-
-
---
 function VUHDO_getCurrentMouseOver()
 	return VUHDO_CURRENT_MOUSEOVER;
 end
 
-
-
---
 local function VUHDO_placePlayerIcon(aButton, anIcon, anIndex)
 	anIcon:ClearAllPoints();
 	if (anIndex == 2) then
@@ -82,9 +73,6 @@ local function VUHDO_placePlayerIcon(aButton, anIcon, anIndex)
 	anIcon:Show();
 end
 
-
-
---
 local function VUHDO_showPlayerIcons(aButton)
 	local tUnit = VUHDO_resolveButtonUnit(aButton);
 	local tIsLeader = false;
@@ -174,9 +162,6 @@ local function VUHDO_showPlayerIcons(aButton)
 	VUHDO_getLifeText(tBar):SetAlpha(0.5);
 end
 
-
-
---
 function VUHDO_hideAllPlayerIcons()
 	local tPanelNum;
 	local tAllButtons;
@@ -185,7 +170,7 @@ function VUHDO_hideAllPlayerIcons()
 
 	for tPanelNum = 1, 10 do -- VUHDO_MAX_PANELS
 		tPanel = VUHDO_getActionPanel(tPanelNum);
-		local tAllButtons = { tPanel:GetChildren() };
+		local tAllButtons = {tPanel:GetChildren()};
 		VUHDO_initLocalVars(tPanelNum);
 
 		for _, tButton in pairs(tAllButtons) do
@@ -201,14 +186,11 @@ function VUHDO_hideAllPlayerIcons()
 	VUHDO_reloadUI();
 end
 
-
-
---
 local function VUHDO_showAllPlayerIcons(aPanel)
 	VUHDO_suspendHoTs(true);
 	VUHDO_removeAllHots();
 
-	local tAllButtons = { aPanel:GetChildren() };
+	local tAllButtons = {aPanel:GetChildren()};
 	local tButton;
 
 	for _, tButton in pairs(tAllButtons) do
@@ -218,9 +200,6 @@ local function VUHDO_showAllPlayerIcons(aPanel)
 	end
 end
 
-
-
---
 local tHighlightBar;
 local tAllUnits;
 local tUnit;
@@ -252,7 +231,7 @@ function VuhDoActionOnEnter(aButton)
 
 	if (VUHDO_INTERNAL_TOGGLES[18]) then -- VUHDO_UPDATE_MOUSEOVER_CLUSTER
 		if (VUHDO_CURRENT_MOUSEOVER ~= nil) then
-	    VUHDO_highlightClusterFor(VUHDO_CURRENT_MOUSEOVER);
+			VUHDO_highlightClusterFor(VUHDO_CURRENT_MOUSEOVER);
 		end
 	end
 
@@ -271,9 +250,6 @@ function VuhDoActionOnEnter(aButton)
 	end
 end
 
-
-
---
 local tOldMouseover;
 function VuhDoActionOnLeave(aButton)
 	VUHDO_hideTooltip();
@@ -288,9 +264,9 @@ function VuhDoActionOnLeave(aButton)
 	end
 
 	if (VUHDO_INTERNAL_TOGGLES[18]) then -- VUHDO_UPDATE_MOUSEOVER_CLUSTER
-  	VUHDO_resetClusterUnit();
-  	VUHDO_removeAllClusterHighlights();
-  end
+		VUHDO_resetClusterUnit();
+		VUHDO_removeAllClusterHighlights();
+	end
 
 	if (VUHDO_INTERNAL_TOGGLES[20]) then -- VUHDO_UPDATE_MOUSEOVER_GROUP
 		tUnit = VUHDO_resolveButtonUnit(aButton);
@@ -308,9 +284,6 @@ function VuhDoActionOnLeave(aButton)
 	end
 end
 
-
-
---
 local tAllButtons, tButton, tQuota, tHighlightBar;
 function VUHDO_highlighterBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, aCounter, aMaxValue, aColor, aBuffName, aBouquetName)
 	aMaxValue = aMaxValue or 0;
@@ -347,9 +320,6 @@ function VUHDO_highlighterBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue,
 	end
 end
 
-
-
---
 local tModi;
 local tKey;
 function VuhDoActionPreClick(aButton, aMouseButton, aDown)
@@ -388,9 +358,6 @@ function VuhDoActionPreClick(aButton, aMouseButton, aDown)
 	end
 end
 
-
-
---
 function VuhDoActionPostClick(aButton, aMouseButton)
 	if (VUHDO_IS_SMART_CAST) then
 		VUHDO_setupAllHealButtonAttributes(aButton, nil, false, false, false);
@@ -398,23 +365,14 @@ function VuhDoActionPostClick(aButton, aMouseButton)
 	end
 end
 
-
-
----
 function VuhDoActionOnMouseDown(aPanel, aMouseButton)
 	VUHDO_startMoving(aPanel);
 end
 
-
-
----
 function VuhDoActionOnMouseUp(aPanel, aMouseButton)
 	VUHDO_stopMoving(aPanel);
 end
 
-
-
----
 function VUHDO_startMoving(aPanel)
 	if (VuhDoNewOptionsPanelPanel ~= nil and VuhDoNewOptionsPanelPanel:IsVisible()) then
 		local tNewNum = VUHDO_getComponentPanelNum(aPanel);
@@ -429,7 +387,7 @@ function VUHDO_startMoving(aPanel)
 
 	if (IsMouseButtonDown(1) and VUHDO_mayMoveHealPanels()) then
 		if (not aPanel["isMoving"]) then
-  		aPanel["isMoving"] = true;
+			aPanel["isMoving"] = true;
 			aPanel:StartMoving();
 		end
 	elseif (IsMouseButtonDown(2) and not InCombatLockdown() and (VuhDoNewOptionsPanelPanel == nil or not VuhDoNewOptionsPanelPanel:IsVisible())) then
@@ -437,9 +395,6 @@ function VUHDO_startMoving(aPanel)
 	end
 end
 
-
-
----
 function VUHDO_stopMoving(aPanel)
 	if (aPanel == nil) then
 		aPanel = VUHDO_MOVE_PANEL;
@@ -448,12 +403,9 @@ function VUHDO_stopMoving(aPanel)
 	aPanel["isMoving"] = false;
 	VUHDO_savePanelCoords(aPanel);
 	VUHDO_saveCurrentProfilePanelPosition(VUHDO_getPanelNum(aPanel));
-  VUHDO_hideAllPlayerIcons();
+	VUHDO_hideAllPlayerIcons();
 end
 
-
-
---
 local tPosition;
 function VUHDO_savePanelCoords(aPanel)
 	tPosition = VUHDO_PANEL_SETUP[VUHDO_getPanelNum(aPanel)]["POSITION"];
