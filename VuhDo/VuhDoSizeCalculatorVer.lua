@@ -1,4 +1,4 @@
--- BURST CACHE ---------------------------------------------------
+-- BURST CACHE
 local VUHDO_CONFIG;
 local VUHDO_PANEL_SETUP;
 
@@ -27,7 +27,7 @@ function VUHDO_sizeCalculatorInitBurstVer()
 	VUHDO_isTableHeaderOrFooter = VUHDO_GLOBAL["VUHDO_isTableHeaderOrFooter"];
 end
 
--- BURST CACHE ---------------------------------------------------
+-- BURST CACHE
 
 local sTopHeightCache = {};
 local sBottomHeightCache = {};
@@ -65,7 +65,6 @@ local function VUHDO_getAdditionalTopHeight(aPanelNum)
 	return sTopHeightCache[aPanelNum];
 end
 
---
 local tHotConfig;
 local tBottomSpace;
 local function VUHDO_getAdditionalBottomHeight(aPanelNum)
@@ -76,8 +75,7 @@ local function VUHDO_getAdditionalBottomHeight(aPanelNum)
 		tHotConfig = VUHDO_PANEL_SETUP["HOTS"];
 
 		if (tHotConfig["radioValue"] == 7 or tHotConfig["radioValue"] == 8) then
-			tBottomSpace = VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barHeight"] *
-			VUHDO_PANEL_SETUP[aPanelNum]["HOTS"]["size"] * 0.01;
+			tBottomSpace = VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barHeight"] * VUHDO_PANEL_SETUP[aPanelNum]["HOTS"]["size"] * 0.01;
 		end
 
 		tNamePos = VUHDO_splitString(VUHDO_PANEL_SETUP[aPanelNum]["ID_TEXT"]["position"], "+");
@@ -100,8 +98,7 @@ local function VUHDO_getHeaderTotalHeight(aPanelNum)
 	if (sHeaderTotalHeightCache[aPanelNum] == nil) then
 		if (VUHDO_isTableHeadersShowing(aPanelNum)) then
 			tBarScaling = VUHDO_PANEL_SETUP[aPanelNum]["SCALING"];
-			sHeaderTotalHeightCache[aPanelNum] = tBarScaling["headerHeight"] + tBarScaling["headerSpacing"] +
-			VUHDO_getAdditionalTopHeight(aPanelNum);
+			sHeaderTotalHeightCache[aPanelNum] = tBarScaling["headerHeight"] + tBarScaling["headerSpacing"] + VUHDO_getAdditionalTopHeight(aPanelNum);
 		else
 			sHeaderTotalHeightCache[aPanelNum] = VUHDO_getAdditionalTopHeight(aPanelNum);
 		end
@@ -116,8 +113,7 @@ local function VUHDO_getHeaderFooterTotalHeight(aPanelNum)
 	if (sHeaderFooterTotalHeightCache[aPanelNum] == nil) then
 		if (VUHDO_isTableHeaderOrFooter(aPanelNum)) then
 			tBarScaling = VUHDO_PANEL_SETUP[aPanelNum]["SCALING"];
-			sHeaderFooterTotalHeightCache[aPanelNum] = tBarScaling["headerHeight"] + tBarScaling["headerSpacing"] +
-			VUHDO_getAdditionalTopHeight(aPanelNum);
+			sHeaderFooterTotalHeightCache[aPanelNum] = tBarScaling["headerHeight"] + tBarScaling["headerSpacing"] + VUHDO_getAdditionalTopHeight(aPanelNum);
 		else
 			sHeaderFooterTotalHeightCache[aPanelNum] = VUHDO_getAdditionalTopHeight(aPanelNum);
 		end
@@ -144,10 +140,8 @@ function VUHDO_getHeaderHeightVer(aPanelNum)
 	end
 end
 
---
 local function VUHDO_getHealButtonHeight(aPanelNum)
-	return VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barHeight"] + VUHDO_getAdditionalTopHeight(aPanelNum) +
-	VUHDO_getAdditionalBottomHeight(aPanelNum);
+	return VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barHeight"] + VUHDO_getAdditionalTopHeight(aPanelNum) + VUHDO_getAdditionalBottomHeight(aPanelNum);
 end
 
 -- Returns the Y-offset in Pixels a heal button has within a model (from the top of the models position)
@@ -225,7 +219,6 @@ local function VUHDO_determineGridRowMaxBars(aRowNum, aPanelNum)
 	return tMaxBars;
 end
 
---
 local function VUHDO_determineGridRowPlaceBars(aPlaceNum, aRowNum, aPanelNum)
 	return #VUHDO_getGroupMembers(VUHDO_PANEL_DYN_MODELS[aPanelNum][aPlaceNum], aPanelNum, aPlaceNum);
 end
@@ -304,7 +297,6 @@ local function VUHDO_getColumnPos(aPlaceNum, aPanelNum, aRowNo)
 	return tColX;
 end
 
---
 local tX, tY, tOffset;
 local tRowNum, tBarScaling;
 function VUHDO_getHeaderPosVer(aHeaderPlace, aPanelNum)
@@ -320,7 +312,6 @@ function VUHDO_getHeaderPosVer(aHeaderPlace, aPanelNum)
 	return tX, tY;
 end
 
---
 local tButtonX;
 local tButtonY;
 local tHots;
@@ -337,8 +328,7 @@ function VUHDO_getHealButtonPosVer(aPlaceNum, aRowNo, aPanelNum)
 		tHots = VUHDO_PANEL_SETUP["HOTS"];
 		if (tHots["radioValue"] == 1) then
 			tHotslots = VUHDO_getNumHotSlots(aPanelNum);
-			tButtonX = tButtonX + VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barHeight"] *
-			VUHDO_PANEL_SETUP[aPanelNum]["HOTS"]["size"] * 0.01 * tHotslots;
+			tButtonX = tButtonX + VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barHeight"] * VUHDO_PANEL_SETUP[aPanelNum]["HOTS"]["size"] * 0.01 * tHotslots;
 		end
 
 		tScaling = VUHDO_PANEL_SETUP[aPanelNum]["SCALING"];
@@ -367,7 +357,6 @@ function VUHDO_getHealButtonPosVer(aPlaceNum, aRowNo, aPanelNum)
 	return tButtonX, tButtonY;
 end
 
---
 local tBarScaling;
 local tAnzCols;
 local tAnzPlaces;
@@ -398,7 +387,6 @@ function VUHDO_getHealPanelWidthVer(aPanelNum)
 	return tWidth;
 end
 
---
 local tBarScaling
 local tAnzPlaces;
 local tRows;
