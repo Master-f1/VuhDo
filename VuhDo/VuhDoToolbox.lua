@@ -56,7 +56,6 @@ function VUHDO_getNumbersFromString(aName, aMaxAnz)
 	return tNumbers;
 end
 
---
 local tValue;
 function VUHDO_tableUniqueAdd(aTable, aValue)
 	for _, tValue in pairs(aTable) do
@@ -69,7 +68,6 @@ function VUHDO_tableUniqueAdd(aTable, aValue)
 	return true;
 end
 
-----------------------------------------------------
 local VUHDO_RAID_NAMES;
 local VUHDO_RAID;
 local VUHDO_UNIT_BUTTONS;
@@ -79,7 +77,6 @@ local sRangeSpell;
 local sIsGuessRange = true;
 local sScanRange;
 
---
 local VUHDO_updateBouquetsForEvent;
 function VUHDO_toolboxInitBurst()
 	VUHDO_RAID_NAMES = VUHDO_GLOBAL["VUHDO_RAID_NAMES"];
@@ -107,13 +104,14 @@ function VUHDO_seeProfiler()
 	VUHDO_Msg("Duration: " .. tTimeDelta);
 end
 
---
--- local tInfo;
--- function VUHDO_dumpRaid()
---	for _, tInfo in pairs(VUHDO_RAID) do
---		VUHDO_Msg(tInfo.name .. ": " .. tInfo.unit);
---	end
--- end
+--[[
+local tInfo;
+function VUHDO_dumpRaid()
+	for _, tInfo in pairs(VUHDO_RAID) do
+		VUHDO_Msg(tInfo.name .. ": " .. tInfo.unit);
+	end
+ end
+]]
 
 -- Print chat frame line with no "{Vuhdo} prefix
 function VUHDO_MsgC(aMessage, aRed, aGreen, aBlue)
@@ -124,7 +122,6 @@ function VUHDO_MsgC(aMessage, aRed, aGreen, aBlue)
 	DEFAULT_CHAT_FRAME:AddMessage(aMessage, aRed, aGreen, aBlue);
 end
 
---
 local tMessage;
 local function VUHDO_argumentToText(anArgument)
 
@@ -155,7 +152,6 @@ function VUHDO_Msg(aMessage, aRed, aGreen, aBlue)
 	VUHDO_MsgC("|cffffe566{VuhDo}|r " .. aMessage, aRed, aGreen, aBlue)
 end
 
---
 local tText;
 local tCnt;
 local tFrag;
@@ -251,8 +247,8 @@ function VUHDO_textParse(aString)
 	local tIsErroneous = false;
 
 	if ((aString ~= nil) and (aString ~= "")) then
-		while (string.find(aString, "  ") ~= nil) do
-			aString = string.gsub(aString, "  ", " ");
+		while (string.find(aString, "") ~= nil) do
+			aString = string.gsub(aString, "", "");
 		end
 
 		if (string.len(aString) <= 1) then
@@ -434,7 +430,6 @@ function VUHDO_getUnitZoneName(aUnit)
 	return tZone, tMap;
 end
 
---
 local tZoneOkay;
 local tUnitZone, tPlayerZone;
 local tIdx;
@@ -459,12 +454,10 @@ function VUHDO_getUnitHealthPercent(anInfo)
 	end
 end
 
---
 function VUHDO_isSpellKnown(aSpellName)
 	return GetSpellInfo(aSpellName) ~= nil;
 end
 
---
 local tDeltaSecs;
 function VUHDO_getDurationTextSince(aStartTime)
 	if (aStartTime == nil) then
@@ -482,7 +475,6 @@ function VUHDO_getDurationTextSince(aStartTime)
 	end
 end
 
---
 local tDistance;
 function VUHDO_getDistanceText(aUnit)
 	tDistance = VUHDO_getDistanceBetween("player", aUnit);
@@ -496,7 +488,6 @@ function VUHDO_getDistanceText(aUnit)
 
 end
 
---
 local tPet;
 function VUHDO_getPetUnit(anOwnerUnit)
 	_, tPet, _ = VUHDO_getUnitIds();
@@ -512,7 +503,6 @@ function VUHDO_getPetUnit(anOwnerUnit)
 	end
 end
 
---
 function VUHDO_getTargetUnit(aSourceUnit)
 	if ("player" == aSourceUnit) then
 		return "target";
@@ -521,7 +511,6 @@ function VUHDO_getTargetUnit(aSourceUnit)
 	end
 end
 
---
 function VUHDO_getResurrectionSpells()
 	if (VUHDO_RESURRECTION_SPELLS[VUHDO_PLAYER_CLASS] == nil) then
 		return nil, nil;
@@ -536,14 +525,12 @@ function VUHDO_getResurrectionSpells()
 	end
 end
 
---
 local tBtnUnit;
 local tBtnName;
 function VUHDO_resolveButtonUnit(aButton)
 	return aButton:GetAttribute("unit");
 end
 
---
 local tInfo;
 local tEmptyInfo = {};
 function VUHDO_resolveVehicleUnit(aUnit)
@@ -555,24 +542,20 @@ function VUHDO_resolveVehicleUnit(aUnit)
 	end
 end
 
---
 local tBtnInfo;
 local tButtons;
 function VUHDO_getUnitButtons(aUnit)
 	return VUHDO_UNIT_BUTTONS[aUnit];
 end
 
---
 function VUHDO_getBuffVariantMaxTarget(someVariants)
 	return someVariants[2] or someVariants[1];
 end
 
---
 function VUHDO_getBuffVariantSingleTarget(someVariants)
 	return someVariants[1];
 end
 
---
 local tEmpty = {};
 local tInfo;
 function VUHDO_shouldScanUnit(aUnit)
@@ -590,7 +573,6 @@ function VUHDO_shouldScanUnit(aUnit)
 	end
 end
 
---
 local tNumBytes, tNumChars;
 local tNumCut;
 local tByte;
