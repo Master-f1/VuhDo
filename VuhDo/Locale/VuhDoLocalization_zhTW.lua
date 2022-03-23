@@ -1,4 +1,3 @@
-﻿
 if (GetLocale() ~= "zhTW") then
 	return;
 end
@@ -68,7 +67,7 @@ VUHDO_I18N_SHOW_BUFF_WATCH = "顯示增益監視";
 
 
 -- @EXACT = true
---
+
 VUHDO_I18N_RANK = "等級";
 
 
@@ -150,7 +149,7 @@ VUHDO_I18N_BUFFC_SKIN = "01皮膚";
 VUHDO_I18N_BUFFC_ARMOR_MAGE = "03護甲";
 
 -- Death Knight
-VUHDO_SPELL_ID_BUFFC_PRESENCE    = "03領域";
+VUHDO_SPELL_ID_BUFFC_PRESENCE = "03領域";
 
 -- Warrior
 VUHDO_I18N_BUFFC_SHOUT = "01怒吼";
