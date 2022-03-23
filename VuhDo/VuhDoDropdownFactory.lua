@@ -1,40 +1,25 @@
-VUHDO_MM_SETTINGS = { };
+VUHDO_MM_SETTINGS = {};
 local VUHDO_MENU_UNIT = nil;
 
-
-
---
 function VUHDO_playerTargetDropdownOnLoad()
 	UIDropDownMenu_Initialize(VuhDoPlayerTargetDropDown, VUHDO_playerTargetDropDown_Initialize, "MENU", 1);
 end
 
-
-
---
 function VUHDO_setMenuUnit(aButton)
 	VUHDO_MENU_UNIT = VUHDO_resolveButtonUnit(aButton);
 end
 
-
-
---
 function VUHDO_ptBuffSelected(_, aName, aCategName)
 	VUHDO_Msg(VUHDO_I18N_BUFF_ASSIGN_1 .. aCategName .. VUHDO_I18N_BUFF_ASSIGN_2 .. aName .. VUHDO_I18N_BUFF_ASSIGN_3);
 	VUHDO_BUFF_SETTINGS[aCategName].name = aName;
 	VUHDO_reloadBuffPanel();
 end
 
-
-
---
 function VUHDO_roleOverrideSelected(_, aModelId, aName)
 	VUHDO_MANUAL_ROLES[aName] = aModelId;
 	VUHDO_reloadUI();
 end
 
-
-
---
 function VUHDO_playerTargetDropDown_Initialize(aFrame, aLevel)
 	local tInfo;
 
@@ -239,9 +224,6 @@ function VUHDO_playerTargetDropDown_Initialize(aFrame, aLevel)
 	UIDropDownMenu_AddButton(tInfo);
 end
 
-
-
---
 function VUHDO_disableMenu(anInfo, aCondition)
 	anInfo.disabled = aCondition;
 
@@ -252,9 +234,6 @@ function VUHDO_disableMenu(anInfo, aCondition)
 	end
 end
 
-
-
---
 function VUHDO_playerTargetItemSelected(_, aUnit)
 	local tName = VUHDO_RAID[aUnit].name;
 	if (VUHDO_PLAYER_TARGETS[tName] ~= nil) then
@@ -267,9 +246,6 @@ function VUHDO_playerTargetItemSelected(_, aUnit)
 	VUHDO_quickRaidReload();
 end
 
-
-
---
 function VUHDO_mainTankItemSelected(_, aMtPos, aUnit)
 	local tName = VUHDO_RAID[aUnit].name;
 
@@ -287,9 +263,6 @@ function VUHDO_mainTankItemSelected(_, aMtPos, aUnit)
 	VUHDO_reloadUI();
 end
 
-
-
---
 function VUHDO_unitRoleItemSelected(_, aCommand, aUnit)
 	if ("LEAD" == aCommand) then
 		PromoteToLeader(aUnit);
@@ -304,46 +277,27 @@ function VUHDO_unitRoleItemSelected(_, aCommand, aUnit)
 	end
 end
 
-
-
---
 function VUHDO_minimapLeftClick()
 	VUHDO_slashCmd("options");
 end
 
-
-
---
 function VUHDO_minimapDropdownOnLoad()
 	UIDropDownMenu_Initialize(VuhDoMinimapDropDown, VUHDO_miniMapDropDown_Initialize, "MENU", 1);
 end
 
-
-
-
---
 function VUHDO_minimapRightClick()
 	ToggleDropDownMenu(1, nil, VuhDoMinimapDropDown, "VuhDoMinimapButton", 0, -5);
 end
 
-
-
---
 function VUHDO_mmLoadProfile(_, aName)
 	VUHDO_loadProfile(aName);
 	VUHDO_CONFIG["CURRENT_PROFILE"] = aName;
 end
 
-
-
---
 function VUHDO_mmLoadKeyLayout(_, aName)
 	VUHDO_activateLayout(aName);
 end
 
-
-
---
 local function VUHDO_createMinimapToggle(aName, anArg1, anIsChecked)
 	local tInfo = UIDropDownMenu_CreateInfo();
 	tInfo.text = aName;
@@ -354,9 +308,6 @@ local function VUHDO_createMinimapToggle(aName, anArg1, anIsChecked)
 	UIDropDownMenu_AddButton(tInfo);
 end
 
-
-
---
 local function VUHDO_createEmptyLine()
 	local tInfo = UIDropDownMenu_CreateInfo();
 	tInfo.text = "";
@@ -364,9 +315,6 @@ local function VUHDO_createEmptyLine()
 	UIDropDownMenu_AddButton(tInfo);
 end
 
-
-
---
 function VUHDO_miniMapDropDown_Initialize(aFrame, aLevel)
 	local tInfo;
 	local tName;
@@ -377,27 +325,27 @@ function VUHDO_miniMapDropDown_Initialize(aFrame, aLevel)
 
 	if (aLevel > 1) then
 		if ("S" == UIDROPDOWNMENU_MENU_VALUE) then
-  		local tSetup;
+		local tSetup;
 
-  		for _, tSetup in ipairs(VUHDO_PROFILES) do
-  			tInfo = UIDropDownMenu_CreateInfo();
-  			tInfo.text = tSetup["NAME"];
-  			tInfo.arg1 = tSetup["NAME"];
-  			tInfo.func = VUHDO_mmLoadProfile;
-  			tInfo.checked = tSetup["NAME"] == VUHDO_CONFIG["CURRENT_PROFILE"];
-  			tInfo.level = 2;
-  			UIDropDownMenu_AddButton(tInfo, 2);
-  		end
+		for _, tSetup in ipairs(VUHDO_PROFILES) do
+			tInfo = UIDropDownMenu_CreateInfo();
+			tInfo.text = tSetup["NAME"];
+			tInfo.arg1 = tSetup["NAME"];
+			tInfo.func = VUHDO_mmLoadProfile;
+			tInfo.checked = tSetup["NAME"] == VUHDO_CONFIG["CURRENT_PROFILE"];
+			tInfo.level = 2;
+			UIDropDownMenu_AddButton(tInfo, 2);
+		end
 		elseif ("K" == UIDROPDOWNMENU_MENU_VALUE) then
-  		for tName, _ in pairs(VUHDO_SPELL_LAYOUTS) do
-  			tInfo = UIDropDownMenu_CreateInfo();
-  			tInfo.text = tName;
-  			tInfo.arg1 = tName;
-  			tInfo.func = VUHDO_mmLoadKeyLayout;
-  			tInfo.checked = tName == VUHDO_SPEC_LAYOUTS["selected"];
-  			tInfo.level = 2;
-  			UIDropDownMenu_AddButton(tInfo, 2);
-  		end
+		for tName, _ in pairs(VUHDO_SPELL_LAYOUTS) do
+			tInfo = UIDropDownMenu_CreateInfo();
+			tInfo.text = tName;
+			tInfo.arg1 = tName;
+			tInfo.func = VUHDO_mmLoadKeyLayout;
+			tInfo.checked = tName == VUHDO_SPEC_LAYOUTS["selected"];
+			tInfo.level = 2;
+			UIDropDownMenu_AddButton(tInfo, 2);
+		end
 		end
 		return;
 	end
@@ -469,11 +417,8 @@ function VUHDO_miniMapDropDown_Initialize(aFrame, aLevel)
 	UIDropDownMenu_AddButton(tInfo);
 end
 
-
-
---
 function VUHDO_minimapItemSelected(_, anId)
-  local tCmd;
+	local tCmd;
 	if ("LOCK" == anId) then
 		tCmd = "lock";
 	elseif ("MINIMAP" == anId) then
@@ -498,19 +443,13 @@ function VUHDO_minimapItemSelected(_, anId)
 	VUHDO_slashCmd(tCmd);
 end
 
-
-
---
 function VUHDO_initMinimap()
-  MyMinimapButton:Create("VuhDo", VUHDO_MM_SETTINGS, VUHDO_MM_LAYOUT);
-  MyMinimapButton:SetLeftClick("VuhDo", VUHDO_minimapLeftClick);
-  MyMinimapButton:SetRightClick("VuhDo", VUHDO_minimapRightClick);
-  VUHDO_initShowMinimap();
+	MyMinimapButton:Create("VuhDo", VUHDO_MM_SETTINGS, VUHDO_MM_LAYOUT);
+	MyMinimapButton:SetLeftClick("VuhDo", VUHDO_minimapLeftClick);
+	MyMinimapButton:SetRightClick("VuhDo", VUHDO_minimapRightClick);
+	VUHDO_initShowMinimap();
 end
 
-
-
---
 function VUHDO_initShowMinimap()
 	if (VUHDO_CONFIG["SHOW_MINIMAP"]) then
 		VuhDoMinimapButton:Show();
