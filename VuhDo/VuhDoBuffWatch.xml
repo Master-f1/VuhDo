@@ -43,8 +43,8 @@
 			<Button name="$parentGlassButton" setAllPoints="true" inherits="SecureUnitButtonTemplate,SecureHandlerEnterLeaveTemplate,SecureHandlerShowHideTemplate">
 				<Scripts>
 					<OnLoad>
-					  self:RegisterForClicks("AnyDown");
-    				self:SetScript("PreClick", VuhDoBuffPreClick);
+						self:RegisterForClicks("AnyDown");
+						self:SetScript("PreClick", VuhDoBuffPreClick);
 						self:SetScript("PostClick", VuhDoBuffPostClick)
 					</OnLoad>
 				</Scripts>
