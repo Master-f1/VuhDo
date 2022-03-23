@@ -1,5 +1,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
 
 	<Script file="Libs\LibStub\LibStub.lua" />
 	<Script file="Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua" />
@@ -8,13 +9,13 @@
 	<Include file="Libs\LibHealComm-4.0\LibHealComm-4.0.xml" />
 
 	<Script file="Libs\LibSharedMedia-3.0\LibSharedMedia-3.0.lua" />
-	<Script file="VuhDoLocalization_en.lua" />
-	<Script file="VuhDoLocalization_de.lua" />
-	<Script file="VuhDoLocalization_fr.lua" />
-	<Script file="VuhDoLocalization_es.lua" />
-	<Script file="VuhDoLocalization_ru.lua" />
-	<Script file="VuhDoLocalization_zhCN.lua" />
-	<Script file="VuhDoLocalization_zhTW.lua" />
+	<Script file="Locale\VuhDoLocalization_en.lua" />
+	<Script file="Locale\VuhDoLocalization_de.lua" />
+	<Script file="Locale\VuhDoLocalization_fr.lua" />
+	<Script file="Locale\VuhDoLocalization_es.lua" />
+	<Script file="Locale\VuhDoLocalization_ru.lua" />
+	<Script file="Locale\VuhDoLocalization_zhCN.lua" />
+	<Script file="Locale\VuhDoLocalization_zhTW.lua" />
 
 	<Script file="VuhDoConstSpells.lua" />
 	<Script file="VuhDoConst.lua" />
