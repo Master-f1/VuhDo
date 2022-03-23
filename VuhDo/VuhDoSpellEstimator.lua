@@ -1,359 +1,154 @@
-VUHDO_MAX_HOTS = 0;
-VUHDO_ACTIVE_HOTS = {};
-VUHDO_ACTIVE_HOTS_OTHERS = {};
-VUHDO_PLAYER_HOTS = {};
+local VUHDO_IS_RESURRECTING = false;
 
-local VUHDO_SPELL_TARGET_SELF = 1; -- Heal target is player
-local VUHDO_SPELL_TARGET_TARGET = 2; -- Heal target is selected target
-local VUHDO_SPELL_TARGET_GROUP_OWN = 3; -- Heal target is players group
-local VUHDO_SPELL_TARGET_GROUP_TARGET = 4; -- Heal target is selected target's group
-local VUHDO_SPELL_TARGET_SELF_TARGET = 5; -- Heal target is player and selected target
-local VUHDO_SPELL_TARGET_PET = 6; -- Heal target is player's pet
+local string = string;
+local pairs = pairs;
+local strlen = strlen;
+local smatch = string.match;
 
-VUHDO_SPELL_TYPE_HOT = 1; -- Spell type heal over time
-VUHDO_SPELL_TYPE_CAST = 2; -- Spell type is regular cast
-VUHDO_SPELL_TYPE_CAST_HOT = 3; -- Spell type is regular cast + HoT
+local UnitIsGhost = UnitIsGhost;
+local InCombatLockdown = InCombatLockdown;
 
-VUHDO_GCD_SPELLS = {
-	["WARRIOR"] = GetSpellInfo(78), -- Heroic Strike
-	["ROGUE"] = GetSpellInfo(1752), -- Sinister Strike
-	["HUNTER"] = GetSpellInfo(1494), -- Track beasts
-	["PALADIN"] = GetSpellInfo(635), -- Holy Light
-	["MAGE"] = GetSpellInfo(133), -- Fire Ball
-	["WARLOCK"] = GetSpellInfo(686), -- Shadow Bolt
-	["SHAMAN"] = GetSpellInfo(331), -- Healing Wave
-	["DRUID"] = GetSpellInfo(5185), -- Healing Touch
-	["PRIEST"] = GetSpellInfo(2050), -- Lesser Heal
-	["DEATHKNIGHT"] = GetSpellInfo(48266) -- Blood Presence
+local VUHDO_sendCtraMessage;
+local VUHDO_updateAllHoTs;
+local VUHDO_updateAllCyclicBouquets;
+local VUHDO_getResurrectionSpells;
+local VUHDO_initGcd;
+
+local VUHDO_ACTIVE_HOTS;
+local VUHDO_RAID_NAMES;
+local VUHDO_CONFIG = {};
+
+function VUHDO_spellEventHandlerInitBurst()
+	VUHDO_sendCtraMessage = VUHDO_GLOBAL["VUHDO_sendCtraMessage"];
+	VUHDO_updateAllHoTs = VUHDO_GLOBAL["VUHDO_updateAllHoTs"];
+	VUHDO_updateAllCyclicBouquets = VUHDO_GLOBAL["VUHDO_updateAllCyclicBouquets"];
+	VUHDO_getResurrectionSpells = VUHDO_GLOBAL["VUHDO_getResurrectionSpells"];
+	VUHDO_initGcd = VUHDO_GLOBAL["VUHDO_initGcd"];
+
+	VUHDO_ACTIVE_HOTS = VUHDO_GLOBAL["VUHDO_ACTIVE_HOTS"];
+	VUHDO_RAID_NAMES = VUHDO_GLOBAL["VUHDO_RAID_NAMES"];
+	VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
+end
+
+function VUHDO_spellcastStop(aUnit)
+	if (VUHDO_IS_RESURRECTING and "player" == aUnit) then
+		VUHDO_sendCtraMessage("RESNO");
+		VUHDO_IS_RESURRECTING = false;
+	end
+end
+local VUHDO_spellcastStop = VUHDO_spellcastStop;
+
+function VUHDO_spellcastFailed(aUnit, aSpellName)
+	VUHDO_spellcastStop(aUnit, aSpellName);
+end
+
+local function VUHDO_activateSpellForSpec(aSpecId)
+	local tName = VUHDO_SPEC_LAYOUTS[aSpecId];
+	if (tName ~= nil and strlen(tName) > 0) then
+		if (VUHDO_SPELL_LAYOUTS[tName] ~= nil) then
+			VUHDO_activateLayout(tName);
+		else
+			VUHDO_Msg("Spell layout \"" .. tName .. "\" doesn't exist.", 1, 0.4, 0.4);
+		end
+	end
+end
+
+-- local
+function VUHDO_activateSpecc(aSpeccNum)
+	VUHDO_activateSpellForSpec("" .. aSpeccNum);
+
+	if (1 == aSpeccNum and VUHDO_CONFIG["AUTO_PROFILES"]["SPEC_1"] ~= nil) then
+		VUHDO_loadProfile(VUHDO_CONFIG["AUTO_PROFILES"]["SPEC_1"]);
+	elseif (2 == aSpeccNum and VUHDO_CONFIG["AUTO_PROFILES"]["SPEC_2"] ~= nil) then
+		VUHDO_loadProfile(VUHDO_CONFIG["AUTO_PROFILES"]["SPEC_2"]);
+	end
+end
+
+local VUHDO_TALENT_CHANGE_SPELLS = {
+	[VUHDO_SPELL_ID_ACTIVATE_FIRST_TALENT] = true,
+	[VUHDO_SPELL_ID_ACTIVATE_SECOND_TALENT] = true,
+	[VUHDO_SPELL_ID_BUFF_FROST_PRESENCE] = true,
+	[VUHDO_SPELL_ID_BUFF_BLOOD_PRESENCE] = true,
+	[VUHDO_SPELL_ID_BUFF_UNHOLY_PRESENCE] = true
 }
 
-local twipe = table.wipe;
-local GetSpellName = GetSpellName;
-local GetSpellInfo = GetSpellInfo;
-local pairs = pairs;
-
---[[
-	target
-	type
-	casttime (auto)
-	regulartime
-	lasts
-	nobonus
-	icon (auto)
-	present (auto)
-	<rangx>.average (auto)
-	<rangx>.level {}
-	<rangx>.present (auto)
-	<rangx>.bonus
-]]
-
--- All healing spells and their ranks we will take notice of
-VUHDO_SPELLS = {
-	-- Paladin
-	[VUHDO_SPELL_ID_FLASH_OF_LIGHT] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_CAST_HOT
-	},
-	[VUHDO_SPELL_ID_HOLY_LIGHT] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_CAST
-	},
-	[VUHDO_SPELL_ID_BUFF_BEACON_OF_LIGHT] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_HOT
-	},
-	[VUHDO_SPELL_ID_SACRED_SHIELD] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_HOT
-	},
-
-	-- Priest
-	[VUHDO_SPELL_ID_FLASH_HEAL] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_CAST
-	},
-	[VUHDO_SPELL_ID_RENEW] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_HOT
-	},
-	[VUHDO_SPELL_ID_LESSER_HEAL] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_CAST
-	},
-	[VUHDO_SPELL_ID_HEAL] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_CAST
-	},
-	[VUHDO_SPELL_ID_GREATER_HEAL] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_CAST
-	},
-	[VUHDO_SPELL_ID_BINDING_HEAL] = {
-		["target"] = VUHDO_SPELL_TARGET_SELF_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_CAST
-	},
-	[VUHDO_SPELL_ID_PRAYER_OF_HEALING] = {
-		["target"] = VUHDO_SPELL_TARGET_GROUP_OWN,
-		["type"] = VUHDO_SPELL_TYPE_CAST
-	},
-	[VUHDO_SPELL_ID_CIRCLE_OF_HEALING] = {
-		["target"] = VUHDO_SPELL_TARGET_GROUP_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_CAST
-	},
-	[VUHDO_SPELL_ID_POWERWORD_SHIELD] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_HOT,
-		["nostance"] = true
-	},
-	[VUHDO_SPELL_ID_PRAYER_OF_MENDING] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_HOT
-	},
-	[VUHDO_SPELL_ID_DIVINE_AEGIS] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_HOT,
-		["nodefault"] = true
-	},
-	[VUHDO_SPELL_ID_PAIN_SUPPRESSION] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_HOT,
-		["nodefault"] = true,
-		["nostance"] = true
-	},
-	[VUHDO_SPELL_ID_GRACE] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_HOT,
-		["nodefault"] = true
-	},
-	[VUHDO_SPELL_ID_GUARDIAN_SPIRIT] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_HOT,
-		["nohelp"] = true,
-		["noselftarget"] = true
-	},
-	[VUHDO_SPELL_ID_ABOLISH_DISEASE] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_HOT,
-		["nohelp"] = true,
-		["noselftarget"] = true
-	},
-	[VUHDO_SPELL_ID_RENEWED_HOPE] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_HOT,
-		["nodefault"] = true
-	},
-	[VUHDO_SPELL_ID_INSPIRATION] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_HOT,
-		["nodefault"] = true
-	},
-	[VUHDO_SPELL_ID_BLESSED_HEALING] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_HOT,
-		["nodefault"] = true
-	},
-
-	-- Shaman
-	[VUHDO_SPELL_ID_HEALING_WAVE] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_CAST
-	},
-	[VUHDO_SPELL_ID_LESSER_HEALING_WAVE] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_CAST
-	},
-	[VUHDO_SPELL_ID_CHAIN_HEAL] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_CAST
-	},
-	[VUHDO_SPELL_ID_RIPTIDE] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_HOT
-	},
-	[VUHDO_SPELL_ID_BUFF_EARTHLIVING_WEAPON] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_HOT
-	},
-	[VUHDO_SPELL_ID_GIFT_OF_THE_NAARU] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_HOT
-	},
-	[VUHDO_SPELL_ID_BUFF_EARTH_SHIELD] = {
-		["target"] = VUHDO_BUFF_TARGET_UNIQUE,
-		["type"] = VUHDO_SPELL_TYPE_HOT
-	},
-	[VUHDO_SPELL_ID_ANCESTRAL_HEALING] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_HOT
-	},
-	[VUHDO_SPELL_ID_BUFF_WATER_SHIELD] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_HOT
-	},
-
-	-- Druid
-	[VUHDO_SPELL_ID_REJUVENATION] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_HOT
-	},
-	[VUHDO_SPELL_ID_HEALING_TOUCH] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_CAST
-	},
-	[VUHDO_SPELL_ID_NOURISH] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_CAST
-	},
-	[VUHDO_SPELL_ID_REGROWTH] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_HOT
-	},
-	[VUHDO_SPELL_ID_LIFEBLOOM] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_HOT
-	},
-	[VUHDO_SPELL_ID_WILD_GROWTH] = {
-		["target"] = VUHDO_SPELL_TARGET_GROUP_OWN,
-		["type"] = VUHDO_SPELL_TYPE_HOT
-	},
-	[VUHDO_SPELL_ID_ABOLISH_POISON] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_HOT
-	},
-	[VUHDO_SPELL_ID_SWIFTMEND] = {
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_CAST
-	},
-
-	-- Hunter
-	[VUHDO_SPELL_ID_MEND_PET] = {
-		["target"] = VUHDO_SPELL_TARGET_PET,
-		["type"] = VUHDO_SPELL_TYPE_HOT
-	},
-
-	-- custom
-	[VUHDO_SPELL_ID_POAK] = {-- Weapon proc
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_HOT,
-		["nodefault"] = true
-	},
-	[VUHDO_SPELL_ID_FOUNTAIN_OF_LIGHT] = {-- Weapon proc
-		["target"] = VUHDO_SPELL_TARGET_TARGET,
-		["type"] = VUHDO_SPELL_TYPE_HOT,
-		["nodefault"] = true
-	}
-};
-local VUHDO_SPELLS = VUHDO_SPELLS;
-
--- Spells from talents only, not in spellbook
-local function VUHDO_addTalentSpells()
-	if (VUHDO_PLAYER_CLASS == "SHAMAN") then
-		VUHDO_SPELLS[VUHDO_SPELL_ID_ANCESTRAL_HEALING]["present"] = true;
-		VUHDO_SPELLS[VUHDO_SPELL_ID_ANCESTRAL_HEALING]["icon"] = "Interface\\Icons\\Spell_Nature_UndyingStrength";
+function VUHDO_spellcastSucceeded(aUnit, aSpellName)
+	if (VUHDO_TALENT_CHANGE_SPELLS[aSpellName]) then
+		VUHDO_resetTalentScan(aUnit);
+		VUHDO_timeReloadUI(1);
 	end
 
-	if (VUHDO_PLAYER_CLASS == "PRIEST") then
-		VUHDO_SPELLS[VUHDO_SPELL_ID_GRACE]["present"] = true;
-		VUHDO_SPELLS[VUHDO_SPELL_ID_GRACE]["icon"] = "Interface\\Icons\\Spell_Holy_Hopeandgrace";
-
-		VUHDO_SPELLS[VUHDO_SPELL_ID_DIVINE_AEGIS]["present"] = true;
-		VUHDO_SPELLS[VUHDO_SPELL_ID_DIVINE_AEGIS]["icon"] = "Interface\\Icons\\Spell_Holy_DevineAegis";
-
-		VUHDO_SPELLS[VUHDO_SPELL_ID_RENEWED_HOPE]["present"] = true;
-		_, _, VUHDO_SPELLS[VUHDO_SPELL_ID_RENEWED_HOPE]["icon"] = GetSpellInfo(57470);
-
-		VUHDO_SPELLS[VUHDO_SPELL_ID_INSPIRATION].present = true;
-		_, _, VUHDO_SPELLS[VUHDO_SPELL_ID_INSPIRATION]["icon"] = GetSpellInfo(14893);
-
-		VUHDO_SPELLS[VUHDO_SPELL_ID_BLESSED_HEALING]["present"] = true;
-		_, _, VUHDO_SPELLS[VUHDO_SPELL_ID_BLESSED_HEALING]["icon"] = GetSpellInfo(70772);
+	if ("player" ~= aUnit and VUHDO_PLAYER_RAID_ID ~= aUnit) then
+		return;
 	end
 
-	-- Val'anyr, Hammer of Ancient Kings
-	VUHDO_SPELLS[VUHDO_SPELL_ID_POAK]["present"] = true;
-	VUHDO_SPELLS[VUHDO_SPELL_ID_POAK]["icon"] = "Interface\\Icons\\Spell_Holy_ImpHolyConcentration";
+	if (VUHDO_ACTIVE_HOTS[aSpellName]) then
+		VUHDO_updateAllHoTs();
+		VUHDO_updateAllCyclicBouquets("player");
+	end
 
-	-- Rotface hammer
-	VUHDO_SPELLS[VUHDO_SPELL_ID_FOUNTAIN_OF_LIGHT]["present"] = true;
-	_, _, VUHDO_SPELLS[VUHDO_SPELL_ID_FOUNTAIN_OF_LIGHT]["icon"] = GetSpellInfo(71864);
+	if (VUHDO_SPELL_ID_ACTIVATE_FIRST_TALENT == aSpellName) then
+		VUHDO_activateSpecc(1);
+	elseif (VUHDO_SPELL_ID_ACTIVATE_SECOND_TALENT == aSpellName) then
+		VUHDO_activateSpecc(2);
+	end
 end
 
--- initializes some dynamic information into VUHDO_SPELLS
-local tHotSlots, tHotCfg, tHotName;
-local tCnt2;
-local tIndex;
+local tTargetUnit;
+local tFirstRes, tSecondRes;
+local tUniqueSpells = nil;
+local tUniqueCategs;
 local tSpellName;
-local tInfo;
-local tSlotsUsed;
-local tHasFoundSpells;
-function VUHDO_initFromSpellbook()
-	tIndex = 1;
-	while (true) do
-		tSpellName, tSpellRank = GetSpellName(tIndex, BOOKTYPE_SPELL);
-		if (tSpellName == nil) then
-			break
-		end
-
-		if (VUHDO_SPELLS[tSpellName] ~= nil) then
-			VUHDO_SPELLS[tSpellName]["present"] = true;
-			_, _, VUHDO_SPELLS[tSpellName]["icon"], _, _, _, _, _, _ = GetSpellInfo(tSpellName);
-			VUHDO_SPELLS[tSpellName]["id"] = tIndex;
-		end
-
-		tIndex = tIndex + 1;
+local tCateg;
+local tText;
+function VUHDO_spellcastSent(aUnit, aSpellName, aSpellRank, aTargetName)
+	if ("player" ~= aUnit or aTargetName == nil) then
+		return;
 	end
 
-	tHasFoundSpells = tIndex > 1;
-	VUHDO_addTalentSpells();
+	if (VUHDO_CONFIG["IS_SHOW_GCD"]) then
+		VUHDO_initGcd();
+	end
 
-	VUHDO_MAX_HOTS = 0;
-	twipe(VUHDO_PLAYER_HOTS);
-	for tSpellName, tInfo in pairs(VUHDO_SPELLS) do
-		if (tInfo["present"] and (VUHDO_SPELL_TYPE_HOT == tInfo["type"] or VUHDO_SPELL_TYPE_CAST_HOT == tInfo["type"])) then
-			VUHDO_MAX_HOTS = VUHDO_MAX_HOTS + 1;
-			tinsert(VUHDO_PLAYER_HOTS, tSpellName);
+	aTargetName = smatch(aTargetName, "^[^-]*");
+	tTargetUnit = VUHDO_RAID_NAMES[aTargetName];
+
+	-- Resurrection?
+	tFirstRes, tSecondRes = VUHDO_getResurrectionSpells();
+	if ((aSpellName == tFirstRes or aSpellName == tSecondRes) and aTargetName ~= nil and tTargetUnit ~= nil and not UnitIsGhost(tTargetUnit)) then
+		VUHDO_sendCtraMessage("RES " .. aTargetName);
+		VUHDO_IS_RESURRECTING = true;
+
+		if (VUHDO_CONFIG["RES_IS_SHOW_TEXT"]) then
+			tText = gsub(VUHDO_CONFIG["RES_ANNOUNCE_TEXT"], "vuhdo", aTargetName);
+
+			if (GetNumRaidMembers() > 0) then
+				SendChatMessage(tText, "RAID", nil, nil);
+			elseif (GetNumPartyMembers() > 0) then
+				SendChatMessage(tText, "PARTY", nil, nil);
+			else
+				SendChatMessage(tText, "WHISPER", nil, aTargetName);
+			end
+		end
+		return;
+	end
+
+	-- Auto track single target unique spells?
+	if (tUniqueSpells == nil) then
+		tUniqueSpells = {};
+
+		local tUnique, tUniqueCategs = VUHDO_getAllUniqueSpells();
+		for _, tSpellName in pairs(tUnique) do
+			tUniqueSpells[tSpellName] = tUniqueCategs[tSpellName];
 		end
 	end
 
-	tSlotsUsed = 0;
-	twipe(VUHDO_ACTIVE_HOTS);
-	twipe(VUHDO_ACTIVE_HOTS_OTHERS);
-
-	tHotSlots = VUHDO_PANEL_SETUP["HOTS"]["SLOTS"];
-
-	if (tHasFoundSpells) then
-		if (tHotSlots["firstFlood"]) then
-			for tCnt2 = 1, VUHDO_MAX_HOTS do
-				if (not VUHDO_SPELLS[VUHDO_PLAYER_HOTS[tCnt2]]["nodefault"]) then
-					tinsert(tHotSlots, VUHDO_PLAYER_HOTS[tCnt2]);
-					tSlotsUsed = tSlotsUsed + 1;
-					if (tSlotsUsed == 9) then
-						break
-					end
-				end
-			end
-			tHotSlots["firstFlood"] = nil;
+	tCateg = tUniqueSpells[aSpellName];
+	if (tCateg ~= nil and tTargetUnit ~= nil and not InCombatLockdown()) then
+		if (VUHDO_BUFF_SETTINGS ~= nil and VUHDO_BUFF_SETTINGS[tCateg] ~= nil and aTargetName ~= VUHDO_BUFF_SETTINGS[tCateg].name) then
+			VUHDO_BUFF_SETTINGS[tCateg].name = aTargetName;
+			VUHDO_reloadBuffPanel();
 		end
-
-		tHotCfg = VUHDO_PANEL_SETUP["HOTS"]["SLOTCFG"];
-		if (tHotCfg["firstFlood"]) then
-			for tCnt2 = 1, 9 do
-				if (tHotSlots[tCnt2] ~= nil) then
-					tHotCfg["" .. tCnt2]["others"] = VUHDO_EXCLUSIVE_HOTS[tHotSlots[tCnt2]] ~= nil;
-				end
-			end
-			tHotCfg["firstFlood"] = nil;
-		end
-
-		for tCnt2, tHotName in pairs(tHotSlots) do
-			if (tHotName ~= nil and strlen(tHotName) > 0) then
-				VUHDO_ACTIVE_HOTS[tHotName] = true;
-
-				if (tHotCfg["" .. tCnt2]["others"]) then
-					VUHDO_ACTIVE_HOTS_OTHERS[tHotName] = true;
-				end
-			end
-		end
-		VUHDO_setKnowsSwiftmend(VUHDO_isSpellKnown(VUHDO_SPELL_ID_SWIFTMEND));
 	end
 end
+
