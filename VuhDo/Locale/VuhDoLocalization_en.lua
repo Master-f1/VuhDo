@@ -1,6 +1,5 @@
-﻿
 -- @EXACT = true: Translation has to be the exact(!) match in the clients language,
---                beacause it carries technical semantics
+-- beacause it carries technical semantics
 -- @EXACT = false: Translation can be done freely, because text is only descriptive
 
 
@@ -65,7 +64,7 @@ VUHDO_I18N_BUFF_ALL = "All";
 VUHDO_I18N_SHOW_BUFF_WATCH = "Show Buff Watch";
 
 -- @EXACT = true
---
+
 VUHDO_I18N_RANK = "Rank";
 
 
@@ -146,7 +145,7 @@ VUHDO_I18N_BUFFC_SKIN = "01Skin";
 VUHDO_I18N_BUFFC_ARMOR_MAGE = "03Armor";
 
 -- Death Knight
-VUHDO_SPELL_ID_BUFFC_PRESENCE    = "03Presence";
+VUHDO_SPELL_ID_BUFFC_PRESENCE = "03Presence";
 
 -- Warrior
 VUHDO_I18N_BUFFC_SHOUT = "01Shout";
