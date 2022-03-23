@@ -10,7 +10,6 @@ local strfind = strfind;
 local twipe = table.wipe;
 local InCombatLockdown = InCombatLockdown;
 
---
 local sBarScaling;
 local sHeaderColSetup;
 local sSortCriterion;
@@ -34,7 +33,6 @@ local sOverhealTextSetup;
 local sHotFontRatio;
 local sIsManaBouquet;
 
---
 function VUHDO_panelRedrawInitBurst()
 	sHotConfig = VUHDO_PANEL_SETUP["HOTS"];
 	VUHDO_FONT_HOTS = VUHDO_PANEL_SETUP["HOTS"]["font"];
@@ -73,7 +71,6 @@ function VUHDO_initLocalVars(aPanelNum)
 end
 local VUHDO_initLocalVars = VUHDO_initLocalVars;
 
---
 function VUHDO_isPanelVisible(aPanelNum)
 	if (not VUHDO_CONFIG["SHOW_PANELS"] or VUHDO_PANEL_MODELS[aPanelNum] == nil or not VUHDO_IS_SHOWN_BY_GROUP) then
 		return false;
@@ -87,20 +84,17 @@ function VUHDO_isPanelVisible(aPanelNum)
 end
 local VUHDO_isPanelVisible = VUHDO_isPanelVisible;
 
---
 function VUHDO_isPanelPopulated(aPanelNum)
 	return VUHDO_CONFIG["SHOW_PANELS"] and VUHDO_PANEL_MODELS[aPanelNum] ~= nil and VUHDO_IS_SHOWN_BY_GROUP;
 end
 local VUHDO_isPanelPopulated = VUHDO_isPanelPopulated;
 
---
 local function VUHDO_initGroupOrderPanel(aGroupOrderPanel)
 	if (aGroupOrderPanel ~= nil) then
 		aGroupOrderPanel:Hide();
 	end
 end
 
---
 local tCnt;
 local tHeader;
 local tX, tY
@@ -165,7 +159,6 @@ local function VUHDO_positionTableHeaders(aPanel, aPanelNum)
 	end
 end
 
---
 local tModelArray;
 local tModelIndex, tModelId;
 local tMemberNum;
@@ -180,15 +173,10 @@ local function VUHDO_getNumButtonsPanel(aPanelNum)
 	return tMemberNum;
 end
 
---
 local tBackdrop, tBorderCol;
 local function VUHDO_initPlayerTargetBorder(aButton, aBorderFrame)
-	aBorderFrame:SetPoint("TOPLEFT", aButton:GetName(), "TOPLEFT",
-		-VUHDO_INDICATOR_CONFIG["CUSTOM"]["BAR_BORDER"]["WIDTH"],
-		VUHDO_INDICATOR_CONFIG["CUSTOM"]["BAR_BORDER"]["WIDTH"]);
-	aBorderFrame:SetPoint("BOTTOMRIGHT", aButton:GetName(), "BOTTOMRIGHT",
-		VUHDO_INDICATOR_CONFIG["CUSTOM"]["BAR_BORDER"]["WIDTH"],
-		-VUHDO_INDICATOR_CONFIG["CUSTOM"]["BAR_BORDER"]["WIDTH"]);
+	aBorderFrame:SetPoint("TOPLEFT", aButton:GetName(), "TOPLEFT", -VUHDO_INDICATOR_CONFIG["CUSTOM"]["BAR_BORDER"]["WIDTH"], VUHDO_INDICATOR_CONFIG["CUSTOM"]["BAR_BORDER"]["WIDTH"]);
+	aBorderFrame:SetPoint("BOTTOMRIGHT", aButton:GetName(), "BOTTOMRIGHT", VUHDO_INDICATOR_CONFIG["CUSTOM"]["BAR_BORDER"]["WIDTH"], -VUHDO_INDICATOR_CONFIG["CUSTOM"]["BAR_BORDER"]["WIDTH"]);
 	if (tBackdrop == nil) then
 		tBackdrop = aBorderFrame:GetBackdrop();
 		tBackdrop["edgeSize"] = VUHDO_INDICATOR_CONFIG["CUSTOM"]["BAR_BORDER"]["WIDTH"];
@@ -198,7 +186,6 @@ local function VUHDO_initPlayerTargetBorder(aButton, aBorderFrame)
 	aBorderFrame:Hide();
 end
 
---
 local tBackdropCluster;
 local tClusterFrame;
 local function VUHDO_initClusterBorder(aButton)
@@ -214,7 +201,6 @@ local function VUHDO_initClusterBorder(aButton)
 	tClusterFrame:Hide();
 end
 
---
 local tIncBar;
 function VUHDO_positionHealButton(aButton)
 	aButton:SetWidth(sBarScaling["barWidth"]);
@@ -235,7 +221,6 @@ function VUHDO_positionHealButton(aButton)
 end
 local VUHDO_positionHealButton = VUHDO_positionHealButton;
 
---
 local tModelIndex;
 local tBorderCol;
 local tXPos, tYPos;
@@ -289,18 +274,14 @@ local function VUHDO_positionAllHealButtons(aPanel, aPanelNum)
 	end
 end
 
---
-
 local sButton;
 local sHealthBar;
 local sPanelSetup;
 
---
 local function VUHDO_initAggroTexture()
 	VUHDO_getAggroTexture(sHealthBar):Hide();
 end
 
---
 local tInfo;
 local tManaHeight;
 local function VUHDO_initManaBar(aButton, aManaBar, aWidth, anIsForceBar)
@@ -328,7 +309,6 @@ local function VUHDO_initManaBar(aButton, aManaBar, aWidth, anIsForceBar)
 	end
 end
 
---
 local function VUHDO_initBackgroundBar(aBgBar)
 	VUHDO_setLlcStatusBarTexture(aBgBar, VUHDO_INDICATOR_CONFIG["CUSTOM"]["BACKGROUND_BAR"]["TEXTURE"]);
 	aBgBar:SetHeight(sBarScaling["barHeight"]);
@@ -337,12 +317,10 @@ local function VUHDO_initBackgroundBar(aBgBar)
 	aBgBar:Show();
 end
 
---
 local function VUHDO_initIncomingBar()
 	VUHDO_getHealthBar(sButton, 6):SetValueRange(0, 0);
 end
 
---
 local tThreatBar;
 local function VUHDO_initThreatBar()
 	tThreatBar = VUHDO_getHealthBar(sButton, 7);
@@ -352,7 +330,6 @@ local function VUHDO_initThreatBar()
 	tThreatBar:SetHeight(VUHDO_INDICATOR_CONFIG["CUSTOM"]["THREAT_BAR"]["HEIGHT"]);
 end
 
---
 local tTextPanel;
 local tNameText;
 local tLifeText;
@@ -381,8 +358,7 @@ local function VUHDO_initBarTexts(aButton, aHealthBar, aWidth)
 
 	tNameText:ClearAllPoints();
 	tAddHeight = 0;
-	if (not sLifeConfig["show"] or VUHDO_LT_POS_RIGHT == sLifeConfig["position"] or VUHDO_LT_POS_LEFT ==
-		sLifeConfig["position"]) then
+	if (not sLifeConfig["show"] or VUHDO_LT_POS_RIGHT == sLifeConfig["position"] or VUHDO_LT_POS_LEFT == sLifeConfig["position"]) then
 		tLifeText:SetWidth(0);
 		tLifeText:SetHeight(0);
 		tLifeText:Hide();
@@ -431,7 +407,6 @@ local function VUHDO_initBarTexts(aButton, aHealthBar, aWidth)
 	tTextPanel:SetPoint(sTextAnchors[1], tAnchorObject:GetName(), sTextAnchors[2], 0, 0);
 end
 
---
 local tX, tY;
 local tOvhColor;
 local tOverhealText;
@@ -456,7 +431,6 @@ local function VUHDO_initOverhealText(aHealthBar, aWidth)
 	tOverhealPanel:SetPoint(sOverhealTextSetup["point"], aHealthBar:GetName(), sOverhealTextSetup["point"], tX, tY);
 end
 
---
 local tAggroBar;
 local function VUHDO_initAggroBar()
 	tAggroBar = VUHDO_getHealthBar(sButton, 4);
@@ -469,7 +443,6 @@ local function VUHDO_initAggroBar()
 	tAggroBar:Show();
 end
 
---
 local tHotBarHeight;
 local tHotBar;
 local tHotBarColor;
@@ -508,7 +481,6 @@ local function VUHDO_initHotBars()
 	tHotBar:Show();
 end
 
---
 local tHotIcon;
 local tOffset;
 local tHotColor;
@@ -552,11 +524,11 @@ local function VUHDO_initHotIcon(tCnt)
 	if (sHotPos == 2) then
 		tHotIcon:SetPoint("LEFT", sHealthBar:GetName(), "LEFT", tOffset, 0); -- li
 	elseif (sHotPos == 3) then
-		tHotIcon:SetPoint("RIGHT", sHealthBar:GetName(), "RIGHT", -tOffset, 0); --  ri
+		tHotIcon:SetPoint("RIGHT", sHealthBar:GetName(), "RIGHT", -tOffset, 0); -- ri
 	elseif (sHotPos == 1) then
 		tHotIcon:SetPoint("RIGHT", sHealthBar:GetName(), "LEFT", -tOffset, 0); -- lo
 	elseif (sHotPos == 4) then
-		tHotIcon:SetPoint("LEFT", sHealthBar:GetName(), "RIGHT", tOffset, 0); --  ro
+		tHotIcon:SetPoint("LEFT", sHealthBar:GetName(), "RIGHT", tOffset, 0); -- ro
 	elseif (sHotPos == 5) then
 		tHotIcon:SetPoint("TOPLEFT", sHealthBar:GetName(), "BOTTOMLEFT", tOffset, sHotIconSize / 2); -- lb
 	elseif (sHotPos == 6) then
@@ -717,7 +689,6 @@ local function VUHDO_initHotIcon(tCnt)
 	tCounter:SetShadowOffset(1, -0.5);
 end
 
---
 local tCnt;
 function VUHDO_initAllHotIcons()
 	for tCnt = 1, 5 do
@@ -728,7 +699,6 @@ function VUHDO_initAllHotIcons()
 end
 local VUHDO_initAllHotIcons = VUHDO_initAllHotIcons;
 
---
 local tIcon, tCounter, tName;
 local tDebuffConfig;
 local tCnt;
@@ -787,7 +757,6 @@ local function VUHDO_initCustomDebuffs()
 	end
 end
 
---
 local tX, tY;
 local function VUHDO_initRaidIcon(aHealthBar, anIcon, aWidth)
 	tX = sRaidIconSetup["xAdjust"] * aWidth * 0.01;
@@ -800,20 +769,17 @@ local function VUHDO_initRaidIcon(aHealthBar, anIcon, aWidth)
 	anIcon:Hide();
 end
 
---
 local tIcon, tHeight;
 local function VUHDO_initSwiftmendIndicator()
 	tIcon = VUHDO_getBarRoleIcon(sButton, 51);
 	tIcon:ClearAllPoints();
-	tIcon:SetPoint("CENTER", sHealthBar:GetName(), "TOPLEFT", sBarScaling["barWidth"] / 5.5,
-		-sBarScaling["barHeight"] / 14);
+	tIcon:SetPoint("CENTER", sHealthBar:GetName(), "TOPLEFT", sBarScaling["barWidth"] / 5.5, -sBarScaling["barHeight"] / 14);
 	tHeight = sHotIconSize * 0.5 * VUHDO_INDICATOR_CONFIG["CUSTOM"]["SWIFTMEND_INDICATOR"]["SCALE"];
 	tIcon:SetWidth(tHeight);
 	tIcon:SetHeight(tHeight);
 	tIcon:Hide();
 end
 
---
 local tTgButton;
 local tTgHealthBar;
 local tBackgroundBar;
@@ -837,10 +803,8 @@ local function VUHDO_initTargetBar()
 		tTgHealthBar:SetValue(100);
 		tTgHealthBar:SetHeight(sBarHeight);
 
-		VUHDO_getBarText(tTgHealthBar):SetTextColor(sTargetColor["TR"], sTargetColor["TG"], sTargetColor["TB"],
-			sTargetColor["TO"]);
-		VUHDO_getLifeText(tTgHealthBar):SetTextColor(sTargetColor["TR"], sTargetColor["TG"], sTargetColor["TB"],
-			sTargetColor["TO"]);
+		VUHDO_getBarText(tTgHealthBar):SetTextColor(sTargetColor["TR"], sTargetColor["TG"], sTargetColor["TB"], sTargetColor["TO"]);
+		VUHDO_getLifeText(tTgHealthBar):SetTextColor(sTargetColor["TR"], sTargetColor["TG"], sTargetColor["TB"], sTargetColor["TO"]);
 
 		VUHDO_initBackgroundBar(VUHDO_getHealthBar(sButton, 12));
 		VUHDO_initManaBar(tTgButton, VUHDO_getHealthBar(sButton, 13), sBarScaling["targetWidth"], true);
@@ -858,7 +822,6 @@ local function VUHDO_initTargetBar()
 	end
 end
 
---
 local tTotButton;
 local function VUHDO_initTotBar()
 	if (sBarScaling["showTot"]) then
@@ -910,7 +873,6 @@ local function VUHDO_initTotBar()
 	end
 end
 
---
 local tFlashBar;
 local function VUHDO_initFlashBar()
 	tFlashBar = VUHDO_GLOBAL[sButton:GetName() .. "BgBarIcBarHlBarFlBar"];
@@ -919,12 +881,10 @@ local function VUHDO_initFlashBar()
 	tFlashBar:Hide();
 end
 
---
 function VUHDO_initReadyCheckIcon(aButton)
 	VUHDO_getBarRoleIcon(aButton, 20):Hide();
 end
 
---
 local tHighlightBar;
 local function VUHDO_initHighlightBar(aButton)
 	tHighlightBar = VUHDO_getHealthBar(sButton, 8);
@@ -934,7 +894,6 @@ local function VUHDO_initHighlightBar(aButton)
 	tHighlightBar:SetValue(0);
 end
 
---
 function VUHDO_initButtonStatics(aButton, aPanelNum)
 	sButton = aButton;
 	sHealthBar = VUHDO_getHealthBar(aButton, 1);
@@ -942,7 +901,6 @@ function VUHDO_initButtonStatics(aButton, aPanelNum)
 end
 local VUHDO_initButtonStatics = VUHDO_initButtonStatics;
 
---
 local tCnt;
 local tHealthBar, tIsInverted, tIsTurned, tIsVertical, tOrientation;
 
@@ -1051,7 +1009,6 @@ end
 
 local VUHDO_initHealButton = VUHDO_initHealButton;
 
---
 local tHealButton, tGroupPanel;
 local tCnt;
 local tNumButtons;
@@ -1084,7 +1041,6 @@ local function VUHDO_initAllHealButtons(aPanel, aPanelNum)
 
 end
 
---
 local tSetup;
 local tPosition;
 local tPanelColor;
@@ -1149,8 +1105,7 @@ local function VUHDO_initPanel(aPanel, aPanelNum)
 	VUHDO_STD_BACKDROP["insets"]["bottom"] = tPanelColor["BORDER"]["insets"];
 
 	aPanel:SetBackdrop(VUHDO_STD_BACKDROP);
-	aPanel:SetBackdropBorderColor(tPanelColor["BORDER"]["R"], tPanelColor["BORDER"]["G"], tPanelColor["BORDER"]["B"],
-		tPanelColor["BORDER"]["O"]);
+	aPanel:SetBackdropBorderColor(tPanelColor["BORDER"]["R"], tPanelColor["BORDER"]["G"], tPanelColor["BORDER"]["B"], tPanelColor["BORDER"]["O"]);
 
 	if (VUHDO_IS_PANEL_CONFIG) then
 		tLabel:SetText("[PANEL " .. aPanelNum .. "]");
@@ -1170,8 +1125,7 @@ local function VUHDO_initPanel(aPanel, aPanelNum)
 			aPanel:SetBackdrop(VUHDO_STD_BACKDROP);
 			tLabel:SetTextColor(0.4, 0.4, 0.4, 1);
 			UIFrameFlashRemoveFrame(tLabel);
-			aPanel:SetBackdropBorderColor(tPanelColor["BORDER"]["R"], tPanelColor["BORDER"]["G"],
-				tPanelColor["BORDER"]["B"], tPanelColor["BORDER"]["O"]);
+			aPanel:SetBackdropBorderColor(tPanelColor["BORDER"]["R"], tPanelColor["BORDER"]["G"], tPanelColor["BORDER"]["B"], tPanelColor["BORDER"]["O"]);
 		end
 
 		if (DESIGN_MISC_PANEL_NUM ~= nil) then
@@ -1198,8 +1152,7 @@ local function VUHDO_initPanel(aPanel, aPanelNum)
 		end
 	end
 
-	aPanel:SetBackdropColor(tPanelColor["BACK"]["R"], tPanelColor["BACK"]["G"], tPanelColor["BACK"]["B"],
-		tPanelColor["BACK"]["O"]);
+	aPanel:SetBackdropColor(tPanelColor["BACK"]["R"], tPanelColor["BACK"]["G"], tPanelColor["BACK"]["B"], tPanelColor["BACK"]["O"]);
 
 	if (VUHDO_CONFIG["LOCK_CLICKS_THROUGH"]) then
 		aPanel:EnableMouse(false);
@@ -1211,7 +1164,6 @@ local function VUHDO_initPanel(aPanel, aPanelNum)
 	aPanel["isMoving"] = false;
 end
 
---
 local tPanel;
 function VUHDO_redrawPanel(aPanelNum)
 
@@ -1239,7 +1191,6 @@ function VUHDO_redrawPanel(aPanelNum)
 end
 local VUHDO_redrawPanel = VUHDO_redrawPanel;
 
---
 local tCnt, tGcdCol;
 function VUHDO_redrawAllPanels()
 	VUHDO_resetMacroCaches();
@@ -1271,7 +1222,6 @@ function VUHDO_redrawAllPanels()
 end
 local VUHDO_redrawAllPanels = VUHDO_redrawAllPanels;
 
---
 function VUHDO_reloadUI()
 	if (InCombatLockdown()) then
 		return;
@@ -1292,7 +1242,6 @@ function VUHDO_reloadUI()
 	VUHDO_reloadBuffPanel();
 end
 
---
 function VUHDO_lnfReloadUI()
 	if (InCombatLockdown()) then
 		return;
