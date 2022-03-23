@@ -7,7 +7,7 @@ VUHDO_MAY_DEBUFF_ANIM = true;
 local VUHDO_DEBUFF_ICONS = {};
 local sScale, sIsAnim, sIsTimer, sIsStacks, sIsName;
 
--- BURST CACHE ---------------------------------------------------
+-- BURST CACHE
 
 local floor = floor;
 local GetTime = GetTime;
@@ -18,11 +18,11 @@ local _ = _;
 local VUHDO_GLOBAL = getfenv();
 
 local VUHDO_getUnitButtons;
-local VUHDO_getBarIconTimer
-local VUHDO_getBarIconCounter
-local VUHDO_getBarIconFrame
-local VUHDO_getBarIcon
-local VUHDO_getBarIconName
+local VUHDO_getBarIconTimer;
+local VUHDO_getBarIconCounter;
+local VUHDO_getBarIconFrame;
+local VUHDO_getBarIcon;
+local VUHDO_getBarIconName;
 
 local VUHDO_CONFIG;
 local sCuDeConfig;
@@ -40,9 +40,6 @@ function VUHDO_customDebuffIconsInitBurst()
 	sCuDeConfig = VUHDO_CONFIG["CUSTOM_DEBUFF"];
 end
 
-----------------------------------------------------
-
---
 local tAliveTime;
 local tDelta;
 local tIconFrame;
@@ -182,7 +179,6 @@ function VUHDO_addDebuffIcon(aUnit, anIcon, aName, anExpiry, aStacks, anIsCustom
 	VUHDO_updateHealthBarsFor(aUnit, VUHDO_UPDATE_RANGE);
 end
 
---
 local tCnt;
 function VUHDO_updateDebuffIcon(aUnit, anIcon, aName, anExpiry, aStacks)
 	if (VUHDO_DEBUFF_ICONS[aUnit] == nil) then
@@ -196,7 +192,6 @@ function VUHDO_updateDebuffIcon(aUnit, anIcon, aName, anExpiry, aStacks)
 	end
 end
 
---
 local tAllButtons2, tCnt2, tButton2;
 local tMaxIcons;
 function VUHDO_removeDebuffIcon(aUnit, aName)
@@ -218,7 +213,6 @@ function VUHDO_removeDebuffIcon(aUnit, aName)
 	end
 end
 
---
 local tAllButtons3, tCnt3, tButton3;
 function VUHDO_removeAllDebuffIcons(aUnit)
 	tAllButtons3 = VUHDO_getUnitButtons(aUnit);
