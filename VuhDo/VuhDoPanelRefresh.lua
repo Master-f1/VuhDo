@@ -1,4 +1,4 @@
--- BURST CACHE ---------------------------------------------------
+-- BURST CACHE
 local table = table;
 local floor = floor;
 local ipairs = ipairs;
@@ -55,9 +55,9 @@ function VUHDO_panelRefreshInitBurst()
 	VUHDO_updateAllRaidBars = VUHDO_GLOBAL["VUHDO_updateAllRaidBars"];
 	VUHDO_isTableHeaderOrFooter = VUHDO_GLOBAL["VUHDO_isTableHeaderOrFooter"];
 end
--- BURST CACHE ---------------------------------------------------
 
---
+-- BURST CACHE
+
 local tModels, tEmptyModel;
 local function VUHDO_hasPanelButtons(aPanelNum)
 	if (not VUHDO_CONFIG["SHOW_PANELS"] or not VUHDO_IS_SHOWN_BY_GROUP) then
@@ -68,7 +68,6 @@ local function VUHDO_hasPanelButtons(aPanelNum)
 	return #tModels > 0;
 end
 
---
 local tCnt;
 local tHeader;
 local tX, tY;
@@ -110,7 +109,6 @@ local function VUHDO_refreshPositionTableHeaders(aPanel, aPanelNum)
 	end
 end
 
---
 local tModelIndex;
 local tCnt;
 local tGroupIdx;
@@ -175,7 +173,6 @@ local function VUHDO_refreshPositionAllHealButtons(aPanel, aPanelNum)
 	end
 end
 
---
 local tHeight;
 local function VUHDO_refreshInitPanel(aPanel, aPanelNum)
 	tHeight = VUHDO_getHealPanelHeight(aPanelNum);
@@ -188,7 +185,6 @@ local function VUHDO_refreshInitPanel(aPanel, aPanelNum)
 	aPanel["isMoving"] = false;
 end
 
---
 local tPanel;
 local function VUHDO_refreshPanel(aPanelNum)
 	if (VUHDO_hasPanelButtons(aPanelNum)) then
@@ -206,7 +202,6 @@ local function VUHDO_refreshPanel(aPanelNum)
 	end
 end
 
---
 local tCnt;
 local tPanel;
 local function VUHDO_refreshAllPanels()
@@ -222,7 +217,6 @@ local function VUHDO_refreshAllPanels()
 	VuhDoGcdStatusBar:Hide();
 end
 
---
 function VUHDO_refreshUI()
 	VUHDO_IS_RELOADING = true;
 	VUHDO_reloadRaidMembers();
