@@ -1,23 +1,22 @@
-
 if (GetLocale() ~= "frFR") then
 	return;
 end
 
--- à = \195\160
--- â = \195\162
--- æ = \195\166
--- ç = \195\167
--- è = \195\168
--- é = \195\169
--- ê = \195\170
--- ï = \195\175
--- ô = \195\180
--- ù = \195\185
--- Œ = \197\146
--- œ = \197\147
+-- Ð° = \195\160
+-- Ð² = \195\162
+-- Ð¶ = \195\166
+-- Ð· = \195\167
+-- Ð¸ = \195\168
+-- Ð¹ = \195\169
+-- Ðº = \195\170
+-- Ð¿ = \195\175
+-- Ñ„ = \195\180
+-- Ñ‰ = \195\185
+-- ÐŠ = \197\146
+-- Ñš = \197\147
 
 -- @EXACT = true: Translation has to be the exact(!) match in the clients language,
---                beacause it carries technical semantics
+-- beacause it carries technical semantics
 -- @EXACT = false: Translation can be done freely, because text is only descriptive
 
 
@@ -83,23 +82,23 @@ VUHDO_I18N_SHOW_BUFF_WATCH = "Montrer le suivi des buffs";
 
 -- Heal Spell Names
 -- @EXACT = true
---
+
 VUHDO_I18N_RANK = "Rang";
 
 
 -- Chat messages
 -- @EXACT = false
 VUHDO_I18N_COMMAND_LIST = "\n|cffffe566 - [ Commandes VuhDo] -|r";
-VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566opt|r[ions] - Opions de VuhDo";
-VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566res|r[et] - R\195\169initialiser la position des panneaux";
-VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566lock|r - V\195\169rouiller/D\195\169v\195\169rouiller les panneaux";
-VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566mm, map, minimap|r - Afficher/Cacher l'ic\195\180ne sur la minimap";
-VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566show, hide, toggle|r - Afficher/Cacher les panneaux";
-VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566load|r - [Profile],[Key Layout]";
-VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§[broad]|cffffe566cast, mt|r[s] - Diffuser les tanks principaux";
-VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566role|r - R\195\169initialiser le r\195\180le des joueurs";
-VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566aegis x|r - Set Divine Aegis detection sensivity";
-VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566help,?|r - Cette liste de commandes\n";
+VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "Â§|cffffe566opt|r[ions] - Opions de VuhDo";
+VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "Â§|cffffe566res|r[et] - R\195\169initialiser la position des panneaux";
+VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "Â§|cffffe566lock|r - V\195\169rouiller/D\195\169v\195\169rouiller les panneaux";
+VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "Â§|cffffe566mm, map, minimap|r - Afficher/Cacher l'ic\195\180ne sur la minimap";
+VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "Â§|cffffe566show, hide, toggle|r - Afficher/Cacher les panneaux";
+VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "Â§|cffffe566load|r - [Profile],[Key Layout]";
+VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "Â§[broad]|cffffe566cast, mt|r[s] - Diffuser les tanks principaux";
+VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "Â§|cffffe566role|r - R\195\169initialiser le r\195\180le des joueurs";
+VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "Â§|cffffe566aegis x|r - Set Divine Aegis detection sensivity";
+VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "Â§|cffffe566help,?|r - Cette liste de commandes\n";
 
 VUHDO_I18N_BAD_COMMAND = "Commande inconnue! Taper '/vuhdo help' or '/vd ?' pour la liste des commandes.";
 VUHDO_I18N_CHAT_SHOWN = "|cffffe566visible|r.";
@@ -165,7 +164,7 @@ VUHDO_I18N_BUFFC_SKIN = "01Peau";
 VUHDO_I18N_BUFFC_ARMOR_MAGE = "03Armure";
 
 -- Death Knight
-VUHDO_SPELL_ID_BUFFC_PRESENCE    = "03Présence";
+VUHDO_SPELL_ID_BUFFC_PRESENCE	= "03PrÐ¹sence";
 
 -- Warrior
 VUHDO_I18N_BUFFC_SHOUT = "01Cri";
