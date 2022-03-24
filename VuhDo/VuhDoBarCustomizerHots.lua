@@ -517,7 +517,7 @@ local function VUHDO_updateHots(aUnit, anInfo)
 	end
 
 	for tIndex, tHotInfo in pairs(VUHDO_MY_HOTS[aUnit]) do
-		tHotInfo[1] = nil; -- Rest == nil => Icon lÑ†schen
+		tHotInfo[1] = nil; -- Rest == nil => Icon löschen
 	end
 
 	for tIndex, tHotInfo in pairs(VUHDO_OTHER_HOTS[aUnit]) do
@@ -544,7 +544,7 @@ local function VUHDO_updateHots(aUnit, anInfo)
 		for tCnt = 1, 255 do
 			if (tDebuffOffset == nil) then
 				tBuffName, _, tBuffIcon, tStacks, _, sDuration, tRest, tCaster, _, _, tSpellId = UnitBuff(aUnit, tCnt);
-			if(tBuffIcon == nil) then
+			if (tBuffIcon == nil) then
 				tDebuffOffset = tCnt - 1;
 			end
 		end

@@ -1,17 +1,11 @@
-local VUHDO_GROUP_ORDER_BARS_LEFT = { };
-local VUHDO_GROUP_ORDER_BARS_RIGHT = { };
+local VUHDO_GROUP_ORDER_BARS_LEFT = {};
+local VUHDO_GROUP_ORDER_BARS_RIGHT = {};
 
-
-
---
 function VUHDO_removeFromModel(aPanelNum, anOrderNum)
 	tremove(VUHDO_PANEL_MODELS[aPanelNum], anOrderNum);
 	VUHDO_initDynamicPanelModels();
 end
 
-
-
---
 function VUHDO_insertIntoModel(aPanelNum, anOrderNum, anIsLeft, aModelId)
 	if (anIsLeft) then
 		tinsert(VUHDO_PANEL_MODELS[aPanelNum], anOrderNum, aModelId)
@@ -21,9 +15,6 @@ function VUHDO_insertIntoModel(aPanelNum, anOrderNum, anIsLeft, aModelId)
 	VUHDO_initDynamicPanelModels();
 end
 
-
-
---
 local tCnt;
 function VUHDO_rewritePanelModels()
 	for tCnt = 1, VUHDO_MAX_PANELS do
@@ -31,22 +22,16 @@ function VUHDO_rewritePanelModels()
 	end
 end
 
-
-
---
 local tCount;
 function VUHDO_tableCount(anArray)
-  tCount = 0;
-  for _, _ in pairs(anArray) do
-    tCount = tCount + 1;
-  end
+	tCount = 0;
+	for _, _ in pairs(anArray) do
+		tCount = tCount + 1;
+	end
 
-  return tCount;
+	return tCount;
 end
 
-
-
---
 function VUHDO_getOrCreateGroupOrderPanel(aParentPanelNum, aPanelNum)
 	local tName = "VdAc" .. aParentPanelNum .. "GrpOrd" .. aPanelNum;
 	if (VUHDO_GLOBAL[tName] == nil) then
@@ -56,9 +41,6 @@ function VUHDO_getOrCreateGroupOrderPanel(aParentPanelNum, aPanelNum)
 	return VUHDO_GLOBAL[tName];
 end
 
-
-
---
 function VUHDO_getOrCreateGroupSelectPanel(aParentPanelNum, aPanelNum)
 	local tName = "VdAc" .. aParentPanelNum .. "GrpSel" .. aPanelNum;
 	if (VUHDO_GLOBAL[tName] == nil) then
@@ -68,9 +50,6 @@ function VUHDO_getOrCreateGroupSelectPanel(aParentPanelNum, aPanelNum)
 	return VUHDO_GLOBAL[tName];
 end
 
-
-
---
 function VUHDO_getConfigOrderBarRight(aPanelNum, anOrderNum)
 	local tIndex = aPanelNum * 100 + anOrderNum;
 	if (VUHDO_GROUP_ORDER_BARS_RIGHT[tIndex] == nil) then
@@ -81,9 +60,6 @@ function VUHDO_getConfigOrderBarRight(aPanelNum, anOrderNum)
 	return VUHDO_GROUP_ORDER_BARS_RIGHT[tIndex];
 end
 
-
-
---
 function VUHDO_getConfigOrderBarLeft(aPanelNum, anOrderNum)
 	local tIndex = aPanelNum * 100 + anOrderNum;
 	if (VUHDO_GROUP_ORDER_BARS_LEFT[tIndex] == nil) then
@@ -94,9 +70,6 @@ function VUHDO_getConfigOrderBarLeft(aPanelNum, anOrderNum)
 	return VUHDO_GROUP_ORDER_BARS_LEFT[tIndex];
 end
 
-
-
---
 function VUHDO_forceBooleanValue(aRawValue)
 	if (aRawValue == nil or aRawValue == 0 or aRawValue == false) then
 		return false;

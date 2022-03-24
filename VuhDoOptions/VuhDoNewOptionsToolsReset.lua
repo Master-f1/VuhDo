@@ -5,7 +5,7 @@ function VUHDO_deepCopyTableTo(aTable, aDestTable)
 	local tKey, tValue;
 
 	if (aDestTable == nil) then
-		aDestTable = { };
+		aDestTable = {};
 	end
 
 	for tKey, tValue in pairs(aTable) do
@@ -27,12 +27,6 @@ function VUHDO_deepCopyTableTo(aTable, aDestTable)
 	return aDestTable;
 end
 
-
-
-
-
-
---
 function VUHDO_newOptionsToolsResetClassColorsClicked()
 	VuhDoYesNoFrameText:SetText(VUHDO_I18N_RESET_CLASS_COLORS);
 	VuhDoYesNoFrame:SetAttribute("callback",
@@ -46,9 +40,6 @@ function VUHDO_newOptionsToolsResetClassColorsClicked()
 	VuhDoYesNoFrame:Show();
 end
 
-
-
---
 function VUHDO_newOptionsToolsResetDebuffColorsClicked()
 	VuhDoYesNoFrameText:SetText(VUHDO_I18N_RESET_DEBUFF_COLORS);
 	VuhDoYesNoFrame:SetAttribute("callback",
@@ -67,9 +58,6 @@ function VUHDO_newOptionsToolsResetDebuffColorsClicked()
 	VuhDoYesNoFrame:Show();
 end
 
-
-
---
 function VUHDO_newOptionsToolsResetRaidIconColorsColorsClicked()
 	VuhDoYesNoFrameText:SetText(VUHDO_I18N_RESET_RAID_ICON_COLORS);
 	VuhDoYesNoFrame:SetAttribute("callback",
@@ -83,14 +71,6 @@ function VUHDO_newOptionsToolsResetRaidIconColorsColorsClicked()
 	VuhDoYesNoFrame:Show();
 end
 
-
-
-
-
-
-
-
---
 function VUHDO_newOptionsToolsResetBuffWatchClicked()
 	VuhDoYesNoFrameText:SetText(VUHDO_I18N_RESET_BUFF_WATCH);
 	VuhDoYesNoFrame:SetAttribute("callback",
@@ -105,9 +85,6 @@ function VUHDO_newOptionsToolsResetBuffWatchClicked()
 	VuhDoYesNoFrame:Show();
 end
 
-
-
---
 function VUHDO_newOptionsToolsResetCustomDebuffsClicked()
 	VuhDoYesNoFrameText:SetText(VUHDO_I18N_RESET_CUSTOM_DEBUFFS);
 	VuhDoYesNoFrame:SetAttribute("callback",
@@ -121,14 +98,6 @@ function VUHDO_newOptionsToolsResetCustomDebuffsClicked()
 	VuhDoYesNoFrame:Show();
 end
 
-
-
-
-
-
-
-
---
 local tName;
 function VUHDO_newOptionsToolsResetDefaultBouquetsClicked()
 	VuhDoYesNoFrameText:SetText(VUHDO_I18N_RESET_DEFAULT_BOUQUETS);
@@ -147,9 +116,6 @@ function VUHDO_newOptionsToolsResetDefaultBouquetsClicked()
 	VuhDoYesNoFrame:Show();
 end
 
-
-
---
 function VUHDO_newOptionsToolsResetIndicatorsClicked()
 	VuhDoYesNoFrameText:SetText(VUHDO_I18N_RESET_INDICATORS);
 	VuhDoYesNoFrame:SetAttribute("callback",
@@ -163,14 +129,6 @@ function VUHDO_newOptionsToolsResetIndicatorsClicked()
 	VuhDoYesNoFrame:Show();
 end
 
-
-
-
-
-
-
-
---
 function VUHDO_newOptionsToolsResetEverythingClicked()
 	VuhDoYesNoFrameText:SetText(VUHDO_I18N_RESET_ALL);
 	VuhDoYesNoFrame:SetAttribute("callback",
@@ -210,14 +168,6 @@ function VUHDO_newOptionsToolsResetEverythingClicked()
 	VuhDoYesNoFrame:Show();
 end
 
-
-
-
-
-
-
-
---
 function VUHDO_newOptionsToolsResetLanguageClicked()
 	VuhDoYesNoFrameText:SetText(VUHDO_I18N_RESET_LANGUAGE);
 	VuhDoYesNoFrame:SetAttribute("callback",
@@ -244,9 +194,6 @@ function VUHDO_newOptionsToolsResetLanguageClicked()
 	VuhDoYesNoFrame:Show();
 end
 
-
-
---
 function VUHDO_newOptionsToolsResetPanelPositionsClicked()
 	VuhDoYesNoFrameText:SetText(VUHDO_I18N_RESET_PANEL_POSITIONS);
 	VuhDoYesNoFrame:SetAttribute("callback",
@@ -259,9 +206,6 @@ function VUHDO_newOptionsToolsResetPanelPositionsClicked()
 	VuhDoYesNoFrame:Show();
 end
 
-
-
---
 local tPanelNum;
 function VUHDO_newOptionsToolsResetPerPanelClicked()
 	VuhDoYesNoFrameText:SetText(VUHDO_I18N_RESET_PER_PANEL_SETTINGS);

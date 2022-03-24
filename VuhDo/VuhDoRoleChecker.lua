@@ -34,7 +34,7 @@ function VUHDO_roleCheckerInitBurst()
 	VUHDO_MANUAL_ROLES = VUHDO_GLOBAL["VUHDO_MANUAL_ROLES"];
 	VUHDO_RAID_NAMES = VUHDO_GLOBAL["VUHDO_RAID_NAMES"];
 	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
-	--[[ 
+--[[ 
 		sIsRolesConfigured =
 		VUHDO_isModelConfigured(VUHDO_ID_MELEE_TANK)
 		or VUHDO_isModelConfigured(VUHDO_ID_MELEE_DAMAGE)
@@ -43,7 +43,7 @@ function VUHDO_roleCheckerInitBurst()
 		or VUHDO_isModelConfigured(VUHDO_ID_MELEE)
 		or VUHDO_isModelConfigured(VUHDO_ID_RANGED)
 		or VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_ROLE);
-	]]
+]]
 
 	VUHDO_isUnitInModel = VUHDO_GLOBAL["VUHDO_isUnitInModel"];
 end
@@ -214,11 +214,11 @@ function VUHDO_inspectLockRole()
 	VUHDO_NEXT_INSPECT_UNIT = nil;
 	-- if (sIsRolesConfigured) then
 	VUHDO_normalRaidReload();
-	--[[
+--[[
 		else
 		VUHDO_refreshRaidMembers();
 	end
-	]]
+]]
 end
 
 local tIsTank, tIsHeal, tIsDps;

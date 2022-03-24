@@ -368,7 +368,7 @@ function VUHDO_customizeText(aButton, aMode, anIsTarget)
 				end
 			end
 		end
-		if (tMaxChars > 0 and strlen(tTextString) > tMaxChars and strbyte(tTextString, 1) ~= 124) then -- |
+		if (tMaxChars > 0 and strlen(tTextString) > tMaxChars and strbyte(tTextString, 1) ~= 124) then
 			tTextString = VUHDO_utf8Cut(tTextString, tMaxChars);
 		end
 	end
@@ -724,9 +724,9 @@ function VUHDO_updateHealthBarsFor(aUnit, anUpdateMode)
 		VUHDO_updateIncHeal(aUnit);
 	end
 
----------------------
--- In-Raid Targets --
----------------------
+	---------------------
+	-- In-Raid Targets --
+	---------------------
 
 	tAllButtons = VUHDO_IN_RAID_TARGET_BUTTONS[tInfo["name"]];
 	if (tAllButtons == nil) then

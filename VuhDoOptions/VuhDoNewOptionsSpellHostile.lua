@@ -1,12 +1,11 @@
---
-local tComponents = { };
+local tComponents = {};
 local tNum;
 local tModel;
 function VUHDO_newOptionsSpellSetModifierHostile(aModifier)
 	VUHDO_CURR_SPELL_MODIFIER = aModifier;
 
 	table.wipe(tComponents);
-	tComponents = { VuhDoNewOptionsSpellHostileKeyPanel:GetChildren() };
+	tComponents = {VuhDoNewOptionsSpellHostileKeyPanel:GetChildren()};
 
 	for _, tComp in pairs(tComponents) do
 		if (tComp:IsObjectType("EditBox")) then
@@ -19,7 +18,7 @@ function VUHDO_newOptionsSpellSetModifierHostile(aModifier)
 	end
 
 	table.wipe(tComponents);
-	tComponents = { VuhDoNewOptionsSpellHostileWheelPanel:GetChildren() };
+	tComponents = {VuhDoNewOptionsSpellHostileWheelPanel:GetChildren()};
 
 	for _, tComp in pairs(tComponents) do
 		if (tComp:IsObjectType("EditBox")) then
@@ -33,9 +32,6 @@ function VUHDO_newOptionsSpellSetModifierHostile(aModifier)
 
 end
 
-
-
---
 local tActionLowerName;
 local function VUHDO_isHostileActionValid(anActionName)
 
@@ -45,10 +41,10 @@ local function VUHDO_isHostileActionValid(anActionName)
 
 	tActionLowerName = strlower(anActionName);
 
-  if (VUHDO_SPELL_KEY_ASSIST == tActionLowerName
-   or VUHDO_SPELL_KEY_FOCUS == tActionLowerName
-	 or VUHDO_SPELL_KEY_TARGET == tActionLowerName) then
-	 	return "Command", 0.8, 1, 0.8;
+	if (VUHDO_SPELL_KEY_ASSIST == tActionLowerName
+		or VUHDO_SPELL_KEY_FOCUS == tActionLowerName
+		or VUHDO_SPELL_KEY_TARGET == tActionLowerName) then
+			return "Command", 0.8, 1, 0.8;
 	end
 
 	if (GetMacroIndexByName(anActionName) ~= 0) then
@@ -62,9 +58,6 @@ local function VUHDO_isHostileActionValid(anActionName)
 	return nil;
 end
 
-
-
---
 local tText, tLabel, tR, tG, tB;
 function VUHDO_newOptionsSpellEditBoxCheckHostileSpell(anEditBox)
 	tText, tR, tG, tB = VUHDO_isHostileActionValid(anEditBox:GetText());

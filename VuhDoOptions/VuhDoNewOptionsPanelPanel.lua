@@ -1,4 +1,3 @@
---
 local function VUHDO_hideAllPanel()
 	VuhDoNewOptionsPanelBasic:Hide();
 	VuhDoNewOptionsPanelSize:Hide();
@@ -12,64 +11,41 @@ local function VUHDO_hideAllPanel()
 	VuhDoNewOptionsPanelMisc:Hide();
 end
 
-
---
 function VUHDO_newOptionsPanelHeaderClicked(aCheckButton)
 	VUHDO_hideAllPanel();
 	VuhDoNewOptionsPanelHeader:Show();
 end
 
-
-
---
 function VUHDO_newOptionsPanelBasicClicked(aCheckButton)
 	VUHDO_hideAllPanel();
 	VuhDoNewOptionsPanelBasic:Show();
 end
 
-
-
---
 function VUHDO_newOptionsPanelTooltipClicked(aCheckButton)
 	VUHDO_hideAllPanel();
 	VuhDoNewOptionsPanelTooltip:Show();
 end
 
-
-
---
 function VUHDO_newOptionsPanelTextClicked(aCheckButton)
 	VUHDO_hideAllPanel();
 	VuhDoNewOptionsPanelText:Show();
 end
 
-
-
---
 function VUHDO_newOptionsPanelTargetClicked(aCheckButton)
 	VUHDO_hideAllPanel();
 	VuhDoNewOptionsPanelTarget:Show();
 end
 
-
-
---
 function VUHDO_newOptionsPanelSizeClicked(aCheckButton)
 	VUHDO_hideAllPanel();
 	VuhDoNewOptionsPanelSize:Show();
 end
 
-
-
---
 function VUHDO_newOptionsPanelBarsClicked(aCheckButton)
 	VUHDO_hideAllPanel();
 	VuhDoNewOptionsPanelBars:Show();
 end
 
-
-
---
 local tCnt;
 local tMaxModels;
 function VUHDO_newOptionsPanelFindDefaultPanel()
@@ -84,33 +60,21 @@ function VUHDO_newOptionsPanelFindDefaultPanel()
 	end
 end
 
-
-
---
 function VUHDO_newOptionsPanelHotsClicked()
 	VUHDO_hideAllPanel();
 	VuhDoNewOptionsPanelHots:Show();
 end
 
-
-
---
 function VUHDO_newOptionsPanelHotBarsClicked()
 	VUHDO_hideAllPanel();
 	VuhDoNewOptionsPanelHotBars:Show();
 end
 
-
-
---
 function VUHDO_newOptionsPanelMiscClicked()
 	VUHDO_hideAllPanel();
 	VuhDoNewOptionsPanelMisc:Show();
 end
 
-
-
---
 local tActivePanel;
 local tRefreshModels;
 local tContentPane;
@@ -128,9 +92,9 @@ local tCnt;
 local tValue;
 function VUHDO_newOptionsApplyToAllOnClick()
 	tActivePanel = nil;
-	tRefreshModels = { };
+	tRefreshModels = {};
 	tContentPane = VUHDO_GLOBAL["VuhDoNewOptionsPanelPanelContentPanel"];
-	tAllPanels = { tContentPane:GetChildren() };
+	tAllPanels = {tContentPane:GetChildren()};
 
 	for _, tAktPanel in pairs(tAllPanels) do
 		if (tAktPanel:IsObjectType("Frame") and tAktPanel:IsShown()) then
@@ -142,18 +106,18 @@ function VUHDO_newOptionsApplyToAllOnClick()
 		return;
 	end
 
-	tSubPanels = { tActivePanel:GetChildren() };
+	tSubPanels = {tActivePanel:GetChildren()};
 
 	for _, tAktSub in pairs(tSubPanels)	do
 		if (tAktSub:IsObjectType("Frame")) then
-			tSubComps =  { tAktSub:GetChildren() };
+			tSubComps = {tAktSub:GetChildren()};
 			for _, tAktComp in pairs(tSubComps) do
 				tModel = tAktComp:GetAttribute("model");
 				if (tModel ~= nil) then
 					tRefreshModels[tModel] = true;
 				end
 
-				tSubSubComps = { tAktComp:GetChildren() };
+				tSubSubComps = {tAktComp:GetChildren()};
 				for _, tAktSubComp in pairs(tSubSubComps) do
 					tSubModel = tAktSubComp:GetAttribute("model");
 					if (tSubModel ~= nil) then
@@ -184,26 +148,18 @@ function VUHDO_newOptionsApplyToAllOnClick()
 	VUHDO_reloadUI();
 end
 
-
---
 function VUHDO_newOptionsShowHeadersEnableClicked(aCheckButton)
 	if (aCheckButton:GetChecked()) then
 		VUHDO_PANEL_SETUP[DESIGN_MISC_PANEL_NUM]["MODEL"].ordering = 0;
 	end
 end
 
-
-
---
 function VUHDO_newOptionsLooseRadioButtonClicked(aRadioButton)
 	if (aRadioButton:GetChecked()) then
 		VUHDO_PANEL_SETUP[DESIGN_MISC_PANEL_NUM]["SCALING"].showHeaders = false;
 	end
 end
 
-
-
---
 function VUHDO_newOptionsStrictRadioButtonClicked(aRadioButton)
 	if (aRadioButton:GetChecked()) then
 		VUHDO_PANEL_SETUP[DESIGN_MISC_PANEL_NUM]["SCALING"].showHeaders = true;

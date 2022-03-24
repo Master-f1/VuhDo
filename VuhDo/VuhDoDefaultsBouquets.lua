@@ -1,3 +1,4 @@
+
 VUHDO_DEFAULT_BOUQUETS = {
 	["VERSION"] = 1,
 	["SELECTED"] = nil,

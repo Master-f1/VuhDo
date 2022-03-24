@@ -169,7 +169,7 @@ end
 
 local tPanelNum, tButtonNum;
 local tEmptyButton = {};
-function VUHDO_initCliqueSupport(bool) -- С„РёРєСЃ
+function VUHDO_initCliqueSupport(bool) -- фикс
 	if (not VUHDO_CONFIG["IS_CLIQUE_COMPAT_MODE"]) then
 		return;
 	end

@@ -10,12 +10,11 @@ local ipairs = ipairs;
 
 local InCombatLockdown = InCombatLockdown;
 
-
 local VUHDO_ACTIVE_LABEL_COLOR = {
 	["TR"] = 0.6,
 	["TG"] = 0.6,
 	["TB"] = 1,
-	["TO"] = 1,
+	["TO"] = 1
 };
 
 
@@ -23,7 +22,7 @@ local VUHDO_NORMAL_LABEL_COLOR = {
 	["TR"] = 0.4,
 	["TG"] = 0.4,
 	["TB"] = 1,
-	["TO"] = 1,
+	["TO"] = 1
 };
 
 
@@ -32,7 +31,7 @@ local VUHDO_ACTIVE_LABEL_COLOR_DISA = {
 	["TR"] = 0.3,
 	["TG"] = 0.3,
 	["TB"] = 0.7,
-	["TO"] = 1,
+	["TO"] = 1
 };
 
 
@@ -41,21 +40,15 @@ local VUHDO_NORMAL_LABEL_COLOR_DISA = {
 	["TR"] = 0.2,
 	["TG"] = 0.2,
 	["TB"] = 0.6,
-	["TO"] = 1,
+	["TO"] = 1
 };
 
-
-
---
 function VUHDO_lnfCheckButtonOnLoad(aCheckButton)
 	if (aCheckButton:GetText() ~= nil) then
 		VUHDO_GLOBAL[aCheckButton:GetName() .. "Label"]:SetText(aCheckButton:GetText());
 	end
 end
 
-
-
---
 function VUHDO_lnfTabCheckButtonOnLoad(aCheckButton)
 	if (aCheckButton:GetText() ~= nil) then
 		VUHDO_GLOBAL[aCheckButton:GetName() .. "TextureCheckMarkLabel"]:SetText(aCheckButton:GetText());
@@ -63,9 +56,6 @@ function VUHDO_lnfTabCheckButtonOnLoad(aCheckButton)
 	end
 end
 
-
-
---
 function VUHDO_lnfCheckButtonClicked(aCheckButton)
 	if (aCheckButton:GetChecked()) then
 		VUHDO_GLOBAL[aCheckButton:GetName() .. "TextureCheckMark"]:Show();
@@ -75,17 +65,14 @@ function VUHDO_lnfCheckButtonClicked(aCheckButton)
 end
 local VUHDO_lnfCheckButtonClicked = VUHDO_lnfCheckButtonClicked;
 
-
-
---
 local tButton;
-local tAllButtons = { };
+local tAllButtons = {};
 local tPanel;
 function VUHDO_lnfRadioButtonClicked(aCheckButton)
 
 	tPanel = aCheckButton:GetParent();
 	table.wipe(tAllButtons);
-	tAllButtons = { tPanel:GetChildren() };
+	tAllButtons = {tPanel:GetChildren()};
 
 	for _, tButton in pairs(tAllButtons) do
 		if (tButton:IsObjectType("CheckButton") and strfind(tButton:GetName(), "Radio", 1, true)) then
@@ -95,16 +82,13 @@ function VUHDO_lnfRadioButtonClicked(aCheckButton)
 	end
 end
 
-
-
---
 local tPanel;
-local tAllButtons = { };
+local tAllButtons = {};
 local tButton;
 function VUHDO_lnfTabCheckButtonClicked(aCheckButton)
 	tPanel = aCheckButton:GetParent();
 	table.wipe(tAllButtons);
-	tAllButtons = { tPanel:GetChildren() };
+	tAllButtons = {tPanel:GetChildren()};
 
 	for _, tButton in pairs(tAllButtons) do
 		if (tButton:IsObjectType("CheckButton") and strfind(tButton:GetName(), "Radio", 1, true)) then
@@ -121,9 +105,6 @@ function VUHDO_lnfTabCheckButtonClicked(aCheckButton)
 	end
 end
 
-
-
---
 local tName;
 function VUHDO_lnfCheckButtonOnEnter(aCheckButton)
 	tName = aCheckButton:GetName();
@@ -139,9 +120,6 @@ function VUHDO_lnfCheckButtonOnEnter(aCheckButton)
 	end
 end
 
-
-
---
 local tName;
 function VUHDO_lnfCheckButtonOnLeave(aCheckButton)
 	tName = aCheckButton:GetName();
@@ -157,23 +135,14 @@ function VUHDO_lnfCheckButtonOnLeave(aCheckButton)
 	end
 end
 
-
-
---
 function VUHDO_lnfRadioBoxOnEnter(aCheckButton)
 	VUHDO_GLOBAL[aCheckButton:GetName() .. "TextureActiveSwatch"]:Show();
 end
 
-
-
---
 function VUHDO_lnfRadioBoxOnLeave(aCheckButton)
 	VUHDO_GLOBAL[aCheckButton:GetName() .. "TextureActiveSwatch"]:Hide();
 end
 
-
-
---
 local tName;
 function VUHDO_lnfTabCheckButtonOnEnter(aCheckButton)
 	tName = aCheckButton:GetName();
@@ -196,9 +165,6 @@ function VUHDO_lnfTabCheckButtonOnEnter(aCheckButton)
 	end
 end
 
-
-
---
 function VUHDO_lnfTabCheckButtonOnLeave(aCheckButton)
 	VUHDO_GLOBAL[tName .. "TextureActiveSwatch"]:Hide();
 
@@ -219,9 +185,6 @@ function VUHDO_lnfTabCheckButtonOnLeave(aCheckButton)
 	end
 end
 
-
-
---
 local tText;
 local tUnit;
 function VUHDO_lnfSliderOnValueChanged(aSlider)
@@ -236,48 +199,32 @@ function VUHDO_lnfSliderOnValueChanged(aSlider)
 	end
 end
 
-
-
---
 function VUHDO_lnfSliderOnLoad(aSlider, aText, aMinValue, aMaxValue, aUnitName, aValueStep)
 	VUHDO_GLOBAL[aSlider:GetName() .. "SliderTitle"]:SetText(aText);
 	aSlider:SetAttribute("unit", aUnitName);
 	VUHDO_GLOBAL[aSlider:GetName() .. "Slider"]:SetMinMaxValues(aMinValue, aMaxValue);
-
 	VUHDO_GLOBAL[aSlider:GetName() .. "Slider"]:SetValueStep(aValueStep or 1);
 	VUHDO_lnfSliderOnValueChanged(aSlider);
 end
 
-
-
---
 local sLastComboItem = nil;
 
 function VUHDO_lnfSetLastComboItem(anItem)
 	sLastComboItem = anItem:GetName();
 end
 
-
-
---
 local tFocus;
 function VUHDO_lnfIsLastComboIten()
 	tFocus = GetMouseFocus();
 	return tFocus ~= nil and tFocus:GetName() == sLastComboItem;
 end
 
-
-
---
 function VUHDO_lnfRadioButtonOnShow(aRadioButton)
 	if (aRadioButton:GetChecked()) then
 		VUHDO_lnfRadioButtonClicked(aRadioButton);
 	end
 end
 
-
-
---
 local tComboBox;
 function VUHDO_lnfComboItemOnEnter(aComboItem)
 	aComboItem:SetBackdropColor(0.8, 0.8, 1, 1);
@@ -288,9 +235,6 @@ function VUHDO_lnfComboItemOnEnter(aComboItem)
 	end
 end
 
-
-
---
 function VUHDO_lnfComboItemOnLeave(aComboItem)
 	if (aComboItem.parentCombo.isScrollable) then
 		aComboItem:SetBackdropColor(0, 0, 0, 0);
@@ -299,9 +243,6 @@ function VUHDO_lnfComboItemOnLeave(aComboItem)
 	end
 end
 
-
-
---
 local tComboBox;
 local tSelectPanel;
 function VUHDO_lnfComboButtonClicked(aButton)
@@ -319,8 +260,6 @@ function VUHDO_lnfComboButtonClicked(aButton)
 	end
 end
 
-
-
 function VUHDO_lnfComboSelectHide(aComboBox)
 	if (aComboBox.isScrollable) then
 		VUHDO_GLOBAL[aComboBox:GetName() .. "ScrollPanel"]:Hide();
@@ -329,18 +268,8 @@ function VUHDO_lnfComboSelectHide(aComboBox)
 	end
 end
 
-
---
---
---
 -- Model changing
---
---
---
 
-
-
---
 local VUHDO_NUM_TEMPLATE = "#PNUM#";
 local VUHDO_VAL_TEMPLATE = "##";
 
@@ -348,17 +277,11 @@ function VUHDO_lnfSetModel(aComponent, aModel)
 	aComponent:SetAttribute("model", aModel);
 end
 
-
-
---
 function VUHDO_lnfSetRadioModel(aComponent, aModel, aValue)
 	aComponent:SetAttribute("model", aModel);
 	aComponent:SetAttribute("radio_value", aValue);
 end
 
-
-
---
 function VUHDO_setComboModel(aComponent, aModel, anEntryTable, aTitle)
 	aComponent:SetAttribute("model", aModel);
 	aComponent:SetAttribute("combo_table", anEntryTable);
@@ -369,13 +292,10 @@ function VUHDO_setComboModel(aComponent, aModel, anEntryTable, aTitle)
 	end
 end
 
-
-
---
 local VUHDO_lnfOnUpdate = false;
 local tCurrModel;
 local tPanel;
-local tAllComps = { };
+local tAllComps = {};
 local tComp;
 local tCurrName;
 local tModel;
@@ -394,12 +314,12 @@ local function VUHDO_lnfUpdateAllModelControls(aComponent, aValue)
 	VUHDO_lnfOnUpdate = true;
 
 	table.wipe(tAllComps);
-	tAllComps = { tPanel:GetChildren() };
+	tAllComps = {tPanel:GetChildren()};
 	tCurrName = aComponent:GetName();
 
 	for _, tComp in pairs(tAllComps) do
 		tModel = tComp:GetAttribute("model");
-		if (tModel ~= nil and strfind(tCurrModel, tModel , 1, true)  and tCurrName ~= tComp:GetName()) then
+		if (tModel ~= nil and strfind(tCurrModel, tModel , 1, true) and tCurrName ~= tComp:GetName()) then
 			if (tComp:IsShown()) then
 				tComp:Hide();
 				tComp:Show();
@@ -410,9 +330,6 @@ local function VUHDO_lnfUpdateAllModelControls(aComponent, aValue)
 	VUHDO_lnfOnUpdate = false;
 end
 
-
-
---
 local tPanelNum;
 local tTableIndices;
 local tGlobal;
@@ -463,35 +380,32 @@ function VUHDO_lnfUpdateVar(aModel, aValue, aPanelNum)
 			if (VUHDO_RESET_SIZES) then
 				resetSizeCalcCaches();
 			end
-  		if (strfind(aModel, "VUHDO_OPTIONS_SETTINGS.", 1, true) ~= nil) then
-  		elseif (tPanelNum ~= nil) then
-  			if (strfind(aModel, "TOOLTIP", 1, true) ~= nil) then
-  				VUHDO_demoTooltip(aPanelNum);
-  			else
-  				VUHDO_initDynamicPanelModels();
-  				VUHDO_timeRedrawPanel(tPanelNum, 0.3);
-  			end
-  		elseif (strfind(aModel, "_BUFF_", 1, true) ~= nil) then
-  			VUHDO_reloadBuffPanel();
-  		elseif (strfind(aModel, "BLIZZ_UI", 1, true) ~= nil) then
-  			VUHDO_initBlizzFrames();
-  		else
-  			if (strfind(aModel, "VUHDO_CONFIG.", 1, true) ~= nil) then
-  				VUHDO_demoSetupResetUsers();
-  			end
+			if (strfind(aModel, "VUHDO_OPTIONS_SETTINGS.", 1, true) ~= nil) then
+			elseif (tPanelNum ~= nil) then
+				if (strfind(aModel, "TOOLTIP", 1, true) ~= nil) then
+					VUHDO_demoTooltip(aPanelNum);
+				else
+					VUHDO_initDynamicPanelModels();
+					VUHDO_timeRedrawPanel(tPanelNum, 0.3);
+				end
+			elseif (strfind(aModel, "_BUFF_", 1, true) ~= nil) then
+				VUHDO_reloadBuffPanel();
+			elseif (strfind(aModel, "BLIZZ_UI", 1, true) ~= nil) then
+				VUHDO_initBlizzFrames();
+			else
+				if (strfind(aModel, "VUHDO_CONFIG.", 1, true) ~= nil) then
+					VUHDO_demoSetupResetUsers();
+				end
 				VUHDO_initDebuffs();
 				VUHDO_customHealthInitBurst(); -- For life left colors
-  			VUHDO_timeReloadUI(0.3, true);
-  		end
+				VUHDO_timeReloadUI(0.3, true);
+			end
 		end
 		VUHDO_toolboxInitBurst();
 	end
 end
 local VUHDO_lnfUpdateVar = VUHDO_lnfUpdateVar;
 
-
-
---
 local tModel, tFunction;
 function VUHDO_lnfUpdateVarFromModel(aComponent, aValue, aPanelNum)
 	tModel = aComponent:GetAttribute("model");
@@ -511,9 +425,6 @@ function VUHDO_lnfUpdateVarFromModel(aComponent, aValue, aPanelNum)
 end
 local VUHDO_lnfUpdateVarFromModel = VUHDO_lnfUpdateVarFromModel;
 
-
-
---
 local tTableIndices;
 local tGlobal;
 local tLastField;
@@ -554,18 +465,13 @@ function VUHDO_lnfGetValueFrom(aModel)
 end
 local VUHDO_lnfGetValueFrom = VUHDO_lnfGetValueFrom;
 
-
-
---
 function VUHDO_lnfGetValueFromModel(aComponent)
 	return VUHDO_lnfGetValueFrom(aComponent:GetAttribute("model"));
 end
 local VUHDO_lnfGetValueFromModel = VUHDO_lnfGetValueFromModel;
 
-
-
 -- Slider
---
+
 local tValue;
 local tModel;
 function VUHDO_lnfSliderUpdateModel(aSlider)
@@ -587,9 +493,6 @@ function VUHDO_lnfSliderUpdateModel(aSlider)
 	VUHDO_lnfUpdateVarFromModel(aSlider:GetParent(), tValue);
 end
 
-
-
---
 local tValue;
 local tModel;
 local tIndex, tInfo;
@@ -621,10 +524,8 @@ function VUHDO_lnfSliderInitFromModel(aSlider)
 	end
 end
 
-
-
 -- Check Button
---
+
 local tIsChecked;
 function VUHDO_lnfCheckButtonUpdateModel(aCheckButton)
 	tIsChecked = aCheckButton:GetChecked();
@@ -636,27 +537,19 @@ function VUHDO_lnfCheckButtonUpdateModel(aCheckButton)
 	VUHDO_lnfUpdateVarFromModel(aCheckButton, tIsChecked);
 end
 
-
-
---
 function VUHDO_lnfCheckButtonInitFromModel(aCheckButton)
 	aCheckButton:SetChecked(VUHDO_lnfGetValueFromModel(aCheckButton));
 	VUHDO_lnfCheckButtonClicked(aCheckButton);
 	VUHDO_lnfCheckButtonOnLoad(aCheckButton);
 end
 
-
-
 -- Radio Button
---
+
 function VUHDO_lnfRadioButtonUpdateModel(aRadioButton)
 	local tValue = aRadioButton:GetAttribute("radio_value");
 	VUHDO_lnfUpdateVarFromModel(aRadioButton, tValue);
 end
 
-
-
---
 local tRadioValue;
 local tModelValue;
 function VUHDO_lnfRadioButtonInitFromModel(aRadioButton)
@@ -673,10 +566,8 @@ function VUHDO_lnfRadioButtonInitFromModel(aRadioButton)
 	VUHDO_lnfCheckButtonOnLoad(aRadioButton);
 end
 
-
-
 -- Edit Box
---
+
 local tTable;
 local tValues;
 local tFunction;
@@ -709,9 +600,6 @@ function VUHDO_lnfEditBoxUpdateModel(anEditBox)
 
 end
 
-
-
---
 local tText;
 function VUHDO_lnfEditBoxInitFromModel(anEditBox)
 	tText = VUHDO_lnfGetValueFromModel(anEditBox);
@@ -723,11 +611,8 @@ function VUHDO_lnfEditBoxInitFromModel(anEditBox)
 	anEditBox:SetText(tText);
 end
 
-
-
 -- ComboBox
---
--- tInfo = { Value, Text/Texture }
+-- tInfo = {Value, Text/Texture}
 local VUHDO_COMBO_ITEM_WIDTH;
 local VUHDO_COMBO_ITEM_HEIGHT;
 local VUHDO_COMBO_ITEMS_PER_COL;
@@ -783,26 +668,26 @@ function VUHDO_lnfComboInitItems(aComboBox)
 		end
 
 		tItemPanel:ClearAllPoints();
-    if (type(tInfo[2]) == "string") then
-		  VUHDO_GLOBAL[tItemPanel:GetName() .. "LabelLabel"]:SetText(tInfo[2]);
-		  VUHDO_GLOBAL[tItemPanel:GetName() .. "Icon"]:Hide();
-      VUHDO_COMBO_ITEM_HEIGHT = 16;
-      VUHDO_COMBO_ITEM_WIDTH = 160;
-      VUHDO_COMBO_ITEMS_PER_COL = 25;
+		if (type(tInfo[2]) == "string") then
+			VUHDO_GLOBAL[tItemPanel:GetName() .. "LabelLabel"]:SetText(tInfo[2]);
+			VUHDO_GLOBAL[tItemPanel:GetName() .. "Icon"]:Hide();
+			VUHDO_COMBO_ITEM_HEIGHT = 16;
+			VUHDO_COMBO_ITEM_WIDTH = 160;
+			VUHDO_COMBO_ITEMS_PER_COL = 25;
 		else
-		  VUHDO_GLOBAL[tItemPanel:GetName() .. "IconTexture"]:SetTexture(VUHDO_GLOBAL[tInfo[2]:GetName() .. "I"]:GetTexture());
-		  VUHDO_GLOBAL[tItemPanel:GetName() .. "IconTexture"]:SetTexCoord(VUHDO_GLOBAL[tInfo[2]:GetName() .. "I"]:GetTexCoord());
-		  VUHDO_GLOBAL[tItemPanel:GetName() .. "Icon"]:SetWidth(30);
-		  VUHDO_GLOBAL[tItemPanel:GetName() .. "Icon"]:SetHeight(30);
-		  VUHDO_GLOBAL[tItemPanel:GetName() .. "Icon"]:Show();
-      VUHDO_COMBO_ITEM_HEIGHT = 34;
-      VUHDO_COMBO_ITEM_WIDTH = 50;
-      VUHDO_COMBO_ITEMS_PER_COL = 3;
+			VUHDO_GLOBAL[tItemPanel:GetName() .. "IconTexture"]:SetTexture(VUHDO_GLOBAL[tInfo[2]:GetName() .. "I"]:GetTexture());
+			VUHDO_GLOBAL[tItemPanel:GetName() .. "IconTexture"]:SetTexCoord(VUHDO_GLOBAL[tInfo[2]:GetName() .. "I"]:GetTexCoord());
+			VUHDO_GLOBAL[tItemPanel:GetName() .. "Icon"]:SetWidth(30);
+			VUHDO_GLOBAL[tItemPanel:GetName() .. "Icon"]:SetHeight(30);
+			VUHDO_GLOBAL[tItemPanel:GetName() .. "Icon"]:Show();
+			VUHDO_COMBO_ITEM_HEIGHT = 34;
+			VUHDO_COMBO_ITEM_WIDTH = 50;
+			VUHDO_COMBO_ITEMS_PER_COL = 3;
 		end
 
 		tItemPanel:SetPoint("TOPLEFT", tItemContainer:GetName(), "TOPLEFT", 3 + tXIdx * VUHDO_COMBO_ITEM_WIDTH, - (3 + tYIdx * VUHDO_COMBO_ITEM_HEIGHT));
-    tItemPanel:SetWidth(VUHDO_COMBO_ITEM_WIDTH);
-    tItemPanel:SetHeight(VUHDO_COMBO_ITEM_HEIGHT);
+		tItemPanel:SetWidth(VUHDO_COMBO_ITEM_WIDTH);
+		tItemPanel:SetHeight(VUHDO_COMBO_ITEM_HEIGHT);
 		tItemPanel:Show();
 		tItemPanel:SetAttribute("value", tInfo[1]);
 		if (aComboBox.isScrollable) then
@@ -842,7 +727,7 @@ function VUHDO_lnfComboInitItems(aComboBox)
 		end
 	end
 
-	if (tMaxY == 0)  then
+	if (tMaxY == 0) then
 		tMaxY = 1;
 	end
 
@@ -861,9 +746,6 @@ function VUHDO_lnfComboInitItems(aComboBox)
 	end
 end
 
-
-
---
 local tIndex, tInfo;
 local tTexture;
 local tTable;
@@ -900,8 +782,8 @@ function VUHDO_lnfComboSetSelectedValue(aComboBox, aValue, anIsEditBox)
 	for tIndex, tInfo in ipairs(tTable) do
 		if (aComboBox.isScrollable) then
 			tTexture = VUHDO_GLOBAL[aComboBox:GetName() .. "ScrollPanelSelectPanelItem" .. tIndex .. "CheckTexture"];
-	  elseif (tIndex > 100) then
-	    break;
+		elseif (tIndex > 100) then
+			break;
 		else
 			tTexture = VUHDO_GLOBAL[aComboBox:GetName() .. "SelectPanelItem" .. tIndex .. "CheckTexture"];
 		end
@@ -942,19 +824,8 @@ function VUHDO_lnfComboSetSelectedValue(aComboBox, aValue, anIsEditBox)
 	else
 		VUHDO_lnfUpdateVarFromModel(aComboBox, aValue, nil);
 	end
-
-
---	tFunction = aComboBox:GetAttribute("custom_function_post");
---	if (tFunction ~= nil) then
---		tIsInCustomFunction = true;
---		tFunction();
---		tIsInCustomFunction = false;
---	end
 end
 
-
-
---
 local tValue;
 local tTitle;
 function VUHDO_lnfComboBoxInitFromModel(aComboBox)
@@ -981,10 +852,8 @@ function VUHDO_lnfComboBoxInitFromModel(aComboBox)
 	end
 end
 
-
-
 -- Color Swatch
---
+
 local tValue;
 local tFont;
 function VUHDO_lnfColorSwatchInitFromModel(aColorSwatch)
@@ -1024,9 +893,6 @@ function VUHDO_lnfColorSwatchInitFromModel(aColorSwatch)
 	end
 end
 
-
-
---
 local tValue;
 local tStatusFile;
 function VUHDO_lnfTextureSwatchInitFromModel(aTexture)
@@ -1040,18 +906,12 @@ function VUHDO_lnfTextureSwatchInitFromModel(aTexture)
 	end
 end
 
-
-
---
 function VUHDO_lnfInitColorSwatch(aColorSwatch, aText, aDescription, aProhibitColors)
 	VUHDO_GLOBAL[aColorSwatch:GetName() .. "TitleString"]:SetText(aText);
 	aColorSwatch:SetAttribute("description", aDescription);
 	aColorSwatch:SetAttribute("prohibit", aProhibitColors);
 end
 
-
-
---
 function VUHDO_lnfColorSwatchShowColorPicker(aColorSwatch, aMouseButton)
 	if (aColorSwatch:GetAttribute("model") == nil) then
 		return;
@@ -1060,16 +920,10 @@ function VUHDO_lnfColorSwatchShowColorPicker(aColorSwatch, aMouseButton)
 	VuhDoNewColorPicker:Show();
 end
 
-
-
---
 function VUHDO_lnfSetTooltip(aComponent, aText)
 	aComponent:SetAttribute("tooltip", aText);
 end
 
-
-
---
 local tTooltip;
 function VUHDO_lnfShowTooltip(aComponent)
 	tTooltip = aComponent:GetAttribute("tooltip");
@@ -1082,16 +936,10 @@ function VUHDO_lnfShowTooltip(aComponent)
 	end
 end
 
-
-
---
 function VUHDO_lnfHideTooltip(aComponent)
 	VuhDoOptionsTooltip:Hide();
 end
 
-
-
---
 local tName;
 local tType, tId, tId2;
 function VUHDO_lnfEditboxReceivedDrag(anEditBox)
@@ -1113,9 +961,6 @@ function VUHDO_lnfEditboxReceivedDrag(anEditBox)
 	ClearCursor();
 end
 
-
-
---
 function VUHDO_lnfScrollFrameOnLoad(aFrame)
 	local tScrollBar = VUHDO_GLOBAL[aFrame:GetName() .. "ScrollBar"];
 	local tUpButton = VUHDO_GLOBAL[tScrollBar:GetName() .. "ScrollUpButton"];

@@ -1,16 +1,15 @@
-VUHDO_PROFILE_TABLE_MODEL = { };
+VUHDO_PROFILE_TABLE_MODEL = {};
 VUHDO_CUSTOM_DEBUFF_PROFILE = nil;
 VUHDO_EXPORT_CUDE_TO_RADIO_VALUE = 3;
 VUHDO_EXPORT_CUDE_IS_REPLACE = false;
 
---
 function VUHDO_initProfileTableModels(aButton)
 	local tIndex, tValue;
 
 	table.wipe(VUHDO_PROFILE_TABLE_MODEL);
-	VUHDO_PROFILE_TABLE_MODEL[1] = { "", "-- " .. VUHDO_I18N_EMPTY_HOTS .. " --" };
+	VUHDO_PROFILE_TABLE_MODEL[1] = {"", "-- " .. VUHDO_I18N_EMPTY_HOTS .. " --"};
 	for tIndex, tValue in ipairs(VUHDO_PROFILES) do
-		VUHDO_PROFILE_TABLE_MODEL[tIndex + 1] = { tValue["NAME"], tValue["NAME"] };
+		VUHDO_PROFILE_TABLE_MODEL[tIndex + 1] = {tValue["NAME"], tValue["NAME"]};
 	end
 
 	table.sort(VUHDO_PROFILE_TABLE_MODEL,
@@ -21,37 +20,23 @@ function VUHDO_initProfileTableModels(aButton)
 
 end
 
-
-
 local VUHDO_PROFILE_COMBO = nil;
 local VUHDO_PROFILE_EDIT = nil;
 
-
-
---
 function VUHDO_setProfileCombo(aComboBox)
 	VUHDO_PROFILE_COMBO = aComboBox;
 end
 
-
-
---
 function VUHDO_setProfileEditBox(anEditBox)
 	VUHDO_PROFILE_EDIT = anEditBox;
 end
 
-
-
---
 function VUHDO_updateProfileSelectCombo()
 	VUHDO_initProfileTableModels();
-  VUHDO_lnfComboBoxInitFromModel(VUHDO_PROFILE_COMBO);
-  VUHDO_lnfEditBoxInitFromModel(VUHDO_PROFILE_EDIT);
+	VUHDO_lnfComboBoxInitFromModel(VUHDO_PROFILE_COMBO);
+	VUHDO_lnfEditBoxInitFromModel(VUHDO_PROFILE_EDIT);
 end
 
-
-
---
 local tCnt;
 local function VUHDO_deleteAutoProfile(tName)
 	for tCnt = 1, 40 do
@@ -69,9 +54,6 @@ local function VUHDO_deleteAutoProfile(tName)
 	end
 end
 
-
-
---
 function VUHDO_skinsInitAutoCheckButton(aButton, anIndex)
 	local tEditBox = VUHDO_GLOBAL[aButton:GetParent():GetParent():GetName() .. "LoadSavePanelEnterProfileNameEditBox"];
 	local tSelected = strtrim(tEditBox:GetText());
@@ -80,32 +62,23 @@ function VUHDO_skinsInitAutoCheckButton(aButton, anIndex)
 	VUHDO_lnfCheckButtonClicked(aButton);
 end
 
-
-
---
 function VUHDO_skinsLockCheckButtonClicked(aButton)
-  local tIndex, tProfile = VUHDO_getProfileNamed(VUHDO_CONFIG["CURRENT_PROFILE"]);
-  if (tIndex ~= nil) then
-  	if (aButton:GetChecked()) then -- Achtung GetChecked liefert 1<->nil => Problem mit model consistency checker
-  		tProfile["LOCKED"] = true;
-  	else
-  		tProfile["LOCKED"] = false;
-  	end
-  end
+	local tIndex, tProfile = VUHDO_getProfileNamed(VUHDO_CONFIG["CURRENT_PROFILE"]);
+	if (tIndex ~= nil) then
+		if (aButton:GetChecked()) then -- Achtung GetChecked liefert 1<->nil => Problem mit model consistency checker
+			tProfile["LOCKED"] = true;
+		else
+			tProfile["LOCKED"] = false;
+		end
+	end
 end
 
-
-
---
 function VUHDO_skinsInitLockCheckButton(aButton)
-  local tIndex, tProfile = VUHDO_getProfileNamed(VUHDO_CONFIG["CURRENT_PROFILE"]);
+	local tIndex, tProfile = VUHDO_getProfileNamed(VUHDO_CONFIG["CURRENT_PROFILE"]);
 	aButton:SetChecked(tIndex ~= nil and tProfile["LOCKED"]);
 	VUHDO_lnfCheckButtonClicked(aButton);
 end
 
-
-
---
 local tCnt;
 local tButton;
 local function VUHDO_updateAllAutoProfiles(aComponent)
@@ -126,16 +99,10 @@ local function VUHDO_updateAllAutoProfiles(aComponent)
 	VUHDO_skinsInitLockCheckButton(tButton);
 end
 
-
-
---
 function VUHDO_profileComboValueChanged(aComboBox, aValue)
 	VUHDO_updateAllAutoProfiles(aComboBox);
 end
 
-
-
---
 function VUHDO_skinsAutoCheckButtonClicked(aButton, anIndex)
 	local tEditBox = VUHDO_GLOBAL[aButton:GetParent():GetParent():GetName() .. "LoadSavePanelEnterProfileNameEditBox"];
 	local tSelected = strtrim(tEditBox:GetText());
@@ -155,14 +122,8 @@ function VUHDO_skinsAutoCheckButtonClicked(aButton, anIndex)
 	end
 end
 
+-- Delete
 
-
-
-
--- Delete -------------------------------
-
-
---
 function VUHDO_deleteProfile(aName)
 	local tIndex, _ = VUHDO_getProfileNamed(aName);
 
@@ -175,9 +136,6 @@ function VUHDO_deleteProfile(aName)
 	end
 end
 
-
-
---
 function VUHDO_yesNoDeleteProfileCallback(aDecision)
 	if (VUHDO_YES == aDecision) then
 		VUHDO_deleteProfile(VuhDoYesNoFrame:GetAttribute("profileName"));
@@ -185,9 +143,6 @@ function VUHDO_yesNoDeleteProfileCallback(aDecision)
 	end
 end
 
-
-
---
 function VUHDO_deleteProfileClicked(aButton)
 	local tEditBox = VUHDO_GLOBAL[aButton:GetParent():GetName() .. "EnterProfileNameEditBox"];
 	local tName = tEditBox:GetText();
@@ -209,9 +164,6 @@ function VUHDO_deleteProfileClicked(aButton)
 	VuhDoYesNoFrame:Show();
 end
 
-
-
---
 function VUHDO_saveProfileClicked(aButton)
 	local tEditBox = VUHDO_GLOBAL[aButton:GetParent():GetName() .. "EnterProfileNameEditBox"];
 	local tName = tEditBox:GetText();
@@ -230,9 +182,6 @@ function VUHDO_saveProfileClicked(aButton)
 	VUHDO_saveProfile(tName);
 end
 
-
-
---
 function VUHDO_loadProfileClicked(aButton)
 	local tEditBox = VUHDO_GLOBAL[aButton:GetParent():GetName() .. "EnterProfileNameEditBox"];
 	local tName = tEditBox:GetText();
@@ -245,12 +194,6 @@ function VUHDO_loadProfileClicked(aButton)
 	VUHDO_loadProfile(tName);
 end
 
-
---------------
-
-
-
---
 local function VUHDO_broadcastCustomDebuffsToProfile(aDestProfile, anIsReplace)
 	local tIndex, tProfile;
 	local tDebuffName, tSettings;
@@ -278,9 +221,6 @@ local function VUHDO_broadcastCustomDebuffsToProfile(aDestProfile, anIsReplace)
 	VUHDO_Msg("Custom debuffs exported to profile " .. aDestProfile);
 end
 
-
-
---
 local function VUHDO_broadcastCustomDebuffsToAllProfiles(anIsSameToonOnly, anIsReplace)
 	local tProfileNum, tProfile;
 
@@ -293,13 +233,10 @@ local function VUHDO_broadcastCustomDebuffsToAllProfiles(anIsSameToonOnly, anIsR
 	VUHDO_Msg("Custom debuff export done.");
 end
 
-
-
---
 function VUHDO_profilesReplaceCudeClicked(_, anIsReplace)
 	VUHDO_EXPORT_CUDE_IS_REPLACE = anIsReplace;
 
-	VuhDoYesNoFrameText:SetText("Really export to profile(s)?");
+	VuhDoYesNoFrameText:SetText(VUHDO_I18N_REALLY_EXPORT_CUDES);
 	VuhDoYesNoFrame:SetAttribute("callback",
 		function(aDecision)
 			if (VUHDO_YES == aDecision) then
@@ -317,6 +254,5 @@ function VUHDO_profilesReplaceCudeClicked(_, anIsReplace)
 		end
 	);
 	VuhDoYesNoFrame:Show();
-
 
 end

@@ -1,6 +1,5 @@
---
 local VUHDO_INDICATORS = {
-	{ -- Outer Border
+	{-- Outer Border
 		["name"] = VUHDO_I18N_OUTER_BORDER,
 		["model"] = "VUHDO_INDICATOR_CONFIG.BOUQUETS.BAR_BORDER",
 		["icon"] = "Indicator_Outer",
@@ -15,7 +14,7 @@ local VUHDO_INDICATORS = {
 		},
 	},
 
-	{ -- Inner Border
+	{-- Inner Border
 		["name"] = VUHDO_I18N_INNER_BORDER,
 		["model"] = "VUHDO_INDICATOR_CONFIG.BOUQUETS.CLUSTER_BORDER",
 		["icon"] = "Indicator_Inner",
@@ -30,7 +29,7 @@ local VUHDO_INDICATORS = {
 		},
 	},
 
-	{ -- Swiftmend Indicator
+	{-- Swiftmend Indicator
 		["name"] = VUHDO_I18N_SWIFTMEND_INDICATOR,
 		["model"] = "VUHDO_INDICATOR_CONFIG.BOUQUETS.SWIFTMEND_INDICATOR",
 		["icon"] = "Indicator_Swiftmend",
@@ -45,7 +44,7 @@ local VUHDO_INDICATORS = {
 		},
 	},
 
-	{ -- MouseoverHiglighter
+	{-- MouseoverHiglighter
 		["name"] = VUHDO_I18N_MOUSEOVER_HIGHLIGHTER,
 		["model"] = "VUHDO_INDICATOR_CONFIG.BOUQUETS.MOUSEOVER_HIGHLIGHT",
 		["icon"] = "Indicator_BarHighlight",
@@ -60,7 +59,7 @@ local VUHDO_INDICATORS = {
 		},
 	},
 
-	{ -- Aggro Line
+	{-- Aggro Line
 		["name"] = VUHDO_I18N_AGGRO_LINE,
 		["model"] = "VUHDO_INDICATOR_CONFIG.BOUQUETS.AGGRO_BAR",
 		["icon"] = "Indicator_Aggro",
@@ -75,14 +74,14 @@ local VUHDO_INDICATORS = {
 		},
 	},
 
-	{ -- Threat Marks
+	{-- Threat Marks
 		["name"] = VUHDO_I18N_THREAT_MARKS,
 		["model"] = "VUHDO_INDICATOR_CONFIG.BOUQUETS.THREAT_MARK",
 		["icon"] = "Indicator_AggroMark",
-		["custom"] = { },
+		["custom"] = {},
 	},
 
-	{ -- Threat Bar
+	{-- Threat Bar
 		["name"] = VUHDO_I18N_THREAT_BAR,
 		["model"] = "VUHDO_INDICATOR_CONFIG.BOUQUETS.THREAT_BAR",
 		["icon"] = "Indicator_ThreatBar",
@@ -116,7 +115,7 @@ local VUHDO_INDICATORS = {
 		},
 	},
 
-	{ -- Mana Bar
+	{-- Mana Bar
 		["name"] = VUHDO_I18N_MANA_BAR,
 		["model"] = "VUHDO_INDICATOR_CONFIG.BOUQUETS.MANA_BAR",
 		["icon"] = "Indicator_ManaBar",
@@ -143,7 +142,7 @@ local VUHDO_INDICATORS = {
 		},
 	},
 
-	{ -- Background Bar
+	{-- Background Bar
 		["name"] = VUHDO_I18N_BACKGROUND_BAR,
 		["model"] = "VUHDO_INDICATOR_CONFIG.BOUQUETS.BACKGROUND_BAR",
 		["icon"] = "Indicator_BackgroundBar",
@@ -158,7 +157,7 @@ local VUHDO_INDICATORS = {
 		},
 	},
 
-	{ -- Health Bar
+	{-- Health Bar
 		["name"] = VUHDO_I18N_HEALTH_BAR,
 		["model"] = "VUHDO_INDICATOR_CONFIG.BOUQUETS.HEALTH_BAR",
 		["icon"] = "Indicator_HealthBar",
@@ -185,14 +184,13 @@ local VUHDO_INDICATORS = {
 	},
 }
 
-
-VUHDO_BOUQUET_SLOTS_COMBO_MODEL = { };
+VUHDO_BOUQUET_SLOTS_COMBO_MODEL = {};
 
 function VUHDO_initBouquetSlotsComboModel()
 	table.wipe(VUHDO_BOUQUET_SLOTS_COMBO_MODEL);
 
 	for tName, _ in pairs(VUHDO_BOUQUETS["STORED"]) do
-		tinsert(VUHDO_BOUQUET_SLOTS_COMBO_MODEL, { tName, tName } );
+		tinsert(VUHDO_BOUQUET_SLOTS_COMBO_MODEL, {tName, tName});
 	end
 
 	table.sort(VUHDO_BOUQUET_SLOTS_COMBO_MODEL,
@@ -201,12 +199,9 @@ function VUHDO_initBouquetSlotsComboModel()
 		end
 	);
 
-	tinsert(VUHDO_BOUQUET_SLOTS_COMBO_MODEL, 1, {"", "Пусто" });
+	tinsert(VUHDO_BOUQUET_SLOTS_COMBO_MODEL, 1, {"", "-- " .. VUHDO_I18N_OFF_EMPTY .. " --"});
 end
 
-
-
---
 local tCombo;
 local function VUHDO_setBouquetSelectorModel(aPanel, aText, aModel, aTexture)
 	VUHDO_GLOBAL[aPanel:GetName() .. "SelectLabelLabel"]:SetText(aText);
@@ -217,17 +212,11 @@ local function VUHDO_setBouquetSelectorModel(aPanel, aText, aModel, aTexture)
 	VUHDO_lnfComboBoxInitFromModel(tCombo);
 end
 
-
-
---
 function VUHDO_notifyBouquetSelect()
 	VUHDO_registerAllBouquets();
 	VUHDO_initAllEventBouquets();
 end
 
-
-
---
 local tCombo;
 function VUHDO_generalIndicatorsEditButtonClicked(aButton)
 	tCombo = VUHDO_GLOBAL[aButton:GetParent():GetName() .. "SelectComboBox"];
@@ -241,9 +230,6 @@ function VUHDO_generalIndicatorsEditButtonClicked(aButton)
 	VUHDO_lnfRadioButtonClicked(VuhDoNewOptionsGeneralRadioPanelBouquetRadioButton);
 end
 
-
-
---
 local tName;
 local tSlider;
 local function VUHDO_createSliderForComponent(anIndex, tElement, aParent)
@@ -264,9 +250,6 @@ local function VUHDO_createSliderForComponent(anIndex, tElement, aParent)
 	return tSlider;
 end
 
-
-
---
 local tName;
 local tCheckButton;
 local function VUHDO_createCheckBoxForComponent(anIndex, tElement, aParent)
@@ -284,9 +267,6 @@ local function VUHDO_createCheckBoxForComponent(anIndex, tElement, aParent)
 	return tCheckButton;
 end
 
-
-
---
 local tName;
 local tPanel, tCombo, tTexture;
 local function VUHDO_createComboBoxForComponent(anIndex, tElement, aParent)
@@ -311,9 +291,6 @@ local function VUHDO_createComboBoxForComponent(anIndex, tElement, aParent)
 	return tPanel;
 end
 
-
-
---
 local tIndex, tElement, tComponent, tYCompOfs, tHeight;
 local function VUHDO_buildCustomComponents(aPanel, someCustomElements)
 	tYCompOfs = -10;
@@ -339,9 +316,6 @@ local function VUHDO_buildCustomComponents(aPanel, someCustomElements)
 	return -tYCompOfs;
 end
 
-
-
---
 local tIndex, tIndicator;
 local tBouqetSlotName, tBouquetSlot, tXOfs, tYOfs, tOffset, tMorePanel, tHeight;
 function VUHDO_newOptionsIndicatorsBuildScrollChild(aScrollChild)
@@ -351,9 +325,9 @@ function VUHDO_newOptionsIndicatorsBuildScrollChild(aScrollChild)
 	for tIndex, tIndicator in ipairs(VUHDO_INDICATORS) do
 		tBouqetSlotName = "VuhDoBouqetSlotItem" .. tIndex;
 
-  	if (VUHDO_GLOBAL[tBouqetSlotName] == nil) then
+		if (VUHDO_GLOBAL[tBouqetSlotName] == nil) then
 			tBouquetSlot = CreateFrame("ScrollFrame", tBouqetSlotName, aScrollChild, "VuhDoBouquetSlotTemplate");
-	  else
+		else
 			tBouquetSlot = VUHDO_GLOBAL[tBouqetSlotName];
 		end
 

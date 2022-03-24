@@ -86,7 +86,7 @@ local function VUHDO_buildSnippetArray()
 			VUHDO_GROUP_SNIPPETS[tMacroIndex] =
 				(tInfo["group"] % 10) .. (VUHDO_CLASS_TO_MACRO[tInfo["classId"]] or "_") .. (VUHDO_ROLE_TO_MACRO[tInfo["role"]] or "_");
 
-			VUHDO_NAME_SNIPPETS[tMacroIndex] = strsub((tInfo["name"] or "") .. " ", 1, 3);
+			VUHDO_NAME_SNIPPETS[tMacroIndex] = strsub((tInfo["name"] or "") .. "   ", 1, 3);
 		end
 	end
 end

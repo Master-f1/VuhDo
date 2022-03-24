@@ -4,30 +4,22 @@ DESIGN_MISC_PANEL_NUM = nil;
 local VUHDO_CURRENT_GROUPS_COMBO;
 local VUHDO_CURRENT_GROUP_ID;
 
-
-
 local VUHDO_ID_TYPE_NAMES = {
-  [VUHDO_ID_TYPE_UNDEFINED] = VUHDO_I18N_UNDEFINED,
-  [VUHDO_ID_TYPE_CLASS] = VUHDO_I18N_CLASS,
-  [VUHDO_ID_TYPE_GROUP] = VUHDO_I18N_GROUP,
-  [VUHDO_ID_TYPE_SPECIAL] = VUHDO_I18N_SPECIAL
+	[VUHDO_ID_TYPE_UNDEFINED] = VUHDO_I18N_UNDEFINED,
+	[VUHDO_ID_TYPE_CLASS] = VUHDO_I18N_CLASS,
+	[VUHDO_ID_TYPE_GROUP] = VUHDO_I18N_GROUP,
+	[VUHDO_ID_TYPE_SPECIAL] = VUHDO_I18N_SPECIAL
 };
 
-
-
---
 function VUHDO_panelSetupRemoveGroupOnClick(aPanel)
 	local tPanelNum, tModelNum;
 
 	tPanelNum, tModelNum = VUHDO_getComponentPanelNumModelNum(aPanel)
 	VUHDO_removeFromModel(tPanelNum, tModelNum);
-	VUHDO_PANEL_MODEL_GUESSED[tPanelNum] = { };
+	VUHDO_PANEL_MODEL_GUESSED[tPanelNum] = {};
 	VUHDO_redrawAllPanels();
 end
 
-
-
---
 function VUHDO_panelSetupChooseGroupOnClick(aButton)
 	local tPanelNum, tModelNum;
 	local tGroupOrderPanel = aButton:GetParent();
@@ -38,9 +30,6 @@ function VUHDO_panelSetupChooseGroupOnClick(aButton)
 	tGroupSelectPanel:Show();
 end
 
-
-
---
 function VUHDO_groupSelectOkayOnClick(aButton)
 	local tPanelNum, tModelNum;
 	local tGroupSelectPanel = aButton:GetParent();
@@ -56,17 +45,11 @@ function VUHDO_groupSelectOkayOnClick(aButton)
 	VUHDO_reloadUI();
 end
 
-
-
---
 function VUHDO_PanelSetupGroupSelectOnShow(aGroupSelectPanel)
 	aGroupSelectPanel:SetBackdropColor(0, 0, 0, 1);
 	aGroupSelectPanel:SetBackdropBorderColor(0.5, 0.5, 0.5, 1);
 end
 
-
-
---
 function VUHDO_groupSelectTypeComboOnShow(aComboBox)
 	local tPanelNum, tModelNum;
 	tPanelNum, tModelNum = VUHDO_getComponentPanelNumModelNum(aComboBox:GetParent());
@@ -88,9 +71,6 @@ function VUHDO_groupSelectTypeComboOnShow(aComboBox)
 	VUHDO_GLOBAL[aComboBox:GetName() .. "Text"]:SetText(tName);
 end
 
-
-
---
 function VUHDO_groupSelectTypeOnSelectionChanged(anEntry)
 	local tText = VUHDO_ID_TYPE_NAMES[anEntry.value];
 	local tPanel = anEntry.owner:GetParent();
@@ -118,9 +98,6 @@ function VUHDO_groupSelectTypeOnSelectionChanged(anEntry)
 	tOkayButton:Enable();
 end
 
-
-
---
 function VUHDO_configGroupSelectButtonOnMouseDown(aButton)
 	local tPanelNum, tModelNum;
 
@@ -134,9 +111,6 @@ function VUHDO_configGroupSelectButtonOnMouseDown(aButton)
 	VUHDO_CURRENT_GROUP_TYPE_ID = tType;
 end
 
-
-
---
 function VUHDO_groupSelectGroupOnSelectionChanged(anEntry)
 	local tPanelNum, tModelNum;
 
@@ -147,11 +121,8 @@ function VUHDO_groupSelectGroupOnSelectionChanged(anEntry)
 	VUHDO_PANEL_MODELS[tPanelNum][tModelNum] = anEntry.value;
 end
 
-
-
---
 local function VUHDO_createComboBoxInfo(aComboBox, aText, aValue, aCheckedValue)
-	local tInfo = { };
+	local tInfo = {};
 
 	tInfo.text = aText;
 	tInfo.value = aValue;
@@ -167,9 +138,6 @@ local function VUHDO_createComboBoxInfo(aComboBox, aText, aValue, aCheckedValue)
 	return tInfo;
 end
 
-
-
---
 function VUHDO_configInitGroupsCombo()
 	local tIndex, tId;
 	local tName;
@@ -187,9 +155,6 @@ function VUHDO_configInitGroupsCombo()
 	VUHDO_GLOBAL[VUHDO_CURRENT_GROUPS_COMBO:GetName() .. "Text"]:SetText(tText);
 end
 
-
-
---
 function VUHDO_refreshGroupsCombo(aGroupsCombo, aModelId)
 	VUHDO_CURRENT_GROUPS_COMBO = aGroupsCombo;
 	VUHDO_CURRENT_GROUP_ID = aModelId;
@@ -197,9 +162,6 @@ function VUHDO_refreshGroupsCombo(aGroupsCombo, aModelId)
 	UIDropDownMenu_Initialize(aGroupsCombo, VUHDO_configInitGroupsCombo);
 end
 
-
-
---
 function VUHDO_configFillGroupsCombo(aGroupSelectPanel, aModelId)
 	local tGroupsCombo = VUHDO_GLOBAL[aGroupSelectPanel:GetName() .. "VlCmb"];
 
@@ -207,16 +169,10 @@ function VUHDO_configFillGroupsCombo(aGroupSelectPanel, aModelId)
 	VUHDO_refreshGroupsCombo(tGroupsCombo, aModelId);
 end
 
-
-
---
 function VUHDO_PanelSetupGroupOrderOnShow(aGroupOrderPanel)
 	VUHDO_PanelSetupGroupOrderSetStandard(aGroupOrderPanel);
 end
 
-
-
---
 function VUHDO_PanelSetupGroupOrderSetStandard(aPanel)
 	aPanel:SetBackdropColor(0, 0, 0, 1);
 	aPanel:SetBackdropBorderColor(0.5, 0.5, 0.5, 1);
@@ -224,9 +180,6 @@ function VUHDO_PanelSetupGroupOrderSetStandard(aPanel)
 	VUHDO_getGroupOrderLabel2(aPanel):SetText(VUHDO_I18N_ME);
 end
 
-
-
---
 function VUHDO_PanelSetupGroupOrderSetDragging(aPanel)
 	local tText;
 	local tPanelNum, tModelNum;
@@ -240,9 +193,6 @@ function VUHDO_PanelSetupGroupOrderSetDragging(aPanel)
 	VUHDO_getGroupOrderLabel2(aPanel):SetText(tText);
 end
 
-
-
---
 function VUHDO_panelSetupGroupDragOnMouseDown(aDragArea)
 	local tGroupPanel = aDragArea:GetParent();
 
@@ -252,9 +202,6 @@ function VUHDO_panelSetupGroupDragOnMouseDown(aDragArea)
 	VUHDO_DRAG_PANEL = tGroupPanel;
 end
 
-
-
---
 function VUHDO_panelSetupGroupDragOnMouseUp(aDragArea)
 	local tGroupPanel = aDragArea:GetParent();
 	tGroupPanel:StopMovingOrSizing();

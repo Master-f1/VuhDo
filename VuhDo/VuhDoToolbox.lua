@@ -1,422 +1,600 @@
-local UnitLevel = UnitLevel;
-local UnitRace = UnitRace;
-local UnitCreatureType = UnitCreatureType;
-local GetGuildInfo = GetGuildInfo;
-local UnitIsGhost = UnitIsGhost;
-local UnitIsDead = UnitIsDead;
-local IsAltKeyDown = IsAltKeyDown;
-local IsControlKeyDown = IsControlKeyDown;
-local IsShiftKeyDown = IsShiftKeyDown;
+local strlen = strlen;
+local strsub = strsub;
 local InCombatLockdown = InCombatLockdown;
-local pairs = pairs;
 local twipe = table.wipe;
-local abs = abs;
+local tinsert = tinsert;
+local strfind = strfind;
+local strsplit = strsplit;
+local strbyte = strbyte;
 local floor = floor;
+local tonumber = tonumber;
+local UnitInRaid = UnitInRaid;
+local UnitExists = UnitExists;
+local UnitInRange = UnitInRange;
+local GetRaidRosterInfo = GetRaidRosterInfo;
+local IsInInstance = IsInInstance;
+local IsSpellInRange = IsSpellInRange;
+local GetTime = GetTime;
+local GetRealZoneText = GetRealZoneText;
+local GetMapInfo = GetMapInfo;
+local GetSpellInfo = GetSpellInfo;
+local pairs = pairs;
+local _ = _;
 
-local VUHDO_TOOLTIP_POS_CUSTOM = 1;
-local VUHDO_TOOLTIP_POS_STANDARD = 2;
-local VUHDO_TOOLTIP_POS_MOUSE = 3;
-local VUHDO_TOOLTIP_POS_LEFT = 50;
-local VUHDO_TOOLTIP_POS_LEFT_UP = 51;
-local VUHDO_TOOLTIP_POS_LEFT_DOWN = 52;
-local VUHDO_TOOLTIP_POS_RIGHT = 60;
-local VUHDO_TOOLTIP_POS_RIGHT_UP = 61;
-local VUHDO_TOOLTIP_POS_RIGHT_DOWN = 62;
-local VUHDO_TOOLTIP_POS_UP = 70;
-local VUHDO_TOOLTIP_POS_UP_LEFT = 71;
-local VUHDO_TOOLTIP_POS_UP_RIGHT = 72;
-local VUHDO_TOOLTIP_POS_DOWN = 80;
-local VUHDO_TOOLTIP_POS_DOWN_LEFT = 81;
-local VUHDO_TOOLTIP_POS_DOWN_RIGHT = 82;
+-- returns an array of numbers sequentially found in a string
+local tCnt;
+local tNumbers = {};
+local tIndex;
+local tStrlen;
+local tDigit;
+local tIsInNumber;
+function VUHDO_getNumbersFromString(aName, aMaxAnz)
+	twipe(tNumbers);
+	tIndex = 0;
+	tStrlen = strlen(aName);
+	tIsInNumber = false;
 
-local VUHDO_TOOLTIP_MAX_LINES_RIGHT = 8;
-local VUHDO_TOOLTIP_MAX_LINES_LEFT = 16;
-
-local VUHDO_TOOLTIP_AKT_LINE_LEFT = 1;
-local VUHDO_TOOLTIP_AKT_LINE_RIGHT = 1;
-
-local VUHDO_TEXT_SIZE_LEFT = {};
-
-local VUHDO_TT_UNIT = nil;
-local VUHDO_TT_PANEL_NUM = nil;
-local VUHDO_TT_RESET = true;
-
-local VUHDO_VALUE_COLOR = {
-	["TR"] = 1,
-	["TG"] = 0.898,
-	["TB"] = 0.4
-};
-
-local function VUHDO_clearTooltipLines()
-	VUHDO_TOOLTIP_AKT_LINE_LEFT = 1;
-	VUHDO_TOOLTIP_AKT_LINE_RIGHT = 1;
-	twipe(VUHDO_TEXT_SIZE_LEFT);
-end
-
-local tLabel;
-local function VUHDO_setTooltipLine(aText, anIsLeft, aLineNum, aColor, aTextSize)
-	if (anIsLeft) then
-		tLabel = VUHDO_GLOBAL["VuhDoTooltipTextL" .. aLineNum];
-	else
-		tLabel = VUHDO_GLOBAL["VuhDoTooltipTextR" .. aLineNum];
-	end
-
-	tLabel:SetText(aText);
-
-	if (aColor ~= nil) then
-		tLabel:SetTextColor(aColor["TR"], aColor["TG"], aColor["TB"], 1);
-	end
-
-	if (aTextSize ~= nil) then
-		tLabel:SetFont(GameFontNormal:GetFont(), aTextSize);
-		tLabel:SetShadowColor(0, 0, 0, 1);
-		tLabel:SetShadowOffset(1, -0.5);
-	end
-
-	if (anIsLeft) then
-		_, VUHDO_TEXT_SIZE_LEFT[aLineNum] = tLabel:GetFont();
-	else
-		tLabel:SetHeight(VUHDO_TEXT_SIZE_LEFT[aLineNum]);
-	end
-
-	tLabel:Show();
-end
-
-local function VUHDO_addTooltipLineLeft(aText, aColor, aTextSize)
-	if (VUHDO_TOOLTIP_AKT_LINE_LEFT < VUHDO_TOOLTIP_MAX_LINES_LEFT) then
-		VUHDO_setTooltipLine(aText, true, VUHDO_TOOLTIP_AKT_LINE_LEFT, aColor, aTextSize)
-		VUHDO_TOOLTIP_AKT_LINE_LEFT = VUHDO_TOOLTIP_AKT_LINE_LEFT + 1;
-	end
-end
-
-local function VUHDO_addTooltipLineRight(aText, aColor, aTextSize)
-	if (VUHDO_TOOLTIP_AKT_LINE_RIGHT < VUHDO_TOOLTIP_MAX_LINES_RIGHT) then
-		VUHDO_setTooltipLine(aText, false, VUHDO_TOOLTIP_AKT_LINE_RIGHT, aColor, aTextSize)
-		VUHDO_TOOLTIP_AKT_LINE_RIGHT = VUHDO_TOOLTIP_AKT_LINE_RIGHT + 1;
-	end
-end
-
-local VUHDO_TT_FIX_POINTS = {
-	[VUHDO_TOOLTIP_POS_LEFT] = {"RIGHT", "LEFT"},
-	[VUHDO_TOOLTIP_POS_LEFT_UP] = {"TOPRIGHT", "TOPLEFT"},
-	[VUHDO_TOOLTIP_POS_LEFT_DOWN] = {"BOTTOMRIGHT", "BOTTOMLEFT"},
-	[VUHDO_TOOLTIP_POS_RIGHT] = {"LEFT", "RIGHT"},
-	[VUHDO_TOOLTIP_POS_RIGHT_UP] = {"TOPLEFT", "TOPRIGHT"},
-	[VUHDO_TOOLTIP_POS_RIGHT_DOWN] = {"BOTTOMLEFT", "BOTTOMRIGHT"},
-	[VUHDO_TOOLTIP_POS_UP] = {"BOTTOM", "TOP"},
-	[VUHDO_TOOLTIP_POS_UP_LEFT] = {"BOTTOMLEFT", "TOPLEFT"},
-	[VUHDO_TOOLTIP_POS_UP_RIGHT] = {"BOTTOMRIGHT", "TOPRIGHT"},
-	[VUHDO_TOOLTIP_POS_DOWN] = {"TOP", "BOTTOM"},
-	[VUHDO_TOOLTIP_POS_DOWN_LEFT] = {"TOPLEFT", "BOTTOMLEFT"},
-	[VUHDO_TOOLTIP_POS_DOWN_RIGHT] = {"TOPRIGHT", "BOTTOMRIGHT"}
-};
-
-local tMouseX, tMouseY;
-local aConfig;
-local tPos;
-local tFactorScale;
-local tFixPos;
-local function VUHDO_initTooltip()
-	aConfig = VUHDO_PANEL_SETUP[VUHDO_TT_PANEL_NUM]["TOOLTIP"];
-	tPos = aConfig["position"];
-
-	if (VUHDO_TT_RESET) then
-		VUHDO_TT_RESET = false;
-
-		VuhDoTooltip:SetScale(aConfig["SCALE"]);
-
-		VuhDoTooltip:SetBackdropColor(aConfig["BACKGROUND"]["R"], aConfig["BACKGROUND"]["G"], aConfig["BACKGROUND"]["B"], aConfig["BACKGROUND"]["O"]);
-
-		VuhDoTooltip:SetBackdropBorderColor(aConfig["BORDER"]["R"], aConfig["BORDER"]["G"], aConfig["BORDER"]["B"], aConfig["BORDER"]["O"]);
-
-		VuhDoTooltip:ClearAllPoints();
-		tFixPos = VUHDO_TT_FIX_POINTS[tPos];
-		if (tFixPos ~= nil) then
-			VuhDoTooltip:SetPoint(tFixPos[1], VUHDO_getActionPanel(VUHDO_TT_PANEL_NUM):GetName(), tFixPos[2], 0, 0);
-		elseif (VUHDO_TOOLTIP_POS_CUSTOM == tPos) then
-			VuhDoTooltip:SetPoint(aConfig["point"], "UIParent", aConfig["relativePoint"], aConfig["x"], aConfig["y"]);
-		elseif (VUHDO_TOOLTIP_POS_STANDARD == tPos) then
-			if (not VUHDO_CONFIG["STANDARD_TOOLTIP"]) then
-				GameTooltip:Hide();
+	for tCnt = 1, tStrlen do
+		tDigit = strbyte(aName, tCnt) - 48;
+		if (tDigit >= 0 and tDigit <= 9) then
+			if (tIsInNumber) then
+				tNumbers[tIndex] = tNumbers[tIndex] * 10 + tDigit;
+			else
+				tIsInNumber = true;
+				tIndex = tIndex + 1;
+				tNumbers[tIndex] = tDigit;
+			end
+		else
+			if (tIndex >= aMaxAnz) then
+				return tNumbers;
 			end
 
-			VuhDoTooltip:SetPoint("BOTTOMRIGHT", "UIParent", "BOTTOMRIGHT", -CONTAINER_OFFSET_X - 13, CONTAINER_OFFSET_Y);
+			tIsInNumber = false;
 		end
+	end
 
-		if (VUHDO_TOOLTIP_POS_MOUSE == tPos) then
-			VUHDO_setTooltipDelay(0.01);
+	return tNumbers;
+end
+
+local tValue;
+function VUHDO_tableUniqueAdd(aTable, aValue)
+	for _, tValue in pairs(aTable) do
+		if (tValue == aValue) then
+			return false;
+		end
+	end
+
+	tinsert(aTable, aValue);
+	return true;
+end
+
+local VUHDO_RAID_NAMES;
+local VUHDO_RAID;
+local VUHDO_UNIT_BUTTONS;
+local VUHDO_CONFIG;
+local VUHDO_GROUPS_BUFFS;
+local sRangeSpell;
+local sIsGuessRange = true;
+local sScanRange;
+
+local VUHDO_updateBouquetsForEvent;
+function VUHDO_toolboxInitBurst()
+	VUHDO_RAID_NAMES = VUHDO_GLOBAL["VUHDO_RAID_NAMES"];
+	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
+	VUHDO_UNIT_BUTTONS = VUHDO_GLOBAL["VUHDO_UNIT_BUTTONS"];
+	VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
+	VUHDO_GROUPS_BUFFS = VUHDO_GLOBAL["VUHDO_GROUPS_BUFFS"];
+	VUHDO_updateBouquetsForEvent = VUHDO_GLOBAL["VUHDO_updateBouquetsForEvent"];
+	sScanRange = tonumber(VUHDO_CONFIG["SCAN_RANGE"]);
+	sRangeSpell = VUHDO_CONFIG["RANGE_SPELL"];
+	sIsGuessRange = VUHDO_CONFIG["RANGE_PESSIMISTIC"] or GetSpellInfo(VUHDO_CONFIG["RANGE_SPELL"]) == nil;
+end
+
+local VUHDO_PROFILE_TIMER = 0; -- Profilers starting time stamp
+
+-- Init by setting start time stamp
+function VUHDO_initProfiler()
+	VUHDO_Msg("Init Profiler");
+	VUHDO_PROFILE_TIMER = GetTime() * 1000;
+end
+
+-- Dump the duration in ms since profiler has been initialized
+function VUHDO_seeProfiler()
+	local tTimeDelta = floor(GetTime() * 1000 - VUHDO_PROFILE_TIMER);
+	VUHDO_Msg("Duration: " .. tTimeDelta);
+end
+
+--[[
+local tInfo;
+function VUHDO_dumpRaid()
+	for _, tInfo in pairs(VUHDO_RAID) do
+		VUHDO_Msg(tInfo.name .. ": " .. tInfo.unit);
+	end
+ end
+]]
+
+-- Print chat frame line with no "{Vuhdo} prefix
+function VUHDO_MsgC(aMessage, aRed, aGreen, aBlue)
+	aRed = aRed or 1;
+	aGreen = aGreen or 0.7;
+	aBlue = aBlue or 0.2;
+
+	DEFAULT_CHAT_FRAME:AddMessage(aMessage, aRed, aGreen, aBlue);
+end
+
+local tMessage;
+local function VUHDO_argumentToText(anArgument)
+
+	if (anArgument == nil) then
+		tMessage = "<nil>";
+	elseif ("function" == type(anArgument)) then
+		tMessage = "<function>";
+	elseif ("table" == type(anArgument)) then
+		tMessage = "<table>";
+	elseif ("boolean" == type(anArgument)) then
+		if (anArgument) then
+			tMessage = "<true>";
 		else
-			VUHDO_setTooltipDelay(2.3);
+			tMessage = "<false>";
 		end
-		VuhDoTooltip:SetWidth(200);
+	elseif (anArgument == "") then
+		tMessage = " ";
+	else
+		tMessage = anArgument;
 	end
 
-	if (VUHDO_TOOLTIP_POS_MOUSE == tPos) then
-		tMouseX, tMouseY = VUHDO_getMouseCoords();
-		tFactorScale = VuhDoTooltip:GetScale();
-		VuhDoTooltip:ClearAllPoints();
-		VuhDoTooltip:SetPoint("TOPLEFT", "UIParent", "BOTTOMLEFT", (tMouseX + 16) / tFactorScale, (tMouseY - 16) / tFactorScale);
+	return tMessage;
+end
+
+-- Print a standard chat frame
+function VUHDO_Msg(aMessage, aRed, aGreen, aBlue)
+	aMessage = VUHDO_argumentToText(aMessage);
+	VUHDO_MsgC("|cffffe566{VuhDo}|r " .. aMessage, aRed, aGreen, aBlue)
+end
+
+local tText;
+local tCnt;
+local tFrag;
+function VUHDO_xMsg(...)
+	tText = "";
+	for tCnt = 1, select('#', ...) do
+		tFrag = select(tCnt, ...);
+		tText = tText .. tCnt .. "=[" .. VUHDO_argumentToText(tFrag) .. "] ";
+	end
+	VUHDO_MsgC(tText);
+end
+
+-- Returns the type of a given model id
+function VUHDO_getModelType(aModelId)
+	if ((aModelId >= 1 and aModelId <= 8) or aModelId == 10) then -- VUHDO_ID_GROUP_1 -- VUHDO_ID_GROUP_8 -- VUHDO_ID_GROUP_OWN
+		return 2; -- VUHDO_ID_TYPE_GROUP
+	elseif (aModelId >= 20 and aModelId <= 29) then -- VUHDO_ID_WARRIORS -- VUHDO_ID_DEATH_KNIGHT
+		return 1; -- VUHDO_ID_TYPE_CLASS
+	elseif (aModelId == 0) then -- VUHDO_ID_UNDEFINED
+		return 0; -- VUHDO_ID_TYPE_UNDEFINED
+	else
+		return 3; -- VUHDO_ID_TYPE_SPECIAL
 	end
 end
 
-function VUHDO_resetTooltip()
-	VUHDO_TT_RESET = true;
-end
-
-local tHeight;
-local tTextHeight;
-local function VUHDO_finishTooltip()
-	tHeight = 28;
-	for _, tTextHeight in pairs(VUHDO_TEXT_SIZE_LEFT) do
-		tHeight = tHeight + tTextHeight;
+-- returns unit-prefix, pet-prefix and maximum number of players in a party
+function VUHDO_getUnitIds()
+	if (UnitInRaid("player")) then
+		return "raid", "raidpet";
+	elseif (UnitExists("party1")) then
+		return "party", "partypet";
+	else
+		return "player", "pet";
 	end
+end
+local VUHDO_getUnitIds = VUHDO_getUnitIds;
 
-	VuhDoTooltip:SetHeight(tHeight);
-	VuhDoTooltip:Show();
+-- Extracts unit number from a Unit's name
+local tUnitNo;
+function VUHDO_getUnitNo(aUnit)
+	if ("player" == aUnit) then
+		aUnit = VUHDO_PLAYER_RAID_ID or "player";
+	end
+	tUnitNo = tonumber(strsub(aUnit, -2, -1)) or tonumber(strsub(aUnit, -1));
+	if (tUnitNo ~= nil) then
+		return tUnitNo;
+	elseif ("focus" == aUnit or "target" == aUnit) then
+		return 0;
+	else
+		return 1;
+	end
+end
+local VUHDO_getUnitNo = VUHDO_getUnitNo;
+
+-- returns the units subgroup number, or 0 for pets/focus
+local tGroupNo;
+function VUHDO_getUnitGroup(aUnit, anIsPet)
+	if (anIsPet or aUnit == nil or aUnit == "focus" or aUnit == "target") then
+		return 0;
+	elseif (UnitInRaid("player")) then
+		_, _, tGroupNo, _, _, _, _, _ = GetRaidRosterInfo(VUHDO_getUnitNo(aUnit));
+		return tGroupNo or 1;
+	else
+		return 1;
+	end
 end
 
-local tSpellText;
-local function VUHDO_getSpellTooltip(aModifier, aButtonNum)
-	tSpellText = "|cffffffff";
+-- returns wether or not a unit is in range
+function VUHDO_isInRange(aUnit)
+	if ("focus" == aUnit or "target" == aUnit) then
+		return CheckInteractDistance(aUnit, 1);
+	elseif (sIsGuessRange) then
+		return UnitInRange(aUnit);
+	else
+		-- return UnitInRange(aUnit) or (1 == IsSpellInRange(sRangeSpell, aUnit));
+		return 1 == IsSpellInRange(sRangeSpell, aUnit);
+	end
+end
 
-	if (aButtonNum < 6) then
-		if (VUHDO_SPELL_ASSIGNMENTS[aModifier .. aButtonNum][3] ~= nil) then
-			tSpellText = tSpellText .. VUHDO_SPELL_ASSIGNMENTS[aModifier .. aButtonNum][3];
+-- Parses a aString line into an array of arguments
+function VUHDO_textParse(aString)
+	local tTextLen = 1;
+	local tOutStrings = {};
+	local tTextNum = 1;
+	local tStartIdx = 1;
+	local tStopIdx = 1;
+	local tTextIdxStart = 1;
+	local tTextIdxStop = 1;
+	local tTextLeft = 1;
+	local tNextSpaceIdx = 1;
+	local tTextChunk = "";
+	local tAnzIterations = 1;
+	local tIsErroneous = false;
+
+	if ((aString ~= nil) and (aString ~= "")) then
+		while (string.find(aString, "  ") ~= nil) do
+			aString = string.gsub(aString, "  ", " ");
+		end
+
+		if (string.len(aString) <= 1) then
+			tIsErroneous = true;
+		end
+
+		if tIsErroneous ~= true then
+			tTextIdxStart = 1;
+			tTextIdxStop = string.len(aString);
+
+			if (string.sub(aString, tTextIdxStart, tTextIdxStart) == " ") then
+				tTextIdxStart = tTextIdxStart + 1;
+			end
+
+			if (string.sub(aString, tTextIdxStop, tTextIdxStop) == " ") then
+				tTextIdxStop = tTextIdxStop - 1;
+			end
+
+			aString = string.sub(aString, tTextIdxStart, tTextIdxStop);
+		end
+
+		tTextNum = 1;
+		tTextLeft = string.len(aString);
+
+		while (tStartIdx <= tTextLeft) and (tIsErroneous ~= true) do
+
+			tNextSpaceIdx = string.find(aString, " ", tStartIdx);
+			if (tNextSpaceIdx ~= nil) then
+				tStopIdx = (tNextSpaceIdx - 1);
+			else
+				tStopIdx = string.len(aString);
+				LetsEnd = true;
+			end
+
+			tTextChunk = string.sub(aString, tStartIdx, tStopIdx);
+			tOutStrings[tTextNum] = tTextChunk;
+			tTextNum = tTextNum + 1;
+
+			tStartIdx = tStopIdx + 2;
+
 		end
 	else
-		if (VUHDO_SPELL_ASSIGNMENTS[aModifier .. aButtonNum - 5][3] ~= nil) then
-			tSpellText = tSpellText .. VUHDO_SPELLS_KEYBOARD["WHEEL"][aModifier .. aButtonNum - 5][3];
+		tOutStrings[1] = "Error: Bad value passed to TextParse!";
+	end
+
+	if (tIsErroneous ~= true) then
+		return tOutStrings;
+	else
+		return {"Error: Bad value passed to TextParse!"};
+	end
+end
+
+-- Returns a "deep" copy of a table,
+-- which means containing tables will be copies value-wise, not by reference
+function VUHDO_deepCopyTable(aTable)
+	local tDestTable = {};
+	local tKey, tValue;
+
+	for tKey, tValue in pairs(aTable) do
+		if ("table" == type(tValue)) then
+			tDestTable[tKey] = VUHDO_deepCopyTable(tValue);
+		else
+			tDestTable[tKey] = tValue;
 		end
 	end
 
-	tSpellText = tSpellText .. "|r";
-	return tSpellText;
+	return tDestTable;
 end
 
-local function VUHDO_getKiloText(aNumber)
-	if (abs(aNumber) < 10000) then
-		return aNumber;
+-- Tokenizes a String into an array of strings, which were delimited by "aChar"
+function VUHDO_splitString(aText, aChar)
+	return {strsplit(aChar, aText)};
+end
+
+-- returns true if player currently is in a battleground
+local tType;
+function VUHDO_isInBattleground()
+	_, tType = IsInInstance();
+	return "pvp" == tType or "arena" == tType;
+end
+local VUHDO_isInBattleground = VUHDO_isInBattleground;
+
+-- returns the appropriate addon message channel for player
+function VUHDO_getAddOnDistribution()
+	if (VUHDO_isInBattleground()) then
+		return "BATTLEGROUND";
+	elseif (UnitInRaid("player")) then
+		return "RAID";
+	else
+		return "PARTY";
+	end
+end
+
+-- returns the players rank in a raid which is 0 = raid member, 1 = assist, 2 = leader
+-- returns leader if not in raid, and member if solo, as no main tank are needed
+local tUnitNo;
+local tRank, tIsMl;
+function VUHDO_getPlayerRank()
+	for tUnit, _ in pairs(VUHDO_RAID) do
+		if (tUnit == "player") then
+			if (UnitInRaid("player")) then
+				tUnitNo = VUHDO_getUnitNo(tUnit);
+				_, tRank, _, _, _, _, _, _, _, _, tIsMl = GetRaidRosterInfo(tUnitNo);
+				return tRank, tIsMl;
+			elseif (GetNumPartyMembers() > 0) then
+				return 2, true;
+			else
+				return 2, true;
+			end
+		end
 	end
 
-	return floor(aNumber * 0.01) * 0.1 .. "k";
+	return 2, true;
 end
 
-local tInfo;
-local tLevel;
-local tRace;
-local tClassColor;
-local tLeftText;
-local tRightText;
-local tModifier;
-local tKey;
-local tGuildName, tGuildRank;
-local tRole;
-local tGuild;
-local tDistance;
-function VUHDO_updateTooltip()
-	tInfo = VUHDO_RAID[VUHDO_TT_UNIT];
+-- returns the units rank in a raid which is 0 = raid member, 1 = assist, 2 = leader
+-- returns 2 if not in raid
+local tRank, tIsMl;
+function VUHDO_getUnitRank(aUnit)
+	if (UnitInRaid("player")) then
+		_, tRank, _, _, _, _, _, _, _, _, tIsMl = GetRaidRosterInfo(VUHDO_getUnitNo(aUnit));
+		return tRank, tIsMl;
+	end
 
+	return 2, true;
+end
+
+-- returns the raid unit of player eg. "raid13" or "party4"
+local tCnt, tRaidUnit;
+function VUHDO_getPlayerRaidUnit()
+	if (UnitInRaid("player")) then
+		for tCnt = 1, 40 do
+			tRaidUnit = "raid" .. tCnt;
+			if (UnitIsUnit("player", tRaidUnit)) then
+				return tRaidUnit;
+			end
+		end
+	end
+	return "player";
+end
+local VUHDO_getPlayerRaidUnit = VUHDO_getPlayerRaidUnit;
+
+--
+local tEmpty = {};
+function VUHDO_getNumGroupMembers(aGroupId)
+	return #(VUHDO_GROUPS[aGroupId] or tEmpty);
+end
+
+--
+local tZone, tIndex, tMap;
+local tEmpty = {};
+function VUHDO_getUnitZoneName(aUnit)
+	tInfo = VUHDO_RAID[aUnit];
 	if (tInfo == nil) then
 		return;
 	end
 
-	VUHDO_initTooltip();
-	VUHDO_clearTooltipLines();
-
-	-- Name
-	tClassColor = VUHDO_getClassColor(tInfo);
-	if (tClassColor == nil) then
-		tClassColor = VUHDO_PANEL_SETUP[VUHDO_TT_PANEL_NUM]["PANEL_COLOR"]["TEXT"];
-	end
-
-	if (tInfo["role"] ~= nil) then
-		tRole = "(" .. VUHDO_HEADER_TEXTS[tInfo["role"]] .. ")";
+	if ("player" == aUnit or tInfo["visible"]) then
+		tZone = GetRealZoneText();
+	elseif (UnitInRaid("player")) then
+		tIndex = (VUHDO_RAID[aUnit] or tEmpty)["number"] or 1;
+		_, _, _, _, _, _, tZone, _, _ = GetRaidRosterInfo(tIndex);
 	else
-		tRole = "";
-	end
-
-	VUHDO_addTooltipLineLeft(tInfo["fullName"], tClassColor, 10);
-	VUHDO_addTooltipLineRight(tRole, tClassColor, 8);
-
-	-- Level, Klasse, Rasse
-	tLevel = UnitLevel(VUHDO_TT_UNIT) or "";
-
-	VUHDO_addTooltipLineLeft(VUHDO_I18N_TT_LEVEL .. tLevel .. " " .. (tInfo["className"] or "?"), tClassColor, 9);
-
-	tRace = UnitRace(VUHDO_TT_UNIT) or UnitCreatureType(VUHDO_TT_UNIT);
-	if (tRace ~= nil) then
-		VUHDO_addTooltipLineRight(tRace, tClassColor, 9);
-	end
-
-	-- Guild
-	tGuildName, tGuildRank, _ = GetGuildInfo(VUHDO_TT_UNIT);
-	if (tGuildName ~= nil) then
-		tGuildRank = tGuildRank or "";
-		tGuild = tGuildRank .. " " .. VUHDO_I18N_TT_OF .. " <" .. tGuildName .. ">";
-	else
-		tGuild = " ";
-	end
-
-	VUHDO_addTooltipLineLeft(tGuild, tClassColor, 9);
-	VUHDO_addTooltipLineRight("");
-
-	tDistance = VUHDO_getDistanceText(VUHDO_TT_UNIT);
-
-	VUHDO_addTooltipLineLeft(VUHDO_I18N_TT_DISTANCE);
-	VUHDO_addTooltipLineRight(tDistance, VUHDO_VALUE_COLOR);
-
-	-- Position
-	VUHDO_addTooltipLineLeft(VUHDO_I18N_TT_POSITION);
-	VUHDO_addTooltipLineRight(tInfo["zone"] or "", VUHDO_VALUE_COLOR);
-
-	tLeftText = " ";
-	if (UnitIsGhost(VUHDO_TT_UNIT)) then
-		tLeftText = VUHDO_I18N_TT_GHOST;
-	elseif (UnitIsDead(VUHDO_TT_UNIT)) then
-		tLeftText = VUHDO_I18N_TT_DEAD;
-	end
-
-	tRightText = " ";
-	if (not tInfo["connected"]) then
-		tRightText = VUHDO_getDurationTextSince(VUHDO_getAfkDcTime(VUHDO_TT_UNIT));
-	elseif (tInfo["afk"]) then
-		tRightText = VUHDO_I18N_TT_AFK .. " " .. VUHDO_getDurationTextSince(VUHDO_getAfkDcTime(VUHDO_TT_UNIT));
-	elseif (UnitIsDND(VUHDO_TT_UNIT)) then
-		tRightText = VUHDO_I18N_TT_DND;
-	end
-
-	if (tLeftText ~= " " or tRightText ~= " ") then
-		VUHDO_addTooltipLineLeft(tLeftText, VUHDO_VALUE_COLOR);
-		VUHDO_addTooltipLineRight(tRightText, VUHDO_VALUE_COLOR);
-	end
-
-	tLeftText = VUHDO_I18N_TT_LIFE .. VUHDO_getKiloText(tInfo["health"]) .. "/" .. VUHDO_getKiloText(tInfo["healthmax"]);
-	if (VUHDO_UNIT_POWER_MANA == tInfo["powertype"]) then
-		tRightText = VUHDO_I18N_TT_MANA .. VUHDO_getKiloText(tInfo["power"]) .. "/" .. VUHDO_getKiloText(tInfo["powermax"]);
-	else
-		tRightText = "";
-	end
-	VUHDO_addTooltipLineLeft(tLeftText, VUHDO_VALUE_COLOR, 8);
-	VUHDO_addTooltipLineRight(tRightText, VUHDO_VALUE_COLOR, 8);
-
-	if (VUHDO_SPELL_CONFIG["IS_TOOLTIP_INFO"]) then
-		tModifier = "";
-		if (IsAltKeyDown()) then
-			tModifier = tModifier .. "alt";
+		if (not VuhDoScanTooltip:IsOwned(VuhDo)) then
+			VuhDoScanTooltip:SetOwner(VuhDo, "ANCHOR_NONE");
+			VuhDoScanTooltip:ClearLines();
 		end
-
-		if (IsControlKeyDown()) then
-			tModifier = tModifier .. "ctrl";
+		VuhDoScanTooltip:SetUnit(aUnit)
+		tZone = VuhDoScanTooltipTextLeft3:GetText();
+		if (tZone == "PvP") then
+			tZone = VuhDoScanTooltipTextLeft4:GetText();
 		end
-
-		if (IsShiftKeyDown()) then
-			tModifier = tModifier .. "shift";
-		end
-
-		VUHDO_addTooltipLineLeft(tModifier .. VUHDO_I18N_TT_LEFT .. VUHDO_getSpellTooltip(tModifier, 1), VUHDO_VALUE_COLOR, 8);
-		VUHDO_addTooltipLineLeft(tModifier .. VUHDO_I18N_TT_RIGHT .. VUHDO_getSpellTooltip(tModifier, 2), VUHDO_VALUE_COLOR, 8);
-		VUHDO_addTooltipLineLeft(tModifier .. VUHDO_I18N_TT_MIDDLE .. VUHDO_getSpellTooltip(tModifier, 3), VUHDO_VALUE_COLOR, 8);
-		VUHDO_addTooltipLineLeft(tModifier .. VUHDO_I18N_TT_BTN_4 .. VUHDO_getSpellTooltip(tModifier, 4), VUHDO_VALUE_COLOR, 8);
-		VUHDO_addTooltipLineLeft(tModifier .. VUHDO_I18N_TT_BTN_5 .. VUHDO_getSpellTooltip(tModifier, 5), VUHDO_VALUE_COLOR, 8);
-		VUHDO_addTooltipLineLeft(tModifier .. VUHDO_I18N_TT_WHEEL_UP .. VUHDO_getSpellTooltip(tModifier, 6), VUHDO_VALUE_COLOR, 8);
-		VUHDO_addTooltipLineLeft(tModifier .. VUHDO_I18N_TT_WHEEL_DOWN .. VUHDO_getSpellTooltip(tModifier, 7), VUHDO_VALUE_COLOR, 8);
-		VUHDO_addTooltipLineLeft(" ", VUHDO_VALUE_COLOR, 8);
-	else
-		VUHDO_addTooltipLineLeft("", VUHDO_VALUE_COLOR, 1);
-		VUHDO_addTooltipLineLeft("", VUHDO_VALUE_COLOR, 1);
-		VUHDO_addTooltipLineLeft("", VUHDO_VALUE_COLOR, 1);
-		VUHDO_addTooltipLineLeft("", VUHDO_VALUE_COLOR, 1);
-		VUHDO_addTooltipLineLeft("", VUHDO_VALUE_COLOR, 1);
-		VUHDO_addTooltipLineLeft("", VUHDO_VALUE_COLOR, 1);
-		VUHDO_addTooltipLineLeft("", VUHDO_VALUE_COLOR, 1);
 	end
 
-	VUHDO_addTooltipLineLeft("", VUHDO_VALUE_COLOR, 1);
-	VUHDO_addTooltipLineRight("", VUHDO_VALUE_COLOR, 1);
-
-	VUHDO_finishTooltip();
+	if (tZone == nil or strfind(tZone, "Level", 1, true)) then
+		tZone = VUHDO_I18N_UNKNOWN;
+	end
+	tMap, _, _ = GetMapInfo();
+	return tZone, tMap;
 end
 
-local tPanelNum;
-local tTipConfig;
-local tUnit;
-function VUHDO_showTooltip(aButton)
-	tPanelNum = VUHDO_BUTTON_CACHE[aButton];
-	tTipConfig = VUHDO_PANEL_SETUP[tPanelNum]["TOOLTIP"];
+local tZoneOkay;
+local tUnitZone, tPlayerZone;
+local tIdx;
+local tEmptyZone = {};
+function VUHDO_isInSameZone(aUnit)
+	return (VUHDO_RAID[aUnit] or tEmptyZone)["map"] == (VUHDO_RAID["player"] or tEmptyZone)["map"];
+end
+local VUHDO_isInSameZone = VUHDO_isInSameZone;
 
-	if (not tTipConfig["show"] or VUHDO_IS_PANEL_CONFIG or (InCombatLockdown() and not tTipConfig["inFight"])) then
-		return;
+-- Returns health of unit info in Percent
+local tHealthMax;
+function VUHDO_getUnitHealthPercent(anInfo)
+	tHealthMax = anInfo["healthmax"];
+	if (tHealthMax == 0) then
+		return 0;
 	end
 
-	tUnit = VUHDO_resolveButtonUnit(aButton);
-
-	if (VUHDO_RAID[tUnit] == nil) then
-		-- Must not happen
-		return;
+	if (anInfo["health"] < tHealthMax) then
+		return (anInfo["health"] / tHealthMax) * 100;
+	else
+		return 100;
 	end
-
-	if (VUHDO_CONFIG["STANDARD_TOOLTIP"]) then
-		GameTooltip_SetDefaultAnchor(GameTooltip, UIParent);
-		GameTooltip:SetUnit(tUnit);
-		GameTooltip:Show();
-		return;
-	end
-
-	VUHDO_TT_UNIT = tUnit;
-	VUHDO_TT_PANEL_NUM = tPanelNum;
-	VUHDO_updateTooltip();
 end
 
-function VUHDO_demoTooltip(aPanelNum)
-	if (not VUHDO_PANEL_SETUP[aPanelNum]["TOOLTIP"]["show"]) then
-		return;
-	end
-
-	tUnit = VUHDO_getPlayerRaidUnit();
-
-	if (VUHDO_RAID[tUnit] == nil) then
-		-- Must not happen
-		return;
-	end
-
-	VUHDO_TT_UNIT = tUnit;
-	VUHDO_TT_PANEL_NUM = aPanelNum;
-	VUHDO_TT_RESET = true;
-	VUHDO_updateTooltip();
+function VUHDO_isSpellKnown(aSpellName)
+	return GetSpellInfo(aSpellName) ~= nil;
 end
 
-function VUHDO_hideTooltip()
-	if (not VUHDO_IS_PANEL_CONFIG) then
-		if (VUHDO_CONFIG["STANDARD_TOOLTIP"]) then
-			GameTooltip:Hide();
+local tDeltaSecs;
+function VUHDO_getDurationTextSince(aStartTime)
+	if (aStartTime == nil) then
+		return "";
+	end
+
+	tDeltaSecs = GetTime() - aStartTime;
+
+	if (tDeltaSecs >= 3600) then
+		return "(|cffffffff" .. floor(tDeltaSecs / 360) * 0.1 .. " hours|r)";
+	elseif (tDeltaSecs >= 60) then
+		return "(|cffffffff" .. floor(tDeltaSecs / 60) .. " mins|r)";
+	else
+		return "(|cffffffff" .. floor(tDeltaSecs) .. " secs|r)";
+	end
+end
+
+local tDistance;
+function VUHDO_getDistanceText(aUnit)
+	tDistance = VUHDO_getDistanceBetween("player", aUnit);
+	if (tDistance ~= nil) then
+		return floor(tDistance * 10) / 10 .. " " .. VUHDO_I18N_YARDS;
+	elseif ("player" == aUnit) then
+		return "0.0 " .. VUHDO_I18N_YARDS;
+	else
+		return VUHDO_I18N_UNKNOWN;
+	end
+
+end
+
+local tPet;
+function VUHDO_getPetUnit(anOwnerUnit)
+	_, tPet, _ = VUHDO_getUnitIds();
+
+	if ("player" == anOwnerUnit) then
+		return "pet";
+	elseif ("focus" == anOwnerUnit or "target" == anOwnerUnit) then
+		return nil;
+	elseif ("raidpet" == tPet or "partypet" == tPet) then
+		return tPet .. VUHDO_getUnitNo(anOwnerUnit);
+	else
+		return "pet";
+	end
+end
+
+function VUHDO_getTargetUnit(aSourceUnit)
+	if ("player" == aSourceUnit) then
+		return "target";
+	else
+		return aSourceUnit .. "target";
+	end
+end
+
+function VUHDO_getResurrectionSpells()
+	if (VUHDO_RESURRECTION_SPELLS[VUHDO_PLAYER_CLASS] == nil) then
+		return nil, nil;
+	elseif (#VUHDO_RESURRECTION_SPELLS[VUHDO_PLAYER_CLASS] == 1) then
+		return VUHDO_RESURRECTION_SPELLS[VUHDO_PLAYER_CLASS][1], nil;
+	else
+		if (InCombatLockdown()) then
+			return VUHDO_RESURRECTION_SPELLS[VUHDO_PLAYER_CLASS][2], VUHDO_RESURRECTION_SPELLS[VUHDO_PLAYER_CLASS][1];
 		else
-			VuhDoTooltip:Hide();
+			return VUHDO_RESURRECTION_SPELLS[VUHDO_PLAYER_CLASS][1], VUHDO_RESURRECTION_SPELLS[VUHDO_PLAYER_CLASS][2];
 		end
 	end
 end
 
-function VuhDoTooltipOnMouseDown(aTooltip)
-	if (VUHDO_IS_PANEL_CONFIG and VUHDO_PANEL_SETUP[DESIGN_MISC_PANEL_NUM]["TOOLTIP"]["position"] == VUHDO_TOOLTIP_POS_CUSTOM) then
-		VUHDO_REFRESH_TOOLTIP_TIMER = 0;
-		aTooltip:StartMoving();
+local tBtnUnit;
+local tBtnName;
+function VUHDO_resolveButtonUnit(aButton)
+	return aButton:GetAttribute("unit");
+end
+
+local tInfo;
+local tEmptyInfo = {};
+function VUHDO_resolveVehicleUnit(aUnit)
+	tInfo = VUHDO_RAID[aUnit] or tEmptyInfo;
+	if (tInfo["isPet"] and (VUHDO_RAID[tInfo["ownerUnit"]] or tEmptyInfo)["isVehicle"]) then
+		return tInfo["ownerUnit"];
+	else
+		return aUnit;
 	end
 end
 
-local tPosition;
-function VuhDoTooltipOnMouseUp(aTooltip)
-	aTooltip:StopMovingOrSizing();
+local tBtnInfo;
+local tButtons;
+function VUHDO_getUnitButtons(aUnit)
+	return VUHDO_UNIT_BUTTONS[aUnit];
+end
 
-	local tSetup;
-	local tConfig;
-	local tX, tY, tRelative, tOrientation;
+function VUHDO_getBuffVariantMaxTarget(someVariants)
+	return someVariants[2] or someVariants[1];
+end
 
-	tPosition = VUHDO_PANEL_SETUP[DESIGN_MISC_PANEL_NUM]["TOOLTIP"];
-	tOrientation, _, tRelative, tX, tY = aTooltip:GetPoint(0);
+function VUHDO_getBuffVariantSingleTarget(someVariants)
+	return someVariants[1];
+end
 
-	tPosition["x"] = tX;
-	tPosition["y"] = tY;
-	tPosition["point"] = tOrientation;
-	tPosition["relativePoint"] = tRelative;
+local tEmpty = {};
+local tInfo;
+function VUHDO_shouldScanUnit(aUnit)
+	tInfo = VUHDO_RAID[aUnit] or tEmpty;
+	if (not tInfo["connected"] or tInfo["dead"]) then
+		return true;
+	elseif (sScanRange == 1) then
+		return VUHDO_isInSameZone(aUnit);
+	elseif (sScanRange == 2) then
+		return tInfo["visible"];
+	elseif (sScanRange == 3) then
+		return tInfo["baseRange"];
+	else
+		return true;
+	end
+end
 
-	VUHDO_initTooltipTimer();
+local tNumBytes, tNumChars;
+local tNumCut;
+local tByte;
+function VUHDO_utf8Cut(aString, aNumChars)
+	tNumBytes = strlen(aString);
+	tNumCut = 1;
+	tNumChars = 0;
+	while (tNumCut < tNumBytes and tNumChars < aNumChars) do
+		tByte = strbyte(aString, tNumCut);
+		if (tByte < 128) then
+			tNumCut = tNumCut + 1;
+		elseif (tByte >= 194 and tByte <= 223) then
+			tNumCut = tNumCut + 2;
+		elseif (tByte >= 224 and tByte <= 239) then
+			tNumCut = tNumCut + 3;
+		elseif (tByte >= 240 and tByte <= 244) then
+			tNumCut = tNumCut + 4;
+		else
+			tNumCut = tNumCut + 1; -- invalid
+		end
+		tNumChars = tNumChars + 1;
+	end
+
+	return strsub(aString, 1, tNumCut - 1);
 end

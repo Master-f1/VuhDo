@@ -186,7 +186,6 @@ function VUHDO_resetClusterUnit()
 	VUHDO_CLUSTER_UNIT = nil;
 end
 
---
 function VUHDO_getNumInUnitCluster(aUnit)
 	return VUHDO_NUM_IN_UNIT_CLUSTER[aUnit] or 0;
 end

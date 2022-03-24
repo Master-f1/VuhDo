@@ -16,9 +16,6 @@ local VUHDO_CLASS_ID_POWER_TYPES = {
 	[VUHDO_ID_DEATH_KNIGHT] = VUHDO_UNIT_POWER_RUNES,
 }
 
-
-
---
 local VUHDO_DEMO_SETUP = {
 	[5] = {
 		[VUHDO_ID_GROUP_1] = 5,
@@ -200,21 +197,12 @@ local VUHDO_LEET_NAME_SUFFIXES = {
  "dagger", "muck"
 };
 
-
-
---
 local function VUHDO_generateLeetName()
-	return VUHDO_LEET_NAME_PREFIXES[random(1, #VUHDO_LEET_NAME_PREFIXES)]
-		.. VUHDO_LEET_NAME_SUFFIXES[random(1, #VUHDO_LEET_NAME_SUFFIXES)];
+	return VUHDO_LEET_NAME_PREFIXES[random(1, #VUHDO_LEET_NAME_PREFIXES)] .. VUHDO_LEET_NAME_SUFFIXES[random(1, #VUHDO_LEET_NAME_SUFFIXES)];
 end
 
+local VUHDO_TEST_USERS_LEFT = {};
 
-
-local VUHDO_TEST_USERS_LEFT = { };
-
-
-
---
 local tCnt;
 local function VUHDO_getNextFreeModelInRange(aFirstModel, aLastModel)
 	for tCnt = aFirstModel, aLastModel do
@@ -227,9 +215,6 @@ local function VUHDO_getNextFreeModelInRange(aFirstModel, aLastModel)
 	return nil;
 end
 
-
-
---
 local tRandom;
 local function VUHDO_getRandomDebuff()
 	tRandom = random(1, 30 + VUHDO_DEBUFF_TYPE_CUSTOM - 1);
@@ -243,9 +228,6 @@ local function VUHDO_getRandomDebuff()
 	end
 end
 
-
-
---
 local tRandom;
 local function VUHDO_getRandomThreatSituation()
 	tRandom = random(1, 13);
@@ -256,9 +238,6 @@ local function VUHDO_getRandomThreatSituation()
 	end
 end
 
-
-
---
 local tRandom;
 local function VUHDO_getRandomHealth(aMax)
 	tRandom = random(1, 3);
@@ -271,12 +250,8 @@ local function VUHDO_getRandomHealth(aMax)
 	end
 end
 
-
 local tPetDemoIdx, tRaidDemoIdx;
 
-
-
---
 local tIsCreatePet, tUnit;
 local tNumber;
 local tClassId;
@@ -289,31 +264,31 @@ local function VUHDO_createTestUser()
 
 	tHealthMax = random(10000, 20000);
 
-  if (VUHDO_TEST_USERS_LEFT[VUHDO_ID_PETS] > 0) then
-	  tIsCreatePet = true;
-    VUHDO_TEST_USERS_LEFT[VUHDO_ID_PETS] = VUHDO_TEST_USERS_LEFT[VUHDO_ID_PETS] - 1;
-    tUnit = "raidpet" .. tPetDemoIdx;
-    tClassId = VUHDO_ID_WARRIORS;
-    tGroup = 0;
-    tNumber = tPetDemoIdx;
-    tRole = nil;
-    tPetDemoIdx = tPetDemoIdx + 1;
-  else
-    tUnit = "raid" .. tRaidDemoIdx;
-    tClassId = VUHDO_getNextFreeModelInRange(VUHDO_ID_WARRIORS, VUHDO_ID_DEATH_KNIGHT);
-    tGroup = VUHDO_getNextFreeModelInRange(VUHDO_ID_GROUP_1, VUHDO_ID_GROUP_8);
-    tNumber = tRaidDemoIdx;
-    tRaidDemoIdx = tRaidDemoIdx + 1;
-    VUHDO_getNextFreeModelInRange(VUHDO_ID_MELEE, VUHDO_ID_RANGED);
-    tRole = VUHDO_getNextFreeModelInRange(VUHDO_ID_MELEE_TANK, VUHDO_ID_RANGED_HEAL);
+	if (VUHDO_TEST_USERS_LEFT[VUHDO_ID_PETS] > 0) then
+		tIsCreatePet = true;
+		VUHDO_TEST_USERS_LEFT[VUHDO_ID_PETS] = VUHDO_TEST_USERS_LEFT[VUHDO_ID_PETS] - 1;
+		tUnit = "raidpet" .. tPetDemoIdx;
+		tClassId = VUHDO_ID_WARRIORS;
+		tGroup = 0;
+		tNumber = tPetDemoIdx;
+		tRole = nil;
+		tPetDemoIdx = tPetDemoIdx + 1;
+	else
+		tUnit = "raid" .. tRaidDemoIdx;
+		tClassId = VUHDO_getNextFreeModelInRange(VUHDO_ID_WARRIORS, VUHDO_ID_DEATH_KNIGHT);
+		tGroup = VUHDO_getNextFreeModelInRange(VUHDO_ID_GROUP_1, VUHDO_ID_GROUP_8);
+		tNumber = tRaidDemoIdx;
+		tRaidDemoIdx = tRaidDemoIdx + 1;
+		VUHDO_getNextFreeModelInRange(VUHDO_ID_MELEE, VUHDO_ID_RANGED);
+		tRole = VUHDO_getNextFreeModelInRange(VUHDO_ID_MELEE_TANK, VUHDO_ID_RANGED_HEAL);
 
-    if (tClassId == nil or tGroup == nil) then
-    	return false;
-    end
-  end
+		if (tClassId == nil or tGroup == nil) then
+			return false;
+		end
+	end
 
 	if (VUHDO_RAID[tUnit] == nil) then
-		VUHDO_RAID[tUnit] = { };
+		VUHDO_RAID[tUnit] = {};
 	end
 	tInfo = VUHDO_RAID[tUnit];
 	tInfo["healthmax"] = tHealthMax;
@@ -353,20 +328,12 @@ local function VUHDO_createTestUser()
 	return true;
 end
 
-
-
---
 local tHasLoaded = false;
-
-
 
 function VUHDO_demoSetupResetUsers()
 	tHasLoaded = false;
 end
 
-
-
---
 local tCnt;
 function VUHDO_reloadRaidDemoUsers()
 	if (tHasLoaded) then

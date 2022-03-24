@@ -1,12 +1,11 @@
 local AceGUI = LibStub("AceGUI-3.0")
 
---------------------------
--- Check Box			--
---------------------------
+---------------
+-- Check Box --
+---------------
 --[[
 	Events :
 		OnValueChanged
-
 ]]
 do
 	local Type = "CheckBox"
@@ -16,7 +15,7 @@ do
 		self:SetValue(false)
 		self.tristate = nil
 	end
-	
+
 	local function OnRelease(self)
 		self.frame:ClearAllPoints()
 		self.frame:Hide()
@@ -27,7 +26,7 @@ do
 		self:SetType()
 		self:SetDisabled(false)
 	end
-  
+
 	local function CheckBox_OnEnter(this)
 		local self = this.obj
 		if not self.disabled then
@@ -35,7 +34,7 @@ do
 		end
 		self:Fire("OnEnter")
 	end
-	
+
 	local function CheckBox_OnLeave(this)
 		local self = this.obj
 		if not self.down then
@@ -43,33 +42,33 @@ do
 		end
 		self:Fire("OnLeave")
 	end
-	
+
 	local function CheckBox_OnMouseUp(this)
 		local self = this.obj
 		if not self.disabled then
 			self:ToggleChecked()
-			self:Fire("OnValueChanged",self.checked)
-			self.text:SetPoint("LEFT",self.check,"RIGHT",0,0)
+			self:Fire("OnValueChanged", self.checked)
+			self.text:SetPoint("LEFT", self.check, "RIGHT", 0, 0)
 		end
 		self.down = nil
 	end
-	
+
 	local function CheckBox_OnMouseDown(this)
 		local self = this.obj
 		if not self.disabled then
-			self.text:SetPoint("LEFT",self.check,"RIGHT",1,-1)
+			self.text:SetPoint("LEFT", self.check, "RIGHT", 1, -1)
 			self.down = true
 		end
 		AceGUI:ClearFocus()
 	end
 
-	local function SetDisabled(self,disabled)
+	local function SetDisabled(self, disabled)
 		self.disabled = disabled
 		if disabled then
-			self.text:SetTextColor(0.5,0.5,0.5)
+			self.text:SetTextColor(0.5, 0.5, 0.5)
 			SetDesaturation(self.check, true)
 		else
-			self.text:SetTextColor(1,1,1)
+			self.text:SetTextColor(1, 1, 1)
 			if self.tristate and self.checked == nil then
 				SetDesaturation(self.check, true)
 			else
@@ -77,7 +76,7 @@ do
 			end
 		end
 	end
-	
+
 	local function SetValue(self,value)
 		local check = self.check
 		self.checked = value
@@ -87,7 +86,7 @@ do
 			check:SetHeight(24)
 			self.check:Show()
 		else
-			--Nil is the unknown tristate value
+			-- Nil is the unknown tristate value
 			if self.tristate and value == nil then
 				SetDesaturation(self.check, true)
 				check:SetWidth(20)
@@ -101,44 +100,44 @@ do
 			end
 		end
 	end
-	
+
 	local function SetTriState(self, enabled)
 		self.tristate = enabled
 		self:SetValue(self:GetValue())
 	end
-	
+
 	local function GetValue(self)
 		return self.checked
 	end
-	
+
 	local function SetType(self, type)
 		local checkbg = self.checkbg
 		local check = self.check
 		local highlight = self.highlight
-	
+
 		if type == "radio" then
 			checkbg:SetTexture("Interface\\Buttons\\UI-RadioButton")
-			checkbg:SetTexCoord(0,0.25,0,1)
+			checkbg:SetTexCoord(0, 0.25, 0,1)
 			check:SetTexture("Interface\\Buttons\\UI-RadioButton")
-			check:SetTexCoord(0.5,0.75,0,1)
+			check:SetTexCoord(0.5, 0.75, 0,1)
 			check:SetBlendMode("ADD")
 			highlight:SetTexture("Interface\\Buttons\\UI-RadioButton")
-			highlight:SetTexCoord(0.5,0.75,0,1)
+			highlight:SetTexCoord(0.5, 0.75, 0,1)
 		else
 			checkbg:SetTexture("Interface\\Buttons\\UI-CheckBox-Up")
-			checkbg:SetTexCoord(0,1,0,1)
+			checkbg:SetTexCoord(0, 1, 0, 1)
 			check:SetTexture("Interface\\Buttons\\UI-CheckBox-Check")
-			check:SetTexCoord(0,1,0,1)
+			check:SetTexCoord(0, 1, 0, 1)
 			check:SetBlendMode("BLEND")
 			highlight:SetTexture("Interface\\Buttons\\UI-CheckBox-Highlight")
-			highlight:SetTexCoord(0,1,0,1)
+			highlight:SetTexCoord(0, 1, 0, 1)
 		end
 	end
-	
+
 	local function ToggleChecked(self)
 		local value = self:GetValue()
 		if self.tristate then
-			--cycle in true, nil, false order
+			-- cycle in true, nil, false order
 			if value then
 				self:SetValue(nil)
 			elseif value == nil then
@@ -156,7 +155,7 @@ do
 	end
 	
 	local function Constructor()
-		local frame = CreateFrame("Button",nil,UIParent)
+		local frame = CreateFrame("Button", nil, UIParent)
 		local self = {}
 		self.type = Type
 
@@ -174,25 +173,25 @@ do
 		self.frame = frame
 		frame.obj = self
 	
-		local text = frame:CreateFontString(nil,"OVERLAY","GameFontHighlight")
+		local text = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
 		self.text = text
 	
-		frame:SetScript("OnEnter",CheckBox_OnEnter)
-		frame:SetScript("OnLeave",CheckBox_OnLeave)
-		frame:SetScript("OnMouseUp",CheckBox_OnMouseUp)
-		frame:SetScript("OnMouseDown",CheckBox_OnMouseDown)
+		frame:SetScript("OnEnter", CheckBox_OnEnter)
+		frame:SetScript("OnLeave", CheckBox_OnLeave)
+		frame:SetScript("OnMouseUp", CheckBox_OnMouseUp)
+		frame:SetScript("OnMouseDown", CheckBox_OnMouseDown)
 		frame:EnableMouse()
-		local checkbg = frame:CreateTexture(nil,"ARTWORK")
+		local checkbg = frame:CreateTexture(nil, "ARTWORK")
 		self.checkbg = checkbg
 		checkbg:SetWidth(24)
 		checkbg:SetHeight(24)
-		checkbg:SetPoint("LEFT",frame,"LEFT",0,0)
+		checkbg:SetPoint("LEFT", frame, "LEFT", 0, 0)
 		checkbg:SetTexture("Interface\\Buttons\\UI-CheckBox-Up")
-		local check = frame:CreateTexture(nil,"OVERLAY")
+		local check = frame:CreateTexture(nil, "OVERLAY")
 		self.check = check
 		check:SetWidth(24)
 		check:SetHeight(24)
-		check:SetPoint("CENTER",checkbg,"CENTER",0,0)
+		check:SetPoint("CENTER", checkbg, "CENTER",0,0)
 		check:SetTexture("Interface\\Buttons\\UI-CheckBox-Check")
 	
 		local highlight = frame:CreateTexture(nil, "BACKGROUND")
@@ -206,12 +205,12 @@ do
 		frame:SetHeight(24)
 		frame:SetWidth(200)
 		text:SetHeight(18)
-		text:SetPoint("LEFT",check,"RIGHT",0,0)
-		text:SetPoint("RIGHT",frame,"RIGHT",0,0)
+		text:SetPoint("LEFT", check, "RIGHT", 0, 0)
+		text:SetPoint("RIGHT", frame, "RIGHT", 0, 0)
 
 		AceGUI:RegisterAsWidget(self)
 		return self
 	end
-	
-	AceGUI:RegisterWidgetType(Type,Constructor,Version)
+
+	AceGUI:RegisterWidgetType(Type, Constructor, Version)
 end

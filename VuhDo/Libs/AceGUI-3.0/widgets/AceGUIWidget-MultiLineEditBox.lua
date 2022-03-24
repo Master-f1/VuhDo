@@ -1,8 +1,5 @@
+-- Multiline Editbox Widget, Originally by bam
 
---[[
---Multiline Editbox Widget, Originally by bam
-
---]]
 local assert, error, ipairs, next, pairs, select, tonumber, tostring, type, unpack, pcall, xpcall =
 		assert, error, ipairs, next, pairs, select, tonumber, tostring, type, unpack, pcall, xpcall
 local getmetatable, setmetatable, rawequal, rawget, rawset, getfenv, setfenv, loadstring, debugstack =
@@ -38,7 +35,7 @@ local FrameBackdrop = {
 	bgFile="Interface\\DialogFrame\\UI-DialogBox-Background",
 	edgeFile="Interface\\DialogFrame\\UI-DialogBox-Border",
 	tile = true, tileSize = 32, edgeSize = 32,
-	insets = { left = 8, right = 8, top = 8, bottom = 8 }
+	insets = {left = 8, right = 8, top = 8, bottom = 8}
 }
 
 local PaneBackdrop	= {
@@ -46,24 +43,23 @@ local PaneBackdrop	= {
 	bgFile = "Interface\\ChatFrame\\ChatFrameBackground",
 	edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
 	tile = true, tileSize = 16, edgeSize = 16,
-	insets = { left = 3, right = 3, top = 5, bottom = 3 }
+	insets = {left = 3, right = 3, top = 5, bottom = 3}
 }
 
 local ControlBackdrop	 = {
 	bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
 	edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
 	tile = true, tileSize = 16, edgeSize = 16,
-	insets = { left = 3, right = 3, top = 3, bottom = 3 }
+	insets = {left = 3, right = 3, top = 3, bottom = 3}
 }
 
---------------------------
--- Edit box		 --
---------------------------
+--------------
+-- Edit box --
+--------------
 --[[
 	Events :
 	OnTextChanged
 	OnEnterPressed
-
 ]]
 do
 	local Type = "MultiLineEditBox"
@@ -73,18 +69,18 @@ do
 	local function EditBox_OnEnterPressed(this)
 		local self = this.obj
 		local value = this:GetText()
-		local cancel = self:Fire("OnEnterPressed",value)
+		local cancel = self:Fire("OnEnterPressed", value)
 		if not cancel then
 			self.button:Disable()
 		end
 	end
-	
+
 	local function Button_OnClick(this)
 		local editbox = this.obj.editbox
 		editbox:ClearFocus()
 		EditBox_OnEnterPressed(editbox)
 	end
-	
+
 	local function EditBox_OnReceiveDrag(this)
 		local self = this.obj
 		local type, id, info = GetCursorInfo()
@@ -98,24 +94,24 @@ do
 				name = name.."("..rank..")"
 			end
 			self:SetText(name)
-			self:Fire("OnEnterPressed",name)
+			self:Fire("OnEnterPressed", name)
 			ClearCursor()
 		end
 		self.button:Disable()
 		AceGUI:ClearFocus()
 	end
-	
+
 	function MultiLineEditBox:OnAcquire()
 		self:SetDisabled(false)
 		self:ShowButton(true)
 	end
-	
+
 	function MultiLineEditBox:OnRelease()
 		self.frame:ClearAllPoints()
 		self.frame:Hide()
 		self:SetDisabled(false)
 	end
-	
+
 	function MultiLineEditBox:SetDisabled(disabled)
 		self.disabled = disabled
 		if disabled then
@@ -123,12 +119,12 @@ do
 			self.scrollframe:EnableMouse(false)
 			self.editbox:ClearFocus()
 			self.editbox:SetTextColor(0.5, 0.5, 0.5)
-			self.label:SetTextColor(0.5,0.5,0.5)
+			self.label:SetTextColor(0.5, 0.5, 0.5)
 		else
 			self.editbox:EnableMouse(true)
 			self.scrollframe:EnableMouse(true)
 			self.editbox:SetTextColor(1, 1, 1)
-			self.label:SetTextColor(1,.82,0)
+			self.label:SetTextColor(1, .82, 0)
 		end
 	end
 
@@ -143,14 +139,14 @@ do
 		self.lasttext = oldText
 		editbox:Insert("")
 	end
-	
+
 	function MultiLineEditBox:SetLabel(text)
 		if (text or "") == "" then
-			self.backdrop:SetPoint("TOPLEFT",self.frame,"TOPLEFT",0,0)
+			self.backdrop:SetPoint("TOPLEFT", self.frame, "TOPLEFT", 0, 0)
 			self.label:Hide()
 			self.label:SetText("")
 		else
-			self.backdrop:SetPoint("TOPLEFT",self.frame,"TOPLEFT",0,-20)
+			self.backdrop:SetPoint("TOPLEFT", self.frame, "TOPLEFT", 0, -20)
 			self.label:Show()
 			self.label:SetText(text)
 		end
@@ -162,10 +158,10 @@ do
 	
 	function MultiLineEditBox:ShowButton(show)
 		if show then
-			self.backdrop:SetPoint("BOTTOMRIGHT",self.frame,"BOTTOMRIGHT",0,22)
+			self.backdrop:SetPoint("BOTTOMRIGHT", self.frame, "BOTTOMRIGHT", 0, 22)
 			self.button:Show()
 		else
-			self.backdrop:SetPoint("BOTTOMRIGHT",self.frame,"BOTTOMRIGHT",0,0)
+			self.backdrop:SetPoint("BOTTOMRIGHT", self.frame, "BOTTOMRIGHT", 0, 0)
 			self.button:Hide()
 		end
 	end
@@ -184,8 +180,8 @@ do
 		backdrop:SetBackdropColor(0, 0, 0)
 		backdrop:SetBackdropBorderColor(0.4, 0.4, 0.4)
 	
-		backdrop:SetPoint("TOPLEFT",frame,"TOPLEFT",0, -20)
-		backdrop:SetPoint("BOTTOMRIGHT",frame,"BOTTOMRIGHT",0,22)
+		backdrop:SetPoint("TOPLEFT", frame, "TOPLEFT", 0, -20)
+		backdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", 0, 22)
 		
 		local scrollframe = CreateFrame("ScrollFrame", format("%s@%s@%s", Type, "ScrollFrame", tostring(self)), backdrop, "UIPanelScrollFrameTemplate")
 		scrollframe:SetPoint("TOPLEFT", 5, -6)
@@ -198,9 +194,9 @@ do
 		scrollchild:SetHeight(2)
 		scrollchild:SetWidth(2)
 	
-		local label = frame:CreateFontString(nil,"OVERLAY","GameFontNormalSmall")
-		label:SetPoint("TOPLEFT",frame,"TOPLEFT",0,-2)
-		label:SetPoint("TOPRIGHT",frame,"TOPRIGHT",0,-2)
+		local label = frame:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+		label:SetPoint("TOPLEFT", frame, "TOPLEFT", 0, -2)
+		label:SetPoint("TOPRIGHT", frame, "TOPRIGHT", 0, -2)
 		label:SetJustifyH("LEFT")
 		label:SetHeight(18)
 		self.label = label
@@ -218,10 +214,10 @@ do
 		editbox:SetAutoFocus(false)
 		editbox:SetFontObject(ChatFontNormal)
 
-		local button = CreateFrame("Button",nil,scrollframe,"UIPanelButtonTemplate")
+		local button = CreateFrame("Button", nil, scrollframe, "UIPanelButtonTemplate")
 		button:SetWidth(80)
 		button:SetHeight(20)
-		button:SetPoint("BOTTOMLEFT",frame,"BOTTOMLEFT",0,2)
+		button:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", 0, 2)
 		button:SetText(ACCEPT)
 		button:SetScript("OnClick", Button_OnClick)
 		button:Disable()

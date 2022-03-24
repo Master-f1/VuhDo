@@ -1,5 +1,4 @@
-
-if (GetLocale() ~= "zhCN") then
+﻿if (GetLocale() ~= "zhCN") then
 	return;
 end
 -- @EXACT = true: Translation has to be the exact(!) match in the clients language,

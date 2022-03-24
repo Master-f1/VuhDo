@@ -1,1067 +1,1080 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
 
-  <Script file="VuhDoLookAndFeel.lua" />
-  <Script file="VuhDoLocalization_en.lua" />
-  <Script file="VuhDoLocalization_de.lua" />
-  <Script file="VuhDoLocalization_fr.lua" />
-  <Script file="VuhDoLocalization_es.lua" />
-  <Script file="VuhDoLocalization_ru.lua" />
-  <Script file="VuhDoLocalization_zhCN.lua" />
-  <Script file="VuhDoLocalization_zhTW.lua" />
-  <Script file="VuhDoDemo.lua" />
-  <Script file="VuhDoPanelConfig.lua" />
-  <Script file="VuhDoPanelConfigTools.lua" />
-  <Script file="VuhDoPanelConfigEventHandler.lua" />
+	<Script file="VuhDoLookAndFeel.lua" />
+	<Script file="Locale\VuhDoLocalization_en.lua" />
+	<Script file="Locale\VuhDoLocalization_de.lua" />
+	<Script file="Locale\VuhDoLocalization_fr.lua" />
+	<Script file="Locale\VuhDoLocalization_es.lua" />
+	<Script file="Locale\VuhDoLocalization_ru.lua" />
+	<Script file="Locale\VuhDoLocalization_zhCN.lua" />
+	<Script file="Locale\VuhDoLocalization_zhTW.lua" />
+	<Script file="VuhDoDemo.lua" />
+	<Script file="VuhDoPanelConfig.lua" />
+	<Script file="VuhDoPanelConfigTools.lua" />
+	<Script file="VuhDoPanelConfigEventHandler.lua" />
 
 <FontString name="VuDoDefaultFontTemplate" inherits="GameFontNormal" font="Interface\AddOns\VuhDo\Fonts\ariblk.ttf" virtual="true">
-  <FontHeight>
-    <AbsValue val="8" />
-  </FontHeight>
-  <Color r="0.4" g="0.4" b="1" />
-  <Shadow>
-    <Color r="0.4" g="0.4" b="1" a="0" />
-      <Offset>
-         <AbsDimension x="0" y="0" />
-      </Offset>
-  </Shadow>
+	<FontHeight>
+		<AbsValue val="8" />
+	</FontHeight>
+	<Color r="0.4" g="0.4" b="1" />
+	<Shadow>
+		<Color r="0.4" g="0.4" b="1" a="0" />
+			<Offset>
+				 <AbsDimension x="0" y="0" />
+			</Offset>
+	</Shadow>
 </FontString>
 
 
 <Font name="VuDoButtonFont" inherits="GameFontNormal" font="Interface\AddOns\VuhDo\Fonts\ariblk.ttf" virtual="true">
-  <FontHeight>
-    <AbsValue val="8" />
-  </FontHeight>
-  <Color r="0.4" g="0.4" b="1" />
-  <Shadow>
-    <Color r="0.4" g="0.4" b="1" a="0" />
-      <Offset>
-         <AbsDimension x="0" y="0" />
-      </Offset>
-  </Shadow>
+	<FontHeight>
+		<AbsValue val="8" />
+	</FontHeight>
+	<Color r="0.4" g="0.4" b="1" />
+	<Shadow>
+		<Color r="0.4" g="0.4" b="1" a="0" />
+			<Offset>
+				 <AbsDimension x="0" y="0" />
+			</Offset>
+	</Shadow>
 </Font>
 
 
 <Font name="VuDoButtonFontLight" inherits="GameFontNormal" font="Interface\AddOns\VuhDo\Fonts\ariblk.ttf" virtual="true">
-  <FontHeight>
-    <AbsValue val="8" />
-  </FontHeight>
-  <Color r="0.6" g="0.6" b="1" />
-  <Shadow>
-    <Color r="0.4" g="0.4" b="1" a="0" />
-      <Offset>
-         <AbsDimension x="0" y="0" />
-      </Offset>
-  </Shadow>
+	<FontHeight>
+		<AbsValue val="8" />
+	</FontHeight>
+	<Color r="0.6" g="0.6" b="1" />
+	<Shadow>
+		<Color r="0.4" g="0.4" b="1" a="0" />
+			<Offset>
+				 <AbsDimension x="0" y="0" />
+			</Offset>
+	</Shadow>
 </Font>
 
 
 <FontString name="VuDoWhiteFontTemplate" inherits="VuDoDefaultFontTemplate" virtual="true">
-  <FontHeight>
-    <AbsValue val="8"/>
-  </FontHeight>
-  <Color r="1" g="1" b="1" />
-  <Shadow>
-    <Color r="0.4" g="0.4" b="0.4"/>
-      <Offset>
-         <AbsDimension x="1" y="-1" />
-      </Offset>
-  </Shadow>
+	<FontHeight>
+		<AbsValue val="8"/>
+	</FontHeight>
+	<Color r="1" g="1" b="1" />
+	<Shadow>
+		<Color r="0.4" g="0.4" b="0.4"/>
+			<Offset>
+				 <AbsDimension x="1" y="-1" />
+			</Offset>
+	</Shadow>
 </FontString>
 
 
 <FontString name="VuDoBigFontTemplate" inherits="GameFontNormal" font="Interface\AddOns\VuhDo\Fonts\ariblk.ttf" virtual="true">
-  <FontHeight>
-    <AbsValue val="10" />
-  </FontHeight>
-  <Color r="0.4" g="0.4" b="1" />
-  <Shadow>
-    <Color r="0.4" g="0.4" b="1" a="0" />
-      <Offset>
-         <AbsDimension x="0" y="0" />
-      </Offset>
-  </Shadow>
+	<FontHeight>
+		<AbsValue val="10" />
+	</FontHeight>
+	<Color r="0.4" g="0.4" b="1" />
+	<Shadow>
+		<Color r="0.4" g="0.4" b="1" a="0" />
+			<Offset>
+				 <AbsDimension x="0" y="0" />
+			</Offset>
+	</Shadow>
 </FontString>
 
 
 <FontString name="VuDoBigWhiteFontTemplate" inherits="GameFontNormal" font="Interface\AddOns\VuhDo\Fonts\ariblk.ttf" virtual="true">
-  <FontHeight>
-    <AbsValue val="12" />
-  </FontHeight>
-  <Color r="1" g="1" b="1" />
-  <Shadow>
-    <Color r="1" g="1" b="1" a="0" />
-      <Offset>
-         <AbsDimension x="0" y="0" />
-      </Offset>
-  </Shadow>
+	<FontHeight>
+		<AbsValue val="12" />
+	</FontHeight>
+	<Color r="1" g="1" b="1" />
+	<Shadow>
+		<Color r="1" g="1" b="1" a="0" />
+			<Offset>
+				 <AbsDimension x="0" y="0" />
+			</Offset>
+	</Shadow>
 </FontString>
 
 
 <FontString name="VuDoBigWhiteFontShadedTemplate" inherits="GameFontNormal" font="Interface\AddOns\VuhDo\Fonts\ariblk.ttf" virtual="true">
-  <FontHeight>
-    <AbsValue val="12" />
-  </FontHeight>
-  <Color r="1" g="1" b="1" />
-  <Shadow>
-    <Color r="0" g="0" b="0" a="1" />
-      <Offset>
-         <AbsDimension x="1" y="-1" />
-      </Offset>
-  </Shadow>
+	<FontHeight>
+		<AbsValue val="12" />
+	</FontHeight>
+	<Color r="1" g="1" b="1" />
+	<Shadow>
+		<Color r="0" g="0" b="0" a="1" />
+			<Offset>
+				 <AbsDimension x="1" y="-1" />
+			</Offset>
+	</Shadow>
 </FontString>
 
 
 <FontString name="VuDoDefaultTitleFontTemplate" inherits="GameFontNormal" font="Interface\AddOns\VuhDo\Fonts\ariblk.ttf" justifyH="LEFT" virtual="true">
-  <FontHeight>
-    <AbsValue val="12" />
-  </FontHeight>
-  <Color r="0.6" g="0.6" b="1" />
-  <Shadow>
-    <Color r="0.6" g="0.6" b="1" a="0" />
-      <Offset>
-         <AbsDimension x="0" y="0" />
-      </Offset>
-  </Shadow>
+	<FontHeight>
+		<AbsValue val="12" />
+	</FontHeight>
+	<Color r="0.6" g="0.6" b="1" />
+	<Shadow>
+		<Color r="0.6" g="0.6" b="1" a="0" />
+			<Offset>
+				 <AbsDimension x="0" y="0" />
+			</Offset>
+	</Shadow>
 </FontString>
 
 
 <FontString name="VuDoDarkTitleFontTemplate" inherits="GameFontNormal" font="Interface\AddOns\VuhDo\Fonts\ariblk.ttf" justifyH="LEFT" virtual="true">
-  <FontHeight>
-    <AbsValue val="12" />
-  </FontHeight>
-  <Color r="0.4" g="0.4" b="1" />
-  <Shadow>
-    <Color r="0.4" g="0.4" b="1" a="0" />
-      <Offset>
-         <AbsDimension x="0" y="0" />
-      </Offset>
-  </Shadow>
+	<FontHeight>
+		<AbsValue val="12" />
+	</FontHeight>
+	<Color r="0.4" g="0.4" b="1" />
+	<Shadow>
+		<Color r="0.4" g="0.4" b="1" a="0" />
+			<Offset>
+				 <AbsDimension x="0" y="0" />
+			</Offset>
+	</Shadow>
 </FontString>
 
 <FontString name="VuDoHostileFontTemplate" inherits="GameFontNormal" font="Interface\AddOns\VuhDo\Fonts\ariblk.ttf" justifyH="LEFT" virtual="true">
-  <FontHeight>
-    <AbsValue val="20" />
-  </FontHeight>
-  <Color r="1" g="0.4" b="0.4" />
-  <Shadow>
-    <Color r="1" g="0.4" b="0.4" a="0" />
-      <Offset>
-         <AbsDimension x="0" y="0" />
-      </Offset>
-  </Shadow>
+	<FontHeight>
+		<AbsValue val="20" />
+	</FontHeight>
+	<Color r="1" g="0.4" b="0.4" />
+	<Shadow>
+		<Color r="1" g="0.4" b="0.4" a="0" />
+			<Offset>
+				 <AbsDimension x="0" y="0" />
+			</Offset>
+	</Shadow>
 </FontString>
 
 
 <Frame name="VuhDoLabelFrameTemplate" virtual="true">
 	<Scripts>
 		<OnShow>VUHDO_lnfPatchFont(self, "Label");</OnShow>
-  </Scripts>
+	</Scripts>
 </Frame>
 
 
 
 <Frame name="VuhDoBarExampleTexture" virtual="true">
-  <Size>
-    <AbsDimension x="100" y="32" />
-  </Size>
-  <Layers>
-    <Layer>
-      <Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDo\Images\bar15">
-        <TexCoords left="0" right="1" top="0" bottom="1" />
-      </Texture>
-    </Layer>
-  </Layers>
+	<Size>
+		<AbsDimension x="100" y="32" />
+	</Size>
+	<Layers>
+		<Layer>
+			<Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDo\Images\bar15">
+				<TexCoords left="0" right="1" top="0" bottom="1" />
+			</Texture>
+		</Layer>
+	</Layers>
 	<Scripts>
-    <OnEnter>VUHDO_lnfShowTooltip(self)</OnEnter>
+		<OnEnter>VUHDO_lnfShowTooltip(self)</OnEnter>
 		<OnLeave>VUHDO_lnfHideTooltip(self)</OnLeave>
-  </Scripts>
+	</Scripts>
 </Frame>
 
 
 <Frame name="VuhDoColorSwatchTexture" virtual="true">
-  <Size>
-    <AbsDimension x="100" y="32" />
-  </Size>
-  <Layers>
-    <Layer>
-      <Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDo\Images\bar15">
-        <TexCoords left="0" right="1" top="0" bottom="1" />
-      </Texture>
-      <FontString name="$parentTitleString" inherits="VuDoBigFontTemplate" text="">
-        <Size>
-          <AbsDimension x="100" y="0" />
-        </Size>
-        <Anchors>
-          <Anchor point="CENTER">
-            <Offset>
-              <AbsDimension x="0" y="0" />
-            </Offset>
-          </Anchor>
-        </Anchors>
-        <FontHeight>
-          <AbsValue val="10" />
-        </FontHeight>
-        <Color r="1" g="0.82" b="0" />
-        <Shadow>
-          <Color r="0" g="0" b="0" />
-          <Offset>
-            <AbsDimension x="1" y="-1" />
-          </Offset>
-        </Shadow>
-    	</FontString>
-    </Layer>
-  </Layers>
-  <Scripts>
-    <OnShow>VUHDO_lnfPatchFont(self, "TitleString"); VUHDO_lnfColorSwatchInitFromModel(self)</OnShow>
-    <OnMouseDown>VUHDO_lnfColorSwatchShowColorPicker(self, arg1)</OnMouseDown>
-    <OnEnter>VUHDO_lnfShowTooltip(self)</OnEnter>
+	<Size>
+		<AbsDimension x="100" y="32" />
+	</Size>
+	<Layers>
+		<Layer>
+			<Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDo\Images\bar15">
+				<TexCoords left="0" right="1" top="0" bottom="1" />
+			</Texture>
+			<FontString name="$parentTitleString" inherits="VuDoBigFontTemplate" text="">
+				<Size>
+					<AbsDimension x="100" y="0" />
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER">
+						<Offset>
+							<AbsDimension x="0" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<FontHeight>
+					<AbsValue val="10" />
+				</FontHeight>
+				<Color r="1" g="0.82" b="0" />
+				<Shadow>
+					<Color r="0" g="0" b="0" />
+					<Offset>
+						<AbsDimension x="1" y="-1" />
+					</Offset>
+				</Shadow>
+			</FontString>
+		</Layer>
+	</Layers>
+	<Scripts>
+		<OnShow>VUHDO_lnfPatchFont(self, "TitleString"); VUHDO_lnfColorSwatchInitFromModel(self)</OnShow>
+		<OnMouseDown>VUHDO_lnfColorSwatchShowColorPicker(self, arg1)</OnMouseDown>
+		<OnEnter>VUHDO_lnfShowTooltip(self)</OnEnter>
 		<OnLeave>VUHDO_lnfHideTooltip(self)</OnLeave>
-  </Scripts>
+	</Scripts>
 </Frame>
 
 
 <Frame name="VuhDoContextColorSwatchTexture" inherits="VuhDoColorSwatchTexture" virtual="true">
-  <Scripts>
-    <OnShow>VUHDO_lnfPatchFont(self, "TitleString"); VUHDO_lnfColorSwatchInitFromModel(self)</OnShow>
-    <OnEnter>VUHDO_lnfShowTooltip(self)</OnEnter>
+	<Scripts>
+		<OnShow>VUHDO_lnfPatchFont(self, "TitleString"); VUHDO_lnfColorSwatchInitFromModel(self)</OnShow>
+		<OnEnter>VUHDO_lnfShowTooltip(self)</OnEnter>
 		<OnLeave>VUHDO_lnfHideTooltip(self)</OnLeave>
-  </Scripts>
+	</Scripts>
 </Frame>
 
 
 <Frame name="VuhDoTextureSelectTexture" virtual="true">
-  <Size>
-    <AbsDimension x="100" y="32" />
-  </Size>
-  <Layers>
-    <Layer>
-      <Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDo\Images\bar15">
-        <TexCoords left="0" right="1" top="0" bottom="1" />
-      </Texture>
-      <FontString name="$parentTitleString" text="VUHDO_I18N_ITEXTUREI" inherits="VuDoWhiteFontTemplate">
-        <Size>
-          <AbsDimension x="0" y="0" />
-        </Size>
-        <Anchors>
-          <Anchor point="CENTER">
-            <Offset>
-              <AbsDimension x="0" y="0" />
-            </Offset>
-          </Anchor>
-        </Anchors>
-      </FontString>
-    </Layer>
-  </Layers>
-  <Scripts>
-    <OnShow>VUHDO_lnfPatchFont(self, "TitleString"); VUHDO_lnfTextureSwatchInitFromModel(self)</OnShow>
-    <OnEnter>VUHDO_lnfShowTooltip(self)</OnEnter>
+	<Size>
+		<AbsDimension x="100" y="32" />
+	</Size>
+	<Layers>
+		<Layer>
+			<Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDo\Images\bar15">
+				<TexCoords left="0" right="1" top="0" bottom="1" />
+			</Texture>
+			<FontString name="$parentTitleString" text="VUHDO_I18N_ITEXTUREI" inherits="VuDoWhiteFontTemplate">
+				<Size>
+					<AbsDimension x="0" y="0" />
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER">
+						<Offset>
+							<AbsDimension x="0" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</FontString>
+		</Layer>
+	</Layers>
+	<Scripts>
+		<OnShow>VUHDO_lnfPatchFont(self, "TitleString"); VUHDO_lnfTextureSwatchInitFromModel(self)</OnShow>
+		<OnEnter>VUHDO_lnfShowTooltip(self)</OnEnter>
 		<OnLeave>VUHDO_lnfHideTooltip(self)</OnLeave>
-  </Scripts>
+	</Scripts>
 </Frame>
 
 
 <Texture name="VuhDoButtonIconTemplate" virtual="true">
-  <Size>
-	  <AbsDimension x="32" y="32" />
+	<Size>
+		<AbsDimension x="32" y="32" />
 	</Size>
 	<Anchors>
-    <Anchor point="RIGHT" relativePoint="RIGHT">
-    	<Offset>
-      	<AbsDimension x="-5" y="0" />
-    	</Offset>
-  	</Anchor>
+		<Anchor point="RIGHT" relativePoint="RIGHT">
+			<Offset>
+				<AbsDimension x="-5" y="0" />
+			</Offset>
+		</Anchor>
 	</Anchors>
 	<TexCoords left="0" right="1" top="0" bottom="1" />
 </Texture>
 
 
 <Texture name="VuhDoCheckBoxIconTemplate" virtual="true">
-  <Size>
-	  <AbsDimension x="32" y="32" />
+	<Size>
+		<AbsDimension x="32" y="32" />
 	</Size>
 	<Anchors>
-    <Anchor point="LEFT" relativePoint="LEFT">
-    	<Offset>
-      	<AbsDimension x="5" y="0" />
-    	</Offset>
-  	</Anchor>
+		<Anchor point="LEFT" relativePoint="LEFT">
+			<Offset>
+				<AbsDimension x="5" y="0" />
+			</Offset>
+		</Anchor>
 	</Anchors>
 	<TexCoords left="0" right="1" top="0" bottom="1" />
 </Texture>
 
-
 <Button name="VuhDoButtonTemplate" virtual="true">
-  <NormalTexture file="Interface\AddOns\VuhDoOptions\Images\button_normal_128_32">
-    <TexCoords left="0" right="1" top="0" bottom="1" />
-  </NormalTexture>
-  <PushedTexture file="Interface\AddOns\VuhDoOptions\Images\button_pressed_128_32">
-    <TexCoords left="0" right="1" top="0" bottom="1" />
-  </PushedTexture>
-  <DisabledTexture file="Interface\AddOns\VuhDoOptions\Images\button_pressed_128_32">
-    <TexCoords left="0" right="1" top="0" bottom="1" />
-  </DisabledTexture>
-  <DisabledFont inherits="VuDoDefaultFontTemplate">
-    <FontHeight>
-      <AbsValue val="9" />
-    </FontHeight>
-    <Color r="0.6" g="0.2" b="0.2" />
-  </DisabledFont>
-  <ButtonText name="$parentText" justifyV="TOP" justifyH="LEFT" maxLines="2">
-    <Anchors>
-      <Anchor point="TOPLEFT" relativePoint="TOPLEFT">
-  			<Offset>
-     			<AbsDimension x="10" y="-6" />
-    		</Offset>
-    	</Anchor>
-    </Anchors>
-    <FontHeight>
-      <AbsValue val="8" />
-   	</FontHeight>
-  </ButtonText>
-  <NormalFont style="VuDoButtonFont">
-    <FontHeight>
-      <AbsValue val="9" />
-    </FontHeight>
-    <Color r="0.4" g="0.4" b="1" />
-  </NormalFont>
-  <HighlightFont style="VuDoButtonFontLight">
-    <FontHeight>
-      <AbsValue val="9" />
-    </FontHeight>
-    <Color r="0.6" g="0.6" b="1" />
-  </HighlightFont>
-  <Scripts>
-  	<OnShow>VUHDO_lnfPatchFont(self, "Text");</OnShow>
-    <OnEnter>VUHDO_lnfShowTooltip(self)</OnEnter>
+	<NormalTexture file="Interface\AddOns\VuhDoOptions\Images\button_normal_128_32">
+		<TexCoords left="0" right="1" top="0" bottom="1" />
+	</NormalTexture>
+	<PushedTexture file="Interface\AddOns\VuhDoOptions\Images\button_pressed_128_32">
+		<TexCoords left="0" right="1" top="0" bottom="1" />
+	</PushedTexture>
+	<DisabledTexture file="Interface\AddOns\VuhDoOptions\Images\button_pressed_128_32">
+		<TexCoords left="0" right="1" top="0" bottom="1" />
+	</DisabledTexture>
+	<DisabledFont inherits="VuDoDefaultFontTemplate">
+		<FontHeight>
+			<AbsValue val="9" />
+		</FontHeight>
+		<Color r="0.6" g="0.2" b="0.2" />
+	</DisabledFont>
+	<ButtonText name="$parentText" justifyV="TOP" justifyH="LEFT" maxLines="2">
+		<Anchors>
+			<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+				<Offset>
+					<AbsDimension x="10" y="-6" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<FontHeight>
+			<AbsValue val="8" />
+		</FontHeight>
+	</ButtonText>
+	<NormalFont style="VuDoButtonFont">
+		<FontHeight>
+			<AbsValue val="9" />
+		</FontHeight>
+		<Color r="0.4" g="0.4" b="1" />
+	</NormalFont>
+	<HighlightFont style="VuDoButtonFontLight">
+		<FontHeight>
+			<AbsValue val="9" />
+		</FontHeight>
+		<Color r="0.6" g="0.6" b="1" />
+	</HighlightFont>
+	<Scripts>
+		<OnShow>VUHDO_lnfPatchFont(self, "Text");</OnShow>
+		<OnEnter>VUHDO_lnfShowTooltip(self)</OnEnter>
 		<OnLeave>VUHDO_lnfHideTooltip(self)</OnLeave>
-  </Scripts>
+	</Scripts>
 </Button>
 
-
 <CheckButton name="VuhDoTabStopButtonTemplate" virtual="true">
-  <Size>
-    <AbsDimension x="48" y="48" />
-  </Size>
-  <Layers>
-    <Layer level="OVERLAY">
-      <FontString name="$parentLabel" inherits="VuDoDefaultFontTemplate" text="" justifyH="CENTER">
-			  <Color r="0.2" g="0.2" b="0.6" />
-		    <Anchors>
+	<Size>
+		<AbsDimension x="48" y="48" />
+	</Size>
+	<Layers>
+		<Layer level="OVERLAY">
+			<FontString name="$parentLabel" inherits="VuDoDefaultFontTemplate" text="" justifyH="CENTER">
+				<Color r="0.2" g="0.2" b="0.6" />
+				<Anchors>
 					<Anchor point="BOTTOM" relativePoint="BOTTOM">
 						<Offset>
 							<AbsDimension x="0" y="12" />
 						</Offset>
 					</Anchor>
-		    </Anchors>
+				</Anchors>
 			</FontString>
-    </Layer>
-    <Layer level="ARTWORK">
-    </Layer>
-  </Layers>
+		</Layer>
+		<Layer level="ARTWORK">
+		</Layer>
+	</Layers>
 
-  <Frames>
-  	<Frame name="$parentTextureSwatch" hidden="true">
-  	</Frame>
-  	<Frame name="$parentTextureActiveSwatch" hidden="true">
-  	</Frame>
-  	<Frame name="$parentTextureCheckMark" setAllPoints="true" hidden="true">
-  		<Layers>
- 				<Layer>
-        	<Texture name="$parentTexture" file="Interface\AddOns\VuhDoOptions\Images\tabstop_active">
-          	<TexCoords left="0" right="1" top="0" bottom="1" />
-        	</Texture>
-		      <FontString name="$parentLabel" inherits="VuDoDefaultFontTemplate" text="" justifyH="CENTER">
-				  	<Color r="0.2" g="0.2" b="0.6" />
-		  	  	<Anchors>
+	<Frames>
+		<Frame name="$parentTextureSwatch" hidden="true">
+		</Frame>
+		<Frame name="$parentTextureActiveSwatch" hidden="true">
+		</Frame>
+		<Frame name="$parentTextureCheckMark" setAllPoints="true" hidden="true">
+			<Layers>
+				<Layer>
+					<Texture name="$parentTexture" file="Interface\AddOns\VuhDoOptions\Images\tabstop_active">
+						<TexCoords left="0" right="1" top="0" bottom="1" />
+					</Texture>
+					<FontString name="$parentLabel" inherits="VuDoDefaultFontTemplate" text="" justifyH="CENTER">
+						<Color r="0.2" g="0.2" b="0.6" />
+						<Anchors>
 							<Anchor point="BOTTOM" relativePoint="BOTTOM">
 								<Offset>
 									<AbsDimension x="0" y="12" />
 								</Offset>
 							</Anchor>
-			    	</Anchors>
+						</Anchors>
 					</FontString>
-      	</Layer>
-    	</Layers>
-  	</Frame>
+				</Layer>
+			</Layers>
+		</Frame>
 	</Frames>
 
-  <NormalTexture file="Interface\AddOns\VuhDoOptions\Images\tabstop_inactive">
-  </NormalTexture>
+	<NormalTexture file="Interface\AddOns\VuhDoOptions\Images\tabstop_inactive">
+	</NormalTexture>
 	<Scripts>
-    <OnLoad>VUHDO_lnfTabCheckButtonOnLoad(self)</OnLoad>
-    <OnShow>VUHDO_lnfPatchFont(self, "Label"); VUHDO_lnfRadioButtonOnShow(self)</OnShow>
-    <OnClick>VUHDO_lnfTabCheckButtonClicked(self)</OnClick>
-    <OnEnter>
-    	VUHDO_lnfTabCheckButtonOnEnter(self);
-    	VUHDO_lnfShowTooltip(self);
-    </OnEnter>
+		<OnLoad>VUHDO_lnfTabCheckButtonOnLoad(self)</OnLoad>
+		<OnShow>VUHDO_lnfPatchFont(self, "Label"); VUHDO_lnfRadioButtonOnShow(self)</OnShow>
+		<OnClick>VUHDO_lnfTabCheckButtonClicked(self)</OnClick>
+		<OnEnter>
+			VUHDO_lnfTabCheckButtonOnEnter(self);
+			VUHDO_lnfShowTooltip(self);
+		</OnEnter>
 		<OnLeave>
 			VUHDO_lnfTabCheckButtonOnLeave(self);
 			VUHDO_lnfHideTooltip(self);
 		</OnLeave>
-  </Scripts>
+	</Scripts>
 </CheckButton>
-
 
 <CheckButton name="VuhDoCheckButtonTemplate" virtual="true">
-  <Size>
-    <AbsDimension x="100" y="32" />
-  </Size>
-  <Layers>
-    <Layer>
-      <FontString name="$parentLabel" inherits="VuDoDefaultFontTemplate" text="" justifyH="LEFT">
-		    <Anchors>
+	<Size>
+		<AbsDimension x="100" y="32" />
+	</Size>
+	<Layers>
+		<Layer>
+			<FontString name="$parentLabel" inherits="VuDoDefaultFontTemplate" text="" justifyH="LEFT">
+				<Anchors>
 					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
 						<Offset>
 							<AbsDimension x="-10" y="-6" />
 						</Offset>
 					</Anchor>
-		    </Anchors>
+				</Anchors>
 			</FontString>
-    </Layer>
-  </Layers>
+		</Layer>
+	</Layers>
 	<Frames>
-    <Frame name="$parentTextureSwatch" frameStrata="HIGH">
-      <Size>
-        <AbsDimension x="24" y="24" />
-      </Size>
-      <Anchors>
-        <Anchor point="LEFT" relativePoint="LEFT">
-          <Offset>
-            <AbsDimension x="5" y="0" />
-          </Offset>
-        </Anchor>
-      </Anchors>
-      <Layers>
-        <Layer>
-          <Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDo\Images\icon_white_square">
-            <TexCoords left="0" right="1" top="0" bottom="1" />
-          </Texture>
-        </Layer>
-      </Layers>
-    </Frame>
-    <Frame name="$parentTextureActiveSwatch" frameStrata="HIGH" hidden="true">
-      <Size>
-        <AbsDimension x="24" y="24" />
-      </Size>
-      <Anchors>
-        <Anchor point="LEFT" relativePoint="LEFT">
-          <Offset>
-            <AbsDimension x="5" y="0" />
-          </Offset>
-        </Anchor>
-      </Anchors>
-      <Layers>
-        <Layer level="OVERLAY">
-          <Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDoOptions\Images\icon_blue_square">
-            <TexCoords left="0" right="1" top="0" bottom="1" />
-          </Texture>
-        </Layer>
-      </Layers>
-    </Frame>
-    <Frame name="$parentTextureCheckMark" frameStrata="DIALOG" hidden="true">
-      <Size>
-        <AbsDimension x="30" y="30" />
-      </Size>
-      <Anchors>
-        <Anchor point="LEFT" relativePoint="LEFT">
-          <Offset>
-            <AbsDimension x="2" y="0" />
-          </Offset>
-        </Anchor>
-      </Anchors>
-      <Layers>
-        <Layer>
-          <Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDoOptions\Images\icon_check">
-            <TexCoords left="0" right="1" top="0" bottom="1" />
-          </Texture>
-        </Layer>
-      </Layers>
-    </Frame>
-  </Frames>
-  <NormalTexture file="Interface\AddOns\VuhDoOptions\Images\button_normal_128_32" />
-  <PushedTexture file="Interface\AddOns\VuhDoOptions\Images\button_pressed_128_32" />
+
+		<Frame name="$parentTextureSwatch" frameStrata="HIGH">
+			<Size>
+				<AbsDimension x="24" y="24" />
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT" relativePoint="LEFT">
+					<Offset>
+						<AbsDimension x="5" y="0" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<Layers>
+				<Layer>
+					<Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDo\Images\icon_white_square">
+						<TexCoords left="0" right="1" top="0" bottom="1" />
+					</Texture>
+				</Layer>
+			</Layers>
+		</Frame>
+
+		<Frame name="$parentTextureActiveSwatch" frameStrata="HIGH" hidden="true">
+			<Size>
+				<AbsDimension x="24" y="24" />
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT" relativePoint="LEFT">
+					<Offset>
+						<AbsDimension x="5" y="0" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<Layers>
+				<Layer level="OVERLAY">
+					<Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDoOptions\Images\icon_blue_square">
+						<TexCoords left="0" right="1" top="0" bottom="1" />
+					</Texture>
+				</Layer>
+			</Layers>
+		</Frame>
+
+		<Frame name="$parentTextureCheckMark" frameStrata="DIALOG" hidden="true">
+			<Size>
+				<AbsDimension x="30" y="30" />
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT" relativePoint="LEFT">
+					<Offset>
+						<AbsDimension x="2" y="0" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<Layers>
+				<Layer>
+					<Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDoOptions\Images\icon_check">
+						<TexCoords left="0" right="1" top="0" bottom="1" />
+					</Texture>
+				</Layer>
+			</Layers>
+		</Frame>
+	</Frames>
+	
+	<NormalTexture file="Interface\AddOns\VuhDoOptions\Images\button_normal_128_32" />
+	<PushedTexture file="Interface\AddOns\VuhDoOptions\Images\button_pressed_128_32" />
 	<Scripts>
-    <OnLoad>VUHDO_lnfCheckButtonOnLoad(self)</OnLoad>
-    <OnClick>
-    	VUHDO_lnfCheckButtonUpdateModel(self);
-    	VUHDO_lnfCheckButtonClicked(self);
-    </OnClick>
-    <OnEnter>
-    	VUHDO_lnfCheckButtonOnEnter(self);
-    	VUHDO_lnfShowTooltip(self);
-    </OnEnter>
+		<OnLoad>VUHDO_lnfCheckButtonOnLoad(self)</OnLoad>
+		<OnClick>
+			VUHDO_lnfCheckButtonUpdateModel(self);
+			VUHDO_lnfCheckButtonClicked(self);
+		</OnClick>
+		<OnEnter>
+			VUHDO_lnfCheckButtonOnEnter(self);
+			VUHDO_lnfShowTooltip(self);
+		</OnEnter>
 		<OnLeave>
 			VUHDO_lnfCheckButtonOnLeave(self);
 			VUHDO_lnfHideTooltip(self);
 		</OnLeave>
-    <OnShow>VUHDO_lnfPatchFont(self, "Label"); VUHDO_lnfCheckButtonInitFromModel(self)</OnShow>
-  </Scripts>
+		<OnShow>VUHDO_lnfPatchFont(self, "Label"); VUHDO_lnfCheckButtonInitFromModel(self)</OnShow>
+	</Scripts>
 </CheckButton>
-
 
 <CheckButton name="VuhDoCheckBoxTemplate" virtual="true">
-  <Size>
-    <AbsDimension x="32" y="32" />
-  </Size>
+	<Size>
+		<AbsDimension x="32" y="32" />
+	</Size>
+
 	<Frames>
-    <Frame name="$parentTextureSwatch" frameStrata="MEDIUM">
-      <Size>
-        <AbsDimension x="24" y="24" />
-      </Size>
-      <Anchors>
-        <Anchor point="LEFT" relativePoint="LEFT">
-          <Offset>
-            <AbsDimension x="5" y="0" />
-          </Offset>
-        </Anchor>
-      </Anchors>
-      <Layers>
-        <Layer>
-          <Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDo\Images\icon_white_square">
-            <TexCoords left="0" right="1" top="0" bottom="1" />
-          </Texture>
-        </Layer>
-      </Layers>
-    </Frame>
-    <Frame name="$parentTextureActiveSwatch" hidden="true">
-      <Size>
-        <AbsDimension x="24" y="24" />
-      </Size>
-      <Anchors>
-        <Anchor point="LEFT" relativePoint="LEFT">
-          <Offset>
-            <AbsDimension x="5" y="0" />
-          </Offset>
-        </Anchor>
-      </Anchors>
-      <Layers>
-        <Layer level="OVERLAY">
-          <Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDoOptions\Images\icon_blue_square">
-            <TexCoords left="0" right="1" top="0" bottom="1" />
-          </Texture>
-        </Layer>
-      </Layers>
-    </Frame>
-    <Frame name="$parentTextureCheckMark" frameStrata="HIGH" hidden="true">
-      <Size>
-        <AbsDimension x="30" y="30" />
-      </Size>
-      <Anchors>
-        <Anchor point="LEFT" relativePoint="LEFT">
-          <Offset>
-            <AbsDimension x="2" y="0" />
-          </Offset>
-        </Anchor>
-      </Anchors>
-      <Layers>
-        <Layer>
-          <Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDoOptions\Images\icon_check">
-            <TexCoords left="0" right="1" top="0" bottom="1" />
-          </Texture>
-        </Layer>
-      </Layers>
-    </Frame>
-  </Frames>
-  <NormalTexture file="" />
-  <PushedTexture file="" />
+		<Frame name="$parentTextureSwatch" frameStrata="MEDIUM">
+			<Size>
+				<AbsDimension x="24" y="24" />
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT" relativePoint="LEFT">
+					<Offset>
+						<AbsDimension x="5" y="0" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<Layers>
+				<Layer>
+					<Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDo\Images\icon_white_square">
+						<TexCoords left="0" right="1" top="0" bottom="1" />
+					</Texture>
+				</Layer>
+			</Layers>
+		</Frame>
+
+		<Frame name="$parentTextureActiveSwatch" hidden="true">
+			<Size>
+				<AbsDimension x="24" y="24" />
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT" relativePoint="LEFT">
+					<Offset>
+						<AbsDimension x="5" y="0" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<Layers>
+				<Layer level="OVERLAY">
+					<Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDoOptions\Images\icon_blue_square">
+						<TexCoords left="0" right="1" top="0" bottom="1" />
+					</Texture>
+				</Layer>
+			</Layers>
+		</Frame>
+
+		<Frame name="$parentTextureCheckMark" frameStrata="HIGH" hidden="true">
+			<Size>
+				<AbsDimension x="30" y="30" />
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT" relativePoint="LEFT">
+					<Offset>
+						<AbsDimension x="2" y="0" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<Layers>
+				<Layer>
+					<Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDoOptions\Images\icon_check">
+						<TexCoords left="0" right="1" top="0" bottom="1" />
+					</Texture>
+				</Layer>
+			</Layers>
+		</Frame>
+	</Frames>
+
+	<NormalTexture file="" />
+	<PushedTexture file="" />
 	<Scripts>
-    <OnLoad>VUHDO_lnfCheckButtonOnLoad(self)</OnLoad>
-    <OnClick>
-    	VUHDO_lnfCheckButtonUpdateModel(self);
-    	VUHDO_lnfCheckButtonClicked(self);
-    </OnClick>
-    <OnEnter>
-    	VUHDO_lnfCheckButtonOnEnter(self);
-    	VUHDO_lnfShowTooltip(self);
-    </OnEnter>
+		<OnLoad>VUHDO_lnfCheckButtonOnLoad(self)</OnLoad>
+		<OnClick>
+			VUHDO_lnfCheckButtonUpdateModel(self);
+			VUHDO_lnfCheckButtonClicked(self);
+		</OnClick>
+		<OnEnter>
+			VUHDO_lnfCheckButtonOnEnter(self);
+			VUHDO_lnfShowTooltip(self);
+		</OnEnter>
 		<OnLeave>
 			VUHDO_lnfCheckButtonOnLeave(self);
-    	VUHDO_lnfHideTooltip(self);
+			VUHDO_lnfHideTooltip(self);
 		</OnLeave>
-    <OnShow>VUHDO_lnfCheckButtonInitFromModel(self)</OnShow>
-  </Scripts>
+		<OnShow>VUHDO_lnfCheckButtonInitFromModel(self)</OnShow>
+	</Scripts>
 </CheckButton>
 
-
 <CheckButton name="VuhDoRadioButtonTemplate" virtual="true">
-  <Size>
-    <AbsDimension x="100" y="32" />
-  </Size>
-  <Layers>
-    <Layer>
-      <FontString name="$parentLabel" inherits="VuDoDefaultFontTemplate" text="" justifyH="LEFT">
-		    <Anchors>
+	<Size>
+		<AbsDimension x="100" y="32" />
+	</Size>
+	<Layers>
+		<Layer>
+			<FontString name="$parentLabel" inherits="VuDoDefaultFontTemplate" text="" justifyH="LEFT">
+				<Anchors>
 					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
 						<Offset>
 							<AbsDimension x="-10" y="-6" />
 						</Offset>
 					</Anchor>
-		    </Anchors>
+				</Anchors>
 			</FontString>
-    </Layer>
-  </Layers>
+		</Layer>
+	</Layers>
+
 	<Frames>
-    <Frame name="$parentTextureSwatch" frameStrata="MEDIUM">
-      <Size>
-        <AbsDimension x="24" y="24" />
-      </Size>
-      <Anchors>
-        <Anchor point="LEFT" relativePoint="LEFT">
-          <Offset>
-            <AbsDimension x="5" y="0" />
-          </Offset>
-        </Anchor>
-      </Anchors>
-      <Layers>
-        <Layer>
-          <Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDoOptions\Images\icon_black">
-            <TexCoords left="0" right="1" top="0" bottom="1" />
-          </Texture>
-        </Layer>
-      </Layers>
-    </Frame>
-    <Frame name="$parentTextureActiveSwatch" frameStrata="HIGH" hidden="true">
-      <Size>
-        <AbsDimension x="24" y="24" />
-      </Size>
-      <Anchors>
-        <Anchor point="LEFT" relativePoint="LEFT">
-          <Offset>
-            <AbsDimension x="5" y="0" />
-          </Offset>
-        </Anchor>
-      </Anchors>
-      <Layers>
-        <Layer level="OVERLAY">
-          <Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDoOptions\Images\icon_aura" alphaMode="ADD">
-            <TexCoords left="0" right="1" top="0" bottom="1" />
-          </Texture>
-        </Layer>
-      </Layers>
-    </Frame>
-    <Frame name="$parentTextureCheckMark" frameStrata="HIGH" hidden="true">
-      <Size>
-        <AbsDimension x="24" y="24" />
-      </Size>
-      <Anchors>
-        <Anchor point="LEFT" relativePoint="LEFT">
-          <Offset>
-            <AbsDimension x="5" y="0" />
-          </Offset>
-        </Anchor>
-      </Anchors>
-      <Layers>
-        <Layer>
-          <Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDo\Images\icon_red">
-            <TexCoords left="0" right="1" top="0" bottom="1" />
-          </Texture>
-        </Layer>
-      </Layers>
-    </Frame>
-  </Frames>
-  <NormalTexture file="Interface\AddOns\VuhDoOptions\Images\button_normal_128_32" />
-  <PushedTexture file="Interface\AddOns\VuhDoOptions\Images\button_pressed_128_32" />
+		<Frame name="$parentTextureSwatch" frameStrata="MEDIUM">
+			<Size>
+				<AbsDimension x="24" y="24" />
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT" relativePoint="LEFT">
+					<Offset>
+						<AbsDimension x="5" y="0" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<Layers>
+				<Layer>
+					<Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDoOptions\Images\icon_black">
+						<TexCoords left="0" right="1" top="0" bottom="1" />
+					</Texture>
+				</Layer>
+			</Layers>
+		</Frame>
+
+		<Frame name="$parentTextureActiveSwatch" frameStrata="HIGH" hidden="true">
+			<Size>
+				<AbsDimension x="24" y="24" />
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT" relativePoint="LEFT">
+					<Offset>
+						<AbsDimension x="5" y="0" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<Layers>
+				<Layer level="OVERLAY">
+					<Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDoOptions\Images\icon_aura" alphaMode="ADD">
+						<TexCoords left="0" right="1" top="0" bottom="1" />
+					</Texture>
+				</Layer>
+			</Layers>
+		</Frame>
+
+		<Frame name="$parentTextureCheckMark" frameStrata="HIGH" hidden="true">
+			<Size>
+				<AbsDimension x="24" y="24" />
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT" relativePoint="LEFT">
+					<Offset>
+						<AbsDimension x="5" y="0" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<Layers>
+				<Layer>
+					<Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDo\Images\icon_red">
+						<TexCoords left="0" right="1" top="0" bottom="1" />
+					</Texture>
+				</Layer>
+			</Layers>
+		</Frame>
+	</Frames>
+
+	<NormalTexture file="Interface\AddOns\VuhDoOptions\Images\button_normal_128_32" />
+	<PushedTexture file="Interface\AddOns\VuhDoOptions\Images\button_pressed_128_32" />
 	<Scripts>
-    <OnLoad>VUHDO_lnfCheckButtonOnLoad(self)</OnLoad>
-    <OnShow>
-    	VUHDO_lnfPatchFont(self, "Label");
-    	VUHDO_lnfRadioButtonOnShow(self);
-    	VUHDO_lnfRadioButtonInitFromModel(self);
-    </OnShow>
-    <OnClick>
-    	VUHDO_lnfRadioButtonClicked(self);
-    	VUHDO_lnfRadioButtonUpdateModel(self);
-    </OnClick>
-    <OnEnter>
-    	VUHDO_lnfCheckButtonOnEnter(self);
-    	VUHDO_lnfShowTooltip(self);
-    </OnEnter>
+		<OnLoad>VUHDO_lnfCheckButtonOnLoad(self)</OnLoad>
+		<OnShow>
+			VUHDO_lnfPatchFont(self, "Label");
+			VUHDO_lnfRadioButtonOnShow(self);
+			VUHDO_lnfRadioButtonInitFromModel(self);
+		</OnShow>
+		<OnClick>
+			VUHDO_lnfRadioButtonClicked(self);
+			VUHDO_lnfRadioButtonUpdateModel(self);
+		</OnClick>
+		<OnEnter>
+			VUHDO_lnfCheckButtonOnEnter(self);
+			VUHDO_lnfShowTooltip(self);
+		</OnEnter>
 		<OnLeave>
 			VUHDO_lnfCheckButtonOnLeave(self);
 			VUHDO_lnfHideTooltip(self);
 		</OnLeave>
-  </Scripts>
+	</Scripts>
 </CheckButton>
 
 
 <CheckButton name="VuhDoRadioBoxTemplate" virtual="true">
-  <Size>
-    <AbsDimension x="32" y="32" />
-  </Size>
+	<Size>
+		<AbsDimension x="32" y="32" />
+	</Size>
 	<Frames>
-    <Frame name="$parentTextureSwatch">
-      <Size>
-        <AbsDimension x="24" y="24" />
-      </Size>
-      <Anchors>
-        <Anchor point="LEFT" relativePoint="LEFT">
-          <Offset>
-            <AbsDimension x="5" y="0" />
-          </Offset>
-        </Anchor>
-      </Anchors>
-      <Layers>
-        <Layer>
-          <Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDoOptions\Images\icon_black">
-            <TexCoords left="0" right="1" top="0" bottom="1" />
-          </Texture>
-        </Layer>
-      </Layers>
-    </Frame>
-    <Frame name="$parentTextureActiveSwatch" hidden="true">
-      <Size>
-        <AbsDimension x="24" y="24" />
-      </Size>
-      <Anchors>
-        <Anchor point="LEFT" relativePoint="LEFT">
-          <Offset>
-            <AbsDimension x="5" y="0" />
-          </Offset>
-        </Anchor>
-      </Anchors>
-      <Layers>
-        <Layer level="OVERLAY">
-          <Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDoOptions\Images\icon_aura" alphaMode="ADD">
-            <TexCoords left="0" right="1" top="0" bottom="1" />
-          </Texture>
-        </Layer>
-      </Layers>
-    </Frame>
-    <Frame name="$parentTextureCheckMark" frameStrata="HIGH" hidden="true">
-      <Size>
-        <AbsDimension x="24" y="24" />
-      </Size>
-      <Anchors>
-        <Anchor point="LEFT" relativePoint="LEFT">
-          <Offset>
-            <AbsDimension x="5" y="0" />
-          </Offset>
-        </Anchor>
-      </Anchors>
-      <Layers>
-        <Layer>
-          <Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDo\Images\icon_red">
-            <TexCoords left="0" right="1" top="0" bottom="1" />
-          </Texture>
-        </Layer>
-      </Layers>
-    </Frame>
-  </Frames>
-  <NormalTexture file="" />
-  <PushedTexture file="" />
-	<Scripts>
-    <OnLoad>VUHDO_lnfCheckButtonOnLoad(self)</OnLoad>
-    <OnShow>VUHDO_lnfRadioButtonInitFromModel(self);</OnShow>
-    <OnClick>
-    	VUHDO_lnfRadioButtonClicked(self);
-    	VUHDO_lnfRadioButtonUpdateModel(self);
-    </OnClick>
-    <OnEnter>
-      VUHDO_lnfRadioBoxOnEnter(self);
-    	VUHDO_lnfShowTooltip(self);
-    </OnEnter>
-		<OnLeave>
-		  VUHDO_lnfRadioBoxOnLeave(self);
-    	VUHDO_lnfHideTooltip(self);
-		</OnLeave>
 
-  </Scripts>
+		<Frame name="$parentTextureSwatch">
+			<Size>
+				<AbsDimension x="24" y="24" />
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT" relativePoint="LEFT">
+					<Offset>
+						<AbsDimension x="5" y="0" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<Layers>
+				<Layer>
+					<Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDoOptions\Images\icon_black">
+						<TexCoords left="0" right="1" top="0" bottom="1" />
+					</Texture>
+				</Layer>
+			</Layers>
+		</Frame>
+
+		<Frame name="$parentTextureActiveSwatch" hidden="true">
+			<Size>
+				<AbsDimension x="24" y="24" />
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT" relativePoint="LEFT">
+					<Offset>
+						<AbsDimension x="5" y="0" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<Layers>
+				<Layer level="OVERLAY">
+					<Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDoOptions\Images\icon_aura" alphaMode="ADD">
+						<TexCoords left="0" right="1" top="0" bottom="1" />
+					</Texture>
+				</Layer>
+			</Layers>
+		</Frame>
+
+		<Frame name="$parentTextureCheckMark" frameStrata="HIGH" hidden="true">
+			<Size>
+				<AbsDimension x="24" y="24" />
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT" relativePoint="LEFT">
+					<Offset>
+						<AbsDimension x="5" y="0" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<Layers>
+				<Layer>
+					<Texture name="$parentTexture" setAllPoints="true" file="Interface\AddOns\VuhDo\Images\icon_red">
+						<TexCoords left="0" right="1" top="0" bottom="1" />
+					</Texture>
+				</Layer>
+			</Layers>
+		</Frame>
+	</Frames>
+	<NormalTexture file="" />
+	<PushedTexture file="" />
+	<Scripts>
+		<OnLoad>VUHDO_lnfCheckButtonOnLoad(self)</OnLoad>
+		<OnShow>VUHDO_lnfRadioButtonInitFromModel(self);</OnShow>
+		<OnClick>
+			VUHDO_lnfRadioButtonClicked(self);
+			VUHDO_lnfRadioButtonUpdateModel(self);
+		</OnClick>
+		<OnEnter>
+			VUHDO_lnfRadioBoxOnEnter(self);
+			VUHDO_lnfShowTooltip(self);
+		</OnEnter>
+		<OnLeave>
+			VUHDO_lnfRadioBoxOnLeave(self);
+			VUHDO_lnfHideTooltip(self);
+		</OnLeave>
+	</Scripts>
 </CheckButton>
 
 <Button name="VuhDoIconButtonTemplate" inherits="VuhDoButtonTemplate" virtual="true">
-  <Size>
-    <AbsDimension x="100" y="32" />
-  </Size>
+	<Size>
+		<AbsDimension x="100" y="32" />
+	</Size>
 </Button>
 
 
 <Button name="VuhDoOkayButtonTemplate" text="VUHDO_I18N_OKAY" inherits="VuhDoIconButtonTemplate" virtual="true">
-  <Layers>
-    <Layer level="OVERLAY">
-      <Texture name="$parentIcon" inherits="VuhDoButtonIconTemplate" file="Interface\AddOns\VuhDo\Images\icon_check_2">
-    	</Texture>
-    </Layer>
-  </Layers>
+	<Layers>
+		<Layer level="OVERLAY">
+			<Texture name="$parentIcon" inherits="VuhDoButtonIconTemplate" file="Interface\AddOns\VuhDo\Images\icon_check_2">
+			</Texture>
+		</Layer>
+	</Layers>
 </Button>
 
 
 <Button name="VuhDoCancelButtonTemplate" text="VUHDO_I18N_CANCEL" inherits="VuhDoIconButtonTemplate" virtual="true">
-  <Layers>
-    <Layer level="OVERLAY">
-      <Texture name="$parentIcon" inherits="VuhDoButtonIconTemplate" file="Interface\AddOns\VuhDo\Images\icon_cancel_1">
-    	</Texture>
-    </Layer>
-  </Layers>
+	<Layers>
+		<Layer level="OVERLAY">
+			<Texture name="$parentIcon" inherits="VuhDoButtonIconTemplate" file="Interface\AddOns\VuhDo\Images\icon_cancel_1">
+			</Texture>
+		</Layer>
+	</Layers>
 </Button>
 
 
 <Button name="VuhDoApplyToAllButtonTemplate" text="VUHDO_I18N_APPLY_TO_ALL" inherits="VuhDoIconButtonTemplate" virtual="true">
-  <Layers>
-    <Layer level="OVERLAY">
-      <Texture name="$parentIcon" inherits="VuhDoButtonIconTemplate" file="Interface\AddOns\VuhDoOptions\Images\icon_apply_to_all">
-    	</Texture>
-    </Layer>
-  </Layers>
+	<Layers>
+		<Layer level="OVERLAY">
+			<Texture name="$parentIcon" inherits="VuhDoButtonIconTemplate" file="Interface\AddOns\VuhDoOptions\Images\icon_apply_to_all">
+			</Texture>
+		</Layer>
+	</Layers>
 </Button>
 
 
 <Button name="VuhDoTestButtonTemplate" text="VUHDO_I18N_TEST" inherits="VuhDoIconButtonTemplate" virtual="true">
-  <Layers>
-    <Layer level="OVERLAY">
-      <Texture name="$parentIcon" inherits="VuhDoButtonIconTemplate" file="Interface\AddOns\VuhDo\Images\icon_info">
-    	</Texture>
-    </Layer>
-  </Layers>
+	<Layers>
+		<Layer level="OVERLAY">
+			<Texture name="$parentIcon" inherits="VuhDoButtonIconTemplate" file="Interface\AddOns\VuhDo\Images\icon_info">
+			</Texture>
+		</Layer>
+	</Layers>
 </Button>
 
 
 <Button name="VuhDoAddButtonTemplate" text="VUHDO_I18N_ADD" inherits="VuhDoIconButtonTemplate" virtual="true">
-  <Layers>
-    <Layer level="OVERLAY">
-      <Texture name="$parentIcon" inherits="VuhDoButtonIconTemplate" file="Interface\AddOns\VuhDoOptions\Images\icon_plus">
-    	</Texture>
-    </Layer>
-  </Layers>
+	<Layers>
+		<Layer level="OVERLAY">
+			<Texture name="$parentIcon" inherits="VuhDoButtonIconTemplate" file="Interface\AddOns\VuhDoOptions\Images\icon_plus">
+			</Texture>
+		</Layer>
+	</Layers>
 </Button>
 
 <Button name="VuhDoAddItemButtonTemplate" text="VUHDO_I18N_ADD" inherits="VuhDoIconButtonTemplate" virtual="true">
-  <Layers>
-    <Layer level="OVERLAY">
-      <Texture name="$parentIcon" inherits="VuhDoButtonIconTemplate" file="Interface\AddOns\VuhDo\Images\icon_plus_round">
-    	</Texture>
-    </Layer>
-  </Layers>
+	<Layers>
+		<Layer level="OVERLAY">
+			<Texture name="$parentIcon" inherits="VuhDoButtonIconTemplate" file="Interface\AddOns\VuhDo\Images\icon_plus_round">
+			</Texture>
+		</Layer>
+	</Layers>
 </Button>
 
 <Button name="VuhDoRemoveItemButtonTemplate" text="VUHDO_I18N_ADD" inherits="VuhDoIconButtonTemplate" virtual="true">
-  <Layers>
-    <Layer level="OVERLAY">
-      <Texture name="$parentIcon" inherits="VuhDoButtonIconTemplate" file="Interface\AddOns\VuhDo\Images\icon_x_round">
-    	</Texture>
-    </Layer>
-  </Layers>
+	<Layers>
+		<Layer level="OVERLAY">
+			<Texture name="$parentIcon" inherits="VuhDoButtonIconTemplate" file="Interface\AddOns\VuhDo\Images\icon_x_round">
+			</Texture>
+		</Layer>
+	</Layers>
 </Button>
 
 <Button name="VuhDoBackButtonTemplate" text="VUHDO_I18N_BACK" inherits="VuhDoIconButtonTemplate" virtual="true">
-  <Layers>
-    <Layer level="OVERLAY">
-      <Texture name="$parentIcon" inherits="VuhDoButtonIconTemplate" file="Interface\AddOns\VuhDoOptions\Images\icon_back">
-    	</Texture>
-    </Layer>
-  </Layers>
+	<Layers>
+		<Layer level="OVERLAY">
+			<Texture name="$parentIcon" inherits="VuhDoButtonIconTemplate" file="Interface\AddOns\VuhDoOptions\Images\icon_back">
+			</Texture>
+		</Layer>
+	</Layers>
 </Button>
 
 <Frame name="VuhDoHSliderTemplate" virtual="true">
-  <Size>
-    <AbsDimension x="140" y="50" />
-  </Size>
-  <Frames>
-    <Slider name="$parentSlider" enableMouse="true" minValue="0" maxValue="100" defaultValue="0" valueStep="1" orientation="HORIZONTAL">
-      <Size>
-        <AbsDimension x="128" y="18" />
-      </Size>
-      <Anchors>
-        <Anchor point="LEFT" />
-        <Anchor point="RIGHT" />
-      </Anchors>
-      <Backdrop bgFile="Interface\AddOns\VuhDoOptions\Images\blue_lt_square_16_16" edgeFile="Interface\AddOns\VuhDoOptions\Images\panel_edges_3" tile="true">
-        <BackgroundInsets>
-          <AbsInset left="1" right="1" top="1" bottom="1" />
-        </BackgroundInsets>
-        <TileSize>
-          <AbsValue val="8" />
-        </TileSize>
-        <EdgeSize>
-          <AbsValue val="8" />
-        </EdgeSize>
-      </Backdrop>
-      <Layers>
-        <Layer>
-          <FontString name="$parentTitle" inherits="VuDoDefaultFontTemplate" text="">
-            <Anchors>
-              <Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
-					      <Offset>
-        					<AbsDimension x="0" y="2" />
-					      </Offset>
-					    </Anchor>
-            </Anchors>
-          </FontString>
-          <FontString name="$parentValue" inherits="VuDoDefaultFontTemplate" text="">
-            <Anchors>
-              <Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT">
-					      <Offset>
-        					<AbsDimension x="0" y="2" />
-					      </Offset>
-					    </Anchor>
-            </Anchors>
-          </FontString>
-        </Layer>
-      </Layers>
-      <ThumbTexture name="$parentThumb" file="Interface\AddOns\VuhDoOptions\Images\slider_thumb_h">
-        <Size>
-          <AbsDimension x="16" y="16" />
-        </Size>
-      </ThumbTexture>
-      <Scripts>
-      	<OnShow>VUHDO_lnfPatchFont(self, "Title"); VUHDO_lnfPatchFont(self, "Value"); VUHDO_lnfSliderInitFromModel(self)</OnShow>
-      	<OnValueChanged>
-      		VUHDO_lnfSliderUpdateModel(self);
-      		VUHDO_lnfSliderOnValueChanged(self:GetParent());
-      	</OnValueChanged>
-		    <OnEnter>VUHDO_lnfShowTooltip(self:GetParent())</OnEnter>
+	<Size>
+		<AbsDimension x="140" y="50" />
+	</Size>
+	<Frames>
+		<Slider name="$parentSlider" enableMouse="true" minValue="0" maxValue="100" defaultValue="0" valueStep="1" orientation="HORIZONTAL">
+			<Size>
+				<AbsDimension x="128" y="18" />
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT" />
+				<Anchor point="RIGHT" />
+			</Anchors>
+			<Backdrop bgFile="Interface\AddOns\VuhDoOptions\Images\blue_lt_square_16_16" edgeFile="Interface\AddOns\VuhDoOptions\Images\panel_edges_3" tile="true">
+				<BackgroundInsets>
+					<AbsInset left="1" right="1" top="1" bottom="1" />
+				</BackgroundInsets>
+				<TileSize>
+					<AbsValue val="8" />
+				</TileSize>
+				<EdgeSize>
+					<AbsValue val="8" />
+				</EdgeSize>
+			</Backdrop>
+			<Layers>
+				<Layer>
+					<FontString name="$parentTitle" inherits="VuDoDefaultFontTemplate" text="">
+						<Anchors>
+							<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</FontString>
+					<FontString name="$parentValue" inherits="VuDoDefaultFontTemplate" text="">
+						<Anchors>
+							<Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="0" y="2" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</FontString>
+				</Layer>
+			</Layers>
+			<ThumbTexture name="$parentThumb" file="Interface\AddOns\VuhDoOptions\Images\slider_thumb_h">
+				<Size>
+					<AbsDimension x="16" y="16" />
+				</Size>
+			</ThumbTexture>
+			<Scripts>
+				<OnShow>VUHDO_lnfPatchFont(self, "Title"); VUHDO_lnfPatchFont(self, "Value"); VUHDO_lnfSliderInitFromModel(self)</OnShow>
+				<OnValueChanged>
+					VUHDO_lnfSliderUpdateModel(self);
+					VUHDO_lnfSliderOnValueChanged(self:GetParent());
+				</OnValueChanged>
+				<OnEnter>VUHDO_lnfShowTooltip(self:GetParent())</OnEnter>
 				<OnLeave>VUHDO_lnfHideTooltip(self:GetParent())</OnLeave>
-      </Scripts>
-    </Slider>
-  </Frames>
-  <Scripts>
-	  <OnEnter>VUHDO_lnfShowTooltip(self)</OnEnter>
+			</Scripts>
+		</Slider>
+	</Frames>
+	<Scripts>
+		<OnEnter>VUHDO_lnfShowTooltip(self)</OnEnter>
 		<OnLeave>VUHDO_lnfHideTooltip(self)</OnLeave>
-  </Scripts>
+	</Scripts>
 </Frame>
 
 
 <Frame name="VuhDoVSliderTemplate" virtual="true">
-  <Size>
-    <AbsDimension x="18" y="50" />
-  </Size>
-  <Frames>
-    <Slider name="$parentSlider" setallpoints="true" enableMouse="true" minValue="0" maxValue="100" defaultValue="0" valueStep="1" orientation="VERTICAL">
-      <Backdrop bgFile="Interface\AddOns\VuhDoOptions\Images\blue_lt_square_16_16" edgeFile="Interface\AddOns\VuhDoOptions\Images\panel_edges_3" tile="true">
-        <BackgroundInsets>
-          <AbsInset left="1" right="1" top="1" bottom="1" />
-        </BackgroundInsets>
-        <TileSize>
-          <AbsValue val="8" />
-        </TileSize>
-        <EdgeSize>
-          <AbsValue val="8" />
-        </EdgeSize>
-      </Backdrop>
-      <Layers>
-        <Layer>
-          <FontString name="$parentTitle" inherits="VuDoDefaultFontTemplate" text="">
-            <Anchors>
-              <Anchor point="BOTTOM" relativePoint="TOP">
-					      <Offset>
-        					<AbsDimension x="0" y="4" />
-					      </Offset>
-					    </Anchor>
-            </Anchors>
-          </FontString>
-          <FontString name="$parentValue" inherits="VuDoDefaultFontTemplate" text="">
-            <Anchors>
-              <Anchor point="TOP" relativePoint="BOTTOM">
-					      <Offset>
-        					<AbsDimension x="0" y="-2" />
-					      </Offset>
-					    </Anchor>
-            </Anchors>
-          </FontString>
-        </Layer>
-      </Layers>
-      <ThumbTexture name="$parentThumb" file="Interface\AddOns\VuhDoOptions\Images\slider_thumb_v">
-        <Size>
-          <AbsDimension x="16" y="16" />
-        </Size>
-      </ThumbTexture>
-      <Scripts>
-      	<OnValueChanged>
-      		VUHDO_lnfSliderUpdateModel(self);
-      		VUHDO_lnfSliderOnValueChanged(self:GetParent());
-      	</OnValueChanged>
-      	<OnShow>VUHDO_lnfPatchFont(self, "Title"); VUHDO_lnfPatchFont(self, "Value"); VUHDO_lnfSliderInitFromModel(self)</OnShow>
-		    <OnEnter>VUHDO_lnfShowTooltip(self:GetParent())</OnEnter>
+	<Size>
+		<AbsDimension x="18" y="50" />
+	</Size>
+	<Frames>
+		<Slider name="$parentSlider" setallpoints="true" enableMouse="true" minValue="0" maxValue="100" defaultValue="0" valueStep="1" orientation="VERTICAL">
+			<Backdrop bgFile="Interface\AddOns\VuhDoOptions\Images\blue_lt_square_16_16" edgeFile="Interface\AddOns\VuhDoOptions\Images\panel_edges_3" tile="true">
+				<BackgroundInsets>
+					<AbsInset left="1" right="1" top="1" bottom="1" />
+				</BackgroundInsets>
+				<TileSize>
+					<AbsValue val="8" />
+				</TileSize>
+				<EdgeSize>
+					<AbsValue val="8" />
+				</EdgeSize>
+			</Backdrop>
+			<Layers>
+				<Layer>
+					<FontString name="$parentTitle" inherits="VuDoDefaultFontTemplate" text="">
+						<Anchors>
+							<Anchor point="BOTTOM" relativePoint="TOP">
+								<Offset>
+									<AbsDimension x="0" y="4" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</FontString>
+					<FontString name="$parentValue" inherits="VuDoDefaultFontTemplate" text="">
+						<Anchors>
+							<Anchor point="TOP" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="-2" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</FontString>
+				</Layer>
+			</Layers>
+			<ThumbTexture name="$parentThumb" file="Interface\AddOns\VuhDoOptions\Images\slider_thumb_v">
+				<Size>
+					<AbsDimension x="16" y="16" />
+				</Size>
+			</ThumbTexture>
+			<Scripts>
+				<OnValueChanged>
+					VUHDO_lnfSliderUpdateModel(self);
+					VUHDO_lnfSliderOnValueChanged(self:GetParent());
+				</OnValueChanged>
+				<OnShow>VUHDO_lnfPatchFont(self, "Title"); VUHDO_lnfPatchFont(self, "Value"); VUHDO_lnfSliderInitFromModel(self)</OnShow>
+				<OnEnter>VUHDO_lnfShowTooltip(self:GetParent())</OnEnter>
 				<OnLeave>VUHDO_lnfHideTooltip(self:GetParent())</OnLeave>
-      </Scripts>
-    </Slider>
-  </Frames>
-  <Scripts>
-	  <OnEnter>VUHDO_lnfShowTooltip(self)</OnEnter>
+			</Scripts>
+		</Slider>
+	</Frames>
+	<Scripts>
+		<OnEnter>VUHDO_lnfShowTooltip(self)</OnEnter>
 		<OnLeave>VUHDO_lnfHideTooltip(self)</OnLeave>
-  </Scripts>
+	</Scripts>
 </Frame>
 
 
 <Frame name="VuhdoComboItemTemplate" virtual="true">
-  <Size>
-    <AbsDimension x="150" y="16" />
-  </Size>
-  <Backdrop bgFile="Interface\AddOns\VuhDo\Images\white_square_16_16" tile="true">
-    <BackgroundInsets>
-      <AbsInset left="0" right="0" top="0" bottom="0" />
-    </BackgroundInsets>
-    <TileSize>
-      <AbsValue val="16" />
-    </TileSize>
-    <EdgeSize>
-      <AbsValue val="16" />
-    </EdgeSize>
-  </Backdrop>
-  <Frames>
-    <Frame name="$parentLabel">
-      <Size>
-        <AbsDimension x="134" y="16" />
-      </Size>
-      <Anchors>
-        <Anchor point="TOPLEFT">
-          <Offset>
-            <AbsDimension x="19" y="0" />
-          </Offset>
-        </Anchor>
-      </Anchors>
-      <Layers>
-        <Layer>
-          <FontString name="$parentLabel" setAllPoints="true" text="" justifyH="LEFT" inherits="VuDoDefaultFontTemplate">
-          </FontString>
-        </Layer>
-      </Layers>
-    </Frame>
-    <Frame name="$parentIcon">
-      <Size>
-        <AbsDimension x="16" y="16" />
-      </Size>
-      <Anchors>
-        <Anchor point="TOPLEFT">
-          <Offset>
-            <AbsDimension x="19" y="0" />
-          </Offset>
-        </Anchor>
-      </Anchors>
-      <Layers>
-        <Layer>
-          <Texture name="$parentTexture" setAllPoints="true">
-            <TexCoords left="0" right="1" top="0" bottom="1" />
-          </Texture>
-        </Layer>
-      </Layers>
-    </Frame>
-    <Frame name="$parentCheckTexture" hidden="true">
-      <Size>
-        <AbsDimension x="16" y="16" />
-      </Size>
-      <Anchors>
-        <Anchor point="TOPLEFT">
-          <Offset>
-            <AbsDimension x="3" y="0" />
-          </Offset>
-        </Anchor>
-      </Anchors>
-      <Layers>
-        <Layer>
-          <Texture name="$parentTexture" setAllPoints="true">
-            <TexCoords left="0" right="1" top="0" bottom="1" />
-          </Texture>
-        </Layer>
-      </Layers>
-    </Frame>
-  </Frames>
+	<Size>
+		<AbsDimension x="150" y="16" />
+	</Size>
+	<Backdrop bgFile="Interface\AddOns\VuhDo\Images\white_square_16_16" tile="true">
+		<BackgroundInsets>
+			<AbsInset left="0" right="0" top="0" bottom="0" />
+		</BackgroundInsets>
+		<TileSize>
+			<AbsValue val="16" />
+		</TileSize>
+		<EdgeSize>
+			<AbsValue val="16" />
+		</EdgeSize>
+	</Backdrop>
+
+	<Frames>
+		<Frame name="$parentLabel">
+			<Size>
+				<AbsDimension x="134" y="16" />
+			</Size>
+			<Anchors>
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="19" y="0" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<Layers>
+				<Layer>
+					<FontString name="$parentLabel" setAllPoints="true" text="" justifyH="LEFT" inherits="VuDoDefaultFontTemplate">
+					</FontString>
+				</Layer>
+			</Layers>
+		</Frame>
+
+		<Frame name="$parentIcon">
+			<Size>
+				<AbsDimension x="16" y="16" />
+			</Size>
+			<Anchors>
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="19" y="0" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<Layers>
+				<Layer>
+					<Texture name="$parentTexture" setAllPoints="true">
+						<TexCoords left="0" right="1" top="0" bottom="1" />
+					</Texture>
+				</Layer>
+			</Layers>
+		</Frame>
+
+		<Frame name="$parentCheckTexture" hidden="true">
+			<Size>
+				<AbsDimension x="16" y="16" />
+			</Size>
+			<Anchors>
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="3" y="0" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<Layers>
+				<Layer>
+					<Texture name="$parentTexture" setAllPoints="true">
+						<TexCoords left="0" right="1" top="0" bottom="1" />
+					</Texture>
+				</Layer>
+			</Layers>
+		</Frame>
+	</Frames>
+
 	<Scripts>
-    <OnShow>
-    	VUHDO_lnfPatchFont(self, "LabelLabel");
-    </OnShow>
+		<OnShow>
+			VUHDO_lnfPatchFont(self, "LabelLabel");
+		</OnShow>
 		<OnMouseDown>
 			VUHDO_lnfComboSetSelectedValue(self.parentCombo, self:GetAttribute("value"));
 			VUHDO_lnfSetLastComboItem(self);
@@ -1086,210 +1099,211 @@
 
 
 <Button name="VuhDoComboBoxTemplate" enableMouse="false" virtual="true">
-  <Size>
-    <AbsDimension x="120" y="24" />
-  </Size>
-  <Layers>
-    <Layer>
-      <Texture name="$parentLeft" file="Interface\AddOns\VuhDoOptions\Images\button_normal_128_32">
-        <Size>
-          <AbsDimension x="25" y="24" />
-        </Size>
-        <Anchors>
-          <Anchor point="TOPLEFT">
-            <Offset>
-              <AbsDimension x="0" y="17" />
-            </Offset>
-          </Anchor>
-        </Anchors>
-        <TexCoords left="0" right="0.1953125" top="0" bottom="1" />
-      </Texture>
-      <Texture name="$parentMiddle" file="Interface\AddOns\VuhDoOptions\Images\button_normal_128_32">
-        <Size>
-          <AbsDimension x="100" y="24" />
-        </Size>
-        <Anchors>
-          <Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT" />
-        </Anchors>
-        <TexCoords left="0.1953125" right="0.8046875" top="0" bottom="1" />
-      </Texture>
-      <Texture name="$parentRight" file="Interface\AddOns\VuhDoOptions\Images\button_normal_128_32">
-        <Size>
-          <AbsDimension x="25" y="24" />
-        </Size>
-        <Anchors>
-          <Anchor point="LEFT" relativeTo="$parentMiddle" relativePoint="RIGHT" />
-        </Anchors>
-        <TexCoords left="0.8046875" right="1" top="0" bottom="1" />
-      </Texture>
+	<Size>
+		<AbsDimension x="120" y="24" />
+	</Size>
+	<Layers>
+		<Layer>
+			<Texture name="$parentLeft" file="Interface\AddOns\VuhDoOptions\Images\button_normal_128_32">
+				<Size>
+					<AbsDimension x="25" y="24" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="17" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<TexCoords left="0" right="0.1953125" top="0" bottom="1" />
+			</Texture>
 
-      <FontString name="$parentText" inherits="VuDoDefaultFontTemplate" text="VUHDO_I18N_SELECT" justifyH="RIGHT">
-        <Size>
-          <AbsDimension x="120" y="10" />
-        </Size>
-        <Anchors>
-          <Anchor point="RIGHT" relativeTo="$parentRight">
-            <Offset>
-              <AbsDimension x="-32" y="0" />
-            </Offset>
-          </Anchor>
-        </Anchors>
-      </FontString>
-    </Layer>
-  </Layers>
-  <Frames>
-    <Button name="$parentButton" enableMouse="true">
-      <Size>
-        <AbsDimension x="32" y="32" />
-      </Size>
-      <Anchors>
-        <Anchor point="RIGHT" relativeTo="$parentRight">
-          <Offset>
-            <AbsDimension x="0" y="0" />
-          </Offset>
-        </Anchor>
-      </Anchors>
-      <Scripts>
-        <OnClick>
+			<Texture name="$parentMiddle" file="Interface\AddOns\VuhDoOptions\Images\button_normal_128_32">
+				<Size>
+					<AbsDimension x="100" y="24" />
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT" />
+				</Anchors>
+				<TexCoords left="0.1953125" right="0.8046875" top="0" bottom="1" />
+			</Texture>
+
+			<Texture name="$parentRight" file="Interface\AddOns\VuhDoOptions\Images\button_normal_128_32">
+				<Size>
+					<AbsDimension x="25" y="24" />
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentMiddle" relativePoint="RIGHT" />
+				</Anchors>
+				<TexCoords left="0.8046875" right="1" top="0" bottom="1" />
+			</Texture>
+
+			<FontString name="$parentText" inherits="VuDoDefaultFontTemplate" text="VUHDO_I18N_SELECT" justifyH="RIGHT">
+				<Size>
+					<AbsDimension x="120" y="10" />
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="$parentRight">
+						<Offset>
+							<AbsDimension x="-32" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</FontString>
+		</Layer>
+	</Layers>
+	<Frames>
+		<Button name="$parentButton" enableMouse="true">
+			<Size>
+				<AbsDimension x="32" y="32" />
+			</Size>
+			<Anchors>
+				<Anchor point="RIGHT" relativeTo="$parentRight">
+					<Offset>
+						<AbsDimension x="0" y="0" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<Scripts>
+				<OnClick>
 					VUHDO_lnfComboButtonClicked(self);
 				</OnClick>
-      </Scripts>
-      <NormalTexture name="$parentNormalTexture" file="Interface\AddOns\VuhDoOptions\Images\button_combo_32_32">
-        <Size>
-          <AbsDimension x="24" y="24" />
-        </Size>
-        <Anchors>
-          <Anchor point="RIGHT" />
-        </Anchors>
-      </NormalTexture>
-      <PushedTexture name="$parentPushedTexture" file="Interface\AddOns\VuhDoOptions\Images\button_combo_pressed_32_32">
-        <Size>
-          <AbsDimension x="24" y="24" />
-        </Size>
-        <Anchors>
-          <Anchor point="RIGHT" />
-        </Anchors>
-      </PushedTexture>
-      <DisabledTexture>
-      </DisabledTexture>
-      <HighlightTexture name="$parentHighlightTexture" file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD">
-        <Size>
-          <AbsDimension x="24" y="24" />
-        </Size>
-        <Anchors>
-          <Anchor point="RIGHT" />
-        </Anchors>
-      </HighlightTexture>
-  		<Scripts>
+			</Scripts>
+			<NormalTexture name="$parentNormalTexture" file="Interface\AddOns\VuhDoOptions\Images\button_combo_32_32">
+				<Size>
+					<AbsDimension x="24" y="24" />
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" />
+				</Anchors>
+			</NormalTexture>
+			<PushedTexture name="$parentPushedTexture" file="Interface\AddOns\VuhDoOptions\Images\button_combo_pressed_32_32">
+				<Size>
+					<AbsDimension x="24" y="24" />
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" />
+				</Anchors>
+			</PushedTexture>
+			<DisabledTexture>
+			</DisabledTexture>
+			<HighlightTexture name="$parentHighlightTexture" file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD">
+				<Size>
+					<AbsDimension x="24" y="24" />
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" />
+				</Anchors>
+			</HighlightTexture>
+			<Scripts>
 				<OnEnter>VUHDO_lnfShowTooltip(self:GetParent())</OnEnter>
 				<OnLeave>VUHDO_lnfHideTooltip(self:GetParent())</OnLeave>
-  		</Scripts>
-    </Button>
-    <Frame name="$parentSelectPanel" hidden="true" clampedToScreen="true" frameStrata="TOOLTIP" inherits="VuhDoPanelTemplate">
-      <Size>
-        <AbsDimension x="150" y="235" />
-      </Size>
-      <Anchors>
-        <Anchor point="TOPRIGHT" relativeTo="$parentRight">
-          <Offset>
-            <AbsDimension x="0" y="-22" />
-          </Offset>
-        </Anchor>
-      </Anchors>
-    </Frame>
-  </Frames>
-  <Scripts>
-    <OnShow>
-    	VUHDO_lnfPatchFont(self, "Text");
+			</Scripts>
+		</Button>
+		<Frame name="$parentSelectPanel" hidden="true" clampedToScreen="true" frameStrata="TOOLTIP" inherits="VuhDoPanelTemplate">
+			<Size>
+				<AbsDimension x="150" y="235" />
+			</Size>
+			<Anchors>
+				<Anchor point="TOPRIGHT" relativeTo="$parentRight">
+					<Offset>
+						<AbsDimension x="0" y="-22" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+		</Frame>
+	</Frames>
+	<Scripts>
+		<OnShow>
+			VUHDO_lnfPatchFont(self, "Text");
 			VUHDO_lnfComboBoxInitFromModel(self);
 		</OnShow>
-    <OnHide>
-    	VUHDO_lnfComboSelectHide(self);
-    </OnHide>
-  </Scripts>
+		<OnHide>
+			VUHDO_lnfComboSelectHide(self);
+		</OnHide>
+	</Scripts>
 </Button>
 
-
 <EditBox name="VuhDoEditBoxTemplate" autoFocus="false" historyLines="0" justifyH="LEFT" virtual="true">
-  <Size>
-    <AbsDimension x="160" y="22" />
-  </Size>
-  <Layers>
-    <Layer level="BACKGROUND">
-      <Texture name="$parentLeft" file="Interface\AddOns\VuhDoOptions\Images\input_border_1">
-        <Size>
-          <AbsDimension x="8" y="20" />
-        </Size>
-        <Anchors>
-          <Anchor point="LEFT">
-            <Offset>
-              <AbsDimension x="-4" y="0" />
-            </Offset>
-          </Anchor>
-        </Anchors>
-        <TexCoords left="0" right="0.0625" top="0" bottom="1" />
-      </Texture>
-
-      <Texture name="$parentRight" file="Interface\AddOns\VuhDoOptions\Images\input_border_1">
-        <Size>
-          <AbsDimension x="8" y="20" />
-        </Size>
-        <Anchors>
-          <Anchor point="RIGHT" />
-        </Anchors>
-        <TexCoords left="0.9375" right="1" top="0" bottom="1" />
-      </Texture>
-
-      <Texture name="$parentMiddle" file="Interface\AddOns\VuhDoOptions\Images\input_border_1">
-        <Size>
-          <AbsDimension x="10" y="20" />
-        </Size>
-        <Anchors>
-          <Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT" />
-          <Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT" />
-        </Anchors>
-        <TexCoords left="0.0625" right="0.9375" top="0" bottom="1" />
-      </Texture>
-
-		  <FontString name="$parentHint" text="" inherits="VuDoDefaultFontTemplate">
+	<Size>
+		<AbsDimension x="160" y="22" />
+	</Size>
+	<Layers>
+		<Layer level="BACKGROUND">
+			<Texture name="$parentLeft" file="Interface\AddOns\VuhDoOptions\Images\input_border_1">
+				<Size>
+					<AbsDimension x="8" y="20" />
+				</Size>
 				<Anchors>
-			    <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
-			    	<Offset>
-			      	<AbsDimension x="-5" y="-9" />
-		  	  	</Offset>
-			  	</Anchor>
+					<Anchor point="LEFT">
+						<Offset>
+							<AbsDimension x="-4" y="0" />
+						</Offset>
+					</Anchor>
 				</Anchors>
-    		<FontHeight>
-		      <AbsValue val="8" />
-    		</FontHeight>
-		    <Color r="0.8" g="0.8" b="1" />
-    		<Shadow>
-      		<Color r="0.8" g="0.8" b="1" a="0" />
-      		<Offset>
-        		<AbsDimension x="0" y="0" />
-      		</Offset>
-    		</Shadow>
-  		</FontString>
+				<TexCoords left="0" right="0.0625" top="0" bottom="1" />
+			</Texture>
 
-    </Layer>
-  </Layers>
-  <FontString font="Interface\AddOns\VuhDo\Fonts\ariblk.ttf">
-    <FontHeight>
-      <AbsValue val="11" />
-    </FontHeight>
-    <Color r="0.8" g="0.8" b="1" />
-    <Shadow>
-      <Color r="0.8" g="0.8" b="1" a="0" />
-      <Offset>
-        <AbsDimension x="0" y="0" />
-      </Offset>
-    </Shadow>
-  </FontString>
-  <Scripts>
-    <OnShow>VUHDO_lnfPatchFont(self, "Hint"); VUHDO_lnfPatchFont(self, ""); VUHDO_lnfEditBoxInitFromModel(self);</OnShow>
-    <OnTextChanged>VUHDO_lnfEditBoxUpdateModel(self)</OnTextChanged>
-  	<OnEscapePressed>self:ClearFocus();</OnEscapePressed>
-	  <OnEditFocusLost>self:HighlightText(0, 0);</OnEditFocusLost>
+			<Texture name="$parentRight" file="Interface\AddOns\VuhDoOptions\Images\input_border_1">
+				<Size>
+					<AbsDimension x="8" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" />
+				</Anchors>
+				<TexCoords left="0.9375" right="1" top="0" bottom="1" />
+			</Texture>
+
+			<Texture name="$parentMiddle" file="Interface\AddOns\VuhDoOptions\Images\input_border_1">
+				<Size>
+					<AbsDimension x="10" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT" />
+					<Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT" />
+				</Anchors>
+				<TexCoords left="0.0625" right="0.9375" top="0" bottom="1" />
+			</Texture>
+
+			<FontString name="$parentHint" text="" inherits="VuDoDefaultFontTemplate">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-5" y="-9" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<FontHeight>
+					<AbsValue val="8" />
+				</FontHeight>
+				<Color r="0.8" g="0.8" b="1" />
+				<Shadow>
+					<Color r="0.8" g="0.8" b="1" a="0" />
+					<Offset>
+						<AbsDimension x="0" y="0" />
+					</Offset>
+				</Shadow>
+			</FontString>
+		</Layer>
+	</Layers>
+
+	<FontString font="Interface\AddOns\VuhDo\Fonts\ariblk.ttf">
+		<FontHeight>
+			<AbsValue val="11" />
+		</FontHeight>
+		<Color r="0.8" g="0.8" b="1" />
+		<Shadow>
+			<Color r="0.8" g="0.8" b="1" a="0" />
+			<Offset>
+				<AbsDimension x="0" y="0" />
+			</Offset>
+		</Shadow>
+	</FontString>
+	<Scripts>
+		<OnShow>VUHDO_lnfPatchFont(self, "Hint"); VUHDO_lnfPatchFont(self, ""); VUHDO_lnfEditBoxInitFromModel(self);</OnShow>
+		<OnTextChanged>VUHDO_lnfEditBoxUpdateModel(self)</OnTextChanged>
+		<OnEscapePressed>self:ClearFocus();</OnEscapePressed>
+		<OnEditFocusLost>self:HighlightText(0, 0);</OnEditFocusLost>
 		<OnEditFocusGained>self:HighlightText();</OnEditFocusGained>
 		<OnEnter>VUHDO_lnfShowTooltip(self)</OnEnter>
 		<OnLeave>VUHDO_lnfHideTooltip(self)</OnLeave>
@@ -1299,53 +1313,53 @@
 </EditBox>
 
 <EditBox name="VuhDoEditBox2Template" autoFocus="false" historyLines="32" justifyH="LEFT" virtual="true">
-  <Size>
-    <AbsDimension x="160" y="22" />
-  </Size>
-  <Layers>
-    <Layer level="BACKGROUND">
-		  <FontString name="$parentHint" text="" inherits="VuDoDefaultFontTemplate">
+	<Size>
+		<AbsDimension x="160" y="22" />
+	</Size>
+	<Layers>
+		<Layer level="BACKGROUND">
+			<FontString name="$parentHint" text="" inherits="VuDoDefaultFontTemplate">
 				<Anchors>
-			    <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
-			    	<Offset>
-			      	<AbsDimension x="-5" y="-9" />
-		  	  	</Offset>
-			  	</Anchor>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-5" y="-9" />
+						</Offset>
+					</Anchor>
 				</Anchors>
-    		<FontHeight>
-		      <AbsValue val="8" />
-    		</FontHeight>
-		    <Color r="0.8" g="0.8" b="1" />
-    		<Shadow>
-      		<Color r="0.8" g="0.8" b="1" a="0" />
-      		<Offset>
-        		<AbsDimension x="0" y="0" />
-      		</Offset>
-    		</Shadow>
-  		</FontString>
-    </Layer>
-  </Layers>
-  <FontString font="Interface\AddOns\VuhDo\Fonts\ariblk.ttf">
-    <FontHeight>
-      <AbsValue val="8" />
-    </FontHeight>
-    <Color r="0.4" g="0.4" b="1" />
-    <Shadow>
-      <Color r="0.4" g="0.4" b="1" a="0" />
-      <Offset>
-        <AbsDimension x="0" y="0" />
-      </Offset>
-    </Shadow>
-  </FontString>
-  <Scripts>
-    <OnShow>VUHDO_lnfPatchFont(self, "Hint"); VUHDO_lnfPatchFont(self, ""); VUHDO_lnfEditBoxInitFromModel(self);</OnShow>
-    <OnTextChanged>
-    	VUHDO_lnfEditBoxUpdateModel(self);
-    </OnTextChanged>
-  	<OnEscapePressed>self:ClearFocus();</OnEscapePressed>
-	  <OnEditFocusLost>
-		  self:HighlightText(0, 0);
-	  </OnEditFocusLost>
+				<FontHeight>
+					<AbsValue val="8" />
+				</FontHeight>
+				<Color r="0.4" g="0.4" b="1" />
+				<Shadow>
+					<Color r="0.4" g="0.4" b="1" a="0" />
+					<Offset>
+						<AbsDimension x="0" y="0" />
+					</Offset>
+				</Shadow>
+			</FontString>
+		</Layer>
+	</Layers>
+	<FontString font="Interface\AddOns\VuhDo\Fonts\ariblk.ttf">
+		<FontHeight>
+			<AbsValue val="8" />
+		</FontHeight>
+		<Color r="1" g="1" b="1" />
+		<Shadow>
+			<Color r="0.4" g="0.4" b="1" a="0" />
+			<Offset>
+				<AbsDimension x="0" y="0" />
+			</Offset>
+		</Shadow>
+	</FontString>
+	<Scripts>
+		<OnShow>VUHDO_lnfPatchFont(self, "Hint"); VUHDO_lnfPatchFont(self, ""); VUHDO_lnfEditBoxInitFromModel(self);</OnShow>
+		<OnTextChanged>
+			VUHDO_lnfEditBoxUpdateModel(self);
+		</OnTextChanged>
+		<OnEscapePressed>self:ClearFocus();</OnEscapePressed>
+		<OnEditFocusLost>
+			self:HighlightText(0, 0);
+		</OnEditFocusLost>
 		<OnEditFocusGained>self:HighlightText();</OnEditFocusGained>
 		<OnEnter>VUHDO_lnfShowTooltip(self)</OnEnter>
 		<OnLeave>VUHDO_lnfHideTooltip(self)</OnLeave>
@@ -1354,185 +1368,183 @@
 	</Scripts>
 </EditBox>
 
-
 <Button name="VuhDoEditComboBoxTemplate" enableMouse="false" virtual="true">
-  <Size>
-    <AbsDimension x="1" y="1" />
-  </Size>
-  <Layers>
-    <Layer>
-      <Texture name="$parentLeft" file="Interface\AddOns\VuhDoOptions\Images\button_combo_edit_128_32">
-        <Size>
-          <AbsDimension x="25" y="24" />
-        </Size>
-        <Anchors>
-          <Anchor point="TOPLEFT">
-            <Offset>
-              <AbsDimension x="0" y="17" />
-            </Offset>
-          </Anchor>
-        </Anchors>
-        <TexCoords left="0" right="0.1953125" top="0" bottom="1" />
-      </Texture>
-      <Texture name="$parentMiddle" file="Interface\AddOns\VuhDoOptions\Images\button_combo_edit_128_32">
-        <Size>
-          <AbsDimension x="120" y="24" />
-        </Size>
-        <Anchors>
-          <Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT" />
-        </Anchors>
-        <TexCoords left="0.1953125" right="0.8046875" top="0" bottom="1" />
-      </Texture>
-      <Texture name="$parentRight" file="Interface\AddOns\VuhDoOptions\Images\button_combo_edit_128_32">
-        <Size>
-          <AbsDimension x="25" y="24" />
-        </Size>
-        <Anchors>
-          <Anchor point="LEFT" relativeTo="$parentMiddle" relativePoint="RIGHT" />
-        </Anchors>
-        <TexCoords left="0.8046875" right="1" top="0" bottom="1" />
-      </Texture>
-    </Layer>
-  </Layers>
-  <Frames>
+	<Size>
+		<AbsDimension x="1" y="1" />
+	</Size>
+	<Layers>
+		<Layer>
+			<Texture name="$parentLeft" file="Interface\AddOns\VuhDoOptions\Images\button_combo_edit_128_32">
+				<Size>
+					<AbsDimension x="25" y="24" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="17" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<TexCoords left="0" right="0.1953125" top="0" bottom="1" />
+			</Texture>
+			<Texture name="$parentMiddle" file="Interface\AddOns\VuhDoOptions\Images\button_combo_edit_128_32">
+				<Size>
+					<AbsDimension x="120" y="24" />
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT" />
+				</Anchors>
+				<TexCoords left="0.1953125" right="0.8046875" top="0" bottom="1" />
+			</Texture>
+			<Texture name="$parentRight" file="Interface\AddOns\VuhDoOptions\Images\button_combo_edit_128_32">
+				<Size>
+					<AbsDimension x="25" y="24" />
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentMiddle" relativePoint="RIGHT" />
+				</Anchors>
+				<TexCoords left="0.8046875" right="1" top="0" bottom="1" />
+			</Texture>
+		</Layer>
+	</Layers>
+	<Frames>
 
-    <EditBox name="$parentEditBox" inherits="VuhDoEditBox2Template">
-      <Size>
-        <AbsDimension x="140" y="34" />
-      </Size>
-      <Anchors>
-        <Anchor point="TOPLEFT">
-          <Offset>
-            <AbsDimension x="7" y="22" />
-          </Offset>
-        </Anchor>
-      </Anchors>
-    </EditBox>
+		<EditBox name="$parentEditBox" inherits="VuhDoEditBox2Template">
+			<Size>
+				<AbsDimension x="140" y="34" />
+			</Size>
+			<Anchors>
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="7" y="22" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+		</EditBox>
 
-    <Button name="$parentButton" enableMouse="true">
-      <Size>
-        <AbsDimension x="32" y="32" />
-      </Size>
-      <Anchors>
-        <Anchor point="RIGHT" relativeTo="$parentRight">
-          <Offset>
-            <AbsDimension x="0" y="0" />
-          </Offset>
-        </Anchor>
-      </Anchors>
-      <Scripts>
-        <OnClick>
+		<Button name="$parentButton" enableMouse="true">
+			<Size>
+				<AbsDimension x="32" y="32" />
+			</Size>
+			<Anchors>
+				<Anchor point="RIGHT" relativeTo="$parentRight">
+					<Offset>
+						<AbsDimension x="0" y="0" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<Scripts>
+				<OnClick>
 					VUHDO_lnfComboButtonClicked(self);
 				</OnClick>
-      </Scripts>
-      <NormalTexture name="$parentNormalTexture" file="Interface\AddOns\VuhDoOptions\Images\button_combo_32_32">
-        <Size>
-          <AbsDimension x="24" y="24" />
-        </Size>
-        <Anchors>
-          <Anchor point="RIGHT" />
-        </Anchors>
-      </NormalTexture>
-      <PushedTexture name="$parentPushedTexture" file="Interface\AddOns\VuhDoOptions\Images\button_combo_pressed_32_32">
-        <Size>
-          <AbsDimension x="24" y="24" />
-        </Size>
-        <Anchors>
-          <Anchor point="RIGHT" />
-        </Anchors>
-      </PushedTexture>
-      <DisabledTexture>
-      </DisabledTexture>
-      <HighlightTexture name="$parentHighlightTexture" file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD">
-        <Size>
-          <AbsDimension x="24" y="24" />
-        </Size>
-        <Anchors>
-          <Anchor point="RIGHT" />
-        </Anchors>
-      </HighlightTexture>
-  		<Scripts>
+			</Scripts>
+			<NormalTexture name="$parentNormalTexture" file="Interface\AddOns\VuhDoOptions\Images\button_combo_32_32">
+				<Size>
+					<AbsDimension x="24" y="24" />
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" />
+				</Anchors>
+			</NormalTexture>
+			<PushedTexture name="$parentPushedTexture" file="Interface\AddOns\VuhDoOptions\Images\button_combo_pressed_32_32">
+				<Size>
+					<AbsDimension x="24" y="24" />
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" />
+				</Anchors>
+			</PushedTexture>
+			<DisabledTexture>
+			</DisabledTexture>
+			<HighlightTexture name="$parentHighlightTexture" file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD">
+				<Size>
+					<AbsDimension x="24" y="24" />
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" />
+				</Anchors>
+			</HighlightTexture>
+			<Scripts>
 				<OnEnter>VUHDO_lnfShowTooltip(self:GetParent())</OnEnter>
 				<OnLeave>VUHDO_lnfHideTooltip(self:GetParent())</OnLeave>
-  		</Scripts>
-    </Button>
-    <ScrollFrame name="$parentScrollPanel" hidden="true" clampedToScreen="true" frameStrata="TOOLTIP"  inherits="VuhDoScrollPanelTemplate2">
-	    <Size>
-	      <AbsDimension x="150" y="235" />
-	    </Size>
-      <Anchors>
-        <Anchor point="TOPRIGHT" relativeTo="$parentRight">
-          <Offset>
-            <AbsDimension x="0" y="-22" />
-          </Offset>
-        </Anchor>
-      </Anchors>
+			</Scripts>
+		</Button>
+		<ScrollFrame name="$parentScrollPanel" hidden="true" clampedToScreen="true" frameStrata="TOOLTIP"	inherits="VuhDoScrollPanelTemplate2">
+			<Size>
+				<AbsDimension x="150" y="235" />
+			</Size>
+			<Anchors>
+				<Anchor point="TOPRIGHT" relativeTo="$parentRight">
+					<Offset>
+						<AbsDimension x="0" y="-22" />
+					</Offset>
+				</Anchor>
+			</Anchors>
 			<ScrollChild>
-		    <Frame name="$parentSelectPanel">
-		      <Anchors>
-		        <Anchor point="TOPLEFT">
-		          <Offset>
-		            <AbsDimension x="0" y="0" />
-		          </Offset>
-		        </Anchor>
-		      </Anchors>
-		      <Size>
-		        <AbsDimension x="1" y="1" />
-		      </Size>
-		    </Frame>
+				<Frame name="$parentSelectPanel">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="0" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Size>
+						<AbsDimension x="1" y="1" />
+					</Size>
+				</Frame>
 			</ScrollChild>
-    </ScrollFrame>
-  </Frames>
-  <Scripts>
-    <OnShow>
-    	VUHDO_lnfPatchFont(self, "EditBox");
+		</ScrollFrame>
+	</Frames>
+	<Scripts>
+		<OnShow>
+			VUHDO_lnfPatchFont(self, "EditBox");
 			VUHDO_lnfComboBoxInitFromModel(self);
 		</OnShow>
-    <OnHide>
-    	VUHDO_lnfComboSelectHide(self);
-    </OnHide>
-  </Scripts>
+		<OnHide>
+			VUHDO_lnfComboSelectHide(self);
+		</OnHide>
+	</Scripts>
 </Button>
 
-
 <Frame name="VuhDoFrameTemplate" toplevel="true" frameStrata="MEDIUM" movable="true" parent="UIParent" enableMouse="true" virtual="true">
-  <Anchors>
-    <Anchor point="CENTER" relativeTo="UIParent">
-      <Offset>
-        <AbsDimension x="0" y="0" />
-      </Offset>
-    </Anchor>
-  </Anchors>
-  <Backdrop bgFile="Interface\AddOns\VuhDoOptions\Images\blue_lt_square_16_16" edgeFile="Interface\AddOns\VuhDoOptions\Images\panel_edges_2" tile="true">
-    <BackgroundInsets>
-      <AbsInset left="1" right="1" top="1" bottom="1" />
-    </BackgroundInsets>
-    <TileSize>
-      <AbsValue val="16" />
-    </TileSize>
-    <EdgeSize>
-      <AbsValue val="16" />
-    </EdgeSize>
-  </Backdrop>
-  <Layers>
-    <Layer>
-    </Layer>
-  </Layers>
+	<Anchors>
+		<Anchor point="CENTER" relativeTo="UIParent">
+			<Offset>
+				<AbsDimension x="0" y="0" />
+			</Offset>
+		</Anchor>
+	</Anchors>
+	<Backdrop bgFile="Interface\AddOns\VuhDoOptions\Images\blue_lt_square_16_16" edgeFile="Interface\AddOns\VuhDoOptions\Images\panel_edges_2" tile="true">
+		<BackgroundInsets>
+			<AbsInset left="1" right="1" top="1" bottom="1" />
+		</BackgroundInsets>
+		<TileSize>
+			<AbsValue val="16" />
+		</TileSize>
+		<EdgeSize>
+			<AbsValue val="16" />
+		</EdgeSize>
+	</Backdrop>
+	<Layers>
+		<Layer>
+		</Layer>
+	</Layers>
 </Frame>
 
 
 <Frame name="VuhDoPanelTemplate" virtual="true">
-  <Backdrop bgFile="Interface\AddOns\VuhDo\Images\white_square_16_16" edgeFile="Interface\AddOns\VuhDoOptions\Images\panel_edges_1" tile="true">
-    <BackgroundInsets>
-      <AbsInset left="3" right="3" top="3" bottom="3" />
-    </BackgroundInsets>
-    <TileSize>
-      <AbsValue val="16" />
-    </TileSize>
-    <EdgeSize>
-      <AbsValue val="16" />
-    </EdgeSize>
-  </Backdrop>
+	<Backdrop bgFile="Interface\AddOns\VuhDo\Images\white_square_16_16" edgeFile="Interface\AddOns\VuhDoOptions\Images\panel_edges_1" tile="true">
+		<BackgroundInsets>
+			<AbsInset left="3" right="3" top="3" bottom="3" />
+		</BackgroundInsets>
+		<TileSize>
+			<AbsValue val="16" />
+		</TileSize>
+		<EdgeSize>
+			<AbsValue val="16" />
+		</EdgeSize>
+	</Backdrop>
 </Frame>
 
 
@@ -1540,22 +1552,22 @@
 	<Size>
 		<AbsDimension x="16" y="0"/>
 	</Size>
-  <Backdrop bgFile="Interface\AddOns\VuhDoOptions\Images\blue_dk_square_16_16" edgeFile="Interface\AddOns\VuhDoOptions\Images\panel_edges_3" tile="true">
-    <BackgroundInsets>
-      <AbsInset left="1" right="1" top="1" bottom="1" />
-    </BackgroundInsets>
-    <TileSize>
-      <AbsValue val="8" />
-    </TileSize>
-    <EdgeSize>
-      <AbsValue val="8" />
-    </EdgeSize>
-  </Backdrop>
+	<Backdrop bgFile="Interface\AddOns\VuhDoOptions\Images\blue_dk_square_16_16" edgeFile="Interface\AddOns\VuhDoOptions\Images\panel_edges_3" tile="true">
+		<BackgroundInsets>
+			<AbsInset left="1" right="1" top="1" bottom="1" />
+		</BackgroundInsets>
+		<TileSize>
+			<AbsValue val="8" />
+		</TileSize>
+		<EdgeSize>
+			<AbsValue val="8" />
+		</EdgeSize>
+	</Backdrop>
 	<Frames>
 		<Button name="$parentScrollUpButton" inherits="UIPanelScrollUpButtonTemplate">
-		  <Size>
-		    <AbsDimension x="0" y="0" />
-		  </Size>
+			<Size>
+				<AbsDimension x="0" y="0" />
+			</Size>
 			<Anchors>
 				<Anchor point="BOTTOM" relativePoint="TOP"/>
 			</Anchors>
@@ -1568,9 +1580,9 @@
 			</Scripts>
 		</Button>
 		<Button name="$parentScrollDownButton" inherits="UIPanelScrollDownButtonTemplate">
-		  <Size>
-		    <AbsDimension x="0" y="0" />
-		  </Size>
+			<Size>
+				<AbsDimension x="0" y="0" />
+			</Size>
 			<Anchors>
 				<Anchor point="TOP" relativePoint="BOTTOM"/>
 			</Anchors>
@@ -1598,17 +1610,17 @@
 
 
 <ScrollFrame name="VuhDoScrollPanelTemplate" virtual="true">
-  <Backdrop bgFile="Interface\AddOns\VuhDo\Images\white_square_16_16" edgeFile="Interface\AddOns\VuhDoOptions\Images\panel_edges_4" tile="true">
-    <BackgroundInsets>
-      <AbsInset left="0" right="0" top="0" bottom="0" />
-    </BackgroundInsets>
-    <TileSize>
-      <AbsValue val="16" />
-    </TileSize>
-    <EdgeSize>
-      <AbsValue val="16" />
-    </EdgeSize>
-  </Backdrop>
+	<Backdrop bgFile="Interface\AddOns\VuhDo\Images\white_square_16_16" edgeFile="Interface\AddOns\VuhDoOptions\Images\panel_edges_4" tile="true">
+		<BackgroundInsets>
+			<AbsInset left="0" right="0" top="0" bottom="0" />
+		</BackgroundInsets>
+		<TileSize>
+			<AbsValue val="16" />
+		</TileSize>
+		<EdgeSize>
+			<AbsValue val="16" />
+		</EdgeSize>
+	</Backdrop>
 	<Frames>
 		<Slider name="$parentScrollBar" inherits="VuhDoPanelScrollBarTemplate">
 			<Anchors>
@@ -1638,7 +1650,7 @@
 			local min;
 			local max;
 			min, max = scrollbar:GetMinMaxValues();
-			if ( offset == 0 ) then
+			if (offset == 0) then
 				_G[scrollbar:GetName().."ScrollUpButton"]:Disable();
 			else
 				_G[scrollbar:GetName().."ScrollUpButton"]:Enable();
@@ -1656,17 +1668,17 @@
 </ScrollFrame>
 
 <ScrollFrame name="VuhDoScrollPanelTemplate2" virtual="true">
-  <Backdrop bgFile="Interface\AddOns\VuhDo\Images\white_square_16_16" edgeFile="Interface\AddOns\VuhDoOptions\Images\panel_edges_1" tile="true">
-    <BackgroundInsets>
-      <AbsInset left="0" right="0" top="0" bottom="0" />
-    </BackgroundInsets>
-    <TileSize>
-      <AbsValue val="16" />
-    </TileSize>
-    <EdgeSize>
-      <AbsValue val="16" />
-    </EdgeSize>
-  </Backdrop>
+	<Backdrop bgFile="Interface\AddOns\VuhDo\Images\white_square_16_16" edgeFile="Interface\AddOns\VuhDoOptions\Images\panel_edges_1" tile="true">
+		<BackgroundInsets>
+			<AbsInset left="0" right="0" top="0" bottom="0" />
+		</BackgroundInsets>
+		<TileSize>
+			<AbsValue val="16" />
+		</TileSize>
+		<EdgeSize>
+			<AbsValue val="16" />
+		</EdgeSize>
+	</Backdrop>
 	<Frames>
 		<Slider name="$parentScrollBar" inherits="VuhDoPanelScrollBarTemplate">
 			<Anchors>
@@ -1696,7 +1708,7 @@
 			local min;
 			local max;
 			min, max = scrollbar:GetMinMaxValues();
-			if ( offset == 0 ) then
+			if (offset == 0) then
 				_G[scrollbar:GetName().."ScrollUpButton"]:Disable();
 			else
 				_G[scrollbar:GetName().."ScrollUpButton"]:Enable();
@@ -1716,195 +1728,195 @@
 
 
 <Button name="VuhDoScrollComboBoxTemplate" enableMouse="false" virtual="true">
-  <Size>
-    <AbsDimension x="120" y="24" />
-  </Size>
-  <Layers>
-    <Layer>
-      <Texture name="$parentLeft" file="Interface\AddOns\VuhDoOptions\Images\button_normal_128_32">
-        <Size>
-          <AbsDimension x="25" y="24" />
-        </Size>
-        <Anchors>
-          <Anchor point="TOPLEFT">
-            <Offset>
-              <AbsDimension x="0" y="17" />
-            </Offset>
-          </Anchor>
-        </Anchors>
-        <TexCoords left="0" right="0.1953125" top="0" bottom="1" />
-      </Texture>
-      <Texture name="$parentMiddle" file="Interface\AddOns\VuhDoOptions\Images\button_normal_128_32">
-        <Size>
-          <AbsDimension x="100" y="24" />
-        </Size>
-        <Anchors>
-          <Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT" />
-        </Anchors>
-        <TexCoords left="0.1953125" right="0.8046875" top="0" bottom="1" />
-      </Texture>
-      <Texture name="$parentRight" file="Interface\AddOns\VuhDoOptions\Images\button_normal_128_32">
-        <Size>
-          <AbsDimension x="25" y="24" />
-        </Size>
-        <Anchors>
-          <Anchor point="LEFT" relativeTo="$parentMiddle" relativePoint="RIGHT" />
-        </Anchors>
-        <TexCoords left="0.8046875" right="1" top="0" bottom="1" />
-      </Texture>
+	<Size>
+		<AbsDimension x="120" y="24" />
+	</Size>
+	<Layers>
+		<Layer>
+			<Texture name="$parentLeft" file="Interface\AddOns\VuhDoOptions\Images\button_normal_128_32">
+				<Size>
+					<AbsDimension x="25" y="24" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="17" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<TexCoords left="0" right="0.1953125" top="0" bottom="1" />
+			</Texture>
+			<Texture name="$parentMiddle" file="Interface\AddOns\VuhDoOptions\Images\button_normal_128_32">
+				<Size>
+					<AbsDimension x="100" y="24" />
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT" />
+				</Anchors>
+				<TexCoords left="0.1953125" right="0.8046875" top="0" bottom="1" />
+			</Texture>
+			<Texture name="$parentRight" file="Interface\AddOns\VuhDoOptions\Images\button_normal_128_32">
+				<Size>
+					<AbsDimension x="25" y="24" />
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentMiddle" relativePoint="RIGHT" />
+				</Anchors>
+				<TexCoords left="0.8046875" right="1" top="0" bottom="1" />
+			</Texture>
 
-      <FontString name="$parentText" inherits="VuDoDefaultFontTemplate" text="VUHDO_I18N_SELECT" justifyH="RIGHT">
-        <Size>
-          <AbsDimension x="120" y="10" />
-        </Size>
-        <Anchors>
-          <Anchor point="RIGHT" relativeTo="$parentRight">
-            <Offset>
-              <AbsDimension x="-32" y="0" />
-            </Offset>
-          </Anchor>
-        </Anchors>
-      </FontString>
-    </Layer>
-  </Layers>
-  <Frames>
-    <Button name="$parentButton" enableMouse="true">
-      <Size>
-        <AbsDimension x="32" y="32" />
-      </Size>
-      <Anchors>
-        <Anchor point="RIGHT" relativeTo="$parentRight">
-          <Offset>
-            <AbsDimension x="0" y="0" />
-          </Offset>
-        </Anchor>
-      </Anchors>
-      <Scripts>
-        <OnClick>
+			<FontString name="$parentText" inherits="VuDoDefaultFontTemplate" text="VUHDO_I18N_SELECT" justifyH="RIGHT">
+				<Size>
+					<AbsDimension x="120" y="10" />
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="$parentRight">
+						<Offset>
+							<AbsDimension x="-32" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</FontString>
+		</Layer>
+	</Layers>
+	<Frames>
+		<Button name="$parentButton" enableMouse="true">
+			<Size>
+				<AbsDimension x="32" y="32" />
+			</Size>
+			<Anchors>
+				<Anchor point="RIGHT" relativeTo="$parentRight">
+					<Offset>
+						<AbsDimension x="0" y="0" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<Scripts>
+				<OnClick>
 					VUHDO_lnfComboButtonClicked(self);
 				</OnClick>
-      </Scripts>
-      <NormalTexture name="$parentNormalTexture" file="Interface\AddOns\VuhDoOptions\Images\button_combo_32_32">
-        <Size>
-          <AbsDimension x="24" y="24" />
-        </Size>
-        <Anchors>
-          <Anchor point="RIGHT" />
-        </Anchors>
-      </NormalTexture>
-      <PushedTexture name="$parentPushedTexture" file="Interface\AddOns\VuhDoOptions\Images\button_combo_pressed_32_32">
-        <Size>
-          <AbsDimension x="24" y="24" />
-        </Size>
-        <Anchors>
-          <Anchor point="RIGHT" />
-        </Anchors>
-      </PushedTexture>
-      <DisabledTexture>
-      </DisabledTexture>
-      <HighlightTexture name="$parentHighlightTexture" file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD">
-        <Size>
-          <AbsDimension x="24" y="24" />
-        </Size>
-        <Anchors>
-          <Anchor point="RIGHT" />
-        </Anchors>
-      </HighlightTexture>
-  		<Scripts>
+			</Scripts>
+			<NormalTexture name="$parentNormalTexture" file="Interface\AddOns\VuhDoOptions\Images\button_combo_32_32">
+				<Size>
+					<AbsDimension x="24" y="24" />
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" />
+				</Anchors>
+			</NormalTexture>
+			<PushedTexture name="$parentPushedTexture" file="Interface\AddOns\VuhDoOptions\Images\button_combo_pressed_32_32">
+				<Size>
+					<AbsDimension x="24" y="24" />
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" />
+				</Anchors>
+			</PushedTexture>
+			<DisabledTexture>
+			</DisabledTexture>
+			<HighlightTexture name="$parentHighlightTexture" file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD">
+				<Size>
+					<AbsDimension x="24" y="24" />
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" />
+				</Anchors>
+			</HighlightTexture>
+			<Scripts>
 				<OnEnter>VUHDO_lnfShowTooltip(self:GetParent())</OnEnter>
 				<OnLeave>VUHDO_lnfHideTooltip(self:GetParent())</OnLeave>
-  		</Scripts>
-    </Button>
+			</Scripts>
+		</Button>
 
-    <ScrollFrame name="$parentScrollPanel" hidden="true" clampedToScreen="true" frameStrata="TOOLTIP"  inherits="VuhDoScrollPanelTemplate2">
-	    <Size>
-	      <AbsDimension x="150" y="235" />
-	    </Size>
-      <Anchors>
-        <Anchor point="TOPRIGHT" relativeTo="$parentRight">
-          <Offset>
-            <AbsDimension x="0" y="-22" />
-          </Offset>
-        </Anchor>
-      </Anchors>
+		<ScrollFrame name="$parentScrollPanel" hidden="true" clampedToScreen="true" frameStrata="TOOLTIP" inherits="VuhDoScrollPanelTemplate2">
+			<Size>
+				<AbsDimension x="150" y="235" />
+			</Size>
+			<Anchors>
+				<Anchor point="TOPRIGHT" relativeTo="$parentRight">
+					<Offset>
+						<AbsDimension x="0" y="-22" />
+					</Offset>
+				</Anchor>
+			</Anchors>
 			<ScrollChild>
-		    <Frame name="$parentSelectPanel">
-		      <Anchors>
-		        <Anchor point="TOPLEFT">
-		          <Offset>
-		            <AbsDimension x="0" y="0" />
-		          </Offset>
-		        </Anchor>
-		      </Anchors>
-		      <Size>
-		        <AbsDimension x="1" y="1" />
-		      </Size>
-		    </Frame>
+				<Frame name="$parentSelectPanel">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="0" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Size>
+						<AbsDimension x="1" y="1" />
+					</Size>
+				</Frame>
 			</ScrollChild>
-    </ScrollFrame>
-  </Frames>
-  <Scripts>
-    <OnShow>
-    	VUHDO_lnfPatchFont(self, "Text");
+		</ScrollFrame>
+	</Frames>
+	<Scripts>
+		<OnShow>
+			VUHDO_lnfPatchFont(self, "Text");
 			VUHDO_lnfComboBoxInitFromModel(self);
 		</OnShow>
-    <OnHide>
-    	VUHDO_lnfComboSelectHide(self);
-    </OnHide>
-  </Scripts>
+		<OnHide>
+			VUHDO_lnfComboSelectHide(self);
+		</OnHide>
+	</Scripts>
 </Button>
 
 
 <Frame name="VuhDoPanelAppendBottomTemplate" virtual="true">
-  <Backdrop bgFile="Interface\AddOns\VuhDoOptions\Images\blue_lt_square_16_16" edgeFile="Interface\AddOns\VuhDoOptions\Images\panel_edges_2_append_bottom" tile="true">
-    <BackgroundInsets>
-      <AbsInset left="1" right="1" top="1" bottom="1" />
-    </BackgroundInsets>
-    <TileSize>
-      <AbsValue val="16" />
-    </TileSize>
-    <EdgeSize>
-      <AbsValue val="16" />
-    </EdgeSize>
-  </Backdrop>
+	<Backdrop bgFile="Interface\AddOns\VuhDoOptions\Images\blue_lt_square_16_16" edgeFile="Interface\AddOns\VuhDoOptions\Images\panel_edges_2_append_bottom" tile="true">
+		<BackgroundInsets>
+			<AbsInset left="1" right="1" top="1" bottom="1" />
+		</BackgroundInsets>
+		<TileSize>
+			<AbsValue val="16" />
+		</TileSize>
+		<EdgeSize>
+			<AbsValue val="16" />
+		</EdgeSize>
+	</Backdrop>
 </Frame>
 
 
 <Frame name="VuhDoOptionsTooltip" frameStrata="TOOLTIP" movable="true" hidden="true" inherits="VuhDoPanelTemplate">
-  <Size>
-    <AbsDimension x="120" y="120" />
-  </Size>
+	<Size>
+		<AbsDimension x="120" y="120" />
+	</Size>
 
 	<Frames>
-  	<Frame name="$parentText">
-      <Size>
-        <AbsDimension x="110" y="110" />
-      </Size>
-      <Anchors>
-        <Anchor point="TOPLEFT">
-          <Offset>
-            <AbsDimension x="5" y="-5" />
-          </Offset>
-        </Anchor>
-      </Anchors>
-      <Layers>
-        <Layer>
-          <FontString name="$parentText" justifyH="LEFT" inherits="VuDoDefaultFontTemplate">
-					  <Size>
-					    <AbsDimension x="110" />
-					  </Size>
-      			<Anchors>
-        			<Anchor point="TOPLEFT">
-          			<Offset>
-            			<AbsDimension x="0" y="0" />
-          			</Offset>
-        			</Anchor>
-      			</Anchors>
-          </FontString>
-        </Layer>
-      </Layers>
-    </Frame>
-  </Frames>
+		<Frame name="$parentText">
+			<Size>
+				<AbsDimension x="110" y="110" />
+			</Size>
+			<Anchors>
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="5" y="-5" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<Layers>
+				<Layer>
+					<FontString name="$parentText" justifyH="LEFT" inherits="VuDoDefaultFontTemplate">
+						<Size>
+							<AbsDimension x="110" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</FontString>
+				</Layer>
+			</Layers>
+		</Frame>
+	</Frames>
 </Frame>
 
 
@@ -2099,3 +2111,4 @@
 
 
 </Ui>
+

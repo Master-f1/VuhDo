@@ -52,7 +52,7 @@ VUHDO_PLAYER_GROUP = nil;
 
 VUHDO_GLOBAL = getfenv();
 
--- BURST CACHE ---------------------------------------------------
+-- BURST CACHE
 local VUHDO_getUnitIds;
 local VUHDO_getUnitNo;
 local VUHDO_isInRange;
@@ -99,7 +99,7 @@ local tinsert = tinsert;
 local tremove = tremove;
 local strfind = strfind;
 local gsub = gsub;
---local VUHDO_PANEL_MODELS;
+-- local VUHDO_PANEL_MODELS;
 local VUHDO_determineRole;
 local VUHDO_getUnitHealthPercent;
 local GetTime = GetTime;
@@ -174,9 +174,6 @@ local function VUHDO_setTopEmergencies(aMaxAnz)
 	end
 end
 
-
-
---
 local tInfoA, tInfoB;
 local VUHDO_EMERGENCY_SORTERS = {
 	[VUHDO_MODE_EMERGENCY_MOST_MISSING] = function(aUnit, anotherUnit)
@@ -433,7 +430,7 @@ function VUHDO_updateHealth(aUnit, aMode)
 	end
 
 	if (1 ~= VUHDO_CONFIG["MODE"] -- VUHDO_MODE_NEUTRAL
-		and (2 == aMode or 3 == aMode)) then --[[ VUHDO_UPDATE_HEALTH -- VUHDO_UPDATE_HEALTH_MAX ]]
+		and (2 == aMode or 3 == aMode)) then -- VUHDO_UPDATE_HEALTH -- VUHDO_UPDATE_HEALTH_MAX
 		-- Remove old emergencies
 		VUHDO_FORCE_RESET = true;
 		for tUnit, _ in pairs(VUHDO_EMERGENCIES) do
@@ -606,9 +603,9 @@ local function VUHDO_addUnitToRole(aUnit)
 
 	tinsert(VUHDO_GROUPS[tRole], aUnit);
 
-	if(tRole == 63 or tRole == 62) then -- VUHDO_ID_RANGED_HEAL VUHDO_ID_RANGED_DAMAGE
+	if(tRole == 63 or tRole == 62) then -- VUHDO_ID_RANGED_HEAL -- VUHDO_ID_RANGED_DAMAGE
 		tinsert(VUHDO_GROUPS[51], aUnit); -- VUHDO_ID_RANGED
-	elseif(tRole == 61 or tRole == 60) then -- VUHDO_ID_MELEE_DAMAGE VUHDO_ID_MELEE_TANK
+	elseif(tRole == 61 or tRole == 60) then -- VUHDO_ID_MELEE_DAMAGE -- VUHDO_ID_MELEE_TANK
 		tinsert(VUHDO_GROUPS[50], aUnit); -- VUHDO_ID_MELEE
 	end
 end

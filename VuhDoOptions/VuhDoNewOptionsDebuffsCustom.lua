@@ -1,27 +1,21 @@
 local VUHDO_COMBO_MODEL = nil;
 
-
-
---
 local tStoredName;
 local tIndex;
-local tDebuffsSorted = { };
+local tDebuffsSorted = {};
 function VUHDO_initCustomDebuffComboModel()
-  table.sort(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"],
+	table.sort(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"],
 		function(aDebuff, anotherDebuff)
 			return aDebuff < anotherDebuff;
 		end
 	);
 
-	VUHDO_COMBO_MODEL = { };
+	VUHDO_COMBO_MODEL = {};
 	for tIndex, tStoredName in ipairs(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"]) do
-		VUHDO_COMBO_MODEL[tIndex] = { tStoredName, tStoredName };
+		VUHDO_COMBO_MODEL[tIndex] = {tStoredName, tStoredName};
 	end
 end
 
-
-
---
 function VUHDO_setupCustomDebuffsComboModel(aComboBox)
 	if (VUHDO_COMBO_MODEL == nil) then
 		VUHDO_initCustomDebuffComboModel();
@@ -32,9 +26,6 @@ function VUHDO_setupCustomDebuffsComboModel(aComboBox)
 	VUHDO_lnfComboBoxInitFromModel(aComboBox);
 end
 
-
-
---
 function VUHDO_notifyCustomDebuffSelect(aComboBox, aValue)
 	if (VuhDoNewOptionsDebuffsCustomStorePanelEditBox ~= nil and aValue ~= nil) then
 		VuhDoNewOptionsDebuffsCustomStorePanelEditBox:SetText(aValue);
@@ -43,7 +34,6 @@ function VUHDO_notifyCustomDebuffSelect(aComboBox, aValue)
 	end
 end
 
-
 VUHDO_ICON_MODEL = nil;
 VUHDO_COLOR_MODEL = nil;
 VUHDO_ANIMATE_MODEL = nil;
@@ -51,11 +41,8 @@ VUHDO_TIMER_MODEL = nil;
 VUHDO_STACKS_MODEL = nil;
 VUHDO_COLOR_SWATCH_MODEL = nil;
 VUHDO_SOUND_MODEL = nil;
---VUHDO_TOGGLE_NAME_MODEL = nil;
+-- VUHDO_TOGGLE_NAME_MODEL = nil;
 
-
-
---
 local tIdx, tValue;
 local function VUHDO_getTableIndex(aTable, aValue)
 	for tIdx, tValue in pairs(aTable) do
@@ -67,9 +54,6 @@ local function VUHDO_getTableIndex(aTable, aValue)
 	return nil;
 end
 
-
-
---
 local tValue;
 local tIndex;
 local tPanelName;
@@ -133,9 +117,9 @@ function VUHDO_customDebuffUpdateEditBox(anEditBox)
 		VUHDO_ANIMATE_MODEL = VUHDO_CONFIG.CUSTOM_DEBUFF.animate;
 		VUHDO_TIMER_MODEL = VUHDO_CONFIG.CUSTOM_DEBUFF.timer;
 		VUHDO_STACKS_MODEL = VUHDO_CONFIG.CUSTOM_DEBUFF.isStacks;
---		VUHDO_TOGGLE_NAME_MODEL = VUHDO_CONFIG.CUSTOM_DEBUFF.toggleName;
-    VUHDO_COLOR_SWATCH_MODEL = VUHDO_deepCopyTable(VUHDO_PANEL_SETUP.BAR_COLORS["DEBUFF" .. VUHDO_DEBUFF_TYPE_CUSTOM]);
-    VUHDO_SOUND_MODEL = VUHDO_CONFIG.CUSTOM_DEBUFF.SOUND;
+		-- VUHDO_TOGGLE_NAME_MODEL = VUHDO_CONFIG.CUSTOM_DEBUFF.toggleName;
+		VUHDO_COLOR_SWATCH_MODEL = VUHDO_deepCopyTable(VUHDO_PANEL_SETUP.BAR_COLORS["DEBUFF" .. VUHDO_DEBUFF_TYPE_CUSTOM]);
+		VUHDO_SOUND_MODEL = VUHDO_CONFIG.CUSTOM_DEBUFF.SOUND;
 
 		tCheckButton = VUHDO_GLOBAL[tPanelName .. "IconCheckButton"];
 		VUHDO_lnfSetModel(tCheckButton, "VUHDO_ICON_MODEL");
@@ -168,9 +152,6 @@ function VUHDO_customDebuffUpdateEditBox(anEditBox)
 	end
 end
 
-
-
---
 local tOldValue = nil;
 function VUHDO_notifySoundSelect(aComboBox, aValue)
 	if (aValue ~= nil and tOldValue ~= aValue) then
@@ -179,16 +160,10 @@ function VUHDO_notifySoundSelect(aComboBox, aValue)
 	end
 end
 
-
-
---
 function VUHDO_custonDebuffisColorClicked()
 	VUHDO_customDebuffUpdateEditBox(VuhDoNewOptionsDebuffsCustomStorePanelEditBox);
 end
 
-
-
---
 local tEditBox;
 local tValue;
 local tIndex;
@@ -209,7 +184,7 @@ function VUHDO_saveCustomDebuffOnClick(aButton)
 
 	tPanelName = aButton:GetParent():GetName();
 
-	VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tValue] = { };
+	VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tValue] = {};
 
 	tCheckButton = VUHDO_GLOBAL[tPanelName .. "IconCheckButton"];
 	VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tValue].isIcon = VUHDO_forceBooleanValue(tCheckButton:GetChecked());
@@ -233,8 +208,7 @@ function VUHDO_saveCustomDebuffOnClick(aButton)
 	tColorSwatch = VUHDO_GLOBAL[tPanelName .. "ColorTexture"];
 
 	if (VUHDO_COLOR_SWATCH_MODEL == nil) then
-		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tValue].color
-		  = VUHDO_deepCopyTable(VUHDO_PANEL_SETUP.BAR_COLORS["DEBUFF" .. VUHDO_DEBUFF_TYPE_CUSTOM]);
+		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tValue].color = VUHDO_deepCopyTable(VUHDO_PANEL_SETUP.BAR_COLORS["DEBUFF" .. VUHDO_DEBUFF_TYPE_CUSTOM]);
 	else
 		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tValue].color
 			= VUHDO_deepCopyTable(VUHDO_COLOR_SWATCH_MODEL);
@@ -247,9 +221,6 @@ function VUHDO_saveCustomDebuffOnClick(aButton)
 	VuhDoNewOptionsDebuffsCustom:Show();
 end
 
-
-
---
 local tEditBox;
 local tValue;
 local tIndex;
@@ -273,9 +244,6 @@ function VUHDO_deleteCustomDebuffOnClick(aButton)
 	VuhDoNewOptionsDebuffsCustomStorePanelEditBox:SetText("");
 end
 
-
-
---
 local tName, tSettings;
 function VUHDO_applyToAllCustomDebuffOnClick()
 	for tName, tSettings in pairs(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"]) do

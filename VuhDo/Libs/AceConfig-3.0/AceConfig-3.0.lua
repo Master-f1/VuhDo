@@ -1,4 +1,4 @@
---- AceConfig-3.0 wrapper library.
+-- AceConfig-3.0 wrapper library.
 -- Provides an API to register an options table with the config registry,
 -- as well as associate it with a slash command.
 -- @class file
@@ -26,7 +26,7 @@ local cfgdlg = LibStub("AceConfigDialog-3.0")
 --TODO: local cfgdrp = LibStub("AceConfigDropdown-3.0")
 
 
----------------------------------------------------------------------
+-- -------------------------------------------------------------------
 -- :RegisterOptionsTable(appName, options, slashcmd, persist)
 --
 -- - appName - (string) application name
@@ -36,7 +36,7 @@ local cfgdlg = LibStub("AceConfigDialog-3.0")
 function lib:RegisterOptionsTable(appName, options, slashcmd)
 	local ok,msg = pcall(cfgreg.RegisterOptionsTable, self, appName, options)
 	if not ok then error(msg, 2) end
-	
+
 	if slashcmd then
 		if type(slashcmd) == "table" then
 			for _,cmd in pairs(slashcmd) do

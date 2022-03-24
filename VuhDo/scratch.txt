@@ -5,7 +5,7 @@
 - Fubar text/icons
 - Nur bestimmte Gruppen, wenn nach klassen/rollen eingeteilt
 - 2 Weapon enchants shammy buffwatch
-- Gruppen in Fenster rechtbÑŒndig anordnen wenn Anker rechts
+- Gruppen in Fenster rechtbündig anordnen wenn Anker rechts
 - Bouquets <, > # stacks bei buffs/debuffs
 
 - Bug: Smart Buff Taste wenn Spieler ausser Reichw.
@@ -25,15 +25,15 @@
 11. Hot bar 3
 
 3. Background
-	6. Incoming
-	1. Health
-	4. Aggro
-	5. Mana
-	Highlight
-	Player Target
+		6. Incoming
+				1. Health
+					4. Aggro
+					5. Mana
+					Highlight
+					Player Target
 
-	5. Target
-	7. Threat
+5. Target
+7. Threat
 
 
 ----------

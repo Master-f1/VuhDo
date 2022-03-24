@@ -1,4 +1,4 @@
--- @EXACT = true: Translation has to be the exact(!) match in the clients language,
+﻿-- @EXACT = true: Translation has to be the exact(!) match in the clients language,
 -- beacause it carries technical semantics
 -- @EXACT = false: Translation can be done freely, because text is only descriptive
 

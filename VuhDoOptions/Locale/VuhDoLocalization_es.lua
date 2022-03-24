@@ -139,7 +139,6 @@ VUHDO_I18N_BAR_WIDTH = "Largura de barras";
 VUHDO_I18N_WIDTH = "Largura";
 VUHDO_I18N_HEADERS = "Cabeceras";
 VUHDO_I18N_CLASS_COL = "Col. de clase";
---
 
 
 

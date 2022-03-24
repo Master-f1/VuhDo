@@ -136,7 +136,6 @@ VUHDO_I18N_BAR_WIDTH = "宽度";
 VUHDO_I18N_WIDTH = "宽度";
 VUHDO_I18N_HEADERS = "标题";
 VUHDO_I18N_CLASS_COL = "职业 Col.";
---
 
 
 
@@ -356,7 +355,7 @@ VUHDO_I18N_TT_163 = "杂项设置."
 VUHDO_I18N_TT_164 = "保存或读取皮肤便于外观快速设置."
 VUHDO_I18N_TT_165 = "不再在队伍/职业面板中显示主坦克."
 VUHDO_I18N_TT_166 = "不再显示队伍/职业面板显示玩家目标."
-VUHDO_I18N_TT_167 = "不再将自己所在小队作为常规小队进行显示. (通常你会有本小队框体或者开启了VuhDo队伍选项中的 \"我的小队\" )"
+VUHDO_I18N_TT_167 = "不再将自己所在小队作为常规小队进行显示. (通常你会有本小队框体或者开启了VuhDo队伍选项中的 \"我的小队\")"
 VUHDO_I18N_TT_168 = "在玩家名字前方显示暂离、离线或死亡标签"
 VUHDO_I18N_TT_169 = "隐藏暴雪队伍框体."
 VUHDO_I18N_TT_170 = "隐藏暴雪玩家框体."
@@ -565,7 +564,7 @@ VUHDO_I18N_TT_372 = "选择上个点显示来自HoTs的治疗输入.";
 VUHDO_I18N_TT_373 = "显示来自HOT的治疗输入.";
 VUHDO_I18N_TT_374 = "选择上个点显示来自爆发性法术的治疗输入 (譬如: 生命绽放爆发).";
 VUHDO_I18N_TT_375 = "显示爆发性治疗法术的治疗输入 (譬如: 生命绽放爆发).";
-VUHDO_I18N_TT_376 = "将组放置于面板底部 (当选择了右边的\"水平\"时 ).";
+VUHDO_I18N_TT_376 = "将组放置于面板底部 (当选择了右边的\"水平\"时).";
 VUHDO_I18N_TT_377 = "Select a panel border texture.";
 VUHDO_I18N_TT_378 = "Select a size for panel border edges.";
 VUHDO_I18N_TT_379 = "Select an inset size for panel borders.";

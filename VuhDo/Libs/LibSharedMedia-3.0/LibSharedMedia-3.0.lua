@@ -16,32 +16,32 @@ if not lib then return end
 
 local _G = getfenv(0)
 
-local pairs		= _G.pairs
-local type		= _G.type
+local pairs = _G.pairs
+local type = _G.type
 
 local band			= _G.bit.band
 
-local table_insert	= _G.table.insert
-local table_sort	= _G.table.sort
+local table_insert = _G.table.insert
+local table_sort = _G.table.sort
 
 local locale = GetLocale()
 local locale_is_western
 local LOCALE_MASK = 0
-lib.LOCALE_BIT_koKR		= 1
-lib.LOCALE_BIT_ruRU		= 2
-lib.LOCALE_BIT_zhCN		= 4
-lib.LOCALE_BIT_zhTW		= 8
-lib.LOCALE_BIT_western	= 128
+lib.LOCALE_BIT_koKR = 1
+lib.LOCALE_BIT_ruRU = 2
+lib.LOCALE_BIT_zhCN = 4
+lib.LOCALE_BIT_zhTW = 8
+lib.LOCALE_BIT_western = 128
 
 local CallbackHandler = LibStub:GetLibrary("CallbackHandler-1.0")
 
-lib.callbacks		= lib.callbacks			or CallbackHandler:New(lib)
+lib.callbacks = lib.callbacks or CallbackHandler:New(lib)
 
-lib.DefaultMedia	= lib.DefaultMedia		or {}
-lib.MediaList		= lib.MediaList			or {}
-lib.MediaTable		= lib.MediaTable		or {}
-lib.MediaType		= lib.MediaType			or {}
-lib.OverrideMedia	= lib.OverrideMedia		or {}
+lib.DefaultMedia = lib.DefaultMedia	or {}
+lib.MediaList = lib.MediaList or {}
+lib.MediaTable = lib.MediaTable	or {}
+lib.MediaType = lib.MediaType or {}
+lib.OverrideMedia = lib.OverrideMedia or {}
 
 local defaultMedia = lib.DefaultMedia
 local mediaList = lib.MediaList
@@ -50,95 +50,95 @@ local overrideMedia = lib.OverrideMedia
 
 
 -- create mediatype constants
-lib.MediaType.BACKGROUND	= "background"			-- background textures
-lib.MediaType.BORDER		= "border"				-- border textures
-lib.MediaType.FONT			= "font"				-- fonts
-lib.MediaType.STATUSBAR		= "statusbar"			-- statusbar textures
-lib.MediaType.SOUND			= "sound"				-- sound files
+lib.MediaType.BACKGROUND = "background" -- background textures
+lib.MediaType.BORDER = "border" -- border textures
+lib.MediaType.FONT = "font" -- fonts
+lib.MediaType.STATUSBAR = "statusbar" -- statusbar textures
+lib.MediaType.SOUND = "sound" -- sound files
 
 -- populate lib with default Blizzard data
 -- BACKGROUND
 if not lib.MediaTable.background then lib.MediaTable.background = {} end
-lib.MediaTable.background["Blizzard Dialog Background"]		= [[Interface\DialogFrame\UI-DialogBox-Background]]
-lib.MediaTable.background["Blizzard Low Health"]			= [[Interface\FullScreenTextures\LowHealth]]
-lib.MediaTable.background["Blizzard Out of Control"]		= [[Interface\FullScreenTextures\OutOfControl]]
-lib.MediaTable.background["Blizzard Parchment"]				= [[Interface\AchievementFrame\UI-Achievement-Parchment-Horizontal]]
-lib.MediaTable.background["Blizzard Parchment 2"]			= [[Interface\AchievementFrame\UI-Achievement-Parchment]]
-lib.MediaTable.background["Blizzard Tabard Background"]		= [[Interface\TabardFrame\TabardFrameBackground]]
-lib.MediaTable.background["Blizzard Tooltip"]				= [[Interface\Tooltips\UI-Tooltip-Background]]
-lib.MediaTable.background["Solid"]							= [[Interface\Buttons\WHITE8X8]]
+lib.MediaTable.background["Blizzard Dialog Background"] = [[Interface\DialogFrame\UI-DialogBox-Background]]
+lib.MediaTable.background["Blizzard Low Health"] = [[Interface\FullScreenTextures\LowHealth]]
+lib.MediaTable.background["Blizzard Out of Control"] = [[Interface\FullScreenTextures\OutOfControl]]
+lib.MediaTable.background["Blizzard Parchment"] = [[Interface\AchievementFrame\UI-Achievement-Parchment-Horizontal]]
+lib.MediaTable.background["Blizzard Parchment 2"] = [[Interface\AchievementFrame\UI-Achievement-Parchment]]
+lib.MediaTable.background["Blizzard Tabard Background"] = [[Interface\TabardFrame\TabardFrameBackground]]
+lib.MediaTable.background["Blizzard Tooltip"] = [[Interface\Tooltips\UI-Tooltip-Background]]
+lib.MediaTable.background["Solid"] = [[Interface\Buttons\WHITE8X8]]
 
 -- BORDER
 if not lib.MediaTable.border then lib.MediaTable.border = {} end
-lib.MediaTable.border["None"]								= [[Interface\None]]
-lib.MediaTable.border["Blizzard Dialog"]					= [[Interface\DialogFrame\UI-DialogBox-Border]]
-lib.MediaTable.border["Blizzard Dialog Gold"]				= [[Interface\DialogFrame\UI-DialogBox-Gold-Border]]
-lib.MediaTable.border["Blizzard Tooltip"]					= [[Interface\Tooltips\UI-Tooltip-Border]]
+lib.MediaTable.border["None"] = [[Interface\None]]
+lib.MediaTable.border["Blizzard Dialog"] = [[Interface\DialogFrame\UI-DialogBox-Border]]
+lib.MediaTable.border["Blizzard Dialog Gold"] = [[Interface\DialogFrame\UI-DialogBox-Gold-Border]]
+lib.MediaTable.border["Blizzard Tooltip"] = [[Interface\Tooltips\UI-Tooltip-Border]]
 
 -- FONT
 if not lib.MediaTable.font then lib.MediaTable.font = {} end
 local SML_MT_font = lib.MediaTable.font
 if locale == "koKR" then
 	LOCALE_MASK = lib.LOCALE_BIT_koKR
---
-	SML_MT_font["굵은 글꼴"]		= [[Fonts\2002B.TTF]]
-	SML_MT_font["기본 글꼴"]		= [[Fonts\2002.TTF]]
-	SML_MT_font["데미지 글꼴"]		= [[Fonts\K_Damage.TTF]]
-	SML_MT_font["퀘스트 글꼴"]		= [[Fonts\K_Pagetext.TTF]]
---
+
+	SML_MT_font["굵은 글꼴"] = [[Fonts\2002B.TTF]]
+	SML_MT_font["기본 글꼴"] = [[Fonts\2002.TTF]]
+	SML_MT_font["데미지 글꼴"] = [[Fonts\K_Damage.TTF]]
+	SML_MT_font["퀘스트 글꼴"] = [[Fonts\K_Pagetext.TTF]]
+
 	lib.DefaultMedia["font"] = "기본 글꼴" -- someone from koKR please adjust if needed
---
+
 elseif locale == "zhCN" then
 	LOCALE_MASK = lib.LOCALE_BIT_zhCN
---
-	SML_MT_font["伤害数字"]		= [[Fonts\ZYKai_C.ttf]]
-	SML_MT_font["默认"]			= [[Fonts\ZYKai_T.ttf]]
-	SML_MT_font["聊天"]			= [[Fonts\ZYHei.ttf]]
---
+
+	SML_MT_font["伤害数字"] = [[Fonts\ZYKai_C.ttf]]
+	SML_MT_font["默认"] = [[Fonts\ZYKai_T.ttf]]
+	SML_MT_font["聊天"] = [[Fonts\ZYHei.ttf]]
+
 	lib.DefaultMedia["font"] = "默认" -- someone from zhCN please adjust if needed
---
+
 elseif locale == "zhTW" then
 	LOCALE_MASK = lib.LOCALE_BIT_zhTW
---
-	SML_MT_font["提示訊息"]		= [[Fonts\bHEI00M.ttf]]
-	SML_MT_font["聊天"]			= [[Fonts\bHEI01B.ttf]]
-	SML_MT_font["傷害數字"]		= [[Fonts\bKAI00M.ttf]]
-	SML_MT_font["預設"]			= [[Fonts\bLEI00D.ttf]]
---
+
+	SML_MT_font["提示訊息"] = [[Fonts\bHEI00M.ttf]]
+	SML_MT_font["聊天"] = [[Fonts\bHEI01B.ttf]]
+	SML_MT_font["傷害數字"] = [[Fonts\bKAI00M.ttf]]
+	SML_MT_font["預設"] = [[Fonts\bLEI00D.ttf]]
+
 	lib.DefaultMedia["font"] = "預設" -- someone from zhTW please adjust if needed
 
 elseif locale == "ruRU" then
 	LOCALE_MASK = lib.LOCALE_BIT_ruRU
---
-	SML_MT_font["Arial Narrow"]			= [[Fonts\ARIALN.TTF]]
-	SML_MT_font["Friz Quadrata TT"]		= [[Fonts\FRIZQT__.TTF]]
-	SML_MT_font["Morpheus"]				= [[Fonts\MORPHEUS.TTF]]
-	SML_MT_font["Nimrod MT"]			= [[Fonts\NIM_____.ttf]]
-	SML_MT_font["Skurri"]				= [[Fonts\SKURRI.TTF]]
---
+
+	SML_MT_font["Arial Narrow"] = [[Fonts\ARIALN.TTF]]
+	SML_MT_font["Friz Quadrata TT"] = [[Fonts\FRIZQT__.TTF]]
+	SML_MT_font["Morpheus"] = [[Fonts\MORPHEUS.TTF]]
+	SML_MT_font["Nimrod MT"] = [[Fonts\NIM_____.ttf]]
+	SML_MT_font["Skurri"] = [[Fonts\SKURRI.TTF]]
+
 	lib.DefaultMedia.font = "Friz Quadrata TT"
---
+
 else
 	LOCALE_MASK = lib.LOCALE_BIT_western
 	locale_is_western = true
---
-	SML_MT_font["Arial Narrow"]			= [[Fonts\ARIALN.TTF]]
-	SML_MT_font["Friz Quadrata TT"]		= [[Fonts\FRIZQT__.TTF]]
-	SML_MT_font["Morpheus"]				= [[Fonts\MORPHEUS.TTF]]
-	SML_MT_font["Skurri"]				= [[Fonts\SKURRI.TTF]]
---
+
+	SML_MT_font["Arial Narrow"] = [[Fonts\ARIALN.TTF]]
+	SML_MT_font["Friz Quadrata TT"] = [[Fonts\FRIZQT__.TTF]]
+	SML_MT_font["Morpheus"] = [[Fonts\MORPHEUS.TTF]]
+	SML_MT_font["Skurri"] = [[Fonts\SKURRI.TTF]]
+
 	lib.DefaultMedia.font = "Friz Quadrata TT"
---
+
 end
 
 -- STATUSBAR
 if not lib.MediaTable.statusbar then lib.MediaTable.statusbar = {} end
-lib.MediaTable.statusbar["Blizzard"]						= [[Interface\TargetingFrame\UI-StatusBar]]
+lib.MediaTable.statusbar["Blizzard"] = [[Interface\TargetingFrame\UI-StatusBar]]
 lib.DefaultMedia.statusbar = "Blizzard"
 
 -- SOUND
 if not lib.MediaTable.sound then lib.MediaTable.sound = {} end
-lib.MediaTable.sound["None"]								= [[Interface\Quiet.mp3]]	-- Relies on the fact that PlaySound[File] doesn't error on non-existing input.
+lib.MediaTable.sound["None"] = [[Interface\Quiet.mp3]] -- Relies on the fact that PlaySound[File] doesn't error on non-existing input.
 lib.DefaultMedia.sound = "None"
 
 local function rebuildMediaList(mediatype)
@@ -156,12 +156,12 @@ local function rebuildMediaList(mediatype)
 end
 
 function lib:Register(mediatype, key, data, langmask)
-	if mediatype == lib.MediaType.FONT  and ((langmask and band(langmask, LOCALE_MASK) == 0) or not (langmask or locale_is_western)) then return false end
+	if mediatype == lib.MediaType.FONT and ((langmask and band(langmask, LOCALE_MASK) == 0) or not (langmask or locale_is_western)) then return false end
 	mediatype = mediatype:lower()
 	if not mediaTable[mediatype] then mediaTable[mediatype] = {} end
 	local mtable = mediaTable[mediatype]
 	if mtable[key] then return false end
-	
+
 	mtable[key] = data
 	rebuildMediaList(mediatype)
 	self.callbacks:Fire("LibSharedMedia_Registered", mediatype, key)

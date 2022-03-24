@@ -437,7 +437,7 @@
 						</Scripts>
 					</CheckButton>
 
-					<CheckButton name="$parentCancelCurrentCheckButton" text="VUHDO_I18N_STOP_CASTING" inherits="VuhDoCheckButtonTemplate">
+					<CheckButton name="$parentCancelCurrentCheckButton" text="VUHDO_I18N_STOP_CAST" inherits="VuhDoCheckButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
