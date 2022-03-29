@@ -2,29 +2,28 @@ VUHDO_DID_DC_RESTORE = false;
 
 VUHDO_IN_COMBAT_RELOG = false;
 
-
-VUHDO_RAID = { };
+VUHDO_RAID = {};
 local VUHDO_RAID;
 
-VUHDO_RAID_NAMES = { };
+VUHDO_RAID_NAMES = {};
 local VUHDO_RAID_NAMES = VUHDO_RAID_NAMES;
 
-VUHDO_GROUPS = { };
+VUHDO_GROUPS = {};
 local VUHDO_GROUPS = VUHDO_GROUPS;
 
-VUHDO_RAID_GUIDS = { };
+VUHDO_RAID_GUIDS = {};
 local VUHDO_RAID_GUIDS = VUHDO_RAID_GUIDS;
 
-VUHDO_RAID_GUID_NAMES = { };
+VUHDO_RAID_GUID_NAMES = {};
 local VUHDO_RAID_GUID_NAMES = VUHDO_RAID_GUID_NAMES;
 
-VUHDO_EMERGENCIES = { };
+VUHDO_EMERGENCIES = {};
 local VUHDO_EMERGENCIES = VUHDO_EMERGENCIES;
 
-VUHDO_CLUSTER_BASE_RAID = { };
+VUHDO_CLUSTER_BASE_RAID = {};
 local VUHDO_CLUSTER_BASE_RAID = VUHDO_CLUSTER_BASE_RAID;
 
-VUHDO_PLAYER_TARGETS = { };
+VUHDO_PLAYER_TARGETS = {};
 
 VUHDO_BUFF_GROUPS = {
 	["WARRIOR"] = {};
@@ -42,10 +41,9 @@ local VUHDO_BUFF_GROUPS = VUHDO_BUFF_GROUPS;
 
 local VUHDO_IS_SUSPICIOUS_ROSTER = false;
 
-local VUHDO_RAID_SORTED = { };
-local VUHDO_MAINTANKS = { };
-local VUHDO_INTERNAL_TOGGLES = { };
-
+local VUHDO_RAID_SORTED = {};
+local VUHDO_MAINTANKS = {};
+local VUHDO_INTERNAL_TOGGLES = {};
 
 VUHDO_PLAYER_CLASS = nil;
 VUHDO_PLAYER_NAME = nil;
@@ -54,7 +52,7 @@ VUHDO_PLAYER_GROUP = nil;
 
 VUHDO_GLOBAL = getfenv();
 
--- BURST CACHE ---------------------------------------------------
+-- BURST CACHE
 local VUHDO_getUnitIds;
 local VUHDO_getUnitNo;
 local VUHDO_isInRange;
@@ -101,7 +99,7 @@ local tinsert = tinsert;
 local tremove = tremove;
 local strfind = strfind;
 local gsub = gsub;
---local VUHDO_PANEL_MODELS;
+-- local VUHDO_PANEL_MODELS;
 local VUHDO_determineRole;
 local VUHDO_getUnitHealthPercent;
 local GetTime = GetTime;
@@ -127,7 +125,7 @@ function VUHDO_vuhdoInitBurst()
 	VUHDO_getModelType = VUHDO_GLOBAL["VUHDO_getModelType"];
 
 	VUHDO_getPlayerRaidUnit = VUHDO_GLOBAL["VUHDO_getPlayerRaidUnit"];
-	--VUHDO_PANEL_MODELS = VUHDO_GLOBAL["VUHDO_PANEL_MODELS"];
+	-- VUHDO_PANEL_MODELS = VUHDO_GLOBAL["VUHDO_PANEL_MODELS"];
 	VUHDO_determineRole = VUHDO_GLOBAL["VUHDO_determineRole"];
 	VUHDO_getUnitHealthPercent = VUHDO_GLOBAL["VUHDO_getUnitHealthPercent"];
 	VUHDO_isConfigDemoUsers = VUHDO_GLOBAL["VUHDO_isConfigDemoUsers"];
@@ -138,12 +136,8 @@ function VUHDO_vuhdoInitBurst()
 	VUHDO_INTERNAL_TOGGLES = VUHDO_GLOBAL["VUHDO_INTERNAL_TOGGLES"];
 end
 
-----------------------------------------------------
+local VUHDO_UNIT_AFK_DC = {};
 
-local VUHDO_UNIT_AFK_DC = { };
-
-
---
 local tUnit, tInfo, tName;
 local function VUHDO_updateAllRaidNames()
 	twipe(VUHDO_RAID_NAMES);
@@ -159,9 +153,6 @@ local function VUHDO_updateAllRaidNames()
 	end
 end
 
-
-
---
 local function VUHDO_isValidEmergency(anInfo)
 	return
 		not anInfo["isPet"]
@@ -171,9 +162,6 @@ local function VUHDO_isValidEmergency(anInfo)
 		and not anInfo["charmed"];
 end
 
-
-
---
 local tUnit;
 local tIndex;
 local function VUHDO_setTopEmergencies(aMaxAnz)
@@ -186,38 +174,27 @@ local function VUHDO_setTopEmergencies(aMaxAnz)
 	end
 end
 
-
-
---
 local tInfoA, tInfoB;
 local VUHDO_EMERGENCY_SORTERS = {
-	[VUHDO_MODE_EMERGENCY_MOST_MISSING]
-		= function(aUnit, anotherUnit)
+	[VUHDO_MODE_EMERGENCY_MOST_MISSING] = function(aUnit, anotherUnit)
 				tInfoA = VUHDO_RAID[aUnit];
 				tInfoB = VUHDO_RAID[anotherUnit];
 
-				return (tInfoA["healthmax"] - tInfoA["health"]
-							> tInfoB["healthmax"] - tInfoB["health"]);
+				return (tInfoA["healthmax"] - tInfoA["health"] > tInfoB["healthmax"] - tInfoB["health"]);
 			end,
 
-	[VUHDO_MODE_EMERGENCY_PERC]
-		= function(aUnit, anotherUnit)
+	[VUHDO_MODE_EMERGENCY_PERC] = function(aUnit, anotherUnit)
 				tInfoA = VUHDO_RAID[aUnit];
 				tInfoB = VUHDO_RAID[anotherUnit];
 
-					return (tInfoA["health"] / tInfoA["healthmax"]
-								< tInfoB["health"] / tInfoB["healthmax"]);
+					return (tInfoA["health"] / tInfoA["healthmax"] < tInfoB["health"] / tInfoB["healthmax"]);
 			end,
 
-	[VUHDO_MODE_EMERGENCY_LEAST_LEFT]
-		= function(aUnit, anotherUnit)
+	[VUHDO_MODE_EMERGENCY_LEAST_LEFT] = function(aUnit, anotherUnit)
 				return VUHDO_RAID[aUnit]["health"] < VUHDO_RAID[anotherUnit]["health"];
 			end,
 }
 
-
-
---
 local tUnit, tInfo;
 local tTrigger;
 local function VUHDO_sortEmergencies()
@@ -234,8 +211,6 @@ local function VUHDO_sortEmergencies()
 	VUHDO_setTopEmergencies(VUHDO_CONFIG["MAX_EMERGENCIES"]);
 end
 
-
-
 -- Avoid reordering sorting by max-health if someone dies or gets offline
 local tEmptyInfo = {};
 local function VUHDO_getUnitSortMaxHp(aUnit)
@@ -246,9 +221,6 @@ local function VUHDO_getUnitSortMaxHp(aUnit)
 	end
 end
 
-
-
---
 local tIsAfk;
 local tIsConnected;
 local function VUHDO_updateAfkDc(aUnit)
@@ -265,16 +237,10 @@ local function VUHDO_updateAfkDc(aUnit)
 	return tIsAfk, tIsConnected, VUHDO_RAID[aUnit] ~= nil and tIsConnected ~= VUHDO_RAID[aUnit]["connected"];
 end
 
-
-
---
 function VUHDO_getAfkDcTime(aUnit)
 	return VUHDO_UNIT_AFK_DC[aUnit];
 end
 
-
-
---
 function VUHDO_getOwner(aUnit, anIsPet)
 	if ("pet" == aUnit) then
 		return "player";
@@ -285,8 +251,6 @@ function VUHDO_getOwner(aUnit, anIsPet)
 	end
 end
 local VUHDO_getOwner = VUHDO_getOwner;
-
-
 
 -- Sets a Member info into raid array
 local tUnitId;
@@ -333,7 +297,7 @@ function VUHDO_setHealth(aUnit, aMode)
 			tIsAfk, tIsConnected, _ = VUHDO_updateAfkDc(aUnit);
 
 			if (VUHDO_RAID[aUnit] == nil) then
-				VUHDO_RAID[aUnit] = { };
+				VUHDO_RAID[aUnit] = {};
 			end
 			tInfo = VUHDO_RAID[aUnit];
 			tInfo["ownerUnit"] = VUHDO_getOwner(aUnit, tIsPet);
@@ -384,11 +348,11 @@ function VUHDO_setHealth(aUnit, aMode)
 			end
 			tInfo["raidIcon"] = GetRaidTargetIndex(aUnit);
 			tInfo["visible"] = UnitIsVisible(aUnit); -- Reihenfolge beachten
-			tInfo["zone"], tInfo["map"] = VUHDO_getUnitZoneName(aUnit); -- ^^
+			tInfo["zone"], tInfo["map"] = VUHDO_getUnitZoneName(aUnit);
 			tInfo["baseRange"] = UnitInRange(aUnit);
-			--tInfo["missbuff"] = nil;
-			--tInfo["mibucateg"] = nil;
-			--tInfo["mibuvariants"] = nil;
+			-- tInfo["missbuff"] = nil;
+			-- tInfo["mibucateg"] = nil;
+			-- tInfo["mibuvariants"] = nil;
 
 			if (aUnit ~= "focus" and aUnit ~= "target") then
 				if (not tIsPet and tInfo["fullName"] == tName and VUHDO_RAID_NAMES[tName] ~= nil) then
@@ -408,7 +372,7 @@ function VUHDO_setHealth(aUnit, aMode)
 				VUHDO_updateBouquetsForEvent(aUnit, 19); -- VUHDO_UPDATE_DC
 			end
 
-			if(2 == aMode) then -- VUHDO_UPDATE_HEALTH
+			if (2 == aMode) then -- VUHDO_UPDATE_HEALTH
 				tNewHealth = UnitHealth(aUnit);
 				if (not tIsDead) then
 					tInfo["lifeLossPerc"] = tNewHealth / tInfo["health"];
@@ -425,12 +389,12 @@ function VUHDO_setHealth(aUnit, aMode)
 					VUHDO_updateBouquetsForEvent(aUnit, 10); -- VUHDO_UPDATE_ALIVE
 				end
 
-			elseif(3 == aMode) then -- VUHDO_UPDATE_HEALTH_MAX
+			elseif (3 == aMode) then -- VUHDO_UPDATE_HEALTH_MAX
 				tInfo["dead"] = tIsDead;
 				tInfo["healthmax"] = UnitHealthMax(aUnit);
 				tInfo["sortMaxHp"] = VUHDO_getUnitSortMaxHp(aUnit);
 
-			elseif(6 == aMode) then -- VUHDO_UPDATE_AFK
+			elseif (6 == aMode) then -- VUHDO_UPDATE_AFK
 				tInfo["afk"] = tIsAfk;
 			end
 		end
@@ -438,16 +402,11 @@ function VUHDO_setHealth(aUnit, aMode)
 end
 local VUHDO_setHealth = VUHDO_setHealth;
 
-
-
---
 local function VUHDO_setHealthSafe(aUnit, aMode)
 	if (UnitExists(aUnit)) then
 		VUHDO_setHealth(aUnit, aMode);
 	end
 end
-
-
 
 -- Callback for UNIT_HEALTH / UNIT_MAXHEALTH events
 local tUnit;
@@ -456,7 +415,7 @@ local tIsPet;
 function VUHDO_updateHealth(aUnit, aMode)
 	tIsPet = VUHDO_RAID[aUnit]["isPet"];
 
-	if (not tIsPet or VUHDO_INTERNAL_TOGGLES[26]) then -- VUHDO_UPDATE_PETS  -- Enth�lt nur Pets als eigene Balken, vehicles werden �ber owner dargestellt s.unten
+	if (not tIsPet or VUHDO_INTERNAL_TOGGLES[26]) then -- VUHDO_UPDATE_PETS Contains only Pets as own bars, vehicles are displayed via owner see below.
 		VUHDO_setHealth(aUnit, aMode);
 		VUHDO_updateHealthBarsFor(aUnit, aMode);
 	end
@@ -485,9 +444,6 @@ function VUHDO_updateHealth(aUnit, aMode)
 	end
 end
 
-
-
---
 local tUnit, tInfo, tIcon;
 function VUHDO_updateAllRaidTargetIndices()
 	for tUnit, tInfo in pairs(VUHDO_RAID) do
@@ -499,8 +455,6 @@ function VUHDO_updateAllRaidTargetIndices()
 	end
 end
 
-
-
 -- Add to groups 1-8
 local function VUHDO_addUnitToGroup(aUnit, aGroupNum)
 	if ("player" == aUnit and VUHDO_CONFIG["OMIT_SELF"]) then
@@ -509,7 +463,7 @@ local function VUHDO_addUnitToGroup(aUnit, aGroupNum)
 
 	if (not VUHDO_CONFIG["OMIT_OWN_GROUP"] or aGroupNum ~= VUHDO_PLAYER_GROUP) then
 		if (VUHDO_GROUPS[aGroupNum] == nil) then
-			VUHDO_GROUPS[aGroupNum] = { };
+			VUHDO_GROUPS[aGroupNum] = {};
 		end
 		tinsert(VUHDO_GROUPS[aGroupNum], aUnit);
 	end
@@ -519,9 +473,6 @@ local function VUHDO_addUnitToGroup(aUnit, aGroupNum)
 	end
 end
 
-
-
---
 local function VUHDO_addUnitToClass(aUnit, aClassId)
 	if (("player" == aUnit and VUHDO_CONFIG["OMIT_SELF"]) or aClassId == nil) then
 		return;
@@ -531,9 +482,6 @@ local function VUHDO_addUnitToClass(aUnit, aClassId)
 	tinsert(VUHDO_BUFF_GROUPS[VUHDO_ID_CLASSES[aClassId] or "WARRIOR"], aUnit);
 end
 
-
-
---
 local tCnt, tModel;
 function VUHDO_isModelConfigured(aModelId)
 	for tCnt = 1, 10 do -- VUHDO_MAX_PANELS
@@ -546,13 +494,10 @@ function VUHDO_isModelConfigured(aModelId)
 		end
 	end
 
-  return false;
+	return false;
 end
 local VUHDO_isModelConfigured = VUHDO_isModelConfigured;
 
-
-
---
 local tModelId, tAllUnits, tIndex, tUnit;
 local function VUHDO_removeUnitFromAllModelsBut(aUnit, aModelId)
 	if (not VUHDO_isModelConfigured(aModelId)) then -- nur doppelte Balken entfernen
@@ -572,9 +517,6 @@ local function VUHDO_removeUnitFromAllModelsBut(aUnit, aModelId)
 	end
 end
 
-
-
---
 local function VUHDO_removeFromAllMainGroups()
 	for tUnit, tInfo in pairs(VUHDO_RAID) do
 		if (VUHDO_CONFIG["OMIT_MAIN_TANKS"] and VUHDO_isUnitInModel(tUnit, 41)) then -- VUHDO_ID_MAINTANKS
@@ -587,9 +529,6 @@ local function VUHDO_removeFromAllMainGroups()
 	end
 end
 
-
-
---
 local tRole, tIsTank;
 local function VUHDO_addUnitToSpecial(aUnit)
 	tIsTank, _, _ = UnitGroupRolesAssigned(aUnit);
@@ -611,9 +550,6 @@ local function VUHDO_addUnitToSpecial(aUnit)
 	end
 end
 
-
-
---
 local tCnt;
 local tUnit;
 local function VUHDO_addUnitToCtraMainTanks()
@@ -625,9 +561,6 @@ local function VUHDO_addUnitToCtraMainTanks()
 	end
 end
 
-
-
---
 local tUnit, tName;
 local function VUHDO_addUnitToPrivateTanks()
 	if (VUHDO_INTERNAL_TOGGLES[27]) then -- VUHDO_UPDATE_PLAYER_TARGET
@@ -648,9 +581,6 @@ local function VUHDO_addUnitToPrivateTanks()
 	end
 end
 
-
-
---
 local tOwner;
 local function VUHDO_addUnitToPets(aPetUnit)
 	tOwner = VUHDO_RAID[aPetUnit]["ownerUnit"];
@@ -662,16 +592,13 @@ local function VUHDO_addUnitToPets(aPetUnit)
 	tinsert(VUHDO_GROUPS[40], aPetUnit); -- VUHDO_ID_PETS
 end
 
-
-
---
 local tRole;
 local function VUHDO_addUnitToRole(aUnit)
 	if ("player" == aUnit and VUHDO_CONFIG["OMIT_SELF"]) then
 		return;
 	end
 
-	tRole = VUHDO_RAID[aUnit]["role"] or 62; -- -- VUHDO_ID_RANGED_DAMAGE
+	tRole = VUHDO_RAID[aUnit]["role"] or 62; -- VUHDO_ID_RANGED_DAMAGE
 
 	tinsert(VUHDO_GROUPS[tRole], aUnit);
 
@@ -682,9 +609,6 @@ local function VUHDO_addUnitToRole(aUnit)
 	end
 end
 
-
-
---
 local tPetUnit;
 local function VUHDO_addUnitToVehicles(aUnit)
 	tPetUnit = VUHDO_RAID[aUnit]["petUnit"];
@@ -693,8 +617,6 @@ local function VUHDO_addUnitToVehicles(aUnit)
 	end
 end
 
-
-
 -- Get an empty array for each group
 local tType, tTypeMembers, tMember, tBuffClassGroup;
 local function VUHDO_initGroupArrays()
@@ -702,7 +624,7 @@ local function VUHDO_initGroupArrays()
 
 	for tType, tTypeMembers in pairs(VUHDO_ID_TYPE_MEMBERS) do
 		for _, tMember in pairs(tTypeMembers) do
-			VUHDO_GROUPS[tMember] = { };
+			VUHDO_GROUPS[tMember] = {};
 		end
 	end
 
@@ -711,9 +633,6 @@ local function VUHDO_initGroupArrays()
 	end
 end
 
-
-
---
 local tUnit, tInfo;
 local function VUHDO_updateGroupArrays(anWasMacroRestore)
 	VUHDO_initGroupArrays();
@@ -747,9 +666,6 @@ local function VUHDO_updateGroupArrays(anWasMacroRestore)
 	VUHDO_initDynamicPanelModels();
 end
 
-
-
---
 local tGroup;
 local tUnit;
 local tEmptyGroup = {};
@@ -764,9 +680,6 @@ local function VUHDO_isInSpecialGroup(aUnit, aModelId)
 	return false;
 end
 
-
-
---
 local tModelType, tModelId, tSpecialModels;
 function VUHDO_isUnitInModel(aUnit, aModelId)
 
@@ -789,15 +702,12 @@ function VUHDO_isUnitInModel(aUnit, aModelId)
 end
 local VUHDO_isUnitInModel = VUHDO_isUnitInModel;
 
-
-
---
 local tModelId;
 local tModelType;
 local function VUHDO_isUnitInPanel(aPanelNum, aUnit)
 	for _, tModelId in pairs(VUHDO_PANEL_MODELS[aPanelNum]) do
 		tModelType = VUHDO_getModelType(tModelId);
-		if (2 == tModelType or 1 == tModelType) then -- VUHDO_ID_TYPE_GROUP -- VUHDO_ID_TYPE_CLASS
+		if (2 == tModelType or 1 == tModelType) then -- VUHDO_ID_TYPE_GROUP VUHDO_ID_TYPE_CLASS
 			if (VUHDO_CONFIG["OMIT_MAIN_TANKS"] and VUHDO_isUnitInModel(aUnit, 41)) then -- VUHDO_ID_MAINTANKS
 			elseif (VUHDO_CONFIG["OMIT_PLAYER_TARGETS"] and VUHDO_isUnitInModel(aUnit, 42)) then -- VUHDO_ID_PRIVATE_TANKS
 			elseif (VUHDO_CONFIG["OMIT_MAIN_ASSIST"] and VUHDO_isUnitInModel(aUnit, 43)) then -- VUHDO_ID_MAIN_ASSISTS
@@ -816,9 +726,6 @@ local function VUHDO_isUnitInPanel(aPanelNum, aUnit)
 	return false;
 end
 
-
-
---
 local tIndex, tModelId;
 function VUHDO_getPanelUnitFirstModel(aPanelNum, aUnit)
 	for tIndex, tModelId in ipairs(VUHDO_PANEL_MODELS[aPanelNum]) do
@@ -830,9 +737,6 @@ function VUHDO_getPanelUnitFirstModel(aPanelNum, aUnit)
 	return 9999;
 end
 
-
-
---
 local tPanelModels;
 local tModel;
 local function VUHDO_isModelInPanel(aPanelNum, aModelId)
@@ -849,7 +753,7 @@ end
 
 
 -- Uniquely buffer all units defined in a panel
-local tPanelUnits = { };
+local tPanelUnits = {};
 local tPanelNum;
 local tHasVehicles;
 local tVehicleUnit;
@@ -868,7 +772,7 @@ local function VUHDO_updateAllPanelUnits()
 				end
 
 				if (tHasVehicles and not VUHDO_RAID[tUnit]["isPet"]) then
-					tVehicleUnit =	VUHDO_RAID[tUnit]["petUnit"];
+					tVehicleUnit = VUHDO_RAID[tUnit]["petUnit"];
 					if (tVehicleUnit ~= nil) then -- e.g. "focus", "target"
 						tPanelUnits[tVehicleUnit] = tVehicleUnit;
 					end
@@ -882,9 +786,6 @@ local function VUHDO_updateAllPanelUnits()
 	end
 end
 
-
-
---
 local tGuid, tUnit, tInfo;
 local function VUHDO_updateAllGuids()
 	twipe(VUHDO_RAID_GUIDS);
@@ -898,9 +799,6 @@ local function VUHDO_updateAllGuids()
 	end
 end
 
-
-
---
 local tCnt, tName;
 local function VUHDO_convertMainTanks()
 	-- Discard deprecated
@@ -918,9 +816,6 @@ local function VUHDO_convertMainTanks()
 	end
 end
 
-
-
---
 local tUnit, tInfo;
 local function VUHDO_createIndexedUnits()
 	twipe(VUHDO_CLUSTER_BASE_RAID);
@@ -935,9 +830,6 @@ local function VUHDO_createIndexedUnits()
 	end
 end
 
-
-
---
 -- Reload all raid members into the raid array e.g. in case of raid roster change
 function VUHDO_reloadRaidMembers()
 	local i;
@@ -1018,9 +910,6 @@ function VUHDO_reloadRaidMembers()
 	end
 end
 
-
-
---
 local i;
 local tPlayer, tPet;
 local tMaxMembers;
@@ -1037,7 +926,7 @@ function VUHDO_refreshRaidMembers()
 	else
 		VUHDO_PLAYER_RAID_ID = VUHDO_getPlayerRaidUnit();
 		VUHDO_IN_COMBAT_RELOG = false;
-		--VUHDO_DID_DC_RESTORE = true;
+		-- VUHDO_DID_DC_RESTORE = true;
 		tUnit, tPetUnit = VUHDO_getUnitIds();
 
 		if ("raid" == tUnit) then
@@ -1048,17 +937,17 @@ function VUHDO_refreshRaidMembers()
 			tMaxMembers = 0;
 		end
 
-		twipe(VUHDO_RAID_NAMES); -- f�r VUHDO_SUSPICIOUS_RAID_ROSTER
+		twipe(VUHDO_RAID_NAMES); -- for VUHDO_SUSPICIOUS_RAID_ROSTER
 
-    if (not InCombatLockdown()) then -- Im combat lockdown heben wir uns verwaiste unit-ids auf um nachr�ckende Spieler darstellen zu k�nnen
-  		for tPlayer, _ in pairs(VUHDO_RAID) do
-  			if (not UnitExists(tPlayer)
-  			  or tPlayer == VUHDO_PLAYER_RAID_ID -- bei raid roster wechsel kann unsere raid id vorher wem anders geh�rt haben
-  				or (not strfind(tPlayer, tUnit, 1, true) and not strfind(tPlayer, tPetUnit, 1, true))) then -- Falls Gruppe<->Raid
-  				VUHDO_RAID[tPlayer] = nil;
-  			end
-  		end
-  	end
+		if (not InCombatLockdown()) then -- In combat lockdown, we save orphaned unit ids to be able to represent players on the move.
+		for tPlayer, _ in pairs(VUHDO_RAID) do
+			if (not UnitExists(tPlayer)
+				or tPlayer == VUHDO_PLAYER_RAID_ID -- in case of raid roster change, our raid id may have belonged to someone else previously
+				or (not strfind(tPlayer, tUnit, 1, true) and not strfind(tPlayer, tPetUnit, 1, true))) then -- Falls Gruppe<->Raid
+				VUHDO_RAID[tPlayer] = nil;
+			end
+		end
+	end
 
 		for i = 1, tMaxMembers do
 			tPlayer = tUnit .. i;
@@ -1070,10 +959,10 @@ function VUHDO_refreshRaidMembers()
 					tInfo["group"] = VUHDO_getUnitGroup(tPlayer, false);
 					tInfo["isVehicle"] = UnitHasVehicleUI(tPlayer);
 					tInfo["role"] = VUHDO_determineRole(tPlayer); -- weil talent-scanner nach und nach arbeitet
-    			tInfo["afk"], tInfo["connected"], tIsDcChange = VUHDO_updateAfkDc(tPlayer);
+					tInfo["afk"], tInfo["connected"], tIsDcChange = VUHDO_updateAfkDc(tPlayer);
 					tInfo["range"] = VUHDO_isInRange(tPlayer);
 
-    			tName, tRealm = UnitName(tPlayer);
+					tName, tRealm = UnitName(tPlayer);
 					tInfo["name"] = tName;
 					if (strlen(tRealm or "") > 0) then
 						tInfo["fullName"] = tName .. "-" .. tRealm;
@@ -1085,15 +974,15 @@ function VUHDO_refreshRaidMembers()
 					end
 					VUHDO_RAID_NAMES[tName] = tPlayer;
 
-    			if (tIsDcChange) then
-    				VUHDO_updateBouquetsForEvent(tPlayer, 19); -- VUHDO_UPDATE_DC
-    			end
+					if (tIsDcChange) then
+						VUHDO_updateBouquetsForEvent(tPlayer, 19); -- VUHDO_UPDATE_DC
+					end
 				end
 
 				tPet = tPetUnit .. i;
 				VUHDO_setHealthSafe(tPet, 1); -- VUHDO_UPDATE_ALL
 			end
-			
+
 			VUHDO_TIMERS["MIRROR_TO_MACRO"] = 8;
 		end
 
@@ -1102,9 +991,9 @@ function VUHDO_refreshRaidMembers()
 		VUHDO_setHealthSafe("focus", 1); -- VUHDO_UPDATE_ALL
 		if (VUHDO_INTERNAL_TOGGLES[27]) then -- VUHDO_UPDATE_PLAYER_TARGET
 			VUHDO_setHealthSafe("target", 1); -- VUHDO_UPDATE_ALL
-    end
-
+		end
 	end
+
 	VUHDO_PLAYER_GROUP = VUHDO_getUnitGroup(VUHDO_PLAYER_RAID_ID, false);
 
 	VUHDO_updateAllRaidNames();

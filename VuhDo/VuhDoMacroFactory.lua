@@ -24,14 +24,12 @@ local VUHDO_RAID_MACRO_CACHE = {};
 local VUHDO_TARGET_MACRO_CACHE = {};
 local sFireText = nil;
 
---
 function VUHDO_resetMacroCaches()
 	table.wipe(VUHDO_RAID_MACRO_CACHE);
 	table.wipe(VUHDO_TARGET_MACRO_CACHE);
 	sFireText = nil;
 end
 
---
 local function VUHDO_isFireSomething(anAction)
 	if (not VUHDO_SPELL_CONFIG["IS_AUTO_FIRE"]) then
 		return false;
@@ -46,20 +44,17 @@ local function VUHDO_isFireSomething(anAction)
 		return true;
 	end
 
-	if (VUHDO_SPELL_CONFIG["IS_FIRE_CUSTOM_1"] and VUHDO_SPELL_CONFIG["FIRE_CUSTOM_1_SPELL"] ~= nil and
-		strlen(VUHDO_SPELL_CONFIG["FIRE_CUSTOM_1_SPELL"]) > 0) then
+	if (VUHDO_SPELL_CONFIG["IS_FIRE_CUSTOM_1"] and VUHDO_SPELL_CONFIG["FIRE_CUSTOM_1_SPELL"] ~= nil and strlen(VUHDO_SPELL_CONFIG["FIRE_CUSTOM_1_SPELL"]) > 0) then
 		return true;
 	end
 
-	if (VUHDO_SPELL_CONFIG["IS_FIRE_CUSTOM_2"] and VUHDO_SPELL_CONFIG["FIRE_CUSTOM_2_SPELL"] ~= nil and
-		strlen(VUHDO_SPELL_CONFIG["FIRE_CUSTOM_2_SPELL"]) > 0) then
+	if (VUHDO_SPELL_CONFIG["IS_FIRE_CUSTOM_2"] and VUHDO_SPELL_CONFIG["FIRE_CUSTOM_2_SPELL"] ~= nil and strlen(VUHDO_SPELL_CONFIG["FIRE_CUSTOM_2_SPELL"]) > 0) then
 		return true;
 	end
 
 	return false;
 end
 
---
 local function VUHDO_getFireText(anAction)
 
 	if (VUHDO_isFireSomething(anAction)) then
@@ -140,7 +135,6 @@ local function VUHDO_getFireText(anAction)
 
 end
 
---
 local tPet;
 local function VUHDO_getMacroPetUnit(aTarget)
 	if (VUHDO_RAID[aTarget] ~= nil and not VUHDO_RAID[aTarget]["isPet"]) then
@@ -150,7 +144,6 @@ local function VUHDO_getMacroPetUnit(aTarget)
 	end
 end
 
---
 local tFriendText;
 local tEnemyText;
 local tModiSpell;
@@ -218,7 +211,6 @@ local function VUHDO_generateTargetMacroText(aTarget, aFriendlyAction, aHostileA
 	return tStopText .. VUHDO_getFireText(aFriendlyAction) .. tFriendText .. tEnemyText;
 end
 
---
 local tIndex, tText;
 function VUHDO_buildTargetButtonMacroText(aTarget, aFriendlyAction, aHostileAction)
 	tIndex = aFriendlyAction .. aHostileAction;
@@ -231,7 +223,6 @@ function VUHDO_buildTargetButtonMacroText(aTarget, aFriendlyAction, aHostileActi
 	return tText;
 end
 
---
 function VUHDO_buildFocusMacroText(aTarget)
 	tPet = VUHDO_getMacroPetUnit(aTarget);
 
@@ -242,7 +233,6 @@ function VUHDO_buildFocusMacroText(aTarget)
 	end
 end
 
---
 function VUHDO_buildTargetMacroText(aTarget)
 	tPet = VUHDO_getMacroPetUnit(aTarget);
 
@@ -253,7 +243,6 @@ function VUHDO_buildTargetMacroText(aTarget)
 	end
 end
 
---
 function VUHDO_buildAssistMacroText(aTarget)
 	tPet = VUHDO_getMacroPetUnit(aTarget);
 
@@ -268,7 +257,6 @@ local VUHDO_PROHIBIT_HELP = {
 	[VUHDO_SPELL_ID_REBIRTH] = true
 }
 
---
 local tText;
 local tModi;
 local tModi2;
@@ -354,7 +342,6 @@ local function VUHDO_generateRaidMacroTemplate(anAction, anIsKeyboard, aTarget, 
 	return tText;
 end
 
---
 local tIndex;
 local tPet;
 local tText;
@@ -384,18 +371,15 @@ function VUHDO_buildMacroText(anAction, anIsKeyboard, aTarget)
 	end
 
 	if (anIsKeyboard and strlen(tText) > 256) then
-		VUHDO_Msg(VUHDO_I18N_MACRO_KEY_ERR_1 .. anAction .. " (" .. strlen(tText) .. VUHDO_I18N_MACRO_KEY_ERR_2, 1, 0.3,
-			0.3);
+		VUHDO_Msg(VUHDO_I18N_MACRO_KEY_ERR_1 .. anAction .. " (" .. strlen(tText) .. VUHDO_I18N_MACRO_KEY_ERR_2, 1, 0.3, 0.3);
 	end
 	return tText;
 end
 
---
 function VUHDO_buildPurgeMacroText(anAction, aTarget)
 	return "/cast [@" .. aTarget .. "] " .. anAction;
 end
 
---
 local tName;
 local tIndex;
 local function VUHDO_createOrUpdateMacro(aMacroNum, aMacroText, aSpell)
@@ -413,7 +397,6 @@ local function VUHDO_createOrUpdateMacro(aMacroNum, aMacroText, aSpell)
 	end
 end
 
---
 local tBody;
 local tKey1, tKey2;
 local tBindPrefix = "VUHDO_KEY_ASSIGN_";

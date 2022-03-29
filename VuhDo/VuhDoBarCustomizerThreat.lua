@@ -19,7 +19,6 @@ function VUHDO_threatIndicatorsBouquetCallback(aUnit, anIsActive, anIcon, aTimer
 	end
 end
 
---
 local tAllButtons, tButton;
 local tBar;
 local tQuota;

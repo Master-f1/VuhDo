@@ -680,7 +680,11 @@ VUHDO_I18N_TT_494 = "Select destination profile";
 VUHDO_I18N_TT_495 = "Exports all custom debuffs of current profile to all profiles of this toon.";
 VUHDO_I18N_TT_496 = "Exports all custom debuffs of current profile to selected profile.";
 VUHDO_I18N_TT_497 = "Exports all custom debuffs of current profile to ALL other profiles.";
-
+VUHDO_I18N_TT_498 = "Check this to abort spell casts currently in progress to start a new cast on repeated click."
+VUHDO_I18N_TT_499 = "Show HoTs right above power bars.";
+VUHDO_I18N_TT_501 = "Show HoTs left above power bars.";
+VUHDO_I18N_TT_502 = "Show HoTs right at the bottom of heal button, overlapping power bars.";
+VUHDO_I18N_TT_503 = "Show HoTs left at the bottom of heal button, overlapping power bars.";
 
 VUHDO_I18N_APPLY_TO_ALL = "apply all";
 VUHDO_I18N_TEST = "Test";
@@ -1116,3 +1120,9 @@ VUHDO_I18N_THIS_TOONS = "This Toon's";
 VUHDO_I18N_SELECTED = "Selected";
 VUHDO_I18N_ALL = "All";
 VUHDO_I18N_REPLACE = "Replace";
+-- edit 29.03.2021
+VUHDO_I18N_DISCARD_CHANGES_CONFIRM = "You have made a total of %d setup changes.\nYou really wanna DISCARD them?";
+VUHDO_I18N_STOP_CAST = "Stop Cast";
+VUHDO_I18N_OVERWRITE_CURR_KEY_LAYOUT_QUESTION = "This will overwrite current\nkey layout. Continue?";
+VUHDO_I18N_MANA_BAR_HEIGHT = "Mana Bar Height";
+VUHDO_I18N_REALLY_EXPORT_CUDES = "Really export to profile(s)?";

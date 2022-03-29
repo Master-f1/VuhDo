@@ -1,6 +1,5 @@
 local VUHDO_IS_RESURRECTING = false;
 
---
 local string = string;
 local pairs = pairs;
 local strlen = strlen;
@@ -31,7 +30,6 @@ function VUHDO_spellEventHandlerInitBurst()
 	VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
 end
 
---
 function VUHDO_spellcastStop(aUnit)
 	if (VUHDO_IS_RESURRECTING and "player" == aUnit) then
 		VUHDO_sendCtraMessage("RESNO");
@@ -40,12 +38,10 @@ function VUHDO_spellcastStop(aUnit)
 end
 local VUHDO_spellcastStop = VUHDO_spellcastStop;
 
---
 function VUHDO_spellcastFailed(aUnit, aSpellName)
 	VUHDO_spellcastStop(aUnit, aSpellName);
 end
 
---
 local function VUHDO_activateSpellForSpec(aSpecId)
 	local tName = VUHDO_SPEC_LAYOUTS[aSpecId];
 	if (tName ~= nil and strlen(tName) > 0) then
@@ -76,7 +72,6 @@ local VUHDO_TALENT_CHANGE_SPELLS = {
 	[VUHDO_SPELL_ID_BUFF_UNHOLY_PRESENCE] = true
 }
 
---
 function VUHDO_spellcastSucceeded(aUnit, aSpellName)
 	if (VUHDO_TALENT_CHANGE_SPELLS[aSpellName]) then
 		VUHDO_resetTalentScan(aUnit);
@@ -99,7 +94,6 @@ function VUHDO_spellcastSucceeded(aUnit, aSpellName)
 	end
 end
 
---
 local tTargetUnit;
 local tFirstRes, tSecondRes;
 local tUniqueSpells = nil;
@@ -121,9 +115,7 @@ function VUHDO_spellcastSent(aUnit, aSpellName, aSpellRank, aTargetName)
 
 	-- Resurrection?
 	tFirstRes, tSecondRes = VUHDO_getResurrectionSpells();
-	if ((aSpellName == tFirstRes or aSpellName == tSecondRes) and aTargetName ~= nil and tTargetUnit ~= nil and
-		not UnitIsGhost(tTargetUnit)) then
-
+	if ((aSpellName == tFirstRes or aSpellName == tSecondRes) and aTargetName ~= nil and tTargetUnit ~= nil and not UnitIsGhost(tTargetUnit)) then
 		VUHDO_sendCtraMessage("RES " .. aTargetName);
 		VUHDO_IS_RESURRECTING = true;
 
@@ -153,8 +145,7 @@ function VUHDO_spellcastSent(aUnit, aSpellName, aSpellRank, aTargetName)
 
 	tCateg = tUniqueSpells[aSpellName];
 	if (tCateg ~= nil and tTargetUnit ~= nil and not InCombatLockdown()) then
-		if (VUHDO_BUFF_SETTINGS ~= nil and VUHDO_BUFF_SETTINGS[tCateg] ~= nil and aTargetName ~=
-			VUHDO_BUFF_SETTINGS[tCateg].name) then
+		if (VUHDO_BUFF_SETTINGS ~= nil and VUHDO_BUFF_SETTINGS[tCateg] ~= nil and aTargetName ~= VUHDO_BUFF_SETTINGS[tCateg].name) then
 			VUHDO_BUFF_SETTINGS[tCateg].name = aTargetName;
 			VUHDO_reloadBuffPanel();
 		end

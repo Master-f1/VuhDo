@@ -8,7 +8,6 @@ local tPoints1, tPoints2, tPoints3, tRank;
 VUHDO_NEXT_INSPECT_UNIT = nil;
 VUHDO_NEXT_INSPECT_TIME_OUT = nil;
 
---------------------------------------------------------------
 local twipe = table.wipe;
 local CheckInteractDistance = CheckInteractDistance;
 local UnitIsUnit = UnitIsUnit;
@@ -28,24 +27,26 @@ local pairs = pairs;
 local VUHDO_MANUAL_ROLES;
 local VUHDO_RAID_NAMES;
 local VUHDO_RAID;
+
 -- local sIsRolesConfigured;
 
 function VUHDO_roleCheckerInitBurst()
 	VUHDO_MANUAL_ROLES = VUHDO_GLOBAL["VUHDO_MANUAL_ROLES"];
 	VUHDO_RAID_NAMES = VUHDO_GLOBAL["VUHDO_RAID_NAMES"];
 	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
-	--[[	sIsRolesConfigured =
+--[[ 
+		sIsRolesConfigured =
 		VUHDO_isModelConfigured(VUHDO_ID_MELEE_TANK)
 		or VUHDO_isModelConfigured(VUHDO_ID_MELEE_DAMAGE)
 		or VUHDO_isModelConfigured(VUHDO_ID_RANGED_DAMAGE)
 		or VUHDO_isModelConfigured(VUHDO_ID_RANGED_HEAL)
 		or VUHDO_isModelConfigured(VUHDO_ID_MELEE)
 		or VUHDO_isModelConfigured(VUHDO_ID_RANGED)
-		or VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_ROLE); ]]
+		or VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_ROLE);
+--]]
 
 	VUHDO_isUnitInModel = VUHDO_GLOBAL["VUHDO_isUnitInModel"];
 end
---------------------------------------------------------------
 
 -- Reset if spec changed or slash command
 function VUHDO_resetTalentScan(aUnit)
@@ -65,7 +66,6 @@ function VUHDO_resetTalentScan(aUnit)
 	end
 end
 
---
 local tName;
 function VUHDO_trimInspected()
 	for tName, _ in pairs(VUHDO_INSPECTED_ROLES) do
@@ -84,7 +84,6 @@ function VUHDO_setRoleUndefined(aUnit)
 	end
 end
 
---
 local tInfo;
 local tClass, tName;
 local function VUHDO_shouldBeInspected(aUnit)
@@ -108,8 +107,7 @@ local function VUHDO_shouldBeInspected(aUnit)
 	-- Already inspected or manually overridden?
 	-- or assigned tank or heal via dungeon finder? (in case of DPS inspect anyway)
 	tName = tInfo["name"];
-	if (VUHDO_INSPECTED_ROLES[tName] ~= nil or VUHDO_MANUAL_ROLES[tName] ~= nil or VUHDO_DF_TOOL_ROLES[tName] == 60 or
-		VUHDO_DF_TOOL_ROLES[tName] == 63) then -- VUHDO_ID_MELEE_TANK -- VUHDO_ID_RANGED_HEAL
+	if (VUHDO_INSPECTED_ROLES[tName] ~= nil or VUHDO_MANUAL_ROLES[tName] ~= nil or VUHDO_DF_TOOL_ROLES[tName] == 60 or VUHDO_DF_TOOL_ROLES[tName] == 63) then -- VUHDO_ID_MELEE_TANK -- VUHDO_ID_RANGED_HEAL
 		return false;
 	end
 	-- Too far away?
@@ -120,7 +118,6 @@ local function VUHDO_shouldBeInspected(aUnit)
 	return true;
 end
 
---
 local tUnit;
 function VUHDO_tryInspectNext()
 	for tUnit, _ in pairs(VUHDO_RAID) do
@@ -138,7 +135,6 @@ function VUHDO_tryInspectNext()
 	end
 end
 
---
 local tIcon1, tIcon2, tIcon3;
 local tActiveTree;
 local tIsInspect;
@@ -184,7 +180,7 @@ function VUHDO_inspectLockRole()
 		elseif (tPoints3 > tPoints2) then
 			VUHDO_INSPECTED_ROLES[tInfo["name"]] = 63; -- VUHDO_ID_RANGED_HEAL
 		else
-			-- "Nat�rliche Reaktion" geskillt => Wahrsch. Tank?
+			-- "Natural reaction" geskillt => Wahrsch. Tank?
 			_, _, _, _, tRank, _, _, _ = GetTalentInfo(2, 16, tIsInspect, false, tActiveTree);
 			if (tRank > 0) then
 				VUHDO_INSPECTED_ROLES[tInfo.name] = 60; -- VUHDO_ID_MELEE_TANK
@@ -204,7 +200,7 @@ function VUHDO_inspectLockRole()
 		end
 
 	elseif (VUHDO_ID_SHAMANS == tClassId) then
-		-- 1 = Elementar, 2 = Verst�rker, 3 = Wiederherstellung
+		-- 1 = Elementar, 2 = Amplifier, 3 = Wiederherstellung
 		if (tPoints1 > tPoints2 and tPoints1 > tPoints3) then
 			VUHDO_INSPECTED_ROLES[tInfo["name"]] = 62; -- VUHDO_ID_RANGED_DAMAGE
 		elseif (tPoints2 > tPoints3) then
@@ -216,14 +212,15 @@ function VUHDO_inspectLockRole()
 
 	ClearInspectPlayer();
 	VUHDO_NEXT_INSPECT_UNIT = nil;
-	--	if (sIsRolesConfigured) then
+	-- if (sIsRolesConfigured) then
 	VUHDO_normalRaidReload();
-	--[[	else
+--[[
+		else
 		VUHDO_refreshRaidMembers();
-	end]]
+	end
+--]]
 end
 
---
 local tIsTank, tIsHeal, tIsDps;
 local function VUHDO_determineDfToolRole(anInfo)
 	tIsTank, tIsHeal, tIsDps = UnitGroupRolesAssigned(anInfo["unit"]);
@@ -242,7 +239,6 @@ local function VUHDO_determineDfToolRole(anInfo)
 	return nil;
 end
 
---
 local tName;
 local tInfo;
 local tDefense;

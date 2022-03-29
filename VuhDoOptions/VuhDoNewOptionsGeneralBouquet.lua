@@ -1,10 +1,10 @@
-VUHDO_BOUQET_COMBO_MODEL = { };
-VUHDO_BOUQET_DETAILS_COMBO_MODEL = { };
-VUHDO_BOUQUET_ICON_COMBO_MODEL = { };
+VUHDO_BOUQET_COMBO_MODEL = {};
+VUHDO_BOUQET_DETAILS_COMBO_MODEL = {};
+VUHDO_BOUQUET_ICON_COMBO_MODEL = {};
 
 local VUHDO_CURRENT_BOUQUET_CHOICE = nil;
 local VUHDO_CURR_SELECTED_ITEM_INDEX = 0;
-local VUHDO_BOUQUET_ITEMS = { };
+local VUHDO_BOUQUET_ITEMS = {};
 local VUHDO_SUPPRESS_COMBO_FEEDBACK = false;
 VUHDO_TEMP_BOUQUET_BUFF = nil;
 
@@ -27,53 +27,42 @@ local function VUHDO_deepCopyColor(aColorTable)
 	return tCopy;
 end
 
-
-
---
 function VUHDO_bouquetsUpdateDefaultColors()
-  VUHDO_BOUQUET_BUFFS_SPECIAL["AGGRO"]["defaultColor"] = VUHDO_deepCopyColor({ ["R"] = 1, ["G"] = 0, ["B"] = 0 });
-  VUHDO_BOUQUET_BUFFS_SPECIAL["NO_RANGE"]["defaultColor"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["OUTRANGED"]);
-  VUHDO_BOUQUET_BUFFS_SPECIAL["IN_RANGE"]["defaultColor"] = VUHDO_deepCopyColor({});
-  VUHDO_BOUQUET_BUFFS_SPECIAL["YARDS_RANGE"]["defaultColor"] = VUHDO_deepCopyColor({ ["R"] = 1, ["G"] = 0.5, ["B"] = 0 });
-  VUHDO_BOUQUET_BUFFS_SPECIAL["OTHER"]["defaultColor"] = VUHDO_deepCopyColor({});
-  --VUHDO_BOUQUET_BUFFS_SPECIAL["DEBUFF_DISPELLABLE"]["defaultColor"] = VUHDO_deepCopyColor({});
-  VUHDO_BOUQUET_BUFFS_SPECIAL["DEBUFF_MAGIC"]["defaultColor"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["DEBUFF" .. VUHDO_DEBUFF_TYPE_MAGIC]);
-  VUHDO_BOUQUET_BUFFS_SPECIAL["DEBUFF_DISEASE"]["defaultColor"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["DEBUFF" .. VUHDO_DEBUFF_TYPE_DISEASE]);
-  VUHDO_BOUQUET_BUFFS_SPECIAL["DEBUFF_POISON"]["defaultColor"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["DEBUFF" .. VUHDO_DEBUFF_TYPE_POISON]);
-  VUHDO_BOUQUET_BUFFS_SPECIAL["DEBUFF_CURSE"]["defaultColor"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["DEBUFF" .. VUHDO_DEBUFF_TYPE_CURSE]);
-  VUHDO_BOUQUET_BUFFS_SPECIAL["DEBUFF_CHARMED"]["defaultColor"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["CHARMED"]);
-  VUHDO_BOUQUET_BUFFS_SPECIAL["DEAD"]["defaultColor"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["DEAD"]);
-  VUHDO_BOUQUET_BUFFS_SPECIAL["DISCONNECTED"]["defaultColor"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["OFFLINE"]);
-  VUHDO_BOUQUET_BUFFS_SPECIAL["AFK"]["defaultColor"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["OFFLINE"]);
-  VUHDO_BOUQUET_BUFFS_SPECIAL["PLAYER_TARGET"]["defaultColor"] = VUHDO_deepCopyColor({ ["R"] = 0.7, ["G"] = 0.7, ["B"] = 0.7 });
-  VUHDO_BOUQUET_BUFFS_SPECIAL["MOUSE_TARGET"]["defaultColor"] = VUHDO_deepCopyColor({ ["R"] = 0.4, ["G"] = 0.4, ["B"] = 0.4 });
-  VUHDO_BOUQUET_BUFFS_SPECIAL["MOUSE_GROUP"]["defaultColor"] = VUHDO_deepCopyColor({ ["R"] = 0.2, ["G"] = 0.2, ["B"] = 0.2 });
-  VUHDO_BOUQUET_BUFFS_SPECIAL["HEALTH_BELOW"]["defaultColor"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["LIFE_LEFT"]["LOW"]);
-  VUHDO_BOUQUET_BUFFS_SPECIAL["MANA_BELOW"]["defaultColor"] = VUHDO_deepCopyColor(VUHDO_POWER_TYPE_COLORS[VUHDO_UNIT_POWER_MANA]);
-  VUHDO_BOUQUET_BUFFS_SPECIAL["THREAT_ABOVE"]["defaultColor"] = VUHDO_deepCopyColor({ ["R"] = 1, ["G"] = 0, ["B"] = 1 });
-  VUHDO_BOUQUET_BUFFS_SPECIAL["NUM_CLUSTER"]["defaultColor"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["CLUSTER_GOOD"]);
-  VUHDO_BOUQUET_BUFFS_SPECIAL["MOUSE_CLUSTER"]["defaultColor"] = VUHDO_deepCopyColor({ ["R"] = 1, ["G"] = 0.5, ["B"] = 0 });
-  VUHDO_BOUQUET_BUFFS_SPECIAL["THREAT_LEVEL_MEDIUM"]["defaultColor"] = VUHDO_deepCopyColor({ ["R"] = 1, ["G"] = 0.5, ["B"] = 0 });
-  VUHDO_BOUQUET_BUFFS_SPECIAL["THREAT_LEVEL_HIGH"]["defaultColor"] = VUHDO_deepCopyColor({ ["R"] = 1, ["G"] = 0, ["B"] = 0 });
-  VUHDO_BOUQUET_BUFFS_SPECIAL["ALWAYS"]["defaultColor"] = VUHDO_deepCopyColor({});
+	VUHDO_BOUQUET_BUFFS_SPECIAL["AGGRO"]["defaultColor"] = VUHDO_deepCopyColor({["R"] = 1, ["G"] = 0, ["B"] = 0});
+	VUHDO_BOUQUET_BUFFS_SPECIAL["NO_RANGE"]["defaultColor"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["OUTRANGED"]);
+	VUHDO_BOUQUET_BUFFS_SPECIAL["IN_RANGE"]["defaultColor"] = VUHDO_deepCopyColor({});
+	VUHDO_BOUQUET_BUFFS_SPECIAL["YARDS_RANGE"]["defaultColor"] = VUHDO_deepCopyColor({["R"] = 1, ["G"] = 0.5, ["B"] = 0});
+	VUHDO_BOUQUET_BUFFS_SPECIAL["OTHER"]["defaultColor"] = VUHDO_deepCopyColor({});
+	-- VUHDO_BOUQUET_BUFFS_SPECIAL["DEBUFF_DISPELLABLE"]["defaultColor"] = VUHDO_deepCopyColor({});
+	VUHDO_BOUQUET_BUFFS_SPECIAL["DEBUFF_MAGIC"]["defaultColor"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["DEBUFF" .. VUHDO_DEBUFF_TYPE_MAGIC]);
+	VUHDO_BOUQUET_BUFFS_SPECIAL["DEBUFF_DISEASE"]["defaultColor"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["DEBUFF" .. VUHDO_DEBUFF_TYPE_DISEASE]);
+	VUHDO_BOUQUET_BUFFS_SPECIAL["DEBUFF_POISON"]["defaultColor"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["DEBUFF" .. VUHDO_DEBUFF_TYPE_POISON]);
+	VUHDO_BOUQUET_BUFFS_SPECIAL["DEBUFF_CURSE"]["defaultColor"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["DEBUFF" .. VUHDO_DEBUFF_TYPE_CURSE]);
+	VUHDO_BOUQUET_BUFFS_SPECIAL["DEBUFF_CHARMED"]["defaultColor"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["CHARMED"]);
+	VUHDO_BOUQUET_BUFFS_SPECIAL["DEAD"]["defaultColor"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["DEAD"]);
+	VUHDO_BOUQUET_BUFFS_SPECIAL["DISCONNECTED"]["defaultColor"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["OFFLINE"]);
+	VUHDO_BOUQUET_BUFFS_SPECIAL["AFK"]["defaultColor"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["OFFLINE"]);
+	VUHDO_BOUQUET_BUFFS_SPECIAL["PLAYER_TARGET"]["defaultColor"] = VUHDO_deepCopyColor({["R"] = 0.7, ["G"] = 0.7, ["B"] = 0.7});
+	VUHDO_BOUQUET_BUFFS_SPECIAL["MOUSE_TARGET"]["defaultColor"] = VUHDO_deepCopyColor({["R"] = 0.4, ["G"] = 0.4, ["B"] = 0.4});
+	VUHDO_BOUQUET_BUFFS_SPECIAL["MOUSE_GROUP"]["defaultColor"] = VUHDO_deepCopyColor({["R"] = 0.2, ["G"] = 0.2, ["B"] = 0.2});
+	VUHDO_BOUQUET_BUFFS_SPECIAL["HEALTH_BELOW"]["defaultColor"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["LIFE_LEFT"]["LOW"]);
+	VUHDO_BOUQUET_BUFFS_SPECIAL["MANA_BELOW"]["defaultColor"] = VUHDO_deepCopyColor(VUHDO_POWER_TYPE_COLORS[VUHDO_UNIT_POWER_MANA]);
+	VUHDO_BOUQUET_BUFFS_SPECIAL["THREAT_ABOVE"]["defaultColor"] = VUHDO_deepCopyColor({["R"] = 1, ["G"] = 0, ["B"] = 1});
+	VUHDO_BOUQUET_BUFFS_SPECIAL["NUM_CLUSTER"]["defaultColor"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["CLUSTER_GOOD"]);
+	VUHDO_BOUQUET_BUFFS_SPECIAL["MOUSE_CLUSTER"]["defaultColor"] = VUHDO_deepCopyColor({["R"] = 1, ["G"] = 0.5, ["B"] = 0});
+	VUHDO_BOUQUET_BUFFS_SPECIAL["THREAT_LEVEL_MEDIUM"]["defaultColor"] = VUHDO_deepCopyColor({["R"] = 1, ["G"] = 0.5, ["B"] = 0});
+	VUHDO_BOUQUET_BUFFS_SPECIAL["THREAT_LEVEL_HIGH"]["defaultColor"] = VUHDO_deepCopyColor({["R"] = 1, ["G"] = 0, ["B"] = 0});
+	VUHDO_BOUQUET_BUFFS_SPECIAL["ALWAYS"]["defaultColor"] = VUHDO_deepCopyColor({});
 end
 
-
-
-
-
---
 local tInfo;
 local function VUHDO_getBouquetItemDisplayText(aName)
 	if (VUHDO_BOUQUET_BUFFS_SPECIAL[aName] ~= nil) then
-	  return "[" .. VUHDO_BOUQUET_BUFFS_SPECIAL[aName]["displayName"] .. "]";
+		return "[" .. VUHDO_BOUQUET_BUFFS_SPECIAL[aName]["displayName"] .. "]";
 	end
 	return nil;
 end
 
-
-
---
 local tBouquetName;
 local function VUHDO_getCurrentBouquetName()
 	tBouquetName = VUHDO_BOUQUETS["SELECTED"];
@@ -84,9 +73,6 @@ local function VUHDO_getCurrentBouquetName()
 	return tBouquetName;
 end
 
-
-
---
 local tName;
 local function VUHDO_getCurrentBouquet()
 	tName = VUHDO_getCurrentBouquetName();
@@ -97,9 +83,6 @@ local function VUHDO_getCurrentBouquet()
 	return VUHDO_BOUQUETS["STORED"][tName];
 end
 
-
-
---
 local tBouquet;
 function VUHDO_getCurrentBouquetItem()
 	tBouquet = VUHDO_getCurrentBouquet();
@@ -110,14 +93,11 @@ function VUHDO_getCurrentBouquetItem()
 	return tBouquet[VUHDO_CURR_SELECTED_ITEM_INDEX];
 end
 
-
-
---
 local tName, tInfo, tIndex;
 function VUHDO_initBouquetComboModel()
 	table.wipe(VUHDO_BOUQET_COMBO_MODEL);
 	for tName, _ in pairs(VUHDO_BOUQUETS["STORED"]) do
-		tinsert(VUHDO_BOUQET_COMBO_MODEL, { tName, tName } );
+		tinsert(VUHDO_BOUQET_COMBO_MODEL, {tName, tName});
 	end
 
 	table.sort(VUHDO_BOUQET_COMBO_MODEL,
@@ -128,7 +108,7 @@ function VUHDO_initBouquetComboModel()
 
 	table.wipe(VUHDO_BOUQET_DETAILS_COMBO_MODEL);
 	for tName, tInfo in pairs(VUHDO_BOUQUET_BUFFS_SPECIAL) do
-		tinsert(VUHDO_BOUQET_DETAILS_COMBO_MODEL, { tName, tInfo["displayName"] });
+		tinsert(VUHDO_BOUQET_DETAILS_COMBO_MODEL, {tName, tInfo["displayName"]});
 	end
 
 	table.sort(VUHDO_BOUQET_DETAILS_COMBO_MODEL,
@@ -139,13 +119,10 @@ function VUHDO_initBouquetComboModel()
 
 	table.wipe(VUHDO_BOUQUET_ICON_COMBO_MODEL);
 	for tIndex, tInfo in ipairs(VUHDO_CUSTOM_ICONS) do
-		tinsert(VUHDO_BOUQUET_ICON_COMBO_MODEL, { tIndex, tInfo[1] });
+		tinsert(VUHDO_BOUQUET_ICON_COMBO_MODEL, {tIndex, tInfo[1]});
 	end
 end
 
-
-
---
 local tFirst, tSecond;
 function VUHDO_swapTable(aTable, anIndex, anotherIndex)
 	tFirst = aTable[anIndex];
@@ -155,9 +132,6 @@ function VUHDO_swapTable(aTable, anIndex, anotherIndex)
 	aTable[anotherIndex] = tFirst;
 end
 
-
-
---
 local function VUHDO_getOrCreateBouqetItem(anIndex, aPanel)
 	if (VUHDO_BOUQUET_ITEMS[anIndex] == nil) then
 		VUHDO_BOUQUET_ITEMS[anIndex] = CreateFrame("Button", "VuhDoBouquetItem" .. anIndex, aPanel, "VuhDoBouquetIconTemplate");
@@ -167,9 +141,6 @@ local function VUHDO_getOrCreateBouqetItem(anIndex, aPanel)
 	return VUHDO_BOUQUET_ITEMS[anIndex];
 end
 
-
-
---
 local tName;
 local function VUHDO_initBouquetItem(aParent, anItemPanel, aBouquetName, aBuffIndex, aBuffInfo)
 	tName = VUHDO_getBouquetItemDisplayText(aBuffInfo["name"]) or aBuffInfo["name"];
@@ -187,9 +158,6 @@ local function VUHDO_initBouquetItem(aParent, anItemPanel, aBouquetName, aBuffIn
 	anItemPanel:Show();
 end
 
-
-
---
 local tItem;
 function VUHDO_setColorManuallyChanged()
 	tItem = VUHDO_getCurrentBouquetItem();
@@ -198,9 +166,6 @@ function VUHDO_setColorManuallyChanged()
 	end
 end
 
-
-
---
 local tCombo, tEditBox, tModel, tIsTempModel, tSwatch, tCheckBox, tCustomPanel, tBuffName;
 local tPanel, tSubPanel, tSlider;
 local tIndex, tSpecialName;
@@ -331,31 +296,31 @@ function VUHDO_rebuildBouquetContextEditors(anIndex)
 			if (VUHDO_BOUQUET_BUFFS_SPECIAL[tBuffName]["custom_type"] == VUHDO_BOUQUET_CUSTOM_TYPE_BRIGHTNESS) then
 				tSubPanel = VUHDO_GLOBAL[tInnerPanel:GetName() .. "PercentFrame"];
 				tSlider = VUHDO_GLOBAL[tSubPanel:GetName() .. "Slider"];
-	  		VUHDO_lnfSetModel(tSlider, tModel .. ".custom.bright");
-	  		VUHDO_lnfSliderOnLoad(tSlider, VUHDO_I18N_BRIGHTNESS, 0, 2, "x", 0.05);
+				VUHDO_lnfSetModel(tSlider, tModel .. ".custom.bright");
+				VUHDO_lnfSliderOnLoad(tSlider, VUHDO_I18N_BRIGHTNESS, 0, 2, "x", 0.05);
 				tSubPanel:Show();
 			elseif (VUHDO_BOUQUET_BUFFS_SPECIAL[tBuffName]["custom_type"] == VUHDO_BOUQUET_CUSTOM_TYPE_PERCENT) then
 				tSubPanel = VUHDO_GLOBAL[tInnerPanel:GetName() .. "PercentFrame"];
 				tSlider = VUHDO_GLOBAL[tSubPanel:GetName() .. "Slider"];
-	  		VUHDO_lnfSetModel(tSlider, tModel .. ".custom.##1");
-	  		tSpecialName = VUHDO_BOUQUETS["STORED"][tBouquetName][tIndex]["name"];
-	  		VUHDO_lnfSliderOnLoad(tSlider, VUHDO_BOUQUET_BUFFS_SPECIAL[tSpecialName]["displayName"], 0, 100, "");
+				VUHDO_lnfSetModel(tSlider, tModel .. ".custom.##1");
+				tSpecialName = VUHDO_BOUQUETS["STORED"][tBouquetName][tIndex]["name"];
+				VUHDO_lnfSliderOnLoad(tSlider, VUHDO_BOUQUET_BUFFS_SPECIAL[tSpecialName]["displayName"], 0, 100, "");
 				tSubPanel:Show();
 			elseif (VUHDO_BOUQUET_BUFFS_SPECIAL[tBuffName]["custom_type"] == VUHDO_BOUQUET_CUSTOM_TYPE_PLAYERS) then
 				tSubPanel = VUHDO_GLOBAL[tInnerPanel:GetName() .. "PercentFrame"];
 				tSlider = VUHDO_GLOBAL[tSubPanel:GetName() .. "Slider"];
-	  		VUHDO_lnfSetModel(tSlider, tModel .. ".custom.##1");
-	  		tSpecialName = VUHDO_BOUQUETS["STORED"][tBouquetName][tIndex]["name"];
-	  		VUHDO_lnfSliderOnLoad(tSlider, VUHDO_BOUQUET_BUFFS_SPECIAL[tSpecialName]["displayName"], 0, 40, "");
+				VUHDO_lnfSetModel(tSlider, tModel .. ".custom.##1");
+				tSpecialName = VUHDO_BOUQUETS["STORED"][tBouquetName][tIndex]["name"];
+				VUHDO_lnfSliderOnLoad(tSlider, VUHDO_BOUQUET_BUFFS_SPECIAL[tSpecialName]["displayName"], 0, 40, "");
 				tSubPanel:Show();
 			else
 				VUHDO_GLOBAL[tInnerPanel:GetName() .. "PercentFrame"]:Hide();
 			end
 
 			if (VUHDO_BOUQUET_BUFFS_SPECIAL[tBuffName]["no_color"]) then
-			  tSwatch = VUHDO_GLOBAL[tInnerPanel:GetName() .. "ColorTexture"];
+				tSwatch = VUHDO_GLOBAL[tInnerPanel:GetName() .. "ColorTexture"];
 				tSwatch:Hide();
-    		VUHDO_lnfSetModel(tSwatch, nil);
+				VUHDO_lnfSetModel(tSwatch, nil);
 			else
 				VUHDO_GLOBAL[tInnerPanel:GetName() .. "ColorTexture"]:Show();
 			end
@@ -380,9 +345,6 @@ function VUHDO_rebuildBouquetContextEditors(anIndex)
 	VUHDO_SUPPRESS_COMBO_FEEDBACK = false;
 end
 
-
-
---
 local tCurrentItemPanel = nil;
 local tNewPanel;
 local function VUHDO_setSelectedBouquetItem(anIndex)
@@ -402,9 +364,6 @@ local function VUHDO_setSelectedBouquetItem(anIndex)
 	VUHDO_CURR_SELECTED_ITEM_INDEX = anIndex;
 end
 
-
-
---
 local tPanel;
 local tIndex, tName, tBouquet;
 local tBuffInfo;
@@ -451,9 +410,6 @@ function VUHDO_rebuildAllBouquetItems(aParent, aCursorPos)
 	VUHDO_bouqetsChanged();
 end
 
-
-
---
 local tBouquet;
 local tNewPos;
 function VUHDO_bouquetItemButtonUpOnClick()
@@ -466,9 +422,6 @@ function VUHDO_bouquetItemButtonUpOnClick()
 	end
 end
 
-
-
---
 local tBouquet;
 local tNewPos;
 function VUHDO_bouquetItemButtonDownOnClick()
@@ -481,9 +434,6 @@ function VUHDO_bouquetItemButtonDownOnClick()
 	end
 end
 
-
-
---
 function VUHDO_bouquetItemButtonOnClick(aPanel)
 	VUHDO_rebuildAllBouquetItems(nil, aPanel.buffIdx);
 end
@@ -495,8 +445,6 @@ local VUHDO_GENERIC_BOUQUETS = {
 	[VUHDO_I18N_DEF_BOUQUET_BAR_HEALTH_SOLID] = true,
 }
 
-
---
 local tBouquet;
 local tSelectLabel;
 local tPanelName;
@@ -529,9 +477,6 @@ function VUHDO_bouquetsComboValueChanged(aParent, aValue)
 	end
 end
 
-
-
---
 local tBouquet;
 function VUHDO_bouquetItemsOnShow(aParent)
 	tBouquet = VUHDO_getCurrentBouquet();
@@ -543,17 +488,12 @@ function VUHDO_bouquetItemsOnShow(aParent)
 
 end
 
-
---
 function VUHDO_bouquetsBuffComboValueChanged(aComboBox, aValue)
 	if (not VUHDO_SUPPRESS_COMBO_FEEDBACK) then
 		VUHDO_rebuildAllBouquetItems(nil, VUHDO_CURR_SELECTED_ITEM_INDEX);
 	end
 end
 
-
-
---
 local tName;
 local tEditBox;
 local tEditText;
@@ -572,7 +512,7 @@ function VUHDO_bouquetSaveButtonClicked(aPanel)
 				VUHDO_Msg(tEditText .. VUHDO_I18N_BOUQUET_ALREADY_EXISTS);
 			end
 		else
-			VUHDO_BOUQUETS["STORED"][tEditText] = { };
+			VUHDO_BOUQUETS["STORED"][tEditText] = {};
 			VUHDO_Msg(VUHDO_I18N_CREATED_NEW_BOUQUET .. tEditText);
 		end
 
@@ -584,9 +524,6 @@ function VUHDO_bouquetSaveButtonClicked(aPanel)
 	end
 end
 
-
-
---
 local tName;
 function VUHDO_bouquetDeleteButtonClicked(aPanel)
 	tName = VUHDO_getCurrentBouquetName();
@@ -604,9 +541,6 @@ function VUHDO_bouquetDeleteButtonClicked(aPanel)
 	end
 end
 
-
-
---
 local tName;
 local tEditBox;
 local tEditText;
@@ -615,7 +549,7 @@ function VUHDO_bouquetNewButtonClicked(aPanel)
 	tEditBox = VUHDO_GLOBAL[aPanel:GetName() .. "BouquetNameEditBox"];
 	tEditText = tEditBox:GetText();
 	if (VUHDO_BOUQUETS["STORED"][tEditText] == nil and tEditText ~= nil and strlen(tEditText) > 0) then
-		VUHDO_BOUQUETS["STORED"][tEditText] = { };
+		VUHDO_BOUQUETS["STORED"][tEditText] = {};
 		VUHDO_BOUQUETS["SELECTED"] = tEditText;
 		VUHDO_bouquetsComboValueChanged(aPanel, tEditText);
 		VUHDO_initBouquetComboModel();
@@ -630,9 +564,6 @@ function VUHDO_bouquetNewButtonClicked(aPanel)
 	end
 end
 
-
-
---
 local tBouquet;
 function VUHDO_bouquetItemAddClicked()
 	tBouquet = VUHDO_getCurrentBouquet();
@@ -645,9 +576,6 @@ function VUHDO_bouquetItemAddClicked()
 	VUHDO_rebuildAllBouquetItems(nil, #tBouquet);
 end
 
-
-
---
 local tBouquet;
 function VUHDO_bouquetItemRemoveClicked()
 	tBouquet = VUHDO_getCurrentBouquet();
@@ -660,16 +588,13 @@ function VUHDO_bouquetItemRemoveClicked()
 		return;
 	end
 
-  tremove(tBouquet, VUHDO_CURR_SELECTED_ITEM_INDEX);
-  if (#tBouquet == 0) then
+	tremove(tBouquet, VUHDO_CURR_SELECTED_ITEM_INDEX);
+	if (#tBouquet == 0) then
 		VUHDO_rebuildBouquetContextEditors(0);
 	end
 	VUHDO_rebuildAllBouquetItems(nil, #tBouquet);
 end
 
-
-
---
 local tAllInfos, tIndex, tInfo, tSpecial;
 function VUHDO_trimAllBouquetItems()
 	for _, tAllInfos in pairs(VUHDO_BOUQUETS["STORED"]) do
@@ -694,9 +619,6 @@ function VUHDO_trimAllBouquetItems()
 	end
 end
 
-
-
---
 function VUHDO_generalBouquetBackButtonClicked(aPanel)
 	if (VUHDO_MENU_RETURN_TARGET_MAIN ~= nil) then
 		VUHDO_newOptionsTabbedClickedClicked(VUHDO_MENU_RETURN_TARGET_MAIN);
@@ -710,7 +632,6 @@ function VUHDO_generalBouquetBackButtonClicked(aPanel)
 		VUHDO_MENU_RETURN_TARGET = nil;
 	end
 end
-
 
 function VUHDO_bouquetsBuffColorChanged()
 	VUHDO_rebuildAllBouquetItems(nil, 0);

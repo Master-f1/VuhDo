@@ -6,13 +6,11 @@ VuhDoShieldComms = {};
 local VUHDO_SHIELDS = {};
 local VUHDO_INIT_SHIELDS = {};
 
---
 function VUHDO_resetShieldsLeft()
 	twipe(VUHDO_SHIELDS);
 	twipe(VUHDO_INIT_SHIELDS);
 end
 
---
 local tInit;
 local tEmptyShields = {};
 function VUHDO_getShieldLeftCount(aUnit, aShield)
@@ -25,7 +23,6 @@ function VUHDO_getShieldLeftCount(aUnit, aShield)
 	end
 end
 
---
 local tUnit;
 local function VUHDO_setShieldAmount(aGUID, aShield, anAmount, anInitAmount)
 	tUnit = VUHDO_RAID_GUIDS[aGUID];
@@ -50,17 +47,14 @@ function VuhDoShieldComms:ShieldLeft_UpdateShield(_, aGUID, _, aShield, anAmount
 	VUHDO_setShieldAmount(aGUID, aShield, anAmount, nil);
 end
 
---
 function VuhDoShieldComms:ShieldLeft_RefreshShield(_, aGUID, _, aShield, anAmount, _)
 	VUHDO_setShieldAmount(aGUID, aShield, anAmount, anAmount);
 end
 
---
 function VuhDoShieldComms:ShieldLeft_NewShield(_, aGUID, _, aShield, anAmount, _)
 	VUHDO_setShieldAmount(aGUID, aShield, anAmount, anAmount);
 end
 
---
 function VuhDoShieldComms:ShieldLeft_RemoveShield(_, aGUID, _, aShield, anAmount, _, _)
 	VUHDO_setShieldAmount(aGUID, aShield, nil, nil);
 end

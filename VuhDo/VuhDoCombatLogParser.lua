@@ -1,6 +1,6 @@
-local VUHDO_RAID = { };
-local VUHDO_RAID_GUIDS = { };
-local VUHDO_INTERNAL_TOGGLES = { };
+local VUHDO_RAID = {};
+local VUHDO_RAID_GUIDS = {};
+local VUHDO_INTERNAL_TOGGLES = {};
 
 local strsplit = strsplit;
 local UnitIsUnit = UnitIsUnit;
@@ -10,9 +10,6 @@ local VUHDO_updateHealth;
 local sCurrentTarget = nil;
 local sCurrentFocus = nil;
 
-
-
---
 function VUHDO_combatLogInitBurst()
 	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
 	VUHDO_RAID_GUIDS = VUHDO_GLOBAL["VUHDO_RAID_GUIDS"];
@@ -20,12 +17,9 @@ function VUHDO_combatLogInitBurst()
 	VUHDO_updateHealth = VUHDO_GLOBAL["VUHDO_updateHealth"];
 end
 
-
-
---
 local tInfo;
 local tNewHealth;
-local tDeadInfo = { ["dead"] = true };
+local tDeadInfo = {["dead"] = true};
 local function VUHDO_addUnitHealth(aUnit, aDelta)
 	tInfo = VUHDO_RAID[aUnit] or tDeadInfo;
 
@@ -43,9 +37,6 @@ local function VUHDO_addUnitHealth(aUnit, aDelta)
 	end
 end
 
-
-
---
 local tPrefix, tSuffix, tSpecial;
 local function VUHDO_getTargetHealthImpact(aMessage, aMessage1, aMessage2, aMessage4)
 	tPrefix, tSuffix, tSpecial = strsplit("_", aMessage);
@@ -71,9 +62,6 @@ local function VUHDO_getTargetHealthImpact(aMessage, aMessage1, aMessage2, aMess
 	return 0;
 end
 
-
-
---
 function VUHDO_clParserSetCurrentTarget(aUnit)
 	if (VUHDO_INTERNAL_TOGGLES[27]) then -- VUHDO_UPDATE_PLAYER_TARGET
 		sCurrentTarget = aUnit;
@@ -82,11 +70,8 @@ function VUHDO_clParserSetCurrentTarget(aUnit)
 	end
 end
 
-
-
---
 local tUnit, tInfo;
-local tEmptyInfo = { };
+local tEmptyInfo = {};
 function VUHDO_clParserSetCurrentFocus()
 	sCurrentFocus = nil;
 
@@ -103,9 +88,6 @@ function VUHDO_clParserSetCurrentFocus()
 
 end
 
-
-
---
 local tUnit;
 local tImpact;
 function VUHDO_parseCombatLogEvent(aMessage, aDstGUID, aMessage1, aMessage2, aMessage4)

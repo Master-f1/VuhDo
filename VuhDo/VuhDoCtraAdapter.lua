@@ -1,4 +1,3 @@
---
 function VUHDO_sendCtraMessage(aMessage)
 	SendAddonMessage("CTRA", aMessage, VUHDO_getAddOnDistribution());
 end
@@ -15,7 +14,6 @@ local function VUHDO_getMainTankNumber(aUnit)
 	return nil;
 end
 
---
 function VUHDO_ctraBroadCastMaintanks()
 	local tUnit, tInfo, tMtNumber;
 	for tUnit, tInfo in pairs(VUHDO_RAID) do
@@ -28,7 +26,6 @@ function VUHDO_ctraBroadCastMaintanks()
 	end
 end
 
---
 function VUHDO_parseCtraMessage(aNick, aMessage)
 	local tCnt;
 	local tNum, tName;

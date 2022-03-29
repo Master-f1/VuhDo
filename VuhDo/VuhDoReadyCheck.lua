@@ -1,6 +1,5 @@
 local VUHDO_IS_ON_READY_CHECK = false;
 
---
 local function VUHDO_placeReadyIcon(aButton)
 	local tUnit = VUHDO_resolveButtonUnit(aButton);
 	local tInfo = VUHDO_RAID[tUnit];
@@ -19,7 +18,6 @@ local function VUHDO_placeReadyIcon(aButton)
 	end
 end
 
---
 local function VUHDO_placeAllReadyIcons()
 	local tPanelNum;
 	local tAllButtons;
@@ -38,7 +36,6 @@ local function VUHDO_placeAllReadyIcons()
 	end
 end
 
---
 local function VUHDO_hideAllReadyIcons()
 	local tPanelNum;
 	local tAllButtons;
@@ -58,7 +55,6 @@ local function VUHDO_hideAllReadyIcons()
 	end
 end
 
---
 function VUHDO_readyCheckStarted()
 	VUHDO_IS_ON_READY_CHECK = true;
 	VUHDO_hideAllPlayerIcons();
@@ -85,7 +81,6 @@ local function VUHDO_updateReadyIcon(aUnit, anIsReady)
 	end
 end
 
---
 function VUHDO_readyCheckConfirm(aUnit, anIsReady)
 	if (VUHDO_RAID[aUnit] == nil) then
 		return;
@@ -98,14 +93,12 @@ function VUHDO_readyCheckConfirm(aUnit, anIsReady)
 	VUHDO_updateReadyIcon(aUnit, anIsReady);
 end
 
---
 function VUHDO_readyStartCheck(aName, aDuration)
 	if (VUHDO_RAID_NAMES[aName] ~= nil) then
 		VUHDO_readyCheckConfirm(VUHDO_RAID_NAMES[aName], true); -- Originator is always ready
 	end
 end
 
---
 function VUHDO_readyCheckEnds()
 	if (not VUHDO_IS_ON_READY_CHECK) then -- Client send READY_CHECK_ENDS on startup
 		return;

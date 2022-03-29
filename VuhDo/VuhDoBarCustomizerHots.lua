@@ -1,10 +1,8 @@
-
-
 local sIsFade;
 local sIsWarnColor;
 local sIsSwiftmend;
 local sHotSetup;
-local sBuffs2Hots = { };
+local sBuffs2Hots = {};
 local sHotCols;
 local sHotSlots;
 local sBarColors;
@@ -13,37 +11,38 @@ local sHotSlotCfgs;
 local sIsChargesIcon;
 
 local VUHDO_KNOWS_SWIFTMEND = false;
-local VUHDO_SWIFTMEND_UNITS = { };
+local VUHDO_SWIFTMEND_UNITS = {};
 
-VUHDO_MY_HOTS = { };
+VUHDO_MY_HOTS = {};
 local VUHDO_MY_HOTS = VUHDO_MY_HOTS;
-VUHDO_OTHER_HOTS = { };
+VUHDO_OTHER_HOTS = {};
 local VUHDO_OTHER_HOTS = VUHDO_OTHER_HOTS;
-VUHDO_MY_AND_OTHERS_HOTS = { };
+VUHDO_MY_AND_OTHERS_HOTS = {};
 local VUHDO_MY_AND_OTHERS_HOTS = VUHDO_MY_AND_OTHERS_HOTS;
 
-local VUHDO_ACTIVE_HOTS = { };
-local VUHDO_ACTIVE_HOTS_OTHERS = { };
-local VUHDO_OTHER_PLAYERS_HOT_INFO = { }
+local VUHDO_ACTIVE_HOTS = {};
+local VUHDO_ACTIVE_HOTS_OTHERS = {};
+local VUHDO_OTHER_PLAYERS_HOT_INFO = {};
+
 local VUHDO_CHARGE_TEXTURES = {
-  "Interface\\AddOns\\VuhDo\\Images\\hot_stacks1",
-  "Interface\\AddOns\\VuhDo\\Images\\hot_stacks2",
-  "Interface\\AddOns\\VuhDo\\Images\\hot_stacks3",
-  "Interface\\AddOns\\VuhDo\\Images\\hot_stacks4",
+	"Interface\\AddOns\\VuhDo\\Images\\hot_stacks1",
+	"Interface\\AddOns\\VuhDo\\Images\\hot_stacks2",
+	"Interface\\AddOns\\VuhDo\\Images\\hot_stacks3",
+	"Interface\\AddOns\\VuhDo\\Images\\hot_stacks4"
 };
 
 local VUHDO_SHIELD_TEXTURES = {
-  "Interface\\AddOns\\VuhDo\\Images\\shield_stacks1",
-  "Interface\\AddOns\\VuhDo\\Images\\shield_stacks2",
-  "Interface\\AddOns\\VuhDo\\Images\\shield_stacks3",
-  "Interface\\AddOns\\VuhDo\\Images\\shield_stacks4",
+	"Interface\\AddOns\\VuhDo\\Images\\shield_stacks1",
+	"Interface\\AddOns\\VuhDo\\Images\\shield_stacks2",
+	"Interface\\AddOns\\VuhDo\\Images\\shield_stacks3",
+	"Interface\\AddOns\\VuhDo\\Images\\shield_stacks4"
 };
 
 local VUHDO_CHARGE_COLORS = {
-  "HOT_CHARGE_1",
-  "HOT_CHARGE_2",
-  "HOT_CHARGE_3",
-  "HOT_CHARGE_4",
+	"HOT_CHARGE_1",
+	"HOT_CHARGE_2",
+	"HOT_CHARGE_3",
+	"HOT_CHARGE_4"
 };
 
 local VUHDO_HOT_CFGS = {
@@ -55,10 +54,10 @@ local VUHDO_HOT_CFGS = {
 	"HOT6",
 	"HOT7",
 	"HOT8",
-	"HOT9",
+	"HOT9"
 };
 
--- BURST CACHE -------------------------------------------------
+-- BURST CACHE
 
 
 local floor = floor;
@@ -112,10 +111,10 @@ function VUHDO_customHotsInitBurst()
 	VUHDO_getBarRoleIcon = VUHDO_GLOBAL["VUHDO_getBarRoleIcon"];
 	VUHDO_updateAllClusterIcons = VUHDO_GLOBAL["VUHDO_updateAllClusterIcons"];
 	VUHDO_shouldScanUnit = VUHDO_GLOBAL["VUHDO_shouldScanUnit"];
-  VUHDO_getShieldLeftCount = VUHDO_GLOBAL["VUHDO_getShieldLeftCount"];
-  VUHDO_resolveVehicleUnit = VUHDO_GLOBAL["VUHDO_resolveVehicleUnit"];
-  VUHDO_isPanelVisible = VUHDO_GLOBAL["VUHDO_isPanelVisible"];
-  VUHDO_getHealButton = VUHDO_GLOBAL["VUHDO_getHealButton"];
+	VUHDO_getShieldLeftCount = VUHDO_GLOBAL["VUHDO_getShieldLeftCount"];
+	VUHDO_resolveVehicleUnit = VUHDO_GLOBAL["VUHDO_resolveVehicleUnit"];
+	VUHDO_isPanelVisible = VUHDO_GLOBAL["VUHDO_isPanelVisible"];
+	VUHDO_getHealButton = VUHDO_GLOBAL["VUHDO_getHealButton"];
 	VUHDO_getBarIcon = VUHDO_GLOBAL["VUHDO_getBarIcon"];
 	VUHDO_getBarIconTimer = VUHDO_GLOBAL["VUHDO_getBarIconTimer"];
 	VUHDO_getBarIconCounter = VUHDO_GLOBAL["VUHDO_getBarIconCounter"];
@@ -132,28 +131,16 @@ function VUHDO_customHotsInitBurst()
 	sIsChargesIcon = sHotSetup["stacksRadioValue"] == 3;
 end
 
-----------------------------------------------------
-
-
-
---
-local tOtherPlayersHotEmpty = { nil, 0 };
+local tOtherPlayersHotEmpty = {nil, 0};
 function VUHDO_getOtherPlayersHotInfo(aUnit)
 	return VUHDO_OTHER_PLAYERS_HOT_INFO[aUnit] or tOtherPlayersHotEmpty;
 end
 
-
-
---
 function VUHDO_setKnowsSwiftmend(aKnowsSwiftmend)
 	VUHDO_KNOWS_SWIFTMEND = aKnowsSwiftmend;
 end
 
-
-
---
---
-local tCopy = { };
+local tCopy = {};
 local function VUHDO_copyColor(aColor)
 	tCopy["R"], tCopy["G"], tCopy["B"], tCopy["O"] = aColor["R"], aColor["G"], aColor["B"], aColor["O"];
 	tCopy["TR"], tCopy["TG"], tCopy["TB"], tCopy["TO"] = aColor["TR"], aColor["TG"], aColor["TB"], aColor["TO"];
@@ -161,9 +148,6 @@ local function VUHDO_copyColor(aColor)
 	return tCopy;
 end
 
-
-
---
 local tHotBar;
 local function VUHDO_customizeHotBar(aButton, aRest, anIndex, aDuration, aColor)
 	tHotBar = VUHDO_getHealthBar(aButton, anIndex + 3);
@@ -179,9 +163,6 @@ local function VUHDO_customizeHotBar(aButton, aRest, anIndex, aDuration, aColor)
 	end
 end
 
-
-
---
 local tHotName;
 local tDuration2;
 local tChargeTexture;
@@ -282,8 +263,8 @@ local function VUHDO_customizeHotIcons(aButton, aHotName, aRest, aTimes, anIcon,
 		tCounter:SetText("");
 	end
 
-	--@TESTING
-	--aTimes = floor(aRest / 3.5);
+	-- @TESTING
+	-- aTimes = floor(aRest / 3.5);
 
 	if (aTimes > 4) then
 		aTimes = 4;
@@ -361,9 +342,6 @@ local function VUHDO_customizeHotIcons(aButton, aHotName, aRest, aTimes, anIcon,
 	end
 end
 
-
-
---
 local tAllButtons;
 local tButton;
 local tShieldCharges;
@@ -390,9 +368,9 @@ local function VUHDO_updateHotIcons(aUnit, aHotName, aRest, aTimes, anIcon, aDur
 				tIsMatch = true;
 			else
 				tSlotCfg = sHotSlotCfgs[tostring(tIndex)];
-				tIsMatch = (aMode == 1 and     tSlotCfg["mine"] and not tSlotCfg["others"])
-						    or (aMode == 2 and not tSlotCfg["mine"] and     tSlotCfg["others"])
-						    or (aMode == 3 and     tSlotCfg["mine"] and     tSlotCfg["others"]);
+				tIsMatch = (aMode == 1 and tSlotCfg["mine"] and not tSlotCfg["others"])
+						or (aMode == 2 and not tSlotCfg["mine"] and tSlotCfg["others"])
+						or (aMode == 3 and tSlotCfg["mine"] and tSlotCfg["others"]);
 			end
 
 			if (tIsMatch) then
@@ -411,9 +389,6 @@ local function VUHDO_updateHotIcons(aUnit, aHotName, aRest, aTimes, anIcon, aDur
 
 end
 
-
-
---
 local tCnt;
 function VUHDO_removeHots(aUnit)
 	tAllButtons = VUHDO_getUnitButtons(aUnit);
@@ -438,9 +413,6 @@ function VUHDO_removeHots(aUnit)
 end
 local VUHDO_removeHots = VUHDO_removeHots;
 
-
-
---
 local tCount;
 local tHotInfo;
 local function VUHDO_snapshotHot(aHotName, aRest, aStacks, anIcon, anIsMine, aDuration, aUnit)
@@ -453,13 +425,13 @@ local function VUHDO_snapshotHot(aHotName, aRest, aStacks, anIcon, anIsMine, aDu
 
 	if (anIsMine) then
 		if (VUHDO_MY_HOTS[aUnit][aHotName] == nil) then
-			VUHDO_MY_HOTS[aUnit][aHotName] = { };
+			VUHDO_MY_HOTS[aUnit][aHotName] = {};
 		end
 		tHotInfo = VUHDO_MY_HOTS[aUnit][aHotName];
 		tHotInfo[1], tHotInfo[2], tHotInfo[3], tHotInfo[4] = aRest, aStacks, anIcon, aDuration;
 	elseif (VUHDO_ACTIVE_HOTS_OTHERS[aHotName]) then
 		if (VUHDO_OTHER_HOTS[aUnit][aHotName] == nil) then
-			VUHDO_OTHER_HOTS[aUnit][aHotName] = { };
+			VUHDO_OTHER_HOTS[aUnit][aHotName] = {};
 		end
 		tHotInfo = VUHDO_OTHER_HOTS[aUnit][aHotName];
 
@@ -475,7 +447,7 @@ local function VUHDO_snapshotHot(aHotName, aRest, aStacks, anIcon, anIsMine, aDu
 	end
 
 	if (VUHDO_MY_AND_OTHERS_HOTS[aUnit][aHotName] == nil) then
-		VUHDO_MY_AND_OTHERS_HOTS[aUnit][aHotName] = { };
+		VUHDO_MY_AND_OTHERS_HOTS[aUnit][aHotName] = {};
 	end
 
 	tHotInfo = VUHDO_MY_AND_OTHERS_HOTS[aUnit][aHotName];
@@ -493,19 +465,16 @@ end
 
 
 local VUHDO_IGNORE_HOT_IDS = {
-  [67358] = true, -- "Rejuvenating" proc has same name in russian and spanish as rejuvenation
+	[67358] = true, -- "Rejuvenating" proc has same name in russian and spanish as rejuvenation
 }
 
 
 
---
+
 function VUHDO_hotBouquetCallback(aUnit, anIsActive, anIcon, aTimer, aCounter, aDuration, aColor, aBuffName, aBouquetName)
 	VUHDO_updateHotIcons(aUnit, "BOUQUET_" .. (aBouquetName or ""), aTimer, aCounter, anIcon, aDuration, 0, aColor, aBuffName);
 end
 
-
-
---
 local tHotCmpName;
 local tOtherHotCnt;
 local tIconFound;
@@ -537,15 +506,15 @@ local function VUHDO_updateHots(aUnit, anInfo)
 	end
 
 	if (VUHDO_MY_HOTS[aUnit] == nil) then
-		VUHDO_MY_HOTS[aUnit] = { };
+		VUHDO_MY_HOTS[aUnit] = {};
 	end
 
 	if (VUHDO_OTHER_HOTS[aUnit] == nil) then
-		VUHDO_OTHER_HOTS[aUnit] = { };
+		VUHDO_OTHER_HOTS[aUnit] = {};
 	end
 
 	if (VUHDO_MY_AND_OTHERS_HOTS[aUnit] == nil) then
-		VUHDO_MY_AND_OTHERS_HOTS[aUnit] = { };
+		VUHDO_MY_AND_OTHERS_HOTS[aUnit] = {};
 	end
 
 	for tIndex, tHotInfo in pairs(VUHDO_MY_HOTS[aUnit]) do
@@ -565,7 +534,7 @@ local function VUHDO_updateHots(aUnit, anInfo)
 	tOtherHotCnt = 0;
 
 	if (VUHDO_OTHER_PLAYERS_HOT_INFO[aUnit] == nil) then
-		VUHDO_OTHER_PLAYERS_HOT_INFO[aUnit] = { nil, 0 };
+		VUHDO_OTHER_PLAYERS_HOT_INFO[aUnit] = {nil, 0};
 	else
 		VUHDO_OTHER_PLAYERS_HOT_INFO[aUnit][1] = nil;
 		VUHDO_OTHER_PLAYERS_HOT_INFO[aUnit][2] = 0;
@@ -574,18 +543,18 @@ local function VUHDO_updateHots(aUnit, anInfo)
 	if (VUHDO_shouldScanUnit(aUnit)) then
 		tDebuffOffset = nil;
 		for tCnt = 1, 255 do
-		  if (tDebuffOffset == nil) then
-			  tBuffName, _, tBuffIcon, tStacks, _, sDuration, tRest, tCaster, _, _, tSpellId = UnitBuff(aUnit, tCnt);
-	  		if (tBuffIcon == nil) then
-	  			tDebuffOffset = tCnt - 1;
-	  		end
-	  	end
-		  if (tDebuffOffset ~= nil) then -- Achtung kein elseif
-			  tBuffName, _, tBuffIcon, tStacks, _, sDuration, tRest, tCaster, _, _, tSpellId = UnitDebuff(aUnit, tCnt - tDebuffOffset);
-	  		if (tBuffIcon == nil) then
-	  			break;
-	  		end
+			if (tDebuffOffset == nil) then
+				tBuffName, _, tBuffIcon, tStacks, _, sDuration, tRest, tCaster, _, _, tSpellId = UnitBuff(aUnit, tCnt);
+			if (tBuffIcon == nil) then
+				tDebuffOffset = tCnt - 1;
 			end
+		end
+			if (tDebuffOffset ~= nil) then -- Achtung kein elseif
+				tBuffName, _, tBuffIcon, tStacks, _, sDuration, tRest, tCaster, _, _, tSpellId = UnitDebuff(aUnit, tCnt - tDebuffOffset);
+			if (tBuffIcon == nil) then
+				break;
+			end
+		end
 
 			if (VUHDO_KNOWS_SWIFTMEND and not sIsSwiftmend) then
 				if (VUHDO_SPELL_ID_REGROWTH == tBuffName or VUHDO_SPELL_ID_REJUVENATION == tBuffName) then
@@ -675,9 +644,6 @@ local function VUHDO_updateHots(aUnit, anInfo)
 
 end
 
-
-
---
 local tAllButtons, tButton, tIcon;
 function VUHDO_swiftmendIndicatorBouquetCallback(aUnit, anIsActive, anIcon, aTimer, aCounter, aDuration, aColor, aBuffName, aBouquetName)
 	tAllButtons = VUHDO_getUnitButtons(aUnit);
@@ -695,16 +661,11 @@ function VUHDO_swiftmendIndicatorBouquetCallback(aUnit, anIsActive, anIcon, aTim
 	end
 end
 
-
-
---
 local VUHDO_HOTS_SUSPENDED = false;
 function VUHDO_suspendHoTs(aFlag)
 	VUHDO_HOTS_SUSPENDED = aFlag;
 end
 
-
---
 local tUnit, tInfo;
 function VUHDO_updateAllHoTs()
 	if (VUHDO_HOTS_SUSPENDED) then
@@ -718,9 +679,6 @@ function VUHDO_updateAllHoTs()
 	end
 end
 
-
-
---
 local tCnt, tCnt2, tCnt3;
 local tButton;
 function VUHDO_removeAllHots()
@@ -752,14 +710,9 @@ function VUHDO_removeAllHots()
 	VUHDO_updatePlayerTarget();
 end
 
-
-
---
 function VUHDO_resetHotBuffCache()
 	twipe(sBuffs2Hots);
 end
-
-
 
 function VUHDO_isUnitSwiftmendable(aUnit)
 	return VUHDO_SWIFTMEND_UNITS[aUnit];

@@ -3,7 +3,7 @@
 ## Author: Iza@Gilneas
 ## Version: 2.23
 ## Notes: VuhDo Options
-## Notes-ruRU: РќР°СЃС‚СЂРѕР№РєРё VuhDo
+## Notes-ruRU: Настройки VuhDo
 ## SavedVariables: VUHDO_OPTIONS_SETTINGS
 ## DefaultState: Enabled
 ## Dependencies: VuhDo

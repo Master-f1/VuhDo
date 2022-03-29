@@ -1,7 +1,4 @@
-
-
--- BURST CACHE ---------------------------------------------------
-
+-- BURST CACHE
 
 local VUHDO_RAID;
 local VUHDO_getUnitButtons;
@@ -31,10 +28,6 @@ function VUHDO_customManaInitBurst()
 	sIsInverted = VUHDO_INDICATOR_CONFIG["CUSTOM"]["MANA_BAR"]["invertGrowth"];
 end
 
-----------------------------------------------------
-
-
---
 local tInfo;
 local tPowerType;
 function VUHDO_updateManaBars(aUnit, aChange)
@@ -83,9 +76,6 @@ function VUHDO_updateManaBars(aUnit, aChange)
 	end
 end
 
-
-
---
 local tAllButtons, tButton, tManaBar, tHealthBar, tQuota;
 local tManaBarHeight;
 local tRegularHeight;
@@ -102,7 +92,7 @@ function VUHDO_manaBarBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, aCo
 	end
 
 	tManaBarHeight = 0;
-	tAllButtons =  VUHDO_getUnitButtons(aUnit);
+	tAllButtons = VUHDO_getUnitButtons(aUnit);
 	if (aCurrValue == 0 and aMaxValue == 0) then
 		if (anIsActive) then
 			tQuota = 100;
@@ -151,7 +141,7 @@ function VUHDO_manaBarBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, aCo
 	end
 
 	-- Targets und targets-of-target, die im Raid sind
-  tAllButtons = VUHDO_IN_RAID_TARGET_BUTTONS[VUHDO_RAID[aUnit]["name"]];
+	tAllButtons = VUHDO_IN_RAID_TARGET_BUTTONS[VUHDO_RAID[aUnit]["name"]];
 	if (tAllButtons == nil) then
 		return;
 	end

@@ -15,8 +15,7 @@ local VuhDoDirectionFrame;
 local VuhDoDirectionFrameArrow;
 local VuhDoDirectionFrameText;
 
-
-local VUHDO_RAID = { };
+local VUHDO_RAID = {};
 function VUHDO_directionsInitBurst()
 	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
 	sIsDeadOnly = VUHDO_CONFIG["DIRECTION"]["isDeadOnly"];
@@ -28,8 +27,6 @@ function VUHDO_directionsInitBurst()
 	tOldButton = nil;
 end
 
-
-
 -- Throttle resetting to current map to avoid conflicts with other addons
 local tLastTime = 0;
 local function VUHDO_setMapToCurrentZone()
@@ -39,9 +36,6 @@ local function VUHDO_setMapToCurrentZone()
 	end
 end
 
-
-
---
 local tFacing;
 local function VUHDO_getPlayerFacing()
 	tFacing = GetPlayerFacing();
@@ -51,15 +45,12 @@ local function VUHDO_getPlayerFacing()
 	return tFacing;
 end
 
-
-
---
 local tPlayerX, tPlayerY;
 local tUnitX, tUnitY;
 local function VUHDO_getUnitDirection(aUnit)
 	if ((WorldMapFrame ~= nil and WorldMapFrame:IsShown())
-	  or (GetMouseFocus() ~= nil and GetMouseFocus():GetName() == nil)) then
-	  return nil;
+		or (GetMouseFocus() ~= nil and GetMouseFocus():GetName() == nil)) then
+		return nil;
 	end
 
 	tPlayerX, tPlayerY = GetPlayerMapPosition("player");
@@ -79,9 +70,6 @@ local function VUHDO_getUnitDirection(aUnit)
 	return VUHDO_PI - VUHDO_atan2(tPlayerX - tUnitX, tUnitY - tPlayerY) - VUHDO_getPlayerFacing();
 end
 
-
-
---
 local tUnit;
 local tCell;
 local sLastCell = nil;

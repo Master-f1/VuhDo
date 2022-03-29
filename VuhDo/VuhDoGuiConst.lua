@@ -1,4 +1,3 @@
-
 -- Group Model Header Texts
 VUHDO_HEADER_TEXTS = {
 	[VUHDO_ID_UNDEFINED] = "",
@@ -43,22 +42,22 @@ VUHDO_HEADER_TEXTS = {
 
 -- For initializing the minimap
 VUHDO_MM_LAYOUT = {
-  icon = "interface\\characterframe\\temporaryportrait-female-draenei",
-  drag = "CIRCLE",
-  left = nil,
-  right = nil,
-  tooltip = VUHDO_I18N_MM_TOOLTIP,
-  enabled = true
+	icon = "interface\\characterframe\\temporaryportrait-female-draenei",
+	drag = "CIRCLE",
+	left = nil,
+	right = nil,
+	tooltip = VUHDO_I18N_MM_TOOLTIP,
+	enabled = true
 };
 
 VUHDO_CUSTOM_ICONS = {
-	{ VUHDO_I18N_CUSTOM_ICON_NONE, nil },
-	{ VUHDO_I18N_CUSTOM_ICON_GLOSSY, "Interface\\AddOns\\VuhDo\\Images\\icon_white_square" },
-	{ VUHDO_I18N_CUSTOM_ICON_MOSAIC, "Interface\\AddOns\\VuhDo\\Images\\cluster" },
-	{ VUHDO_I18N_CUSTOM_ICON_CLUSTER, "Interface\\AddOns\\VuhDo\\Images\\cluster2" },
-	{ VUHDO_I18N_CUSTOM_ICON_FLAT, "Interface\\AddOns\\VuhDo\\Images\\white_square_16_16" },
-	{ VUHDO_I18N_CUSTOM_ICON_SPOT, "Interface\\AddOns\\VuhDo\\Images\\icon_white" },
-	{ VUHDO_I18N_CUSTOM_ICON_CIRCLE, "Interface\\AddOns\\VuhDo\\Images\\shield_stacks4" },
-	{ VUHDO_I18N_CUSTOM_ICON_SKETCHED, "Interface\\AddOns\\VuhDo\\Images\\hot_flat_16_16" },
-	{ VUHDO_I18N_CUSTOM_ICON_RHOMB, "Interface\\AddOns\\VuhDo\\Images\\rhomb" },
+	{VUHDO_I18N_CUSTOM_ICON_NONE, nil},
+	{VUHDO_I18N_CUSTOM_ICON_GLOSSY, "Interface\\AddOns\\VuhDo\\Images\\icon_white_square"},
+	{VUHDO_I18N_CUSTOM_ICON_MOSAIC, "Interface\\AddOns\\VuhDo\\Images\\cluster"},
+	{VUHDO_I18N_CUSTOM_ICON_CLUSTER, "Interface\\AddOns\\VuhDo\\Images\\cluster2"},
+	{VUHDO_I18N_CUSTOM_ICON_FLAT, "Interface\\AddOns\\VuhDo\\Images\\white_square_16_16"},
+	{VUHDO_I18N_CUSTOM_ICON_SPOT, "Interface\\AddOns\\VuhDo\\Images\\icon_white"},
+	{VUHDO_I18N_CUSTOM_ICON_CIRCLE, "Interface\\AddOns\\VuhDo\\Images\\shield_stacks4"},
+	{VUHDO_I18N_CUSTOM_ICON_SKETCHED, "Interface\\AddOns\\VuhDo\\Images\\hot_flat_16_16"},
+	{VUHDO_I18N_CUSTOM_ICON_RHOMB, "Interface\\AddOns\\VuhDo\\Images\\rhomb"},
 };

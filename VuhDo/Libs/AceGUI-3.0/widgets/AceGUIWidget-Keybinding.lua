@@ -1,18 +1,18 @@
 local AceGUI = LibStub("AceGUI-3.0")
 
---------------------------
--- Keybinding  		    --
---------------------------
+----------------
+-- Keybinding --
+----------------
 
 do
 	local Type = "Keybinding"
 	local Version = 11
 
-	local ControlBackdrop  = {
+	local ControlBackdrop = {
 		bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
 		edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
 		tile = true, tileSize = 16, edgeSize = 16,
-		insets = { left = 3, right = 3, top = 3, bottom = 3 }
+		insets = {left = 3, right = 3, top = 3, bottom = 3}
 	}
 
 	local function Control_OnEnter(this)
@@ -22,7 +22,7 @@ do
 	local function Control_OnLeave(this)
 		this.obj:Fire("OnLeave")
 	end
-	
+
 	local function keybindingMsgFixWidth(this)
 		this:SetWidth(this.msg:GetWidth()+10)
 		this:SetScript("OnUpdate",nil)
@@ -56,10 +56,15 @@ do
 			else
 				if not ignoreKeys then
 					ignoreKeys = {
-						["BUTTON1"] = true, ["BUTTON2"] = true,
+						["BUTTON1"] = true,
+						["BUTTON2"] = true,
 						["UNKNOWN"] = true,
-						["LSHIFT"] = true, ["LCTRL"] = true, ["LALT"] = true,
-						["RSHIFT"] = true, ["RCTRL"] = true, ["RALT"] = true,
+						["LSHIFT"] = true,
+						["LCTRL"] = true,
+						["LALT"] = true,
+						["RSHIFT"] = true,
+						["RCTRL"] = true,
+						["RALT"] = true,
 					}
 				end
 				if ignoreKeys[keyPressed] then return end
@@ -73,7 +78,7 @@ do
 					keyPressed = "ALT-"..keyPressed
 				end
 			end
-	
+
 			this:EnableKeyboard(false)
 			self.msgframe:Hide()
 			this:UnlockHighlight()
@@ -85,7 +90,7 @@ do
 			end
 		end
 	end
-	
+
 	local function Keybinding_OnMouseDown(this, button)
 		if button == "LeftButton" or button == "RightButton" then
 			return
@@ -103,25 +108,25 @@ do
 		self:SetLabel("")
 		self:SetKey("")
 	end
-	
+
 	local function OnRelease(self)
 		self.frame:ClearAllPoints()
 		self.frame:Hide()
 		self.waitingForKey = nil
 		self.msgframe:Hide()
 	end
-	
+
 	local function SetDisabled(self, disabled)
 		self.disabled = disabled
 		if disabled then
 			self.button:Disable()
-			self.label:SetTextColor(0.5,0.5,0.5)
+			self.label:SetTextColor(0.5, 0.5, 0.5)
 		else
 			self.button:Enable()
-			self.label:SetTextColor(1,1,1)
+			self.label:SetTextColor(1, 1, 1)
 		end
 	end
-	
+
 	local function SetKey(self, key)
 		if (key or "") == "" then
 			self.button:SetText(NOT_BOUND)
@@ -131,7 +136,7 @@ do
 			self.button:SetNormalFontObject("GameFontHighlight")
 		end
 	end
-	
+
 	local function SetLabel(self, label)
 		self.label:SetText(label or "")
 		if (label or "") == "" then
@@ -144,67 +149,67 @@ do
 	end
 
 	local function Constructor()
-		local num  = AceGUI:GetNextWidgetNum(Type)
-		local frame = CreateFrame("Frame",nil,UIParent)
-		
-		local button = CreateFrame("Button","AceGUI-3.0 KeybindingButton"..num,frame,"UIPanelButtonTemplate2")
-		
+		local num = AceGUI:GetNextWidgetNum(Type)
+		local frame = CreateFrame("Frame", nil, UIParent)
+
+		local button = CreateFrame("Button", "AceGUI-3.0 KeybindingButton"..num, frame, "UIPanelButtonTemplate2")
+
 		local self = {}
 		self.type = Type
 		self.num = num
 
 		local text = button:GetFontString()
-		text:SetPoint("LEFT",button,"LEFT",7,0)
-		text:SetPoint("RIGHT",button,"RIGHT",-7,0)
-	
-		button:SetScript("OnClick",Keybinding_OnClick)
-		button:SetScript("OnKeyDown",Keybinding_OnKeyDown)
-		button:SetScript("OnEnter",Control_OnEnter)
-		button:SetScript("OnLeave",Control_OnLeave)
-		button:SetScript("OnMouseDown",Keybinding_OnMouseDown)
+		text:SetPoint("LEFT", button, "LEFT", 7, 0)
+		text:SetPoint("RIGHT", button, "RIGHT", -7, 0)
+
+		button:SetScript("OnClick", Keybinding_OnClick)
+		button:SetScript("OnKeyDown", Keybinding_OnKeyDown)
+		button:SetScript("OnEnter", Control_OnEnter)
+		button:SetScript("OnLeave", Control_OnLeave)
+		button:SetScript("OnMouseDown", Keybinding_OnMouseDown)
 		button:RegisterForClicks("AnyDown")
 		button:EnableMouse()
-	
+
 		button:SetHeight(24)
 		button:SetWidth(200)
-		button:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT",0,0)
-		button:SetPoint("BOTTOMRIGHT",frame,"BOTTOMRIGHT",0,0)
-		
+		button:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", 0, 0)
+		button:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", 0, 0)
+
 		frame:SetWidth(200)
 		frame:SetHeight(44)
-		
+
 		self.alignoffset = 30
-		
+
 		self.button = button
-		
-		local label = frame:CreateFontString(nil,"OVERLAY","GameFontHighlight")
-		label:SetPoint("TOPLEFT",frame,"TOPLEFT",0,0)
-		label:SetPoint("TOPRIGHT",frame,"TOPRIGHT",0,0)
+
+		local label = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+		label:SetPoint("TOPLEFT", frame, "TOPLEFT", 0, 0)
+		label:SetPoint("TOPRIGHT", frame, "TOPRIGHT", 0, 0)
 		label:SetJustifyH("CENTER")
 		label:SetHeight(18)
 		self.label = label
-		
-		local msgframe = CreateFrame("Frame",nil,UIParent)
+
+		local msgframe = CreateFrame("Frame", nil, UIParent)
 		msgframe:SetHeight(30)
 		msgframe:SetBackdrop(ControlBackdrop)
-		msgframe:SetBackdropColor(0,0,0)
+		msgframe:SetBackdropColor(0, 0, 0)
 		msgframe:SetFrameStrata("FULLSCREEN_DIALOG")
 		msgframe:SetFrameLevel(1000)
 		self.msgframe = msgframe
-		local msg = msgframe:CreateFontString(nil,"OVERLAY","GameFontNormal")
+		local msg = msgframe:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 		msg:SetText("Press a key to bind, ESC to clear the binding or click the button again to cancel")
 		msgframe.msg = msg
-		msg:SetPoint("TOPLEFT",msgframe,"TOPLEFT",5,-5)
+		msg:SetPoint("TOPLEFT", msgframe, "TOPLEFT", 5, -5)
 		msgframe:SetScript("OnUpdate", keybindingMsgFixWidth)
-		msgframe:SetPoint("BOTTOM",button,"TOP",0,0)
+		msgframe:SetPoint("BOTTOM", button, "TOP", 0, 0)
 		msgframe:Hide()
-	
+
 		self.OnRelease = OnRelease
 		self.OnAcquire = OnAcquire
 		self.SetLabel = SetLabel
 		self.SetDisabled = SetDisabled
 		self.SetKey = SetKey
-		
+
 		self.frame = frame
 		frame.obj = self
 		button.obj = self
@@ -212,6 +217,6 @@ do
 		AceGUI:RegisterAsWidget(self)
 		return self
 	end
-	
-	AceGUI:RegisterWidgetType(Type,Constructor,Version)
+
+	AceGUI:RegisterWidgetType(Type, Constructor, Version)
 end

@@ -1,4 +1,3 @@
-
 assert(LibStub, "LibDataBroker-1.1 requires LibStub")
 assert(LibStub:GetLibrary("CallbackHandler-1.0", true), "LibDataBroker-1.1 requires CallbackHandler-1.0")
 
@@ -13,8 +12,10 @@ local attributestorage, namestorage, callbacks = lib.attributestorage, lib.names
 
 if oldminor < 2 then
 	lib.domt = {
-		__metatable = "access denied",
-		__index = function(self, key) return attributestorage[self] and attributestorage[self][key] end,
+	__metatable = "access denied",
+	__index = function(self, key)
+	return attributestorage[self] and attributestorage[self][key]
+	end,
 	}
 end
 

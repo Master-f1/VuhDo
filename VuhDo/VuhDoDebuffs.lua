@@ -11,7 +11,6 @@ local VUHDO_IGNORE_DEBUFFS_NO_HARM = {};
 local VUHDO_IGNORE_DEBUFFS_MOVEMENT = {};
 local VUHDO_IGNORE_DEBUFFS_DURATION = {};
 
---
 local VUHDO_DEBUFF_TYPES = {
 	["Magic"] = VUHDO_DEBUFF_TYPE_MAGIC,
 	["Disease"] = VUHDO_DEBUFF_TYPE_DISEASE,
@@ -20,13 +19,13 @@ local VUHDO_DEBUFF_TYPES = {
 };
 
 VUHDO_DEBUFF_BLACKLIST = {
-	[GetSpellInfo(69127)] = true, -- Chill of the Throne (st�ndiger debuff)
+	[GetSpellInfo(69127)] = true, -- Chill of the Throne (constant debuff)
 	[GetSpellInfo(57724)] = true, -- Sated
 	[GetSpellInfo(71328)] = true -- Dungeon Cooldown
 }
 
 local VUHDO_CUSTOM_BUFF_BLACKLIST = {
-	[GetSpellInfo(67847)] = true -- Expose Weakness ist ein Boss-Debuff und gleichzeitig ein J�ger-Buff
+	[GetSpellInfo(67847)] = true -- Expose Weakness is a boss debuff and a hunter buff at the same time
 }
 
 local VUHDO_INIT_UNIT_DEBUFF_SCHOOLS = {
@@ -36,7 +35,7 @@ local VUHDO_INIT_UNIT_DEBUFF_SCHOOLS = {
 	[VUHDO_DEBUFF_TYPE_CURSE] = {}
 };
 
--- BURST CACHE ---------------------------------------------------
+-- BURST CACHE
 
 local VUHDO_CONFIG;
 local VUHDO_RAID;
@@ -83,15 +82,11 @@ function VUHDO_debuffsInitBurst()
 	};
 end
 
-----------------------------------------------------
-
---
 local tEmptyChosen = {nil, 0, 0, 0};
 function VUHDO_getChosenDebuffInfo(aUnit)
 	return VUHDO_CHOSEN_DEBUFF_INFO[aUnit] or tEmptyChosen;
 end
 
---
 local tCopies = {};
 local tIndex = 0;
 local tIsRevolvInit = true;
@@ -110,7 +105,6 @@ local function VUHDO_copyColorRevolving()
 	return tCopies[tIndex];
 end
 
---
 local function VUHDO_formColor(aColor)
 	if (aColor["useText"]) then
 		aColor["TR"], aColor["TG"], aColor["TB"] = aColor["TR"] or 0, aColor["TG"] or 0, aColor["TB"] or 0;
@@ -123,17 +117,14 @@ local function VUHDO_formColor(aColor)
 	return aColor;
 end
 
---
 local function VUHDO_copyColorTo(aSource, aDest)
 	aDest["R"], aDest["G"], aDest["B"] = aSource["R"], aSource["G"], aSource["B"];
 	aDest["TR"], aDest["TG"], aDest["TB"] = aSource["TR"], aSource["TG"], aSource["TB"];
 	aDest["O"], aDest["TO"] = aSource["O"], aSource["TO"];
-	aDest["useText"], aDest["useBackground"], aDest["useOpacity"] = aSource["useText"], aSource["useBackground"],
-		aSource["useOpacity"];
+	aDest["useText"], aDest["useBackground"], aDest["useOpacity"] = aSource["useText"], aSource["useBackground"], aSource["useOpacity"];
 	return aDest;
 end
 
---
 local tSourceColor;
 local tDebuffSettings;
 local tDebuff;
@@ -156,14 +147,12 @@ local function _VUHDO_getDebuffColor(anInfo, aNewColor)
 
 		if (VUHDO_DEBUFF_COLORS[6]["useBackground"]) then
 			aNewColor["useBackground"] = true;
-			aNewColor["R"], aNewColor["G"], aNewColor["B"], aNewColor["O"] = tSourceColor["R"], tSourceColor["G"],
-				tSourceColor["B"], tSourceColor["O"];
+			aNewColor["R"], aNewColor["G"], aNewColor["B"], aNewColor["O"] = tSourceColor["R"], tSourceColor["G"], tSourceColor["B"], tSourceColor["O"];
 		end
 
 		if (VUHDO_DEBUFF_COLORS[6]["useText"]) then
 			aNewColor["useText"] = true;
-			aNewColor["TR"], aNewColor["TG"], aNewColor["TB"], aNewColor["TO"] = tSourceColor["TR"], tSourceColor["TG"],
-				tSourceColor["TB"], tSourceColor["TO"];
+			aNewColor["TR"], aNewColor["TG"], aNewColor["TB"], aNewColor["TO"] = tSourceColor["TR"], tSourceColor["TG"], tSourceColor["TB"], tSourceColor["TO"];
 		end
 
 		return aNewColor;
@@ -176,34 +165,27 @@ local function _VUHDO_getDebuffColor(anInfo, aNewColor)
 	tSourceColor = VUHDO_BUFF_SETTINGS[anInfo["mibucateg"]]["missingColor"];
 	if (VUHDO_BUFF_SETTINGS["CONFIG"]["BAR_COLORS_TEXT"]) then
 		aNewColor["useText"] = true;
-		aNewColor["TR"], aNewColor["TG"], aNewColor["TB"], aNewColor["TO"] = tSourceColor["TR"], tSourceColor["TG"],
-			tSourceColor["TB"], tSourceColor["TO"];
+		aNewColor["TR"], aNewColor["TG"], aNewColor["TB"], aNewColor["TO"] = tSourceColor["TR"], tSourceColor["TG"], tSourceColor["TB"], tSourceColor["TO"];
 	end
 
 	if (VUHDO_BUFF_SETTINGS["CONFIG"]["BAR_COLORS_BACKGROUND"]) then
 		aNewColor["useBackground"] = true;
-		aNewColor["R"], aNewColor["G"], aNewColor["B"], aNewColor["O"] = tSourceColor["R"], tSourceColor["G"],
-			tSourceColor["B"], tSourceColor["O"];
+		aNewColor["R"], aNewColor["G"], aNewColor["B"], aNewColor["O"] = tSourceColor["R"], tSourceColor["G"], tSourceColor["B"], tSourceColor["O"];
 	end
 
 	return aNewColor;
 end
 
---
 local tColor;
 function VUHDO_getDebuffColor(anInfo)
 	return VUHDO_formColor(_VUHDO_getDebuffColor(anInfo, VUHDO_copyColorRevolving()));
 end
 
---
 local tEmpty = {};
 local function VUHDO_isDebuffRelevant(aDebuffName, aClass)
-	return not VUHDO_IGNORE_DEBUFFS_NO_HARM[aDebuffName] and not VUHDO_IGNORE_DEBUFFS_MOVEMENT[aDebuffName] and
-			   not VUHDO_IGNORE_DEBUFFS_DURATION[aDebuffName] and
-			   not (VUHDO_IGNORE_DEBUFFS_BY_CLASS[aClass or ""] or tEmpty)[aDebuffName];
+	return not VUHDO_IGNORE_DEBUFFS_NO_HARM[aDebuffName] and not VUHDO_IGNORE_DEBUFFS_MOVEMENT[aDebuffName] and not VUHDO_IGNORE_DEBUFFS_DURATION[aDebuffName] and not (VUHDO_IGNORE_DEBUFFS_BY_CLASS[aClass or ""] or tEmpty)[aDebuffName];
 end
 
---
 local tNextSoundTime = 0;
 local function VUHDO_playDebuffSound(aSound)
 	if ((aSound or "") == "" or GetTime() < tNextSoundTime) then
@@ -214,7 +196,6 @@ local function VUHDO_playDebuffSound(aSound)
 	tNextSoundTime = GetTime() + 2;
 end
 
---
 local tSetColor, tSetIcon;
 local tIconsSet = {};
 local tDebuffInfo;
@@ -317,8 +298,7 @@ function VUHDO_determineDebuff(aUnit, aClassName)
 					if (VUHDO_isDebuffRelevant(tName, aClassName)) then
 						if (tAbility ~= nil or tChosen == 0) then -- VUHDO_DEBUFF_TYPE_NONE
 							tChosen = tDebuff;
-							tChosenInfo[1], tChosenInfo[2], tChosenInfo[3], tChosenInfo[4] = tIcon, tRemaining, tStacks,
-								tDuration;
+							tChosenInfo[1], tChosenInfo[2], tChosenInfo[3], tChosenInfo[4] = tIcon, tRemaining, tStacks, tDuration;
 						end
 					end
 				end
@@ -333,8 +313,7 @@ function VUHDO_determineDebuff(aUnit, aClassName)
 			end
 
 			if (not VUHDO_CUSTOM_BUFF_BLACKLIST[tName]) then
-				tSetColor, tSetIcon = (VUHDO_CUSTOM_DEBUFF_LIST[tName] or tEmptyCustomDebuf)[1],
-					(VUHDO_CUSTOM_DEBUFF_LIST[tName] or tEmptyCustomDebuf)[2];
+				tSetColor, tSetIcon = (VUHDO_CUSTOM_DEBUFF_LIST[tName] or tEmptyCustomDebuf)[1], (VUHDO_CUSTOM_DEBUFF_LIST[tName] or tEmptyCustomDebuf)[2];
 			else
 				tSetColor, tSetIcon = false, false;
 			end
@@ -399,7 +378,6 @@ end
 
 local VUHDO_determineDebuff = VUHDO_determineDebuff;
 
---
 local tUnit, tInfo;
 function VUHDO_updateAllCustomDebuffs(anIsEnableAnim)
 	twipe(VUHDO_UNIT_CUSTOM_DEBUFFS);
@@ -434,9 +412,10 @@ function VUHDO_initDebuffs()
 		VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
 	end
 	for _, tDebuffName in pairs(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"]) do
-		VUHDO_CUSTOM_DEBUFF_LIST[tDebuffName] =
-			{VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tDebuffName]["isColor"],
-			 VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tDebuffName]["isIcon"]};
+		VUHDO_CUSTOM_DEBUFF_LIST[tDebuffName] = {
+			VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tDebuffName]["isColor"],
+			VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tDebuffName]["isIcon"]
+		};
 	end
 
 	if (VUHDO_CONFIG["DETECT_DEBUFFS_IGNORE_NO_HARM"]) then
@@ -461,14 +440,11 @@ function VUHDO_initDebuffs()
 
 end
 
---
 function VUHDO_getDebuffAbilities(aClass)
 	return VUHDO_DEBUFF_ABILITIES[aClass];
 end
 
---
 local tEmptySchoolInfo = {};
 function VUHDO_getUnitDebuffSchoolInfos(aUnit, aDebuffSchool)
 	return (VUHDO_UNIT_DEBUFF_SCHOOLS[aUnit] or VUHDO_INIT_UNIT_DEBUFF_SCHOOLS)[aDebuffSchool] or tEmptySchoolInfo;
 end
-

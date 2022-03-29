@@ -10,7 +10,7 @@ local ipairs = ipairs;
 local twipe = table.wipe;
 local tsort = table.sort;
 
--- BURST CACHE ---------------------------------------------------
+-- BURST CACHE
 
 local VUHDO_ORDERING_STRICT = 0;
 local VUHDO_ID_ALL = 999;
@@ -26,7 +26,6 @@ local VUHDO_getClassColorByModelId;
 local VUHDO_getHeaderBar;
 local VUHDO_getModelType;
 
---
 function VUHDO_panelInitBurst()
 	VUHDO_PANEL_SETUP = VUHDO_GLOBAL["VUHDO_PANEL_SETUP"];
 	VUHDO_HEADER_TEXTS = VUHDO_GLOBAL["VUHDO_HEADER_TEXTS"];
@@ -39,9 +38,9 @@ function VUHDO_panelInitBurst()
 	VUHDO_getHeaderBar = VUHDO_GLOBAL["VUHDO_getHeaderBar"];
 	VUHDO_getModelType = VUHDO_GLOBAL["VUHDO_getModelType"];
 end
--- BURST CACHE ---------------------------------------------------
 
---
+-- BURST CACHE
+
 local tIdAll = {VUHDO_ID_ALL};
 local tEmpty = {};
 function VUHDO_getDynamicModelArray(aPanelNum)
@@ -53,7 +52,6 @@ function VUHDO_getDynamicModelArray(aPanelNum)
 end
 local VUHDO_getDynamicModelArray = VUHDO_getDynamicModelArray;
 
---
 function VUHDO_getHeaderText(aModelId)
 	if (10 == aModelId) then -- VUHDO_ID_GROUP_OWN
 		return VUHDO_HEADER_TEXTS[aModelId] .. " (" .. VUHDO_PLAYER_GROUP .. ")";
@@ -63,23 +61,20 @@ function VUHDO_getHeaderText(aModelId)
 end
 local VUHDO_getHeaderText = VUHDO_getHeaderText;
 
---
 local tHeaderText;
 local tColor;
 function VUHDO_customizeHeader(aHeader, aPanelNum, aModelId)
 	tHeaderText = VUHDO_getHeaderTextId(aHeader);
 	tHeaderText:SetText(VUHDO_getHeaderText(aModelId));
 
-	if (VUHDO_PANEL_SETUP[aPanelNum]["PANEL_COLOR"]["classColorsHeader"] and VUHDO_ID_TYPE_CLASS ==
-		VUHDO_getModelType(aModelId)) then
+	if (VUHDO_PANEL_SETUP[aPanelNum]["PANEL_COLOR"]["classColorsHeader"] and VUHDO_ID_TYPE_CLASS == VUHDO_getModelType(aModelId)) then
 		tColor = VUHDO_getClassColorByModelId(aModelId);
 	else
 		tColor = VUHDO_PANEL_SETUP[aPanelNum]["PANEL_COLOR"]["HEADER"];
 	end
 	tHeaderText:SetTextColor(tColor["TR"], tColor["TG"], tColor["TB"], tColor["TO"]);
 
-	if (VUHDO_PANEL_SETUP[aPanelNum]["PANEL_COLOR"]["classColorsBackHeader"] and VUHDO_ID_TYPE_CLASS ==
-		VUHDO_getModelType(aModelId)) then
+	if (VUHDO_PANEL_SETUP[aPanelNum]["PANEL_COLOR"]["classColorsBackHeader"] and VUHDO_ID_TYPE_CLASS == VUHDO_getModelType(aModelId)) then
 		tColor = VUHDO_getClassColorByModelId(aModelId);
 	else
 		tColor = VUHDO_PANEL_SETUP[aPanelNum]["PANEL_COLOR"]["HEADER"];
@@ -87,7 +82,6 @@ function VUHDO_customizeHeader(aHeader, aPanelNum, aModelId)
 	VUHDO_getHeaderBar(aHeader):SetStatusBarColor(tColor["R"], tColor["G"], tColor["B"], tColor["O"]);
 end
 
---
 local tSubTable = {};
 local tSubCount;
 local tEnd;
@@ -106,7 +100,6 @@ local function VUHDO_getSubTable(aTable, anIndex, aCount)
 	return tSubTable;
 end
 
---
 local tOccurrence;
 local tDynModel;
 local tMaxRows;
@@ -125,7 +118,6 @@ local function VUHDO_cutSubGroup(anIdentifier, aPanelNum, aModelIndex)
 	return VUHDO_getSubTable(VUHDO_GROUPS[anIdentifier] or tEmptyGroup, (tOccurrence - 1) * tMaxRows + 1, tMaxRows);
 end
 
---
 local tEmptyArray = {};
 local tGroupArray;
 function VUHDO_getGroupMembers(anIdentifier, aPanelNum, aModelIndex)
@@ -148,7 +140,6 @@ local sIsPlayerFirst;
 local tInfo1, tInfo2;
 local tEmpty = {};
 
---
 local VUHDO_RAID_SORTERS = {
 	[VUHDO_SORT_RAID_UNITID] = function(aUnitId, anotherUnitId)
 		if (sIsPlayerFirst and aUnitId == "player") then
@@ -239,7 +230,6 @@ local VUHDO_RAID_SORTERS = {
 	end
 };
 
---
 local tSorted = {};
 local tMembers;
 local tUnit;
@@ -296,7 +286,6 @@ function VUHDO_getGroupMembersSorted(anIdentifier, aSortCriterion, aPanelNum, aM
 	return tSorted;
 end
 
---
 local tUnit;
 function VUHDO_addUnitButton(aHealButton)
 	tUnit = aHealButton:GetAttribute("unit");

@@ -135,7 +135,6 @@ VUHDO_I18N_BAR_WIDTH = "Balkenbreite";
 VUHDO_I18N_WIDTH = "Breite";
 VUHDO_I18N_HEADERS = "Titel";
 VUHDO_I18N_CLASS_COL = "Klassenf.";
---
 
 
 
@@ -287,7 +286,7 @@ VUHDO_I18N_TT_104 = "Passen Sie das Aussehen der Spaltenüberschriften an.";
 VUHDO_I18N_TT_105 = "Nehmen Sie grundsätzliche Einstellungen zum Erscheinungsbild der Fenster vor.";
 VUHDO_I18N_TT_106 = "Stellen Sie ein, wie die Tooltips aussehen sollen.";
 VUHDO_I18N_TT_107 = "Konfigurieren Sie Inhalt und Erscheinung der Balkenbeschriftungen.";
-VUHDO_I18N_TT_108 = "Stellen Sie ein, ob und wie die Ziele der Spieler in einem Fenster angezeigt  werden.";
+VUHDO_I18N_TT_108 = "Stellen Sie ein, ob und wie die Ziele der Spieler in einem Fenster angezeigt werden.";
 VUHDO_I18N_TT_109 = "Stellen Sie Grössen und Abstände der Balken ein.";
 VUHDO_I18N_TT_110 = "Verändern Sie das Aussehen der Balken sowie des Fensterhintergrunds und -rahmens.";
 VUHDO_I18N_TT_111 = "Klicken Sie diesen Button, um die Einstellungen des aktuell sichtbaren Untermenüs für alle Fenster zu übernehmen";

@@ -1,9 +1,8 @@
-﻿
-if (GetLocale() ~= "zhCN") then
+﻿if (GetLocale() ~= "zhCN") then
 	return;
 end
 -- @EXACT = true: Translation has to be the exact(!) match in the clients language,
---                beacause it carries technical semantics
+-- beacause it carries technical semantics
 -- @EXACT = false: Translation can be done freely, because text is only descriptive
 
 
@@ -69,7 +68,7 @@ VUHDO_I18N_SHOW_BUFF_WATCH = "显示增益监视";
 
 
 -- @EXACT = true
---
+
 VUHDO_I18N_RANK = "等级";
 
 
@@ -151,7 +150,7 @@ VUHDO_I18N_BUFFC_SKIN = "01皮肤";
 VUHDO_I18N_BUFFC_ARMOR_MAGE = "03护甲";
 
 -- Death Knight
-VUHDO_SPELL_ID_BUFFC_PRESENCE    = "03Presence";
+VUHDO_SPELL_ID_BUFFC_PRESENCE = "03Presence";
 
 -- Warrior
 VUHDO_I18N_BUFFC_SHOUT = "01怒吼";
@@ -199,7 +198,7 @@ VUHDO_I18N_DEFAULT_RES_ANNOUNCE = "复活吧, 我的勇士!";
 -- #v+1.151
 VUHDO_I18N_MAIN_ASSISTS = "协助坦克";
 
---VUHDO_OPTIONS_FONT_NAME = "Interface\\AddOns\\VuhDo\\Fonts\\ariblk.ttf";
+-- VUHDO_OPTIONS_FONT_NAME = "Interface\\AddOns\\VuhDo\\Fonts\\ariblk.ttf";
 VUHDO_OPTIONS_FONT_NAME = GameFontNormal:GetFont();
 
 -- #v+1.169

@@ -10,21 +10,14 @@ VUHDO_OPTIONS_SETTINGS = nil;
 
 VUHDO_IS_CONFIG = false;
 
---
 function VUHDO_tabbedFrameOnMouseDown(aPanel)
 	aPanel:StartMoving();
 end
 
-
-
---
 function VUHDO_tabbedFrameOnMouseUp(aPanel)
 	aPanel:StopMovingOrSizing();
 end
 
-
-
---
 local function VUHDO_getMainPanel(aComponent)
 	while (aComponent:GetParent():GetName() ~= "UIParent") do
 		aComponent = aComponent:GetParent();
@@ -33,9 +26,6 @@ local function VUHDO_getMainPanel(aComponent)
 	return aComponent;
 end
 
-
-
---
 local function VUHDO_countTableDiffs(aTable, anotherTable)
 	local tCount = 0;
 	local tKey, tValue;
@@ -66,9 +56,6 @@ local function VUHDO_countTableDiffs(aTable, anotherTable)
 	return tCount;
 end
 
-
-
---
 function VUHDO_tabbedPanelOkayClicked(aButton)
 	VUHDO_getMainPanel(aButton):Hide();
 
@@ -82,7 +69,7 @@ function VUHDO_tabbedPanelOkayClicked(aButton)
 	VUHDO_B_BOUQUETS = nil;
 
 	VUHDO_initKeyboardMacros();
-  VUHDO_fixHotSettings();
+	VUHDO_fixHotSettings();
 	VUHDO_initFromSpellbook();
 	VUHDO_registerAllBouquets();
 
@@ -105,18 +92,12 @@ function VUHDO_tabbedPanelOkayClicked(aButton)
 	collectgarbage('collect');
 end
 
-
-
---
 function VUHDO_tabbedPanelCancelClicked(aButton)
 	VUHDO_newOptionsRestoreVars();
 	VUHDO_initKeyboardMacros();
 	VUHDO_MAY_DEBUFF_ANIM = true;
 end
 
-
-
---
 local function VUHDO_newOptionsHideAllTabPanels()
 	VuhDoNewOptionsGeneral:Hide();
 	VuhDoNewOptionsPanelPanel:Hide();
@@ -128,9 +109,6 @@ local function VUHDO_newOptionsHideAllTabPanels()
 	VuhDoNewOptionsTools:Hide();
 end
 
-
-
---
 local tName;
 function VUHDO_newOptionsTabbedClickedClicked(aTabRadio)
 	tName = aTabRadio:GetName();
@@ -156,9 +134,6 @@ function VUHDO_newOptionsTabbedClickedClicked(aTabRadio)
 	end
 end
 
-
-
---
 function VUHDO_newOptionsBufferVars()
 	if (VUHDO_B_CONFIG == nil) then
 		VUHDO_B_CONFIG = VUHDO_deepCopyTable(VUHDO_CONFIG);
@@ -172,9 +147,6 @@ function VUHDO_newOptionsBufferVars()
 	end
 end
 
-
-
---
 function VUHDO_yesNoDiscardChangesCallback(aDecision)
 	if (VUHDO_YES == aDecision) then
 		VuhDoNewOptionsTabbedFrame:Hide();
@@ -204,9 +176,6 @@ function VUHDO_yesNoDiscardChangesCallback(aDecision)
 	end
 end
 
-
-
---
 local tChanges;
 function VUHDO_newOptionsRestoreVars()
 	tChanges =
@@ -220,7 +189,7 @@ function VUHDO_newOptionsRestoreVars()
 		+ VUHDO_countTableDiffs(VUHDO_BOUQUETS, VUHDO_B_BOUQUETS);
 
 	if (tChanges > 0) then
-		VuhDoYesNoFrameText:SetText("Вы изменили настройки: " .. tChanges .. " шт.\nХотите выйти без сохранения?");
+		VuhDoYesNoFrameText:SetText(format(VUHDO_I18N_DISCARD_CHANGES_CONFIRM, tChanges));
 		VuhDoYesNoFrame:SetAttribute("callback", VUHDO_yesNoDiscardChangesCallback);
 		VuhDoYesNoFrame:Show();
 	else
@@ -228,16 +197,10 @@ function VUHDO_newOptionsRestoreVars()
 	end
 end
 
-
-
-
-
 local VUHDO_INIT_OPTIONS_SETTINGS = {
 	["scale"] = 1;
 }
 
-
---
 function VUHDO_initOptionsSettings()
 	if (VUHDO_OPTIONS_SETTINGS == nil) then
 		VUHDO_OPTIONS_SETTINGS = VUHDO_deepCopyTable(VUHDO_INIT_OPTIONS_SETTINGS);

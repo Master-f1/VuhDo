@@ -30,8 +30,6 @@ local VUHDO_getIncHealOnUnit;
 local sIsInverted;
 local sBarColors;
 
-----------------------------------------------------------
-
 function VUHDO_bouquetValidatorsInitBurst()
 	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
 	VUHDO_RESSING_NAMES = VUHDO_GLOBAL["VUHDO_RESSING_NAMES"];
@@ -54,8 +52,6 @@ function VUHDO_bouquetValidatorsInitBurst()
 	sIsInverted = VUHDO_INDICATOR_CONFIG["CUSTOM"]["HEALTH_BAR"]["invertGrowth"];
 	sBarColors = VUHDO_PANEL_SETUP["BAR_COLORS"];
 end
-
-----------------------------------------------------------
 
 local VUHDO_ICONS_BY_ROLE = {
 	[VUHDO_ID_MELEE_TANK] = "Interface\\AddOns\\VuhDo\\Images\\roleicons\\tank",
@@ -90,7 +86,6 @@ local VUHDO_ICONS_BY_CLASS_ID = {
 
 local VUHDO_CHARGE_COLORS = {"HOT_CHARGE_1", "HOT_CHARGE_2", "HOT_CHARGE_3", "HOT_CHARGE_4"};
 
---
 local tCopy = {};
 local tEmptyColor = {};
 local function VUHDO_copyColor(aColor)
@@ -99,61 +94,51 @@ local function VUHDO_copyColor(aColor)
 	end
 	tCopy["R"], tCopy["G"], tCopy["B"], tCopy["O"] = aColor["R"], aColor["G"], aColor["B"], aColor["O"];
 	tCopy["TR"], tCopy["TG"], tCopy["TB"], tCopy["TO"] = aColor["TR"], aColor["TG"], aColor["TB"], aColor["TO"];
-	tCopy["useBackground"], tCopy["useText"], tCopy["useOpacity"] = aColor["useBackground"], aColor["useText"],
-		aColor["useOpacity"];
+	tCopy["useBackground"], tCopy["useText"], tCopy["useOpacity"] = aColor["useBackground"], aColor["useText"], aColor["useOpacity"];
 	return tCopy;
 end
 
---
 local tSummand;
 local function VUHDO_brightenColor(aColor, aFactor)
 	if (aColor == nil) then
 		return;
 	end
 	tSummand = aFactor - 1;
-	aColor["R"], aColor["G"], aColor["B"] = (aColor["R"] or 0) + tSummand, (aColor["G"] or 0) + tSummand,
-		(aColor["B"] or 0) + tSummand;
+	aColor["R"], aColor["G"], aColor["B"] = (aColor["R"] or 0) + tSummand, (aColor["G"] or 0) + tSummand, (aColor["B"] or 0) + tSummand;
 	return aColor;
 end
 
 -- return tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tTimer2
 
---
 local function VUHDO_aggroValidator(anInfo, _)
 	return anInfo["aggro"], nil, -1, -1, -1, nil, nil;
 end
 
---
 local function VUHDO_outOfRangeValidator(anInfo, _)
 	return not anInfo["range"], nil, -1, -1, -1, nil, nil;
 end
 
---
 local function VUHDO_inRangeValidator(anInfo, _)
 	return anInfo["range"], nil, -1, -1, -1, nil, nil;
 end
 
---
 local tDistance;
 local function VUHDO_inYardsRangeValidator(anInfo, someCustom)
 	tDistance = VUHDO_getDistanceBetween("player", anInfo["unit"]);
 	return (tDistance ~= nil) and (tDistance <= someCustom["custom"][1]), nil, -1, -1, -1, nil, nil;
 end
 
---
 local tDistance;
 local function VUHDO_swiftmendValidator(anInfo, _)
 	return VUHDO_isUnitSwiftmendable(anInfo["unit"]), nil, -1, -1, -1, nil, nil;
 end
 
---
 local tOPHotInfo;
 local function VUHDO_otherPlayersHotsValidator(anInfo, _)
 	tOPHotInfo = VUHDO_getOtherPlayersHotInfo(anInfo["unit"]);
 	return tOPHotInfo[1] ~= nil, tOPHotInfo[1], -1, tOPHotInfo[2], -1, nil, nil;
 end
 
---
 local tDebuffInfo;
 local function VUHDO_debuffMagicValidator(anInfo, _)
 	tDebuffInfo = VUHDO_getUnitDebuffSchoolInfos(anInfo["unit"], VUHDO_DEBUFF_TYPE_MAGIC);
@@ -164,7 +149,6 @@ local function VUHDO_debuffMagicValidator(anInfo, _)
 	end
 end
 
---
 local tDebuffInfo;
 local function VUHDO_debuffDiseaseValidator(anInfo, _)
 	tDebuffInfo = VUHDO_getUnitDebuffSchoolInfos(anInfo["unit"], VUHDO_DEBUFF_TYPE_DISEASE);
@@ -175,7 +159,6 @@ local function VUHDO_debuffDiseaseValidator(anInfo, _)
 	end
 end
 
---
 local tDebuffInfo;
 local function VUHDO_debuffPoisonValidator(anInfo, _)
 	tDebuffInfo = VUHDO_getUnitDebuffSchoolInfos(anInfo["unit"], VUHDO_DEBUFF_TYPE_POISON);
@@ -186,7 +169,6 @@ local function VUHDO_debuffPoisonValidator(anInfo, _)
 	end
 end
 
---
 local tDebuffInfo;
 local function VUHDO_debuffCurseValidator(anInfo, _)
 	tDebuffInfo = VUHDO_getUnitDebuffSchoolInfos(anInfo["unit"], VUHDO_DEBUFF_TYPE_CURSE);
@@ -208,103 +190,82 @@ local function VUHDO_debuffBarColorValidator(anInfo, _)
 	end
 end
 
---
 local function VUHDO_debuffCharmedValidator(anInfo, _)
 	return anInfo["charmed"], nil, -1, -1, -1, nil, nil;
 end
 
---
 local function VUHDO_deadValidator(anInfo, _)
 	return anInfo["dead"], nil, 100, -1, 100, nil, nil;
 end
 
---
 function VUHDO_disconnectedValidator(anInfo, _)
 	return anInfo == nil or not anInfo["connected"], nil, 100, -1, 100, nil, nil;
 end
 local VUHDO_disconnectedValidator = VUHDO_disconnectedValidator;
 
---
 local function VUHDO_afkValidator(anInfo, _)
 	return anInfo["afk"], nil, -1, -1, -1, nil, nil;
 end
 
---
 local tEmptyInfo = {};
 local function VUHDO_playerTargetValidator(anInfo, _)
 	if (anInfo["isPet"] and (VUHDO_RAID[anInfo["ownerUnit"]] or tEmptyInfo)["isVehicle"]) then
-		return anInfo["ownerUnit"] == VUHDO_getCurrentPlayerTarget(), nil, VUHDO_RAID[anInfo["ownerUnit"]]["health"],
-			-1, VUHDO_RAID[anInfo["ownerUnit"]]["healthmax"], nil, nil;
+		return anInfo["ownerUnit"] == VUHDO_getCurrentPlayerTarget(), nil, VUHDO_RAID[anInfo["ownerUnit"]]["health"], -1, VUHDO_RAID[anInfo["ownerUnit"]]["healthmax"], nil, nil;
 	else
-		return anInfo["unit"] == VUHDO_getCurrentPlayerTarget(), nil, anInfo["health"], -1, anInfo["healthmax"], nil,
-			nil;
+		return anInfo["unit"] == VUHDO_getCurrentPlayerTarget(), nil, anInfo["health"], -1, anInfo["healthmax"], nil, nil;
 	end
 
 end
 
---
 local tEmptyInfo = {};
 local function VUHDO_mouseOverTargetValidator(anInfo, _)
 	if (anInfo["isPet"] and (VUHDO_RAID[anInfo["ownerUnit"]] or tEmptyInfo)["isVehicle"]) then
-		return anInfo["ownerUnit"] == VUHDO_getCurrentMouseOver(), nil, VUHDO_RAID[anInfo["ownerUnit"]]["health"], -1,
-			VUHDO_RAID[anInfo["ownerUnit"]]["healthmax"], nil, nil;
+		return anInfo["ownerUnit"] == VUHDO_getCurrentMouseOver(), nil, VUHDO_RAID[anInfo["ownerUnit"]]["health"], -1, VUHDO_RAID[anInfo["ownerUnit"]]["healthmax"], nil, nil;
 	else
 		return anInfo["unit"] == VUHDO_getCurrentMouseOver(), nil, anInfo["health"], -1, anInfo["healthmax"], nil, nil;
 	end
 end
 
---
 local tMouseOverUnit;
 local function VUHDO_mouseOverGroupValidator(anInfo, _)
 	tMouseOverUnit = VUHDO_getCurrentMouseOver();
-	return VUHDO_RAID[tMouseOverUnit] ~= nil and anInfo["group"] == VUHDO_RAID[tMouseOverUnit]["group"], nil, -1, -1,
-		-1, nil, nil;
+	return VUHDO_RAID[tMouseOverUnit] ~= nil and anInfo["group"] == VUHDO_RAID[tMouseOverUnit]["group"], nil, -1, -1, -1, nil, nil;
 end
 
---
 local function VUHDO_healthBelowValidator(anInfo, someCustom)
 	return 100 * anInfo["health"] / anInfo["healthmax"] < someCustom["custom"][1], nil, -1, -1, -1, nil, nil;
 end
 
---
 local function VUHDO_healthAboveValidator(anInfo, someCustom)
 	return 100 * anInfo["health"] / anInfo["healthmax"] >= someCustom["custom"][1], nil, -1, -1, -1, nil, nil;
 end
 
---
 local function VUHDO_manaBelowValidator(anInfo, someCustom)
-	return anInfo["powertype"] == 0 and 100 * anInfo["power"] / anInfo["powermax"] < someCustom["custom"][1], nil, -1,
-		-1, -1, nil, nil;
+	return anInfo["powertype"] == 0 and 100 * anInfo["power"] / anInfo["powermax"] < someCustom["custom"][1], nil, -1, -1, -1, nil, nil;
 end
 
---
 local function VUHDO_threatAboveValidator(anInfo, someCustom)
 	return anInfo["threatPerc"] > someCustom["custom"][1], nil, -1, -1, -1, nil, nil;
 end
 
---
 local tNumInCluster;
 local function VUHDO_numInClusterValidator(anInfo, someCustom)
 	tNumInCluster = VUHDO_getNumInUnitCluster(anInfo["unit"]);
 	return tNumInCluster >= someCustom["custom"][1], nil, -1, tNumInCluster, -1, nil, nil;
 end
 
---
 local function VUHDO_mouseClusterValidator(anInfo, _)
 	return VUHDO_getIsInHiglightCluster(anInfo["unit"]), nil, -1, -1, -1, nil, nil;
 end
 
---
 local function VUHDO_threatMediumValidator(anInfo, _)
 	return anInfo["threat"] == 2, nil, -1, -1, -1, nil, nil;
 end
 
---
 local function VUHDO_threatHighValidator(anInfo, _)
 	return anInfo["threat"] == 3, nil, -1, -1, -1, nil, nil;
 end
 
---
 local tIsRaidIconColor;
 local tColor, tIcon;
 local function VUHDO_raidTargetValidator(anInfo, _)
@@ -323,7 +284,6 @@ local function VUHDO_raidTargetValidator(anInfo, _)
 	end
 end
 
---
 local tOverheal;
 local function VUHDO_overhealHighlightValidator(anInfo, _)
 	tOverheal = VUHDO_getIncHealOnUnit(anInfo["name"]) + anInfo["health"];
@@ -333,7 +293,6 @@ local function VUHDO_overhealHighlightValidator(anInfo, _)
 	return false, nil, -1, -1, -1, nil, nil;
 end
 
---
 local tStacks;
 local function VUHDO_stacksColorValidator(anInfo, _)
 	tStacks = VUHDO_getCurrentBouquetStacks() or 0;
@@ -348,7 +307,6 @@ local function VUHDO_stacksColorValidator(anInfo, _)
 	end
 end
 
---
 local tIndex, tFactor, tColor;
 local function VUHDO_emergencyColorValidator(anInfo, someCustom)
 	if (not VUHDO_FORCE_RESET) then
@@ -357,8 +315,7 @@ local function VUHDO_emergencyColorValidator(anInfo, someCustom)
 			tFactor = 1 / tIndex;
 
 			tColor = VUHDO_copyColor(someCustom["color"]);
-			tColor["R"], tColor["G"], tColor["B"] = (tColor["R"] or 0) * tFactor, (tColor["G"] or 0) * tFactor,
-				(tColor["B"] or 0) * tFactor;
+			tColor["R"], tColor["G"], tColor["B"] = (tColor["R"] or 0) * tFactor, (tColor["G"] or 0) * tFactor, (tColor["B"] or 0) * tFactor;
 			return true, nil, -1, -1, -1, tColor;
 		end
 	end
@@ -366,14 +323,12 @@ local function VUHDO_emergencyColorValidator(anInfo, someCustom)
 	return false, nil, -1, -1, -1, nil, nil;
 end
 
---
 local function VUHDO_resurrectionValidator(anInfo, someCustom)
 	return VUHDO_RESSING_NAMES[anInfo["name"]], nil, -1, -1, -1, nil, nil;
 end
 
 -- return tIsActive, tIcon, tTimer, tCounter, tDuration, tColor
 
---
 local function VUHDO_statusHealthValidator(anInfo, _)
 	if (sIsInverted) then
 		return true, nil, anInfo["health"] + VUHDO_getIncHealOnUnit(anInfo["name"]), -1, anInfo["healthmax"], nil,
@@ -383,29 +338,22 @@ local function VUHDO_statusHealthValidator(anInfo, _)
 	end
 end
 
---
 local function VUHDO_statusManaValidator(anInfo, _)
-	return anInfo["powertype"] == 0, nil, anInfo["power"], -1, anInfo["powermax"],
-		VUHDO_copyColor(VUHDO_POWER_TYPE_COLORS[0]), nil;
+	return anInfo["powertype"] == 0, nil, anInfo["power"], -1, anInfo["powermax"], VUHDO_copyColor(VUHDO_POWER_TYPE_COLORS[0]), nil;
 end
 
---
 local function VUHDO_statusOtherPowersValidator(anInfo, _)
-	return anInfo["powertype"] ~= 0, nil, anInfo["power"], -1, anInfo["powermax"],
-		VUHDO_copyColor(VUHDO_POWER_TYPE_COLORS[anInfo["powertype"] or 0]), nil;
+	return anInfo["powertype"] ~= 0, nil, anInfo["power"], -1, anInfo["powermax"], VUHDO_copyColor(VUHDO_POWER_TYPE_COLORS[anInfo["powertype"] or 0]), nil;
 end
 
---
 local function VUHDO_statusIncomingValidator(anInfo, _)
 	return true, nil, VUHDO_getIncHealOnUnit(anInfo["name"]), -1, anInfo["healthmax"], nil, nil;
 end
 
---
 local function VUHDO_statusThreatValidator(anInfo, _)
 	return true, nil, anInfo["threatPerc"], -1, 100, nil, nil;
 end
 
---
 local tIcon;
 local function VUHDO_classIconValidator(anInfo, _)
 	tIcon = VUHDO_ICONS_BY_CLASS_ID[anInfo["classId"] or -1];
@@ -417,7 +365,6 @@ local function VUHDO_classIconValidator(anInfo, _)
 	end
 end
 
---
 local tIcon;
 local function VUHDO_raidIconValidator(anInfo, _)
 	tIcon = VUHDO_ICONS_BY_RAID_ICON[GetRaidTargetIndex(anInfo["unit"]) or -1];
@@ -429,7 +376,6 @@ local function VUHDO_raidIconValidator(anInfo, _)
 	end
 end
 
---
 local tIcon;
 local function VUHDO_roleIconValidator(anInfo, _)
 	tIcon = VUHDO_ICONS_BY_ROLE[anInfo["role"] or -1];
@@ -441,17 +387,14 @@ local function VUHDO_roleIconValidator(anInfo, _)
 	end
 end
 
---
 local function VUHDO_classColorValidator(anInfo, _)
 	return true, nil, -1, -1, -1, VUHDO_copyColor(VUHDO_USER_CLASS_COLORS[anInfo["classId"]]), nil;
 end
 
---
 local function VUHDO_alwaysTrueValidator(_, _)
 	return true, nil, -1, -1, -1, nil, nil;
 end
 
---
 VUHDO_BOUQUET_BUFFS_SPECIAL = {
 	["AGGRO"] = {
 		["displayName"] = VUHDO_I18N_BOUQUET_AGGRO,
