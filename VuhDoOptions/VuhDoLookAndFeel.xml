@@ -23,7 +23,7 @@
 	<Shadow>
 		<Color r="0.4" g="0.4" b="1" a="0" />
 			<Offset>
-				 <AbsDimension x="0" y="0" />
+				<AbsDimension x="0" y="0" />
 			</Offset>
 	</Shadow>
 </FontString>
@@ -37,7 +37,7 @@
 	<Shadow>
 		<Color r="0.4" g="0.4" b="1" a="0" />
 			<Offset>
-				 <AbsDimension x="0" y="0" />
+				<AbsDimension x="0" y="0" />
 			</Offset>
 	</Shadow>
 </Font>
@@ -51,7 +51,7 @@
 	<Shadow>
 		<Color r="0.4" g="0.4" b="1" a="0" />
 			<Offset>
-				 <AbsDimension x="0" y="0" />
+				<AbsDimension x="0" y="0" />
 			</Offset>
 	</Shadow>
 </Font>
@@ -59,13 +59,13 @@
 
 <FontString name="VuDoWhiteFontTemplate" inherits="VuDoDefaultFontTemplate" virtual="true">
 	<FontHeight>
-		<AbsValue val="8"/>
+		<AbsValue val="8" />
 	</FontHeight>
 	<Color r="1" g="1" b="1" />
 	<Shadow>
-		<Color r="0.4" g="0.4" b="0.4"/>
+		<Color r="0.4" g="0.4" b="0.4" />
 			<Offset>
-				 <AbsDimension x="1" y="-1" />
+				<AbsDimension x="1" y="-1" />
 			</Offset>
 	</Shadow>
 </FontString>
@@ -79,7 +79,7 @@
 	<Shadow>
 		<Color r="0.4" g="0.4" b="1" a="0" />
 			<Offset>
-				 <AbsDimension x="0" y="0" />
+				<AbsDimension x="0" y="0" />
 			</Offset>
 	</Shadow>
 </FontString>
@@ -93,7 +93,7 @@
 	<Shadow>
 		<Color r="1" g="1" b="1" a="0" />
 			<Offset>
-				 <AbsDimension x="0" y="0" />
+				<AbsDimension x="0" y="0" />
 			</Offset>
 	</Shadow>
 </FontString>
@@ -107,7 +107,7 @@
 	<Shadow>
 		<Color r="0" g="0" b="0" a="1" />
 			<Offset>
-				 <AbsDimension x="1" y="-1" />
+				<AbsDimension x="1" y="-1" />
 			</Offset>
 	</Shadow>
 </FontString>
@@ -121,7 +121,7 @@
 	<Shadow>
 		<Color r="0.6" g="0.6" b="1" a="0" />
 			<Offset>
-				 <AbsDimension x="0" y="0" />
+				<AbsDimension x="0" y="0" />
 			</Offset>
 	</Shadow>
 </FontString>
@@ -135,7 +135,7 @@
 	<Shadow>
 		<Color r="0.4" g="0.4" b="1" a="0" />
 			<Offset>
-				 <AbsDimension x="0" y="0" />
+				<AbsDimension x="0" y="0" />
 			</Offset>
 	</Shadow>
 </FontString>
@@ -148,7 +148,7 @@
 	<Shadow>
 		<Color r="1" g="0.4" b="0.4" a="0" />
 			<Offset>
-				 <AbsDimension x="0" y="0" />
+				<AbsDimension x="0" y="0" />
 			</Offset>
 	</Shadow>
 </FontString>
@@ -1550,7 +1550,7 @@
 
 <Slider name="VuhDoPanelScrollBarTemplate" virtual="true">
 	<Size>
-		<AbsDimension x="16" y="0"/>
+		<AbsDimension x="16" y="0" />
 	</Size>
 	<Backdrop bgFile="Interface\AddOns\VuhDoOptions\Images\blue_dk_square_16_16" edgeFile="Interface\AddOns\VuhDoOptions\Images\panel_edges_3" tile="true">
 		<BackgroundInsets>
@@ -1569,7 +1569,7 @@
 				<AbsDimension x="0" y="0" />
 			</Size>
 			<Anchors>
-				<Anchor point="BOTTOM" relativePoint="TOP"/>
+				<Anchor point="BOTTOM" relativePoint="TOP" />
 			</Anchors>
 			<Scripts>
 				<OnClick>
@@ -1584,7 +1584,7 @@
 				<AbsDimension x="0" y="0" />
 			</Size>
 			<Anchors>
-				<Anchor point="TOP" relativePoint="BOTTOM"/>
+				<Anchor point="TOP" relativePoint="BOTTOM" />
 			</Anchors>
 			<Scripts>
 				<OnClick>
@@ -1602,9 +1602,9 @@
 	</Scripts>
 	<ThumbTexture name="$parentThumbTexture" inherits="UIPanelScrollBarButton" file="Interface\AddOns\VuhDoOptions\Images\slider_thumb_v">
 		<Size>
-			<AbsDimension x="18" y="18"/>
+			<AbsDimension x="18" y="18" />
 		</Size>
-		<TexCoords left="0" right="1" top="0" bottom="1"/>
+		<TexCoords left="0" right="1" top="0" bottom="1" />
 	</ThumbTexture>
 </Slider>
 
@@ -1626,12 +1626,12 @@
 			<Anchors>
 				<Anchor point="TOPLEFT" relativePoint="TOPRIGHT">
 					<Offset>
-						<AbsDimension x="-8" y="-8"/>
+						<AbsDimension x="-8" y="-8" />
 					</Offset>
 				</Anchor>
 				<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT">
 					<Offset>
-						<AbsDimension x="-8" y="8"/>
+						<AbsDimension x="-8" y="8" />
 					</Offset>
 				</Anchor>
 			</Anchors>
@@ -1684,12 +1684,12 @@
 			<Anchors>
 				<Anchor point="TOPLEFT" relativePoint="TOPRIGHT">
 					<Offset>
-						<AbsDimension x="-8" y="-8"/>
+						<AbsDimension x="-8" y="-8" />
 					</Offset>
 				</Anchor>
 				<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT">
 					<Offset>
-						<AbsDimension x="-8" y="8"/>
+						<AbsDimension x="-8" y="8" />
 					</Offset>
 				</Anchor>
 			</Anchors>
@@ -1923,12 +1923,12 @@
 
 <Frame name="VuhDoYesNoFrame" toplevel="true" frameStrata="TOOLTIP" parent="UIParent" hidden="true">
 	<Size>
-		<AbsDimension x="323" y="97"/>
+		<AbsDimension x="323" y="97" />
 	</Size>
 	<Anchors>
 		<Anchor point="CENTER">
 			<Offset>
-				<AbsDimension x="0" y="-10"/>
+				<AbsDimension x="0" y="-10" />
 			</Offset>
 		</Anchor>
 	</Anchors>
@@ -1936,12 +1936,12 @@
 		<Layer level="BACKGROUND">
 			<Texture name="$parentPortrait">
 				<Size>
-					<AbsDimension x="50" y="50"/>
+					<AbsDimension x="50" y="50" />
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
 						<Offset>
-							<AbsDimension x="7" y="-6"/>
+							<AbsDimension x="7" y="-6" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -1950,18 +1950,18 @@
 		<Layer level="ARTWORK">
 			<Texture file="Interface\RaidFrame\UI-ReadyCheckFrame">
 				<Size>
-					<AbsDimension x="323" y="97"/>
+					<AbsDimension x="323" y="97" />
 				</Size>
 				<Anchors>
-					<Anchor point="TOPLEFT"/>
+					<Anchor point="TOPLEFT" />
 				</Anchors>
-				<TexCoords left="0" right="0.630859375" top="0" bottom="0.7578125"/>
+				<TexCoords left="0" right="0.630859375" top="0" bottom="0.7578125" />
 			</Texture>
 			<FontString name="$parentText" inherits="GameFontNormal" text="VUHDO_I18N_O_REALLY">
 				<Anchors>
 					<Anchor point="TOP">
 						<Offset>
-							<AbsDimension x="15" y="-24"/>
+							<AbsDimension x="15" y="-24" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -1971,12 +1971,12 @@
 	<Frames>
 		<Button name="$parentYesButton" inherits="UIPanelButtonTemplate" text="VUHDO_I18N_YES">
 			<Size>
-				<AbsDimension x="109" y="24"/>
+				<AbsDimension x="109" y="24" />
 			</Size>
 			<Anchors>
 				<Anchor point="BOTTOMLEFT">
 					<Offset>
-						<AbsDimension x="55" y="18"/>
+						<AbsDimension x="55" y="18" />
 					</Offset>
 				</Anchor>
 			</Anchors>
@@ -1989,12 +1989,12 @@
 		</Button>
 		<Button name="$parentNoButton" inherits="UIPanelButtonTemplate" text="VUHDO_I18N_NO">
 			<Size>
-				<AbsDimension x="109" y="24"/>
+				<AbsDimension x="109" y="24" />
 			</Size>
 			<Anchors>
 				<Anchor point="LEFT" relativeTo="VuhDoYesNoFrameYesButton" relativePoint="RIGHT">
 					<Offset>
-						<AbsDimension x="0" y="0"/>
+						<AbsDimension x="0" y="0" />
 					</Offset>
 				</Anchor>
 			</Anchors>
@@ -2017,12 +2017,12 @@
 
 <Frame name="VuhDoThreeSelectFrame" toplevel="true" frameStrata="TOOLTIP" parent="UIParent" hidden="true">
 	<Size>
-		<AbsDimension x="460" y="120"/>
+		<AbsDimension x="460" y="120" />
 	</Size>
 	<Anchors>
 		<Anchor point="CENTER">
 			<Offset>
-				<AbsDimension x="0" y="-10"/>
+				<AbsDimension x="0" y="-10" />
 			</Offset>
 		</Anchor>
 	</Anchors>
@@ -2030,18 +2030,18 @@
 		<Layer level="ARTWORK">
 			<Texture file="Interface\RaidFrame\UI-ReadyCheckFrame">
 				<Size>
-					<AbsDimension x="460" y="120"/>
+					<AbsDimension x="460" y="120" />
 				</Size>
 				<Anchors>
-					<Anchor point="TOPLEFT"/>
+					<Anchor point="TOPLEFT" />
 				</Anchors>
-				<TexCoords left="0" right="0.630859375" top="0" bottom="0.7578125"/>
+				<TexCoords left="0" right="0.630859375" top="0" bottom="0.7578125" />
 			</Texture>
 			<FontString name="$parentText" inherits="GameFontNormal" text="">
 				<Anchors>
 					<Anchor point="TOP">
 						<Offset>
-							<AbsDimension x="15" y="-24"/>
+							<AbsDimension x="15" y="-24" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -2051,12 +2051,12 @@
 	<Frames>
 		<Button name="$parentButton1" inherits="UIPanelButtonTemplate" text="1">
 			<Size>
-				<AbsDimension x="109" y="24"/>
+				<AbsDimension x="109" y="24" />
 			</Size>
 			<Anchors>
 				<Anchor point="BOTTOMLEFT">
 					<Offset>
-						<AbsDimension x="55" y="18"/>
+						<AbsDimension x="55" y="18" />
 					</Offset>
 				</Anchor>
 			</Anchors>
@@ -2070,12 +2070,12 @@
 
 		<Button name="$parentButton2" inherits="UIPanelButtonTemplate" text="2">
 			<Size>
-				<AbsDimension x="109" y="24"/>
+				<AbsDimension x="109" y="24" />
 			</Size>
 			<Anchors>
 				<Anchor point="LEFT" relativeTo="VuhDoThreeSelectFrameButton1" relativePoint="RIGHT">
 					<Offset>
-						<AbsDimension x="0" y="0"/>
+						<AbsDimension x="0" y="0" />
 					</Offset>
 				</Anchor>
 			</Anchors>
@@ -2089,12 +2089,12 @@
 
 		<Button name="$parentButton3" inherits="UIPanelButtonTemplate" text="3">
 			<Size>
-				<AbsDimension x="109" y="24"/>
+				<AbsDimension x="109" y="24" />
 			</Size>
 			<Anchors>
 				<Anchor point="LEFT" relativeTo="VuhDoThreeSelectFrameButton2" relativePoint="RIGHT">
 					<Offset>
-						<AbsDimension x="0" y="0"/>
+						<AbsDimension x="0" y="0" />
 					</Offset>
 				</Anchor>
 			</Anchors>

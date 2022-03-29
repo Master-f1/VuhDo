@@ -49,8 +49,8 @@
 									</Layer>
 								</Layers>
 								<Scripts>
-								 	<OnShow>
-								 		VUHDO_lnfPatchFont(self, "Label");
+									<OnShow>
+										VUHDO_lnfPatchFont(self, "Label");
 									</OnShow>
 								</Scripts>
 							</Frame>

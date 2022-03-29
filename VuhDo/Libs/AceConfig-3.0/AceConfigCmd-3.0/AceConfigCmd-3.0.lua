@@ -44,9 +44,9 @@ end
 -- pickfirstset() - picks the first non-nil value and returns it
 
 local function pickfirstset(...)
-	for i=1,select("#",...) do
-		if select(i,...)~=nil then
-			return select(i,...)
+	for i=1,select("#", ...) do
+		if select(i, ...)~=nil then
+			return select(i, ...)
 		end
 	end
 end
@@ -120,7 +120,7 @@ local function do_final(info, inputpos, tab, methodtype, ...)
 	end
 	-- console ignores .confirm
 
-	callmethod(info,inputpos,tab,methodtype, ...)
+	callmethod(info, inputpos, tab, methodtype, ...)
 end
 
 
@@ -220,10 +220,10 @@ local function showhelp(info, inputpos, tab, noHead)
 				desc = callfunction(info, v, 'desc')
 			end
 			if v.type == "group" and pickfirstset(v.cmdInline, v.inline, false) then
-				print(""..(desc or name)..":")
+				print("  "..(desc or name)..":")
 				showhelp(info, inputpos, v, true)
 			else
-				print("|cffffff78"..k.."|r - "..(desc or name or ""))
+				print("  |cffffff78"..k.."|r - "..(desc or name or ""))
 			end
 		end
 	end

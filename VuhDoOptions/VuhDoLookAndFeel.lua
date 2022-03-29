@@ -319,7 +319,7 @@ local function VUHDO_lnfUpdateAllModelControls(aComponent, aValue)
 
 	for _, tComp in pairs(tAllComps) do
 		tModel = tComp:GetAttribute("model");
-		if (tModel ~= nil and strfind(tCurrModel, tModel , 1, true) and tCurrName ~= tComp:GetName()) then
+		if (tModel ~= nil and strfind(tCurrModel, tModel, 1, true) and tCurrName ~= tComp:GetName()) then
 			if (tComp:IsShown()) then
 				tComp:Hide();
 				tComp:Show();

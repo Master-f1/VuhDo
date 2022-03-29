@@ -209,9 +209,9 @@ local function VUHDO_addBuffPanel(aCategorySpec)
 	tIconFrame = VUHDO_GLOBAL[tBuffPanel:GetName() .. "IconTexture"];
 	tIconFrame:ClearAllPoints();
 	if (VUHDO_BUFF_SETTINGS["CONFIG"]["COMPACT"]) then
-		tIconFrame:SetPoint("TOPLEFT", tBuffPanel:GetName(), "TOPLEFT" , 0, 0);
+		tIconFrame:SetPoint("TOPLEFT", tBuffPanel:GetName(), "TOPLEFT", 0, 0);
 	else
-		tIconFrame:SetPoint("TOPLEFT", tBuffPanel:GetName(), "TOPLEFT" , 3, -3);
+		tIconFrame:SetPoint("TOPLEFT", tBuffPanel:GetName(), "TOPLEFT", 3, -3);
 	end
 
 
@@ -242,7 +242,7 @@ local function VUHDO_addBuffPanel(aCategorySpec)
 				end
 			end
 		end
-]]
+--]]
 
 	elseif (VUHDO_BUFF_TARGET_CLASS == tBuffTarget) then
 		local tGroups = VUHDO_getValidBuffClasses(tSettings);

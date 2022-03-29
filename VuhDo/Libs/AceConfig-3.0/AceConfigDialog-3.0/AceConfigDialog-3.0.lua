@@ -49,10 +49,10 @@ local function CreateDispatcher(argCount)
 		local function call() return method(ARGS) end
 	
 		local function dispatch(func, ...)
-			 method = func
-			 if not method then return end
-			 ARGS = ...
-			 return xpcall(call, eh)
+			method = func
+			if not method then return end
+			ARGS = ...
+			return xpcall(call, eh)
 		end
 	
 		return dispatch
@@ -74,7 +74,7 @@ Dispatchers[0] = function(func)
 end
 
 local function safecall(func, ...)
-	return Dispatchers[select('#', ...)](func, ...)
+	return Dispatchers[select("#", ...)](func, ...)
 end
 
 local width_multiplier = 170
@@ -101,7 +101,7 @@ Group Types
 local new, del, copy
 -- newcount, delcount,createdcount,cached = 0,0,0
 do
-	local pool = setmetatable({},{__mode='k'})
+	local pool = setmetatable({},{__mode="k"})
 	function new()
 		-- newcount = newcount + 1
 		local t = next(pool)
@@ -135,14 +135,14 @@ do
 		end
 		return n
 	end
-]]
+--]]
 end
 
 
 -- picks the first non-nil value and returns it
 local function pickfirstset(...)
 	for i=1,select("#", ...) do
-		if select(i,...)~=nil then
+		if select(i, ...)~=nil then
 			return select(i, ...)
 		end
 	end
@@ -239,7 +239,7 @@ local function GetOptionsMemberValue(membername, option, options, path, appName,
 		info.handler = handler
 		info.option = option
 		info.type = option.type
-		info.uiType = 'dialog'
+		info.uiType = "dialog"
 		info.uiName = MAJOR
 
 		local a, b, c ,d
@@ -304,7 +304,7 @@ local function CallOptionsFunction(funcname ,option, options, path, appName, ...
 	del(info)
 	return a,b,c,d
 end
-]]
+--]]
 
 -- tables to hold orders and names for options being sorted, will be created with new()
 -- prevents needing to call functions repeatedly while sorting
@@ -320,12 +320,12 @@ local function compareOptions(a,b)
 	end
 	local OrderA, OrderB = tempOrders[a] or 100, tempOrders[b] or 100
 	if OrderA == OrderB then
-		local NameA = (type(tempNames[a] == "string") and tempNames[a]) or ""
-		local NameB = (type(tempNames[b] == "string") and tempNames[b]) or ""
+		local NameA = (type(tempNames[a]) == "string") and tempNames[a] or ""
+		local NameB = (type(tempNames[b]) == "string") and tempNames[b] or ""
 		return NameA:upper() < NameB:upper()
 	end
 	if OrderA < 0 then
-		if OrderB > 0 then
+		if OrderB >= 0 then
 			return false
 		end
 	else
@@ -473,7 +473,7 @@ function lib:SelectGroup(appName, ...)
 	local treevalue
 	local treestatus
 
-	for n = 1, select('#',...) do
+	for n = 1, select("#",...) do
 		local key = select(n, ...)
 
 		if group.childGroups == "tab" or group.childGroups == "select" then
@@ -534,8 +534,8 @@ local function OptionOnMouseOver(widget, event)
 
 	GameTooltip:SetText(name, 1, .82, 0, 1)
 
-	if opt.type == 'multiselect' then
-		GameTooltip:AddLine(user.text,0.5, 0.5, 0.8, 1)
+	if opt.type == "multiselect" then
+		GameTooltip:AddLine(user.text, 0.5, 0.5, 0.8, 1)
 	end
 	if type(desc) == "string" then
 		GameTooltip:AddLine(desc, 1, 1, 1, 1)
@@ -553,10 +553,10 @@ end
 
 local function GetFuncName(option)
 	local type = option.type
-	if type == 'execute' then
-		return 'func'
+	if type == "execute" then
+		return "func"
 	else
-		return 'set'
+		return "set"
 	end
 end
 local function confirmPopup(appName, rootframe, basepath, info, message, func, ...)
@@ -585,7 +585,7 @@ local function confirmPopup(appName, rootframe, basepath, info, message, func, .
 		end
 		del(info)
 	end
-	for i = 1, select('#', ...) do
+	for i = 1, select("#", ...) do
 		t[i] = select(i, ...) or false
 	end
 	t.timeout = 0
@@ -644,7 +644,7 @@ local function ActivateControl(widget, event, ...)
 	info.handler = handler
 	info.option = option
 	info.type = option.type
-	info.uiType = 'dialog'
+	info.uiType = "dialog"
 	info.uiName = MAJOR
 
 	local name
@@ -693,7 +693,7 @@ local function ActivateControl(widget, event, ...)
 		del(info)
 		return true
 	elseif not validated then
-		-- validate returned false	
+		-- validate returned false
 		if rootframe.SetStatusText then
 			if usage then
 				rootframe:SetStatusText(name..": "..usage)
@@ -751,13 +751,13 @@ local function ActivateControl(widget, event, ...)
 					end
 				end
 
-				local iscustom = user.rootframe:GetUserData('iscustom')
+				local iscustom = user.rootframe:GetUserData("iscustom")
 				local rootframe
 
 				if iscustom then
 					rootframe = user.rootframe
 				end
-				local basepath = user.rootframe:GetUserData('basepath')
+				local basepath = user.rootframe:GetUserData("basepath")
 				if type(func) == "string" then
 					if handler and handler[func] then
 						confirmPopup(user.appName, rootframe, basepath, info, confirmText, handler[func], handler, info, ...)
@@ -785,8 +785,8 @@ local function ActivateControl(widget, event, ...)
 
 
 
-		local iscustom = user.rootframe:GetUserData('iscustom')
-		local basepath = user.rootframe:GetUserData('basepath')
+		local iscustom = user.rootframe:GetUserData("iscustom")
+		local basepath = user.rootframe:GetUserData("basepath")
 		-- full refresh of the frame, some controls dont cause this on all events
 		if option.type == "color" then
 			if event == "OnValueConfirmed" then
@@ -821,7 +821,7 @@ local function ActivateControl(widget, event, ...)
 end
 
 local function ActivateSlider(widget, event, value)
-	local option = widget:GetUserData('option')
+	local option = widget:GetUserData("option")
 	local min, max, step = option.min or 0, option.max or 100, option.step
 	if step then
 		value = math.floor((value - min) / step + 0.5) * step + min
@@ -834,10 +834,10 @@ end
 -- called from a checkbox that is part of an internally created multiselect group
 -- this type is safe to refresh on activation of one control
 local function ActivateMultiControl(widget, event, ...)
-	ActivateControl(widget, event, widget:GetUserData('value'), ...)
+	ActivateControl(widget, event, widget:GetUserData("value"), ...)
 	local user = widget:GetUserDataTable()
-	local iscustom = user.rootframe:GetUserData('iscustom')
-	local basepath = user.rootframe:GetUserData('basepath')
+	local iscustom = user.rootframe:GetUserData("iscustom")
+	local basepath = user.rootframe:GetUserData("basepath")
 	if iscustom then
 		lib:Open(user.appName, user.rootframe, basepath and unpack(basepath))
 	else
@@ -848,8 +848,8 @@ end
 local function MultiControlOnClosed(widget, event, ...)
 	local user = widget:GetUserDataTable()
 	if user.valuechanged then
-		local iscustom = user.rootframe:GetUserData('iscustom')
-		local basepath = user.rootframe:GetUserData('basepath')
+		local iscustom = user.rootframe:GetUserData("iscustom")
+		local basepath = user.rootframe:GetUserData("basepath")
 		if iscustom then
 			lib:Open(user.appName, user.rootframe, basepath and unpack(basepath))
 		else
@@ -859,7 +859,7 @@ local function MultiControlOnClosed(widget, event, ...)
 end
 
 local function FrameOnClose(widget, event)
-	local appName = widget:GetUserData('appName')
+	local appName = widget:GetUserData("appName")
 	lib.OpenFrames[appName] = nil
 	gui:Release(widget)
 end
@@ -1025,7 +1025,7 @@ end
 	container - widget that controls will be placed in
 	rootframe - Frame object the options are in
 	path - table with the keys to get to the group being fed
-]]
+--]]
 
 local function FeedOptions(appName, options,container,rootframe,path,group,inline)
 	local keySort = new()
@@ -1124,7 +1124,7 @@ local function FeedOptions(appName, options,container,rootframe,path,group,inlin
 						value = nil
 					end
 					control:SetValue(value)
-					control:SetCallback("OnValueChanged",ActivateControl)
+					control:SetCallback("OnValueChanged", ActivateControl)
 
 				elseif v.type == "multiselect" then
 					local values = GetOptionsMemberValue("values", v, options, path, appName)
@@ -1179,8 +1179,8 @@ local function FeedOptions(appName, options,container,rootframe,path,group,inlin
 							local text = values[value]
 							local check = gui:Create("CheckBox")
 							check:SetLabel(text)
-							check:SetUserData('value', value)
-							check:SetUserData('text', text)
+							check:SetUserData("value", value)
+							check:SetUserData("text", text)
 							check:SetDisabled(disabled)
 							check:SetTriState(v.tristate)
 							check:SetValue(GetOptionsMemberValue("get",v, options, path, appName, value))
@@ -1230,14 +1230,14 @@ local function FeedOptions(appName, options,container,rootframe,path,group,inlin
 					local imageCoords = GetOptionsMemberValue("imageCoords",v, options, path, appName)
 					local image, width, height = GetOptionsMemberValue("image",v, options, path, appName)
 
-					if type(image) == 'string' then
+					if type(image) == "string" then
 						if not width then
 							width = GetOptionsMemberValue("imageWidth",v, options, path, appName)
 						end
 						if not height then
 							height = GetOptionsMemberValue("imageHeight",v, options, path, appName)
 						end
-						if type(imageCoords) == 'table' then
+						if type(imageCoords) == "table" then
 							control:SetImage(image, unpack(imageCoords))
 						else
 							control:SetImage(image)
@@ -1288,7 +1288,7 @@ local function FeedOptions(appName, options,container,rootframe,path,group,inlin
 end
 
 local function BuildPath(path, ...)
-	for i = 1, select('#', ...) do
+	for i = 1, select("#", ...) do
 		tinsert(path, (select(i, ...)))
 	end
 end
@@ -1394,7 +1394,7 @@ end
 
 
 --[[
-	INTERNAL
+-- INTERNAL --
 This function will feed one group, and any inline child groups into the given container
 Select Groups will only have the selection control (tree, tabs, dropdown) fed in
 and have a group selected, this event will trigger the feeding of child groups
@@ -1666,7 +1666,7 @@ function lib:Open(appName, container, ...)
 		tinsert(path, container)
 		container = nil
 	end
-	for n = 1, select('#',...) do
+	for n = 1, select("#", ...) do
 		tinsert(path, (select(n, ...)))
 	end
 
@@ -1674,10 +1674,10 @@ function lib:Open(appName, container, ...)
 	if container then
 		f = container
 		f:ReleaseChildren()
-		f:SetUserData('appName', appName)
-		f:SetUserData('iscustom', true)
+		f:SetUserData("appName", appName)
+		f:SetUserData("iscustom", true)
 		if #path > 0 then
-			f:SetUserData('basepath', copy(path))
+			f:SetUserData("basepath", copy(path))
 		end
 		local status = lib:GetStatusTable(appName)
 		if not status.width then
@@ -1698,16 +1698,16 @@ function lib:Open(appName, container, ...)
 		end
 		f:ReleaseChildren()
 		f:SetCallback("OnClose", FrameOnClose)
-		f:SetUserData('appName', appName)
+		f:SetUserData("appName", appName)
 		if #path > 0 then
-			f:SetUserData('basepath', copy(path))
+			f:SetUserData("basepath", copy(path))
 		end
 		f:SetTitle(name or "")
 		local status = lib:GetStatusTable(appName)
 		f:SetStatusTable(status)
 	end
 
-	self:FeedGroup(appName,options,f,f,path,true)
+	self:FeedGroup(appName, options, f, f, path, true)
 	if f.Show then
 		f:Show()
 	end
@@ -1717,8 +1717,8 @@ end
 lib.BlizOptions = lib.BlizOptions or {}
 
 local function FeedToBlizPanel(widget, event)
-	local path = widget:GetUserData('path')
-	lib:Open(widget:GetUserData('appName'), widget, path and unpack(path))
+	local path = widget:GetUserData("path")
+	lib:Open(widget:GetUserData("appName"), widget, path and unpack(path))
 end
 
 local function ClearBlizPanel(widget, event)
@@ -1729,8 +1729,8 @@ function lib:AddToBlizOptions(appName, name, parent, ...)
 	local BlizOptions = lib.BlizOptions
 	
 	local key = appName
-	for n = 1, select('#', ...) do
-		key = key..'\001'..select(n, ...)
+	for n = 1, select("#", ...) do
+		key = key.."\001"..select(n, ...)
 	end
 
 	if not BlizOptions[key] then
@@ -1739,13 +1739,13 @@ function lib:AddToBlizOptions(appName, name, parent, ...)
 		group:SetName(name or appName, parent)
 
 		group:SetTitle(name or appName)
-		group:SetUserData('appName', appName)
-		if select('#', ...) > 0 then
+		group:SetUserData("appName", appName)
+		if select("#", ...) > 0 then
 			local path = {}
-			for n = 1, select('#',...) do
+			for n = 1, select("#",...) do
 				tinsert(path, (select(n, ...)))
 			end
-			group:SetUserData('path', path)
+			group:SetUserData("path", path)
 		end
 		group:SetCallback("OnShow", FeedToBlizPanel)
 		group:SetCallback("OnHide", ClearBlizPanel)

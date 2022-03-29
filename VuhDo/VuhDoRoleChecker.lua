@@ -43,7 +43,7 @@ function VUHDO_roleCheckerInitBurst()
 		or VUHDO_isModelConfigured(VUHDO_ID_MELEE)
 		or VUHDO_isModelConfigured(VUHDO_ID_RANGED)
 		or VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_ROLE);
-]]
+--]]
 
 	VUHDO_isUnitInModel = VUHDO_GLOBAL["VUHDO_isUnitInModel"];
 end
@@ -218,7 +218,7 @@ function VUHDO_inspectLockRole()
 		else
 		VUHDO_refreshRaidMembers();
 	end
-]]
+--]]
 end
 
 local tIsTank, tIsHeal, tIsDps;

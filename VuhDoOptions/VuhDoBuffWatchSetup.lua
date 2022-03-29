@@ -84,7 +84,7 @@ local function VUHDO_buffSetupNewRowCheck(aWidth, anAddHeight)
 	end
 
 	if (VUHDO_BUFF_PANEL_Y + anAddHeight > VUHDO_PANEL_MAX_HEIGHT) then
-		VUHDO_BUFF_PANEL_X = VUHDO_BUFF_PANEL_X +	aWidth;
+		VUHDO_BUFF_PANEL_X = VUHDO_BUFF_PANEL_X + aWidth;
 		VUHDO_BUFF_PANEL_Y = VUHDO_PANEL_INSET_Y;
 	end
 

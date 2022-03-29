@@ -6,10 +6,10 @@
 
 	<ColorSelect name="VuhDoNewColorPicker" frameStrata="HIGH" toplevel="true" hidden="true" parent="UIParent" movable="true" enableMouse="true" enableKeyboard="true" inherits="VuhDoFrameTemplate">
 		<Size>
-			<AbsDimension x="385" y="240"/>
+			<AbsDimension x="385" y="240" />
 		</Size>
 		<Anchors>
-			<Anchor point="CENTER"/>
+			<Anchor point="CENTER" />
 		</Anchors>
 		<Layers>
 			<Layer level="ARTWORK">
@@ -18,7 +18,7 @@
 					<Anchors>
 						<Anchor point="TOPRIGHT">
 							<Offset>
-								<AbsDimension x="-17" y="-90"/>
+								<AbsDimension x="-17" y="-90" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -26,37 +26,37 @@
 
 				<Texture name="VuhDoColorPickerColorSwatchNew">
 					<Size>
-						<AbsDimension x="80" y="32"/>
+						<AbsDimension x="80" y="32" />
 					</Size>
 					<Anchors>
 						<Anchor point="TOPRIGHT">
 							<Offset>
-								<AbsDimension x="-17" y="-100"/>
+								<AbsDimension x="-17" y="-100" />
 							</Offset>
 						</Anchor>
 					</Anchors>
-					<Color r="1.0" g="1.0" b="1.0" a="1.0"/>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />
 				</Texture>
 
 				<Texture name="VuhDoColorPickerColorSwatchOld">
 					<Size>
-						<AbsDimension x="80" y="32"/>
+						<AbsDimension x="80" y="32" />
 					</Size>
 					<Anchors>
 						<Anchor point="TOPRIGHT">
 							<Offset>
-								<AbsDimension x="-17" y="-132"/>
+								<AbsDimension x="-17" y="-132" />
 							</Offset>
 						</Anchor>
 					</Anchors>
-					<Color r="1.0" g="1.0" b="1.0" a="1.0"/>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />
 				</Texture>
 
 				<FontString name="$parentOldColorLabel" text="VUHDO_I18N_OLD_COLOR" inherits="VuDoDefaultFontTemplate">
 					<Anchors>
 						<Anchor point="TOPRIGHT">
 							<Offset>
-								<AbsDimension x="-17" y="-164"/>
+								<AbsDimension x="-17" y="-164" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -125,7 +125,7 @@
 				<Anchors>
 					<Anchor point="BOTTOMRIGHT">
 						<Offset>
-							<AbsDimension x="-10" y="10"/>
+							<AbsDimension x="-10" y="10" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -141,7 +141,7 @@
 				<Anchors>
 					<Anchor point="RIGHT" relativeTo="$parentOkayButton" relativePoint="LEFT">
 						<Offset>
-							<AbsDimension x="-10" y="0"/>
+							<AbsDimension x="-10" y="0" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -155,12 +155,12 @@
 
 			<Button name="$parentCopyButton" text="VUHDO_I18N_COPY" inherits="VuhDoButtonTemplate">
 				<Size>
-					<AbsDimension x="65" y="32"/>
+					<AbsDimension x="65" y="32" />
 				</Size>
 				<Anchors>
 					<Anchor point="RIGHT" relativeTo="$parentCancelButton" relativePoint="LEFT">
 						<Offset>
-							<AbsDimension x="-10" y="0"/>
+							<AbsDimension x="-10" y="0" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -173,12 +173,12 @@
 
 			<Button name="$parentPasteButton" text="VUHDO_I18N_PASTE" inherits="VuhDoButtonTemplate">
 				<Size>
-					<AbsDimension x="65" y="32"/>
+					<AbsDimension x="65" y="32" />
 				</Size>
 				<Anchors>
 					<Anchor point="RIGHT" relativeTo="$parentCopyButton" relativePoint="LEFT">
 						<Offset>
-							<AbsDimension x="-10" y="0"/>
+							<AbsDimension x="-10" y="0" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -191,12 +191,12 @@
 
 			<Slider name="$parentOpacitySliderFrame">
 				<Size>
-					<AbsDimension x="16" y="128"/>
+					<AbsDimension x="16" y="128" />
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
 						<Offset>
-							<AbsDimension x="235" y="-40"/>
+							<AbsDimension x="235" y="-40" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -271,12 +271,12 @@
 
 		<ColorWheelTexture name="$parentColorPickerWheel">
 			<Size>
-				<AbsDimension x="128" y="128"/>
+				<AbsDimension x="128" y="128" />
 			</Size>
 			<Anchors>
 				<Anchor point="TOPLEFT">
 					<Offset>
-						<AbsDimension x="16" y="-42"/>
+						<AbsDimension x="16" y="-42" />
 					</Offset>
 				</Anchor>
 			</Anchors>
@@ -284,28 +284,28 @@
 
 		<ColorWheelThumbTexture file="Interface\Buttons\UI-ColorPicker-Buttons">
 			<Size>
-				<AbsDimension x="10" y="10"/>
+				<AbsDimension x="10" y="10" />
 			</Size>
-			<TexCoords left="0" right="0.15625" top="0" bottom="0.625"/>
+			<TexCoords left="0" right="0.15625" top="0" bottom="0.625" />
 		</ColorWheelThumbTexture>
 
 		<ColorValueTexture>
 			<Size>
-				<AbsDimension x="32" y="128"/>
+				<AbsDimension x="32" y="128" />
 			</Size>
 			<Anchors>
 				<Anchor point="LEFT" relativeTo="$parentColorPickerWheel" relativePoint="RIGHT">
 					<Offset>
-						<AbsDimension x="24" y="0"/>
+						<AbsDimension x="24" y="0" />
 					</Offset>
 				</Anchor>
 			</Anchors>
 		</ColorValueTexture>
 		<ColorValueThumbTexture file="Interface\Buttons\UI-ColorPicker-Buttons">
 			<Size>
-				<AbsDimension x="48" y="14"/>
+				<AbsDimension x="48" y="14" />
 			</Size>
-			<TexCoords left="0.25" right="1.0" top="0" bottom="0.875"/>
+			<TexCoords left="0.25" right="1.0" top="0" bottom="0.875" />
 		</ColorValueThumbTexture>
 		<Scripts>
 			<OnShow>VUHDO_newColorPickerOnShow(self)</OnShow>

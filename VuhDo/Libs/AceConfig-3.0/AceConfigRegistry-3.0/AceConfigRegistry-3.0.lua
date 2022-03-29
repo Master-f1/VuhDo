@@ -36,7 +36,7 @@ lib.validated = {
 
 local function err(msg, errlvl, ...)
 	local t = {}
-	for i=select("#",...),1,-1 do
+	for i=select("#", ...),1,-1 do
 		tinsert(t, (select(i, ...)))
 	end
 	error(MAJOR..":ValidateOptionsTable(): "..table.concat(t,".")..msg, errlvl+2)
@@ -95,10 +95,10 @@ local typedkeys={
 		args=istable,
 		plugins=opttable,
 		inline=optbool,
-			cmdInline=optbool,
-			guiInline=optbool,
-			dropdownInline=optbool,
-			dialogInline=optbool,
+		cmdInline=optbool,
+		guiInline=optbool,
+		dropdownInline=optbool,
+		dialogInline=optbool,
 		childGroups=optstring
 	},
 	execute={},
@@ -150,10 +150,10 @@ local typedkeys={
 local function validateKey(k,errlvl, ...)
 	errlvl=(errlvl or 0) + 1
 	if type(k)~="string" then
-		err("["..tostring(k).."] - key is not a string", errlvl,...)
+		err("["..tostring(k).."] - key is not a string", errlvl, ...)
 	end
 	if strfind(k, "[%c\127]") then
-		err("["..tostring(k).."] - key name contained spaces (or control characters)", errlvl,...)
+		err("["..tostring(k).."] - key name contained spaces (or control characters)", errlvl, ...)
 	end
 end
 
@@ -162,35 +162,35 @@ local function validateVal(v, oktypes, errlvl,...)
 	local isok=oktypes[type(v)] or oktypes["*"]
 
 	if not isok then
-		err(": expected a "..oktypes._..", got '"..tostring(v).."'", errlvl,...)
+		err(": expected a "..oktypes._..", got '"..tostring(v).."'", errlvl, ...)
 	end
 	if type(isok)=="table" then -- isok was a table containing specific values to be tested for!
 		if not isok[v] then
-			err(": did not expect "..type(v).." value '"..tostring(v).."'", errlvl,...)
+			err(": did not expect "..type(v).." value '"..tostring(v).."'", errlvl, ...)
 		end
 	end
 end
 
-local function validate(options,errlvl,...)
+local function validate(options, errlvl, ...)
 	errlvl=(errlvl or 0) + 1
 	-- basic consistency
 	if type(options)~="table" then
-		err(": expected a table, got a "..type(options), errlvl,...)
+		err(": expected a table, got a "..type(options), errlvl, ...)
 	end
 	if type(options.type)~="string" then
-		err(".type: expected a string, got a "..type(options.type), errlvl,...)
+		err(".type: expected a string, got a "..type(options.type), errlvl, ...)
 	end
 
 	-- get type and 'typedkeys' member
 	local tk = typedkeys[options.type]
 	if not tk then
-		err(".type: unknown type '"..options.type.."'", errlvl,...)
+		err(".type: unknown type '"..options.type.."'", errlvl, ...)
 	end
 
 	-- make sure that all options[] are known parameters
 	for k,v in pairs(options) do
 		if not (tk[k] or basekeys[k]) then
-			err(": unknown parameter", errlvl,tostring(k),...)
+			err(": unknown parameter", errlvl,tostring(k), ...)
 		end
 	end
 
@@ -205,17 +205,17 @@ local function validate(options,errlvl,...)
 	-- extra logic for groups
 	if options.type=="group" then
 		for k,v in pairs(options.args) do
-			validateKey(k,errlvl,"args",...)
-			validate(v, errlvl,k,"args",...)
+			validateKey(k, errlvl, "args", ...)
+			validate(v, errlvl, k, "args", ...)
 		end
 		if options.plugins then
 			for plugname,plugin in pairs(options.plugins) do
 				if type(plugin)~="table" then
-					err(": expected a table, got '"..tostring(plugin).."'", errlvl, tostring(plugname), "plugins",...)
+					err(": expected a table, got '"..tostring(plugin).."'", errlvl, tostring(plugname), "plugins", ...)
 				end
 				for k,v in pairs(plugin) do
-					validateKey(k, errlvl, tostring(plugname), "plugins",...)
-					validate(v, errlvl, k, tostring(plugname), "plugins",...)
+					validateKey(k, errlvl, tostring(plugname), "plugins", ...)
+					validate(v, errlvl, k, tostring(plugname), "plugins", ...)
 				end
 			end
 		end
@@ -230,7 +230,7 @@ end
 -- Validates basic structure and integrity of an options table
 -- Does NOT verify that get/set etc actually exist, since they can be defined at any depth
 
-function lib:ValidateOptionsTable(options,name,errlvl)
+function lib:ValidateOptionsTable(options, name, errlvl)
 	errlvl=(errlvl or 0)+1
 	name = name or "Optionstable"
 	if not options.name then
@@ -271,7 +271,7 @@ function lib:RegisterOptionsTable(appName, options)
 			error(MAJOR..": RegisterOptionsTable(appName, options): 'options' - missing type='group' member in root group", 2)
 		end
 		lib.tables[appName] = function(uiType, uiName, errlvl)
-			errlvl=(errlvl or 0)+1
+			errlvl=(errlvl or 0) + 1
 			validateGetterArgs(uiType, uiName, errlvl)
 			if not lib.validated[uiType][appName] then
 				lib:ValidateOptionsTable(options, appName, errlvl) -- upgradable
@@ -281,7 +281,7 @@ function lib:RegisterOptionsTable(appName, options)
 		end
 	elseif type(options)=="function" then
 		lib.tables[appName] = function(uiType, uiName, errlvl)
-			errlvl=(errlvl or 0)+1
+			errlvl=(errlvl or 0) + 1
 			validateGetterArgs(uiType, uiName, errlvl)
 			local tab = assert(options(uiType, uiName))
 			if not lib.validated[uiType][appName] then
@@ -303,7 +303,7 @@ end
 
 -- Query the registry for a specific options table.
 -- If only appName is given, a function is returned which you
--- can call with (uiType,uiName) to get the table.\\
+-- can call with (uiType, uiName) to get the table.\\
 -- If uiType&uiName are given, the table is returned.
 
 function lib:GetOptionsTable(appName, uiType, uiName)
@@ -313,7 +313,7 @@ function lib:GetOptionsTable(appName, uiType, uiName)
 	end
 
 	if uiType then
-		return f(uiType,uiName,1) -- get the table for us
+		return f(uiType, uiName, 1) -- get the table for us
 	else
 		return f -- return the function
 	end

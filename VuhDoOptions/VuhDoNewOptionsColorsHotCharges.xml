@@ -2,6 +2,7 @@
 
 	<Frame name="VuhDoNewOptionsColorsHotChargesTemplate" virtual="true">
 		<Frames>
+
 			<Frame name="$parentHotChargesPanel" inherits="VuhDoPanelTemplate">
 				<Size>
 					<AbsDimension x="250" y="180" />

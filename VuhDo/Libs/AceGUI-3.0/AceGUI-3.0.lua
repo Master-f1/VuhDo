@@ -58,7 +58,7 @@ local function CreateDispatcher(argCount)
 
 	local ARGS = {}
 	for i = 1, argCount do ARGS[i] = "arg"..i end
-	code = code:gsub("ARGS", table.concat(ARGS, ","))
+	code = code:gsub("ARGS", table.concat(ARGS, ", "))
 	return assert(loadstring(code, "safecall Dispatcher["..argCount.."]"))(xpcall, errorhandler)
 end
 
@@ -72,7 +72,7 @@ Dispatchers[0] = function(func)
 end
 
 local function safecall(func, ...)
-	return Dispatchers[select('#', ...)](func, ...)
+	return Dispatchers[select("#", ...)](func, ...)
 end
 
 -- Recycling functions
@@ -125,16 +125,16 @@ function AceGUI:Create(type)
 	if reg[type] then
 		local widget = new(type, reg[type])
 
-		if rawget(widget, 'Acquire') then
+		if rawget(widget, "Acquire") then
 			widget.OnAcquire = widget.Acquire
 			widget.Acquire = nil
-		elseif rawget(widget, 'Aquire') then
+		elseif rawget(widget, "Aquire") then
 			widget.OnAcquire = widget.Aquire
 			widget.Aquire = nil
 		end
 
-		if rawget(widget, 'Release') then
-			widget.OnRelease = rawget(widget, 'Release')
+		if rawget(widget, "Release") then
+			widget.OnRelease = rawget(widget, "Release")
 			widget.Release = nil
 		end
 
@@ -174,7 +174,7 @@ function AceGUI:Release(widget)
 		widget.content.width = nil
 		widget.content.height = nil
 	end
-	del(widget,widget.type)
+	del(widget, widget.type)
 end
 
 -----------
@@ -557,7 +557,7 @@ AceGUI:RegisterLayout("Flow",
 		-- height of the current row
 		local rowheight = 0
 		local rowoffset = 0
-	 	local lastrowoffset
+		local lastrowoffset
 
 		local width = content.width or content:GetWidth() or 0
 
@@ -565,7 +565,7 @@ AceGUI:RegisterLayout("Flow",
 		local rowstart
 		local rowstartoffset
 		local lastrowstart
-	 	local isfullheight
+		local isfullheight
 
 		local frameoffset
 		local lastframeoffset
@@ -616,7 +616,7 @@ AceGUI:RegisterLayout("Flow",
 					rowoffset = math.max(rowoffset, frameoffset)
 
 					rowheight = math.max(rowheight, rowoffset + (frameheight / 2))
-					frame:SetPoint("TOPLEFT", children[i-1].frame,"TOPRIGHT", 0, frameoffset-lastframeoffset)
+					frame:SetPoint("TOPLEFT", children[i-1].frame, "TOPRIGHT", 0, frameoffset - lastframeoffset)
 					usedwidth = framewidth + usedwidth
 				end
 			end
@@ -652,7 +652,7 @@ AceGUI:RegisterLayout("Flow",
 		if isfullheight then
 			rowstart:SetPoint("TOPLEFT", content, "TOPLEFT", 0, -height)
 		elseif rowstart then
-			rowstart:SetPoint("TOPLEFT", content, "TOPLEFT", 0, -(height + (rowoffset-rowstartoffset) + 3))
+			rowstart:SetPoint("TOPLEFT", content, "TOPLEFT", 0, -(height + (rowoffset - rowstartoffset) + 3))
 		end
 
 		height = height + rowheight + 3

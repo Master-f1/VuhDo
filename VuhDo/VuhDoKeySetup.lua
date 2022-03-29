@@ -263,29 +263,29 @@ function VUHDO_setupAllHealButtonAttributes(aButton, aUnit, anIsDisable, aForceT
 		if (tIsWheel) then
 			aButton:SetAttribute("_onenter", [=[
 					self:ClearBindings();
-					self:SetBindingClick(0, "MOUSEWHEELUP" , self:GetName(), "w1");
-					self:SetBindingClick(0, "MOUSEWHEELDOWN" , self:GetName(), "w2");
+					self:SetBindingClick(0, "MOUSEWHEELUP", self:GetName(), "w1");
+					self:SetBindingClick(0, "MOUSEWHEELDOWN", self:GetName(), "w2");
 
-					self:SetBindingClick(0, "ALT-MOUSEWHEELUP" , self:GetName(), "w3");
-					self:SetBindingClick(0, "ALT-MOUSEWHEELDOWN" , self:GetName(), "w4");
+					self:SetBindingClick(0, "ALT-MOUSEWHEELUP", self:GetName(), "w3");
+					self:SetBindingClick(0, "ALT-MOUSEWHEELDOWN", self:GetName(), "w4");
 
-					self:SetBindingClick(0, "CTRL-MOUSEWHEELUP" , self:GetName(), "w5");
-					self:SetBindingClick(0, "CTRL-MOUSEWHEELDOWN" , self:GetName(), "w6");
+					self:SetBindingClick(0, "CTRL-MOUSEWHEELUP", self:GetName(), "w5");
+					self:SetBindingClick(0, "CTRL-MOUSEWHEELDOWN", self:GetName(), "w6");
 
-					self:SetBindingClick(0, "SHIFT-MOUSEWHEELUP" , self:GetName(), "w7");
-					self:SetBindingClick(0, "SHIFT-MOUSEWHEELDOWN" , self:GetName(), "w8");
+					self:SetBindingClick(0, "SHIFT-MOUSEWHEELUP", self:GetName(), "w7");
+					self:SetBindingClick(0, "SHIFT-MOUSEWHEELDOWN", self:GetName(), "w8");
 
-					self:SetBindingClick(0, "ALT-CTRL-MOUSEWHEELUP" , self:GetName(), "w9");
-					self:SetBindingClick(0, "ALT-CTRL-MOUSEWHEELDOWN" , self:GetName(), "w10");
+					self:SetBindingClick(0, "ALT-CTRL-MOUSEWHEELUP", self:GetName(), "w9");
+					self:SetBindingClick(0, "ALT-CTRL-MOUSEWHEELDOWN", self:GetName(), "w10");
 
-					self:SetBindingClick(0, "ALT-SHIFT-MOUSEWHEELUP" , self:GetName(), "w11");
-					self:SetBindingClick(0, "ALT-SHIFT-MOUSEWHEELDOWN" , self:GetName(), "w12");
+					self:SetBindingClick(0, "ALT-SHIFT-MOUSEWHEELUP", self:GetName(), "w11");
+					self:SetBindingClick(0, "ALT-SHIFT-MOUSEWHEELDOWN", self:GetName(), "w12");
 
-					self:SetBindingClick(0, "CTRL-SHIFT-MOUSEWHEELUP" , self:GetName(), "w13");
-					self:SetBindingClick(0, "CTRL-SHIFT-MOUSEWHEELDOWN" , self:GetName(), "w14");
+					self:SetBindingClick(0, "CTRL-SHIFT-MOUSEWHEELUP", self:GetName(), "w13");
+					self:SetBindingClick(0, "CTRL-SHIFT-MOUSEWHEELDOWN", self:GetName(), "w14");
 
-					self:SetBindingClick(0, "ALT-CTRL-SHIFT-MOUSEWHEELUP" , self:GetName(), "w15");
-					self:SetBindingClick(0, "ALT-CTRL-SHIFT-MOUSEWHEELDOWN" , self:GetName(), "w16");
+					self:SetBindingClick(0, "ALT-CTRL-SHIFT-MOUSEWHEELUP", self:GetName(), "w15");
+					self:SetBindingClick(0, "ALT-CTRL-SHIFT-MOUSEWHEELDOWN", self:GetName(), "w16");
 			]=]);
 		else
 			aButton:SetAttribute("_onenter", [=[

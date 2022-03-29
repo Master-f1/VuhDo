@@ -111,7 +111,7 @@ function VUHDO_dumpRaid()
 		VUHDO_Msg(tInfo.name .. ": " .. tInfo.unit);
 	end
  end
-]]
+--]]
 
 -- Print chat frame line with no "{Vuhdo} prefix
 function VUHDO_MsgC(aMessage, aRed, aGreen, aBlue)
@@ -157,9 +157,9 @@ local tCnt;
 local tFrag;
 function VUHDO_xMsg(...)
 	tText = "";
-	for tCnt = 1, select('#', ...) do
+	for tCnt = 1, select("#", ...) do
 		tFrag = select(tCnt, ...);
-		tText = tText .. tCnt .. "=[" .. VUHDO_argumentToText(tFrag) .. "] ";
+		tText = tText .. tCnt .. "=[" .. VUHDO_argumentToText(tFrag) .. "]";
 	end
 	VUHDO_MsgC(tText);
 end
@@ -467,11 +467,11 @@ function VUHDO_getDurationTextSince(aStartTime)
 	tDeltaSecs = GetTime() - aStartTime;
 
 	if (tDeltaSecs >= 3600) then
-		return "(|cffffffff" .. floor(tDeltaSecs / 360) * 0.1 .. " hours|r)";
+		return "(|cffffffff" .. floor(tDeltaSecs / 360) * 0.1 .. ", VUHDO_I18N_HOURS)";
 	elseif (tDeltaSecs >= 60) then
-		return "(|cffffffff" .. floor(tDeltaSecs / 60) .. " mins|r)";
+		return "(|cffffffff" .. floor(tDeltaSecs / 60) .. ", VUHDO_I18N_MINS)";
 	else
-		return "(|cffffffff" .. floor(tDeltaSecs) .. " secs|r)";
+		return "(|cffffffff" .. floor(tDeltaSecs) .. ", VUHDO_I18N_SECS)";
 	end
 end
 

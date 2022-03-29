@@ -820,8 +820,6 @@
 						</Frames>
 					</Frame>
 
-
-
 					<Frame name="$parentStatusbarFrame" hidden="true">
 						<Size>
 							<AbsDimension x="200" y="272" />
@@ -992,7 +990,7 @@
 				<Scripts>
 					<OnClick>VUHDO_generalBouquetBackButtonClicked(self:GetParent())</OnClick>
 				<OnLoad>
-					 VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_478);
+					VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_478);
 				</OnLoad>
 				</Scripts>
 			</Button>

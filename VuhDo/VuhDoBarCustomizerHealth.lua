@@ -795,4 +795,3 @@ function VUHDO_updateAllRaidBars()
 		VUHDO_REMOVE_HOTS = true;
 	end
 end
-

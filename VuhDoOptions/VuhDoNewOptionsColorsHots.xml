@@ -66,8 +66,8 @@
 				</OnLoad>
 			</Scripts>
 		</CheckButton>
-	 </Frames>
- </Frame>
+	</Frames>
+</Frame>
 
 
 	<Frame name="VuhDoNewOptionsColorsHotsTemplate" virtual="true">

@@ -4,6 +4,7 @@
 
 	<Frame name="VuhDoNewOptionsMoveTemplate" virtual="true">
 		<Frames>
+
 			<Frame name="$parentAddPanelPanel" inherits="VuhDoPanelTemplate">
 				<Size>
 					<AbsDimension x="153" y="75" />

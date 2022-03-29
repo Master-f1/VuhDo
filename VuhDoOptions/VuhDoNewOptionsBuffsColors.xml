@@ -1,6 +1,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Frame name="VuhDoNewOptionsBuffsColorsTemplate" virtual="true">
 		<Frames>
+
 			<Frame name="$parentStatesPanel" inherits="VuhDoPanelTemplate">
 				<Size>
 					<AbsDimension x="235" y="164" />

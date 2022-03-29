@@ -4,6 +4,7 @@
 
 	<Frame name="VuhDoNewOptionsSpellKeysTemplate" virtual="true">
 		<Frames>
+
 			<Frame name="$parentAdviceLabel" inherits="VuhDoLabelFrameTemplate">
 				<Size>
 					<AbsDimension x="266" y="36" />

@@ -17,9 +17,9 @@
 			</Layer>
 		</Layers>
 		<Scripts>
-		 	<OnShow>
-		 		VUHDO_lnfPatchFont(self, "Label");
-		 		VUHDO_squareDemoOnShow(this);
+			<OnShow>
+				VUHDO_lnfPatchFont(self, "Label");
+				VUHDO_squareDemoOnShow(this);
 			</OnShow>
 		</Scripts>
 	</Frame>
@@ -41,9 +41,9 @@
 			</Layer>
 		</Layers>
 		<Scripts>
-		 	<OnShow>
-		 		VUHDO_lnfPatchFont(self, "Label");
-		 		VUHDO_squareDemoOnShow(this);
+			<OnShow>
+				VUHDO_lnfPatchFont(self, "Label");
+				VUHDO_squareDemoOnShow(this);
 			</OnShow>
 		</Scripts>
 	</Frame>
@@ -65,9 +65,9 @@
 			</Layer>
 		</Layers>
 		<Scripts>
-		 	<OnShow>
-		 		VUHDO_squareDemoOnShow(this);
-		 		VUHDO_lnfPatchFont(self, "Label");
+			<OnShow>
+				VUHDO_squareDemoOnShow(this);
+				VUHDO_lnfPatchFont(self, "Label");
 			</OnShow>
 		</Scripts>
 	</Frame>

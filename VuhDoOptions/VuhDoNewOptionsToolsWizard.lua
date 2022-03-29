@@ -9,7 +9,7 @@ local function VUHDO_wizardInitMainPanelGrouped(aPanelNum)
 	tAktPanel["SCALING"].showManaBars = true;
 	tAktPanel["SCALING"].showRageBars = false;
 	tAktPanel["SCALING"].manaBarHeight = 3;
-]]
+--]]
 
 	tAktPanel["SCALING"].showHeaders = true;
 
@@ -22,10 +22,10 @@ local function VUHDO_wizardInitMainPanelGrouped(aPanelNum)
 	tAktPanel["SCALING"].barWidth = 75;
 	tAktPanel["SCALING"].barHeight = 25;
 
- 	tAktPanel["SCALING"].scale = 1;
+	tAktPanel["SCALING"].scale = 1;
 
- 	tAktPanel["ID_TEXT"].showName = true;
- 	tAktPanel["ID_TEXT"].showClass = false;
+	tAktPanel["ID_TEXT"].showName = true;
+	tAktPanel["ID_TEXT"].showClass = false;
 end
 
 local tAktPanel;
@@ -39,7 +39,7 @@ local function VUHDO_wizardInitMainPanelLoose(aPanelNum)
 	tAktPanel["SCALING"].showManaBars = true;
 	tAktPanel["SCALING"].showRageBars = false;
 	tAktPanel["SCALING"].manaBarHeight = 3;
-]]
+--]]
 
 	tAktPanel["SCALING"].showHeaders = true;
 
@@ -85,7 +85,7 @@ function VUHDO_panelWizardInitVarsMainTanks(aPanelNum)
 	tAktPanel["SCALING"].showManaBars = false;
 	tAktPanel["SCALING"].showRageBars = false;
 	tAktPanel["SCALING"].manaBarHeight = 0;
-]]
+--]]
 
 	tAktPanel["SCALING"].showHeaders = true;
 
@@ -115,7 +115,7 @@ function VUHDO_panelWizardInitVarsPlayerTargets(aPanelNum)
 	tAktPanel["SCALING"].showManaBars = false;
 	tAktPanel["SCALING"].showRageBars = false;
 	tAktPanel["SCALING"].manaBarHeight = 0;
-]]
+--]]
 
 	tAktPanel["SCALING"].showHeaders = true;
 

@@ -177,21 +177,21 @@
 
 			<Frame name="$parentContentPanel" setAllPoints="true">
 				<Frames>
-			 		<Frame name="VuhDoNewOptionsGeneral" setAllPoints="true" inherits="VuhDoNewOptionsGeneralTemplate">
+					<Frame name="VuhDoNewOptionsGeneral" setAllPoints="true" inherits="VuhDoNewOptionsGeneralTemplate">
 					</Frame>
-			 		<Frame name="VuhDoNewOptionsSpell" hidden="true"	setAllPoints="true" inherits="VuhDoNewOptionsSpellTemplate">
+					<Frame name="VuhDoNewOptionsSpell" hidden="true"	setAllPoints="true" inherits="VuhDoNewOptionsSpellTemplate">
 					</Frame>
-			 		<Frame name="VuhDoNewOptionsPanelPanel" hidden="true"	setAllPoints="true" inherits="VuhDoNewOptionsPanelPanelTemplate">
+					<Frame name="VuhDoNewOptionsPanelPanel" hidden="true"	setAllPoints="true" inherits="VuhDoNewOptionsPanelPanelTemplate">
 					</Frame>
-			 		<Frame name="VuhDoNewOptionsColors" hidden="true"	setAllPoints="true" inherits="VuhDoNewOptionsColorsTemplate">
+					<Frame name="VuhDoNewOptionsColors" hidden="true"	setAllPoints="true" inherits="VuhDoNewOptionsColorsTemplate">
 					</Frame>
-			 		<Frame name="VuhDoNewOptionsMove" hidden="true" setAllPoints="true" inherits="VuhDoNewOptionsMoveTemplate">
+					<Frame name="VuhDoNewOptionsMove" hidden="true" setAllPoints="true" inherits="VuhDoNewOptionsMoveTemplate">
 					</Frame>
-			 		<Frame name="VuhDoNewOptionsBuffs" hidden="true" setAllPoints="true" inherits="VuhDoNewOptionsBuffsTemplate">
+					<Frame name="VuhDoNewOptionsBuffs" hidden="true" setAllPoints="true" inherits="VuhDoNewOptionsBuffsTemplate">
 					</Frame>
-			 		<Frame name="VuhDoNewOptionsDebuffs" hidden="true" setAllPoints="true" inherits="VuhDoNewOptionsDebuffsTemplate">
+					<Frame name="VuhDoNewOptionsDebuffs" hidden="true" setAllPoints="true" inherits="VuhDoNewOptionsDebuffsTemplate">
 					</Frame>
-			 		<Frame name="VuhDoNewOptionsTools" hidden="true" setAllPoints="true" inherits="VuhDoNewOptionsToolsTemplate">
+					<Frame name="VuhDoNewOptionsTools" hidden="true" setAllPoints="true" inherits="VuhDoNewOptionsToolsTemplate">
 					</Frame>
 				</Frames>
 			</Frame>
@@ -220,7 +220,7 @@
 						<Scripts>
 							<OnClick>VUHDO_tabbedPanelOkayClicked(self)</OnClick>
 							<OnLoad>
-								 VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_154);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_154);
 							</OnLoad>
 						</Scripts>
 					</Button>
@@ -236,7 +236,7 @@
 						<Scripts>
 							<OnClick>VUHDO_tabbedPanelCancelClicked(self)</OnClick>
 						<OnLoad>
-							 VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_155);
+							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_155);
 						</OnLoad>
 						</Scripts>
 					</Button>
@@ -321,7 +321,7 @@
 							<Shadow>
 								<Color r="0.4" g="0.4" b="1" a="0" />
 									<Offset>
-										 <AbsDimension x="0" y="0" />
+										<AbsDimension x="0" y="0" />
 									</Offset>
 							</Shadow>
 							<Anchors>

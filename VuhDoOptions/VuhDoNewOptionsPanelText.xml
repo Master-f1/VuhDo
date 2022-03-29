@@ -1,6 +1,8 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
 	<Frame name="VuhDoNewOptionsPanelTextTemplate" virtual="true">
 		<Frames>
+
 			<Frame name="$parentTextposPanel" inherits="VuhDoPanelTemplate">
 				<Size>
 					<AbsDimension x="180" y="170" />
@@ -36,7 +38,7 @@
 									</Anchor>
 								</Anchors>
 								<Scripts>
-								 	<OnLoad>
+									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.ID_TEXT.position", "BOTTOMLEFT+TOPLEFT");
 									</OnLoad>
 								</Scripts>
@@ -51,7 +53,7 @@
 									</Anchor>
 								</Anchors>
 								<Scripts>
-								 	<OnLoad>
+									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.ID_TEXT.position", "BOTTOM+TOP");
 									</OnLoad>
 								</Scripts>
@@ -66,7 +68,7 @@
 									</Anchor>
 								</Anchors>
 								<Scripts>
-								 	<OnLoad>
+									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.ID_TEXT.position", "BOTTOMRIGHT+TOPRIGHT");
 									</OnLoad>
 								</Scripts>
@@ -81,7 +83,7 @@
 									</Anchor>
 								</Anchors>
 								<Scripts>
-								 	<OnLoad>
+									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.ID_TEXT.position", "TOPRIGHT+TOPLEFT");
 									</OnLoad>
 								</Scripts>
@@ -96,7 +98,7 @@
 									</Anchor>
 								</Anchors>
 								<Scripts>
-								 	<OnLoad>
+									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.ID_TEXT.position", "TOPLEFT+TOPLEFT");
 									</OnLoad>
 								</Scripts>
@@ -111,7 +113,7 @@
 									</Anchor>
 								</Anchors>
 								<Scripts>
-								 	<OnLoad>
+									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.ID_TEXT.position", "TOP+TOP");
 									</OnLoad>
 								</Scripts>
@@ -126,7 +128,7 @@
 									</Anchor>
 								</Anchors>
 								<Scripts>
-								 	<OnLoad>
+									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.ID_TEXT.position", "TOPRIGHT+TOPRIGHT");
 									</OnLoad>
 								</Scripts>
@@ -141,7 +143,7 @@
 									</Anchor>
 								</Anchors>
 								<Scripts>
-								 	<OnLoad>
+									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.ID_TEXT.position", "TOPLEFT+TOPRIGHT");
 									</OnLoad>
 								</Scripts>
@@ -156,7 +158,7 @@
 									</Anchor>
 								</Anchors>
 								<Scripts>
-								 	<OnLoad>
+									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.ID_TEXT.position", "RIGHT+LEFT");
 									</OnLoad>
 								</Scripts>
@@ -171,7 +173,7 @@
 									</Anchor>
 								</Anchors>
 								<Scripts>
-								 	<OnLoad>
+									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.ID_TEXT.position", "LEFT+LEFT");
 									</OnLoad>
 								</Scripts>
@@ -186,7 +188,7 @@
 									</Anchor>
 								</Anchors>
 								<Scripts>
-								 	<OnLoad>
+									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.ID_TEXT.position", "CENTER+CENTER");
 									</OnLoad>
 								</Scripts>
@@ -201,7 +203,7 @@
 									</Anchor>
 								</Anchors>
 								<Scripts>
-								 	<OnLoad>
+									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.ID_TEXT.position", "RIGHT+RIGHT");
 									</OnLoad>
 								</Scripts>
@@ -216,7 +218,7 @@
 									</Anchor>
 								</Anchors>
 								<Scripts>
-								 	<OnLoad>
+									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.ID_TEXT.position", "LEFT+RIGHT");
 									</OnLoad>
 								</Scripts>
@@ -231,7 +233,7 @@
 									</Anchor>
 								</Anchors>
 								<Scripts>
-								 	<OnLoad>
+									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.ID_TEXT.position", "BOTTOMRIGHT+BOTTOMLEFT");
 									</OnLoad>
 								</Scripts>
@@ -246,7 +248,7 @@
 									</Anchor>
 								</Anchors>
 								<Scripts>
-								 	<OnLoad>
+									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.ID_TEXT.position", "BOTTOMLEFT+BOTTOMLEFT");
 									</OnLoad>
 								</Scripts>
@@ -261,7 +263,7 @@
 									</Anchor>
 								</Anchors>
 								<Scripts>
-								 	<OnLoad>
+									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.ID_TEXT.position", "BOTTOM+BOTTOM");
 									</OnLoad>
 								</Scripts>
@@ -276,7 +278,7 @@
 									</Anchor>
 								</Anchors>
 								<Scripts>
-								 	<OnLoad>
+									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.ID_TEXT.position", "BOTTOMRIGHT+BOTTOMRIGHT");
 									</OnLoad>
 								</Scripts>
@@ -291,7 +293,7 @@
 									</Anchor>
 								</Anchors>
 								<Scripts>
-								 	<OnLoad>
+									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.ID_TEXT.position", "BOTTOMLEFT+BOTTOMRIGHT");
 									</OnLoad>
 								</Scripts>
@@ -306,7 +308,7 @@
 									</Anchor>
 								</Anchors>
 								<Scripts>
-								 	<OnLoad>
+									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.ID_TEXT.position", "TOPLEFT+BOTTOMLEFT");
 									</OnLoad>
 								</Scripts>
@@ -321,7 +323,7 @@
 									</Anchor>
 								</Anchors>
 								<Scripts>
-								 	<OnLoad>
+									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.ID_TEXT.position", "TOP+BOTTOM");
 									</OnLoad>
 								</Scripts>
@@ -336,7 +338,7 @@
 									</Anchor>
 								</Anchors>
 								<Scripts>
-								 	<OnLoad>
+									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.ID_TEXT.position", "TOPRIGHT+BOTTOMRIGHT");
 									</OnLoad>
 								</Scripts>
@@ -511,8 +513,8 @@
 									</Anchor>
 								</Anchors>
 								<Scripts>
-								 	<OnLoad>
-								 		VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.LIFE_TEXT.position", 1);
+									<OnLoad>
+										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.LIFE_TEXT.position", 1);
 										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_129);
 									</OnLoad>
 								</Scripts>
@@ -527,8 +529,8 @@
 									</Anchor>
 								</Anchors>
 								<Scripts>
-								 	<OnLoad>
-								 		VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.LIFE_TEXT.position", 2);
+									<OnLoad>
+										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.LIFE_TEXT.position", 2);
 										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_130);
 									</OnLoad>
 								</Scripts>
@@ -543,8 +545,8 @@
 									</Anchor>
 								</Anchors>
 								<Scripts>
-								 	<OnLoad>
-								 		VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.LIFE_TEXT.position", 4);
+									<OnLoad>
+										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.LIFE_TEXT.position", 4);
 										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_131);
 									</OnLoad>
 								</Scripts>
@@ -559,8 +561,8 @@
 									</Anchor>
 								</Anchors>
 								<Scripts>
-								 	<OnLoad>
-								 		VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.LIFE_TEXT.position", 3);
+									<OnLoad>
+										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.LIFE_TEXT.position", 3);
 										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_132);
 									</OnLoad>
 								</Scripts>

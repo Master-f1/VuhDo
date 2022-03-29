@@ -421,4 +421,3 @@ function VUHDO_getHealPanelHeightVer(aPanelNum)
 		return tHeight;
 	end
 end
-

@@ -41,7 +41,7 @@ VUHDO_I18N_PLAYER = "Игрок";
 -- @EXACT = false
 VUHDO_I18N_TT_POSITION = "|cffffb233Позиция:|r";
 VUHDO_I18N_TT_GHOST = "|cffff0000дух|r";
-VUHDO_I18N_TT_DEAD = "мёртв";
+VUHDO_I18N_TT_DEAD = "|cffff0000мёртв|r";
 VUHDO_I18N_TT_AFK = "AFK";
 VUHDO_I18N_TT_DND = "DND";
 VUHDO_I18N_TT_LIFE = "|cffffb233Здоровье:|r ";
@@ -146,7 +146,7 @@ VUHDO_I18N_BUFFC_ARMOR_MAGE = "03Доспех";
 VUHDO_SPELL_ID_BUFFC_PRESENCE = "03Власть";
 
 -- Warrior
-VUHDO_I18N_BUFFC_SHOUT = "01крик";
+VUHDO_I18N_BUFFC_SHOUT = "01Крик";
 
 -- Hunter
 VUHDO_I18N_BUFFC_ASPECT = "02Дух";
@@ -259,7 +259,7 @@ VUHDO_I18N_TRACK_BUFFS_FOR = "Слежение баффа для ...";
 
 VUHDO_I18N_NO_FOCUS = "[нет фокуса]";
 VUHDO_I18N_NOT_AVAILABLE = "[ N/A ]";
-VUHDO_I18N_SHIELD_ABSORPTION = "Статус щита";
+VUHDO_I18N_SHIELD_ABSORPTION = "Статус\nЩита";
 
 
 -- #+1.237
@@ -333,12 +333,12 @@ VUHDO_I18N_CUSTOM_ICON_SKETCHED = "Набросок";
 VUHDO_I18N_CUSTOM_ICON_RHOMB = "Ромб";
 
 
-VUHDO_I18N_OUTER_BORDER = "Снаружи";
-VUHDO_I18N_INNER_BORDER = "Внутри";
+VUHDO_I18N_OUTER_BORDER = "Внешняя";
+VUHDO_I18N_INNER_BORDER = "Внутренняя";
 VUHDO_I18N_SWIFTMEND_INDICATOR = "Быстр. Восст.";
 VUHDO_I18N_MOUSEOVER_HIGHLIGHTER = "Наведение мыши";
 VUHDO_I18N_THREAT_MARKS = "Метки угрозы";
-VUHDO_I18N_THREAT_BAR = "Полоса угрозы";
+VUHDO_I18N_THREAT_BAR = "Полоса Угрозы";
 VUHDO_I18N_AGGRO_LINE = "Полоса Агро";
 VUHDO_I18N_MANA_BAR = "Полоска маны";
 VUHDO_I18N_BORDER_WIDTH = "Ширина";
@@ -398,7 +398,10 @@ VUHDO_I18N_LOAD_PROFILE = "Загрузить профиль";
 VUHDO_I18N_DC_SHIELD_NO_MACROS = "Нет свободных слотов для макросов у этого персонажа... Временно отключено восстановление после разрыва связи.";
 VUHDO_I18N_BROKER_TOOLTIP_1 = "|cffffff00ЛКМ|r Окно настроек";
 VUHDO_I18N_BROKER_TOOLTIP_2 = "|cffffff00ПКМ|r Всплывающее меню";
-
+-- 2.54
+VUHDO_I18N_HOURS = "ч.";
+VUHDO_I18N_MINS = "мин.";
+VUHDO_I18N_SECS = "сек.";
 -- 2.66
 VUHDO_I18N_OFF = "без звука";
 VUHDO_I18N_OFF_EMPTY = "выкл";

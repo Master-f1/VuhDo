@@ -180,8 +180,7 @@ local VUHDO_EMERGENCY_SORTERS = {
 				tInfoA = VUHDO_RAID[aUnit];
 				tInfoB = VUHDO_RAID[anotherUnit];
 
-				return (tInfoA["healthmax"] - tInfoA["health"]
-							> tInfoB["healthmax"] - tInfoB["health"]);
+				return (tInfoA["healthmax"] - tInfoA["health"] > tInfoB["healthmax"] - tInfoB["health"]);
 			end,
 
 	[VUHDO_MODE_EMERGENCY_PERC] = function(aUnit, anotherUnit)
@@ -373,7 +372,7 @@ function VUHDO_setHealth(aUnit, aMode)
 				VUHDO_updateBouquetsForEvent(aUnit, 19); -- VUHDO_UPDATE_DC
 			end
 
-			if(2 == aMode) then -- VUHDO_UPDATE_HEALTH
+			if (2 == aMode) then -- VUHDO_UPDATE_HEALTH
 				tNewHealth = UnitHealth(aUnit);
 				if (not tIsDead) then
 					tInfo["lifeLossPerc"] = tNewHealth / tInfo["health"];
@@ -390,12 +389,12 @@ function VUHDO_setHealth(aUnit, aMode)
 					VUHDO_updateBouquetsForEvent(aUnit, 10); -- VUHDO_UPDATE_ALIVE
 				end
 
-			elseif(3 == aMode) then -- VUHDO_UPDATE_HEALTH_MAX
+			elseif (3 == aMode) then -- VUHDO_UPDATE_HEALTH_MAX
 				tInfo["dead"] = tIsDead;
 				tInfo["healthmax"] = UnitHealthMax(aUnit);
 				tInfo["sortMaxHp"] = VUHDO_getUnitSortMaxHp(aUnit);
 
-			elseif(6 == aMode) then -- VUHDO_UPDATE_AFK
+			elseif (6 == aMode) then -- VUHDO_UPDATE_AFK
 				tInfo["afk"] = tIsAfk;
 			end
 		end
@@ -940,7 +939,7 @@ function VUHDO_refreshRaidMembers()
 
 		twipe(VUHDO_RAID_NAMES); -- for VUHDO_SUSPICIOUS_RAID_ROSTER
 
-	if (not InCombatLockdown()) then -- In combat lockdown, we save orphaned unit ids to be able to represent players on the move.
+		if (not InCombatLockdown()) then -- In combat lockdown, we save orphaned unit ids to be able to represent players on the move.
 		for tPlayer, _ in pairs(VUHDO_RAID) do
 			if (not UnitExists(tPlayer)
 				or tPlayer == VUHDO_PLAYER_RAID_ID -- in case of raid roster change, our raid id may have belonged to someone else previously
@@ -960,10 +959,10 @@ function VUHDO_refreshRaidMembers()
 					tInfo["group"] = VUHDO_getUnitGroup(tPlayer, false);
 					tInfo["isVehicle"] = UnitHasVehicleUI(tPlayer);
 					tInfo["role"] = VUHDO_determineRole(tPlayer); -- weil talent-scanner nach und nach arbeitet
-				tInfo["afk"], tInfo["connected"], tIsDcChange = VUHDO_updateAfkDc(tPlayer);
+					tInfo["afk"], tInfo["connected"], tIsDcChange = VUHDO_updateAfkDc(tPlayer);
 					tInfo["range"] = VUHDO_isInRange(tPlayer);
 
-				tName, tRealm = UnitName(tPlayer);
+					tName, tRealm = UnitName(tPlayer);
 					tInfo["name"] = tName;
 					if (strlen(tRealm or "") > 0) then
 						tInfo["fullName"] = tName .. "-" .. tRealm;
@@ -975,15 +974,15 @@ function VUHDO_refreshRaidMembers()
 					end
 					VUHDO_RAID_NAMES[tName] = tPlayer;
 
-				if (tIsDcChange) then
-					VUHDO_updateBouquetsForEvent(tPlayer, 19); -- VUHDO_UPDATE_DC
-				end
+					if (tIsDcChange) then
+						VUHDO_updateBouquetsForEvent(tPlayer, 19); -- VUHDO_UPDATE_DC
+					end
 				end
 
 				tPet = tPetUnit .. i;
 				VUHDO_setHealthSafe(tPet, 1); -- VUHDO_UPDATE_ALL
 			end
-			
+
 			VUHDO_TIMERS["MIRROR_TO_MACRO"] = 8;
 		end
 
@@ -992,9 +991,9 @@ function VUHDO_refreshRaidMembers()
 		VUHDO_setHealthSafe("focus", 1); -- VUHDO_UPDATE_ALL
 		if (VUHDO_INTERNAL_TOGGLES[27]) then -- VUHDO_UPDATE_PLAYER_TARGET
 			VUHDO_setHealthSafe("target", 1); -- VUHDO_UPDATE_ALL
+		end
 	end
 
-	end
 	VUHDO_PLAYER_GROUP = VUHDO_getUnitGroup(VUHDO_PLAYER_RAID_ID, false);
 
 	VUHDO_updateAllRaidNames();

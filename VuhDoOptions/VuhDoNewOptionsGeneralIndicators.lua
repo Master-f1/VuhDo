@@ -1,5 +1,5 @@
 local VUHDO_INDICATORS = {
-	{-- Outer Border
+	{ -- Outer Border
 		["name"] = VUHDO_I18N_OUTER_BORDER,
 		["model"] = "VUHDO_INDICATOR_CONFIG.BOUQUETS.BAR_BORDER",
 		["icon"] = "Indicator_Outer",
@@ -14,7 +14,7 @@ local VUHDO_INDICATORS = {
 		},
 	},
 
-	{-- Inner Border
+	{ -- Inner Border
 		["name"] = VUHDO_I18N_INNER_BORDER,
 		["model"] = "VUHDO_INDICATOR_CONFIG.BOUQUETS.CLUSTER_BORDER",
 		["icon"] = "Indicator_Inner",
@@ -29,7 +29,7 @@ local VUHDO_INDICATORS = {
 		},
 	},
 
-	{-- Swiftmend Indicator
+	{ -- Swiftmend Indicator
 		["name"] = VUHDO_I18N_SWIFTMEND_INDICATOR,
 		["model"] = "VUHDO_INDICATOR_CONFIG.BOUQUETS.SWIFTMEND_INDICATOR",
 		["icon"] = "Indicator_Swiftmend",
@@ -44,7 +44,7 @@ local VUHDO_INDICATORS = {
 		},
 	},
 
-	{-- MouseoverHiglighter
+	{ -- MouseoverHiglighter
 		["name"] = VUHDO_I18N_MOUSEOVER_HIGHLIGHTER,
 		["model"] = "VUHDO_INDICATOR_CONFIG.BOUQUETS.MOUSEOVER_HIGHLIGHT",
 		["icon"] = "Indicator_BarHighlight",
@@ -59,7 +59,7 @@ local VUHDO_INDICATORS = {
 		},
 	},
 
-	{-- Aggro Line
+	{ -- Aggro Line
 		["name"] = VUHDO_I18N_AGGRO_LINE,
 		["model"] = "VUHDO_INDICATOR_CONFIG.BOUQUETS.AGGRO_BAR",
 		["icon"] = "Indicator_Aggro",
@@ -74,14 +74,14 @@ local VUHDO_INDICATORS = {
 		},
 	},
 
-	{-- Threat Marks
+	{ -- Threat Marks
 		["name"] = VUHDO_I18N_THREAT_MARKS,
 		["model"] = "VUHDO_INDICATOR_CONFIG.BOUQUETS.THREAT_MARK",
 		["icon"] = "Indicator_AggroMark",
 		["custom"] = {},
 	},
 
-	{-- Threat Bar
+	{ -- Threat Bar
 		["name"] = VUHDO_I18N_THREAT_BAR,
 		["model"] = "VUHDO_INDICATOR_CONFIG.BOUQUETS.THREAT_BAR",
 		["icon"] = "Indicator_ThreatBar",
@@ -115,7 +115,7 @@ local VUHDO_INDICATORS = {
 		},
 	},
 
-	{-- Mana Bar
+	{ -- Mana Bar
 		["name"] = VUHDO_I18N_MANA_BAR,
 		["model"] = "VUHDO_INDICATOR_CONFIG.BOUQUETS.MANA_BAR",
 		["icon"] = "Indicator_ManaBar",
@@ -142,7 +142,7 @@ local VUHDO_INDICATORS = {
 		},
 	},
 
-	{-- Background Bar
+	{ -- Background Bar
 		["name"] = VUHDO_I18N_BACKGROUND_BAR,
 		["model"] = "VUHDO_INDICATOR_CONFIG.BOUQUETS.BACKGROUND_BAR",
 		["icon"] = "Indicator_BackgroundBar",
@@ -157,7 +157,7 @@ local VUHDO_INDICATORS = {
 		},
 	},
 
-	{-- Health Bar
+	{ -- Health Bar
 		["name"] = VUHDO_I18N_HEALTH_BAR,
 		["model"] = "VUHDO_INDICATOR_CONFIG.BOUQUETS.HEALTH_BAR",
 		["icon"] = "Indicator_HealthBar",

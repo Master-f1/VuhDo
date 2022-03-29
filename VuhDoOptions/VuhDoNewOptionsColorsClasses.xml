@@ -4,6 +4,7 @@
 
 	<Frame name="VuhDoNewOptionsColorsClassesTemplate" virtual="true">
 		<Frames>
+
 			<Frame name="$parentClassColorsPanel" inherits="VuhDoPanelTemplate">
 				<Size>
 					<AbsDimension x="230" y="279" />

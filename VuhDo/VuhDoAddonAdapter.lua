@@ -26,7 +26,7 @@ VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - Bar Highlighter", "Interface
 VUHDO_LibSharedMedia:Register("statusbar", "LiteStepLite", "Interface\\AddOns\\VuhDo\\Images\\LiteStepLite.tga");
 
 VUHDO_LibSharedMedia:Register("sound", "Tribal Bass Drum", "Sound\\Doodad\\BellTollTribal.wav");
-VUHDO_LibSharedMedia:Register("sound", "Thorns", "Sound\\Spells\\Thorns.wav	");
+VUHDO_LibSharedMedia:Register("sound", "Thorns", "Sound\\Spells\\Thorns.wav");
 VUHDO_LibSharedMedia:Register("sound", "Elf Bell Toll", "Sound\\Doodad\\BellTollNightElf.wav");
 
 LoadAddOn("FuBarPlugin-3.0");
@@ -114,7 +114,7 @@ function VUHDO_initFuBar()
 		VuhDo:SetFuBarOption("hasNoColor", true);
 		VuhDo:SetFuBarOption("cannotDetachTooltip", true);
 		VuhDo:SetFuBarOption("hideWithoutStandby", true);
-		VuhDo:SetFuBarOption("iconPath", [[Interface\AddOns\VuhDo\Images\VuhDo]]);
+		VuhDo:SetFuBarOption("iconPath", "Interface\AddOns\VuhDo\Images\VuhDo");
 		VuhDo:SetFuBarOption("hasIcon", true);
 		VuhDo:SetFuBarOption("defaultPosition", "RIGHT");
 		VuhDo:SetFuBarOption("tooltipHiddenWhenEmpty", true);

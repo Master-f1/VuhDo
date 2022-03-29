@@ -429,12 +429,12 @@ local function VUHDO_isBouquetInterestedInEvent(aBouquetName, anEventType)
 			tName = tItem["name"];
 			if (VUHDO_BOUQUET_BUFFS_SPECIAL[tName] ~= nil) then
 
-		 		for _, tInterest in pairs(VUHDO_BOUQUET_BUFFS_SPECIAL[tName]["interests"]) do
-		 			if (tInterest == anEventType) then
-		 				VUHDO_EVENT_BOUQUETS[aBouquetName][anEventType] = 1;
-		 				break;
-		 			end
-		 		end
+				for _, tInterest in pairs(VUHDO_BOUQUET_BUFFS_SPECIAL[tName]["interests"]) do
+					if (tInterest == anEventType) then
+						VUHDO_EVENT_BOUQUETS[aBouquetName][anEventType] = 1;
+						break;
+					end
+				end
 
 			end
 		end

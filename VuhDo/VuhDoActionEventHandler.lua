@@ -1,4 +1,3 @@
-
 local VUHDO_IS_SMART_CAST = false;
 
 local IsAltKeyDown = IsAltKeyDown;
@@ -374,7 +373,9 @@ function VuhDoActionOnMouseUp(aPanel, aMouseButton)
 end
 
 function VUHDO_startMoving(aPanel)
-	if (VuhDoNewOptionsPanelPanel ~= nil and VuhDoNewOptionsPanelPanel:IsVisible()) then
+	if (VuhDoNewOptionsPanelPanel ~= nil
+		and VuhDoNewOptionsPanelPanel:IsVisible()) then
+
 		local tNewNum = VUHDO_getComponentPanelNum(aPanel);
 		if (tNewNum ~= DESIGN_MISC_PANEL_NUM) then
 			VuhDoNewOptionsTabbedFrame:Hide();
@@ -390,7 +391,8 @@ function VUHDO_startMoving(aPanel)
 			aPanel["isMoving"] = true;
 			aPanel:StartMoving();
 		end
-	elseif (IsMouseButtonDown(2) and not InCombatLockdown() and (VuhDoNewOptionsPanelPanel == nil or not VuhDoNewOptionsPanelPanel:IsVisible())) then
+	elseif (IsMouseButtonDown(2) and not InCombatLockdown()
+		and (VuhDoNewOptionsPanelPanel == nil or not VuhDoNewOptionsPanelPanel:IsVisible())) then
 		VUHDO_showAllPlayerIcons(aPanel);
 	end
 end

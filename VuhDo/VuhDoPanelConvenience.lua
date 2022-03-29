@@ -166,8 +166,8 @@ function VUHDO_getOrCreateBuffSwatch(aName, aParent)
 	if (VUHDO_BUFF_SETTINGS["CONFIG"]["WHEEL_SMART_BUFF"]) then
 		tButton:SetAttribute("_onenter", [=[
 				self:ClearBindings();
-				self:SetBindingClick(0, "MOUSEWHEELUP" , "VuhDoSmartCastGlassButton", "LeftButton");
-				self:SetBindingClick(0, "MOUSEWHEELDOWN" , "VuhDoSmartCastGlassButton", "LeftButton");
+				self:SetBindingClick(0, "MOUSEWHEELUP", "VuhDoSmartCastGlassButton", "LeftButton");
+				self:SetBindingClick(0, "MOUSEWHEELDOWN", "VuhDoSmartCastGlassButton", "LeftButton");
 		]=]);
 	else
 		tButton:SetAttribute("_onenter", [=[

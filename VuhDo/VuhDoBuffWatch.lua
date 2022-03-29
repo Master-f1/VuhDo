@@ -236,7 +236,7 @@ function VUHDO_buffSelectDropdown_Initialize(_, _)
 			UIDropDownMenu_AddButton(tInfo);
 		end
 	else
-]]
+--]]
 
 	if (VUHDO_BUFF_TARGET_RAID == tMaxTarget or VUHDO_BUFF_TARGET_SINGLE == tMaxTarget) then
 		local tInfo;
@@ -336,7 +336,7 @@ function VUHDO_buffSelectDropdownGroupSelected(_, aCategoryName, aGroupNum)
 		VUHDO_reloadBuffPanel();
 	end
 end
-]]
+--]]
 
 function VUHDO_buffSelectDropdownClassSelected(_, aCategoryName, aClassBuffName)
 	if (aCategoryName ~= nil) then
@@ -533,7 +533,7 @@ local function VUHDO_getValidBuffGroups(someSettings)
 
 	return tGroups;
 end
-]]
+--]]
 
 local tClassBuffs;
 local tCategBuffs, tBuffVariants, tVariant, tCategName;
@@ -560,7 +560,7 @@ local function VUHDO_isBuffGroupEmpty(aTargetCode)
 		tGroup = VUHDO_GROUPS[tonumber(strsub(aTargetCode, 2))];
 		return tGroup == nil or #tGroup == 0;
 	else
-]]
+--]]
 
 	if ("C" == strsub(aTargetCode, 1, 1)) then
 		return #VUHDO_BUFF_GROUPS[strsub(aTargetCode, 2)] == 0;
@@ -793,7 +793,7 @@ local function VUHDO_getMissingBuffsForCode(aTargetCode, someBuffVariants, aCate
 	if ("G" == tCode) then
 		tDestGroup = VUHDO_GROUPS[tonumber(strsub(aTargetCode, 2))];
 	else
-]]
+--]]
 
 	if ("C" == tCode) then
 		tDestGroup = VUHDO_BUFF_GROUPS[strsub(aTargetCode, 2)];

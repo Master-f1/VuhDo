@@ -15,7 +15,7 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
-				
+
 				<Frames>
 					<CheckButton name="$parentConfigRadioButton" checked="true" text="VUHDO_I18N_CONFIG" inherits="VuhDoRadioButtonTemplate">
 						<Anchors>

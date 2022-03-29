@@ -19,9 +19,9 @@
 			</Layer>
 		</Layers>
 		<Scripts>
-		 	<OnShow>
-		 		VUHDO_squareDemoOnShow(this);
-		 		VUHDO_lnfPatchFont(self, "Label");
+			<OnShow>
+				VUHDO_squareDemoOnShow(this);
+				VUHDO_lnfPatchFont(self, "Label");
 			</OnShow>
 		</Scripts>
 	</Frame>
@@ -84,6 +84,7 @@
 						</Scripts>
 					</CheckButton>
 
+
 					<Frame name="$parentIconTypePanel">
 						<Size>
 							<AbsDimension x="120" y="114" />
@@ -112,7 +113,6 @@
 									</Scripts>
 								</CheckButton>
 
-
 								<CheckButton name="$parentGlossyTextureRadioButton" text="VUHDO_I18N_GLOSSY" inherits="VuhDoRadioButtonTemplate">
 									<Anchors>
 										<Anchor point="TOPLEFT">
@@ -128,7 +128,6 @@
 										</OnLoad>
 									</Scripts>
 								</CheckButton>
-
 
 								<CheckButton name="$parentFlatTextureRadioButton" text="VUHDO_I18N_FLAT_TEXTURE" inherits="VuhDoRadioButtonTemplate">
 									<Anchors>
@@ -148,6 +147,7 @@
 						</Frames>
 					</Frame>
 
+
 					<Frame name="$parentStacksPanel">
 						<Size>
 							<AbsDimension x="120" y="114" />
@@ -160,22 +160,21 @@
 							</Anchor>
 						</Anchors>
 						<Frames>
-								<CheckButton name="$parentNoneRadioButton" text="VUHDO_I18N_NO_STACKS" inherits="VuhDoRadioButtonTemplate">
-									<Anchors>
-										<Anchor point="TOPLEFT">
-											<Offset>
-												<AbsDimension x="0" y="0" />
-											</Offset>
-										</Anchor>
-									</Anchors>
-									<Scripts>
-										<OnLoad>
-											VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.HOTS.stacksRadioValue", 1);
-											VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_406);
-										</OnLoad>
-									</Scripts>
-								</CheckButton>
-
+							<CheckButton name="$parentNoneRadioButton" text="VUHDO_I18N_NO_STACKS" inherits="VuhDoRadioButtonTemplate">
+								<Anchors>
+									<Anchor point="TOPLEFT">
+										<Offset>
+											<AbsDimension x="0" y="0" />
+										</Offset>
+									</Anchor>
+								</Anchors>
+								<Scripts>
+									<OnLoad>
+										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.HOTS.stacksRadioValue", 1);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_406);
+									</OnLoad>
+								</Scripts>
+							</CheckButton>
 
 								<CheckButton name="$parentNumberRadioButton" text="VUHDO_I18N_NUMBER_STACKS" inherits="VuhDoRadioButtonTemplate">
 									<Anchors>
@@ -192,7 +191,6 @@
 										</OnLoad>
 									</Scripts>
 								</CheckButton>
-
 
 								<CheckButton name="$parentTrianglesRadioButton" text="VUHDO_I18N_TRIANGLE_STACKS" inherits="VuhDoRadioButtonTemplate">
 									<Anchors>
@@ -211,6 +209,7 @@
 								</CheckButton>
 						</Frames>
 					</Frame>
+
 
 					<Frame name="$parentHotIconsTexture" inherits="VuhDoBarExampleTexture">
 						<Size>

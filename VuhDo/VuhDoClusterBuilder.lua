@@ -415,7 +415,6 @@ function VUHDO_updateAllClusters() -- Carbonite workaround
 	VUHDO_MAP_WIDTH = tMaxX;
 end
 
---
 function VUHDO_resetClusterCoordDeltas()
 	twipe(VUHDO_COORD_DELTAS);
 end
@@ -464,8 +463,7 @@ local function VUHDO_getMostDeficitUnitOutOf(anIncludeList, anExcludeList)
 			tInfo = VUHDO_RAID[tUnit];
 
 			if (tWinnerUnit == nil or
-				(tInfo ~= nil and tInfo["healthmax"] - tInfo["health"] > tWinnerInfo["healthmax"] -
-					tWinnerInfo["health"])) then
+				(tInfo ~= nil and tInfo["healthmax"] - tInfo["health"] > tWinnerInfo["healthmax"] - tWinnerInfo["health"])) then
 				tWinnerUnit = tUnit;
 				tWinnerInfo = tInfo;
 			end
@@ -506,4 +504,3 @@ function VUHDO_getDistanceBetween(aUnit, anotherUnit)
 
 	return nil;
 end
-

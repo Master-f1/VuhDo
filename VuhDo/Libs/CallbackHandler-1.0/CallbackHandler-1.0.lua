@@ -46,7 +46,7 @@ local function CreateDispatcher(argCount)
 
 	local ARGS, OLD_ARGS = {}, {}
 	for i = 1, argCount do ARGS[i], OLD_ARGS[i] = "arg"..i, "old_arg"..i end
-	code = code:gsub("OLD_ARGS", concat(OLD_ARGS, ",")):gsub("ARGS", concat(ARGS, ","))
+	code = code:gsub("OLD_ARGS", concat(OLD_ARGS, ", ")):gsub("ARGS", concat(ARGS, ", "))
 	return assert(loadstring(code, "safecall Dispatcher["..argCount.."]"))(next, xpcall, errorhandler)
 end
 
@@ -87,7 +87,7 @@ function CallbackHandler:New(target, RegisterName, UnregisterName, UnregisterAll
 		local oldrecurse = registry.recurse
 		registry.recurse = oldrecurse + 1
 
-		Dispatchers[select('#', ...) + 1](events[eventname], eventname, ...)
+		Dispatchers[select("#", ...) + 1](events[eventname], eventname, ...)
 
 		registry.recurse = oldrecurse
 
@@ -138,7 +138,7 @@ function CallbackHandler:New(target, RegisterName, UnregisterName, UnregisterAll
 				error("Usage: "..RegisterName.."(\"eventname\", \"methodname\"): 'methodname' - method '"..tostring(method).."' not found on self.", 2)
 			end
 
-			if select("#", ...) > = 1 then -- this is not the same as testing for arg == nil!
+			if select("#", ...) >= 1 then -- this is not the same as testing for arg == nil!
 				local arg=select(1, ...)
 				regfunc = function(...) self[method](self, arg, ...) end
 			else
@@ -150,7 +150,7 @@ function CallbackHandler:New(target, RegisterName, UnregisterName, UnregisterAll
 				error("Usage: "..RegisterName.."(self or \"addonId\", eventname, method): 'self or addonId': table or string expected.", 2)
 			end
 
-			if select("#", ...) > = 1 then -- this is not the same as testing for arg == nil!
+			if select("#", ...) >= 1 then -- this is not the same as testing for arg == nil!
 				local arg=select(1, ...)
 				regfunc = function(...) method(arg, ...) end
 			else

@@ -84,7 +84,7 @@ function VUHDO_groupSelectTypeOnSelectionChanged(anEntry)
 
 	local tModelId;
 	if (anEntry.value == VUHDO_ID_TYPE_GROUP) then
-		 tModelId = VUHDO_ID_GROUP_1;
+		tModelId = VUHDO_ID_GROUP_1;
 	elseif (anEntry.value == VUHDO_ID_TYPE_CLASS) then
 		tModelId = VUHDO_ID_WARRIORS;
 	else

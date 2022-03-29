@@ -30,17 +30,17 @@ local function CreateDispatcher(argCount)
 		local xpcall, eh = ...
 		local method, ARGS
 		local function call() return method(ARGS) end
-	
+
 		local function dispatch(func, ...)
 			 method = func
 			 if not method then return end
 			 ARGS = ...
 			 return xpcall(call, eh)
 		end
-	
+
 		return dispatch
 	]]
-	
+
 	local ARGS = {}
 	for i = 1, argCount do ARGS[i] = "arg"..i end
 	code = code:gsub("ARGS", tconcat(ARGS, ", "))
@@ -61,7 +61,7 @@ local function safecall(func, ...)
 	-- this safecall is used for optional functions like OnInitialize OnEnable etc. When they are not
 	-- present execution should continue without hinderance
 	if type(func) == "function" then
-		return Dispatchers[select('#', ...)](func, ...)
+		return Dispatchers[select("#", ...)](func, ...)
 	end
 end
 
@@ -238,7 +238,7 @@ end
 
 -- addon:EnableModule(name)
 -- name (string) - unique module object name
---
+
 -- Enables the Module if possible, return true or false depending on success
 function EnableModule(self, name)
 	local module = self:GetModule(name)
@@ -247,7 +247,7 @@ end
 
 -- addon:DisableModule(name)
 -- name (string) - unique module object name
---
+
 -- Disables the Module if possible, return true or false depending on success
 function DisableModule(self, name)
 	local module = self:GetModule(name)
@@ -339,13 +339,13 @@ end
 -- calls OnEmbedInitialize on embedded libs in the addon object if available
 function AceAddon:InitializeAddon(addon)
 	safecall(addon.OnInitialize, addon)
-	
+
 	local embeds = self.embeds[addon]
 	for i = 1, #embeds do
 		local lib = LibStub:GetLibrary(embeds[i], true)
 		if lib then safecall(lib.OnEmbedInitialize, lib, addon) end
 	end
-	
+
 	-- we don't call InitializeAddon on modules specifically, this is handled
 	-- from the event handler and only done _once_
 end

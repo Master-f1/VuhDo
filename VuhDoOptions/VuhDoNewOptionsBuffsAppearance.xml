@@ -1,4 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
 	<Frame name="VuhDoNewOptionsBuffsAppearanceTemplate" virtual="true">
 		<Frames>
 
@@ -112,10 +113,10 @@
 			<CheckButton name="$parentEnableButton" text="VUHDO_I18N_ENABLE" inherits="VuhDoCheckButtonTemplate">
 					<Anchors>
 					<Anchor point="TOPLEFT">
-						 <Offset>
+						<Offset>
 							<AbsDimension x="13" y="-31" />
 						</Offset>
-					 </Anchor>
+					</Anchor>
 			</Anchors>
 					<Scripts>
 						<OnLoad>

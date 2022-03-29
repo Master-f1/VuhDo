@@ -38,7 +38,7 @@ local FrameBackdrop = {
 	insets = {left = 8, right = 8, top = 8, bottom = 8}
 }
 
-local PaneBackdrop	= {
+local PaneBackdrop = {
 
 	bgFile = "Interface\\ChatFrame\\ChatFrameBackground",
 	edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
@@ -298,6 +298,3 @@ do
 
 	AceGUI:RegisterWidgetType(Type, Constructor, Version)
 end
-
-
-

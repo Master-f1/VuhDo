@@ -23,6 +23,7 @@ local VUHDO_MY_AND_OTHERS_HOTS = VUHDO_MY_AND_OTHERS_HOTS;
 local VUHDO_ACTIVE_HOTS = {};
 local VUHDO_ACTIVE_HOTS_OTHERS = {};
 local VUHDO_OTHER_PLAYERS_HOT_INFO = {};
+
 local VUHDO_CHARGE_TEXTURES = {
 	"Interface\\AddOns\\VuhDo\\Images\\hot_stacks1",
 	"Interface\\AddOns\\VuhDo\\Images\\hot_stacks2",

@@ -1,6 +1,8 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
 	<Frame name="VuhDoNewOptionsGeneralScanTemplate" virtual="true">
 		<Frames>
+
 			<Frame name="$parentHoTPanel" inherits="VuhDoPanelTemplate">
 				<Size>
 					<AbsDimension x="235" y="146" />

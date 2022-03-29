@@ -80,7 +80,7 @@ do
 
 		if image:GetTexture() then
 			self.imageshown = true
-			local n = select('#', ...)
+			local n = select("#", ...)
 			if n == 4 or n == 8 then
 				image:SetTexCoord(...)
 			end

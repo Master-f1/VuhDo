@@ -2,7 +2,6 @@
 
 	<Script file="VuhDoNewOptionsGeneralIndicators.lua" />
 
-
 	<Frame name="VuhDoMoreButtonsTexturePanel" virtual="true">
 		<Size>
 			<AbsDimension x="150" y="60" />
@@ -54,7 +53,7 @@
 				<Layers>
 					<Layer level="ARTWORK">
 						<Texture name="$parentTexture" file="Interface\AddOns\VuhDo\Images\white_square_16_16">
-							<Color r="1" g="1" b="1" a="0.9"/>
+							<Color r="1" g="1" b="1" a="0.9" />
 							<Size>
 								<AbsDimension x="60" y="8" />
 							</Size>

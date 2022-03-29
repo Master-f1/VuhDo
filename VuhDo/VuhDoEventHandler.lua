@@ -223,7 +223,7 @@ end
 	2 = Tanking, others > 100%
 	1 = Not Tanking, more than 100%
 	0 = Not Tanking, less than 100%
-]]
+--]]
 
 local tInfo, tIsAggroed;
 local function VUHDO_updateThreat(aUnit)

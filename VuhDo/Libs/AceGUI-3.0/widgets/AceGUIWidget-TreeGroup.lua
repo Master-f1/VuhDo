@@ -445,7 +445,7 @@ do
 	end
 
 	local function BuildUniqueValue(...)
-		local n = select('#', ...)
+		local n = select("#", ...)
 		if n == 1 then
 			return ...
 		else
@@ -457,7 +457,7 @@ do
 		self.filter = false
 		local status = self.status or self.localstatus
 		local groups = status.groups
-		for i = 1, select('#', ...) do
+		for i = 1, select("#", ...) do
 			groups[BuildUniqueValue(select(i, ...))] = true
 		end
 		status.selected = uniquevalue

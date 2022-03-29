@@ -117,12 +117,12 @@ do
 
 		if type == "radio" then
 			checkbg:SetTexture("Interface\\Buttons\\UI-RadioButton")
-			checkbg:SetTexCoord(0, 0.25, 0,1)
+			checkbg:SetTexCoord(0, 0.25, 0, 1)
 			check:SetTexture("Interface\\Buttons\\UI-RadioButton")
-			check:SetTexCoord(0.5, 0.75, 0,1)
+			check:SetTexCoord(0.5, 0.75, 0, 1)
 			check:SetBlendMode("ADD")
 			highlight:SetTexture("Interface\\Buttons\\UI-RadioButton")
-			highlight:SetTexCoord(0.5, 0.75, 0,1)
+			highlight:SetTexCoord(0.5, 0.75, 0, 1)
 		else
 			checkbg:SetTexture("Interface\\Buttons\\UI-CheckBox-Up")
 			checkbg:SetTexCoord(0, 1, 0, 1)

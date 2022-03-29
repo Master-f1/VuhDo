@@ -201,7 +201,7 @@
 				<Scripts>
 					<OnClick>VUHDO_newOptionsApplyToAllOnClick();</OnClick>
 					<OnLoad>
-						 VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_111);
+						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_111);
 					</OnLoad>
 				</Scripts>
 			</Button>

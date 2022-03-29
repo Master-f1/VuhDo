@@ -96,7 +96,7 @@
 						<Scripts>
 							<OnClick>VUHDO_applyToAllCustomDebuffOnClick();</OnClick>
 							<OnLoad>
-								 VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_412);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_412);
 							</OnLoad>
 						</Scripts>
 					</Button>
@@ -207,8 +207,6 @@
 							</OnLoad>
 						</Scripts>
 					</Button>
-
-
 				</Frames>
 			</Frame>
 
@@ -588,11 +586,11 @@
 						<Scripts>
 							<OnShow>
 								VUHDO_lnfPatchFont(self, "Text");
-						 		VUHDO_setupCustomDebuffsComboModel(self);
+								VUHDO_setupCustomDebuffsComboModel(self);
 							</OnShow>
-						 	<OnLoad>
-				 				self:SetAttribute("custom_function", VUHDO_notifyCustomDebuffSelect);
-				 			</OnLoad>
+							<OnLoad>
+								self:SetAttribute("custom_function", VUHDO_notifyCustomDebuffSelect);
+							</OnLoad>
 						</Scripts>
 					</Button>
 

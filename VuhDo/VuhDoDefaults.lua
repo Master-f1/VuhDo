@@ -700,7 +700,7 @@ local VUHDO_DEFAULT_CU_DE_STORED_SETTINGS = {
 		["useBackground"] = true,
 		["useOpacity"] = true,
 	},
-]]
+--]]
 };
 
 

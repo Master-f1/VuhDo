@@ -4,6 +4,7 @@
 
 	<Frame name="VuhDoNewOptionsSpellTemplate" virtual="true">
 		<Frames>
+
 			<Frame name="$parentRadioPanel">
 				<Size>
 					<AbsDimension x="115" y="231" />

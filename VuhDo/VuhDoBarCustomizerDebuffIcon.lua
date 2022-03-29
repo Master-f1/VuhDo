@@ -166,7 +166,7 @@ function VUHDO_addDebuffIcon(aUnit, anIcon, aName, anExpiry, aStacks, anIsCustom
 	for tCnt = 1, sMaxIcons do
 		if (VUHDO_DEBUFF_ICONS[aUnit][tCnt] == nil) then
 			tSlot = tCnt;
-			break
+			break;
 		else
 			if (VUHDO_DEBUFF_ICONS[aUnit][tCnt][2] > 0 and VUHDO_DEBUFF_ICONS[aUnit][tCnt][2] < tOldest) then
 				tOldest = VUHDO_DEBUFF_ICONS[aUnit][tCnt][2];

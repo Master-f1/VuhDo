@@ -45,7 +45,7 @@ local pairs = pairs;
 	<rangx>.level {}
 	<rangx>.present (auto)
 	<rangx>.bonus
-]]
+--]]
 
 -- All healing spells and their ranks we will take notice of
 VUHDO_SPELLS = {

@@ -74,7 +74,7 @@ function VUHDO_positionAllGroupConfigPanels(aPanelNum)
 		end
 
 	tPanel = VUHDO_getGroupSelectPanel(aPanelNum, tCnt);
-		 tPanel:ClearAllPoints();
+		tPanel:ClearAllPoints();
 	tPanel:SetPoint("TOPLEFT", tParentPanel:GetName(), "TOPLEFT", tXPos / tScale, -tYPos / tScale);
 	if (not tIsShowOrder) then
 		tPanel:Hide();

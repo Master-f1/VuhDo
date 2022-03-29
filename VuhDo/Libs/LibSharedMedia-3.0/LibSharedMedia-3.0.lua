@@ -37,9 +37,9 @@ local CallbackHandler = LibStub:GetLibrary("CallbackHandler-1.0")
 
 lib.callbacks = lib.callbacks or CallbackHandler:New(lib)
 
-lib.DefaultMedia = lib.DefaultMedia	or {}
+lib.DefaultMedia = lib.DefaultMedia or {}
 lib.MediaList = lib.MediaList or {}
-lib.MediaTable = lib.MediaTable	or {}
+lib.MediaTable = lib.MediaTable or {}
 lib.MediaType = lib.MediaType or {}
 lib.OverrideMedia = lib.OverrideMedia or {}
 

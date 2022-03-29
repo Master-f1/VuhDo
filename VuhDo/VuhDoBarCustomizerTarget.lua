@@ -150,7 +150,7 @@ end
 	We remember the target buttons when the target is in
 	the raid to perform health updates with the regular mechanism.
 	So the target buttons are indexed by the target name.
-]]
+--]]
 
 local tUnit, tInfo;
 local tName;
@@ -173,7 +173,7 @@ end
 Delete all the target buttons of the person whose target has changed.
 Where the buttons are indexed with the name of the TARGET, which we have
 which we have remembered VUHDO_IN_RAID_TARGETS.
-]]
+--]]
 
 local tName;
 local function VUHDO_forgetTargetButton(aTargetUnit, aButton)
