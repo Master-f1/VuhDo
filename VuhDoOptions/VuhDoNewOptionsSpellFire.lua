@@ -47,7 +47,7 @@ end
 
 function VUHDO_deleteKeyLayoutCallback(aDecision)
 	if (VUHDO_YES == aDecision) then
-		VUHDO_Msg("Deleted key layout \"" .. VUHDO_CURR_LAYOUT .. "\".");
+		VUHDO_Msg(VUHDO_I18N_KEY_DELETED .. " \"" .. VUHDO_CURR_LAYOUT .. "\".");
 		VUHDO_SPELL_LAYOUTS[VUHDO_CURR_LAYOUT] = nil;
 		VUHDO_CURR_LAYOUT = "";
 		VUHDO_SPEC_LAYOUTS["selected"] = "";
@@ -60,7 +60,7 @@ end
 
 function VUHDO_keyLayoutDeleteOnClick(aButton)
 	if (VUHDO_CURR_LAYOUT ~= nil and VUHDO_CURR_LAYOUT ~= "") then
-		VuhDoYesNoFrameText:SetText("Really delete key layout \"" .. VUHDO_CURR_LAYOUT .. "\"?");
+		VuhDoYesNoFrameText:SetText(VUHDO_I18N_KEY_DELETE .. " \"" .. VUHDO_CURR_LAYOUT .. "\"?");
 		VuhDoYesNoFrame:SetAttribute("callback", VUHDO_deleteKeyLayoutCallback);
 		VuhDoYesNoFrame:Show();
 	else
@@ -102,7 +102,7 @@ function VUHDO_saveKeyLayoutCallback(aDecision)
 
 		VUHDO_SPELL_LAYOUTS[VUHDO_CURR_LAYOUT]["HOTS"] = VUHDO_deepCopyTable(VUHDO_PANEL_SETUP["HOTS"]);
 
-		VUHDO_Msg("Key layout \"" .. VUHDO_CURR_LAYOUT .. "\" successfully saved.");
+		VUHDO_Msg(VUHDO_I18N_KEY_SAVED .. " \"" .. VUHDO_CURR_LAYOUT .. "\".");
 		VUHDO_initKeyLayoutComboModel();
 		VUHDO_lnfComboBoxInitFromModel(VuhDoNewOptionsSpellFireStorePanelLayoutCombo);
 		VuhDoNewOptionsSpellFireTriggerWhatPanel:Hide();

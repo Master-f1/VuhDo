@@ -803,21 +803,21 @@ function VUHDO_loadDefaultConfig()
 	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version == nil or VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 2) then
 		VUHDO_CONFIG["CUSTOM_DEBUFF"].version = 2;
 		VUHDO_addCustomSpellIds(
-		-- WotLK
-			48920, -- Drak'Tharon Keep - Grievous Bite
-			23965, -- Utgarde Keep - Frost Tomb
-			48261, -- Utgarde Pinnacle - Impale
-			-- Naxx
-			28622, -- Maexxna - Web Wrap
-			55550, -- Razuvious - Jagged Knife
-			27808, -- Kel'Thuzad - Frost Blast
-			-- Ulduar
-			63477, -- Ignis - Slag Pot
-			64234, -- XT-002 - Gravity Bomb
-			63018, -- XT-002 - Searing Light
-			64292, -- Kologarn - Stone Grip
-			64669, -- Auriaya - Feral Pounce
-			63666 -- Mimiron - Napalm Shell
+			-- WotLK
+			48920, -- Болезненный укус
+			23965, -- Мгновенное исцеление
+			48261, -- Прокалывание
+			-- Накс
+			28622, -- Кокон
+			55550, -- Зазубренный нож
+			27808, -- Ледяной взрыв
+			-- Ульда
+			63477, -- Шлаковый ковш
+			64234, -- Гравитационная бомба
+			63018, -- Опаляющий свет
+			64292, -- Каменная хватка
+			64669, -- Дикий прыжок
+			63666 -- Заряд напалма
 		);
 	end
 
@@ -825,16 +825,16 @@ function VUHDO_loadDefaultConfig()
 		VUHDO_CONFIG["CUSTOM_DEBUFF"].version = 6;
 
 		VUHDO_addCustomSpellIds(
-			-- ToC
-			67478, -- Impale
-			66406, -- Snobolled!
-			66869, -- Burning Bile
-			67618, -- Paralytic Toxin
-			67049, -- Incinerate Flesh
-			67297, -- Touch of Light
-			66001, -- Touch of Darkness
-			66013, -- Penetrating Cold
-			67861 -- Acid-Drenched Mandibles
+			-- ИК
+			67478, -- Прокалывание
+			66406, -- Получи снобольда!
+			66869, -- Горящая желчь
+			67618, -- Паралитический токсин
+			67049, -- Испепеление плоти
+			67297, -- Касание Света
+			66001, -- Касание тьмы
+			66013, -- Пронизывающий холод
+			67861 -- Ядовитые жвалы
 		);
 	end
 
@@ -843,21 +843,21 @@ function VUHDO_loadDefaultConfig()
 
 		VUHDO_addCustomSpellIds(
 			-- Ulduar
-			62283, -- Iron Roots
-			63134, -- Sara's Blessing
-			-- ToC
-			67475, -- Fire Bomb
-			68123, -- Legion Flame
-			67078, -- Mistress' Kiss
-			66283, -- Spinning Pain Spike
-			67847, -- Expose Weakness
-			-- ICC
-			69065, -- Impaled
-			70659, -- Necrotic Strike
-			72293, -- Mark of the Fallen Champion
-			72385, -- Boiling Blood
-			72409 -- Rune Blood
-		);
+			62283, -- Железные корни
+			63134, -- Благословение Сары
+			-- ИК
+			67475, -- Огненная бомба
+			68123, -- Пламя Легиона
+			67078, -- Поцелуй Госпожи
+			66283, -- Крутящийся шип боли
+			67847, -- Выявление слабости
+			-- ЦЛК
+			69065, -- Прокалывание
+			70659, -- Некротический удар
+			72293, -- Метка падшего воителя
+			72385, -- Кипящая кровь
+			72409 -- Руна крови
+			);
 	end
 
 	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 9) then
@@ -865,15 +865,15 @@ function VUHDO_loadDefaultConfig()
 
 		VUHDO_addCustomSpellIds(
 			-- ICC
-			72273, -- Vile Gas
-			72219, -- Gastric Bloat
-			69278, -- Gas Spore
-			-- 72103, -- Inoculated
-			71224, -- Mutated Infection
-			72455, -- Gaseous Bloat
-			70447, -- Volatile Ooze Adhesive
-			72745 -- Mutated Plague
-		);
+			72273, -- Губительный газ
+			72219, -- Желудочное вздутие
+			69278, -- Газообразные споры
+			-- 72103, -- Невосприимчивость к гнили
+			71224, -- Мутировавшая инфекция
+			72455, -- Газовое вздутие
+			70447, -- Выделения неустойчивого слизнюка
+			72745 -- Мутировавшая чума
+			);
 	end
 
 	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 10) then
@@ -881,13 +881,13 @@ function VUHDO_loadDefaultConfig()
 
 		VUHDO_addCustomSpellIds(
 			-- ICC
-			72999, -- Shadow Prison
-			72796, -- Glittering Sparks
-			71624, -- Delirious Slash
-			72638, -- Swarming Shadows
-			70986, -- Shroud of Sorrow
-			71340 -- Pact of the Darkfallen
-		);
+			72999, -- Темница Тьмы
+			72796, -- Ослепительные искры
+			71624, -- Безумный выпад
+			72638, -- Роящиеся тени
+			70986, -- Покров скорби
+			71340 -- Пакт Омраченных
+			);
 	end
 
 	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 11) then
@@ -895,7 +895,7 @@ function VUHDO_loadDefaultConfig()
 
 		VUHDO_addCustomSpellIds(
 			-- ICC
-			70867 -- Essence of the Blood Queen
+			70867 -- Сущность Кровавой королевы
 		);
 	end
 
@@ -904,17 +904,17 @@ function VUHDO_loadDefaultConfig()
 
 		VUHDO_addCustomSpellIds(
 			-- ICC
-			70751, -- Corrosion
-			70633, -- Gut Spray
-			70157, -- Ice Tomb
-			70106, -- Chilled to the Bone
-			69766, -- Instability
-			69649, -- Frost Breath
-			70126, -- Frost Beacon
-			70541, -- Infest
-			72754, -- Defile
-			68980 -- Harvest Soul
-		);
+			70751, -- Коррозия
+			70633, -- Выброс внутренностей
+			70157, -- Ледяной склеп
+			70106, -- Обморожение
+			69766, -- Неустойчивость
+			69649, -- Ледяное дыхание
+			70126, -- Ледяная метка
+			70541, -- Заражение
+			72754, -- Осквернение
+			68980 -- Жатва душ
+			);
 	end
 
 	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 13) then
@@ -922,7 +922,7 @@ function VUHDO_loadDefaultConfig()
 
 		VUHDO_addCustomSpellIds(
 			-- ICC
-			73912 -- Necrotic plague, Lich King
+			73912 -- Мертвящая чума
 		);
 end
 

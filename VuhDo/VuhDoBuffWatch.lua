@@ -874,7 +874,7 @@ local tMinutes;
 local tSecs;
 local tSecsStr;
 local tCountStr;
-local function VUHDO_setBuffSwatchTimer(aSwatchName, aSecsNum, aCount)
+local function VUHDO_setBuffSwatchTimer(aSwatchName, aSecsNum, aCount, ...)
 
 	if ((aSecsNum or -1) >= 0) then
 		tMinutes = floor(aSecsNum / 60);

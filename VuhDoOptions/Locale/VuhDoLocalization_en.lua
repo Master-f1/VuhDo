@@ -1126,3 +1126,6 @@ VUHDO_I18N_STOP_CAST = "Stop Cast";
 VUHDO_I18N_OVERWRITE_CURR_KEY_LAYOUT_QUESTION = "This will overwrite current\nkey layout. Continue?";
 VUHDO_I18N_MANA_BAR_HEIGHT = "Mana Bar Height";
 VUHDO_I18N_REALLY_EXPORT_CUDES = "Really export to profile(s)?";
+VUHDO_I18N_KEY_SAVED = "Key layout successfully saved:"
+VUHDO_I18N_KEY_DELETE = "Really delete key layout:"
+VUHDO_I18N_KEY_DELETED = "Deleted key layout:"
