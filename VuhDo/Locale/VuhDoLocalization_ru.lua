@@ -1,8 +1,8 @@
 ﻿if (GetLocale() ~= "ruRU") then
 	return;
 end
+
 -- Class Names
--- @EXACT = false
 VUHDO_I18N_WARRIORS="Воин"
 VUHDO_I18N_ROGUES = "Разбойник";
 VUHDO_I18N_HUNTERS = "Охотник";
@@ -14,43 +14,32 @@ VUHDO_I18N_DRUIDS = "Друид";
 VUHDO_I18N_PRIESTS = "Жрец";
 VUHDO_I18N_DEATH_KNIGHT = "Рыцарь Смерти";
 
-
 -- Group Model Names
--- @EXACT = false
 VUHDO_I18N_GROUP = "Группа";
 VUHDO_I18N_OWN_GROUP = "Ваша\nгруппа";
 
-
 -- Special Model Names
--- @EXACT = false
 VUHDO_I18N_PETS = "Питомцы";
 VUHDO_I18N_MAINTANKS = "Глав. танки";
 VUHDO_I18N_PRIVATE_TANKS = "Лич. танки";
 
-
-
 -- General Labels
--- @EXACT = false
 VUHDO_I18N_OKAY = "ОК";
 VUHDO_I18N_CLASS = "Класс";
 VUHDO_I18N_UNDEFINED = "<n/a>";
 VUHDO_I18N_PLAYER = "Игрок";
 
-
 -- VuhDoTooltip.lua
--- @EXACT = false
 VUHDO_I18N_TT_POSITION = "|cffffb233Позиция:|r";
 VUHDO_I18N_TT_GHOST = "|cffff0000дух|r-";
-VUHDO_I18N_TT_DEAD = "|cffff0000мёртв|r-";
+VUHDO_I18N_TT_DEAD = "|cffff0000труп|r-";
 VUHDO_I18N_TT_AFK = "афк-";
-VUHDO_I18N_TT_DND = "<DND>";
+VUHDO_I18N_TT_DND = "d/s";
 VUHDO_I18N_TT_LIFE = "|cffffb233Здоровье:|r ";
 VUHDO_I18N_TT_MANA = "|cffffb233Мана:|r ";
 VUHDO_I18N_TT_LEVEL = "Уровень ";
 
-
 -- VuhDoPanel.lua
--- @EXACT = false
 VUHDO_I18N_CHOOSE = "Выбрать";
 VUHDO_I18N_DRAG = "Перетащи";
 VUHDO_I18N_REMOVE = "Удалить";
@@ -61,13 +50,9 @@ VUHDO_I18N_SPECIAL = "Особый";
 VUHDO_I18N_BUFF_ALL = "Все";
 VUHDO_I18N_SHOW_BUFF_WATCH = "Панель баффов";
 
--- @EXACT = true
-
 VUHDO_I18N_RANK = "Уровень";
 
-
 -- Chat messages
--- @EXACT = false
 VUHDO_I18N_COMMAND_LIST = "\n|cffffe566 - [ Команды VuhDo ] -|r\n";
 VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566opt|r[ions] - настройки VuhDo\n";
 VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566res|r[et] - сбросить позицию панелей\n";
@@ -92,16 +77,12 @@ VUHDO_I18N_LOCK_PANELS_LOCKED = "|cffffe566заблокировать|r.";
 VUHDO_I18N_LOCK_PANELS_UNLOCKED = "|cffffe566разблокировать|r.";
 VUHDO_I18N_PANELS_RESET = "Позиция панели сброшена.";
 
-
 -- Config Pop-Up
--- @EXACT = false
 VUHDO_I18N_ROLE = "Роль";
 VUHDO_I18N_PRIVATE_TANK = "Личный танк";
 VUHDO_I18N_SET_BUFF = "Назначьте баф";
 
-
 -- Minimap
--- @EXACT = false
 VUHDO_I18N_VUHDO_OPTIONS = "Настройки VuhDo";
 VUHDO_I18N_PANEL_SETUP = "Настройки";
 VUHDO_I18N_MM_TOOLTIP = "ЛКМ: Настройки панели\nПКМ: Меню";
@@ -112,14 +93,11 @@ VUHDO_I18N_MM_BUTTON = "Кнопка у мини-карты";
 VUHDO_I18N_CLOSE = "Закрыть";
 VUHDO_I18N_BROADCAST_MTS = "Объявить танков";
 
-
 -- Buff categories
--- @EXACT = false
 -- Priest
 VUHDO_I18N_BUFFC_FORTITUDE = "01Стойкость";
 VUHDO_I18N_BUFFC_SPIRIT = "02Дух";
 VUHDO_I18N_BUFFC_SHADOW_PROTECTION = "03Защита от темной магии";
-
 -- Shaman
 VUHDO_I18N_BUFFC_FIRE_TOTEM = "01Тотем огня";
 VUHDO_I18N_BUFFC_AIR_TOTEM = "02Тотем воздуха";
@@ -128,32 +106,23 @@ VUHDO_I18N_BUFFC_WATER_TOTEM = "04Тотем воды";
 VUHDO_I18N_BUFFC_WEAPON_ENCHANT = "08Зачарование оружия";
 VUHDO_I18N_BUFFC_WEAPON_ENCHANT_2 = "13Зачарование оружия 2";
 VUHDO_I18N_BUFFC_SHIELDS = "09Щиты";
-
 -- Paladin
 VUHDO_I18N_BUFFC_BLESSING = "01Благословение";
 VUHDO_I18N_BUFFC_AURA = "02Аура";
 VUHDO_I18N_BUFFC_SEAL = "03Печать";
-
 -- Druids
-
 -- Warlock
 VUHDO_I18N_BUFFC_SKIN = "01Шкура";
-
 -- Mage
 VUHDO_I18N_BUFFC_ARMOR_MAGE = "03Доспех";
-
 -- Death Knight
 VUHDO_SPELL_ID_BUFFC_PRESENCE = "03Власть";
-
 -- Warrior
 VUHDO_I18N_BUFFC_SHOUT = "01Крик";
-
 -- Hunter
 VUHDO_I18N_BUFFC_ASPECT = "02Дух";
 
-
 -- Key Binding Headers/Names
--- @EXACT = false
 BINDING_HEADER_VUHDO_TITLE = "VuhDo";
 BINDING_NAME_VUHDO_KEY_ASSIGN_1 = "Заклинание 1";
 BINDING_NAME_VUHDO_KEY_ASSIGN_2 = "Заклинание 2";
@@ -177,14 +146,12 @@ BINDING_NAME_VUHDO_KEY_ASSIGN_SMART_BUFF = "Умный бафф";
 VUHDO_I18N_MOUSE_OVER_BINDING = "Клавиши";
 VUHDO_I18N_UNASSIGNED = "(не назначено)";
 
-
 -- #+V1.89
 VUHDO_I18N_YES = "Да";
 VUHDO_I18N_NO = "Нет";
 VUHDO_I18N_UP = "выше";
 VUHDO_I18N_DOWN = "ниже";
 VUHDO_I18N_VEHICLES = "Транспорт";
-
 
 -- #+v1.94
 VUHDO_I18N_DEFAULT_RES_ANNOUNCE = "vuhdo, вернись к жизни!";
@@ -194,7 +161,6 @@ VUHDO_I18N_MAIN_ASSISTS = "Помощник";
 
 -- #v+1.169
 VUHDO_I18N_O_REALLY = "Точно?";
-
 
 -- #+v1.184
 VUHDO_I18N_BW_CD = "CD";
@@ -239,7 +205,6 @@ VUHDO_I18N_SMARTBUFF_OKAY_2 = "|r на ";
 VUHDO_I18N_SET_BUFF_TARGET_1 = "Установка цели баффа для ";
 VUHDO_I18N_SET_BUFF_TARGET_2 = " до ";
 
-
 -- #+v1.189
 VUHDO_I18N_UNKNOWN = "Неизвестно";
 VUHDO_I18N_SELF = "Скрыть\nсебя";
@@ -261,12 +226,10 @@ VUHDO_I18N_NO_FOCUS = "[нет фокуса]";
 VUHDO_I18N_NOT_AVAILABLE = "[ N/A ]";
 VUHDO_I18N_SHIELD_ABSORPTION = "Статус\nЩита";
 
-
 -- #+1.237
 VUHDO_I18N_TT_DISTANCE = "|cffffb233Расстояние:|r";
 VUHDO_I18N_TT_OF = " - ";
 VUHDO_I18N_YARDS = "метров";
-
 
 -- #+1.252
 VUHDO_I18N_PANEL = "Панель";
@@ -305,7 +268,6 @@ VUHDO_I18N_BOUQUET_STATUS_INCOMING = "Вход. исцеление в %";
 VUHDO_I18N_BOUQUET_STATUS_THREAT = "Угроза в %";
 VUHDO_I18N_BOUQUET_NEW_ITEM_NAME = "-- введите сюда (де)баф --";
 
-
 VUHDO_I18N_DEF_BOUQUET_TANK_COOLDOWNS = "Кулдауны танка";
 VUHDO_I18N_DEF_BOUQUET_PW_S_WEAKENED_SOUL = "Слово силы Щит";
 VUHDO_I18N_DEF_BOUQUET_BORDER_MULTI_AGGRO = "Границы и угроза";
@@ -321,7 +283,6 @@ VUHDO_I18N_DEF_BOUQUET_BAR_MANA_ALL = "Все виды энергии";
 VUHDO_I18N_DEF_BOUQUET_BAR_MANA_ONLY = "Полоса маны";
 VUHDO_I18N_DEF_BOUQUET_BAR_THREAT = "Уровень угрозы";
 
-
 VUHDO_I18N_CUSTOM_ICON_NONE = "По умолчанию";
 VUHDO_I18N_CUSTOM_ICON_GLOSSY = "Блестящий";
 VUHDO_I18N_CUSTOM_ICON_MOSAIC = "Мозаика";
@@ -331,7 +292,6 @@ VUHDO_I18N_CUSTOM_ICON_SPOT = "Пятно";
 VUHDO_I18N_CUSTOM_ICON_CIRCLE = "Окружность";
 VUHDO_I18N_CUSTOM_ICON_SKETCHED = "Набросок";
 VUHDO_I18N_CUSTOM_ICON_RHOMB = "Ромб";
-
 
 VUHDO_I18N_OUTER_BORDER = "Снаружи";
 VUHDO_I18N_INNER_BORDER = "Внутри";
@@ -385,7 +345,6 @@ VUHDO_I18N_TT_BTN_5 = " Кнопка 5: ";
 VUHDO_I18N_TT_WHEEL_UP = " Колесо вверх: ";
 VUHDO_I18N_TT_WHEEL_DOWN = " Колесо вниз: ";
 
-
 -- 2.13
 VUHDO_I18N_BOUQUET_CLASS_ICON = "Иконка: Класс";
 VUHDO_I18N_BOUQUET_RAID_ICON = "Иконка: Метка рейда";
@@ -398,11 +357,17 @@ VUHDO_I18N_LOAD_PROFILE = "Загрузить профиль";
 VUHDO_I18N_DC_SHIELD_NO_MACROS = "Нет свободных слотов в макросах.";
 VUHDO_I18N_BROKER_TOOLTIP_1 = "|cffffff00ЛКМ|r Окно настроек";
 VUHDO_I18N_BROKER_TOOLTIP_2 = "|cffffff00ПКМ|r Всплывающее меню";
+
 -- 2.54
 VUHDO_I18N_HOURS = "ч.";
 VUHDO_I18N_MINS = "мин.";
 VUHDO_I18N_SECS = "сек.";
+
 -- 2.66
-VUHDO_I18N_OFF = "без звука";
+VUHDO_I18N_OFF = "Без звука";
 VUHDO_I18N_OFF_EMPTY = "выкл";
 VUHDO_I18N_NONE = "пусто";
+
+VUHDO_I18N_COMBAT = "Настройка невозможна в режиме боя!"
+VUHDO_I18N_HOOK = "пытается зацепить"
+VUHDO_I18N_HOOK2 = "который не существует!"

@@ -347,7 +347,7 @@ local function VUHDO_registerForBouquet(aBouquetName, anOwnerName, aFunction)
 	end
 
 	if (VUHDO_BOUQUETS["STORED"][aBouquetName] == nil) then
-		VUHDO_Msg("\"" .. anOwnerName .. "\" tries to hook to bouquet \"" .. aBouquetName .. "\" which doesn't exist!", 1, 0.4, 0.4);
+		VUHDO_Msg("\"" .. anOwnerName .. "\"" .. VUHDO_I18N_HOOK .. "\"" .. aBouquetName .. "\"" .. VUHDO_I18N_HOOK2, 1, 0.4, 0.4);
 		return;
 	end
 

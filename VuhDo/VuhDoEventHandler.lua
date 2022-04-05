@@ -526,7 +526,7 @@ function VUHDO_slashCmd(aCommand)
 	if (strfind(tCommandWord, "opt")) then
 		if (VuhDoNewOptionsTabbedFrame ~= nil) then
 			if (InCombatLockdown() and not VuhDoNewOptionsTabbedFrame:IsShown()) then
-				VUHDO_Msg("Leave combat first!", 1, 0.4, 0.4);
+				VUHDO_Msg(VUHDO_I18N_COMBAT, 1, 0.4, 0.4);
 			else
 				VUHDO_toggleMenu(VuhDoNewOptionsTabbedFrame);
 			end

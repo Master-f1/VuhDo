@@ -158,7 +158,7 @@ function VUHDO_initSharedMedia()
 	for tIndex, tValue in ipairs(tSounds) do
 		VUHDO_SOUNDS[tIndex] = {VUHDO_LibSharedMedia:Fetch('sound', tValue), tValue};
 	end
-	tinsert(VUHDO_SOUNDS, 1, {nil, "-- " .. VUHDO_I18N_OFF .. " --"});
+	tinsert(VUHDO_SOUNDS, 1, {nil, VUHDO_I18N_OFF});
 
 	-- borders
 	local tBorders = VUHDO_LibSharedMedia:List('border');
@@ -169,7 +169,7 @@ end
 
 local tPanelNum, tButtonNum;
 local tEmptyButton = {};
-function VUHDO_initCliqueSupport(bool) -- фикс
+function VUHDO_initCliqueSupport(bool) -- пїЅпїЅпїЅпїЅ
 	if (not VUHDO_CONFIG["IS_CLIQUE_COMPAT_MODE"]) then
 		return;
 	end

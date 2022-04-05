@@ -403,3 +403,7 @@ VUHDO_I18N_LOAD_PROFILE = "Load Profile";
 VUHDO_I18N_DC_SHIELD_NO_MACROS = "No free macro slots for this toon... d/c shield temporarily disabled.";
 VUHDO_I18N_BROKER_TOOLTIP_1 = "|cffffff00Left Click|r to show options menu";
 VUHDO_I18N_BROKER_TOOLTIP_2 = "|cffffff00Right Click|r to show popup menu";
+
+VUHDO_I18N_COMBAT = "Leave combat first!";
+VUHDO_I18N_HOOK = "tries to hook to bouquet"
+VUHDO_I18N_HOOK2 = "which doesn't exist!"

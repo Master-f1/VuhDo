@@ -857,7 +857,7 @@ function VUHDO_loadDefaultConfig()
 			72293, -- Метка падшего воителя
 			72385, -- Кипящая кровь
 			72409 -- Руна крови
-			);
+		);
 	end
 
 	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 9) then
@@ -873,7 +873,7 @@ function VUHDO_loadDefaultConfig()
 			72455, -- Газовое вздутие
 			70447, -- Выделения неустойчивого слизнюка
 			72745 -- Мутировавшая чума
-			);
+		);
 	end
 
 	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 10) then
@@ -887,7 +887,7 @@ function VUHDO_loadDefaultConfig()
 			72638, -- Роящиеся тени
 			70986, -- Покров скорби
 			71340 -- Пакт Омраченных
-			);
+		);
 	end
 
 	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 11) then
@@ -914,7 +914,7 @@ function VUHDO_loadDefaultConfig()
 			70541, -- Заражение
 			72754, -- Осквернение
 			68980 -- Жатва душ
-			);
+		);
 	end
 
 	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 13) then
