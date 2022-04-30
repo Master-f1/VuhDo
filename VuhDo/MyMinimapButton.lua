@@ -202,7 +202,7 @@ if not MyMinimapButton or MyMinimapButton.Version < version then
 
 		-- this gets a new default position by increments of 20 degrees
 		GetDefaultPosition = function(self)
-			local position, found = 0, 1, 0
+			local position, found = 0, 1
 
 			while found do
 				found = nil

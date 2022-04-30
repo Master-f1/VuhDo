@@ -30,7 +30,7 @@ local function VUHDO_placeAllReadyIcons()
 			if (tButton:GetAttribute("unit") ~= nil) then
 				VUHDO_placeReadyIcon(tButton);
 			else
-				break
+				break;
 			end
 		end
 	end
@@ -49,7 +49,7 @@ local function VUHDO_hideAllReadyIcons()
 			if (tButton:GetAttribute("unit") ~= nil) then
 				UIFrameFlash(VUHDO_getBarRoleIcon(tButton, 20), 0, 2, 10, false, 0, 8);
 			else
-				break
+				break;
 			end
 		end
 	end

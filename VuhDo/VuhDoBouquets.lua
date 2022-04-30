@@ -31,7 +31,15 @@ end
 
 local tValue;
 local function VUHDO_getColorHash(aColor)
-	tValue = (aColor["R"] or 0) * 0.0001 + (aColor["G"] or 0) * 0.001 + (aColor["B"] or 0) * 0.01 + (aColor["O"] or 0) * 0.1 + (aColor["TR"] or 0) + (aColor["TG"] or 0) * 10 + (aColor["TB"] or 0) * 100 + (aColor["TO"] or 0) * 1000;
+	tValue =
+		  (aColor["R"] or 0) * 0.0001
+		+ (aColor["G"] or 0) * 0.001
+		+ (aColor["B"] or 0) * 0.01
+		+ (aColor["O"] or 0) * 0.1
+		+ (aColor["TR"] or 0)
+		+ (aColor["TG"] or 0) * 10
+		+ (aColor["TB"] or 0) * 100
+		+ (aColor["TO"] or 0) * 1000;
 
 	if (aColor["useText"]) then
 		tValue = tValue + 10000;
@@ -347,7 +355,7 @@ local function VUHDO_registerForBouquet(aBouquetName, anOwnerName, aFunction)
 	end
 
 	if (VUHDO_BOUQUETS["STORED"][aBouquetName] == nil) then
-		VUHDO_Msg("\"" .. anOwnerName .. "\" tries to hook to bouquet \"" .. aBouquetName .. "\" which doesn't exist!", 1, 0.4, 0.4);
+		VUHDO_Msg(format(VUHDO_I18N_ERR_NO_BOUQUET, anOwnerName, aBouquetName), 1, 0.4, 0.4);
 		return;
 	end
 
@@ -364,12 +372,16 @@ local function VUHDO_registerForBouquet(aBouquetName, anOwnerName, aFunction)
 end
 
 local tCnt, tHotName, tHotSlots, tIndex, tBouquetName;
-local tAlreadyRegistered = {};
-function VUHDO_registerAllBouquets()
+local tAlreadyRegistered = { };
+function VUHDO_registerAllBouquets(aDoCompress)
 	VUHDO_unregisterAllBouquetListeners();
 
 	if (VUHDO_BOUQUETS["STORED"] == nil) then
 		return;
+	end
+
+	if (aDoCompress) then
+		VUHDO_compressAllBouquets();
 	end
 
 	-- Hot Icons+Bars
@@ -386,7 +398,7 @@ function VUHDO_registerAllBouquets()
 	-- Cluster (=Inner) Border
 	VUHDO_registerForBouquet(VUHDO_INDICATOR_CONFIG["BOUQUETS"]["CLUSTER_BORDER"], "Inner Border", VUHDO_clusterBorderBouquetCallback);
 	-- Swiftmend Indicator
-	VUHDO_registerForBouquet(VUHDO_INDICATOR_CONFIG["BOUQUETS"]["SWIFTMEND_INDICATOR"], "Swiftmend Indicator", VUHDO_swiftmendIndicatorBouquetCallback);
+	VUHDO_registerForBouquet(VUHDO_INDICATOR_CONFIG["BOUQUETS"]["SWIFTMEND_INDICATOR"], "Special Dot", VUHDO_swiftmendIndicatorBouquetCallback);
 	-- Aggro Line
 	VUHDO_registerForBouquet(VUHDO_INDICATOR_CONFIG["BOUQUETS"]["AGGRO_BAR"], "Aggro Bar", VUHDO_aggroBarBouquetCallback);
 	-- Mouseover Highlighter
@@ -401,6 +413,10 @@ function VUHDO_registerAllBouquets()
 	VUHDO_registerForBouquet(VUHDO_INDICATOR_CONFIG["BOUQUETS"]["BACKGROUND_BAR"], "Background Bar", VUHDO_backgroundBarBouquetCallback);
 	-- Health Bar
 	VUHDO_registerForBouquet(VUHDO_INDICATOR_CONFIG["BOUQUETS"]["HEALTH_BAR"], "Health Bar", VUHDO_healthBarBouquetCallback);
+	-- Side bar left
+	VUHDO_registerForBouquet(VUHDO_INDICATOR_CONFIG["BOUQUETS"]["SIDE_LEFT"], "Side Bar Left", VUHDO_sideBarLeftBouquetCallback);
+	-- Side bar right
+	VUHDO_registerForBouquet(VUHDO_INDICATOR_CONFIG["BOUQUETS"]["SIDE_RIGHT"], "Side Bar Right", VUHDO_sideBarRightBouquetCallback);
 	-- Per panel Health Bars
 	twipe(tAlreadyRegistered);
 	for tCnt = 1, VUHDO_MAX_PANELS do
@@ -409,6 +425,10 @@ function VUHDO_registerAllBouquets()
 			VUHDO_registerForBouquet(tBouquetName, "Health Bar " .. tCnt, VUHDO_healthBarBouquetCallbackCustom);
 			tAlreadyRegistered[tBouquetName] = true;
 		end
+	end
+
+	for _, tBouquetName in pairs(VUHDO_CUSTOM_BOUQUETS) do
+		VUHDO_BOUQUETS["STORED"][tBouquetName] = VUHDO_decompressIfCompressed(VUHDO_BOUQUETS["STORED"][tBouquetName]);
 	end
 
 	VUHDO_updateGlobalToggles();

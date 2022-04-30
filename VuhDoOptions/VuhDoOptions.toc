@@ -1,7 +1,7 @@
 ## Interface: 30300
 ## Title: VuhDo - Options
 ## Author: Iza@Gilneas
-## Version: 2.23
+## Version: 2.23.4
 ## Notes: VuhDo Options
 ## Notes-ruRU: Настройки VuhDo
 ## SavedVariables: VUHDO_OPTIONS_SETTINGS

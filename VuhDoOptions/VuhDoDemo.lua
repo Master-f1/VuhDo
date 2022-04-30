@@ -156,7 +156,7 @@ local VUHDO_DEMO_SETUP = {
 		[VUHDO_ID_RANGED_DAMAGE] = 12,
 		[VUHDO_ID_RANGED_HEAL] = 12,
 		[VUHDO_ID_VEHICLES] = 40,
-	},
+	}
 };
 
 
@@ -261,7 +261,6 @@ local tRole;
 local tHealthMax;
 local function VUHDO_createTestUser()
 	tIsCreatePet = false;
-
 	tHealthMax = random(10000, 20000);
 
 	if (VUHDO_TEST_USERS_LEFT[VUHDO_ID_PETS] > 0) then

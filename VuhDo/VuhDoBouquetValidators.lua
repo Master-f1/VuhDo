@@ -84,7 +84,12 @@ local VUHDO_ICONS_BY_CLASS_ID = {
 	[VUHDO_ID_DEATH_KNIGHT] = "Interface\\AddOns\\VuhDo\\Images\\classicons\\deathknight"
 };
 
-local VUHDO_CHARGE_COLORS = {"HOT_CHARGE_1", "HOT_CHARGE_2", "HOT_CHARGE_3", "HOT_CHARGE_4"};
+local VUHDO_CHARGE_COLORS = {
+	"HOT_CHARGE_1",
+	"HOT_CHARGE_2",
+	"HOT_CHARGE_3",
+	"HOT_CHARGE_4"
+};
 
 local tCopy = {};
 local tEmptyColor = {};
@@ -331,8 +336,7 @@ end
 
 local function VUHDO_statusHealthValidator(anInfo, _)
 	if (sIsInverted) then
-		return true, nil, anInfo["health"] + VUHDO_getIncHealOnUnit(anInfo["name"]), -1, anInfo["healthmax"], nil,
-			anInfo["health"];
+		return true, nil, anInfo["health"] + VUHDO_getIncHealOnUnit(anInfo["name"]), -1, anInfo["healthmax"], nil, anInfo["health"];
 	else
 		return true, nil, anInfo["health"], -1, anInfo["healthmax"], nil, anInfo["health"];
 	end

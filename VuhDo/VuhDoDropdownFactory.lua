@@ -86,7 +86,7 @@ function VUHDO_playerTargetDropDown_Initialize(aFrame, aLevel)
 	end
 
 	if (tUnitRank == 1) then
-	-- - assist
+		-- - assist
 		tInfo = UIDropDownMenu_CreateInfo();
 		tInfo.text = VUHDO_I18N_DEMOTE_ASSISTANT;
 		tInfo.checked = false;
@@ -325,27 +325,27 @@ function VUHDO_miniMapDropDown_Initialize(aFrame, aLevel)
 
 	if (aLevel > 1) then
 		if ("S" == UIDROPDOWNMENU_MENU_VALUE) then
-		local tSetup;
+			local tSetup;
 
-		for _, tSetup in ipairs(VUHDO_PROFILES) do
-			tInfo = UIDropDownMenu_CreateInfo();
-			tInfo.text = tSetup["NAME"];
-			tInfo.arg1 = tSetup["NAME"];
-			tInfo.func = VUHDO_mmLoadProfile;
-			tInfo.checked = tSetup["NAME"] == VUHDO_CONFIG["CURRENT_PROFILE"];
-			tInfo.level = 2;
-			UIDropDownMenu_AddButton(tInfo, 2);
-		end
+			for _, tSetup in ipairs(VUHDO_PROFILES) do
+				tInfo = UIDropDownMenu_CreateInfo();
+				tInfo.text = tSetup["NAME"];
+				tInfo.arg1 = tSetup["NAME"];
+				tInfo.func = VUHDO_mmLoadProfile;
+				tInfo.checked = tSetup["NAME"] == VUHDO_CONFIG["CURRENT_PROFILE"];
+				tInfo.level = 2;
+				UIDropDownMenu_AddButton(tInfo, 2);
+			end
 		elseif ("K" == UIDROPDOWNMENU_MENU_VALUE) then
-		for tName, _ in pairs(VUHDO_SPELL_LAYOUTS) do
-			tInfo = UIDropDownMenu_CreateInfo();
-			tInfo.text = tName;
-			tInfo.arg1 = tName;
-			tInfo.func = VUHDO_mmLoadKeyLayout;
-			tInfo.checked = tName == VUHDO_SPEC_LAYOUTS["selected"];
-			tInfo.level = 2;
-			UIDropDownMenu_AddButton(tInfo, 2);
-		end
+			for tName, _ in pairs(VUHDO_SPELL_LAYOUTS) do
+				tInfo = UIDropDownMenu_CreateInfo();
+				tInfo.text = tName;
+				tInfo.arg1 = tName;
+				tInfo.func = VUHDO_mmLoadKeyLayout;
+				tInfo.checked = tName == VUHDO_SPEC_LAYOUTS["selected"];
+				tInfo.level = 2;
+				UIDropDownMenu_AddButton(tInfo, 2);
+			end
 		end
 		return;
 	end

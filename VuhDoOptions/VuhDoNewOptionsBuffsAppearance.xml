@@ -142,15 +142,15 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
-					<Layers>
-						<Layer>
-							<FontString name="$parentLabel" text="PallyPower" inherits="VuDoDefaultTitleFontTemplate">
-							</FontString>
-						</Layer>
-					</Layers>
-				</Frame>
-			</Frames>
-		</Frame>
+				<Layers>
+					<Layer>
+						<FontString name="$parentLabel" text="PallyPower" inherits="VuDoDefaultTitleFontTemplate">
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+		</Frames>
+	</Frame>
 
 			<Frame name="$parentGeneralPanel" inherits="VuhDoPanelTemplate">
 				<Size>

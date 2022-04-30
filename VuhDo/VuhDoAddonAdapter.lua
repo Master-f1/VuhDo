@@ -106,7 +106,10 @@ function VUHDO_initFuBar()
 	end
 
 	-- Native FuBar
-	if (LibStub:GetLibrary("LibFuBarPlugin-3.0", true) and IsAddOnLoaded("FuBar") and not IsAddOnLoaded("FuBar2Broker") and not IsAddOnLoaded("Broker2FuBar")) then
+	if (LibStub:GetLibrary("LibFuBarPlugin-3.0", true)
+		and IsAddOnLoaded("FuBar")
+		and not IsAddOnLoaded("FuBar2Broker")
+		and not IsAddOnLoaded("Broker2FuBar")) then
 
 		local tLibFuBarPlugin = LibStub:GetLibrary("LibFuBarPlugin-3.0");
 		LibStub("AceAddon-3.0"):EmbedLibrary(VuhDo, "LibFuBarPlugin-3.0");
@@ -158,7 +161,7 @@ function VUHDO_initSharedMedia()
 	for tIndex, tValue in ipairs(tSounds) do
 		VUHDO_SOUNDS[tIndex] = {VUHDO_LibSharedMedia:Fetch('sound', tValue), tValue};
 	end
-	tinsert(VUHDO_SOUNDS, 1, {nil, "-- " .. VUHDO_I18N_OFF .. " --"});
+	tinsert(VUHDO_SOUNDS, 1, {nil, VUHDO_I18N_OFF});
 
 	-- borders
 	local tBorders = VUHDO_LibSharedMedia:List('border');

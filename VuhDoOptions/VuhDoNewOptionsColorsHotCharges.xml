@@ -14,8 +14,8 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
+			
 			<Frames>
-
 					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
 						<Size>
 							<AbsDimension x="110" y="18" />

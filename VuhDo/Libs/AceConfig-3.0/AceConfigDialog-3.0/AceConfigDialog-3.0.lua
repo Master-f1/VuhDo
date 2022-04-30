@@ -505,7 +505,7 @@ function lib:SelectGroup(appName, ...)
 		-- move to the next group in the path
 		group = GetSubOption(group, key)
 		if not group then
-			break
+			break;
 		end
 		tinsert(path, key)
 		status = self:GetStatusTable(appName, path)
@@ -1407,7 +1407,7 @@ Rules:
 	If the group is a tree group FeedOptions then
 		its parent isnt a tree group: then add the tree control containing this and all child tree groups
 		if its parent is a tree group, its already a node on a tree
-]]
+--]]
 
 function lib:FeedGroup(appName,options,container,rootframe,path, isRoot)
 	local group = options
@@ -1502,7 +1502,7 @@ function lib:FeedGroup(appName,options,container,rootframe,path, isRoot)
 				local entry = tabs[i]
 				if not entry.disabled then
 					tab:SelectTab((GroupExists(appName, options, path,status.groups.selected) and status.groups.selected) or entry.value)
-					break
+					break;
 				end
 			end
 
@@ -1565,7 +1565,7 @@ function lib:FeedGroup(appName,options,container,rootframe,path, isRoot)
 				local entry = treedefinition[i]
 				if not entry.disabled then
 					tree:SelectByValue((GroupExists(appName, options, path,status.groups.selected) and status.groups.selected) or entry.value)
-					break
+					break;
 				end
 			end
 

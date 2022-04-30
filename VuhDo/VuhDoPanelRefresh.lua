@@ -164,7 +164,7 @@ local function VUHDO_refreshPositionAllHealButtons(aPanel, aPanelNum)
 	for tCnt = tButtonIdx, 51 do -- VUHDO_MAX_BUTTONS_PANEL
 		tButton = VUHDO_getHealButton(tCnt, aPanelNum);
 		if (tButton == nil) then
-			break
+			break;
 		end
 		tButton["raidid"] = nil;
 		tButton["target"] = nil;

@@ -295,6 +295,7 @@ local function VUHDO_generateRaidMacroTemplate(anAction, anIsKeyboard, aTarget, 
 
 	if (VUHDO_SPELL_CONFIG["IS_KEEP_STANCE"] and VUHDO_SPELL_ID_REBIRTH ~= anAction and VUHDO_SPELLS[anAction] ~= nil and
 		not VUHDO_SPELLS[anAction].nostance) then
+
 		if ("DRUID" == VUHDO_PLAYER_CLASS) then
 			tModiSpell = tModiSpell .. "noform:1/3,";
 
@@ -329,15 +330,14 @@ local function VUHDO_generateRaidMacroTemplate(anAction, anIsKeyboard, aTarget, 
 		if (aPet ~= nil) then
 			tText = tText .. "/tar [bonusbar:5,@vdpet]\n";
 		end
-	end
 
-	-- if (not anIsKeyboard) then
-	if (VUHDO_SPELL_CONFIG["IS_AUTO_TARGET"]) then
-		tText = tText .. "/tar [@vuhdo]\n";
-	else
-		tText = tText .. "/tar [harm,@vuhdo]\n";
+
+		if (VUHDO_SPELL_CONFIG["IS_AUTO_TARGET"]) then
+			tText = tText .. "/tar [@vuhdo]\n";
+		else
+			tText = tText .. "/tar [harm,@vuhdo]\n";
+		end
 	end
-	-- end
 
 	return tText;
 end

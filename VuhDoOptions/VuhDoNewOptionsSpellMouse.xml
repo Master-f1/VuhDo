@@ -44,7 +44,7 @@
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
-									<AbsDimension x="16" y="-311" />
+									<AbsDimension x="16" y="-343" />
 								</Offset>
 							</Anchor>
 						</Anchors>
@@ -63,7 +63,7 @@
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
-									<AbsDimension x="16" y="-322" />
+									<AbsDimension x="16" y="-354" />
 								</Offset>
 							</Anchor>
 						</Anchors>
@@ -82,7 +82,7 @@
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
-									<AbsDimension x="16" y="-336" />
+									<AbsDimension x="16" y="-365" />
 								</Offset>
 							</Anchor>
 						</Anchors>
@@ -96,7 +96,7 @@
 
 					<ScrollFrame name="$parentScrollPanel" inherits="VuhDoScrollPanelTemplate">
 						<Size>
-							<AbsDimension x="245" y="277" />
+							<AbsDimension x="245" y="310" />
 						</Size>
 						<Anchors>
 							<Anchor point="TOPLEFT">

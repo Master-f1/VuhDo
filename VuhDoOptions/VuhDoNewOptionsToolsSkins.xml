@@ -563,7 +563,7 @@
 						</Scripts>
 					</Button>
 
-					<CheckButton name="$parentSelectedRadioButton" text="VUHDO_I18N_SELECTED" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentSelectedRadioButton" text="VUHDO_I18N_SELECT" inherits="VuhDoRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>

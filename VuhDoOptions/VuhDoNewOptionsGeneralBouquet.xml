@@ -250,7 +250,7 @@
 
 			<Frame name="$parentDetailsPanel" inherits="VuhDoPanelTemplate">
 				<Size>
-					<AbsDimension x="200" y="380" />
+					<AbsDimension x="220" y="380" />
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">

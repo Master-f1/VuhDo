@@ -93,7 +93,7 @@ local function VUHDO_getSubTable(aTable, anIndex, aCount)
 		if (aTable[tSubCount] ~= nil) then
 			tinsert(tSubTable, aTable[tSubCount]);
 		else
-			break
+			break;
 		end
 	end
 

@@ -39,6 +39,7 @@ function VUHDO_resetSizeCalcCachesHor()
 end
 
 -- Returns the total height of optional threat bars
+
 local tTopSpace;
 local tNameHeight;
 local tNamePos;
@@ -73,7 +74,7 @@ local function VUHDO_getAdditionalBottomHeight(aPanelNum)
 		tHotCfg = VUHDO_PANEL_SETUP["HOTS"];
 
 		if (tHotCfg["radioValue"] == 7 or tHotCfg["radioValue"] == 8) then
-		tBottomSpace = VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barHeight"] * VUHDO_PANEL_SETUP[aPanelNum]["HOTS"]["size"] * 0.01;
+			tBottomSpace = VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barHeight"] * VUHDO_PANEL_SETUP[aPanelNum]["HOTS"]["size"] * 0.01;
 		end
 
 		tNamePos = VUHDO_splitString(VUHDO_PANEL_SETUP[aPanelNum]["ID_TEXT"]["position"], "+");
@@ -124,7 +125,9 @@ function VUHDO_getHeaderWidthHor(aPanelNum)
 end
 
 local function VUHDO_getHealButtonHeight(aPanelNum)
-	return VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barHeight"] + VUHDO_getAdditionalTopHeight(aPanelNum) + VUHDO_getAdditionalBottomHeight(aPanelNum);
+	return VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barHeight"]
+		+ VUHDO_getAdditionalTopHeight(aPanelNum)
+		+ VUHDO_getAdditionalBottomHeight(aPanelNum);
 end
 
 -- Returns total header height

@@ -132,7 +132,6 @@ function VUHDO_vuhdoInitBurst()
 	VUHDO_updateBouquetsForEvent = VUHDO_GLOBAL["VUHDO_updateBouquetsForEvent"];
 	VUHDO_resetClusterCoordDeltas = VUHDO_GLOBAL["VUHDO_resetClusterCoordDeltas"];
 	VUHDO_getUnitZoneName = VUHDO_GLOBAL["VUHDO_getUnitZoneName"];
-
 	VUHDO_INTERNAL_TOGGLES = VUHDO_GLOBAL["VUHDO_INTERNAL_TOGGLES"];
 end
 
@@ -187,7 +186,7 @@ local VUHDO_EMERGENCY_SORTERS = {
 				tInfoA = VUHDO_RAID[aUnit];
 				tInfoB = VUHDO_RAID[anotherUnit];
 
-					return (tInfoA["health"] / tInfoA["healthmax"] < tInfoB["health"] / tInfoB["healthmax"]);
+				return (tInfoA["health"] / tInfoA["healthmax"] < tInfoB["health"] / tInfoB["healthmax"]);
 			end,
 
 	[VUHDO_MODE_EMERGENCY_LEAST_LEFT] = function(aUnit, anotherUnit)
@@ -707,7 +706,7 @@ local tModelType;
 local function VUHDO_isUnitInPanel(aPanelNum, aUnit)
 	for _, tModelId in pairs(VUHDO_PANEL_MODELS[aPanelNum]) do
 		tModelType = VUHDO_getModelType(tModelId);
-		if (2 == tModelType or 1 == tModelType) then -- VUHDO_ID_TYPE_GROUP VUHDO_ID_TYPE_CLASS
+		if (2 == tModelType or 1 == tModelType) then -- VUHDO_ID_TYPE_GROUP -- VUHDO_ID_TYPE_CLASS
 			if (VUHDO_CONFIG["OMIT_MAIN_TANKS"] and VUHDO_isUnitInModel(aUnit, 41)) then -- VUHDO_ID_MAINTANKS
 			elseif (VUHDO_CONFIG["OMIT_PLAYER_TARGETS"] and VUHDO_isUnitInModel(aUnit, 42)) then -- VUHDO_ID_PRIVATE_TANKS
 			elseif (VUHDO_CONFIG["OMIT_MAIN_ASSIST"] and VUHDO_isUnitInModel(aUnit, 43)) then -- VUHDO_ID_MAIN_ASSISTS
@@ -879,7 +878,6 @@ function VUHDO_reloadRaidMembers()
 					VUHDO_setHealthSafe(tPet, 1); -- VUHDO_UPDATE_ALL
 				end
 			end
-
 		end
 
 		VUHDO_setHealthSafe("player", 1); -- VUHDO_UPDATE_ALL

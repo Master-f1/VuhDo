@@ -89,8 +89,8 @@ local tMacroId, tMacroText;
 local tActionLow;
 local tBaseSpell;
 local tSpellInfo;
-local function VUHDO_setupHealButtonAttributes(aModiKey, aButtonId, anAction, aButton, anIsTgButton, anIndex)
 
+local function VUHDO_setupHealButtonAttributes(aModiKey, aButtonId, anAction, aButton, anIsTgButton, anIndex)
 	if (anIsTgButton or aButton["target"] == "focus" or aButton["target"] == "target") then
 		if (anIndex == nil) then
 			tHostSpell = VUHDO_HOSTILE_SPELL_ASSIGNMENTS[gsub(aModiKey, "-", "") .. aButtonId][3];
@@ -201,7 +201,6 @@ local tPreAction;
 local tTarget;
 local tIndex;
 local tSpellDescr;
--- local tInfo;
 local tIsWheel;
 local tHostSpell;
 function VUHDO_setupAllHealButtonAttributes(aButton, aUnit, anIsDisable, aForceTarget, anIsTgButton)
@@ -240,6 +239,7 @@ function VUHDO_setupAllHealButtonAttributes(aButton, aUnit, anIsDisable, aForceT
 		for _, tSpellDescr in pairs(VUHDO_SPELL_ASSIGNMENTS) do
 			VUHDO_setupHealButtonAttributes(tSpellDescr[1], tSpellDescr[2], tPreAction, aButton, anIsTgButton);
 		end
+
 	else
 		for _, tSpellDescr in pairs(VUHDO_SPELL_ASSIGNMENTS) do
 			VUHDO_setupHealButtonAttributes(tSpellDescr[1], tSpellDescr[2], tSpellDescr[3], aButton, anIsTgButton);
@@ -334,6 +334,7 @@ end
 
 function VUHDO_disableActions(aButton)
 	VUHDO_setupAllHealButtonAttributes(aButton, nil, true, false, false);
+
 	aButton:Hide(); -- For clearing mouse-wheel click bindings
 	aButton:Show();
 end
@@ -375,7 +376,6 @@ function VUHDO_setupSmartCast(aButton)
 		local tMainRes, _ = VUHDO_getResurrectionSpells();
 		if (tMainRes ~= nil) then
 			if (not UnitIsGhost(tUnit)) then
-
 				VUHDO_setupAllButtonsTo(aButton, tMainRes);
 				return true;
 			else

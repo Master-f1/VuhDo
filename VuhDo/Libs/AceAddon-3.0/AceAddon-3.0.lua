@@ -254,7 +254,7 @@ function DisableModule(self, name)
 	return module:Disable()
 end
 
--- addon:SetDefaultModuleLibraries([lib, lib, lib, ...] )
+-- addon:SetDefaultModuleLibraries([lib, lib, lib, ...])
 -- [lib] (string) - libs to embed in every module
 function SetDefaultModuleLibraries(self, ...)
 	if next(self.modules) then

@@ -349,7 +349,7 @@ function VUHDO_customizeText(aButton, aMode, anIsTarget)
 		-- Add player flags
 		if (tSetup["ID_TEXT"]["showTags"]) then
 			if (not tInfo["connected"]) then
-				tTextString = "d/c-" .. tTextString;
+				tTextString = VUHDO_I18N_TT_DC .. tTextString;
 			elseif (tInfo["dead"]) then
 				if (UnitIsGhost(tUnit)) then
 					tTextString = VUHDO_I18N_TT_GHOST .. tTextString;
@@ -358,13 +358,13 @@ function VUHDO_customizeText(aButton, aMode, anIsTarget)
 				end
 			else
 				if ("focus" == tUnit) then
-					tTextString = "|cffff0000foc|r-" .. tTextString;
+					tTextString = VUHDO_I18N_TT_FOC .. tTextString;
 				elseif ("target" == tUnit) then
-					tTextString = "|cffff0000tar|r-" .. tTextString;
+					tTextString = VUHDO_I18N_TT_TAR .. tTextString;
 				elseif (tInfo["afk"]) then
 					tTextString = VUHDO_I18N_TT_AFK .. tTextString;
 				elseif (tOwnerInfo ~= nil and tOwnerInfo["isVehicle"]) then
-					tTextString = "|cffff0000pet|r-" .. tTextString;
+					tTextString = VUHDO_I18N_VEHICLE .. tTextString;
 				end
 			end
 		end

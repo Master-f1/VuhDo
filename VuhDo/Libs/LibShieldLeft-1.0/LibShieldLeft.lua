@@ -401,7 +401,7 @@ local function getBaseShieldSize(name)
 			local spellName, spellRank = GetSpellName(i, BOOKTYPE_SPELL)
 
 			if (not spellName) then
-				break
+				break;
 			end
 
 			if (spellName == name) then
