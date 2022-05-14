@@ -201,19 +201,17 @@ function VUHDO_inspectLockRole()
 	VUHDO_normalRaidReload();
 end
 
-local tDfRole;
+local tIsTank, tIsHeal, tIsDps;
 local function VUHDO_determineDfToolRole(anInfo)
-	tDfRole = UnitGroupRolesAssigned(anInfo["unit"]);
+	tIsTank, tIsHeal, tIsDps = UnitGroupRolesAssigned(anInfo["unit"]);
 
-	if ("NONE" == tDfRole) then
-		return nil;
-	elseif("TANK" == tDfRole) then
+	if (tIsTank) then
 		VUHDO_DF_TOOL_ROLES[anInfo["name"]] = 60; -- VUHDO_ID_MELEE_TANK
 		return 60; -- VUHDO_ID_MELEE_TANK
-	elseif ("HEALER" == tDfRole) then
+	elseif (tIsHeal) then
 		VUHDO_DF_TOOL_ROLES[anInfo["name"]] = 63; -- VUHDO_ID_RANGED_HEAL
 		return 63; -- VUHDO_ID_RANGED_HEAL
-	elseif ("DAMAGER" == tDfRole) then
+	elseif (tIsDps) then
 		VUHDO_DF_TOOL_ROLES[anInfo["name"]] = 61; -- VUHDO_ID_MELEE_DAMAGE
 		-- Do return "nil", cause we don't know if melee or ranged dps, mark as indicator
 	end

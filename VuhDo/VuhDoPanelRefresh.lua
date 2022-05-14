@@ -64,7 +64,8 @@ local function VUHDO_hasPanelButtons(aPanelNum)
 		return false;
 	end
 
-	return #VUHDO_PANEL_DYN_MODELS[aPanelNum] > 0;
+	tModels = VUHDO_PANEL_DYN_MODELS[aPanelNum] or tEmptyModel;
+	return #tModels > 0;
 end
 
 local tCnt;

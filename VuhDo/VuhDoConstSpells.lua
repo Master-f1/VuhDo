@@ -4,47 +4,47 @@ local GetSpellInfo = GetSpellInfo;
 -- Spells by SpellId --
 -----------------------
 -- VUHDO_SPELL_ID = { }; -- (DeMix)
-VUHDO_SPELL_ID_ABOLISH_DISEASE = GetSpellInfo(552); -- Устранение болезни (Жрец)
+VUHDO_SPELL_ID_ABOLISH_DISEASE = GetSpellInfo(552);
 VUHDO_SPELL_ID_ABOLISH_POISON = GetSpellInfo(2893);
-VUHDO_SPELL_ID_ACTIVATE_FIRST_TALENT = GetSpellInfo(63645); -- Применение первого набора талантов
-VUHDO_SPELL_ID_ACTIVATE_SECOND_TALENT = GetSpellInfo(63644); -- Применение второго набора талантов
-VUHDO_SPELL_ID_ANCESTRAL_HEALING = GetSpellInfo(16176); -- Исцеление предков (Шаман)
-VUHDO_SPELL_ID_ANCESTRAL_SPIRIT = GetSpellInfo(2008); -- Дух предков (Шаман)
-VUHDO_SPELL_ID_BINDING_HEAL = GetSpellInfo(32546); -- Связующее исцеление (Жрец)
-VUHDO_SPELL_ID_BLESSED_HEALING = GetSpellInfo(70772); -- Благословенное исцеление (Жрец)
+VUHDO_SPELL_ID_ACTIVATE_FIRST_TALENT = GetSpellInfo(63645);
+VUHDO_SPELL_ID_ACTIVATE_SECOND_TALENT = GetSpellInfo(63644);
+VUHDO_SPELL_ID_ANCESTRAL_HEALING = GetSpellInfo(16176);
+VUHDO_SPELL_ID_ANCESTRAL_SPIRIT = GetSpellInfo(2008);
+VUHDO_SPELL_ID_BINDING_HEAL = GetSpellInfo(32546);
+VUHDO_SPELL_ID_BLESSED_HEALING = GetSpellInfo(70772);
 -- VUHDO_SPELL_ID_BLOOD_PAKT = GetSpellInfo(6307); -- Кровавый пакт (DeMix)
 -- VUHDO_SPELL_ID_CALL_OF_THE_ELEMENTS = GetSpellInfo(66842); -- Зов Стихий (Шаман) установка 4х тотемов (DeMix)
-VUHDO_SPELL_ID_CHAIN_HEAL = GetSpellInfo(1064); -- Цепное исцеление (Шаман)
-VUHDO_SPELL_ID_CIRCLE_OF_HEALING = GetSpellInfo(34861); -- Круг исцеления (Жрец)
-VUHDO_SPELL_ID_CLEANSE_SPIRIT = GetSpellInfo(51886); -- Очищение духа (Шаман)
-VUHDO_SPELL_ID_CURE_DISEASE = GetSpellInfo(528); -- Излечение болезни (Жрец)
-VUHDO_SPELL_ID_CURE_TOXINS = GetSpellInfo(526); -- Оздоровление (Шаман)
-VUHDO_SPELL_ID_DESPERATE_PRAYER = GetSpellInfo(19236); -- Молитва отчаяния (Жрец)
-VUHDO_SPELL_ID_DISPEL_MAGIC = GetSpellInfo(527); -- Рассеивание заклинаний (Жрец)
-VUHDO_SPELL_ID_DIVINE_AEGIS = GetSpellInfo(47509); -- Божественное покровительство (Жрец)
+VUHDO_SPELL_ID_CHAIN_HEAL = GetSpellInfo(1064);
+VUHDO_SPELL_ID_CIRCLE_OF_HEALING = GetSpellInfo(34861);
+VUHDO_SPELL_ID_CLEANSE_SPIRIT = GetSpellInfo(51886);
+VUHDO_SPELL_ID_CURE_DISEASE = GetSpellInfo(528);
+VUHDO_SPELL_ID_CURE_TOXINS = GetSpellInfo(526);
+VUHDO_SPELL_ID_DESPERATE_PRAYER = GetSpellInfo(19236);
+VUHDO_SPELL_ID_DISPEL_MAGIC = GetSpellInfo(527);
+VUHDO_SPELL_ID_DIVINE_AEGIS = GetSpellInfo(47509);
 VUHDO_SPELL_ID_DIVINE_FAVOR = GetSpellInfo(20216); -- Божественное одобрение (Паладин)
 VUHDO_SPELL_ID_DIVINE_ILLUMINATION = GetSpellInfo(31842); -- Божественное просветление (Паладин)
 -- Удалить
-VUHDO_SPELL_ID_DIVINE_INTERVENTION = GetSpellInfo(19752); -- Божественное вмешательство (Паладин)
-VUHDO_SPELL_ID_EARTHLIVING = GetSpellInfo(51945); -- Жизнь Земли (Шаман) прок от Оружие жизни земли
-VUHDO_SPELL_ID_FLASH_HEAL = GetSpellInfo(2061); -- Быстрое исцеление (Жрец)
-VUHDO_SPELL_ID_FLASH_OF_LIGHT = GetSpellInfo(19750); -- Вспышка Света (Паладин)
-VUHDO_SPELL_ID_FOUNTAIN_OF_LIGHT = GetSpellInfo(71864); -- Фонтан света (Прок от травмы)
-VUHDO_SPELL_ID_GIFT_OF_THE_NAARU = GetSpellInfo(59547); -- Дар наару (Дренеи)
-VUHDO_SPELL_ID_GRACE = GetSpellInfo(47516); -- Милость (Жрец)
-VUHDO_SPELL_ID_GREATER_HEAL = GetSpellInfo(2060); -- Великое исцеление (Жрец)
-VUHDO_SPELL_ID_GUARDIAN_SPIRIT = GetSpellInfo(47788); -- Оберегающий дух (Жрец)
-VUHDO_SPELL_ID_HEAL = GetSpellInfo(2054); -- Исцеление (Жрец)
-VUHDO_SPELL_ID_HEALING_TOUCH = GetSpellInfo(5185); -- Целительное прикосновение (Друид)
-VUHDO_SPELL_ID_HEALING_WAVE = GetSpellInfo(331); -- Волна исцеления (Шаман)
-VUHDO_SPELL_ID_HOLY_LIGHT = GetSpellInfo(635); -- Свет небес (Паладин)
-VUHDO_SPELL_ID_HOLY_SHOCK = GetSpellInfo(20473); -- Шок небес (Паладин)
+VUHDO_SPELL_ID_DIVINE_INTERVENTION = GetSpellInfo(19752);
+VUHDO_SPELL_ID_EARTHLIVING = GetSpellInfo(51945);
+VUHDO_SPELL_ID_FLASH_HEAL = GetSpellInfo(2061);
+VUHDO_SPELL_ID_FLASH_OF_LIGHT = GetSpellInfo(19750);
+VUHDO_SPELL_ID_FOUNTAIN_OF_LIGHT = GetSpellInfo(71864);
+VUHDO_SPELL_ID_GIFT_OF_THE_NAARU = GetSpellInfo(59547);
+VUHDO_SPELL_ID_GRACE = GetSpellInfo(47516);
+VUHDO_SPELL_ID_GREATER_HEAL = GetSpellInfo(2060);
+VUHDO_SPELL_ID_GUARDIAN_SPIRIT = GetSpellInfo(47788);
+VUHDO_SPELL_ID_HEAL = GetSpellInfo(2054);
+VUHDO_SPELL_ID_HEALING_TOUCH = GetSpellInfo(5185);
+VUHDO_SPELL_ID_HEALING_WAVE = GetSpellInfo(331);
+VUHDO_SPELL_ID_HOLY_LIGHT = GetSpellInfo(635);
+VUHDO_SPELL_ID_HOLY_SHOCK = GetSpellInfo(20473);
 -- Удалить
 -- Удалить
 -- Удалить
 -- Удалить
 -- Удалить
-VUHDO_SPELL_ID_INNERVATE = GetSpellInfo(29166); -- Озарение (Друид)
+VUHDO_SPELL_ID_INNERVATE = GetSpellInfo(29166);
 VUHDO_SPELL_ID_INSPIRATION = GetSpellInfo(14893); -- "Вдохновение"(аура) или заменить на ID 14894 "Вдохновение" (Жрец)
 VUHDO_SPELL_ID_LAY_ON_HANDS = GetSpellInfo(633);
 VUHDO_SPELL_ID_LESSER_HEAL = GetSpellInfo(2050); -- ЕСТЬ -- (DeMix)

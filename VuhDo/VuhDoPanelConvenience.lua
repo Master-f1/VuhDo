@@ -470,7 +470,7 @@ end
 
 function VUHDO_initFastCache()
 	local tCnt;
-	for tCnt = 1, 10 do
+	for tCnt = 1, VUHDO_MAX_PANELS do
 		VUHDO_HEAL_BUTTON[tCnt] = {};
 	end
 end

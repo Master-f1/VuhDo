@@ -86,6 +86,12 @@
 			<OnLoad>
 				VUHDO_OnLoad(self);
 			</OnLoad>
+			<OnEvent>
+				VUHDO_OnEvent(self,event,arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12);
+			</OnEvent>
+			<OnUpdate>
+				VUHDO_OnUpdate(self,arg1);
+			</OnUpdate>
 		</Scripts>
 	</Frame>
 

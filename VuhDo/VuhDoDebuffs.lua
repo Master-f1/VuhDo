@@ -306,7 +306,7 @@ function VUHDO_determineDebuff(aUnit, aClassName)
 		end
 
 		for tCnt = 1, 255 do
-			tName, _, tIcon, tStacks, _, _, tExpiry, _, _, _, _ = UnitBuff(aUnit, tCnt);
+			tName, _, tIcon, tStacks, _, _, tExpiry = UnitBuff(aUnit, tCnt);
 
 			if (tIcon == nil) then
 				break;
