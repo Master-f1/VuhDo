@@ -1,4 +1,3 @@
-
 local table = table;
 local floor = floor;
 local select = select;

@@ -103,7 +103,7 @@
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.HOTS.BARS.width");
 								VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_SIZE, 1, 100, "%", 0.5);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_318);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K318);
 							</OnLoad>
 						</Scripts>
 					</Frame>
@@ -392,7 +392,7 @@
 							</Layer>
 						</Layers>
 					</Frame>
-
+<!--VUHDO_I18N_TT.K320, нету в актуале-->
 					<Button name="$parentSlot3ComboBox" inherits="VuhDoEditComboBoxTemplate">
 						<Size>
 							<AbsDimension x="187" y="32" />
@@ -407,14 +407,14 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_setComboModel(self, "VUHDO_PANEL_SETUP.HOTS.SLOTS.##8", VUHDO_HOT_BAR_MODELS);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_320);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K320);
 								self:SetAttribute("custom_function", VUHDO_notifyHotSelect);
 								self:SetAttribute("custom_function_post", VUHDO_notifyBouquetUpdate);
 								self:SetAttribute("derive_custom", true);
 							</OnLoad>
 						</Scripts>
 					</Button>
-
+<!--VUHDO_I18N_TT.K321, нету в актуале-->
 					<Button name="$parentSlot2ComboBox" inherits="VuhDoEditComboBoxTemplate">
 						<Size>
 							<AbsDimension x="187" y="32" />
@@ -429,14 +429,14 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_setComboModel(self, "VUHDO_PANEL_SETUP.HOTS.SLOTS.##7", VUHDO_HOT_BAR_MODELS);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_321);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K321);
 								self:SetAttribute("custom_function", VUHDO_notifyHotSelect);
 								self:SetAttribute("custom_function_post", VUHDO_notifyBouquetUpdate);
 								self:SetAttribute("derive_custom", true);
 							</OnLoad>
 						</Scripts>
 					</Button>
-
+<!--VUHDO_I18N_TT.K322, нету в актуале-->
 					<Button name="$parentSlot1ComboBox" inherits="VuhDoEditComboBoxTemplate">
 						<Size>
 							<AbsDimension x="187" y="32" />
@@ -451,14 +451,14 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_setComboModel(self, "VUHDO_PANEL_SETUP.HOTS.SLOTS.##6", VUHDO_HOT_BAR_MODELS);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_322);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K322);
 								self:SetAttribute("custom_function", VUHDO_notifyHotSelect);
 								self:SetAttribute("custom_function_post", VUHDO_notifyBouquetUpdate);
 								self:SetAttribute("derive_custom", true);
 							</OnLoad>
 						</Scripts>
 					</Button>
-
+<!--VUHDO_I18N_SLOT_3, нету в актуале-->
 					<Frame name="$parentSlot3Label" inherits="VuhDoLabelFrameTemplate">
 						<Size>
 							<AbsDimension x="152" y="18" />
@@ -477,7 +477,7 @@
 							</Layer>
 						</Layers>
 					</Frame>
-
+<!--VUHDO_I18N_SLOT_2, нету в актуале-->
 					<Frame name="$parentSlot2Label" inherits="VuhDoLabelFrameTemplate">
 						<Size>
 							<AbsDimension x="152" y="18" />
@@ -496,7 +496,7 @@
 							</Layer>
 						</Layers>
 					</Frame>
-
+<!--VUHDO_I18N_SLOT_1_2, нету в актуале-->
 					<Frame name="$parentSlot1Label" inherits="VuhDoLabelFrameTemplate">
 						<Size>
 							<AbsDimension x="152" y="18" />

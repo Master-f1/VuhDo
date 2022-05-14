@@ -379,7 +379,7 @@ function VUHDO_setupSmartCast(aButton)
 				VUHDO_setupAllButtonsTo(aButton, tMainRes);
 				return true;
 			else
-				UIErrorsFrame:AddMessage(VUHDO_I18N_RESS_ERR_1 .. UnitName(tUnit) .. VUHDO_I18N_RESS_ERR_2, 1, 0.1, 0.1, 1);
+				UIErrorsFrame:AddMessage(VUHDO_I18N_RESS_ERR_1 .. UnitName(tUnit) .. VUHDO_I18N_RESS_ERR_2, 1, 0.1, 0.1, 1);  --VUHDO_I18N_RESS_ERR_1, VUHDO_I18N_RESS_ERR_2 нету в актуале
 				return false;
 			end
 		end

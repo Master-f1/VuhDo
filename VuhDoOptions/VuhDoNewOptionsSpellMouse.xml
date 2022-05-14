@@ -933,7 +933,7 @@
 							</OnClick>
 							<OnLoad>
 								VUHDO_lnfCheckButtonOnLoad(self);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_146);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K146);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -952,7 +952,7 @@
 								VUHDO_newOptionsSpellSetModifier("ctrl");
 							</OnClick>
 							<OnLoad>
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_147);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K147);
 								VUHDO_lnfCheckButtonOnLoad(self);
 							</OnLoad>
 						</Scripts>
@@ -972,7 +972,7 @@
 								VUHDO_newOptionsSpellSetModifier("ctrlshift");
 							</OnClick>
 							<OnLoad>
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_148);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K148);
 								VUHDO_lnfCheckButtonOnLoad(self);
 							</OnLoad>
 						</Scripts>
@@ -992,7 +992,7 @@
 								VUHDO_newOptionsSpellSetModifier("altctrlshift");
 							</OnClick>
 							<OnLoad>
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_149);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K149);
 								VUHDO_lnfCheckButtonOnLoad(self);
 							</OnLoad>
 						</Scripts>
@@ -1031,7 +1031,7 @@
 								VUHDO_newOptionsSpellSetModifier("");
 							</OnClick>
 							<OnLoad>
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_150);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K150);
 								VUHDO_lnfCheckButtonOnLoad(self);
 							</OnLoad>
 						</Scripts>
@@ -1051,7 +1051,7 @@
 								VUHDO_newOptionsSpellSetModifier("alt");
 							</OnClick>
 							<OnLoad>
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_151);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K151);
 								VUHDO_lnfCheckButtonOnLoad(self);
 							</OnLoad>
 						</Scripts>
@@ -1071,7 +1071,7 @@
 								VUHDO_newOptionsSpellSetModifier("shift");
 							</OnClick>
 							<OnLoad>
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_152);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K152);
 								VUHDO_lnfCheckButtonOnLoad(self);
 							</OnLoad>
 						</Scripts>
@@ -1091,7 +1091,7 @@
 								VUHDO_newOptionsSpellSetModifier("altctrl");
 							</OnClick>
 							<OnLoad>
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_153);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K153);
 								VUHDO_lnfCheckButtonOnLoad(self);
 							</OnLoad>
 						</Scripts>

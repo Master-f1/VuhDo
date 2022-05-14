@@ -912,7 +912,7 @@ function VUHDO_updateBuffSwatch(aSwatch)
 				VUHDO_BUFFS[tRefSpell]["wasOnCd"] = true;
 			end
 		else
-			if (VUHDO_BUFFS[tRefSpell]["wasOnCd"]	and VUHDO_BUFF_SETTINGS["CONFIG"]["HIGHLIGHT_COOLDOWN"]) then
+			if (VUHDO_BUFFS[tRefSpell]["wasOnCd"] and VUHDO_BUFF_SETTINGS["CONFIG"]["HIGHLIGHT_COOLDOWN"]) then
 				UIFrameFlash(aSwatch, 0.3, 0.3, 5, true, 0, 0.3);
 				VUHDO_BUFFS[tRefSpell]["wasOnCd"] = false;
 			end

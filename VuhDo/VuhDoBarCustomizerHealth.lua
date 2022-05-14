@@ -347,24 +347,24 @@ function VUHDO_customizeText(aButton, aMode, anIsTarget)
 		end
 
 		-- Add player flags
-		if (tSetup["ID_TEXT"]["showTags"]) then
+		if (tSetup["ID_TEXT"]["showTags"] and not anIsTarget) then
 			if (not tInfo["connected"]) then
-				tTextString = VUHDO_I18N_TT_DC .. tTextString;
+				tTextString = format("%s-%s", VUHDO_I18N_DC, tTextString);
 			elseif (tInfo["dead"]) then
 				if (UnitIsGhost(tUnit)) then
-					tTextString = VUHDO_I18N_TT_GHOST .. tTextString;
+					tTextString = format("|cffff0000%s|r-%s", VUHDO_I18N_GHOST, tTextString);
 				else
-					tTextString = VUHDO_I18N_TT_DEAD .. tTextString;
+					tTextString = format("%s-%s", VUHDO_I18N_RIP, tTextString);
 				end
 			else
 				if ("focus" == tUnit) then
-					tTextString = VUHDO_I18N_TT_FOC .. tTextString;
+					tTextString = format("|cffff0000%s|r-%s", VUHDO_I18N_FOC, tTextString);
 				elseif ("target" == tUnit) then
-					tTextString = VUHDO_I18N_TT_TAR .. tTextString;
+					tTextString = format("|cffff0000%s|r-%s", VUHDO_I18N_TAR, tTextString);
 				elseif (tInfo["afk"]) then
-					tTextString = VUHDO_I18N_TT_AFK .. tTextString;
+					tTextString = format("|cffff0000%s|r-%s", VUHDO_I18N_AFK, tTextString);
 				elseif (tOwnerInfo ~= nil and tOwnerInfo["isVehicle"]) then
-					tTextString = VUHDO_I18N_VEHICLE .. tTextString;
+					tTextString = format("|cffff0000%s|r-%s", VUHDO_I18N_VEHICLE, tTextString);
 				end
 			end
 		end
