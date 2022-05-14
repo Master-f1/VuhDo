@@ -28,9 +28,9 @@
 						</Anchors>
 						<Scripts>
 							<OnLoad>
-						VUHDO_lnfSetModel(self, "VUHDO_CONFIG.CLUSTER.REFRESH")
-							VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_REFRESH_RATE, 20, 500, " " .. VUHDO_I18N_MSEC, 20);
-						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_425);
+								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.CLUSTER.REFRESH")
+								VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_REFRESH_RATE, 20, 500, " " .. VUHDO_I18N_MSEC, 20);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K425);
 							</OnLoad>
 						</Scripts>
 					</Frame>
@@ -48,9 +48,9 @@
 						</Anchors>
 						<Scripts>
 							<OnLoad>
-						VUHDO_lnfSetModel(self, "VUHDO_CONFIG.CLUSTER.RANGE")
-							VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_RANGE, 1, 40, " " .. VUHDO_I18N_YARDS, 1);
-						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_426);
+								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.CLUSTER.RANGE")
+								VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_RANGE, 1, 40, " " .. VUHDO_I18N_YARDS, 1);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K426);
 							</OnLoad>
 						</Scripts>
 					</Frame>
@@ -68,13 +68,12 @@
 						</Anchors>
 						<Scripts>
 							<OnLoad>
-						VUHDO_lnfSetModel(self, "VUHDO_CONFIG.CLUSTER.BELOW_HEALTH_PERC")
-							VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_HEALTH_LEVEL, 5, 100, " %", 5);
-						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_427);
+								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.CLUSTER.BELOW_HEALTH_PERC")
+								VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_HEALTH_LEVEL, 5, 100, " %", 5);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K427);
 							</OnLoad>
 						</Scripts>
 					</Frame>
-
 
 					<Frame name="$parentModeRadioGroup">
 						<Size>
@@ -118,8 +117,8 @@
 								</Anchors>
 								<Scripts>
 									<OnLoad>
-								VUHDO_lnfSetRadioModel(self, "VUHDO_CONFIG.CLUSTER.MODE", 1);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_437);
+										VUHDO_lnfSetRadioModel(self, "VUHDO_CONFIG.CLUSTER.MODE", 1);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K437);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -134,8 +133,8 @@
 								</Anchors>
 								<Scripts>
 									<OnLoad>
-								VUHDO_lnfSetRadioModel(self, "VUHDO_CONFIG.CLUSTER.MODE", 2);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_438);
+										VUHDO_lnfSetRadioModel(self, "VUHDO_CONFIG.CLUSTER.MODE", 2);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K438);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -155,9 +154,9 @@
 						</Anchors>
 						<Scripts>
 							<OnLoad>
-						VUHDO_lnfSetModel(self, "VUHDO_CONFIG.CLUSTER.CHAIN_MAX_JUMP")
-							VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_CHAINED_MAX_JUMP, 1, 10, VUHDO_I18N_TIMES, 1);
-						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_439);
+								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.CLUSTER.CHAIN_MAX_JUMP")
+								VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_CHAINED_MAX_JUMP, 1, 10, VUHDO_I18N_TIMES, 1);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K439);
 							</OnLoad>
 						</Scripts>
 					</Frame>
@@ -175,7 +174,7 @@
 						</Anchors>
 						<Layers>
 							<Layer>
-								<FontString name="$parentLabel" text="VUHDO_I18N_CLUSTER_TEXT" justifyH="LEFT" inherits="VuDoDefaultFontTemplate">
+								<FontString name="$parentLabel" text="VUHDO_I18N_LINK_SPELL_COOLDOWN" justifyH="LEFT" inherits="VuDoDefaultFontTemplate">
 								</FontString>
 							</Layer>
 						</Layers>
@@ -194,12 +193,12 @@
 						</Anchors>
 						<Scripts>
 							<OnLoad>
-						VUHDO_lnfSetModel(self, "VUHDO_CONFIG.CLUSTER.COOLDOWN_SPELL");
-						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_479);
+								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.CLUSTER.COOLDOWN_SPELL");
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K479);
 							</OnLoad>
 							<OnTextChanged>
-							VUHDO_lnfEditBoxUpdateModel(self);
-							VUHDO_newOptionsSpellEditBoxCheckSpell(self);
+								VUHDO_lnfEditBoxUpdateModel(self);
+								VUHDO_newOptionsSpellEditBoxCheckSpell(self);
 							</OnTextChanged>
 						</Scripts>
 					</EditBox>
@@ -298,8 +297,8 @@
 								</Anchors>
 								<Scripts>
 									<OnLoad>
-								VUHDO_lnfSetRadioModel(self, "VUHDO_CONFIG.CLUSTER.DISPLAY_SOURCE", 1);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_430);
+										VUHDO_lnfSetRadioModel(self, "VUHDO_CONFIG.CLUSTER.DISPLAY_SOURCE", 1);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K430);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -314,8 +313,8 @@
 								</Anchors>
 								<Scripts>
 									<OnLoad>
-								VUHDO_lnfSetRadioModel(self, "VUHDO_CONFIG.CLUSTER.DISPLAY_SOURCE", 2);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_431);
+										VUHDO_lnfSetRadioModel(self, "VUHDO_CONFIG.CLUSTER.DISPLAY_SOURCE", 2);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K431);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -363,8 +362,8 @@
 								</Anchors>
 								<Scripts>
 									<OnLoad>
-								VUHDO_lnfSetRadioModel(self, "VUHDO_CONFIG.CLUSTER.DISPLAY_DESTINATION", 1);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_433);
+										VUHDO_lnfSetRadioModel(self, "VUHDO_CONFIG.CLUSTER.DISPLAY_DESTINATION", 1);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K433);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -379,8 +378,8 @@
 								</Anchors>
 								<Scripts>
 									<OnLoad>
-								VUHDO_lnfSetRadioModel(self, "VUHDO_CONFIG.CLUSTER.DISPLAY_DESTINATION", 2);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_432);
+										VUHDO_lnfSetRadioModel(self, "VUHDO_CONFIG.CLUSTER.DISPLAY_DESTINATION", 2);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K432);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -432,8 +431,8 @@
 						</Anchors>
 						<Scripts>
 							<OnLoad>
-						VUHDO_lnfSetModel(self, "VUHDO_CONFIG.CLUSTER.IS_NUMBER");
-						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_435);
+								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.CLUSTER.IS_NUMBER");
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K435);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -451,9 +450,9 @@
 						</Anchors>
 						<Scripts>
 							<OnLoad>
-						VUHDO_lnfSetModel(self, "VUHDO_CONFIG.CLUSTER.THRESH_FAIR")
-							VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_FAIR_THRESHOLD, 1, 10, " " .. VUHDO_I18N_PEOPLE, 1);
-						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_428);
+								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.CLUSTER.THRESH_FAIR")
+								VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_FAIR_THRESHOLD, 1, 10, " " .. VUHDO_I18N_PEOPLE, 1);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K428);
 							</OnLoad>
 						</Scripts>
 					</Frame>
@@ -471,9 +470,9 @@
 						</Anchors>
 						<Scripts>
 							<OnLoad>
-						VUHDO_lnfSetModel(self, "VUHDO_CONFIG.CLUSTER.THRESH_GOOD")
-							VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_GOOD_THRESHOLD, 1, 10, " " .. VUHDO_I18N_PEOPLE, 1);
-						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_429);
+								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.CLUSTER.THRESH_GOOD")
+								VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_GOOD_THRESHOLD, 1, 10, " " .. VUHDO_I18N_PEOPLE, 1);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K429);
 							</OnLoad>
 						</Scripts>
 					</Frame>

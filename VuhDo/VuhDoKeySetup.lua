@@ -67,11 +67,11 @@ function VUHDO_replaceMacroTemplates(aText, aUnit)
 		if (VUHDO_RAID[aUnit] ~= nil) then
 			aText = gsub(aText, "vdname", VUHDO_RAID[aUnit]["name"]);
 
-			if (VUHDO_RAID[aUnit].petUnit ~= nil) then
+			if (VUHDO_RAID[aUnit]["petUnit"] ~= nil) then
 				aText = gsub(aText, "vdpet", VUHDO_RAID[aUnit]["petUnit"]);
 			end
 
-			if (VUHDO_RAID[aUnit].targetUnit ~= nil) then
+			if (VUHDO_RAID[aUnit]["targetUnit"] ~= nil) then
 				aText = gsub(aText, "vdtarget", VUHDO_RAID[aUnit]["targetUnit"]);
 			end
 		end
@@ -89,8 +89,8 @@ local tMacroId, tMacroText;
 local tActionLow;
 local tBaseSpell;
 local tSpellInfo;
-local function VUHDO_setupHealButtonAttributes(aModiKey, aButtonId, anAction, aButton, anIsTgButton, anIndex)
 
+local function VUHDO_setupHealButtonAttributes(aModiKey, aButtonId, anAction, aButton, anIsTgButton, anIndex)
 	if (anIsTgButton or aButton["target"] == "focus" or aButton["target"] == "target") then
 		if (anIndex == nil) then
 			tHostSpell = VUHDO_HOSTILE_SPELL_ASSIGNMENTS[gsub(aModiKey, "-", "") .. aButtonId][3];
@@ -139,7 +139,7 @@ local function VUHDO_setupHealButtonAttributes(aModiKey, aButtonId, anAction, aB
 					if (not UnitInRaid("player")) then
 						sDropdown = VUHDO_GLOBAL['PartyMemberFrame' .. sInfo["number"] .. 'DropDown']
 					else
-						sIdent = sInfo.number;
+						sIdent = sInfo["number"];
 						if (sIdent == 0) then
 							sIdent = aButton["index"];
 						end
@@ -201,7 +201,6 @@ local tPreAction;
 local tTarget;
 local tIndex;
 local tSpellDescr;
--- local tInfo;
 local tIsWheel;
 local tHostSpell;
 function VUHDO_setupAllHealButtonAttributes(aButton, aUnit, anIsDisable, aForceTarget, anIsTgButton)
@@ -240,6 +239,7 @@ function VUHDO_setupAllHealButtonAttributes(aButton, aUnit, anIsDisable, aForceT
 		for _, tSpellDescr in pairs(VUHDO_SPELL_ASSIGNMENTS) do
 			VUHDO_setupHealButtonAttributes(tSpellDescr[1], tSpellDescr[2], tPreAction, aButton, anIsTgButton);
 		end
+
 	else
 		for _, tSpellDescr in pairs(VUHDO_SPELL_ASSIGNMENTS) do
 			VUHDO_setupHealButtonAttributes(tSpellDescr[1], tSpellDescr[2], tSpellDescr[3], aButton, anIsTgButton);
@@ -334,6 +334,7 @@ end
 
 function VUHDO_disableActions(aButton)
 	VUHDO_setupAllHealButtonAttributes(aButton, nil, true, false, false);
+
 	aButton:Hide(); -- For clearing mouse-wheel click bindings
 	aButton:Show();
 end
@@ -361,7 +362,7 @@ function VUHDO_setupSmartCast(aButton)
 
 	if (tInfo == nil or not tInfo["baseRange"]) then
 		return false;
-	end
+	end;
 	-- Trade?
 	tCursorItemType, _, _ = GetCursorInfo();
 	if ("item" == tCursorItemType or "money" == tCursorItemType) then
@@ -375,11 +376,10 @@ function VUHDO_setupSmartCast(aButton)
 		local tMainRes, _ = VUHDO_getResurrectionSpells();
 		if (tMainRes ~= nil) then
 			if (not UnitIsGhost(tUnit)) then
-
 				VUHDO_setupAllButtonsTo(aButton, tMainRes);
 				return true;
 			else
-				UIErrorsFrame:AddMessage(VUHDO_I18N_RESS_ERR_1 .. UnitName(tUnit) .. VUHDO_I18N_RESS_ERR_2, 1, 0.1, 0.1, 1);
+				UIErrorsFrame:AddMessage(VUHDO_I18N_RESS_ERR_1 .. UnitName(tUnit) .. VUHDO_I18N_RESS_ERR_2, 1, 0.1, 0.1, 1);  --VUHDO_I18N_RESS_ERR_1, VUHDO_I18N_RESS_ERR_2 нету в актуале
 				return false;
 			end
 		end

@@ -112,10 +112,10 @@ function VUHDO_lnfCheckButtonOnEnter(aCheckButton)
 
 	if (VUHDO_GLOBAL[tName .. "Label"] ~= nil) then
 		VUHDO_GLOBAL[tName .. "Label"]:SetTextColor(
-			VUHDO_ACTIVE_LABEL_COLOR.TR,
-			VUHDO_ACTIVE_LABEL_COLOR.TG,
-			VUHDO_ACTIVE_LABEL_COLOR.TB,
-			VUHDO_ACTIVE_LABEL_COLOR.TO
+			VUHDO_ACTIVE_LABEL_COLOR["TR"],
+			VUHDO_ACTIVE_LABEL_COLOR["TG"],
+			VUHDO_ACTIVE_LABEL_COLOR["TB"],
+			VUHDO_ACTIVE_LABEL_COLOR["TO"]
 		);
 	end
 end
@@ -127,10 +127,10 @@ function VUHDO_lnfCheckButtonOnLeave(aCheckButton)
 
 	if (VUHDO_GLOBAL[tName .. "Label"] ~= nil) then
 		VUHDO_GLOBAL[tName .. "Label"]:SetTextColor(
-			VUHDO_NORMAL_LABEL_COLOR.TR,
-			VUHDO_NORMAL_LABEL_COLOR.TG,
-			VUHDO_NORMAL_LABEL_COLOR.TB,
-			VUHDO_NORMAL_LABEL_COLOR.TO
+			VUHDO_NORMAL_LABEL_COLOR["TR"],
+			VUHDO_NORMAL_LABEL_COLOR["TG"],
+			VUHDO_NORMAL_LABEL_COLOR["TB"],
+			VUHDO_NORMAL_LABEL_COLOR["TO"]
 		);
 	end
 end
@@ -486,7 +486,9 @@ function VUHDO_lnfSliderUpdateModel(aSlider)
 	if (tModel ~= nil and strfind(tModel, "SOUND", 1, true)) then
 		if (VUHDO_SOUNDS[tValue] ~= nil) then
 			tValue = VUHDO_SOUNDS[tValue][1];
-			PlaySoundFile(tValue);
+			if (tValue ~= nil) then
+				PlaySoundFile(tValue);
+			end
 		end
 	end
 
@@ -864,32 +866,32 @@ function VUHDO_lnfColorSwatchInitFromModel(aColorSwatch)
 	end
 
 	if (tValue.R ~= nil and tValue.useBackground) then
-		VUHDO_GLOBAL[aColorSwatch:GetName() .. "Texture"]:SetVertexColor(tValue.R, tValue.G, tValue.B);
+		VUHDO_GLOBAL[aColorSwatch:GetName() .. "Texture"]:SetVertexColor(tValue["R"], tValue["G"], tValue["B"]);
 	else
 		VUHDO_GLOBAL[aColorSwatch:GetName() .. "Texture"]:SetVertexColor(1, 1, 1);
 	end
 
 	if (tValue.O ~= nil and tValue.useOpacity) then
-		VUHDO_GLOBAL[aColorSwatch:GetName() .. "Texture"]:SetAlpha(tValue.O);
+		VUHDO_GLOBAL[aColorSwatch:GetName() .. "Texture"]:SetAlpha(tValue["O"]);
 	else
 		VUHDO_GLOBAL[aColorSwatch:GetName() .. "Texture"]:SetAlpha(1);
 	end
 
 	if (tValue.TR ~= nil and tValue.useText) then
-		VUHDO_GLOBAL[aColorSwatch:GetName() .. "TitleString"]:SetTextColor(tValue.TR, tValue.TG, tValue.TB);
+		VUHDO_GLOBAL[aColorSwatch:GetName() .. "TitleString"]:SetTextColor(tValue["TR"], tValue["TG"], tValue["TB"]);
 	else
 		VUHDO_GLOBAL[aColorSwatch:GetName() .. "TitleString"]:SetTextColor(1, 1, 1);
 	end
 
 	if (tValue.TO ~= nil and tValue.useOpacity) then
-		VUHDO_GLOBAL[aColorSwatch:GetName() .. "TitleString"]:SetAlpha(tValue.TO);
+		VUHDO_GLOBAL[aColorSwatch:GetName() .. "TitleString"]:SetAlpha(tValue["TO"]);
 	else
 		VUHDO_GLOBAL[aColorSwatch:GetName() .. "TitleString"]:SetAlpha(1);
 	end
 
 	if (tValue.textSize ~= nil and tValue.font ~= nil) then
-		local tFont = VUHDO_getFont(tValue.font);
-		VUHDO_GLOBAL[aColorSwatch:GetName() .. "TitleString"]:SetFont(tFont, tValue.textSize);
+		local tFont = VUHDO_getFont(tValue["font"]);
+		VUHDO_GLOBAL[aColorSwatch:GetName() .. "TitleString"]:SetFont(tFont, tValue["textSize"]);
 	end
 end
 
@@ -940,12 +942,9 @@ function VUHDO_lnfHideTooltip(aComponent)
 	VuhDoOptionsTooltip:Hide();
 end
 
-local tName;
-local tType, tId, tId2;
 function VUHDO_lnfEditboxReceivedDrag(anEditBox)
-	tName = nil;
-
-	tType, tId, tId2 = GetCursorInfo();
+	local tName = nil;
+	local tType, tId, tId2 = GetCursorInfo();
 	if ("item" == tType) then
 		tName = GetItemInfo(tId) ;
 	elseif ("spell" == tType) then

@@ -64,8 +64,7 @@ local function VUHDO_hasPanelButtons(aPanelNum)
 		return false;
 	end
 
-	tModels = VUHDO_PANEL_DYN_MODELS[aPanelNum] or tEmptyModel;
-	return #tModels > 0;
+	return #VUHDO_PANEL_DYN_MODELS[aPanelNum] > 0;
 end
 
 local tCnt;
@@ -164,7 +163,7 @@ local function VUHDO_refreshPositionAllHealButtons(aPanel, aPanelNum)
 	for tCnt = tButtonIdx, 51 do -- VUHDO_MAX_BUTTONS_PANEL
 		tButton = VUHDO_getHealButton(tCnt, aPanelNum);
 		if (tButton == nil) then
-			break
+			break;
 		end
 		tButton["raidid"] = nil;
 		tButton["target"] = nil;

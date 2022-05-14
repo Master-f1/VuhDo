@@ -17,7 +17,7 @@
 		add it to the .toc, and it's done.
 
 	Can run as a standalone addon also, but, really, just embed it! :-)
-]]
+--]]
 
 local CTL_VERSION = 21
 

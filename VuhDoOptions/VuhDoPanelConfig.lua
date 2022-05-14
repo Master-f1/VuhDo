@@ -44,7 +44,7 @@ function VUHDO_positionAllGroupConfigPanels(aPanelNum)
 	end
 
 	tModelArray = VUHDO_PANEL_MODELS[aPanelNum];
-	tScale =	VUHDO_getHealButtonWidth(aPanelNum) / VUHDO_getOrCreateGroupOrderPanel(aPanelNum, 1):GetWidth();
+	tScale = VUHDO_getHealButtonWidth(aPanelNum) / VUHDO_getOrCreateGroupOrderPanel(aPanelNum, 1):GetWidth();
 
 	if (tModelArray == nil) then
 		return;
@@ -241,7 +241,7 @@ function VUHDO_determineDragTarget(aDraggedPanel)
 			if (tMaxOrderPanels == 0) then
 
 				tPanelX = tPanel:GetLeft() + (tPanel:GetWidth() / 2);
-				tPanelY = tPanel:GetTop() - (tPanel:GetHeight()	/ 2);
+				tPanelY = tPanel:GetTop() - (tPanel:GetHeight() / 2);
 				tDragX = aDraggedPanel:GetLeft() * aDraggedPanel:GetScale() + (aDraggedPanel:GetWidth() * aDraggedPanel:GetScale() / 2);
 				tDragY = aDraggedPanel:GetTop() * aDraggedPanel:GetScale() - (aDraggedPanel:GetHeight() * aDraggedPanel:GetScale() / 2);
 				tCurrentDistance = VUHDO_determineDistance(tPanelX, tPanelY, tDragX, tDragY);

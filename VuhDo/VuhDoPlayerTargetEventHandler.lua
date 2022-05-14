@@ -9,8 +9,8 @@ function VUHDO_updatePlayerTarget()
 	tTargetUnit = nil;
 	for tUnit, tInfo in pairs(VUHDO_RAID) do
 		if (UnitIsUnit("target", tUnit) and tUnit ~= "focus" and tUnit ~= "target") then
-			if (tInfo.isPet and (VUHDO_RAID[tInfo.ownerUnit] or tEmptyInfo).isVehicle) then
-				tTargetUnit = tInfo.ownerUnit;
+			if (tInfo["isPet"] and (VUHDO_RAID[tInfo["ownerUnit"]] or tEmptyInfo)["isVehicle"]) then
+				tTargetUnit = tInfo["ownerUnit"];
 			else
 				tTargetUnit = tUnit;
 			end
@@ -48,7 +48,7 @@ function VUHDO_barBorderBouquetCallback(aUnit, anIsActive, anIcon, aTimer, aCoun
 			tBorder = VUHDO_getPlayerTargetFrame(tButton);
 			if (aColor ~= nil) then
 				tBorder:SetFrameLevel(tButton:GetFrameLevel() + (anImpact or 0));
-				tBorder:SetBackdropBorderColor(aColor.R, aColor.G, aColor.B, aColor.O);
+				tBorder:SetBackdropBorderColor(aColor["R"], aColor["G"], aColor["B"], aColor["O"]);
 				tBorder:Show();
 			else
 				tBorder:Hide();

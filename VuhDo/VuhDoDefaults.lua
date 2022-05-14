@@ -1,8 +1,7 @@
 local pairs = pairs;
 
-local tHotCfg, tHotSlots, tCnt2, tHasFixed;
+local tHotCfg, tHotSlots, tCnt2;
 function VUHDO_fixHotSettings()
-	tHasFixed = false;
 	tHotSlots = VUHDO_PANEL_SETUP["HOTS"]["SLOTS"];
 	tHotCfg = VUHDO_PANEL_SETUP["HOTS"]["SLOTCFG"];
 
@@ -11,12 +10,9 @@ function VUHDO_fixHotSettings()
 			if (tHotSlots[tCnt2] ~= nil) then
 				tHotCfg["" .. tCnt2]["mine"] = true;
 				tHotCfg["" .. tCnt2]["others"] = VUHDO_EXCLUSIVE_HOTS[tHotSlots[tCnt2]] ~= nil;
-				tHasFixed = true;
 			end
 		end
 	end
-
-	return tHasFixed;
 end
 
 local function VUHDO_getVarDescription(aVar)
@@ -319,8 +315,6 @@ local VUHDO_CLASS_DEFAULT_SPELL_ASSIGNMENT = {
 		["shift1"] = {"shift-", "1", VUHDO_SPELL_ID_ABOLISH_DISEASE},
 		["shift2"] = {"shift-", "2", VUHDO_SPELL_ID_DISPEL_MAGIC},
 		["shift3"] = {"shift-", "3", "menu"},
-		["shift4"] = {"shift-", "4", ""},
-		["shift5"] = {"shift-", "5", ""}
 	},
 
 	["DRUID"] = {
@@ -333,20 +327,14 @@ local VUHDO_CLASS_DEFAULT_SPELL_ASSIGNMENT = {
 		["alt1"] = {"alt-", "1", "target"},
 		["alt2"] = {"alt-", "2", "focus"},
 		["alt3"] = {"alt-", "3", "menu"},
-		["alt4"] = {"alt-", "4", ""},
-		["alt5"] = {"alt-", "5", ""},
 
 		["ctrl1"] = {"ctrl-", "1", VUHDO_SPELL_ID_REGROWTH},
 		["ctrl2"] = {"ctrl-", "2", VUHDO_SPELL_ID_LIFEBLOOM},
-		["ctrl3"] = {"ctrl-", "3", ""},
 		["ctrl4"] = {"ctrl-", "4", VUHDO_SPELL_ID_TRANQUILITY},
 		["ctrl5"] = {"ctrl-", "5", VUHDO_SPELL_ID_TRANQUILITY},
 
 		["shift1"] = {"shift-", "1", VUHDO_SPELL_ID_ABOLISH_POISON},
 		["shift2"] = {"shift-", "2", VUHDO_SPELL_ID_REMOVE_CURSE},
-		["shift3"] = {"shift-", "3", ""},
-		["shift4"] = {"shift-", "4", ""},
-		["shift5"] = {"shift-", "5", ""}
 	}
 };
 
@@ -452,19 +440,18 @@ function VUHDO_loadSpellArray()
 	if (VUHDO_HOSTILE_SPELL_ASSIGNMENTS == nil) then
 		VUHDO_HOSTILE_SPELL_ASSIGNMENTS = VUHDO_deepCopyTable(VUHDO_DEFAULT_SPELL_ASSIGNMENT);
 	end
+	
 	-- Tastatur
 	VUHDO_HOSTILE_SPELL_ASSIGNMENTS = VUHDO_ensureSanity("VUHDO_HOSTILE_SPELL_ASSIGNMENTS", VUHDO_HOSTILE_SPELL_ASSIGNMENTS, VUHDO_DEFAULT_SPELL_ASSIGNMENT);
-
 	if (VUHDO_SPELLS_KEYBOARD == nil) then
 		VUHDO_SPELLS_KEYBOARD = VUHDO_deepCopyTable(VUHDO_DEFAULT_SPELLS_KEYBOARD);
 	end
-
 	VUHDO_SPELLS_KEYBOARD = VUHDO_ensureSanity("VUHDO_SPELLS_KEYBOARD", VUHDO_SPELLS_KEYBOARD, VUHDO_DEFAULT_SPELLS_KEYBOARD);
+
 	-- Konfiguration
 	if (VUHDO_SPELL_CONFIG == nil) then
 		VUHDO_SPELL_CONFIG = VUHDO_deepCopyTable(VUHDO_DEFAULT_SPELL_CONFIG);
 	end
-
 	VUHDO_SPELL_CONFIG = VUHDO_ensureSanity("VUHDO_SPELL_CONFIG", VUHDO_SPELL_CONFIG, VUHDO_DEFAULT_SPELL_CONFIG);
 
 	if (VUHDO_SPELL_LAYOUTS == nil) then
@@ -474,8 +461,8 @@ function VUHDO_loadSpellArray()
 	if (VUHDO_SPEC_LAYOUTS == nil) then
 		VUHDO_SPEC_LAYOUTS = {
 			["selected"] = "",
-			["1"] = "",
-			["2"] = ""
+			["1"] = "";
+			["2"] = "";
 		};
 	end
 end
@@ -504,22 +491,22 @@ local function VUHDO_customDebuffsAddDefaultSettings(aBuffName)
 		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"] = {};
 	end
 
-	tIsToggle = aBuffName ~= VUHDO_SPELL_ID_DEBUFF_WEAKENED_SOUL and VUHDO_CONFIG["CUSTOM_DEBUFF"].toggleName;
+	tIsToggle = aBuffName ~= VUHDO_SPELL_ID_DEBUFF_WEAKENED_SOUL and VUHDO_CONFIG["CUSTOM_DEBUFF"]["toggleName"];
 
 	if (VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][aBuffName] == nil) then
 		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][aBuffName] = {
-			["isIcon"] = VUHDO_CONFIG["CUSTOM_DEBUFF"].isIcon,
+			["isIcon"] = VUHDO_CONFIG["CUSTOM_DEBUFF"]["isIcon"],
 			["isColor"] = false,
-			["animate"] = VUHDO_CONFIG["CUSTOM_DEBUFF"].animate,
-			["timer"] = VUHDO_CONFIG["CUSTOM_DEBUFF"].timer,
-			["isStacks"] = VUHDO_CONFIG["CUSTOM_DEBUFF"].isStacks
+			["animate"] = VUHDO_CONFIG["CUSTOM_DEBUFF"]["animate"],
+			["timer"] = VUHDO_CONFIG["CUSTOM_DEBUFF"]["timer"],
+			["isStacks"] = VUHDO_CONFIG["CUSTOM_DEBUFF"]["isStacks"],
 		};
 	end
 
-	if (not VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][aBuffName].isColor) then
-		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][aBuffName].color = nil;
-	elseif (VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][aBuffName].color == nil) then
-		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][aBuffName].color = {
+	if (not VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][aBuffName]["isColor"]) then
+		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][aBuffName]["color"] = nil;
+	elseif (VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][aBuffName]["color"] == nil) then
+		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][aBuffName]["color"] = {
 			["R"] = 0.6,
 			["G"] = 0.3,
 			["B"] = 0,
@@ -539,10 +526,8 @@ local tArgNum, tArg;
 local tCnt;
 local tBuffName;
 local function VUHDO_addCustomSpellIds(...)
-	tArgNum = select("#", ...);
-
-	for tCnt = 1, tArgNum do
-		tArg = select(tCnt, ...);
+	for tCnt = 1, select("#", ...) do
+		local tArg = select(tCnt, ...);
 		tBuffName = select(1, GetSpellInfo(tArg));
 		VUHDO_tableUniqueAdd(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"], tBuffName);
 	end
@@ -596,6 +581,7 @@ local VUHDO_DEFAULT_CONFIG = {
 	["IS_ALWAYS_OVERWRITE_PROFILE"] = false,
 	["HIDE_EMPTY_PANELS"] = false,
 	["ON_MOUSE_UP"] = false,
+
 	["STANDARD_TOOLTIP"] = false,
 
 	["AUTO_PROFILES"] = {
@@ -804,20 +790,20 @@ function VUHDO_loadDefaultConfig()
 		VUHDO_CONFIG["CUSTOM_DEBUFF"].version = 2;
 		VUHDO_addCustomSpellIds(
 			-- WotLK
-			48920, -- Р‘РѕР»РµР·РЅРµРЅРЅС‹Р№ СѓРєСѓСЃ
-			23965, -- РњРіРЅРѕРІРµРЅРЅРѕРµ РёСЃС†РµР»РµРЅРёРµ
-			48261, -- РџСЂРѕРєР°Р»С‹РІР°РЅРёРµ
-			-- РќР°РєСЃ
-			28622, -- РљРѕРєРѕРЅ
-			55550, -- Р—Р°Р·СѓР±СЂРµРЅРЅС‹Р№ РЅРѕР¶
-			27808, -- Р›РµРґСЏРЅРѕР№ РІР·СЂС‹РІ
-			-- РЈР»СЊРґР°
-			63477, -- РЁР»Р°РєРѕРІС‹Р№ РєРѕРІС€
-			64234, -- Р“СЂР°РІРёС‚Р°С†РёРѕРЅРЅР°СЏ Р±РѕРјР±Р°
-			63018, -- РћРїР°Р»СЏСЋС‰РёР№ СЃРІРµС‚
-			64292, -- РљР°РјРµРЅРЅР°СЏ С…РІР°С‚РєР°
-			64669, -- Р”РёРєРёР№ РїСЂС‹Р¶РѕРє
-			63666 -- Р—Р°СЂСЏРґ РЅР°РїР°Р»РјР°
+			48920, -- Болезненный укус
+			23965, -- Мгновенное исцеление
+			48261, -- Прокалывание
+			-- Накс
+			28622, -- Кокон
+			55550, -- Зазубренный нож
+			27808, -- Ледяной взрыв
+			-- Ульда
+			63477, -- Шлаковый ковш
+			64234, -- Гравитационная бомба
+			63018, -- Опаляющий свет
+			64292, -- Каменная хватка
+			64669, -- Дикий прыжок
+			63666 -- Заряд напалма
 		);
 	end
 
@@ -825,16 +811,16 @@ function VUHDO_loadDefaultConfig()
 		VUHDO_CONFIG["CUSTOM_DEBUFF"].version = 6;
 
 		VUHDO_addCustomSpellIds(
-			-- РРљ
-			67478, -- РџСЂРѕРєР°Р»С‹РІР°РЅРёРµ
-			66406, -- РџРѕР»СѓС‡Рё СЃРЅРѕР±РѕР»СЊРґР°!
-			66869, -- Р“РѕСЂСЏС‰Р°СЏ Р¶РµР»С‡СЊ
-			67618, -- РџР°СЂР°Р»РёС‚РёС‡РµСЃРєРёР№ С‚РѕРєСЃРёРЅ
-			67049, -- РСЃРїРµРїРµР»РµРЅРёРµ РїР»РѕС‚Рё
-			67297, -- РљР°СЃР°РЅРёРµ РЎРІРµС‚Р°
-			66001, -- РљР°СЃР°РЅРёРµ С‚СЊРјС‹
-			66013, -- РџСЂРѕРЅРёР·С‹РІР°СЋС‰РёР№ С…РѕР»РѕРґ
-			67861 -- РЇРґРѕРІРёС‚С‹Рµ Р¶РІР°Р»С‹
+			-- ИК
+			67478, -- Прокалывание
+			66406, -- Получи снобольда!
+			66869, -- Горящая желчь
+			67618, -- Паралитический токсин
+			67049, -- Испепеление плоти
+			67297, -- Касание Света
+			66001, -- Касание тьмы
+			66013, -- Пронизывающий холод
+			67861 -- Ядовитые жвалы
 		);
 	end
 
@@ -843,20 +829,20 @@ function VUHDO_loadDefaultConfig()
 
 		VUHDO_addCustomSpellIds(
 			-- Ulduar
-			62283, -- Р–РµР»РµР·РЅС‹Рµ РєРѕСЂРЅРё
-			63134, -- Р‘Р»Р°РіРѕСЃР»РѕРІРµРЅРёРµ РЎР°СЂС‹
-			-- РРљ
-			67475, -- РћРіРЅРµРЅРЅР°СЏ Р±РѕРјР±Р°
-			68123, -- РџР»Р°РјСЏ Р›РµРіРёРѕРЅР°
-			67078, -- РџРѕС†РµР»СѓР№ Р“РѕСЃРїРѕР¶Рё
-			66283, -- РљСЂСѓС‚СЏС‰РёР№СЃСЏ С€РёРї Р±РѕР»Рё
-			67847, -- Р’С‹СЏРІР»РµРЅРёРµ СЃР»Р°Р±РѕСЃС‚Рё
-			-- Р¦Р›Рљ
-			69065, -- РџСЂРѕРєР°Р»С‹РІР°РЅРёРµ
-			70659, -- РќРµРєСЂРѕС‚РёС‡РµСЃРєРёР№ СѓРґР°СЂ
-			72293, -- РњРµС‚РєР° РїР°РґС€РµРіРѕ РІРѕРёС‚РµР»СЏ
-			72385, -- РљРёРїСЏС‰Р°СЏ РєСЂРѕРІСЊ
-			72409 -- Р СѓРЅР° РєСЂРѕРІРё
+			62283, -- Железные корни
+			63134, -- Благословение Сары
+			-- ИК
+			67475, -- Огненная бомба
+			68123, -- Пламя Легиона
+			67078, -- Поцелуй Госпожи
+			66283, -- Крутящийся шип боли
+			67847, -- Выявление слабости
+			-- ЦЛК
+			69065, -- Прокалывание
+			70659, -- Некротический удар
+			72293, -- Метка падшего воителя
+			72385, -- Кипящая кровь
+			72409 -- Руна крови
 		);
 	end
 
@@ -865,14 +851,14 @@ function VUHDO_loadDefaultConfig()
 
 		VUHDO_addCustomSpellIds(
 			-- ICC
-			72273, -- Р“СѓР±РёС‚РµР»СЊРЅС‹Р№ РіР°Р·
-			72219, -- Р–РµР»СѓРґРѕС‡РЅРѕРµ РІР·РґСѓС‚РёРµ
-			69278, -- Р“Р°Р·РѕРѕР±СЂР°Р·РЅС‹Рµ СЃРїРѕСЂС‹
-			-- 72103, -- РќРµРІРѕСЃРїСЂРёРёРјС‡РёРІРѕСЃС‚СЊ Рє РіРЅРёР»Рё
-			71224, -- РњСѓС‚РёСЂРѕРІР°РІС€Р°СЏ РёРЅС„РµРєС†РёСЏ
-			72455, -- Р“Р°Р·РѕРІРѕРµ РІР·РґСѓС‚РёРµ
-			70447, -- Р’С‹РґРµР»РµРЅРёСЏ РЅРµСѓСЃС‚РѕР№С‡РёРІРѕРіРѕ СЃР»РёР·РЅСЋРєР°
-			72745 -- РњСѓС‚РёСЂРѕРІР°РІС€Р°СЏ С‡СѓРјР°
+			72273, -- Губительный газ
+			72219, -- Желудочное вздутие
+			69278, -- Газообразные споры
+			-- 72103, -- Невосприимчивость к гнили
+			71224, -- Мутировавшая инфекция
+			72455, -- Газовое вздутие
+			70447, -- Выделения неустойчивого слизнюка
+			72745 -- Мутировавшая чума
 		);
 	end
 
@@ -881,12 +867,12 @@ function VUHDO_loadDefaultConfig()
 
 		VUHDO_addCustomSpellIds(
 			-- ICC
-			72999, -- РўРµРјРЅРёС†Р° РўСЊРјС‹
-			72796, -- РћСЃР»РµРїРёС‚РµР»СЊРЅС‹Рµ РёСЃРєСЂС‹
-			71624, -- Р‘РµР·СѓРјРЅС‹Р№ РІС‹РїР°Рґ
-			72638, -- Р РѕСЏС‰РёРµСЃСЏ С‚РµРЅРё
-			70986, -- РџРѕРєСЂРѕРІ СЃРєРѕСЂР±Рё
-			71340 -- РџР°РєС‚ РћРјСЂР°С‡РµРЅРЅС‹С…
+			72999, -- Темница Тьмы
+			72796, -- Ослепительные искры
+			71624, -- Безумный выпад
+			72638, -- Роящиеся тени
+			70986, -- Покров скорби
+			71340 -- Пакт Омраченных
 		);
 	end
 
@@ -895,7 +881,7 @@ function VUHDO_loadDefaultConfig()
 
 		VUHDO_addCustomSpellIds(
 			-- ICC
-			70867 -- РЎСѓС‰РЅРѕСЃС‚СЊ РљСЂРѕРІР°РІРѕР№ РєРѕСЂРѕР»РµРІС‹
+			70867 -- Сущность Кровавой королевы
 		);
 	end
 
@@ -904,16 +890,16 @@ function VUHDO_loadDefaultConfig()
 
 		VUHDO_addCustomSpellIds(
 			-- ICC
-			70751, -- РљРѕСЂСЂРѕР·РёСЏ
-			70633, -- Р’С‹Р±СЂРѕСЃ РІРЅСѓС‚СЂРµРЅРЅРѕСЃС‚РµР№
-			70157, -- Р›РµРґСЏРЅРѕР№ СЃРєР»РµРї
-			70106, -- РћР±РјРѕСЂРѕР¶РµРЅРёРµ
-			69766, -- РќРµСѓСЃС‚РѕР№С‡РёРІРѕСЃС‚СЊ
-			69649, -- Р›РµРґСЏРЅРѕРµ РґС‹С…Р°РЅРёРµ
-			70126, -- Р›РµРґСЏРЅР°СЏ РјРµС‚РєР°
-			70541, -- Р—Р°СЂР°Р¶РµРЅРёРµ
-			72754, -- РћСЃРєРІРµСЂРЅРµРЅРёРµ
-			68980 -- Р–Р°С‚РІР° РґСѓС€
+			70751, -- Коррозия
+			70633, -- Выброс внутренностей
+			70157, -- Ледяной склеп
+			70106, -- Обморожение
+			69766, -- Неустойчивость
+			69649, -- Ледяное дыхание
+			70126, -- Ледяная метка
+			70541, -- Заражение
+			72754, -- Осквернение
+			68980 -- Жатва душ
 		);
 	end
 
@@ -922,7 +908,7 @@ function VUHDO_loadDefaultConfig()
 
 		VUHDO_addCustomSpellIds(
 			-- ICC
-			73912 -- РњРµСЂС‚РІСЏС‰Р°СЏ С‡СѓРјР°
+			73912 -- Мертвящая чума
 		);
 end
 
@@ -932,7 +918,8 @@ end
 		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tName] = VUHDO_ensureSanity("CUSTOM_DEBUFF.STORED_SETTINGS", VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tName], VUHDO_DEFAULT_CU_DE_STORED_SETTINGS);
 	end
 
-	if (VUHDO_POWER_TYPE_COLORS == nil) then VUHDO_POWER_TYPE_COLORS = VUHDO_deepCopyTable(VUHDO_DEFAULT_POWER_TYPE_COLORS);
+	if (VUHDO_POWER_TYPE_COLORS == nil) then
+		VUHDO_POWER_TYPE_COLORS = VUHDO_deepCopyTable(VUHDO_DEFAULT_POWER_TYPE_COLORS);
 	end
 	VUHDO_POWER_TYPE_COLORS = VUHDO_ensureSanity("VUHDO_POWER_TYPE_COLORS", VUHDO_POWER_TYPE_COLORS, VUHDO_DEFAULT_POWER_TYPE_COLORS);
 end
@@ -986,7 +973,7 @@ local VUHDO_DEFAULT_PANEL_SETUP = {
 			["TO"] = 1,
 			["useText"] = true
 		},
-				
+
 		["BARS"] = {
 			["R"] = 0.7,
 			["G"] = 0.7,

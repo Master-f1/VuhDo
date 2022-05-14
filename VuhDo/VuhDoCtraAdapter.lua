@@ -43,7 +43,7 @@ function VUHDO_parseCtraMessage(aNick, aMessage)
 				end
 			end
 		end
-		-- started resurrection
+	-- started resurrection
 	elseif (strsub(aMessage, 1, 3) == "RES") then
 		local tObject;
 		_, _, tObject = strfind(aMessage, "^RES (.+)$");
@@ -54,7 +54,7 @@ function VUHDO_parseCtraMessage(aNick, aMessage)
 				VUHDO_updateHealth(tUnit, VUHDO_UPDATE_RESURRECTION);
 			end
 		end
-		-- Setting main tanks
+	-- Setting main tanks
 	elseif (strsub(aMessage, 1, 4) == "SET ") then
 		local _, _, tNum, tName = strfind(aMessage, "^SET (%d+) (.+)$");
 		if (tNum ~= nil and tName ~= nil) then
@@ -66,14 +66,14 @@ function VUHDO_parseCtraMessage(aNick, aMessage)
 			VUHDO_MAINTANK_NAMES[tonumber(tNum)] = tName;
 			VUHDO_normalRaidReload();
 		end
-		-- Removing main tanks
+	-- Removing main tanks
 	elseif (strsub(aMessage, 1, 2) == "R ") then
 		local _, _, tName = strfind(aMessage, "^R (.+)$");
 		if (tName ~= nil) then
 			for tKey, _ in pairs(VUHDO_MAINTANK_NAMES) do
 				if (VUHDO_MAINTANK_NAMES[tKey] == tName) then
 					VUHDO_MAINTANK_NAMES[tKey] = nil;
-					break
+					break;
 				end
 			end
 			VUHDO_normalRaidReload();

@@ -47,7 +47,7 @@ end
 
 function VUHDO_deleteKeyLayoutCallback(aDecision)
 	if (VUHDO_YES == aDecision) then
-		VUHDO_Msg(VUHDO_I18N_KEY_DELETED .. " \"" .. VUHDO_CURR_LAYOUT .. "\".");
+		VUHDO_Msg(format(VUHDO_I18N_DELETED_KEY_LAYOUT, VUHDO_CURR_LAYOUT));
 		VUHDO_SPELL_LAYOUTS[VUHDO_CURR_LAYOUT] = nil;
 		VUHDO_CURR_LAYOUT = "";
 		VUHDO_SPEC_LAYOUTS["selected"] = "";
@@ -60,7 +60,7 @@ end
 
 function VUHDO_keyLayoutDeleteOnClick(aButton)
 	if (VUHDO_CURR_LAYOUT ~= nil and VUHDO_CURR_LAYOUT ~= "") then
-		VuhDoYesNoFrameText:SetText(VUHDO_I18N_KEY_DELETE .. " \"" .. VUHDO_CURR_LAYOUT .. "\"?");
+		VuhDoYesNoFrameText:SetText(format(VUHDO_I18N_DELETE_KEY_LAYOUT_QUESTION, VUHDO_CURR_LAYOUT));
 		VuhDoYesNoFrame:SetAttribute("callback", VUHDO_deleteKeyLayoutCallback);
 		VuhDoYesNoFrame:Show();
 	else
@@ -78,7 +78,7 @@ end
 
 function VUHDO_keyLayoutApplyOnClick(aButton)
 	if (VUHDO_CURR_LAYOUT ~= nil and VUHDO_CURR_LAYOUT ~= "") then
-		VuhDoYesNoFrameText:SetText("This will overwrite current\nkey layout. Continue?");
+		VuhDoYesNoFrameText:SetText(VUHDO_I18N_OVERWRITE_CURR_KEY_LAYOUT_QUESTION);
 		VuhDoYesNoFrame:SetAttribute("callback", VUHDO_applyKeyLayoutCallback);
 		VuhDoYesNoFrame:Show();
 	else
@@ -102,7 +102,7 @@ function VUHDO_saveKeyLayoutCallback(aDecision)
 
 		VUHDO_SPELL_LAYOUTS[VUHDO_CURR_LAYOUT]["HOTS"] = VUHDO_deepCopyTable(VUHDO_PANEL_SETUP["HOTS"]);
 
-		VUHDO_Msg(VUHDO_I18N_KEY_SAVED .. " \"" .. VUHDO_CURR_LAYOUT .. "\".");
+		VUHDO_Msg(format(VUHDO_I18N_KEY_LAYOUT_SAVED, VUHDO_CURR_LAYOUT));
 		VUHDO_initKeyLayoutComboModel();
 		VUHDO_lnfComboBoxInitFromModel(VuhDoNewOptionsSpellFireStorePanelLayoutCombo);
 		VuhDoNewOptionsSpellFireTriggerWhatPanel:Hide();
@@ -110,18 +110,17 @@ function VUHDO_saveKeyLayoutCallback(aDecision)
 	end
 end
 
-local tEditBox;
 function VUHDO_saveKeyLayoutOnClick(aButton)
-	tEditBox = VUHDO_GLOBAL[aButton:GetParent():GetName() .. "SaveAsEditBox"];
+	local tEditBox = VUHDO_GLOBAL[aButton:GetParent():GetName() .. "SaveAsEditBox"];
 	VUHDO_CURR_LAYOUT = strtrim(tEditBox:GetText());
 
 	if (strlen(VUHDO_CURR_LAYOUT) == 0) then
-		VUHDO_Msg("Please enter a key layout name.", 1, 0.4, 0.4);
+		VUHDO_Msg(VUHDO_I18N_ENTER_KEY_LAYOUT_NAME, 1, 0.4, 0.4);
 		return;
 	end
 
-	if (VUHDO_SPELL_LAYOUTS[VUHDO_CURR_LAYOUT] ~= nil) then
-		VuhDoYesNoFrameText:SetText("A key layout called " .. VUHDO_CURR_LAYOUT .. " already exists. Overwrite?");
+	if VUHDO_SPELL_LAYOUTS[VUHDO_CURR_LAYOUT] then
+		VuhDoYesNoFrameText:SetText(format(VUHDO_I18N_OVERWRITE_KEY_LAYOUT_QUESTION, VUHDO_CURR_LAYOUT));
 		VuhDoYesNoFrame:SetAttribute("callback", VUHDO_saveKeyLayoutCallback);
 		VuhDoYesNoFrame:Show();
 	else

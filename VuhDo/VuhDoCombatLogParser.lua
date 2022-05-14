@@ -97,7 +97,6 @@ function VUHDO_parseCombatLogEvent(aMessage, aDstGUID, aMessage1, aMessage2, aMe
 	end
 
 	tImpact = VUHDO_getTargetHealthImpact(aMessage, aMessage1, aMessage2, aMessage4);
-
 	if (tImpact ~= 0) then
 		VUHDO_addUnitHealth(tUnit, tImpact);
 		if (tUnit == sCurrentTarget) then

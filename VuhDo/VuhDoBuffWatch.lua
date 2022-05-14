@@ -49,7 +49,6 @@ local GetSpellCooldown = GetSpellCooldown;
 local GetSpellName = GetSpellName;
 local GetSpellInfo = GetSpellInfo;
 local InCombatLockdown = InCombatLockdown;
-
 local GetWeaponEnchantInfo = GetWeaponEnchantInfo;
 local tonumber = tonumber;
 local tinsert = tinsert;
@@ -65,7 +64,6 @@ local sRebuffPerc;
 local sIsIgnorePets;
 
 function VUHDO_buffWatchInitBurst()
-
 	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
 	VUHDO_RAID_NAMES = VUHDO_GLOBAL["VUHDO_RAID_NAMES"];
 
@@ -172,17 +170,13 @@ end
 
 function VUHDO_setupAllBuffButtonUnits(aButton, aUnit)
 	if (not InCombatLockdown()) then
-		if (aUnit == nil) then
-			aUnit = "_foo";
-		end
-		aButton:SetAttribute("unit", aUnit);
+		aButton:SetAttribute("unit", aUnit or "_foo");
 	end
 end
 
 local tSpellDescr;
 local tModiKey, tButtonId;
 function VUHDO_setupAllBuffButtonsTo(aButton, aBuffName, aUnit, aMaxTargetBuff)
-
 	if (InCombatLockdown()) then
 		return;
 	end
@@ -219,24 +213,6 @@ function VUHDO_buffSelectDropdown_Initialize(_, _)
 	local tMaxVariant = VUHDO_getBuffVariantMaxTarget(tCateg[1]);
 	local tMaxTarget = tMaxVariant[2];
 
---[[
-	if (VUHDO_BUFF_TARGET_GROUP == tMaxTarget) then
-		local tCnt;
-		for tCnt = 1,8 do
-			local tGroupName = VUHDO_HEADER_TEXTS[tCnt];
-
-			local tInfo;
-			tInfo = UIDropDownMenu_CreateInfo();
-			tInfo.text = tGroupName;
-			tInfo.keepShownOnClick = true;
-			tInfo.arg1 = tCategName;
-			tInfo.arg2 = tCnt;
-			tInfo.func = VUHDO_buffSelectDropdownGroupSelected;
-			tInfo.checked = tSettings["groups"][tCnt];
-			UIDropDownMenu_AddButton(tInfo);
-		end
-	else
---]]
 
 	if (VUHDO_BUFF_TARGET_RAID == tMaxTarget or VUHDO_BUFF_TARGET_SINGLE == tMaxTarget) then
 		local tInfo;
@@ -328,15 +304,6 @@ function VUHDO_buffSelectDropdown_Initialize(_, _)
 	end
 
 end
-
---[[
-function VUHDO_buffSelectDropdownGroupSelected(_, aCategoryName, aGroupNum)
-	if (aCategoryName ~= nil) then
-		VUHDO_BUFF_SETTINGS[aCategoryName]["groups"][aGroupNum] = not VUHDO_BUFF_SETTINGS[aCategoryName]["groups"][aGroupNum];
-		VUHDO_reloadBuffPanel();
-	end
-end
---]]
 
 function VUHDO_buffSelectDropdownClassSelected(_, aCategoryName, aClassBuffName)
 	if (aCategoryName ~= nil) then
@@ -452,7 +419,6 @@ function VUHDO_getAllUniqueSpells()
 			tinsert(tUniqueBuffs, tSpellName);
 			tUniqueCategs[tSpellName] = strsub(tCategName, 3);
 		end
-
 	end
 
 	return tUniqueBuffs, tUniqueCategs;
@@ -516,24 +482,7 @@ function VUHDO_initBuffsFromSpellBook()
 			["booktype"] = nil,
 		};
 	end
-
 end
-
---[[
-local tCnt;
-local tGroups = {};
-local function VUHDO_getValidBuffGroups(someSettings)
-	twipe(tGroups);
-
-	for tCnt = 1, 8 do
-		if (someSettings["groups"][tCnt]) then
-			tinsert(tGroups, tCnt);
-		end
-	end
-
-	return tGroups;
-end
---]]
 
 local tClassBuffs;
 local tCategBuffs, tBuffVariants, tVariant, tCategName;
@@ -554,14 +503,6 @@ function VUHDO_getBuffCategory(aBuffName)
 end
 
 local function VUHDO_isBuffGroupEmpty(aTargetCode)
-
---[[
-	if ("G" == tCode) then
-		tGroup = VUHDO_GROUPS[tonumber(strsub(aTargetCode, 2))];
-		return tGroup == nil or #tGroup == 0;
-	else
---]]
-
 	if ("C" == strsub(aTargetCode, 1, 1)) then
 		return #VUHDO_BUFF_GROUPS[strsub(aTargetCode, 2)] == 0;
 	else
@@ -569,7 +510,6 @@ local function VUHDO_isBuffGroupEmpty(aTargetCode)
 	end
 end
 
---
 local tBuffOrder;
 local tInfo;
 local tEmpty = {};
@@ -634,7 +574,7 @@ local function VUHDO_getMissingBuffs(someBuffVariants, someUnits, aCategSpec)
 		tInfo = VUHDO_RAID[tUnit];
 
 		if ("focus" == tUnit or "target" == tUnit or tInfo == nil) then
-		tIsWatchUnit = false;
+			tIsWatchUnit = false;
 		elseif ("player" == tUnit) then
 			tIsWatchUnit = true;
 		elseif (VUHDO_isInSameZone(tUnit) and (tInfo["visible"] or not VUHDO_isInBattleground())) then
@@ -643,7 +583,7 @@ local function VUHDO_getMissingBuffs(someBuffVariants, someUnits, aCategSpec)
 				or VUHDO_RAID[tOwner] == nil
 				or (not sIsIgnorePets and VUHDO_RAID[tOwner]["classId"] ~= VUHDO_ID_WARLOCKS);
 		else
-		tIsWatchUnit = false;
+			tIsWatchUnit = false;
 		end
 
 		if (tIsWatchUnit) then
@@ -654,7 +594,7 @@ local function VUHDO_getMissingBuffs(someBuffVariants, someUnits, aCategSpec)
 			end
 
 			if (7 == tMaxVariant[2]) then -- VUHDO_BUFF_TARGET_TOTEM
-			tRest = 0;
+				tRest = 0;
 				for tTotemNum = 1, 4 do
 					_, tName, tStart, tDuration, tTexture = GetTotemInfo(tTotemNum);
 					if (tTexture == VUHDO_BUFFS[tMaxVariant[1]]["icon"]) then
@@ -789,11 +729,6 @@ local tEmpty = {};
 local function VUHDO_getMissingBuffsForCode(aTargetCode, someBuffVariants, aCategSpec)
 	tCode = strsub(aTargetCode, 1, 1);
 
---[[
-	if ("G" == tCode) then
-		tDestGroup = VUHDO_GROUPS[tonumber(strsub(aTargetCode, 2))];
-	else
---]]
 
 	if ("C" == tCode) then
 		tDestGroup = VUHDO_BUFF_GROUPS[strsub(aTargetCode, 2)];
@@ -812,7 +747,7 @@ local function VUHDO_getMissingBuffsForCode(aTargetCode, someBuffVariants, aCate
 			end
 
 		elseif (VUHDO_BUFF_TARGET_OWN_GROUP == tMaxTarget) then
-			tDestGroup = VUHDO_GROUPS[VUHDO_RAID["player"]["group"]];
+			tDestGroup = VUHDO_GROUPS[(VUHDO_RAID["player"] or {})["group"] or 1];
 
 		elseif (VUHDO_BUFF_TARGET_ENCHANT == tMaxTarget) then
 			tHasEnch1, tEnchDuration1, _, _, _, _ = GetWeaponEnchantInfo();
@@ -974,7 +909,7 @@ function VUHDO_updateBuffSwatch(aSwatch)
 				VUHDO_BUFFS[tRefSpell]["wasOnCd"] = true;
 			end
 		else
-			if (VUHDO_BUFFS[tRefSpell]["wasOnCd"]	and VUHDO_BUFF_SETTINGS["CONFIG"]["HIGHLIGHT_COOLDOWN"]) then
+			if (VUHDO_BUFFS[tRefSpell]["wasOnCd"] and VUHDO_BUFF_SETTINGS["CONFIG"]["HIGHLIGHT_COOLDOWN"]) then
 				UIFrameFlash(aSwatch, 0.3, 0.3, 5, true, 0, 0.3);
 				VUHDO_BUFFS[tRefSpell]["wasOnCd"] = false;
 			end

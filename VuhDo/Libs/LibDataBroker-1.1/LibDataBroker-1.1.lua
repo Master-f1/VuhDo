@@ -12,9 +12,8 @@ local attributestorage, namestorage, callbacks = lib.attributestorage, lib.names
 
 if oldminor < 2 then
 	lib.domt = {
-	__metatable = "access denied",
-	__index = function(self, key)
-	return attributestorage[self] and attributestorage[self][key]
+		__metatable = "access denied", __index = function(self, key)
+		return attributestorage[self] and attributestorage[self][key]
 	end,
 	}
 end

@@ -239,7 +239,7 @@ local function keybindingValidateFunc(text)
 	local modifier
 	while true do
 		if text == "-" then
-			break
+			break;
 		end
 		modifier, text = strsplit('-', text, 2)
 		if text then
@@ -266,7 +266,7 @@ local function keybindingValidateFunc(text)
 			end
 		else
 			text = modifier
-			break
+			break;
 		end
 	end
 	if text == "" then
@@ -458,7 +458,6 @@ local function handle(info, inputpos, tab, depth, retfalse)
 		------------ select ------------------------------------
 		local str = strtrim(strlower(str))
 		if str == "" then
-			-- TODO: Show current selection and possible values
 			return
 		end
 		
@@ -474,7 +473,7 @@ local function handle(info, inputpos, tab, depth, retfalse)
 			if strlower(k)==str then
 				str = k -- overwrite with key (in case of case mismatches)
 				ok = true
-				break
+				break;
 			end
 		end
 		if not ok then
@@ -488,7 +487,6 @@ local function handle(info, inputpos, tab, depth, retfalse)
 		------------ multiselect -------------------------------------------
 		local str = strtrim(strlower(str))
 		if str == "" then
-			-- TODO: Show current values
 			return
 		end
 		
@@ -517,7 +515,7 @@ local function handle(info, inputpos, tab, depth, retfalse)
 				if strlower(k)==opt then
 					opt = k -- overwrite with key (in case of case mismatches)
 					ok = true
-					break
+					break;
 				end
 			end
 
@@ -721,7 +719,7 @@ end
 
 -- GetChatCommandOptions(slashcmd)
 
--- Utility function that returns the options table that belongs to a slashcommand
+-- Utility function that returns the options table that belongs to a slashcommand.
 -- mainly used by AceTab
 
 function lib:GetChatCommandOptions(slashcmd)

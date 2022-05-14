@@ -481,7 +481,7 @@
 			</Layers>
 		</Frame>
 	</Frames>
-	
+
 	<NormalTexture file="Interface\AddOns\VuhDoOptions\Images\button_normal_128_32" />
 	<PushedTexture file="Interface\AddOns\VuhDoOptions\Images\button_pressed_128_32" />
 	<Scripts>

@@ -58,7 +58,7 @@
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.#PNUM#.HOTS.size");
 								VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_SIZE, 0, 100, "%", 2);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_070);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K070);
 							</OnLoad>
 						</Scripts>
 					</Frame>
@@ -74,7 +74,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.BAR_COLORS.HOTS.showShieldAbsorb");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_420);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K420);
 							</OnLoad>
 							<OnClick>
 								VUHDO_lnfCheckButtonUpdateModel(self);
@@ -108,7 +108,7 @@
 									<Scripts>
 										<OnLoad>
 											VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.HOTS.iconRadioValue", 1);
-											VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_473);
+											VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K473);
 										</OnLoad>
 									</Scripts>
 								</CheckButton>
@@ -124,7 +124,7 @@
 									<Scripts>
 										<OnLoad>
 											VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.HOTS.iconRadioValue", 2);
-											VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_474);
+											VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K474);
 										</OnLoad>
 									</Scripts>
 								</CheckButton>
@@ -140,7 +140,7 @@
 									<Scripts>
 										<OnLoad>
 											VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.HOTS.iconRadioValue", 3);
-											VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_331);
+											VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K331);
 										</OnLoad>
 									</Scripts>
 								</CheckButton>
@@ -171,7 +171,7 @@
 								<Scripts>
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.HOTS.stacksRadioValue", 1);
-										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_406);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K406);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -187,7 +187,7 @@
 									<Scripts>
 										<OnLoad>
 											VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.HOTS.stacksRadioValue", 2);
-											VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_407);
+											VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K407);
 										</OnLoad>
 									</Scripts>
 								</CheckButton>
@@ -203,7 +203,7 @@
 									<Scripts>
 										<OnLoad>
 											VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.HOTS.stacksRadioValue", 3);
-											VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_408);
+											VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K408);
 										</OnLoad>
 									</Scripts>
 								</CheckButton>
@@ -252,7 +252,7 @@
 								<Scripts>
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.HOTS.radioValue", 9);
-										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_325);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K325);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -268,7 +268,7 @@
 								<Scripts>
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.HOTS.radioValue", 10);
-										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_325);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K325);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -284,7 +284,7 @@
 								<Scripts>
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.HOTS.radioValue", 8);
-										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_326);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K326);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -300,7 +300,7 @@
 								<Scripts>
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.HOTS.radioValue", 7);
-										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_327);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K327);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -316,7 +316,7 @@
 								<Scripts>
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.HOTS.radioValue", 6);
-										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_328);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K328);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -332,7 +332,7 @@
 								<Scripts>
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.HOTS.radioValue", 5);
-										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_329);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K329);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -348,7 +348,7 @@
 								<Scripts>
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.HOTS.radioValue", 11);
-										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_499);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K503);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -364,7 +364,7 @@
 								<Scripts>
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.HOTS.radioValue", 12);
-										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_500);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K504);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -380,7 +380,7 @@
 								<Scripts>
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.HOTS.radioValue", 14);
-										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_501);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K505);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -396,7 +396,7 @@
 								<Scripts>
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.HOTS.radioValue", 13);
-										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_502);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K506);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -413,7 +413,7 @@
 								<Scripts>
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.HOTS.radioValue", 3);
-										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_071);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K071);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -429,7 +429,7 @@
 								<Scripts>
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.HOTS.radioValue", 2);
-										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_072);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K072);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -445,7 +445,7 @@
 								<Scripts>
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.HOTS.radioValue", 1);
-										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_073);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K073);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -461,7 +461,7 @@
 								<Scripts>
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.HOTS.radioValue", 4);
-										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_074);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K074);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -750,7 +750,7 @@
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.#PNUM#.HOTS.textSize");
 								VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_TEXT_SIZE, 50, 300, "%", 2);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_482);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K482);
 							</OnLoad>
 						</Scripts>
 					</Frame>
@@ -769,7 +769,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_setComboModel(self, "VUHDO_PANEL_SETUP.HOTS.font", VUHDO_FONTS);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_481);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K481);
 							</OnLoad>
 						</Scripts>
 					</Button>
@@ -808,7 +808,7 @@
 							</Layer>
 						</Layers>
 					</Frame>
-
+<!--VUHDO_I18N_TT.K332, нету в актуале-->
 					<Button name="$parentSlot5ComboBox" inherits="VuhDoEditComboBoxTemplate">
 						<Size>
 							<AbsDimension x="187" y="32" />
@@ -823,7 +823,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_setComboModel(self, "VUHDO_PANEL_SETUP.HOTS.SLOTS.##5", VUHDO_HOT_MODELS);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_332);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K332);
 								self:SetAttribute("custom_function", VUHDO_notifyHotSelect);
 								self:SetAttribute("custom_function_post", VUHDO_notifyBouquetUpdate);
 								self:SetAttribute("derive_custom", true);
@@ -845,14 +845,14 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_setComboModel(self, "VUHDO_PANEL_SETUP.HOTS.SLOTS.##9", VUHDO_HOT_MODELS);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_332);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K332);
 								self:SetAttribute("custom_function", VUHDO_notifyHotSelect);
 								self:SetAttribute("custom_function_post", VUHDO_notifyBouquetUpdate);
 								self:SetAttribute("derive_custom", true);
 							</OnLoad>
 						</Scripts>
 					</Button>
-
+<!--VUHDO_I18N_TT.K333, нету в актуале-->
 					<Button name="$parentSlot4ComboBox" inherits="VuhDoEditComboBoxTemplate">
 						<Size>
 							<AbsDimension x="187" y="32" />
@@ -867,14 +867,14 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_setComboModel(self, "VUHDO_PANEL_SETUP.HOTS.SLOTS.##4", VUHDO_HOT_MODELS);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_333);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K333);
 								self:SetAttribute("custom_function_post", VUHDO_notifyBouquetUpdate);
 								self:SetAttribute("custom_function", VUHDO_notifyHotSelect);
 								self:SetAttribute("derive_custom", true);
 							</OnLoad>
 						</Scripts>
 					</Button>
-
+<!--VUHDO_I18N_TT.K334, нету в актуале-->
 					<Button name="$parentSlot3ComboBox" inherits="VuhDoEditComboBoxTemplate">
 						<Size>
 							<AbsDimension x="187" y="32" />
@@ -889,14 +889,14 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_setComboModel(self, "VUHDO_PANEL_SETUP.HOTS.SLOTS.##3", VUHDO_HOT_MODELS);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_334);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K334);
 								self:SetAttribute("custom_function", VUHDO_notifyHotSelect);
 								self:SetAttribute("custom_function_post", VUHDO_notifyBouquetUpdate);
 								self:SetAttribute("derive_custom", true);
 							</OnLoad>
 						</Scripts>
 					</Button>
-
+<!--VUHDO_I18N_TT.K335, нету в актуале-->
 					<Button name="$parentSlot2ComboBox" inherits="VuhDoEditComboBoxTemplate">
 						<Size>
 							<AbsDimension x="187" y="32" />
@@ -911,14 +911,14 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_setComboModel(self, "VUHDO_PANEL_SETUP.HOTS.SLOTS.##2", VUHDO_HOT_MODELS);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_335);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K335);
 								self:SetAttribute("custom_function", VUHDO_notifyHotSelect);
 								self:SetAttribute("custom_function_post", VUHDO_notifyBouquetUpdate);
 								self:SetAttribute("derive_custom", true);
 							</OnLoad>
 						</Scripts>
 					</Button>
-
+<!--VUHDO_I18N_TT.K336, нету в актуале-->
 					<Button name="$parentSlot1ComboBox" inherits="VuhDoEditComboBoxTemplate">
 						<Size>
 							<AbsDimension x="187" y="32" />
@@ -933,14 +933,14 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_setComboModel(self, "VUHDO_PANEL_SETUP.HOTS.SLOTS.##1", VUHDO_HOT_MODELS);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_336);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K336);
 								self:SetAttribute("custom_function", VUHDO_notifyHotSelect);
 								self:SetAttribute("custom_function_post", VUHDO_notifyBouquetUpdate);
 								self:SetAttribute("derive_custom", true);
 							</OnLoad>
 						</Scripts>
 					</Button>
-
+<!--VUHDO_I18N_SLOT_6, нету в актуале-->
 					<Frame name="$parentSlot6Label" inherits="VuhDoLabelFrameTemplate">
 						<Size>
 							<AbsDimension x="152" y="18" />
@@ -959,8 +959,7 @@
 							</Layer>
 						</Layers>
 					</Frame>
-
-
+<!--VUHDO_I18N_SLOT_5, нету в актуале-->
 					<Frame name="$parentSlot5Label" inherits="VuhDoLabelFrameTemplate">
 						<Size>
 							<AbsDimension x="152" y="18" />
@@ -979,7 +978,7 @@
 							</Layer>
 						</Layers>
 					</Frame>
-
+<!--VUHDO_I18N_SLOT_4, нету в актуале-->
 					<Frame name="$parentSlot4Label" inherits="VuhDoLabelFrameTemplate">
 						<Size>
 							<AbsDimension x="152" y="18" />
@@ -998,7 +997,7 @@
 							</Layer>
 						</Layers>
 					</Frame>
-
+<!--VUHDO_I18N_SLOT_3, нету в актуале-->
 					<Frame name="$parentSlot3Label" inherits="VuhDoLabelFrameTemplate">
 						<Size>
 							<AbsDimension x="152" y="18" />
@@ -1017,7 +1016,7 @@
 							</Layer>
 						</Layers>
 					</Frame>
-
+<!--VUHDO_I18N_SLOT_2, нету в актуале-->
 					<Frame name="$parentSlot2Label" inherits="VuhDoLabelFrameTemplate">
 						<Size>
 							<AbsDimension x="152" y="18" />
@@ -1036,7 +1035,7 @@
 							</Layer>
 						</Layers>
 					</Frame>
-
+<!--VUHDO_I18N_SLOT_1, нету в актуале-->
 					<Frame name="$parentSlot1Label" inherits="VuhDoLabelFrameTemplate">
 						<Size>
 							<AbsDimension x="152" y="18" />

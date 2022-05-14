@@ -5,7 +5,7 @@ local function VUHDO_placeReadyIcon(aButton)
 	local tInfo = VUHDO_RAID[tUnit];
 	local tIcon = VUHDO_getBarRoleIcon(aButton, 20);
 
-	if (tInfo == nil or tInfo.isPet) then
+	if (tInfo == nil or tInfo["isPet"]) then
 		tIcon:Hide();
 	else
 		UIFrameFlashRemoveFrame(tIcon);
@@ -30,7 +30,7 @@ local function VUHDO_placeAllReadyIcons()
 			if (tButton:GetAttribute("unit") ~= nil) then
 				VUHDO_placeReadyIcon(tButton);
 			else
-				break
+				break;
 			end
 		end
 	end
@@ -39,7 +39,6 @@ end
 local function VUHDO_hideAllReadyIcons()
 	local tPanelNum;
 	local tAllButtons;
-	local tPanel;
 	local tButton;
 
 	for tPanelNum = 1, VUHDO_MAX_PANELS do
@@ -49,7 +48,7 @@ local function VUHDO_hideAllReadyIcons()
 			if (tButton:GetAttribute("unit") ~= nil) then
 				UIFrameFlash(VUHDO_getBarRoleIcon(tButton, 20), 0, 2, 10, false, 0, 8);
 			else
-				break
+				break;
 			end
 		end
 	end

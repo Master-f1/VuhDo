@@ -372,13 +372,6 @@ function VUHDO_demoTooltip(aPanelNum)
 		return;
 	end
 
-	tUnit = VUHDO_getPlayerRaidUnit();
-
-	if (VUHDO_RAID[tUnit] == nil) then
-		-- Must not happen
-		return;
-	end
-
 	VUHDO_TT_UNIT = tUnit;
 	VUHDO_TT_PANEL_NUM = aPanelNum;
 	VUHDO_TT_RESET = true;

@@ -83,13 +83,13 @@ local function VUHDO_getFireText(anAction)
 			if (VUHDO_SPELL_CONFIG["IS_FIRE_CUSTOM_1"] and tInstant ~= nil and strlen(tInstant) > 0) then
 
 				if (VUHDO_SPELL_CONFIG["IS_FIRE_OUT_FIGHT"]) then
-					if (VUHDO_SPELLS[tInstant] ~= nil and VUHDO_SPELLS[tInstant].noselftarget) then
+					if (VUHDO_SPELLS[tInstant] ~= nil and VUHDO_SPELLS[tInstant]["noselftarget"]) then
 						tModi2 = " ";
 					else
 						tModi2 = " [@player] ";
 					end
 				else
-					if (VUHDO_SPELLS[tInstant] ~= nil and VUHDO_SPELLS[tInstant].noselftarget) then
+					if (VUHDO_SPELLS[tInstant] ~= nil and VUHDO_SPELLS[tInstant]["noselftarget"]) then
 						tModi2 = " [combat] ";
 					else
 						tModi2 = " [combat,@player] ";
@@ -104,13 +104,13 @@ local function VUHDO_getFireText(anAction)
 			if (VUHDO_SPELL_CONFIG["IS_FIRE_CUSTOM_2"] and tInstant ~= nil and strlen(tInstant) > 0) then
 
 				if (VUHDO_SPELL_CONFIG["IS_FIRE_OUT_FIGHT"]) then
-					if (VUHDO_SPELLS[tInstant] ~= nil and VUHDO_SPELLS[tInstant].noselftarget) then
+					if (VUHDO_SPELLS[tInstant] ~= nil and VUHDO_SPELLS[tInstant]["noselftarget"]) then
 						tModi2 = " ";
 					else
 						tModi2 = " [@player] ";
 					end
 				else
-					if (VUHDO_SPELLS[tInstant] ~= nil and VUHDO_SPELLS[tInstant].noselftarget) then
+					if (VUHDO_SPELLS[tInstant] ~= nil and VUHDO_SPELLS[tInstant]["noselftarget"]) then
 						tModi2 = " [combat] ";
 					else
 						tModi2 = " [combat,@player] ";
@@ -295,6 +295,7 @@ local function VUHDO_generateRaidMacroTemplate(anAction, anIsKeyboard, aTarget, 
 
 	if (VUHDO_SPELL_CONFIG["IS_KEEP_STANCE"] and VUHDO_SPELL_ID_REBIRTH ~= anAction and VUHDO_SPELLS[anAction] ~= nil and
 		not VUHDO_SPELLS[anAction].nostance) then
+
 		if ("DRUID" == VUHDO_PLAYER_CLASS) then
 			tModiSpell = tModiSpell .. "noform:1/3,";
 
@@ -329,15 +330,14 @@ local function VUHDO_generateRaidMacroTemplate(anAction, anIsKeyboard, aTarget, 
 		if (aPet ~= nil) then
 			tText = tText .. "/tar [bonusbar:5,@vdpet]\n";
 		end
-	end
 
-	-- if (not anIsKeyboard) then
-	if (VUHDO_SPELL_CONFIG["IS_AUTO_TARGET"]) then
-		tText = tText .. "/tar [@vuhdo]\n";
-	else
-		tText = tText .. "/tar [harm,@vuhdo]\n";
+
+		if (VUHDO_SPELL_CONFIG["IS_AUTO_TARGET"]) then
+			tText = tText .. "/tar [@vuhdo]\n";
+		else
+			tText = tText .. "/tar [harm,@vuhdo]\n";
+		end
 	end
-	-- end
 
 	return tText;
 end

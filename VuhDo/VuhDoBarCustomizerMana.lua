@@ -32,9 +32,6 @@ local tInfo;
 local tPowerType;
 function VUHDO_updateManaBars(aUnit, aChange)
 	tInfo = VUHDO_RAID[aUnit];
-	if (tInfo == nil) then
-		return;
-	end
 
 	if (tInfo["isVehicle"]) then
 		if (tInfo["petUnit"] == nil) then

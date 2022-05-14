@@ -145,10 +145,9 @@ function VUHDO_spellcastSent(aUnit, aSpellName, aSpellRank, aTargetName)
 
 	tCateg = tUniqueSpells[aSpellName];
 	if (tCateg ~= nil and tTargetUnit ~= nil and not InCombatLockdown()) then
-		if (VUHDO_BUFF_SETTINGS ~= nil and VUHDO_BUFF_SETTINGS[tCateg] ~= nil and aTargetName ~= VUHDO_BUFF_SETTINGS[tCateg].name) then
-			VUHDO_BUFF_SETTINGS[tCateg].name = aTargetName;
+		if (VUHDO_BUFF_SETTINGS ~= nil and VUHDO_BUFF_SETTINGS[tCateg] ~= nil and aTargetName ~= VUHDO_BUFF_SETTINGS[tCateg]["name"]) then
+			VUHDO_BUFF_SETTINGS[tCateg]["name"] = aTargetName;
 			VUHDO_reloadBuffPanel();
 		end
 	end
 end
-

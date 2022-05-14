@@ -51,7 +51,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.BAR_COLORS.RAID_ICONS.enable");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_416);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K416);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -67,7 +67,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.BAR_COLORS.RAID_ICONS.filterOnly");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_417);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K417);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -399,7 +399,7 @@
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.BAR_COLORS.RAID_ICONS.1");
 								VUHDO_lnfInitColorSwatch(self, VUHDO_I18N_TEXT, VUHDO_I18N_RAID_ICON);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_418);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K418);
 							</OnLoad>
 						</Scripts>
 					</Frame>
@@ -419,7 +419,7 @@
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.BAR_COLORS.RAID_ICONS.2");
 								VUHDO_lnfInitColorSwatch(self, VUHDO_I18N_TEXT, VUHDO_I18N_RAID_ICON);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_418);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K418);
 							</OnLoad>
 						</Scripts>
 					</Frame>
@@ -439,7 +439,7 @@
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.BAR_COLORS.RAID_ICONS.3");
 								VUHDO_lnfInitColorSwatch(self, VUHDO_I18N_TEXT, VUHDO_I18N_RAID_ICON);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_418);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K418);
 							</OnLoad>
 						</Scripts>
 					</Frame>
@@ -459,7 +459,7 @@
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.BAR_COLORS.RAID_ICONS.4");
 								VUHDO_lnfInitColorSwatch(self, VUHDO_I18N_TEXT, VUHDO_I18N_RAID_ICON);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_418);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K418);
 							</OnLoad>
 						</Scripts>
 					</Frame>
@@ -479,7 +479,7 @@
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.BAR_COLORS.RAID_ICONS.5");
 								VUHDO_lnfInitColorSwatch(self, VUHDO_I18N_TEXT, VUHDO_I18N_RAID_ICON);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_418);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K418);
 							</OnLoad>
 						</Scripts>
 					</Frame>
@@ -499,7 +499,7 @@
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.BAR_COLORS.RAID_ICONS.6");
 								VUHDO_lnfInitColorSwatch(self, VUHDO_I18N_TEXT, VUHDO_I18N_RAID_ICON);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_418);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K418);
 							</OnLoad>
 						</Scripts>
 					</Frame>
@@ -519,7 +519,7 @@
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.BAR_COLORS.RAID_ICONS.7");
 								VUHDO_lnfInitColorSwatch(self, VUHDO_I18N_TEXT, VUHDO_I18N_RAID_ICON);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_418);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K418);
 							</OnLoad>
 						</Scripts>
 					</Frame>
@@ -539,7 +539,7 @@
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.BAR_COLORS.RAID_ICONS.8");
 								VUHDO_lnfInitColorSwatch(self, VUHDO_I18N_TEXT, VUHDO_I18N_RAID_ICON);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_418);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K418);
 							</OnLoad>
 						</Scripts>
 					</Frame>

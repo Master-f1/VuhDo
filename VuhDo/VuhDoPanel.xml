@@ -819,25 +819,25 @@
 						UIDropDownMenu_SetWidth(self, 100);
 						self:SetScale(0.7);
 						local cb_init_fn = function()
-						local info
+						local info1 = {};
 						info = {}
 						info.text = "" .. VUHDO_I18N_CLASS;
-						info.value = 1
+						info.value = 1;
 						info.owner = self;
-						info.func = function() VUHDO_groupSelectTypeOnSelectionChanged(this) end
-						UIDropDownMenu_AddButton(info);
-						info = {}
+						info.func = function() VUHDO_groupSelectTypeOnSelectionChanged(info1) end
+						UIDropDownMenu_AddButton(info1);
+						info info2 = {};
 						info.text = "" .. VUHDO_I18N_GROUP;
-						info.value = 2
+						info.value = 2;
 						info.owner = self;
-						info.func = function() VUHDO_groupSelectTypeOnSelectionChanged(this) end
-						UIDropDownMenu_AddButton(info);
-						info = {}
+						info.func = function() VUHDO_groupSelectTypeOnSelectionChanged(info2) end
+						UIDropDownMenu_AddButton(info2);
+						info info3 = {};
 						info.text = "" .. VUHDO_I18N_SPECIAL;
-						info.value = 3
+						info.value = 3;
 						info.owner = self;
-						info.func = function() VUHDO_groupSelectTypeOnSelectionChanged(this) end
-						UIDropDownMenu_AddButton(info);
+						info.func = function() VUHDO_groupSelectTypeOnSelectionChanged(info3) end
+						UIDropDownMenu_AddButton(info3);
 						end
 						UIDropDownMenu_Initialize(self, cb_init_fn)
 					</OnLoad>

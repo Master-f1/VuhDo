@@ -84,26 +84,6 @@
 				</Layers>
 			</Frame>
 
-			<Frame name="$parentBuffIconTexture" hidden="true">
-				<Size>
-					<AbsDimension x="16" y="16" />
-				</Size>
-				<Anchors>
-					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT">
-						<Offset>
-							<AbsDimension x="40" y="0" />
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Layers>
-					<Layer>
-						<Texture name="$parentTexture" setAllPoints="true" file="interface\icons\spell_holy_prayerofspirit">
-							<TexCoords left="0" right="1" top="0" bottom="1" />
-						</Texture>
-					</Layer>
-				</Layers>
-			</Frame>
-
 			<Frame name="$parentMessageLabel" inherits="VuhDoLabelFrameTemplate">
 				<Size>
 					<AbsDimension x="28" y="15" />

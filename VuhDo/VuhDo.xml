@@ -57,7 +57,7 @@
 	<Script file="VuhDoNewOptionsSpellFireShared.lua" />
 	<Script file="VuhDoNewOptionsGeneralSkinsShared.lua" />
 
-	<Frame name="VuhDoStatusBar" virtual="true" hidden="false">
+	<Frame name="VuhDoStatusBar" enableMouse="false" virtual="true" hidden="false">
 		<Scripts>
 			<OnLoad>
 				VUHDO_repairStatusbar(self);
@@ -86,12 +86,6 @@
 			<OnLoad>
 				VUHDO_OnLoad(self);
 			</OnLoad>
-			<OnEvent>
-				VUHDO_OnEvent(self,event,arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12);
-			</OnEvent>
-			<OnUpdate>
-				VUHDO_OnUpdate(self,arg1);
-			</OnUpdate>
 		</Scripts>
 	</Frame>
 
