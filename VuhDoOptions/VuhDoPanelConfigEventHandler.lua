@@ -55,7 +55,7 @@ function VUHDO_groupSelectTypeComboOnShow(aComboBox)
 	tPanelNum, tModelNum = VUHDO_getComponentPanelNumModelNum(aComboBox:GetParent());
 
 	local tModelId = VUHDO_PANEL_MODELS[tPanelNum][tModelNum];
-	local tOkayButton = VUHDO_GLOBAL[aComboBox:GetParent():GetName() .. "OkayButton"];
+	local tOkayButton = _G[aComboBox:GetParent():GetName() .. "OkayButton"];
 
 	if (tModelId ~= VUHDO_ID_UNDEFINED) then
 		tOkayButton:Enable();
@@ -68,7 +68,7 @@ function VUHDO_groupSelectTypeComboOnShow(aComboBox)
 	VUHDO_configFillGroupsCombo(aComboBox:GetParent(), tModelId);
 
 	local tName = VUHDO_ID_TYPE_NAMES[tType];
-	VUHDO_GLOBAL[aComboBox:GetName() .. "Text"]:SetText(tName);
+	_G[aComboBox:GetName() .. "Text"]:SetText(tName);
 end
 
 function VUHDO_groupSelectTypeOnSelectionChanged(anEntry)
@@ -78,7 +78,7 @@ function VUHDO_groupSelectTypeOnSelectionChanged(anEntry)
 
 
 	UIDropDownMenu_SetSelectedID(anEntry.owner, anEntry:GetID(), false);
-	VUHDO_GLOBAL[anEntry.owner:GetName() .. "Text"]:SetText(tText);
+	_G[anEntry.owner:GetName() .. "Text"]:SetText(tText);
 
 	tPanelNum, tModelNum = VUHDO_getComponentPanelNumModelNum(tPanel);
 
@@ -94,7 +94,7 @@ function VUHDO_groupSelectTypeOnSelectionChanged(anEntry)
 	VUHDO_PANEL_MODELS[tPanelNum][tModelNum] = tModelId;
 	VUHDO_configFillGroupsCombo(tPanel, tModelId);
 
-	local tOkayButton = VUHDO_GLOBAL[tPanel:GetName() .. "OkayButton"];
+	local tOkayButton = _G[tPanel:GetName() .. "OkayButton"];
 	tOkayButton:Enable();
 end
 
@@ -152,7 +152,7 @@ function VUHDO_configInitGroupsCombo()
 	end
 
 	local tText = VUHDO_HEADER_TEXTS[VUHDO_CURRENT_GROUP_ID];
-	VUHDO_GLOBAL[VUHDO_CURRENT_GROUPS_COMBO:GetName() .. "Text"]:SetText(tText);
+	_G[VUHDO_CURRENT_GROUPS_COMBO:GetName() .. "Text"]:SetText(tText);
 end
 
 function VUHDO_refreshGroupsCombo(aGroupsCombo, aModelId)
@@ -163,7 +163,7 @@ function VUHDO_refreshGroupsCombo(aGroupsCombo, aModelId)
 end
 
 function VUHDO_configFillGroupsCombo(aGroupSelectPanel, aModelId)
-	local tGroupsCombo = VUHDO_GLOBAL[aGroupSelectPanel:GetName() .. "VlCmb"];
+	local tGroupsCombo = _G[aGroupSelectPanel:GetName() .. "VlCmb"];
 
 	UIDropDownMenu_ClearAll(tGroupsCombo);
 	VUHDO_refreshGroupsCombo(tGroupsCombo, aModelId);

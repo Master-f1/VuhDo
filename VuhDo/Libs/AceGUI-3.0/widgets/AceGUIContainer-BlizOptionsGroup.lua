@@ -27,7 +27,7 @@ local AceGUI = LibStub("AceGUI-3.0")
 -- Blizzard Options Group --
 ----------------------------
 
---	Group Designed to be added to the bliz interface options panel
+-- Group Designed to be added to the bliz interface options panel
 
 
 do

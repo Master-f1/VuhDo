@@ -1,3 +1,5 @@
+local _;
+
 local VUHDO_IS_SMART_CAST = false;
 
 local IsAltKeyDown = IsAltKeyDown;
@@ -29,23 +31,23 @@ local VUHDO_CONFIG;
 local VUHDO_INTERNAL_TOGGLES;
 local VUHDO_RAID;
 function VUHDO_actionEventHandlerInitBurst()
-	VUHDO_updateBouquetsForEvent = VUHDO_GLOBAL["VUHDO_updateBouquetsForEvent"];
-	VUHDO_highlightClusterFor = VUHDO_GLOBAL["VUHDO_highlightClusterFor"];
-	VUHDO_showTooltip = VUHDO_GLOBAL["VUHDO_showTooltip"];
-	VUHDO_hideTooltip = VUHDO_GLOBAL["VUHDO_hideTooltip"];
-	VUHDO_resetClusterUnit = VUHDO_GLOBAL["VUHDO_resetClusterUnit"];
-	VUHDO_removeAllClusterHighlights = VUHDO_GLOBAL["VUHDO_removeAllClusterHighlights"];
-	VUHDO_getHealthBar = VUHDO_GLOBAL["VUHDO_getHealthBar"];
-	VUHDO_resolveButtonUnit = VUHDO_GLOBAL["VUHDO_resolveButtonUnit"];
-	VUHDO_setupSmartCast = VUHDO_GLOBAL["VUHDO_setupSmartCast"];
-	VUHDO_updateDirectionFrame = VUHDO_GLOBAL["VUHDO_updateDirectionFrame"];
-	VUHDO_getUnitButtons = VUHDO_GLOBAL["VUHDO_getUnitButtons"];
+	VUHDO_updateBouquetsForEvent = _G["VUHDO_updateBouquetsForEvent"];
+	VUHDO_highlightClusterFor = _G["VUHDO_highlightClusterFor"];
+	VUHDO_showTooltip = _G["VUHDO_showTooltip"];
+	VUHDO_hideTooltip = _G["VUHDO_hideTooltip"];
+	VUHDO_resetClusterUnit = _G["VUHDO_resetClusterUnit"];
+	VUHDO_removeAllClusterHighlights = _G["VUHDO_removeAllClusterHighlights"];
+	VUHDO_getHealthBar = _G["VUHDO_getHealthBar"];
+	VUHDO_resolveButtonUnit = _G["VUHDO_resolveButtonUnit"];
+	VUHDO_setupSmartCast = _G["VUHDO_setupSmartCast"];
+	VUHDO_updateDirectionFrame = _G["VUHDO_updateDirectionFrame"];
+	VUHDO_getUnitButtons = _G["VUHDO_getUnitButtons"];
 
-	VUHDO_SPELL_CONFIG = VUHDO_GLOBAL["VUHDO_SPELL_CONFIG"];
-	VUHDO_SPELL_ASSIGNMENTS = VUHDO_GLOBAL["VUHDO_SPELL_ASSIGNMENTS"];
-	VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
-	VUHDO_INTERNAL_TOGGLES = VUHDO_GLOBAL["VUHDO_INTERNAL_TOGGLES"];
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
+	VUHDO_SPELL_CONFIG = _G["VUHDO_SPELL_CONFIG"];
+	VUHDO_SPELL_ASSIGNMENTS = _G["VUHDO_SPELL_ASSIGNMENTS"];
+	VUHDO_CONFIG = _G["VUHDO_CONFIG"];
+	VUHDO_INTERNAL_TOGGLES = _G["VUHDO_INTERNAL_TOGGLES"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
 end
 
 function VUHDO_getCurrentMouseOver()
@@ -54,10 +56,10 @@ end
 
 local function VUHDO_placePlayerIcon(aButton, anIcon, anIndex)
 	anIcon:ClearAllPoints();
-	if (anIndex == 2) then
+	if 2 == anIndex then
 		anIcon:SetPoint("CENTER", aButton:GetName(), "TOPRIGHT", -5, -10);
 	else
-		if (anIndex > 2) then
+		if anIndex > 2 then
 			anIndex = anIndex - 1;
 		end
 		local tCol = floor(anIndex * 0.5);
@@ -80,18 +82,16 @@ local function VUHDO_showPlayerIcons(aButton)
 	local tIsPvPEnabled;
 	local tFaction;
 
-	if (tUnit == nil) then
-		return;
-	end
+	if not tUnit then return; end
 
-	if (UnitInRaid(tUnit)) then
+	if UnitInRaid(tUnit) then
 		local tUnitNo = VUHDO_getUnitNo(tUnit);
-		if (tUnitNo ~= nil) then
+		if tUnitNo then
 			local tRank;
 			_, tRank, _, _, _, _, _, _, _, _, tIsMasterLooter = GetRaidRosterInfo(tUnitNo);
-			if (tRank == 2) then
+			if 2 == tRank then
 				tIsLeader = true;
-			elseif (tRank == 1) then
+			elseif 1 == tRank then
 				tIsAssist = true;
 			end
 		end
@@ -102,7 +102,7 @@ local function VUHDO_showPlayerIcons(aButton)
 	tIsPvPEnabled = UnitIsPVP(tUnit);
 
 	local tIcon;
-	if (tIsLeader) then
+	if tIsLeader then
 		tIcon = VUHDO_getBarIcon(aButton, 1);
 		tIcon:SetTexture("Interface\\groupframe\\ui-group-leadericon");
 		VUHDO_placePlayerIcon(aButton, tIcon, 0);
@@ -112,13 +112,13 @@ local function VUHDO_showPlayerIcons(aButton)
 		VUHDO_placePlayerIcon(aButton, tIcon, 0);
 	end
 
-	if (tIsMasterLooter) then
+	if tIsMasterLooter then
 		tIcon = VUHDO_getBarIcon(aButton, 2);
 		tIcon:SetTexture("Interface\\groupframe\\ui-group-masterlooter");
-		VUHDO_placePlayerIcon(aButton, tIcon, 1);
+		VUHDO_placePlayerIcon(aButton, 2, 1);
 	end
 
-	if (tIsPvPEnabled) then
+	if tIsPvPEnabled then
 		tIcon = VUHDO_getBarIcon(aButton, 3);
 
 		tFaction, _ = UnitFactionGroup(tUnit);
@@ -128,22 +128,22 @@ local function VUHDO_showPlayerIcons(aButton)
 			tIcon:SetTexture("Interface\\groupframe\\ui-group-pvp-horde");
 		end
 
-		VUHDO_placePlayerIcon(aButton, tIcon, 2);
+		VUHDO_placePlayerIcon(aButton, 3, 2);
 		tIcon:SetWidth(32);
 		tIcon:SetHeight(32);
 	end
 
 	local tClass = (VUHDO_RAID[tUnit] or {})["class"];
-	if (tClass ~= nil) then
+	if tClass then
 		tIcon = VUHDO_getBarIcon(aButton, 4);
 
 		tIcon:SetTexture("Interface\\TargetingFrame\\UI-Classes-Circles");
 		tIcon:SetTexCoord(unpack(CLASS_ICON_TCOORDS[tClass]));
-		VUHDO_placePlayerIcon(aButton, tIcon, 3);
+		VUHDO_placePlayerIcon(aButton, 4, 3);
 	end
 
 	local tRole = (VUHDO_RAID[tUnit] or {})["role"];
-	if (tRole ~= nil) then
+	if tRole then
 		tIcon = VUHDO_getBarIcon(aButton, 5);
 		tIcon:SetTexture("Interface\\LFGFrame\\UI-LFG-ICON-ROLES");
 		if (VUHDO_ID_MELEE_TANK == tRole) then
@@ -153,7 +153,7 @@ local function VUHDO_showPlayerIcons(aButton)
 		else
 			tIcon:SetTexCoord(GetTexCoordsForRole("DAMAGER"));
 		end
-		VUHDO_placePlayerIcon(aButton, tIcon, 5);
+		VUHDO_placePlayerIcon(aButton, 5, 5);
 	end
 
 	local tBar = VUHDO_getHealthBar(aButton, 1);
@@ -182,7 +182,6 @@ function VUHDO_hideAllPlayerIcons()
 
 	VUHDO_removeAllHots();
 	VUHDO_suspendHoTs(false);
-	VUHDO_reloadUI();
 end
 
 local function VUHDO_showAllPlayerIcons(aPanel)
@@ -212,7 +211,7 @@ function VuhDoActionOnEnter(aButton)
 
 	tOldMouseover = VUHDO_CURRENT_MOUSEOVER;
 	VUHDO_CURRENT_MOUSEOVER = VUHDO_resolveButtonUnit(aButton);
-	if (VUHDO_INTERNAL_TOGGLES[15]) then -- VUHDO_UPDATE_MOUSEOVER
+	if VUHDO_INTERNAL_TOGGLES[15] then -- VUHDO_UPDATE_MOUSEOVER
 		VUHDO_updateBouquetsForEvent(tOldMouseover, 15); -- Seems to be ghosting sometimes, -- VUHDO_UPDATE_MOUSEOVER
 		VUHDO_updateBouquetsForEvent(VUHDO_CURRENT_MOUSEOVER, 15); -- VUHDO_UPDATE_MOUSEOVER
 	end
@@ -228,20 +227,20 @@ function VuhDoActionOnEnter(aButton)
 		VuhDoGcdStatusBar:Show();
 	end
 
-	if (VUHDO_INTERNAL_TOGGLES[18]) then -- VUHDO_UPDATE_MOUSEOVER_CLUSTER
-		if (VUHDO_CURRENT_MOUSEOVER ~= nil) then
+	if VUHDO_INTERNAL_TOGGLES[18] then -- VUHDO_UPDATE_MOUSEOVER_CLUSTER
+		if VUHDO_CURRENT_MOUSEOVER then
 			VUHDO_highlightClusterFor(VUHDO_CURRENT_MOUSEOVER);
 		end
 	end
 
-	if (VUHDO_INTERNAL_TOGGLES[20]) then -- VUHDO_UPDATE_MOUSEOVER_GROUP
+	if VUHDO_INTERNAL_TOGGLES[20] then -- VUHDO_UPDATE_MOUSEOVER_GROUP
 		tInfo = VUHDO_RAID[VUHDO_CURRENT_MOUSEOVER];
-		if (tInfo == nil) then
+		if not tInfo then
 			return;
 		end
 
 		tAllUnits = VUHDO_GROUPS[tInfo["group"]];
-		if (tAllUnits ~= nil) then
+		if tAllUnits then
 			for _, tUnit in pairs(tAllUnits) do
 				VUHDO_updateBouquetsForEvent(tUnit, 20); -- VUHDO_UPDATE_MOUSEOVER_GROUP
 			end
@@ -251,31 +250,31 @@ end
 
 local tOldMouseover;
 function VuhDoActionOnLeave(aButton)
-	VUHDO_hideTooltip();
 
+	VUHDO_hideTooltip();
 	VuhDoDirectionFrame["shown"] = false;
 	VuhDoDirectionFrame:Hide();
 
 	tOldMouseover = VUHDO_CURRENT_MOUSEOVER;
 	VUHDO_CURRENT_MOUSEOVER = nil;
-	if (VUHDO_INTERNAL_TOGGLES[15]) then -- VUHDO_UPDATE_MOUSEOVER
+	if VUHDO_INTERNAL_TOGGLES[15] then -- VUHDO_UPDATE_MOUSEOVER
 		VUHDO_updateBouquetsForEvent(tOldMouseover, 15); -- VUHDO_UPDATE_MOUSEOVER
 	end
 
-	if (VUHDO_INTERNAL_TOGGLES[18]) then -- VUHDO_UPDATE_MOUSEOVER_CLUSTER
+	if VUHDO_INTERNAL_TOGGLES[18] then -- VUHDO_UPDATE_MOUSEOVER_CLUSTER
 		VUHDO_resetClusterUnit();
 		VUHDO_removeAllClusterHighlights();
 	end
 
-	if (VUHDO_INTERNAL_TOGGLES[20]) then -- VUHDO_UPDATE_MOUSEOVER_GROUP
+	if VUHDO_INTERNAL_TOGGLES[20] then -- VUHDO_UPDATE_MOUSEOVER_GROUP
 		tUnit = VUHDO_resolveButtonUnit(aButton);
 		tInfo = VUHDO_RAID[tUnit];
 
-		if (tInfo == nil) then
+		if not tInfo then
 			return;
 		end
 		tAllUnits = VUHDO_GROUPS[tInfo["group"]];
-		if (tAllUnits ~= nil) then
+		if tAllUnits then
 			for _, tUnit in pairs(tAllUnits) do
 				VUHDO_updateBouquetsForEvent(tUnit, 20); -- VUHDO_UPDATE_MOUSEOVER_GROUP
 			end
@@ -301,7 +300,7 @@ function VUHDO_highlighterBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue,
 	end
 
 	tAllButtons = VUHDO_getUnitButtons(aUnit);
-	if (tAllButtons ~= nil) then
+	if tAllButtons then
 		for _, tButton in pairs(tAllButtons) do
 			if (tQuota > 0) then
 				tHighlightBar = VUHDO_getHealthBar(tButton, 8);
@@ -322,34 +321,37 @@ end
 local tModi;
 local tKey;
 function VuhDoActionPreClick(aButton, aMouseButton, aDown)
-	if (VUHDO_CONFIG["IS_CLIQUE_COMPAT_MODE"]) then
+
+
+	-- allow VuhDo menu command to be bound even when using Clique compat mode
+	if VUHDO_CONFIG["IS_CLIQUE_COMPAT_MODE"] then
 		return;
 	end
 
 	tModi = "";
-	if (IsAltKeyDown()) then
+	if IsAltKeyDown() then
 		tModi = tModi .. "alt";
 	end
 
-	if (IsControlKeyDown()) then
+	if IsControlKeyDown() then
 		tModi = tModi .. "ctrl";
 	end
 
-	if (IsShiftKeyDown()) then
+	if IsShiftKeyDown() then
 		tModi = tModi .. "shift";
 	end
 
 	tKey = VUHDO_SPELL_ASSIGNMENTS[tModi .. SecureButton_GetButtonSuffix(aMouseButton)];
-	if (tKey ~= nil and strlower(tKey[3]) == "menu") then
+	if tKey and strlower(tKey[3]) == "menu" then
 		VUHDO_disableActions(aButton);
 		VUHDO_setMenuUnit(aButton);
 		ToggleDropDownMenu(1, nil, VuhDoPlayerTargetDropDown, aButton:GetName(), 0, -5);
 		VUHDO_IS_SMART_CAST = true;
-	elseif (tKey ~= nil and strlower(tKey[3]) == "tell") then
+	elseif tKey and strlower(tKey[3]) == "tell" then
 		ChatFrame_SendTell(VUHDO_RAID[VUHDO_resolveButtonUnit(aButton)]["name"]);
 	else
-		if (VUHDO_SPELL_CONFIG["smartCastModi"] == "all"
-			or strfind(tModi, VUHDO_SPELL_CONFIG["smartCastModi"], 1, true)) then
+		if VUHDO_SPELL_CONFIG["smartCastModi"] == "all"
+			or strfind(tModi, VUHDO_SPELL_CONFIG["smartCastModi"], 1, true) then
 			VUHDO_IS_SMART_CAST = VUHDO_setupSmartCast(aButton);
 		else
 			VUHDO_IS_SMART_CAST = false;
@@ -358,7 +360,7 @@ function VuhDoActionPreClick(aButton, aMouseButton, aDown)
 end
 
 function VuhDoActionPostClick(aButton, aMouseButton)
-	if (VUHDO_IS_SMART_CAST) then
+	if VUHDO_IS_SMART_CAST then
 		VUHDO_setupAllHealButtonAttributes(aButton, nil, false, false, false);
 		VUHDO_IS_SMART_CAST = false;
 	end
@@ -373,15 +375,14 @@ function VuhDoActionOnMouseUp(aPanel, aMouseButton)
 end
 
 function VUHDO_startMoving(aPanel)
-	if (VuhDoNewOptionsPanelPanel ~= nil
-		and VuhDoNewOptionsPanelPanel:IsVisible()) then
+	if VuhDoNewOptionsPanelPanel and VuhDoNewOptionsPanelPanel:IsVisible() then
 
 		local tNewNum = VUHDO_getComponentPanelNum(aPanel);
-		if (tNewNum ~= DESIGN_MISC_PANEL_NUM) then
+		if tNewNum ~= DESIGN_MISC_PANEL_NUM then
 			VuhDoNewOptionsTabbedFrame:Hide();
 			DESIGN_MISC_PANEL_NUM = tNewNum;
 			VuhDoNewOptionsTabbedFrame:Show();
-			VUHDO_redrawAllPanels();
+			VUHDO_redrawAllPanels(false);
 			return;
 		end
 	end
@@ -391,16 +392,14 @@ function VUHDO_startMoving(aPanel)
 			aPanel["isMoving"] = true;
 			aPanel:StartMoving();
 		end
-	elseif (IsMouseButtonDown(2) and not InCombatLockdown()
-		and (VuhDoNewOptionsPanelPanel == nil or not VuhDoNewOptionsPanelPanel:IsVisible())) then
+	elseif IsMouseButtonDown(2) and not InCombatLockdown()
+		and (not VuhDoNewOptionsPanelPanel or not VuhDoNewOptionsPanelPanel:IsVisible()) then
 		VUHDO_showAllPlayerIcons(aPanel);
 	end
 end
 
 function VUHDO_stopMoving(aPanel)
-	if (aPanel == nil) then
-		aPanel = VUHDO_MOVE_PANEL;
-	end
+	if not aPanel then aPanel = VUHDO_MOVE_PANEL; end
 	aPanel:StopMovingOrSizing();
 	aPanel["isMoving"] = false;
 	VUHDO_savePanelCoords(aPanel);

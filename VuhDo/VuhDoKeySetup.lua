@@ -1,3 +1,4 @@
+local _;
 VUHDO_FAST_ACCESS_ACTIONS = {};
 
 -- BURST CACHE
@@ -30,19 +31,19 @@ local InCombatLockdown = InCombatLockdown;
 local pairs = pairs;
 
 function VUHDO_keySetupInitBurst()
-	VUHDO_RAID_NAMES = VUHDO_GLOBAL["VUHDO_RAID_NAMES"];
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
-	VUHDO_BUFF_REMOVAL_SPELLS = VUHDO_GLOBAL["VUHDO_BUFF_REMOVAL_SPELLS"];
-	VUHDO_SPELL_ASSIGNMENTS = VUHDO_GLOBAL["VUHDO_SPELL_ASSIGNMENTS"];
-	VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
+	VUHDO_RAID_NAMES = _G["VUHDO_RAID_NAMES"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
+	VUHDO_BUFF_REMOVAL_SPELLS = _G["VUHDO_BUFF_REMOVAL_SPELLS"];
+	VUHDO_SPELL_ASSIGNMENTS = _G["VUHDO_SPELL_ASSIGNMENTS"];
+	VUHDO_CONFIG = _G["VUHDO_CONFIG"];
 
-	VUHDO_resolveButtonUnit = VUHDO_GLOBAL["VUHDO_resolveButtonUnit"];
-	VUHDO_buildMacroText = VUHDO_GLOBAL["VUHDO_buildMacroText"];
-	VUHDO_buildTargetButtonMacroText = VUHDO_GLOBAL["VUHDO_buildTargetButtonMacroText"];
-	VUHDO_buildTargetMacroText = VUHDO_GLOBAL["VUHDO_buildTargetMacroText"];
-	VUHDO_buildFocusMacroText = VUHDO_GLOBAL["VUHDO_buildFocusMacroText"];
-	VUHDO_buildAssistMacroText = VUHDO_GLOBAL["VUHDO_buildAssistMacroText"];
-	VUHDO_getDebuffAbilities = VUHDO_GLOBAL["VUHDO_getDebuffAbilities"];
+	VUHDO_resolveButtonUnit = _G["VUHDO_resolveButtonUnit"];
+	VUHDO_buildMacroText = _G["VUHDO_buildMacroText"];
+	VUHDO_buildTargetButtonMacroText = _G["VUHDO_buildTargetButtonMacroText"];
+	VUHDO_buildTargetMacroText = _G["VUHDO_buildTargetMacroText"];
+	VUHDO_buildFocusMacroText = _G["VUHDO_buildFocusMacroText"];
+	VUHDO_buildAssistMacroText = _G["VUHDO_buildAssistMacroText"];
+	VUHDO_getDebuffAbilities = _G["VUHDO_getDebuffAbilities"];
 end
 
 local VUHDO_REZ_SPELLS_NAMES = {
@@ -54,24 +55,32 @@ local VUHDO_REZ_SPELLS_NAMES = {
 };
 
 function VUHDO_replaceMacroTemplates(aText, aUnit)
-	if (VUHDO_RAID_NAMES[aUnit] ~= nil) then
+	if VUHDO_RAID_NAMES[aUnit] then
 		aUnit = VUHDO_RAID_NAMES[aUnit];
 	end
-	if (aUnit ~= nil) then
+	if aUnit then
 		aText = gsub(aText, "vuhdo", aUnit);
 
-		if (VUHDO_RAID_NAMES[aUnit] ~= nil) then
+		if VUHDO_RAID_NAMES[aUnit] then
 			aUnit = VUHDO_RAID_NAMES[aUnit];
 		end
 
-		if (VUHDO_RAID[aUnit] ~= nil) then
+		if VUHDO_RAID[aUnit] then
 			aText = gsub(aText, "vdname", VUHDO_RAID[aUnit]["name"]);
 
+<<<<<<< Updated upstream
 			if (VUHDO_RAID[aUnit]["petUnit"] ~= nil) then
 				aText = gsub(aText, "vdpet", VUHDO_RAID[aUnit]["petUnit"]);
 			end
 
 			if (VUHDO_RAID[aUnit]["targetUnit"] ~= nil) then
+=======
+			if VUHDO_RAID[aUnit]["petUnit"] then
+				aText = gsub(aText, "vdpet", VUHDO_RAID[aUnit]["petUnit"]);
+			end
+
+			if VUHDO_RAID[aUnit]["targetUnit"] then
+>>>>>>> Stashed changes
 				aText = gsub(aText, "vdtarget", VUHDO_RAID[aUnit]["targetUnit"]);
 			end
 		end
@@ -91,8 +100,8 @@ local tBaseSpell;
 local tSpellInfo;
 
 local function VUHDO_setupHealButtonAttributes(aModiKey, aButtonId, anAction, aButton, anIsTgButton, anIndex)
-	if (anIsTgButton or aButton["target"] == "focus" or aButton["target"] == "target") then
-		if (anIndex == nil) then
+	if anIsTgButton or aButton["target"] == "focus" or aButton["target"] == "target" then
+		if not anIndex then
 			tHostSpell = VUHDO_HOSTILE_SPELL_ASSIGNMENTS[gsub(aModiKey, "-", "") .. aButtonId][3];
 		else
 			tHostSpell = VUHDO_SPELLS_KEYBOARD["HOSTILE_WHEEL"][anIndex][3];
@@ -103,44 +112,48 @@ local function VUHDO_setupHealButtonAttributes(aModiKey, aButtonId, anAction, aB
 		return;
 	end
 
-	if (anAction == nil or anAction == "") then
+	if not anAction or anAction == "" then
 		return;
 	end
 
 	tActionLow = strlower(anAction);
 
-	if (VUHDO_SPELL_KEY_ASSIST == tActionLow) then
+	if VUHDO_SPELL_KEY_ASSIST == tActionLow then
 		aButton:SetAttribute(aModiKey .. "type" .. aButtonId, "macro");
 		aButton:SetAttribute(aModiKey .. "macrotext" .. aButtonId, VUHDO_buildAssistMacroText(aButton["target"]));
-	elseif (VUHDO_SPELL_KEY_FOCUS == tActionLow) then
+	elseif VUHDO_SPELL_KEY_FOCUS == tActionLow then
 		aButton:SetAttribute(aModiKey .. "type" .. aButtonId, "macro");
 		aButton:SetAttribute(aModiKey .. "macrotext" .. aButtonId, VUHDO_buildFocusMacroText(aButton["target"]));
 
-	elseif (VUHDO_SPELL_KEY_TARGET == tActionLow) then
+	elseif VUHDO_SPELL_KEY_TARGET == tActionLow then
 		aButton:SetAttribute(aModiKey .. "type" .. aButtonId, "macro");
 		aButton:SetAttribute(aModiKey .. "macrotext" .. aButtonId, VUHDO_buildTargetMacroText(aButton["target"]));
-	elseif (VUHDO_SPELL_KEY_MENU == tActionLow or VUHDO_SPELL_KEY_TELL == tActionLow) then
+	elseif VUHDO_SPELL_KEY_MENU == tActionLow or VUHDO_SPELL_KEY_TELL == tActionLow then
 		aButton:SetAttribute(aModiKey .. "type" .. aButtonId, nil);
-	elseif (VUHDO_SPELL_KEY_DROPDOWN == tActionLow) then
+	elseif VUHDO_SPELL_KEY_DROPDOWN == tActionLow then
 		aButton:SetAttribute(aModiKey .. "type" .. aButtonId, "VUHDO_contextMenu");
 
 		VUHDO_contextMenu = function()
 			sDropdown = nil;
 
-			if (aButton["raidid"] == "player") then
+			if aButton["raidid"] == "player" then
 				sDropdown = PlayerFrameDropDown;
-			elseif (UnitIsUnit(aButton["raidid"], "pet")) then
+			elseif UnitIsUnit(aButton["raidid"], "pet") then
 				sDropdown = PetFrameDropDown;
 			else
 				sUnit = aButton["raidid"];
 				sInfo = VUHDO_RAID[sUnit];
 
-				if (sInfo ~= nil) then
-					if (not UnitInRaid("player")) then
-						sDropdown = VUHDO_GLOBAL['PartyMemberFrame' .. sInfo["number"] .. 'DropDown']
+				if sInfo then
+					if not UnitInRaid("player") then
+						sDropdown = _G['PartyMemberFrame' .. sInfo["number"] .. 'DropDown']
 					else
 						sIdent = sInfo["number"];
+<<<<<<< Updated upstream
 						if (sIdent == 0) then
+=======
+						if sIdent == 0 then
+>>>>>>> Stashed changes
 							sIdent = aButton["index"];
 						end
 						FriendsDropDown["name"] = sInfo["name"];
@@ -153,7 +166,7 @@ local function VUHDO_setupHealButtonAttributes(aModiKey, aButtonId, anAction, aB
 				end
 			end
 
-			if (sDropdown ~= nil) then
+			if sDropdown then
 				ToggleDropDownMenu(1, nil, sDropdown, "cursor", 0, 0);
 			end
 		end
@@ -161,7 +174,7 @@ local function VUHDO_setupHealButtonAttributes(aModiKey, aButtonId, anAction, aB
 		aButton.VUHDO_contextMenu = VUHDO_contextMenu;
 	else
 		tMacroId = GetMacroIndexByName(anAction);
-		if (tMacroId ~= 0) then
+		if tMacroId ~= 0 then
 			_, _, tMacroText = GetMacroInfo(tMacroId);
 			tMacroText = VUHDO_replaceMacroTemplates(tMacroText, aButton["raidid"]);
 			aButton:SetAttribute(aModiKey .. "type" .. aButtonId, "macro");
@@ -169,13 +182,13 @@ local function VUHDO_setupHealButtonAttributes(aModiKey, aButtonId, anAction, aB
 		else
 			tBaseSpell = strtrim(anAction);
 			tSpellInfo = GetSpellInfo(tBaseSpell);
-			if (tSpellInfo ~= nil or (VUHDO_IN_COMBAT_RELOG and VUHDO_FAST_ACCESS_ACTIONS[anAction] == "S")) then
-				if (VUHDO_REZ_SPELLS_NAMES[tBaseSpell] ~= nil) then
+			if tSpellInfo or (VUHDO_IN_COMBAT_RELOG and VUHDO_FAST_ACCESS_ACTIONS[anAction] == "S") then
+				if VUHDO_REZ_SPELLS_NAMES[tBaseSpell] then
 					aButton:SetAttribute(aModiKey .. "type" .. aButtonId, "spell");
 					aButton:SetAttribute(aModiKey .. "spell" .. aButtonId, tBaseSpell);
 					return;
 					-- Cleansing charmed players is an offensive thing to do
-				elseif (VUHDO_BUFF_REMOVAL_SPELLS[tBaseSpell] ~= nil) then
+				elseif VUHDO_BUFF_REMOVAL_SPELLS[tBaseSpell] then
 					aButton:SetAttribute(aModiKey .. "type" .. aButtonId, "macro");
 					aButton:SetAttribute(aModiKey .. "macrotext" .. aButtonId,
 						VUHDO_buildPurgeMacroText(tBaseSpell, aButton["target"]));
@@ -205,37 +218,32 @@ local tIsWheel;
 local tHostSpell;
 function VUHDO_setupAllHealButtonAttributes(aButton, aUnit, anIsDisable, aForceTarget, anIsTgButton)
 
-	if (aUnit ~= nil) then
+	if aUnit then
 		aButton:SetAttribute("unit", aUnit);
 		aButton["raidid"] = aUnit;
 		aButton["target"] = aUnit;
 	end
 
-	if (aButton:GetAttribute("vd_tt_hook") == nil and not anIsTgButton and VUHDO_BUTTON_CACHE[aButton] ~= nil) then
-		aButton:HookScript("OnEnter", function(self)
-			VuhDoActionOnEnter(self);
-		end);
-
-		aButton:HookScript("OnLeave", function(self)
-			VuhDoActionOnLeave(self);
-		end);
+	if not aButton:GetAttribute("vd_tt_hook") and not anIsTgButton and VUHDO_BUTTON_CACHE[aButton] then
+		aButton:HookScript("OnEnter", function(self) VuhDoActionOnEnter(self); end);
+		aButton:HookScript("OnLeave", function(self) VuhDoActionOnLeave(self); end);
 
 		aButton:SetAttribute("vd_tt_hook", true);
 	end
 
-	if (VUHDO_CONFIG["IS_CLIQUE_COMPAT_MODE"]) then
+	if VUHDO_CONFIG["IS_CLIQUE_COMPAT_MODE"] then
 		return;
 	end
 
-	if (anIsDisable) then
+	if anIsDisable then
 		tPreAction = "";
-	elseif (aForceTarget) then
+	elseif aForceTarget then
 		tPreAction = "target";
 	else
 		tPreAction = nil;
 	end
 
-	if (tPreAction ~= nil) then
+	if tPreAction then
 		for _, tSpellDescr in pairs(VUHDO_SPELL_ASSIGNMENTS) do
 			VUHDO_setupHealButtonAttributes(tSpellDescr[1], tSpellDescr[2], tPreAction, aButton, anIsTgButton);
 		end
@@ -258,9 +266,9 @@ function VUHDO_setupAllHealButtonAttributes(aButton, aUnit, anIsDisable, aForceT
 	end
 
 	-- Tooltips and stuff for raid members only (not: target buttons)
-	if (VUHDO_BUTTON_CACHE[aButton] ~= nil) then
+	if VUHDO_BUTTON_CACHE[aButton] then
 
-		if (tIsWheel) then
+		if tIsWheel then
 			aButton:SetAttribute("_onenter", [=[
 					self:ClearBindings();
 					self:SetBindingClick(0, "MOUSEWHEELUP", self:GetName(), "w1");
@@ -316,7 +324,7 @@ local function VUHDO_setupAllButtonsTo(aButton, aSpellName)
 		tButtonId = tSpellDescr[2];
 		tAction = tSpellDescr[3];
 
-		if ("target" == tAction or "assist" == tAction or "focus" == tAction) then
+		if "target" == tAction or "assist" == tAction or "focus" == tAction then
 			VUHDO_setupHealButtonAttributes(tModiKey, tButtonId, tAction, aButton, false);
 		else
 			VUHDO_setupHealButtonAttributes(tModiKey, tButtonId, aSpellName, aButton, false);
@@ -352,30 +360,34 @@ local tUnit;
 local tInfo;
 local tVariants, tMaxVariant;
 function VUHDO_setupSmartCast(aButton)
-	if (InCombatLockdown() or UnitIsDeadOrGhost("player") or
-		(VUHDO_PLAYER_CLASS == "PRIEST" and GetShapeshiftForm() ~= 0 and not VUHDO_isShadowForm())) then
+	if InCombatLockdown() or UnitIsDeadOrGhost("player") or
+		(VUHDO_PLAYER_CLASS == "PRIEST" and GetShapeshiftForm() ~= 0 and not VUHDO_isShadowForm()) then -- Priest Spirit of Redemption?
 		return false;
 	end
 
 	tUnit = aButton["raidid"];
 	tInfo = VUHDO_RAID[tUnit];
 
+<<<<<<< Updated upstream
 	if (tInfo == nil or not tInfo["baseRange"]) then
 		return false;
 	end;
+=======
+	if not tInfo or not tInfo["baseRange"] then return false; end;
+>>>>>>> Stashed changes
 	-- Trade?
 	tCursorItemType, _, _ = GetCursorInfo();
-	if ("item" == tCursorItemType or "money" == tCursorItemType) then
+	if "item" == tCursorItemType or "money" == tCursorItemType then
 		DropItemOnUnit(tUnit);
 		VUHDO_disableActions(aButton);
 		return true;
 	end
 
 	-- Resurrect?
-	if (VUHDO_CONFIG["SMARTCAST_RESURRECT"] and tInfo["dead"]) then
+	if VUHDO_CONFIG["SMARTCAST_RESURRECT"] and tInfo["dead"] then
 		local tMainRes, _ = VUHDO_getResurrectionSpells();
-		if (tMainRes ~= nil) then
-			if (not UnitIsGhost(tUnit)) then
+		if tMainRes then
+			if not UnitIsGhost(tUnit) then
 				VUHDO_setupAllButtonsTo(aButton, tMainRes);
 				return true;
 			else
@@ -386,10 +398,10 @@ function VUHDO_setupSmartCast(aButton)
 	end
 
 	-- Cleanse?
-	if (VUHDO_CONFIG["SMARTCAST_CLEANSE"] and not tInfo["dead"]) then
-		if (VUHDO_DEBUFF_TYPE_NONE ~= tInfo["debuff"]) then
+	if VUHDO_CONFIG["SMARTCAST_CLEANSE"] and not tInfo["dead"] then
+		if VUHDO_DEBUFF_TYPE_NONE ~= tInfo["debuff"] then
 			tAbilities = VUHDO_getDebuffAbilities(VUHDO_PLAYER_CLASS);
-			if (tAbilities[tInfo["debuff"]] ~= nil) then
+			if tAbilities[tInfo["debuff"]] then
 				VUHDO_setupAllButtonsTo(aButton, tAbilities[tInfo["debuff"]]);
 				return true;
 			end
@@ -397,7 +409,7 @@ function VUHDO_setupSmartCast(aButton)
 	end
 
 	-- Buff?
-	if (VUHDO_CONFIG["SMARTCAST_BUFF"] and tInfo["missbuff"] ~= nil and not tInfo["dead"]) then
+	if VUHDO_CONFIG["SMARTCAST_BUFF"] and tInfo["missbuff"] and not tInfo["dead"] then
 		tVariants = tInfo["mibuvariants"];
 		VUHDO_setupAllButtonsTo(aButton, VUHDO_getBuffVariantSingleTarget(tVariants)[1]);
 		tMaxVariant = VUHDO_getBuffVariantMaxTarget(tVariants)[1];

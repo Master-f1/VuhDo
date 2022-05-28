@@ -175,8 +175,8 @@ VUHDO_I18N_LOAD_KEY_SETUP = "Load Key Setup";
 VUHDO_I18N_BUFF_ASSIGN_1 = "Buff |cffffe566";
 VUHDO_I18N_BUFF_ASSIGN_2 = "|r has been assigned to |cffffe566";
 VUHDO_I18N_BUFF_ASSIGN_3 = "|r";
-VUHDO_I18N_RESS_ERR_1 = "Can't resurrect, "; -- нету в актуале
-VUHDO_I18N_RESS_ERR_2 = " has realeased spirit."; -- нету в актуале
+VUHDO_I18N_RESS_ERR_1 = "Can't resurrect, "; -- РЅРµС‚Сѓ РІ Р°РєС‚СѓР°Р»Рµ
+VUHDO_I18N_RESS_ERR_2 = " has realeased spirit."; -- РЅРµС‚Сѓ РІ Р°РєС‚СѓР°Р»Рµ
 VUHDO_I18N_MACRO_KEY_ERR_1 = "ERROR: Keyboard mouse-over macro size exceeds limit for spell: ";
 VUHDO_I18N_MACRO_KEY_ERR_2 = "/256 Characters). Try reducing auto fire options!!!";
 VUHDO_I18N_MACRO_NUM_ERR = "Maximum number of macros per character exceeded! Can't create mouse over macro for: ";
@@ -494,6 +494,6 @@ VUHDO_I18N_DEF_COUNTER_HEAL_ABSORB = "Counter: All Heal Absorb #k";
 VUHDO_I18N_DEF_STATUS_HEAL_ABSORB = "Statusbar: Heal Absorb";
 
 --EDIT 11.05.22
-VUHDO_I18N_OFF_EMPTY = "выкл";
-VUHDO_I18N_NONE = "пусто";
-VUHDO_I18N_COMBAT = "Настройка невозможна в режиме боя!"
+VUHDO_I18N_OFF_EMPTY = "РІС‹РєР»";
+VUHDO_I18N_NONE = "РїСѓСЃС‚Рѕ";
+VUHDO_I18N_COMBAT = "РќР°СЃС‚СЂРѕР№РєР° РЅРµРІРѕР·РјРѕР¶РЅР° РІ СЂРµР¶РёРјРµ Р±РѕСЏ!"

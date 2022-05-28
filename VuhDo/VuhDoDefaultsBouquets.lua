@@ -1286,7 +1286,7 @@ local tCnt;
 function VUHDO_transferOldSettingsToBouquets()
 	-- Part 2
 
-	if (VUHDO_PANEL_SETUP[1]["barBackBrightness"] ~= nil) then
+	if VUHDO_PANEL_SETUP[1]["barBackBrightness"] then
 
 		if (VUHDO_PANEL_SETUP[1]["classColorsBack"]) then
 			VUHDO_INDICATOR_CONFIG["BOUQUETS"]["BACKGROUND_BAR"] = VUHDO_I18N_DEF_BAR_BACKGROUND_CLASS_COLOR;
@@ -1311,8 +1311,8 @@ function VUHDO_transferOldSettingsToBouquets()
 	VUHDO_Msg("Transferring old setup to bouquets...");
 
 	-- Player Target Border
-	if (VUHDO_CONFIG["BAR_FRAMES"]) then
-		if (VUHDO_CONFIG["THREAT"]["AGGRO_USE_FRAME"]) then
+	if VUHDO_CONFIG["BAR_FRAMES"] then
+		if VUHDO_CONFIG["THREAT"]["AGGRO_USE_FRAME"] then
 			VUHDO_INDICATOR_CONFIG["BOUQUETS"]["BAR_BORDER"] = VUHDO_I18N_DEF_BOUQUET_BORDER_MULTI_AGGRO;
 		else
 			if (VUHDO_CONFIG["PLAYER_TARGET_FRAME"]) then
@@ -1330,7 +1330,7 @@ function VUHDO_transferOldSettingsToBouquets()
 	VUHDO_CONFIG["THREAT"]["AGGRO_USE_FRAME"] = nil;
 
 	-- Cluster Border
-	if (VUHDO_CONFIG["CLUSTER"]["IS_HOVER"]) then
+	if VUHDO_CONFIG["CLUSTER"]["IS_HOVER"] then
 		VUHDO_INDICATOR_CONFIG["BOUQUETS"]["CLUSTER_BORDER"] = VUHDO_I18N_DEF_BOUQUET_CLUSTER_MOUSE_HOVER;
 	else
 		VUHDO_INDICATOR_CONFIG["BOUQUETS"]["CLUSTER_BORDER"] = "";
@@ -1340,7 +1340,7 @@ function VUHDO_transferOldSettingsToBouquets()
 	VUHDO_PANEL_SETUP["BAR_COLORS"]["CLUSTER_BORDER"] = nil;
 
 	-- Threat Marks
-	if (VUHDO_CONFIG["THREAT"]["THREAT_DETECT"] and VUHDO_CONFIG["THREAT"]["THREAT_USE_SYMBOL"]) then
+	if VUHDO_CONFIG["THREAT"]["THREAT_DETECT"] and VUHDO_CONFIG["THREAT"]["THREAT_USE_SYMBOL"] then
 		VUHDO_INDICATOR_CONFIG["BOUQUETS"]["THREAT_MARK"] = VUHDO_I18N_DEF_BOUQUET_THREAT_MARKS;
 	else
 		VUHDO_INDICATOR_CONFIG["BOUQUETS"]["THREAT_MARK"] = ""
@@ -1350,7 +1350,7 @@ function VUHDO_transferOldSettingsToBouquets()
 	VUHDO_CONFIG["THREAT"]["THREAT_DETECT"] = nil;
 
 	-- Aggro Line
-	if (VUHDO_CONFIG["THREAT"]["AGGRO_USE_LINE"]) then
+	if VUHDO_CONFIG["THREAT"]["AGGRO_USE_LINE"] then
 		VUHDO_INDICATOR_CONFIG["BOUQUETS"]["AGGRO_BAR"] = VUHDO_I18N_DEF_BOUQUET_AGGRO_INDICATOR;
 	else
 		VUHDO_INDICATOR_CONFIG["BOUQUETS"]["AGGRO_BAR"] = ""
@@ -1364,7 +1364,7 @@ function VUHDO_transferOldSettingsToBouquets()
 	VUHDO_CONFIG["THREAT"]["THREAT_BAR_WIDTH"] = nil;
 
 	-- Mouseover Highlight
-	if (VUHDO_CONFIG["IS_GROUP_HIGHLIGHT"]) then
+	if VUHDO_CONFIG["IS_GROUP_HIGHLIGHT"] then
 		VUHDO_INDICATOR_CONFIG["BOUQUETS"]["MOUSEOVER_HIGHLIGHT"] = VUHDO_I18N_DEF_BOUQUET_MOUSEOVER_MULTI;
 	elseif (VUHDO_CONFIG["IS_UNIT_HIGHLIGHT"]) then
 		VUHDO_INDICATOR_CONFIG["BOUQUETS"]["MOUSEOVER_HIGHLIGHT"] = VUHDO_I18N_DEF_BOUQUET_MOUSEOVER_SINGLE;
@@ -1376,22 +1376,22 @@ function VUHDO_transferOldSettingsToBouquets()
 	VUHDO_CONFIG["GROUP_HIGHLIGHT_FACTOR"] = nil;
 
 	-- Swiftmend Indicator
-	if (VUHDO_PANEL_SETUP[1]["HOTS"] ~= nil) then
-		if (VUHDO_PANEL_SETUP[1]["HOTS"].showSwiftmend) then
+	if VUHDO_PANEL_SETUP[1]["HOTS"] then
+		if VUHDO_PANEL_SETUP[1]["HOTS"]["showSwiftmend"] then
 			VUHDO_INDICATOR_CONFIG["BOUQUETS"]["SWIFTMEND_INDICATOR"] = VUHDO_I18N_DEF_BOUQUET_SWIFTMENDABLE;
 		else
 			VUHDO_INDICATOR_CONFIG["BOUQUETS"]["SWIFTMEND_INDICATOR"] = "";
 		end
 
 		for tCnt = 1, VUHDO_MAX_PANELS do
-			VUHDO_PANEL_SETUP[tCnt]["HOTS"].showSwiftmend = nil;
+			VUHDO_PANEL_SETUP[tCnt]["HOTS"]["showSwiftmend"] = nil;
 		end
 	else
 		VUHDO_INDICATOR_CONFIG["BOUQUETS"]["SWIFTMEND_INDICATOR"] = "";
 	end
 
 	-- Mana Bars
-	if (VUHDO_PANEL_SETUP[1]["SCALING"].showManaBars and VUHDO_PANEL_SETUP[1]["SCALING"].showRageBars) then
+	if VUHDO_PANEL_SETUP[1]["SCALING"].showManaBars and VUHDO_PANEL_SETUP[1]["SCALING"]["showRageBars"] then
 		VUHDO_INDICATOR_CONFIG["BOUQUETS"]["MANA_BAR"] = VUHDO_I18N_DEF_BOUQUET_BAR_MANA_ALL;
 	elseif (VUHDO_PANEL_SETUP[1]["SCALING"].showManaBars) then
 		VUHDO_INDICATOR_CONFIG["BOUQUETS"]["MANA_BAR"] = VUHDO_I18N_DEF_BOUQUET_BAR_MANA_ONLY;
@@ -1407,7 +1407,7 @@ function VUHDO_transferOldSettingsToBouquets()
 
 
 	-- Threat Bars
-	if (VUHDO_CONFIG["THREAT"]["THREAT_USE_BAR"]) then
+	if VUHDO_CONFIG["THREAT"]["THREAT_USE_BAR"] then
 		VUHDO_INDICATOR_CONFIG["BOUQUETS"]["THREAT_BAR"] = VUHDO_I18N_DEF_BOUQUET_BAR_THREAT;
 	else
 		VUHDO_INDICATOR_CONFIG["BOUQUETS"]["THREAT_BAR"] = "";
@@ -1419,25 +1419,25 @@ function VUHDO_transferOldSettingsToBouquets()
 	VUHDO_CONFIG["RANGE_CHECK"] = nil;
 
 
-	if (VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["BARS"]["mode"] ~= nil) then
+	if VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["BARS"]["mode"] then
 		VUHDO_PANEL_SETUP["PANEL_COLOR"] = {};
 		VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"] = {};
 
-		VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"].R = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["BARS"].R;
-		VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"].G = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["BARS"].G;
-		VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"].B = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["BARS"].B;
-		VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"].O = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["BARS"].O;
-		VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"].mode = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["BARS"].mode;
-		VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"].useBackground = true;
-		VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"].useOpacity = true;
+		VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"]["R"] = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["BARS"]["R"];
+		VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"]["G"] = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["BARS"]["G"];
+		VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"]["B"] = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["BARS"]["B"];
+		VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"]["O"] = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["BARS"]["O"];
+		VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"]["mode"] = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["BARS"].mode;
+		VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"]["useBackground"] = true;
+		VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"]["useOpacity"] = true;
 
 		VUHDO_PANEL_SETUP["PANEL_COLOR"]["TEXT"] = {};
-		VUHDO_PANEL_SETUP["PANEL_COLOR"]["TEXT"].TR = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["TEXT"].TR;
-		VUHDO_PANEL_SETUP["PANEL_COLOR"]["TEXT"].TG = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["TEXT"].TG;
-		VUHDO_PANEL_SETUP["PANEL_COLOR"]["TEXT"].TB = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["TEXT"].TB;
-		VUHDO_PANEL_SETUP["PANEL_COLOR"]["TEXT"].TO = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["TEXT"].TO;
-		VUHDO_PANEL_SETUP["PANEL_COLOR"]["TEXT"].useText = true;
-		VUHDO_PANEL_SETUP["PANEL_COLOR"].classColorsName = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"].classColorsName;
+		VUHDO_PANEL_SETUP["PANEL_COLOR"]["TEXT"]["TR"] = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["TEXT"]["TR"];
+		VUHDO_PANEL_SETUP["PANEL_COLOR"]["TEXT"]["TG"] = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["TEXT"]["TG"];
+		VUHDO_PANEL_SETUP["PANEL_COLOR"]["TEXT"]["TB"] = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["TEXT"]["TB"];
+		VUHDO_PANEL_SETUP["PANEL_COLOR"]["TEXT"]["TO"] = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["TEXT"]["TO"];
+		VUHDO_PANEL_SETUP["PANEL_COLOR"]["TEXT"]["useText"] = true;
+		VUHDO_PANEL_SETUP["PANEL_COLOR"]["classColorsName"] = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["classColorsName"];
 		VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["BARS"]["mode"] = nil;
 	end
 end
@@ -1452,21 +1452,21 @@ end
 local tCopy;
 local function VUHDO_deepCopyColor(aColorTable)
 	tCopy = VUHDO_deepCopyTable(aColorTable);
-	tCopy.R = tCopy.R or 1;
-	tCopy.G = tCopy.G or 1;
-	tCopy.B = tCopy.B or 1;
-	tCopy.O = tCopy.O or 1;
-	tCopy.TR = tCopy.TR or 1;
-	tCopy.TG = tCopy.TG or 1;
-	tCopy.TB = tCopy.TB or 1;
-	tCopy.TO = tCopy.TO or 1;
+	tCopy["R"] = tCopy["R"] or 1;
+	tCopy["G"] = tCopy["G"] or 1;
+	tCopy["B"] = tCopy["B"] or 1;
+	tCopy["O"] = tCopy["O"] or 1;
+	tCopy["TR"] = tCopy["TR"] or 1;
+	tCopy["TG"] = tCopy["TG"] or 1;
+	tCopy["TB"] = tCopy["TB"] or 1;
+	tCopy["TO"] = tCopy["TO"] or 1;
 	return tCopy;
 end
 
 local function VUHDO_createBouquetItem(anEvent, aColor)
 	local tItem = VUHDO_deepCopyTable(VUHDO_SANE_BOUQUET_ITEM);
 	tItem["name"] = anEvent;
-	if (aColor ~= nil) then
+	if aColor then
 		tItem["color"] = VUHDO_deepCopyColor(aColor);
 	end
 	tItem["color"]["isManuallySet"] = true;
@@ -1486,7 +1486,7 @@ local function _VUHDO_buildGenericHealthBarBouquet(aType, aName)
 
 	-- Out of Range
 	tColor = VUHDO_PANEL_SETUP["BAR_COLORS"]["OUTRANGED"];
-	if (tColor["useText"] or tColor["useBackground"] or tColor["useOpacity"]) then
+	if tColor["useText"] or tColor["useBackground"] or tColor["useOpacity"] then
 		tItem = VUHDO_createBouquetItem("NO_RANGE", tColor);
 		tinsert(tBouquet, tItem);
 	end
@@ -1539,7 +1539,7 @@ local function _VUHDO_buildGenericHealthBarBouquet(aType, aName)
 		end
 
 		-- Health Bar
-		if (aType == 0) then
+		if aType == 0 then
 			tItem = VUHDO_createBouquetItem("STATUS_HEALTH", VUHDO_PANEL_SETUP["BAR_COLORS"]["LIFE_LEFT"]["GOOD"]);
 			tItem["color"]["useOpacity"] = true;
 			tItem["custom"]["grad_med"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["LIFE_LEFT"]["FAIR"]);
@@ -1547,7 +1547,7 @@ local function _VUHDO_buildGenericHealthBarBouquet(aType, aName)
 			tItem["custom"]["grad_low"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["LIFE_LEFT"]["LOW"]);
 			tItem["custom"]["grad_low"]["useOpacity"] = true;
 			tItem["custom"]["radio"] = 3; -- gradient
-		elseif (aType == 1) then
+		elseif aType == 1 then
 			tItem = VUHDO_createBouquetItem("STATUS_HEALTH", VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"]);
 			tItem["custom"]["radio"] = 2; -- class color
 		else -- Solid == 2, Chimaeron == 3
@@ -1588,60 +1588,56 @@ end
 
 local tName, tAllInfos, tIndex, tInfo;
 function VUHDO_loadDefaultBouquets()
-	if (VUHDO_BOUQUETS == nil) then
+	if not VUHDO_BOUQUETS then
 		VUHDO_BOUQUETS = VUHDO_deepCopyTable(VUHDO_DEFAULT_BOUQUETS);
 	end
 
-	if (VUHDO_BOUQUETS["VERSION"] < 2) then
+	if VUHDO_BOUQUETS["VERSION"] < 2 then
 		VUHDO_BOUQUETS["VERSION"] = 2;
 		VUHDO_addDefaultBouquet(VUHDO_DEFAULT_BACKGROUND_BOUQUETS);
 	end
 	VUHDO_buildGenericHealthBarBouquet();
 
-	if (VUHDO_INDICATOR_CONFIG == nil) then
+	if not VUHDO_INDICATOR_CONFIG then
 		VUHDO_INDICATOR_CONFIG = VUHDO_deepCopyTable(VUHDO_DEFAULT_INDICATOR_CONFIG);
 
-		if ("DRUID" == VUHDO_PLAYER_CLASS) then
+		if "DRUID" == VUHDO_PLAYER_CLASS then
 			VUHDO_INDICATOR_CONFIG["BOUQUETS"]["SWIFTMEND_INDICATOR"] = VUHDO_I18N_DEF_BOUQUET_SWIFTMENDABLE;
 		end
 	end
 
-	if (VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"].mode ~= nil) then
-		if (VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"].mode == 2) then -- Solid
+	if VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"]["mode"] then
+		if VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"]["mode"] == 2 then -- Solid
 			VUHDO_INDICATOR_CONFIG["BOUQUETS"]["HEALTH_BAR"] = VUHDO_I18N_DEF_BOUQUET_BAR_HEALTH_SOLID;
-		elseif (VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"].mode == 1) then -- Class Color
+		elseif VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"]["mode"] == 1 then -- Class Color
 			VUHDO_INDICATOR_CONFIG["BOUQUETS"]["HEALTH_BAR"] = VUHDO_I18N_DEF_BOUQUET_BAR_HEALTH_CLASS_COLOR;
 		else -- gradient
 			VUHDO_INDICATOR_CONFIG["BOUQUETS"]["HEALTH_BAR"] = VUHDO_I18N_DEF_BOUQUET_BAR_HEALTH;
 		end
-		VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"].mode = nil;
+		VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"]["mode"] = nil;
 	end
 
-	if (VUHDO_INDICATOR_CONFIG["CUSTOM"]["THREAT_BAR"] == nil) then
-		VUHDO_INDICATOR_CONFIG["CUSTOM"]["AGGRO_BAR"]["TEXTURE"] = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"].barTexture;
-		VUHDO_INDICATOR_CONFIG["CUSTOM"]["BACKGROUND_BAR"]["TEXTURE"] = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"].barTexture;
-		VUHDO_INDICATOR_CONFIG["CUSTOM"]["HEALTH_BAR"]["TEXTURE"] = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"].barTexture;
-		VUHDO_INDICATOR_CONFIG["CUSTOM"]["MANA_BAR"]["TEXTURE"] = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"].barTexture;
-		VUHDO_INDICATOR_CONFIG["CUSTOM"]["THREAT_BAR"]["TEXTURE"] = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"].barTexture;
+	if not VUHDO_INDICATOR_CONFIG["CUSTOM"]["THREAT_BAR"] then
+		VUHDO_INDICATOR_CONFIG["CUSTOM"]["AGGRO_BAR"]["TEXTURE"] = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["barTexture"];
+		VUHDO_INDICATOR_CONFIG["CUSTOM"]["BACKGROUND_BAR"]["TEXTURE"] = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["barTexture"];
+		VUHDO_INDICATOR_CONFIG["CUSTOM"]["HEALTH_BAR"]["TEXTURE"] = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["barTexture"];
+		VUHDO_INDICATOR_CONFIG["CUSTOM"]["MANA_BAR"]["TEXTURE"] = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["barTexture"];
+		VUHDO_INDICATOR_CONFIG["CUSTOM"]["THREAT_BAR"]["TEXTURE"] = VUHDO_PANEL_SETUP[1]["PANEL_COLOR"]["barTexture"];
 	end
 
-	if (VUHDO_INDICATOR_CONFIG["BOUQUETS"]["HEALTH_BAR"] == "") then
+	if VUHDO_INDICATOR_CONFIG["BOUQUETS"]["HEALTH_BAR"] == "" then
 		VUHDO_INDICATOR_CONFIG["BOUQUETS"]["HEALTH_BAR"] = VUHDO_I18N_DEF_BOUQUET_BAR_HEALTH;
 	end
 
 	VUHDO_ensureSanity("VUHDO_INDICATOR_CONFIG", VUHDO_INDICATOR_CONFIG, VUHDO_DEFAULT_INDICATOR_CONFIG);
 
 	for tName, tAllInfos in pairs(VUHDO_BOUQUETS["STORED"]) do
-		if (tAllInfos == nil or "table" ~= type(tAllInfos)) then
+		if not tAllInfos or "table" ~= type(tAllInfos) then
 			VUHDO_BOUQUETS["STORED"][tName] = {};
 		end
 
 		for tIndex, tInfo in pairs(VUHDO_BOUQUETS["STORED"][tName]) do
-			VUHDO_BOUQUETS["STORED"][tName][tIndex] = VUHDO_ensureSanity(
-				"VUHDO_BOUQUETS.STORED",
-				VUHDO_BOUQUETS["STORED"][tName][tIndex],
-				VUHDO_SANE_BOUQUET_ITEM
-			);
+			VUHDO_BOUQUETS["STORED"][tName][tIndex] = VUHDO_ensureSanity("VUHDO_BOUQUETS.STORED", VUHDO_BOUQUETS["STORED"][tName][tIndex], VUHDO_SANE_BOUQUET_ITEM);
 		end
 	end
 end

@@ -1,3 +1,4 @@
+local _;
 local VUHDO_B_CONFIG = nil;
 local VUHDO_B_INDICATOR_CONFIG = nil;
 local VUHDO_B_PANEL_SETUP = nil;

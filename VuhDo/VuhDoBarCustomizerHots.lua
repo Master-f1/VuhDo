@@ -1,3 +1,4 @@
+local _;
 local sIsFade;
 local sIsWarnColor;
 local sIsSwiftmend;
@@ -69,10 +70,9 @@ local GetTime = GetTime;
 local strfind = strfind;
 local pairs = pairs;
 local twipe = table.wipe;
-local _ = _;
 local tostring = tostring;
 
-local VUHDO_GLOBAL = getfenv();
+local _G = _G;
 
 local VUHDO_getHealthBar;
 local VUHDO_getBarRoleIcon;
@@ -97,37 +97,37 @@ local VUHDO_INTERNAL_TOGGLES;
 
 function VUHDO_customHotsInitBurst()
 	-- variables
-	VUHDO_PANEL_SETUP = VUHDO_GLOBAL["VUHDO_PANEL_SETUP"];
-	VUHDO_CAST_ICON_DIFF = VUHDO_GLOBAL["VUHDO_CAST_ICON_DIFF"];
-	VUHDO_HEALING_HOTS = VUHDO_GLOBAL["VUHDO_HEALING_HOTS"];
-	VUHDO_SPELLS = VUHDO_GLOBAL["VUHDO_SPELLS"];
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
-	VUHDO_ACTIVE_HOTS = VUHDO_GLOBAL["VUHDO_ACTIVE_HOTS"];
-	VUHDO_ACTIVE_HOTS_OTHERS = VUHDO_GLOBAL["VUHDO_ACTIVE_HOTS_OTHERS"];
-	VUHDO_INTERNAL_TOGGLES = VUHDO_GLOBAL["VUHDO_INTERNAL_TOGGLES"];
+	VUHDO_PANEL_SETUP = _G["VUHDO_PANEL_SETUP"];
+	VUHDO_CAST_ICON_DIFF = _G["VUHDO_CAST_ICON_DIFF"];
+	VUHDO_HEALING_HOTS = _G["VUHDO_HEALING_HOTS"];
+	VUHDO_SPELLS = _G["VUHDO_SPELLS"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
+	VUHDO_ACTIVE_HOTS = _G["VUHDO_ACTIVE_HOTS"];
+	VUHDO_ACTIVE_HOTS_OTHERS = _G["VUHDO_ACTIVE_HOTS_OTHERS"];
+	VUHDO_INTERNAL_TOGGLES = _G["VUHDO_INTERNAL_TOGGLES"];
 	-- functions
-	VUHDO_getUnitButtons = VUHDO_GLOBAL["VUHDO_getUnitButtons"];
-	VUHDO_getHealthBar = VUHDO_GLOBAL["VUHDO_getHealthBar"];
-	VUHDO_getBarRoleIcon = VUHDO_GLOBAL["VUHDO_getBarRoleIcon"];
-	VUHDO_updateAllClusterIcons = VUHDO_GLOBAL["VUHDO_updateAllClusterIcons"];
-	VUHDO_shouldScanUnit = VUHDO_GLOBAL["VUHDO_shouldScanUnit"];
-	VUHDO_getShieldLeftCount = VUHDO_GLOBAL["VUHDO_getShieldLeftCount"];
-	VUHDO_resolveVehicleUnit = VUHDO_GLOBAL["VUHDO_resolveVehicleUnit"];
-	VUHDO_isPanelVisible = VUHDO_GLOBAL["VUHDO_isPanelVisible"];
-	VUHDO_getHealButton = VUHDO_GLOBAL["VUHDO_getHealButton"];
-	VUHDO_getBarIcon = VUHDO_GLOBAL["VUHDO_getBarIcon"];
-	VUHDO_getBarIconTimer = VUHDO_GLOBAL["VUHDO_getBarIconTimer"];
-	VUHDO_getBarIconCounter = VUHDO_GLOBAL["VUHDO_getBarIconCounter"];
-	VUHDO_getBarIconCharge = VUHDO_GLOBAL["VUHDO_getBarIconCharge"];
+	VUHDO_getUnitButtons = _G["VUHDO_getUnitButtons"];
+	VUHDO_getHealthBar = _G["VUHDO_getHealthBar"];
+	VUHDO_getBarRoleIcon = _G["VUHDO_getBarRoleIcon"];
+	VUHDO_updateAllClusterIcons = _G["VUHDO_updateAllClusterIcons"];
+	VUHDO_shouldScanUnit = _G["VUHDO_shouldScanUnit"];
+	VUHDO_getShieldLeftCount = _G["VUHDO_getShieldLeftCount"];
+	VUHDO_resolveVehicleUnit = _G["VUHDO_resolveVehicleUnit"];
+	VUHDO_isPanelVisible = _G["VUHDO_isPanelVisible"];
+	VUHDO_getHealButton = _G["VUHDO_getHealButton"];
+	VUHDO_getBarIcon = _G["VUHDO_getBarIcon"];
+	VUHDO_getBarIconTimer = _G["VUHDO_getBarIconTimer"];
+	VUHDO_getBarIconCounter = _G["VUHDO_getBarIconCounter"];
+	VUHDO_getBarIconCharge = _G["VUHDO_getBarIconCharge"];
 
 	sBarColors = VUHDO_PANEL_SETUP["BAR_COLORS"];
 	sHotCols = sBarColors["HOTS"];
-	sIsFade = sHotCols.isFadeOut;
-	sIsWarnColor = sHotCols["WARNING"].enabled;
+	sIsFade = sHotCols["isFadeOut"];
+	sIsWarnColor = sHotCols["WARNING"]["enabled"];
 	sHotSetup = VUHDO_PANEL_SETUP["HOTS"];
 	sHotSlots = VUHDO_PANEL_SETUP["HOTS"]["SLOTS"];
 	sHotSlotCfgs = VUHDO_PANEL_SETUP["HOTS"]["SLOTCFG"];
-	sIsHotShowIcon = sHotSetup.iconRadioValue == 1;
+	sIsHotShowIcon = sHotSetup["iconRadioValue"] == 1;
 	sIsChargesIcon = sHotSetup["stacksRadioValue"] == 3;
 end
 
@@ -151,10 +151,10 @@ end
 local tHotBar;
 local function VUHDO_customizeHotBar(aButton, aRest, anIndex, aDuration, aColor)
 	tHotBar = VUHDO_getHealthBar(aButton, anIndex + 3);
-	if (aColor ~= nil) then
+	if aColor then
 		tHotBar:SetStatusBarColor(aColor["R"], aColor["G"], aColor["B"], aColor["O"]);
 	end
-	if (aDuration == nil or aRest == nil) then
+	if not aDuration or not aRest then
 		tHotBar:SetValue(0);
 	elseif (aDuration == 0) then
 		tHotBar:SetValue(100);
@@ -180,7 +180,7 @@ local function VUHDO_customizeHotIcons(aButton, aHotName, aRest, aTimes, anIcon,
 	tCounter = VUHDO_getBarIconCounter(aButton, anIndex);
 	tChargeTexture = VUHDO_getBarIconCharge(aButton, anIndex);
 
-	if (aRest == nil) then
+	if not aRest then
 		tIcon:SetAlpha(0);
 		tTimer:SetText("");
 		tCounter:SetText("");
@@ -190,7 +190,7 @@ local function VUHDO_customizeHotIcons(aButton, aHotName, aRest, aTimes, anIcon,
 
 	tIsChargeAlpha = false;
 
-	if (anIcon ~= nil and sIsHotShowIcon) then
+	if anIcon and sIsHotShowIcon then
 		tIcon:SetTexture(anIcon);
 	end
 
@@ -199,10 +199,10 @@ local function VUHDO_customizeHotIcons(aButton, aHotName, aRest, aTimes, anIcon,
 	aTimes = aTimes or 0;
 	tIsChargeShown = sIsChargesIcon and aTimes > 0;
 
-	if (aRest == 999) then
-		if (aTimes > 0) then
+	if aRest == 999 then -- Other players' HoTs
+		if aTimes > 0 then
 			tIcon:SetAlpha(tHotCfg["O"]);
-			if (aTimes > 1) then
+			if aTimes > 1 then
 				tCounter:SetText(aTimes);
 			else
 				tCounter:SetText("");
@@ -213,14 +213,14 @@ local function VUHDO_customizeHotIcons(aButton, aHotName, aRest, aTimes, anIcon,
 		end
 		tTimer:SetText("");
 		return;
-	elseif (aRest > 0) then
-		if (aRest < 10 and sIsFade) then
+	elseif aRest > 0 then
+		if aRest < 10 and sIsFade then
 			tIcon:SetAlpha(tHotCfg["O"] * aRest * 0.1);
 		else
 			tIcon:SetAlpha(tHotCfg["O"]);
 		end
 
-		if (aRest < 10 or tHotCfg["isFullDuration"]) then
+		if aRest < 10 or tHotCfg["isFullDuration"] then
 			if (tHotCfg["countdownMode"] == 2 and aRest < sHotCols["WARNING"]["lowSecs"]) then
 				tDuration = "" .. floor(aRest * 10) * 0.1;
 				if (strlen(tDuration) < 3) then
@@ -239,20 +239,20 @@ local function VUHDO_customizeHotIcons(aButton, aHotName, aRest, aTimes, anIcon,
 
 		tTimer:SetText(tDuration);
 
-		if (sIsFade and aRest < 10) then
+		if sIsFade and aRest < 10 then
 			tIcon:SetAlpha(tHotCfg["O"] * aRest * 0.1);
 		else
 			tIcon:SetAlpha(tHotCfg["O"]);
 		end
 
-		if (aRest > 5) then
+		if aRest > 5 then
 			tTimer:SetTextColor(1, 1, 1, 1);
 		else
 			tDuration2 = aRest * 0.2;
 			tTimer:SetTextColor(1, tDuration2, tDuration2, 1);
 		end
 
-		if (aTimes > 1) then
+		if aTimes > 1 then
 			tCounter:SetText(aTimes);
 		else
 			tCounter:SetText("");
@@ -266,49 +266,49 @@ local function VUHDO_customizeHotIcons(aButton, aHotName, aRest, aTimes, anIcon,
 	-- @TESTING
 	-- aTimes = floor(aRest / 3.5);
 
-	if (aTimes > 4) then
+	if aTimes > 4 then
 		aTimes = 4;
 	end
 
-	if (aColor ~= nil and (not aColor["isDefault"] or not sIsHotShowIcon)) then
-		tHotColor = aColor
+	if aColor and (not aColor["isDefault"] or not sIsHotShowIcon) then
+		tHotColor = aColor;
 
-		if (aTimes > 1) then
+		if aTimes > 1 then
 			tChargeColor = sBarColors[VUHDO_CHARGE_COLORS[aTimes]];
-			if (sHotCols["useColorBack"]) then
+			if sHotCols["useColorBack"] then
 				tHotColor["R"], tHotColor["G"], tHotColor["B"], tHotColor["O"]
 					= tChargeColor["R"], tChargeColor["G"], tChargeColor["B"], tChargeColor["O"];
 				tIsChargeAlpha = true;
 			end
-			if (sHotCols["useColorText"]) then
+			if sHotCols["useColorText"] then
 				tHotColor["TR"], tHotColor["TG"], tHotColor["TB"], tHotColor["TO"]
 					= tChargeColor["TR"], tChargeColor["TG"], tChargeColor["TB"], tChargeColor["TO"];
 			end
 		end
 
-		if (tHotColor["useText"] and not sIsHotShowIcon) then
+		if tHotColor["useText"] and not sIsHotShowIcon then
 			tTimer:SetTextColor(tHotColor["TR"], tHotColor["TG"], tHotColor["TB"], tHotColor["TO"]);
 		end
 
-	elseif (sIsWarnColor and aRest < sHotCols["WARNING"]["lowSecs"]) then
+	elseif sIsWarnColor and aRest < sHotCols["WARNING"]["lowSecs"] then
 		tHotColor = sHotCols["WARNING"];
 		tTimer:SetTextColor(tHotColor["TR"], tHotColor["TG"], tHotColor["TB"], tHotColor["TO"]);
 	else
 		tHotColor = VUHDO_copyColor(tHotCfg);
-		if (sIsHotShowIcon) then
+		if sIsHotShowIcon then
 			tHotColor["R"], tHotColor["G"], tHotColor["B"] = 1, 1, 1;
 		elseif (aTimes <= 1 or not sHotCols["useColorText"]) then
 			tTimer:SetTextColor(tHotColor["TR"], tHotColor["TG"], tHotColor["TB"], tHotColor["TO"]);
 		end
 
-		if (aTimes > 1) then
+		if aTimes > 1 then
 			tChargeColor = sBarColors[VUHDO_CHARGE_COLORS[aTimes]];
-			if (sHotCols["useColorBack"]) then
+			if sHotCols["useColorBack"] then
 				tHotColor["R"], tHotColor["G"], tHotColor["B"], tHotColor["O"]
 					= tChargeColor["R"], tChargeColor["G"], tChargeColor["B"], tChargeColor["O"];
 				tIsChargeAlpha = true;
 			end
-			if (sHotCols["useColorText"]) then
+			if sHotCols["useColorText"] then
 				tHotColor["TR"], tHotColor["TG"], tHotColor["TB"], tHotColor["TO"]
 					= tChargeColor["TR"], tChargeColor["TG"], tChargeColor["TB"], tChargeColor["TO"];
 				tTimer:SetTextColor(tHotColor["TR"], tHotColor["TG"], tHotColor["TB"], tHotColor["TO"]);
@@ -316,24 +316,24 @@ local function VUHDO_customizeHotIcons(aButton, aHotName, aRest, aTimes, anIcon,
 		end
 	end
 
-	if (tIsChargeAlpha) then
+	if tIsChargeAlpha then
 		tIcon:SetVertexColor(tHotColor["R"], tHotColor["G"], tHotColor["B"], tHotColor["O"]);
 	else
 		tIcon:SetVertexColor(tHotColor["R"], tHotColor["G"], tHotColor["B"]);
 	end
 
-	if (tIsChargeShown) then
+	if tIsChargeShown then
 		tChargeTexture:SetTexture(VUHDO_CHARGE_TEXTURES[aTimes]);
 		if (tHotColor["R"]) then
 			tChargeTexture:SetVertexColor(tHotColor["R"], tHotColor["G"], tHotColor["B"], tHotColor["O"]);
 		end
 		tChargeTexture:Show();
-	elseif (aShieldCharges > 0) then
-		if (sIsHotShowIcon) then
+	elseif aShieldCharges > 0 then
+		if sIsHotShowIcon then
 			tHotColor = tHotCfg;
 		end
 		tChargeTexture:SetTexture(VUHDO_SHIELD_TEXTURES[aShieldCharges]);
-		if (tHotColor["R"]) then
+		if tHotColor["R"] then
 			tChargeTexture:SetVertexColor(tHotColor["R"] + 0.15, tHotColor["G"] + 0.15, tHotColor["B"] + 0.15, tHotColor["O"]);
 		end
 		tChargeTexture:Show();
@@ -351,21 +351,20 @@ local tSlotCfg;
 
 local function VUHDO_updateHotIcons(aUnit, aHotName, aRest, aTimes, anIcon, aDuration, aMode, aColor, aHotSpellName)
 	tAllButtons = VUHDO_getUnitButtons(VUHDO_resolveVehicleUnit(aUnit));
-	if (tAllButtons == nil) then
+	if not tAllButtons then
 		return;
 	end
 
-	if (aMode ~= 2) then -- if not our shield don't show remaining absorption
+	if aMode ~= 2 then -- if not our shield don't show remaining absorption
 		tShieldCharges = VUHDO_getShieldLeftCount(aUnit, aHotSpellName or aHotName);
 	else
 		tShieldCharges = 0;
 	end
 
 	for tIndex, tHotName in pairs(sHotSlots) do
-		if (aHotName == tHotName) then
+		if aHotName == tHotName then
 
-			if (aMode == 0 or aColor ~= nil) then -- Bouquet => color ~= nil
-				tIsMatch = true;
+			if aMode == 0 or aColor then tIsMatch = true; -- Bouquet => aColor ~= nil
 			else
 				tSlotCfg = sHotSlotCfgs[tostring(tIndex)];
 				tIsMatch = (aMode == 1 and tSlotCfg["mine"] and not tSlotCfg["others"])
@@ -373,8 +372,8 @@ local function VUHDO_updateHotIcons(aUnit, aHotName, aRest, aTimes, anIcon, aDur
 						or (aMode == 3 and tSlotCfg["mine"] and tSlotCfg["others"]);
 			end
 
-			if (tIsMatch) then
-				if (tIndex >= 6 and tIndex <= 8) then
+			if tIsMatch then
+				if tIndex >= 6 and tIndex <= 8 then
 					for _, tButton in pairs(tAllButtons) do
 						VUHDO_customizeHotBar(tButton, aRest, tIndex, aDuration, aColor);
 					end
@@ -392,7 +391,7 @@ end
 local tCnt;
 function VUHDO_removeHots(aUnit)
 	tAllButtons = VUHDO_getUnitButtons(aUnit);
-	if (tAllButtons == nil) then
+	if not tAllButtons then
 		return;
 	end
 
@@ -417,44 +416,43 @@ local tCount;
 local tHotInfo;
 local function VUHDO_snapshotHot(aHotName, aRest, aStacks, anIcon, anIsMine, aDuration, aUnit)
 	aStacks = aStacks or 0;
-	if (aStacks == 0) then
+	if aStacks == 0 then
 		tCount = 1;
 	else
 		tCount = aStacks;
 	end
 
-	if (anIsMine) then
-		if (VUHDO_MY_HOTS[aUnit][aHotName] == nil) then
+	if anIsMine then
+		if not VUHDO_MY_HOTS[aUnit][aHotName] then
 			VUHDO_MY_HOTS[aUnit][aHotName] = {};
 		end
 		tHotInfo = VUHDO_MY_HOTS[aUnit][aHotName];
 		tHotInfo[1], tHotInfo[2], tHotInfo[3], tHotInfo[4] = aRest, aStacks, anIcon, aDuration;
-	elseif (VUHDO_ACTIVE_HOTS_OTHERS[aHotName]) then
-		if (VUHDO_OTHER_HOTS[aUnit][aHotName] == nil) then
+
+	elseif VUHDO_ACTIVE_HOTS_OTHERS[aHotName] then
+		if not VUHDO_OTHER_HOTS[aUnit][aHotName] then
 			VUHDO_OTHER_HOTS[aUnit][aHotName] = {};
 		end
 		tHotInfo = VUHDO_OTHER_HOTS[aUnit][aHotName];
 
-		if (tHotInfo[1] == nil) then
+		if not tHotInfo[1] then
 			tHotInfo[1], tHotInfo[2], tHotInfo[3], tHotInfo[4] = aRest, aStacks, anIcon, aDuration;
 		else
-			if (aRest > tHotInfo[1]) then
+			if aRest > tHotInfo[1] then
 				tHotInfo[1] = aRest;
 			end
-
 			tHotInfo[2] = tHotInfo[2] + tCount;
 		end
 	end
 
-	if (VUHDO_MY_AND_OTHERS_HOTS[aUnit][aHotName] == nil) then
+	if not VUHDO_MY_AND_OTHERS_HOTS[aUnit][aHotName] then
 		VUHDO_MY_AND_OTHERS_HOTS[aUnit][aHotName] = {};
 	end
-
 	tHotInfo = VUHDO_MY_AND_OTHERS_HOTS[aUnit][aHotName];
-	if (tHotInfo[1] == nil) then
+	if not tHotInfo[1] then
 		tHotInfo[1], tHotInfo[2], tHotInfo[3], tHotInfo[4] = aRest, aStacks, anIcon, aDuration;
 	else
-		if (anIsMine or aRest > tHotInfo[1]) then
+		if anIsMine or aRest > tHotInfo[1] then
 			tHotInfo[1] = aRest;
 		end
 
@@ -494,28 +492,28 @@ local tNow;
 local function VUHDO_updateHots(aUnit, anInfo)
 	tNow = GetTime();
 
-	if (anInfo["isVehicle"]) then
+	if anInfo["isVehicle"] then
 		VUHDO_removeHots(aUnit);
 		aUnit = anInfo["petUnit"];
-		if (aUnit == nil) then -- bei z.B. focus/target
+		if not aUnit then -- bei z.B. focus/target
 			return;
 		end
 	end
 
-	if (VUHDO_MY_HOTS[aUnit] == nil) then
+	if not VUHDO_MY_HOTS[aUnit] then
 		VUHDO_MY_HOTS[aUnit] = {};
 	end
 
-	if (VUHDO_OTHER_HOTS[aUnit] == nil) then
+	if not VUHDO_OTHER_HOTS[aUnit] then
 		VUHDO_OTHER_HOTS[aUnit] = {};
 	end
 
-	if (VUHDO_MY_AND_OTHERS_HOTS[aUnit] == nil) then
+	if not VUHDO_MY_AND_OTHERS_HOTS[aUnit] then
 		VUHDO_MY_AND_OTHERS_HOTS[aUnit] = {};
 	end
 
 	for tIndex, tHotInfo in pairs(VUHDO_MY_HOTS[aUnit]) do
-		tHotInfo[1] = nil; -- Rest == nil => Icon lˆschen
+		tHotInfo[1] = nil; -- Rest == nil => Icon l—Üschen
 	end
 
 	for tIndex, tHotInfo in pairs(VUHDO_OTHER_HOTS[aUnit]) do
@@ -530,33 +528,34 @@ local function VUHDO_updateHots(aUnit, anInfo)
 	tOtherIcon = nil;
 	tOtherHotCnt = 0;
 
-	if (VUHDO_OTHER_PLAYERS_HOT_INFO[aUnit] == nil) then
+	if not VUHDO_OTHER_PLAYERS_HOT_INFO[aUnit] then
 		VUHDO_OTHER_PLAYERS_HOT_INFO[aUnit] = {nil, 0};
 	else
-		VUHDO_OTHER_PLAYERS_HOT_INFO[aUnit][1] = nil;
-		VUHDO_OTHER_PLAYERS_HOT_INFO[aUnit][2] = 0;
+		VUHDO_OTHER_PLAYERS_HOT_INFO[aUnit][1], VUHDO_OTHER_PLAYERS_HOT_INFO[aUnit][2] = nil, 0;
 	end
 
-	if (VUHDO_shouldScanUnit(aUnit)) then
+	if VUHDO_shouldScanUnit(aUnit) then
 		tDebuffOffset = nil;
 		for tCnt = 1, 255 do
-			if (tDebuffOffset == nil) then
+
+			if not tDebuffOffset then
 				tBuffName, _, tBuffIcon, tStacks, _, sDuration, tRest, tCaster, _, _, tSpellId = UnitBuff(aUnit, tCnt);
-			if (tBuffIcon == nil) then
+
+			if not tBuffIcon then
 				tDebuffOffset = tCnt - 1;
 			end
 		end
-			if (tDebuffOffset ~= nil) then -- Achtung kein elseif
+			if tDebuffOffset then -- Achtung kein elseif
 				tBuffName, _, tBuffIcon, tStacks, _, sDuration, tRest, tCaster, _, _, tSpellId = UnitDebuff(aUnit, tCnt - tDebuffOffset);
-			if (tBuffIcon == nil) then
+			if not tBuffIcon then
 				break;
 			end
 		end
 
-			if (VUHDO_KNOWS_SWIFTMEND and not sIsSwiftmend) then
-				if (VUHDO_SPELL_ID_REGROWTH == tBuffName or VUHDO_SPELL_ID_REJUVENATION == tBuffName) then
+			if VUHDO_KNOWS_SWIFTMEND and not sIsSwiftmend then
+				if VUHDO_SPELL_ID_REGROWTH == tBuffName or VUHDO_SPELL_ID_REJUVENATION == tBuffName then
 					tStart, tSmDuration, tEnabled = GetSpellCooldown(VUHDO_SPELLS[VUHDO_SPELL_ID_SWIFTMEND].id, BOOKTYPE_SPELL);
-					if (tEnabled ~= 0 and (tStart == nil or tSmDuration == nil or tStart <= 0 or tSmDuration <= 1.6)) then
+					if tEnabled ~= 0 and (tStart == nil or tSmDuration == nil or tStart <= 0 or tSmDuration <= 1.6) then
 						sIsSwiftmend = true;
 					end
 				end
@@ -565,10 +564,10 @@ local function VUHDO_updateHots(aUnit, anInfo)
 			if (tRest ~= nil and tCaster ~= nil) then
 				tIsMine = tCaster == "player" or tCaster == VUHDO_PLAYER_RAID_ID;
 				tHotFromBuff = sBuffs2Hots[tBuffName .. tBuffIcon];
-				if (tHotFromBuff == "" or VUHDO_IGNORE_HOT_IDS[tSpellId]) then -- non hot buff
-				elseif(tHotFromBuff ~= nil) then -- Hot buff cached
+				if tHotFromBuff == "" or VUHDO_IGNORE_HOT_IDS[tSpellId] then -- non hot buff
+				elseif tHotFromBuff then -- Hot buff cached
 					tRest = tRest - tNow;
-					if (tRest > 0) then
+					if tRest > 0 then
 						VUHDO_snapshotHot(tHotFromBuff, tRest, tStacks, tBuffIcon, tIsMine, sDuration, aUnit);
 					end
 				else -- not yet scanned
@@ -576,20 +575,21 @@ local function VUHDO_updateHots(aUnit, anInfo)
 					for tHotCmpName, _ in pairs(VUHDO_ACTIVE_HOTS) do
 						tDiffIcon = VUHDO_CAST_ICON_DIFF[tHotCmpName];
 
-						if (tDiffIcon == tBuffIcon
+						if tDiffIcon == tBuffIcon
 						or (tDiffIcon == nil and tBuffName == tHotCmpName)
-						or (VUHDO_SPELLS[tHotCmpName] ~= nil and tBuffIcon == VUHDO_SPELLS[tHotCmpName]["icon"])) then
+						or (VUHDO_SPELLS[tHotCmpName] ~= nil and tBuffIcon == VUHDO_SPELLS[tHotCmpName]["icon"]) then
 							tRest = tRest - tNow;
-							if (tRest > 0) then
+							if tRest > 0 then
 								VUHDO_snapshotHot(tHotCmpName, tRest, tStacks, tBuffIcon, tIsMine, sDuration, aUnit);
 							end
+
 							sBuffs2Hots[tBuffName .. tBuffIcon] = tHotCmpName;
 							break;
 						end
 					end
 				end
 
-				if (not tIsMine and VUHDO_HEALING_HOTS[tBuffName] and not VUHDO_ACTIVE_HOTS_OTHERS[tBuffName]) then
+				if not tIsMine and VUHDO_HEALING_HOTS[tBuffName] and not VUHDO_ACTIVE_HOTS_OTHERS[tBuffName] then
 					tOtherHotCnt = tOtherHotCnt + 1;
 					tOtherIcon = tBuffIcon;
 					VUHDO_OTHER_PLAYERS_HOT_INFO[aUnit][1] = tOtherIcon;
@@ -599,7 +599,7 @@ local function VUHDO_updateHots(aUnit, anInfo)
 		end
 
 		-- Other players' HoTs
-		if (VUHDO_ACTIVE_HOTS["OTHER"]) then
+		if VUHDO_ACTIVE_HOTS["OTHER"] then
 			VUHDO_updateHotIcons(aUnit, "OTHER", 999, tOtherHotCnt, tOtherIcon, nil, 0, nil, nil);
 		end
 
@@ -617,7 +617,7 @@ local function VUHDO_updateHots(aUnit, anInfo)
 	-- Own
 	for tHotCmpName, tHotInfo in pairs(VUHDO_MY_HOTS[aUnit]) do
 		VUHDO_updateHotIcons(aUnit, tHotCmpName, tHotInfo[1], tHotInfo[2], tHotInfo[3], tHotInfo[4], 1, nil, nil);
-		if (tHotInfo[1] == nil) then
+		if not tHotInfo[1] then
 			twipe(tHotInfo);
 			VUHDO_MY_HOTS[aUnit][tHotCmpName] = nil;
 		end
@@ -625,7 +625,7 @@ local function VUHDO_updateHots(aUnit, anInfo)
 	-- Others
 	for tHotCmpName, tHotInfo in pairs(VUHDO_OTHER_HOTS[aUnit]) do
 		VUHDO_updateHotIcons(aUnit, tHotCmpName, tHotInfo[1], tHotInfo[2], tHotInfo[3], tHotInfo[4], 2, nil, nil);
-		if (tHotInfo[1] == nil) then
+		if not tHotInfo[1] then
 			twipe(tHotInfo);
 			VUHDO_OTHER_HOTS[aUnit][tHotCmpName] = nil;
 		end
@@ -633,7 +633,7 @@ local function VUHDO_updateHots(aUnit, anInfo)
 	-- Own+Others
 	for tHotCmpName, tHotInfo in pairs(VUHDO_MY_AND_OTHERS_HOTS[aUnit]) do
 		VUHDO_updateHotIcons(aUnit, tHotCmpName, tHotInfo[1], tHotInfo[2], tHotInfo[3], tHotInfo[4], 3, nil, nil);
-		if (tHotInfo[1] == nil) then
+		if not tHotInfo[1] then
 			twipe(tHotInfo);
 			VUHDO_MY_AND_OTHERS_HOTS[aUnit][tHotCmpName] = nil;
 		end
@@ -644,9 +644,9 @@ end
 local tAllButtons, tButton, tIcon;
 function VUHDO_swiftmendIndicatorBouquetCallback(aUnit, anIsActive, anIcon, aTimer, aCounter, aDuration, aColor, aBuffName, aBouquetName)
 	tAllButtons = VUHDO_getUnitButtons(aUnit);
-	if (tAllButtons ~= nil) then
+	if tAllButtons then
 		for _, tButton in pairs(tAllButtons) do
-			if (anIsActive and aColor ~= nil) then
+			if anIsActive and aColor then
 				tIcon = VUHDO_getBarRoleIcon(tButton, 51);
 				tIcon:SetTexture(anIcon);
 				tIcon:SetVertexColor(aColor["R"], aColor["G"], aColor["B"], aColor["O"]);
@@ -665,9 +665,7 @@ end
 
 local tUnit, tInfo;
 function VUHDO_updateAllHoTs()
-	if (VUHDO_HOTS_SUSPENDED) then
-		return;
-	end
+	if VUHDO_HOTS_SUSPENDED then return; end
 
 	twipe(VUHDO_SWIFTMEND_UNITS);
 
@@ -680,13 +678,11 @@ local tCnt, tCnt2, tCnt3;
 local tButton;
 function VUHDO_removeAllHots()
 	for tCnt = 1, 10 do -- VUHDO_MAX_PANELS
-		if (VUHDO_isPanelVisible(tCnt)) then
+		if VUHDO_isPanelVisible(tCnt) then
 
 			for tCnt2 = 1, 51 do -- VUHDO_MAX_BUTTONS_PANEL
 				tButton = VUHDO_getHealButton(tCnt2, tCnt);
-				if (tButton == nil) then -- Auch nicht belegte buttons ausblenden
-					break;
-				end
+				if not tButton then break; end -- Auch nicht belegte buttons ausblenden
 
 				for tCnt3 = 1, 5 do
 					VUHDO_getBarIcon(tButton, tCnt3):SetAlpha(0);

@@ -1,4 +1,4 @@
-﻿-- @EXACT = true: Translation has to be the exact(!) match in the clients language,
+-- @EXACT = true: Translation has to be the exact(!) match in the clients language,
 -- beacause it carries technical semantics
 -- Class Names
 VUHDO_I18N_WARRIORS="Warriors"

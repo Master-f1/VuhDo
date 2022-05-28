@@ -1,3 +1,6 @@
+local _;
+local _G = _G;
+
 local VUHDO_HIGLIGHT_CLUSTER = {};
 local VUHDO_HIGLIGHT_NUM = 0;
 local VUHDO_ICON_CLUSTER = {};
@@ -9,8 +12,6 @@ local VUHDO_CLUSTER_UNIT = nil;
 
 local twipe = table.wipe;
 local pairs = pairs;
-
-local VUHDO_GLOBAL = getfenv();
 
 local VUHDO_RAID = {};
 
@@ -36,17 +37,17 @@ local sNumMaxJumps;
 local sIsRadial;
 local sHotSlots;
 function VUHDO_customClustersInitBurst()
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
-	VUHDO_ACTIVE_HOTS = VUHDO_GLOBAL["VUHDO_ACTIVE_HOTS"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
+	VUHDO_ACTIVE_HOTS = _G["VUHDO_ACTIVE_HOTS"];
 
-	VUHDO_getUnitsInRadialClusterWith = VUHDO_GLOBAL["VUHDO_getUnitsInRadialClusterWith"];
-	VUHDO_getUnitsInChainClusterWith = VUHDO_GLOBAL["VUHDO_getUnitsInChainClusterWith"];
-	VUHDO_getUnitButtons = VUHDO_GLOBAL["VUHDO_getUnitButtons"];
-	VUHDO_getHealthBar = VUHDO_GLOBAL["VUHDO_getHealthBar"];
-	VUHDO_getClusterBorderFrame = VUHDO_GLOBAL["VUHDO_getClusterBorderFrame"];
-	VUHDO_updateBouquetsForEvent = VUHDO_GLOBAL["VUHDO_updateBouquetsForEvent"];
-	VUHDO_getBarIcon = VUHDO_GLOBAL["VUHDO_getBarIcon"];
-	VUHDO_getBarIconTimer = VUHDO_GLOBAL["VUHDO_getBarIconTimer"];
+	VUHDO_getUnitsInRadialClusterWith = _G["VUHDO_getUnitsInRadialClusterWith"];
+	VUHDO_getUnitsInChainClusterWith = _G["VUHDO_getUnitsInChainClusterWith"];
+	VUHDO_getUnitButtons = _G["VUHDO_getUnitButtons"];
+	VUHDO_getHealthBar = _G["VUHDO_getHealthBar"];
+	VUHDO_getClusterBorderFrame = _G["VUHDO_getClusterBorderFrame"];
+	VUHDO_updateBouquetsForEvent = _G["VUHDO_updateBouquetsForEvent"];
+	VUHDO_getBarIcon = _G["VUHDO_getBarIcon"];
+	VUHDO_getBarIconTimer = _G["VUHDO_getBarIconTimer"];
 
 	sClusterConfig = VUHDO_CONFIG["CLUSTER"];
 	sHealthLimit = sClusterConfig["BELOW_HEALTH_PERC"] * 0.01;
@@ -70,13 +71,13 @@ local tIcon;
 local tColor;
 local function VUHDO_customizeClusterIcons(aButton, aNumLow, anInfo)
 	for tIndex, tHotName in pairs(sHotSlots) do
-		if ("CLUSTER" == tHotName) then
+		if "CLUSTER" == tHotName then
 
-			if (aNumLow < sThreshFair or not anInfo["range"]) then
+			if aNumLow < sThreshFair or not anInfo["range"] then
 				VUHDO_getBarIcon(aButton, tIndex):Hide();
 				VUHDO_getBarIconTimer(aButton, tIndex):SetText("");
 			else
-				if (aNumLow < sThreshGood) then
+				if aNumLow < sThreshGood then
 					tColor = sColorFair;
 				else
 					tColor = sColorGood;
@@ -85,7 +86,7 @@ local function VUHDO_customizeClusterIcons(aButton, aNumLow, anInfo)
 				tIcon = VUHDO_getBarIcon(aButton, tIndex);
 				tIcon:SetVertexColor(tColor["R"], tColor["G"], tColor["B"], tColor["O"]);
 				tIcon:Show();
-				if (sIsShowNumber) then
+				if sIsShowNumber then
 					VUHDO_getBarIconTimer(aButton, tIndex):SetText(aNumLow);
 				end
 			end
@@ -99,16 +100,16 @@ local tSrcGroup;
 local function VUHDO_getDestCluster(aUnit, anArray)
 	twipe(anArray);
 	tNumArray = 0;
-	if (sIsSourcePlayer and aUnit ~= "player") then
+	if sIsSourcePlayer and aUnit ~= "player" then
 		return 0;
 	end
 
 	tSrcInfo = VUHDO_RAID[aUnit];
-	if (tSrcInfo == nil or tSrcInfo["isPet"] or "focus" == aUnit or "target" == aUnit) then
+	if not tSrcInfo or tSrcInfo["isPet"] or "focus" == aUnit or "target" == aUnit then
 		return 0;
 	end
 
-	if (sIsRadial) then
+	if sIsRadial then
 		VUHDO_getUnitsInRadialClusterWith(aUnit, sRange, tDestCluster);
 	else
 		VUHDO_getUnitsInChainClusterWith(aUnit, sRange, tDestCluster, sNumMaxJumps);
@@ -117,7 +118,7 @@ local function VUHDO_getDestCluster(aUnit, anArray)
 	tSrcGroup = tSrcInfo["group"];
 	for _, tUnit in pairs(tDestCluster) do
 		tInfo = VUHDO_RAID[tUnit];
-		if (tInfo ~= nil and not tInfo["dead"] and tInfo["health"] / tInfo["healthmax"] <= sHealthLimit) then
+		if tInfo and not tInfo["dead"] and tInfo["health"] / tInfo["healthmax"] <= sHealthLimit then
 			if (sIsRaid or tInfo["group"] == tSrcGroup) then -- all raid members or in same group
 				anArray[tUnit] = tUnit;
 				tNumArray = tNumArray + 1;
@@ -132,18 +133,18 @@ local tInfo, tNumLow;
 local tAllButtons, tButton, tInfo;
 function VUHDO_updateAllClusterIcons(aUnit)
 	tInfo = VUHDO_RAID[aUnit];
-	if (tInfo == nil) then
+	if not tInfo then
 		return;
 	end
 
 	tNumLow = VUHDO_getDestCluster(aUnit, VUHDO_ICON_CLUSTER);
-	if (VUHDO_NUM_IN_UNIT_CLUSTER[aUnit] ~= tNumLow) then
+	if VUHDO_NUM_IN_UNIT_CLUSTER[aUnit] ~= tNumLow then
 		VUHDO_NUM_IN_UNIT_CLUSTER[aUnit] = tNumLow;
 		VUHDO_updateBouquetsForEvent(aUnit, 16); -- VUHDO_UPDATE_NUM_CLUSTER
 	end
 
 	tAllButtons = VUHDO_getUnitButtons(aUnit);
-	if (tAllButtons ~= nil and VUHDO_ACTIVE_HOTS["CLUSTER"]) then
+	if tAllButtons and VUHDO_ACTIVE_HOTS["CLUSTER"] then
 		for _, tButton in pairs(tAllButtons) do
 			VUHDO_customizeClusterIcons(tButton, tNumLow, tInfo);
 		end
@@ -165,7 +166,7 @@ local tUnit, tAllButtons, tButton;
 local tClusterBorder;
 function VUHDO_highlightClusterFor(aUnit)
 	VUHDO_CLUSTER_UNIT = aUnit;
-	if (VUHDO_HIGLIGHT_NUM ~= 0) then
+	if VUHDO_HIGLIGHT_NUM ~= 0 then
 		VUHDO_removeAllClusterHighlights();
 	end
 
@@ -177,7 +178,7 @@ function VUHDO_highlightClusterFor(aUnit)
 end
 
 function VUHDO_updateClusterHighlights()
-	if (VUHDO_CLUSTER_UNIT ~= nil) then
+	if VUHDO_CLUSTER_UNIT then
 		VUHDO_highlightClusterFor(VUHDO_CLUSTER_UNIT);
 	end
 end
@@ -191,20 +192,20 @@ function VUHDO_getNumInUnitCluster(aUnit)
 end
 
 function VUHDO_getIsInHiglightCluster(aUnit)
-	if (VUHDO_HIGLIGHT_NUM < sThreshFair) then
+	if VUHDO_HIGLIGHT_NUM < sThreshFair then
 		return false;
 	end
 
-	return VUHDO_HIGLIGHT_CLUSTER[aUnit] ~= nil;
+	return VUHDO_HIGLIGHT_CLUSTER[aUnit];
 end
 
 local tAllButtons, tButton, tBorder;
 function VUHDO_clusterBorderBouquetCallback(aUnit, anIsActive, anIcon, aTimer, aCounter, aDuration, aColor, aBuffName, aBouquetName)
 	tAllButtons = VUHDO_getUnitButtons(aUnit);
-	if (tAllButtons ~= nil) then
+	if tAllButtons then
 		for _, tButton in pairs(tAllButtons) do
 			tBorder = VUHDO_getClusterBorderFrame(tButton);
-			if (aColor ~= nil) then
+			if aColor then
 				tBorder:SetBackdropBorderColor(aColor["R"], aColor["G"], aColor["B"], aColor["O"]);
 				tBorder:Show();
 			else

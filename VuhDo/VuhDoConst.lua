@@ -1,4 +1,4 @@
-VUHDO_VERSION = "2.23.5";
+VUHDO_VERSION = GetAddOnMetadata("VuhDo", "Version");
 
 VUHDO_YES = 1;
 VUHDO_NO = 2;
@@ -220,7 +220,7 @@ VUHDO_UNIT_POWER_ENERGY = 3;
 VUHDO_UNIT_POWER_HAPPINESS = 4;
 VUHDO_UNIT_POWER_RUNES = 6;
 
--- Resurection spells by class
+-- Resurrection spells by class
 VUHDO_RESURRECTION_SPELLS = {
 	["PALADIN"] = {VUHDO_SPELL_ID_REDEMPTION},
 	["SHAMAN"] = {VUHDO_SPELL_ID_ANCESTRAL_SPIRIT},

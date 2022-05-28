@@ -1,3 +1,4 @@
+local _;
 VUHDO_IS_PANEL_CONFIG = false;
 VUHDO_CONFIG_SHOW_RAID = false;
 

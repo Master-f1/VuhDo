@@ -1,4 +1,5 @@
 local VUHDO_IS_ON_READY_CHECK = false;
+local _;
 
 local function VUHDO_placeReadyIcon(aButton)
 	local tUnit = VUHDO_resolveButtonUnit(aButton);
@@ -45,7 +46,7 @@ local function VUHDO_hideAllReadyIcons()
 		tAllButtons = VUHDO_getPanelButtons(tPanelNum);
 
 		for _, tButton in pairs(tAllButtons) do
-			if (tButton:GetAttribute("unit") ~= nil) then
+			if tButton:GetAttribute("unit") then
 				UIFrameFlash(VUHDO_getBarRoleIcon(tButton, 20), 0, 2, 10, false, 0, 8);
 			else
 				break;

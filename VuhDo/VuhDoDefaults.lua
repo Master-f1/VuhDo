@@ -1,4 +1,5 @@
 local pairs = pairs;
+local _;
 
 local tHotCfg, tHotSlots, tCnt2;
 function VUHDO_fixHotSettings()
@@ -6,10 +7,14 @@ function VUHDO_fixHotSettings()
 	tHotCfg = VUHDO_PANEL_SETUP["HOTS"]["SLOTCFG"];
 
 	for tCnt2 = 1, 9 do
-		if (not tHotCfg["" .. tCnt2]["mine"] and not tHotCfg["" .. tCnt2]["others"]) then
-			if (tHotSlots[tCnt2] ~= nil) then
+		if not tHotCfg["" .. tCnt2]["mine"] and not tHotCfg["" .. tCnt2]["others"] then
+			if tHotSlots[tCnt2] then
 				tHotCfg["" .. tCnt2]["mine"] = true;
+<<<<<<< Updated upstream
 				tHotCfg["" .. tCnt2]["others"] = VUHDO_EXCLUSIVE_HOTS[tHotSlots[tCnt2]] ~= nil;
+=======
+				tHotCfg["" .. tCnt2]["others"] = VUHDO_EXCLUSIVE_HOTS[tHotSlots[tCnt2]];
+>>>>>>> Stashed changes
 			end
 		end
 	end
@@ -17,15 +22,15 @@ end
 
 local function VUHDO_getVarDescription(aVar)
 	local tMessage = "";
-	if (aVar == nil) then
+	if aVar == nil then
 		tMessage = "<nil>";
-	elseif ("boolean" == type(aVar)) then
-		if (aVar) then
+	elseif "boolean" == type(aVar) then
+		if aVar then
 			tMessage = "<true>";
 		else
 			tMessage = "<false>";
 		end
-	elseif ("number" == type(aVar) or "string" == type(aVar)) then
+	elseif "number" == type(aVar) or "string" == type(aVar) then
 		tMessage = aVar .. " (" .. type(aVar) .. ")";
 	else
 		tMessage = "(" .. type(aVar) .. ")";
@@ -36,17 +41,16 @@ end
 
 local tCreated, tRepaired;
 local function _VUHDO_ensureSanity(aName, aValue, aSaneValue)
-	if (aSaneValue ~= nil) then
-		if (type(aSaneValue) == "table") then
-			if (aValue ~= nil and type(aValue) == "table") then
+	if aSaneValue ~= nil then
+		if type(aSaneValue) == "table" then
+			if aValue ~= nil and type(aValue) == "table" then
 				local tIndex;
 				for tIndex, _ in pairs(aSaneValue) do
 					aValue[tIndex] = _VUHDO_ensureSanity(aName, aValue[tIndex], aSaneValue[tIndex]);
 				end
 			else
 
-				if (aValue ~= nil) then
-					VUHDO_Msg("AUTO MODEL SANITY: " .. aName .. " repaired table (was flat value): " .. VUHDO_getVarDescription(aValue));
+				if aValue ~= nil then
 					tRepaired = tRepaired + 1;
 				else
 					tCreated = tCreated + 1;
@@ -55,13 +59,12 @@ local function _VUHDO_ensureSanity(aName, aValue, aSaneValue)
 				return VUHDO_deepCopyTable(aSaneValue);
 			end
 		else
-			if (aValue == nil or type(aValue) ~= type(aSaneValue)) then
-				if ((type(aSaneValue) ~= "boolean" or (aValue ~= 1 and aValue ~= 0 and aValue ~= nil)) and
-					(type(aSaneValue) ~= "number" or (aSaneValue ~= 1 and aSaneValue ~= 0))) then
+			if aValue == nil or type(aValue) ~= type(aSaneValue) then
+				if (type(aSaneValue) ~= "boolean" or (aValue ~= 1 and aValue ~= 0 and aValue ~= nil)) and
+					(type(aSaneValue) ~= "number" or (aSaneValue ~= 1 and aSaneValue ~= 0)) then
 
 					if (aValue ~= nil) then
 						tRepaired = tRepaired + 1;
-						VUHDO_Msg("AUTO MODEL SANITY: " .. aName .. " repaired a flat value: " .. VUHDO_getVarDescription(aValue) .. " to " .. VUHDO_getVarDescription(aSaneValue));
 					else
 						tCreated = tCreated + 1;
 					end
@@ -69,6 +72,11 @@ local function _VUHDO_ensureSanity(aName, aValue, aSaneValue)
 					return aSaneValue;
 				end
 			end
+
+			if aValue ~= nil and "string" == type(aValue) then
+				aValue = strtrim(aValue);
+			end
+
 		end
 	end
 
@@ -77,11 +85,11 @@ end
 
 local tRepairedArray;
 function VUHDO_ensureSanity(aName, aValue, aSaneValue)
-	tCreated = 0;
-	tRepaired = 0;
+	tCreated, tRepaired = 0, 0;
+
 	tRepairedArray = _VUHDO_ensureSanity(aName, aValue, aSaneValue);
 
-	if (tCreated + tRepaired > 0) then
+	if tCreated + tRepaired > 0 then
 		VUHDO_Msg("auto model sanity: " .. aName .. ": created " .. tCreated .. ", repaired " .. tRepaired .. " values.");
 	end
 
@@ -430,35 +438,35 @@ local VUHDO_DEFAULT_SPELL_CONFIG = {
 
 function VUHDO_loadSpellArray()
 	-- Maus freundlich
-	if (VUHDO_SPELL_ASSIGNMENTS == nil) then
+	if not VUHDO_SPELL_ASSIGNMENTS then
 		VUHDO_assignDefaultSpells();
 	end
 
 	VUHDO_SPELL_ASSIGNMENTS = VUHDO_ensureSanity("VUHDO_SPELL_ASSIGNMENTS", VUHDO_SPELL_ASSIGNMENTS, VUHDO_DEFAULT_SPELL_ASSIGNMENT);
 
 	-- Maus gegnerisch
-	if (VUHDO_HOSTILE_SPELL_ASSIGNMENTS == nil) then
+	if not VUHDO_HOSTILE_SPELL_ASSIGNMENTS then
 		VUHDO_HOSTILE_SPELL_ASSIGNMENTS = VUHDO_deepCopyTable(VUHDO_DEFAULT_SPELL_ASSIGNMENT);
 	end
 	
 	-- Tastatur
 	VUHDO_HOSTILE_SPELL_ASSIGNMENTS = VUHDO_ensureSanity("VUHDO_HOSTILE_SPELL_ASSIGNMENTS", VUHDO_HOSTILE_SPELL_ASSIGNMENTS, VUHDO_DEFAULT_SPELL_ASSIGNMENT);
-	if (VUHDO_SPELLS_KEYBOARD == nil) then
+	if not VUHDO_SPELLS_KEYBOARD then
 		VUHDO_SPELLS_KEYBOARD = VUHDO_deepCopyTable(VUHDO_DEFAULT_SPELLS_KEYBOARD);
 	end
 	VUHDO_SPELLS_KEYBOARD = VUHDO_ensureSanity("VUHDO_SPELLS_KEYBOARD", VUHDO_SPELLS_KEYBOARD, VUHDO_DEFAULT_SPELLS_KEYBOARD);
 
 	-- Konfiguration
-	if (VUHDO_SPELL_CONFIG == nil) then
+	if not VUHDO_SPELL_CONFIG then
 		VUHDO_SPELL_CONFIG = VUHDO_deepCopyTable(VUHDO_DEFAULT_SPELL_CONFIG);
 	end
 	VUHDO_SPELL_CONFIG = VUHDO_ensureSanity("VUHDO_SPELL_CONFIG", VUHDO_SPELL_CONFIG, VUHDO_DEFAULT_SPELL_CONFIG);
 
-	if (VUHDO_SPELL_LAYOUTS == nil) then
+	if not VUHDO_SPELL_LAYOUTS then
 		VUHDO_SPELL_LAYOUTS = {};
 	end
 
-	if (VUHDO_SPEC_LAYOUTS == nil) then
+	if not VUHDO_SPEC_LAYOUTS then
 		VUHDO_SPEC_LAYOUTS = {
 			["selected"] = "",
 			["1"] = "";
@@ -473,12 +481,12 @@ function VUHDO_assignDefaultSpells()
 
 	VUHDO_SPELL_ASSIGNMENTS = VUHDO_deepCopyTable(VUHDO_DEFAULT_SPELL_ASSIGNMENT);
 
-	if (VUHDO_CLASS_DEFAULT_SPELL_ASSIGNMENT[tClass] ~= nil) then
+	if VUHDO_CLASS_DEFAULT_SPELL_ASSIGNMENT[tClass] then
 		VUHDO_SPELL_ASSIGNMENTS = VUHDO_deepCopyTable(VUHDO_CLASS_DEFAULT_SPELL_ASSIGNMENT[tClass]);
 		local tKey, tValue;
 
 		for tKey, tValue in pairs(VUHDO_DEFAULT_SPELL_ASSIGNMENT) do
-			if (VUHDO_SPELL_ASSIGNMENTS[tKey] == nil) then
+			if not VUHDO_SPELL_ASSIGNMENTS[tKey] then
 				VUHDO_SPELL_ASSIGNMENTS[tKey] = tValue;
 			end
 		end
@@ -487,13 +495,13 @@ end
 
 local tIsToggle;
 local function VUHDO_customDebuffsAddDefaultSettings(aBuffName)
-	if (VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"] == nil) then
+	if not VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"] then
 		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"] = {};
 	end
 
 	tIsToggle = aBuffName ~= VUHDO_SPELL_ID_DEBUFF_WEAKENED_SOUL and VUHDO_CONFIG["CUSTOM_DEBUFF"]["toggleName"];
 
-	if (VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][aBuffName] == nil) then
+	if not VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][aBuffName] then
 		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][aBuffName] = {
 			["isIcon"] = VUHDO_CONFIG["CUSTOM_DEBUFF"]["isIcon"],
 			["isColor"] = false,
@@ -786,129 +794,129 @@ function VUHDO_loadDefaultConfig()
 
 	VUHDO_CONFIG = VUHDO_ensureSanity("VUHDO_CONFIG", VUHDO_CONFIG, VUHDO_DEFAULT_CONFIG);
 
-	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version == nil or VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 2) then
-		VUHDO_CONFIG["CUSTOM_DEBUFF"].version = 2;
+	if not VUHDO_CONFIG["CUSTOM_DEBUFF"]["VERSION"] or VUHDO_CONFIG["CUSTOM_DEBUFF"]["VERSION"] < 2 then
+		VUHDO_CONFIG["CUSTOM_DEBUFF"]["VERSION"] = 2;
 		VUHDO_addCustomSpellIds(
 			-- WotLK
-			48920, -- Áîëåçíåííûé óêóñ
-			23965, -- Ìãíîâåííîå èñöåëåíèå
-			48261, -- Ïðîêàëûâàíèå
-			-- Íàêñ
-			28622, -- Êîêîí
-			55550, -- Çàçóáðåííûé íîæ
-			27808, -- Ëåäÿíîé âçðûâ
-			-- Óëüäà
-			63477, -- Øëàêîâûé êîâø
-			64234, -- Ãðàâèòàöèîííàÿ áîìáà
-			63018, -- Îïàëÿþùèé ñâåò
-			64292, -- Êàìåííàÿ õâàòêà
-			64669, -- Äèêèé ïðûæîê
-			63666 -- Çàðÿä íàïàëìà
+			48920, -- Ð‘Ð¾Ð»ÐµÐ·Ð½ÐµÐ½Ð½Ñ‹Ð¹ ÑƒÐºÑƒÑ
+			23965, -- ÐœÐ³Ð½Ð¾Ð²ÐµÐ½Ð½Ð¾Ðµ Ð¸ÑÑ†ÐµÐ»ÐµÐ½Ð¸Ðµ
+			48261, -- ÐŸÑ€Ð¾ÐºÐ°Ð»Ñ‹Ð²Ð°Ð½Ð¸Ðµ
+			-- ÐÐ°ÐºÑ
+			28622, -- ÐšÐ¾ÐºÐ¾Ð½
+			55550, -- Ð—Ð°Ð·ÑƒÐ±Ñ€ÐµÐ½Ð½Ñ‹Ð¹ Ð½Ð¾Ð¶
+			27808, -- Ð›ÐµÐ´ÑÐ½Ð¾Ð¹ Ð²Ð·Ñ€Ñ‹Ð²
+			-- Ð£Ð»ÑŒÐ´Ð°
+			63477, -- Ð¨Ð»Ð°ÐºÐ¾Ð²Ñ‹Ð¹ ÐºÐ¾Ð²Ñˆ
+			64234, -- Ð“Ñ€Ð°Ð²Ð¸Ñ‚Ð°Ñ†Ð¸Ð¾Ð½Ð½Ð°Ñ Ð±Ð¾Ð¼Ð±Ð°
+			63018, -- ÐžÐ¿Ð°Ð»ÑÑŽÑ‰Ð¸Ð¹ ÑÐ²ÐµÑ‚
+			64292, -- ÐšÐ°Ð¼ÐµÐ½Ð½Ð°Ñ Ñ…Ð²Ð°Ñ‚ÐºÐ°
+			64669, -- Ð”Ð¸ÐºÐ¸Ð¹ Ð¿Ñ€Ñ‹Ð¶Ð¾Ðº
+			63666 -- Ð—Ð°Ñ€ÑÐ´ Ð½Ð°Ð¿Ð°Ð»Ð¼Ð°
 		);
 	end
 
-	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 6) then
-		VUHDO_CONFIG["CUSTOM_DEBUFF"].version = 6;
+	if VUHDO_CONFIG["CUSTOM_DEBUFF"]["VERSION"] < 6 then
+		VUHDO_CONFIG["CUSTOM_DEBUFF"]["VERSION"] = 6;
 
 		VUHDO_addCustomSpellIds(
-			-- ÈÊ
-			67478, -- Ïðîêàëûâàíèå
-			66406, -- Ïîëó÷è ñíîáîëüäà!
-			66869, -- Ãîðÿùàÿ æåë÷ü
-			67618, -- Ïàðàëèòè÷åñêèé òîêñèí
-			67049, -- Èñïåïåëåíèå ïëîòè
-			67297, -- Êàñàíèå Ñâåòà
-			66001, -- Êàñàíèå òüìû
-			66013, -- Ïðîíèçûâàþùèé õîëîä
-			67861 -- ßäîâèòûå æâàëû
+			-- Ð˜Ðš
+			67478, -- ÐŸÑ€Ð¾ÐºÐ°Ð»Ñ‹Ð²Ð°Ð½Ð¸Ðµ
+			66406, -- ÐŸÐ¾Ð»ÑƒÑ‡Ð¸ ÑÐ½Ð¾Ð±Ð¾Ð»ÑŒÐ´Ð°!
+			66869, -- Ð“Ð¾Ñ€ÑÑ‰Ð°Ñ Ð¶ÐµÐ»Ñ‡ÑŒ
+			67618, -- ÐŸÐ°Ñ€Ð°Ð»Ð¸Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¸Ð¹ Ñ‚Ð¾ÐºÑÐ¸Ð½
+			67049, -- Ð˜ÑÐ¿ÐµÐ¿ÐµÐ»ÐµÐ½Ð¸Ðµ Ð¿Ð»Ð¾Ñ‚Ð¸
+			67297, -- ÐšÐ°ÑÐ°Ð½Ð¸Ðµ Ð¡Ð²ÐµÑ‚Ð°
+			66001, -- ÐšÐ°ÑÐ°Ð½Ð¸Ðµ Ñ‚ÑŒÐ¼Ñ‹
+			66013, -- ÐŸÑ€Ð¾Ð½Ð¸Ð·Ñ‹Ð²Ð°ÑŽÑ‰Ð¸Ð¹ Ñ…Ð¾Ð»Ð¾Ð´
+			67861 -- Ð¯Ð´Ð¾Ð²Ð¸Ñ‚Ñ‹Ðµ Ð¶Ð²Ð°Ð»Ñ‹
 		);
 	end
 
-	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 7) then
-		VUHDO_CONFIG["CUSTOM_DEBUFF"].version = 7;
+	if VUHDO_CONFIG["CUSTOM_DEBUFF"]["VERSION"] < 7 then
+		VUHDO_CONFIG["CUSTOM_DEBUFF"]["VERSION"] = 7;
 
 		VUHDO_addCustomSpellIds(
 			-- Ulduar
-			62283, -- Æåëåçíûå êîðíè
-			63134, -- Áëàãîñëîâåíèå Ñàðû
-			-- ÈÊ
-			67475, -- Îãíåííàÿ áîìáà
-			68123, -- Ïëàìÿ Ëåãèîíà
-			67078, -- Ïîöåëóé Ãîñïîæè
-			66283, -- Êðóòÿùèéñÿ øèï áîëè
-			67847, -- Âûÿâëåíèå ñëàáîñòè
-			-- ÖËÊ
-			69065, -- Ïðîêàëûâàíèå
-			70659, -- Íåêðîòè÷åñêèé óäàð
-			72293, -- Ìåòêà ïàäøåãî âîèòåëÿ
-			72385, -- Êèïÿùàÿ êðîâü
-			72409 -- Ðóíà êðîâè
+			62283, -- Ð–ÐµÐ»ÐµÐ·Ð½Ñ‹Ðµ ÐºÐ¾Ñ€Ð½Ð¸
+			63134, -- Ð‘Ð»Ð°Ð³Ð¾ÑÐ»Ð¾Ð²ÐµÐ½Ð¸Ðµ Ð¡Ð°Ñ€Ñ‹
+			-- Ð˜Ðš
+			67475, -- ÐžÐ³Ð½ÐµÐ½Ð½Ð°Ñ Ð±Ð¾Ð¼Ð±Ð°
+			68123, -- ÐŸÐ»Ð°Ð¼Ñ Ð›ÐµÐ³Ð¸Ð¾Ð½Ð°
+			67078, -- ÐŸÐ¾Ñ†ÐµÐ»ÑƒÐ¹ Ð“Ð¾ÑÐ¿Ð¾Ð¶Ð¸
+			66283, -- ÐšÑ€ÑƒÑ‚ÑÑ‰Ð¸Ð¹ÑÑ ÑˆÐ¸Ð¿ Ð±Ð¾Ð»Ð¸
+			67847, -- Ð’Ñ‹ÑÐ²Ð»ÐµÐ½Ð¸Ðµ ÑÐ»Ð°Ð±Ð¾ÑÑ‚Ð¸
+			-- Ð¦Ð›Ðš
+			69065, -- ÐŸÑ€Ð¾ÐºÐ°Ð»Ñ‹Ð²Ð°Ð½Ð¸Ðµ
+			70659, -- ÐÐµÐºÑ€Ð¾Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¸Ð¹ ÑƒÐ´Ð°Ñ€
+			72293, -- ÐœÐµÑ‚ÐºÐ° Ð¿Ð°Ð´ÑˆÐµÐ³Ð¾ Ð²Ð¾Ð¸Ñ‚ÐµÐ»Ñ
+			72385, -- ÐšÐ¸Ð¿ÑÑ‰Ð°Ñ ÐºÑ€Ð¾Ð²ÑŒ
+			72409 -- Ð ÑƒÐ½Ð° ÐºÑ€Ð¾Ð²Ð¸
 		);
 	end
 
-	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 9) then
-		VUHDO_CONFIG["CUSTOM_DEBUFF"].version = 9;
+	if VUHDO_CONFIG["CUSTOM_DEBUFF"]["VERSION"] < 9 then
+		VUHDO_CONFIG["CUSTOM_DEBUFF"]["VERSION"] = 9;
 
 		VUHDO_addCustomSpellIds(
 			-- ICC
-			72273, -- Ãóáèòåëüíûé ãàç
-			72219, -- Æåëóäî÷íîå âçäóòèå
-			69278, -- Ãàçîîáðàçíûå ñïîðû
-			-- 72103, -- Íåâîñïðèèì÷èâîñòü ê ãíèëè
-			71224, -- Ìóòèðîâàâøàÿ èíôåêöèÿ
-			72455, -- Ãàçîâîå âçäóòèå
-			70447, -- Âûäåëåíèÿ íåóñòîé÷èâîãî ñëèçíþêà
-			72745 -- Ìóòèðîâàâøàÿ ÷óìà
+			72273, -- Ð“ÑƒÐ±Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ð¹ Ð³Ð°Ð·
+			72219, -- Ð–ÐµÐ»ÑƒÐ´Ð¾Ñ‡Ð½Ð¾Ðµ Ð²Ð·Ð´ÑƒÑ‚Ð¸Ðµ
+			69278, -- Ð“Ð°Ð·Ð¾Ð¾Ð±Ñ€Ð°Ð·Ð½Ñ‹Ðµ ÑÐ¿Ð¾Ñ€Ñ‹
+			-- 72103, -- ÐÐµÐ²Ð¾ÑÐ¿Ñ€Ð¸Ð¸Ð¼Ñ‡Ð¸Ð²Ð¾ÑÑ‚ÑŒ Ðº Ð³Ð½Ð¸Ð»Ð¸
+			71224, -- ÐœÑƒÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð²ÑˆÐ°Ñ Ð¸Ð½Ñ„ÐµÐºÑ†Ð¸Ñ
+			72455, -- Ð“Ð°Ð·Ð¾Ð²Ð¾Ðµ Ð²Ð·Ð´ÑƒÑ‚Ð¸Ðµ
+			70447, -- Ð’Ñ‹Ð´ÐµÐ»ÐµÐ½Ð¸Ñ Ð½ÐµÑƒÑÑ‚Ð¾Ð¹Ñ‡Ð¸Ð²Ð¾Ð³Ð¾ ÑÐ»Ð¸Ð·Ð½ÑŽÐºÐ°
+			72745 -- ÐœÑƒÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð²ÑˆÐ°Ñ Ñ‡ÑƒÐ¼Ð°
 		);
 	end
 
-	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 10) then
-		VUHDO_CONFIG["CUSTOM_DEBUFF"].version = 10;
+	if VUHDO_CONFIG["CUSTOM_DEBUFF"]["VERSION"] < 10 then
+		VUHDO_CONFIG["CUSTOM_DEBUFF"]["VERSION"] = 10;
 
 		VUHDO_addCustomSpellIds(
 			-- ICC
-			72999, -- Òåìíèöà Òüìû
-			72796, -- Îñëåïèòåëüíûå èñêðû
-			71624, -- Áåçóìíûé âûïàä
-			72638, -- Ðîÿùèåñÿ òåíè
-			70986, -- Ïîêðîâ ñêîðáè
-			71340 -- Ïàêò Îìðà÷åííûõ
+			72999, -- Ð¢ÐµÐ¼Ð½Ð¸Ñ†Ð° Ð¢ÑŒÐ¼Ñ‹
+			72796, -- ÐžÑÐ»ÐµÐ¿Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ðµ Ð¸ÑÐºÑ€Ñ‹
+			71624, -- Ð‘ÐµÐ·ÑƒÐ¼Ð½Ñ‹Ð¹ Ð²Ñ‹Ð¿Ð°Ð´
+			72638, -- Ð Ð¾ÑÑ‰Ð¸ÐµÑÑ Ñ‚ÐµÐ½Ð¸
+			70986, -- ÐŸÐ¾ÐºÑ€Ð¾Ð² ÑÐºÐ¾Ñ€Ð±Ð¸
+			71340 -- ÐŸÐ°ÐºÑ‚ ÐžÐ¼Ñ€Ð°Ñ‡ÐµÐ½Ð½Ñ‹Ñ…
 		);
 	end
 
-	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 11) then
-		VUHDO_CONFIG["CUSTOM_DEBUFF"].version = 11;
+	if VUHDO_CONFIG["CUSTOM_DEBUFF"]["VERSION"] < 11 then
+		VUHDO_CONFIG["CUSTOM_DEBUFF"]["VERSION"] = 11;
 
 		VUHDO_addCustomSpellIds(
 			-- ICC
-			70867 -- Ñóùíîñòü Êðîâàâîé êîðîëåâû
+			70867 -- Ð¡ÑƒÑ‰Ð½Ð¾ÑÑ‚ÑŒ ÐšÑ€Ð¾Ð²Ð°Ð²Ð¾Ð¹ ÐºÐ¾Ñ€Ð¾Ð»ÐµÐ²Ñ‹
 		);
 	end
 
-	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 12) then
-		VUHDO_CONFIG["CUSTOM_DEBUFF"].version = 12;
+	if VUHDO_CONFIG["CUSTOM_DEBUFF"]["VERSION"] < 12 then
+		VUHDO_CONFIG["CUSTOM_DEBUFF"]["VERSION"] = 12;
 
 		VUHDO_addCustomSpellIds(
 			-- ICC
-			70751, -- Êîððîçèÿ
-			70633, -- Âûáðîñ âíóòðåííîñòåé
-			70157, -- Ëåäÿíîé ñêëåï
-			70106, -- Îáìîðîæåíèå
-			69766, -- Íåóñòîé÷èâîñòü
-			69649, -- Ëåäÿíîå äûõàíèå
-			70126, -- Ëåäÿíàÿ ìåòêà
-			70541, -- Çàðàæåíèå
-			72754, -- Îñêâåðíåíèå
-			68980 -- Æàòâà äóø
+			70751, -- ÐšÐ¾Ñ€Ñ€Ð¾Ð·Ð¸Ñ
+			70633, -- Ð’Ñ‹Ð±Ñ€Ð¾Ñ Ð²Ð½ÑƒÑ‚Ñ€ÐµÐ½Ð½Ð¾ÑÑ‚ÐµÐ¹
+			70157, -- Ð›ÐµÐ´ÑÐ½Ð¾Ð¹ ÑÐºÐ»ÐµÐ¿
+			70106, -- ÐžÐ±Ð¼Ð¾Ñ€Ð¾Ð¶ÐµÐ½Ð¸Ðµ
+			69766, -- ÐÐµÑƒÑÑ‚Ð¾Ð¹Ñ‡Ð¸Ð²Ð¾ÑÑ‚ÑŒ
+			69649, -- Ð›ÐµÐ´ÑÐ½Ð¾Ðµ Ð´Ñ‹Ñ…Ð°Ð½Ð¸Ðµ
+			70126, -- Ð›ÐµÐ´ÑÐ½Ð°Ñ Ð¼ÐµÑ‚ÐºÐ°
+			70541, -- Ð—Ð°Ñ€Ð°Ð¶ÐµÐ½Ð¸Ðµ
+			72754, -- ÐžÑÐºÐ²ÐµÑ€Ð½ÐµÐ½Ð¸Ðµ
+			68980 -- Ð–Ð°Ñ‚Ð²Ð° Ð´ÑƒÑˆ
 		);
 	end
 
-	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 13) then
-		VUHDO_CONFIG["CUSTOM_DEBUFF"].version = 13;
+	if VUHDO_CONFIG["CUSTOM_DEBUFF"]["VERSION"] < 13 then
+		VUHDO_CONFIG["CUSTOM_DEBUFF"]["VERSION"] = 13;
 
 		VUHDO_addCustomSpellIds(
 			-- ICC
-			73912 -- Ìåðòâÿùàÿ ÷óìà
+			73912 -- ÐœÐµÑ€Ñ‚Ð²ÑÑ‰Ð°Ñ Ñ‡ÑƒÐ¼Ð°
 		);
 end
 
@@ -1751,47 +1759,47 @@ function VUHDO_loadDefaultPanelSetup()
 	local tPanelNum;
 	local tAktPanel;
 
-	if (VUHDO_PANEL_SETUP == nil) then
+	if not VUHDO_PANEL_SETUP then
 		VUHDO_PANEL_SETUP = VUHDO_deepCopyTable(VUHDO_DEFAULT_PANEL_SETUP);
 	end
 
 	for tPanelNum = 1, VUHDO_MAX_PANELS do
-		if (VUHDO_PANEL_SETUP[tPanelNum] == nil) then
+		if not VUHDO_PANEL_SETUP[tPanelNum] then
 			VUHDO_PANEL_SETUP[tPanelNum] = VUHDO_deepCopyTable(VUHDO_DEFAULT_PER_PANEL_SETUP);
 
 			tAktPanel = VUHDO_PANEL_SETUP[tPanelNum];
 			tAktPanel["MODEL"]["groups"] = VUHDO_DEFAULT_MODELS[tPanelNum];
 
-			if (VUHDO_DEFAULT_MODELS[tPanelNum] ~= nil and VUHDO_ID_MAINTANKS == VUHDO_DEFAULT_MODELS[tPanelNum][1]) then
-				tAktPanel["SCALING"].barWidth = 100;
-				tAktPanel["SCALING"].barHeight = 26;
-				tAktPanel["SCALING"].showTarget = true;
+			if VUHDO_DEFAULT_MODELS[tPanelNum] and VUHDO_ID_MAINTANKS == VUHDO_DEFAULT_MODELS[tPanelNum][1] then
+				tAktPanel["SCALING"]["barWidth"] = 100;
+				tAktPanel["SCALING"]["barHeight"] = 26;
+				tAktPanel["SCALING"]["showTarget"] = true;
 			else
-				if (VUHDO_DEFAULT_MODELS[tPanelNum] ~= nil and VUHDO_ID_PETS == VUHDO_DEFAULT_MODELS[tPanelNum][1]) then
-					tAktPanel["MODEL"].ordering = VUHDO_ORDERING_LOOSE;
-				elseif (VUHDO_DEFAULT_MODELS[tPanelNum] ~= nil and VUHDO_ID_PRIVATE_TANKS == VUHDO_DEFAULT_MODELS[tPanelNum][1]) then
-					tAktPanel["SCALING"].showTarget = true;
+				if VUHDO_DEFAULT_MODELS[tPanelNum] and VUHDO_ID_PETS == VUHDO_DEFAULT_MODELS[tPanelNum][1] then
+					tAktPanel["MODEL"]["ordering"] = VUHDO_ORDERING_LOOSE;
+				elseif VUHDO_DEFAULT_MODELS[tPanelNum] and VUHDO_ID_PRIVATE_TANKS == VUHDO_DEFAULT_MODELS[tPanelNum][1] then
+					tAktPanel["SCALING"]["showTarget"] = true;
 				else
-					tAktPanel["SCALING"].ommitEmptyWhenStructured = true;
+					tAktPanel["SCALING"]["ommitEmptyWhenStructured"] = true;
 				end
 			end
 
-			if (GetLocale() == "zhCN" or GetLocale() == "zhTW" or GetLocale() == "koKR") then
-				tAktPanel["PANEL_COLOR"]["TEXT"].font = "";
-				tAktPanel["PANEL_COLOR"]["HEADER"].font = "";
+			if GetLocale() == "zhCN" or GetLocale() == "zhTW" or GetLocale() == "koKR" then
+				tAktPanel["PANEL_COLOR"]["TEXT"]["font"] = "";
+				tAktPanel["PANEL_COLOR"]["HEADER"]["font"] = "";
 			else
-				tAktPanel["PANEL_COLOR"]["TEXT"].font = VUHDO_LibSharedMedia:Fetch('font', "Emblem");
-				tAktPanel["PANEL_COLOR"]["HEADER"].font = VUHDO_LibSharedMedia:Fetch('font', "Emblem");
+				tAktPanel["PANEL_COLOR"]["TEXT"]["font"] = VUHDO_LibSharedMedia:Fetch('font', "Emblem");
+				tAktPanel["PANEL_COLOR"]["HEADER"]["font"] = VUHDO_LibSharedMedia:Fetch('font', "Emblem");
 			end
 
-			if (VUHDO_DEFAULT_MODELS[tPanelNum] ~= nil and VUHDO_ID_MAINTANKS == VUHDO_DEFAULT_MODELS[tPanelNum][1]) then
-				tAktPanel["PANEL_COLOR"]["TEXT"].textSize = 12;
+			if VUHDO_DEFAULT_MODELS[tPanelNum] and VUHDO_ID_MAINTANKS == VUHDO_DEFAULT_MODELS[tPanelNum][1] then
+				tAktPanel["PANEL_COLOR"]["TEXT"]["textSize"] = 12;
 			end
 		end
 	end
 
 	for tPanelNum = 1, VUHDO_MAX_PANELS do
-		if (VUHDO_PANEL_SETUP[tPanelNum]["POSITION"] == nil) then
+		if not VUHDO_PANEL_SETUP[tPanelNum]["POSITION"]  then
 			VUHDO_PANEL_SETUP[tPanelNum]["POSITION"] = {
 				["x"] = 100 + 30 * tPanelNum,
 				["y"] = 668 - 30 * tPanelNum,
@@ -2112,7 +2120,7 @@ VUHDO_DEFAULT_USER_CLASS_COLORS = {
 };
 
 function VUHDO_initClassColors()
-	if (VUHDO_USER_CLASS_COLORS == nil) then
+	if not VUHDO_USER_CLASS_COLORS then
 		VUHDO_USER_CLASS_COLORS = VUHDO_deepCopyTable(VUHDO_DEFAULT_USER_CLASS_COLORS);
 	end
 	VUHDO_USER_CLASS_COLORS = VUHDO_ensureSanity("VUHDO_USER_CLASS_COLORS", VUHDO_USER_CLASS_COLORS, VUHDO_DEFAULT_USER_CLASS_COLORS);
@@ -2120,7 +2128,7 @@ end
 
 function VUHDO_initBuffSettings()
 
-	if (VUHDO_BUFF_SETTINGS["CONFIG"] == nil) then
+	if not VUHDO_BUFF_SETTINGS["CONFIG"] then
 		VUHDO_BUFF_SETTINGS["CONFIG"] = VUHDO_deepCopyTable(VUHDO_DEFAULT_BUFF_CONFIG);
 	end
 	VUHDO_BUFF_SETTINGS["CONFIG"] = VUHDO_ensureSanity("VUHDO_BUFF_SETTINGS.CONFIG", VUHDO_BUFF_SETTINGS["CONFIG"], VUHDO_DEFAULT_BUFF_CONFIG);
@@ -2128,7 +2136,7 @@ function VUHDO_initBuffSettings()
 	local _, tPlayerClass = UnitClass("player");
 	local tAllClassBuffs = VUHDO_CLASS_BUFFS[tPlayerClass];
 	local tCategSepc, tCategName;
-	if (tAllClassBuffs ~= nil) then
+	if tAllClassBuffs then
 		for tCategSpec, _ in pairs(tAllClassBuffs) do
 
 			tCategName = strsub(tCategSpec, 3);
@@ -2162,10 +2170,10 @@ function VUHDO_initBuffSettings()
 	end
 
 	local tAllBuffs = VUHDO_CLASS_BUFFS[VUHDO_PLAYER_CLASS];
-	if (tAllBuffs ~= nil) then
+	if tAllBuffs then
 		local tCategoryName, tAllCategoryBuffs;
 		for tCategoryName, tAllCategoryBuffs in pairs(tAllBuffs) do
-			if (VUHDO_BUFF_ORDER[tCategoryName] == nil) then
+			if not VUHDO_BUFF_ORDER[tCategoryName] then
 				local tNumber = tonumber(strsub(tCategoryName, 1, 2));
 				VUHDO_BUFF_ORDER[tCategoryName] = tNumber;
 			end

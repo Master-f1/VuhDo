@@ -17,13 +17,10 @@
 	<Script file="VuhDoActionEventHandler.lua" />
 
 
-	<StatusBar name="VuhDoDummyStatusBar" hidden="true" inherits="VuhDoStatusBar">
-	</StatusBar>
+	<StatusBar name="VuhDoDummyStatusBar" hidden="true" inherits="VuhDoStatusBar"> </StatusBar>
+	<StatusBar name="VuhDoGcdStatusBar" frameLevel="220" hidden="true" inherits="VuhDoStatusBar"> </StatusBar>
 
-	<StatusBar name="VuhDoGcdStatusBar" hidden="true" inherits="VuhDoStatusBar">
-	</StatusBar>
-
-	<Frame name="VuhDoDirectionFrame" hidden="true">
+	<Frame name="VuhDoDirectionFrame" frameLevel="221" hidden="true">
 		<Layers>
 			<Layer level="ARTWORK">
 				<Texture name="$parentArrow" file="Interface\AddOns\VuhDo\Images\Arrow.blp"></Texture>
@@ -1003,7 +1000,6 @@
 					<OnMouseUp>VUHDO_stopMoving(self:GetParent())</OnMouseUp>
 				</Scripts>
 			</Frame>
-
 
 			<Frame name="$parentNewTxu" hidden="true">
 				<Size>

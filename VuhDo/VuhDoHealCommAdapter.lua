@@ -17,9 +17,9 @@ local sIsCasted, sIsChannelled, sIsHots, sIsBombed;
 local sIsOthers, sIsOwn;
 local sCastedSecs, sChannelledSecs, sHotsSecs, sBombedSecs;
 function VUHDO_healCommAdapterInitBurst()
-	VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
-	VUHDO_RAID_GUID_NAMES = VUHDO_GLOBAL["VUHDO_RAID_GUID_NAMES"];
-	VUHDO_updateHealthBarsFor = VUHDO_GLOBAL["VUHDO_updateHealthBarsFor"];
+	VUHDO_CONFIG = _G["VUHDO_CONFIG"];
+	VUHDO_RAID_GUID_NAMES = _G["VUHDO_RAID_GUID_NAMES"];
+	VUHDO_updateHealthBarsFor = _G["VUHDO_updateHealthBarsFor"];
 	sIsCasted = VUHDO_CONFIG["SHOW_INC_CASTED"];
 	sIsChannelled = VUHDO_CONFIG["SHOW_INC_CHANNELLED"];
 	sIsHots = VUHDO_CONFIG["SHOW_INC_HOTS"];
@@ -42,7 +42,7 @@ end
 
 local function VUHDO_setIncHeal(aTargetName, anAmount, anEndTime)
 	VUHDO_INC_HEAL[aTargetName] = anAmount;
-	if (anEndTime ~= nil and (VUHDO_INC_END[aTargetName] == nil or VUHDO_INC_END[aTargetName] < anEndTime)) then
+	if anEndTime and (VUHDO_INC_END[aTargetName] == nil or VUHDO_INC_END[aTargetName] < anEndTime) then
 		VUHDO_INC_END[aTargetName] = anEndTime + 1;
 	end
 	VUHDO_updateHealthBarsFor(VUHDO_RAID_NAMES[aTargetName], 9); -- VUHDO_UPDATE_INC
@@ -53,7 +53,7 @@ function VUHDO_clearObsoleteInc()
 	tNow = GetTime();
 	-- Clear obsolete ending times
 	for tName, tTime in pairs(VUHDO_INC_END) do
-		if (tTime < tNow) then
+		if tTime < tNow then
 			VUHDO_setIncHeal(tName, 0, nil);
 			VUHDO_INC_END[tName] = nil;
 		end
@@ -85,22 +85,22 @@ function VuhDoHealComms:HealComm_HealStarted(_, aCasterGUID, _, aHealType, anEnd
 		for tCnt = 1, tArgNum do
 			tTargetGUID = select(tCnt, ...);
 			tTargetName = VUHDO_RAID_GUID_NAMES[tTargetGUID];
-			if (tTargetName ~= nil) then
+			if tTargetName then
 				tAmount = 0;
 
-				if (sIsCasted) then
+				if sIsCasted then
 					tAmount = tAmount + (sHealComm:GetHealAmount(tTargetGUID, VUHDO_DIRECT_HEALS, tNow + sCastedSecs, nil) or 0);
 				end
 
-				if (sIsChannelled) then
+				if sIsChannelled then
 					tAmount = tAmount + (sHealComm:GetHealAmount(tTargetGUID, VUHDO_CHANNEL_HEALS, tNow + sChannelledSecs, nil) or 0);
 				end
 
-				if (sIsHots) then
+				if sIsHots then
 					tAmount = tAmount + (sHealComm:GetHealAmount(tTargetGUID, VUHDO_HOT_HEALS, tNow + sHotsSecs, nil) or 0);
 				end
 
-				if (sIsBombed) then
+				if sIsBombed then
 					tAmount = tAmount + (sHealComm:GetHealAmount(tTargetGUID, VUHDO_BOMB_HEALS, tNow + sBombedSecs, nil) or 0);
 				end
 

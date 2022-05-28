@@ -297,7 +297,7 @@
 						</Anchors>
 						<Scripts>
 							<OnLoad>
-								VUHDO_setComboModel(self, "VUHDO_PANEL_SETUP.RAID_ICON_FILTER", VUHDO_getRaidTargetComboModel(this));
+								VUHDO_setComboModel(self, "VUHDO_PANEL_SETUP.RAID_ICON_FILTER", VUHDO_getRaidTargetComboModel(self));
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K414);
 								self:SetAttribute("custom_function", VUHDO_notifySoundSelect);
 							</OnLoad>

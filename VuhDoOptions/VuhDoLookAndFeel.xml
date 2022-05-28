@@ -2008,7 +2008,7 @@
 	</Frames>
 	<Scripts>
 		<OnShow>
-			SetPortraitTexture(VUHDO_GLOBAL["VuhDoYesNoFramePortrait"], "player");
+			SetPortraitTexture(_G["VuhDoYesNoFramePortrait"], "player");
 		</OnShow>
 	</Scripts>
 </Frame>

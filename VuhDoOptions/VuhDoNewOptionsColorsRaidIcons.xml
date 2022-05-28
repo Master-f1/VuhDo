@@ -20,7 +20,7 @@
 		<Scripts>
 			<OnShow>
 				local tNumber = VUHDO_getNumbersFromString(self:GetName(), 1)[1];
-				VUHDO_setRaidTargetIconTexture(VUHDO_GLOBAL[self:GetName() .. "Texture"], tNumber);
+				VUHDO_setRaidTargetIconTexture(_G[self:GetName() .. "Texture"], tNumber);
 			</OnShow>
 		</Scripts>
 	</Frame>

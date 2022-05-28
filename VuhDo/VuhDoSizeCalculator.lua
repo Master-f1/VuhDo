@@ -14,20 +14,20 @@ local VUHDO_resetSizeCalcCachesVer;
 local twipe = table.wipe;
 
 function VUHDO_sizeCalculatorInitBurst()
-	VUHDO_PANEL_SETUP = VUHDO_GLOBAL["VUHDO_PANEL_SETUP"];
+	VUHDO_PANEL_SETUP = _G["VUHDO_PANEL_SETUP"];
 	VUHDO_sizeCalculatorInitBurstHor();
 	VUHDO_sizeCalculatorInitBurstVer();
 
-	VUHDO_getHeaderWidthHor = VUHDO_GLOBAL["VUHDO_getHeaderWidthHor"];
-	VUHDO_getHeaderWidthVer = VUHDO_GLOBAL["VUHDO_getHeaderWidthVer"];
-	VUHDO_getHeaderHeightHor = VUHDO_GLOBAL["VUHDO_getHeaderHeightHor"];
-	VUHDO_getHeaderHeightVer = VUHDO_GLOBAL["VUHDO_getHeaderHeightVer"];
-	VUHDO_getHeaderPosHor = VUHDO_GLOBAL["VUHDO_getHeaderPosHor"];
-	VUHDO_getHeaderPosVer = VUHDO_GLOBAL["VUHDO_getHeaderPosVer"];
-	VUHDO_getHealButtonPosHor = VUHDO_GLOBAL["VUHDO_getHealButtonPosHor"];
-	VUHDO_getHealButtonPosVer = VUHDO_GLOBAL["VUHDO_getHealButtonPosVer"];
-	VUHDO_resetSizeCalcCachesHor = VUHDO_GLOBAL["VUHDO_resetSizeCalcCachesHor"];
-	VUHDO_resetSizeCalcCachesVer = VUHDO_GLOBAL["VUHDO_resetSizeCalcCachesVer"];
+	VUHDO_getHeaderWidthHor = _G["VUHDO_getHeaderWidthHor"];
+	VUHDO_getHeaderWidthVer = _G["VUHDO_getHeaderWidthVer"];
+	VUHDO_getHeaderHeightHor = _G["VUHDO_getHeaderHeightHor"];
+	VUHDO_getHeaderHeightVer = _G["VUHDO_getHeaderHeightVer"];
+	VUHDO_getHeaderPosHor = _G["VUHDO_getHeaderPosHor"];
+	VUHDO_getHeaderPosVer = _G["VUHDO_getHeaderPosVer"];
+	VUHDO_getHealButtonPosHor = _G["VUHDO_getHealButtonPosHor"];
+	VUHDO_getHealButtonPosVer = _G["VUHDO_getHealButtonPosVer"];
+	VUHDO_resetSizeCalcCachesHor = _G["VUHDO_resetSizeCalcCachesHor"];
+	VUHDO_resetSizeCalcCachesVer = _G["VUHDO_resetSizeCalcCachesVer"];
 end
 
 -- BURST CACHE

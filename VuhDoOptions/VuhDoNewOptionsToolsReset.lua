@@ -1,3 +1,4 @@
+local _;
 -- Returns a "deep" copy of a table, not deleting existent elements in aDestTable
 -- which means containing tables will be copies value-wise, not by reference
 local tIsBool;

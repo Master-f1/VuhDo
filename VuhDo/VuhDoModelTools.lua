@@ -6,6 +6,7 @@ local tremove = tremove;
 local twipe = table.wipe;
 local ceil = ceil;
 local pairs = pairs;
+local _;
 
 local tModelArray;
 local tKeyArray;
@@ -16,16 +17,14 @@ function VUHDO_clearUndefinedModelEntries()
 		for tCnt = 15, 1, -1 do -- VUHDO_MAX_GROUPS_PER_PANEL
 			tModelId = tModelArray[tCnt];
 
-			if (tModelId == 0) then -- VUHDO_ID_UNDEFINED
+			if tModelId == 0 then -- VUHDO_ID_UNDEFINED
 				tremove(tModelArray, tCnt);
 			end
 		end
 	end
 
 	for tKeyArray, tModelArray in pairs(VUHDO_PANEL_MODELS) do
-		if (tModelArray == nil or #tModelArray == 0) then
-			VUHDO_PANEL_MODELS[tKeyArray] = nil;
-		end
+		if not tModelArray or #tModelArray == 0 then VUHDO_PANEL_MODELS[tKeyArray] = nil; end
 	end
 
 end
@@ -47,7 +46,7 @@ local tMaxRows, tNumModels, tRepeatModels;
 local tCnt;
 function VUHDO_initDynamicPanelModels()
 
-	if (VUHDO_isConfigPanelShowing()) then
+	if VUHDO_isConfigPanelShowing() then
 		VUHDO_PANEL_DYN_MODELS = VUHDO_deepCopyTable(VUHDO_PANEL_MODELS);
 		return;
 	end
@@ -61,12 +60,10 @@ function VUHDO_initDynamicPanelModels()
 
 		for tModelIdx, tModelId in pairs(tModelArray) do
 			tNumModels = #VUHDO_getGroupMembers(tModelId);
-			if ((not tIsOmitEmpty) or tNumModels > 0) then
+			if not tIsOmitEmpty or tNumModels > 0 then
 
 				tRepeatModels = ceil(tNumModels / tMaxRows);
-				if (tRepeatModels == 0) then
-					tRepeatModels = 1;
-				end
+				if tRepeatModels == 0 then tRepeatModels = 1; end
 
 				for tCnt = 1, tRepeatModels do
 					tinsert(VUHDO_PANEL_DYN_MODELS[tPanelNum], tModelId);

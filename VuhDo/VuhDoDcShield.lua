@@ -8,12 +8,13 @@ local GetMacroIndexByName = GetMacroIndexByName;
 local tonumber = tonumber;
 local pairs = pairs;
 local GetNumMacros = GetNumMacros;
+
 local InCombatLockdown = InCombatLockdown;
-local _ = _;
+local _;
 
 local VUHDO_RAID;
 function VUHDO_dcShieldInitBurst()
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
 end
 
 local VUHDO_MACRO_NAME_GROUPS = "VuhDoDCShieldData";
@@ -79,10 +80,8 @@ local function VUHDO_buildSnippetArray()
 			tMacroIndex = tInfo["number"];
 		end
 
-		if ((tMacroIndex or 0) > 0) then -- nicht: Target, Focus
-			if (tInfo["isPet"]) then
-				tMacroIndex = tMacroIndex + 41; -- VUHDO_MAX_MACRO_UNITS
-			end
+		if (tMacroIndex or 0) > 0 then -- nicht: Target, Focus
+			if tInfo["isPet"] then tMacroIndex = tMacroIndex + 41; end -- VUHDO_MAX_MACRO_UNITS
 
 			VUHDO_GROUP_SNIPPETS[tMacroIndex] =
 				(tInfo["group"] % 10) .. (VUHDO_CLASS_TO_MACRO[tInfo["classId"]] or "_") .. (VUHDO_ROLE_TO_MACRO[tInfo["role"]] or "_");
@@ -97,22 +96,14 @@ local tCnt;
 local tIndexGroups, tIndexNames;
 local tNumMacros;
 function VUHDO_mirrorToMacro()
-	if (VUHDO_IS_DC_TEMP_DISABLE) then
-		return;
-	end
+	if VUHDO_IS_DC_TEMP_DISABLE then return; end
 
 	tIndexGroups = GetMacroIndexByName(VUHDO_MACRO_NAME_GROUPS);
 	tIndexNames = GetMacroIndexByName(VUHDO_MACRO_NAME_NAMES);
 
-	if (VUHDO_CONFIG["IS_DC_SHIELD_DISABLED"]) then
-		if ((tIndexGroups or 0) ~= 0) then
-			DeleteMacro(tIndexGroups);
-		end
-
-		if ((tIndexNames or 0) ~= 0) then
-			DeleteMacro(tIndexNames);
-		end
-
+	if VUHDO_CONFIG["IS_DC_SHIELD_DISABLED"] then
+		if (tIndexGroups or 0) ~= 0 then DeleteMacro(tIndexGroups); end
+		if (tIndexNames or 0) ~= 0 then DeleteMacro(tIndexNames); end
 		return;
 	end
 
@@ -130,9 +121,9 @@ function VUHDO_mirrorToMacro()
 		tMacroNames = tMacroNames .. (VUHDO_NAME_SNIPPETS[tCnt] or VUHDO_EMPTY_SNIPPET)
 	end
 
-	if ((tIndexGroups or 0) == 0) then
+	if (tIndexGroups or 0) == 0 then
 		_, tNumMacros = GetNumMacros();
-		if ((tNumMacros or 0) > 17) then
+		if (tNumMacros or 0) > 17 then
 			VUHDO_Msg(VUHDO_I18N_DC_SHIELD_NO_MACROS);
 			VUHDO_IS_DC_TEMP_DISABLE = true;
 		else
@@ -142,9 +133,9 @@ function VUHDO_mirrorToMacro()
 		EditMacro(tIndexGroups, VUHDO_MACRO_NAME_GROUPS, 130, tMacroString, 1, 1);
 	end
 
-	if ((tIndexNames or 0) == 0) then
+	if (tIndexNames or 0) == 0 then
 		_, tNumMacros = GetNumMacros();
-		if ((tNumMacros or 0) > 17) then
+		if (tNumMacros or 0) > 17 then
 			VUHDO_Msg(VUHDO_I18N_DC_SHIELD_NO_MACROS);
 			VUHDO_IS_DC_TEMP_DISABLE = true;
 		else
@@ -159,9 +150,7 @@ local function VUHDO_buildInfoFromSnippet(aUnit, aSnippet, aName)
 	local tInfo;
 	local tClassId;
 
-	if (VUHDO_RAID[aUnit] == nil) then
-		VUHDO_RAID[aUnit] = {};
-	end
+	if not VUHDO_RAID[aUnit] then VUHDO_RAID[aUnit] = {}; end
 
 	tClassId = VUHDO_MACRO_TO_CLASS[strsub(aSnippet, 2, 2)] or VUHDO_ID_PETS;
 
@@ -217,16 +206,14 @@ function VUHDO_buildRaidFromMacro()
 	tIndexGroups = GetMacroIndexByName(VUHDO_MACRO_NAME_GROUPS);
 	tIndexNames = GetMacroIndexByName(VUHDO_MACRO_NAME_NAMES);
 
-	if ((tIndexGroups or 0) == 0 or (tIndexNames or 0) == 0) then
-		return false;
-	end
+	if (tIndexGroups or 0) == 0 or (tIndexNames or 0) == 0 then return false; end
 
 	twipe(VUHDO_RAID);
 	tMacroGroups = GetMacroBody(tIndexGroups);
 	tMacroNames = GetMacroBody(tIndexNames);
 
 	tSnippet = strsub(tMacroGroups, 1, 1);
-	if (tSnippet == "R") then -- VUHDO_ID_RAID
+	if tSnippet == "R" then -- VUHDO_ID_RAID
 		tPrefix = "raid";
 	else
 		tPrefix = "party";
@@ -236,13 +223,13 @@ function VUHDO_buildRaidFromMacro()
 		tStrIdx = tCnt * 3 + 2;
 		tSnippet = strsub(tMacroGroups, tStrIdx, tStrIdx + 2);
 		tName = strsub(tMacroNames, tStrIdx, tStrIdx + 2)
-		if ((tSnippet or VUHDO_EMPTY_SNIPPET) ~= VUHDO_EMPTY_SNIPPET) then
+		if (tSnippet or VUHDO_EMPTY_SNIPPET) ~= VUHDO_EMPTY_SNIPPET then
 			tRaidIdx = tCnt + 1;
-			if (tRaidIdx == 41) then -- VUHDO_MAX_MACRO_UNITS
+			if tRaidIdx == 41 then -- VUHDO_MAX_MACRO_UNITS
 				tUnit = "player";
-			elseif (tRaidIdx == 82) then -- VUHDO_MAX_MACRO_UNITS * 2
+			elseif tRaidIdx == 82 then -- VUHDO_MAX_MACRO_UNITS * 2
 				tUnit = "pet";
-			elseif (tRaidIdx > 41) then -- VUHDO_MAX_MACRO_UNITS
+			elseif tRaidIdx > 41 then -- VUHDO_MAX_MACRO_UNITS
 				tUnit = tPrefix .. "pet" .. tRaidIdx;
 			else
 				tUnit = tPrefix .. tRaidIdx;

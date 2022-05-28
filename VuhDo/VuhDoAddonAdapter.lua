@@ -1,27 +1,25 @@
+local _;
+
 VUHDO_LibSharedMedia = LibStub("LibSharedMedia-3.0");
 VUHDO_LibDataBroker = LibStub("LibDataBroker-1.1", true);
+VUHDO_LibDBIcon = LibStub("LibDBIcon-1.0");
+
+VUHDO_LibHealComm = LibStub("LibHealComm-4.0");
 
 VUHDO_LibSharedMedia:Register("font", "Arial Black", "Interface\\AddOns\\VuhDo\\Fonts\\ariblk.ttf");
 VUHDO_LibSharedMedia:Register("font", "Emblem", "Interface\\AddOns\\VuhDo\\Fonts\\Emblem.ttf");
+VUHDO_LibSharedMedia:Register("font", "Vixar", "Interface\\AddOns\\VuhDo\\Fonts\\vixar.ttf");
 
-VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - Rhombs", "Interface\\AddOns\\VuhDo\\Images\\bar1.tga");
-VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - Twirls", "Interface\\AddOns\\VuhDo\\Images\\bar2.tga");
-VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - Pipe, dark", "Interface\\AddOns\\VuhDo\\Images\\bar3.tga");
-VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - Concave, dark", "Interface\\AddOns\\VuhDo\\Images\\bar4.tga");
-VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - Pipe, light", "Interface\\AddOns\\VuhDo\\Images\\bar5.tga");
-VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - Flat", "Interface\\AddOns\\VuhDo\\Images\\bar6.tga");
-VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - Concave, light", "Interface\\AddOns\\VuhDo\\Images\\bar7.tga");
-VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - Convex", "Interface\\AddOns\\VuhDo\\Images\\bar8.tga");
-VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - Textile", "Interface\\AddOns\\VuhDo\\Images\\bar9.tga");
-VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - Mirrorfinish", "Interface\\AddOns\\VuhDo\\Images\\bar10.tga");
-VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - Diagonals", "Interface\\AddOns\\VuhDo\\Images\\bar11.tga");
-VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - Zebra", "Interface\\AddOns\\VuhDo\\Images\\bar12.tga");
-VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - Marble", "Interface\\AddOns\\VuhDo\\Images\\bar13.tga");
-VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - Modern Art", "Interface\\AddOns\\VuhDo\\Images\\bar14.tga");
-VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - Polished Wood", "Interface\\AddOns\\VuhDo\\Images\\bar15.tga");
-VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - Plain", "Interface\\AddOns\\VuhDo\\Images\\bar16.tga");
-VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - Minimalist", "Interface\\AddOns\\VuhDo\\Images\\bar17.tga");
-VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - Aluminium", "Interface\\AddOns\\VuhDo\\Images\\bar18.tga");
+local function VUHDO_registerLsmBar(...)
+	for tCnt = 1, select('#', ...) do
+		VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - " .. select(tCnt, ...), "Interface\\AddOns\\VuhDo\\Images\\bar" .. tCnt .. ".tga");
+	end
+end
+
+VUHDO_registerLsmBar("Rhombs", "Twirls", "Pipe, dark", "Concave, dark", "Pipe, light", "Flat", "Concave, light",
+	"Convex", "Textile", "Mirrorfinish", "Diagonals", "Zebra", "Marble", "Modern Art", "Polished Wood", "Plain",
+	"Minimalist", "Aluminium");
+
 VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - Bar Highlighter", "Interface\\AddOns\\VuhDo\\Images\\highlight.tga");
 VUHDO_LibSharedMedia:Register("statusbar", "LiteStepLite", "Interface\\AddOns\\VuhDo\\Images\\LiteStepLite.tga");
 
@@ -33,14 +31,10 @@ LoadAddOn("FuBarPlugin-3.0");
 
 
 function VUHDO_parseAddonMessage(anArg1, anArg2, anArg3, anArg4)
-	-- PallyPower?
-	if ("PLPWR" == anArg1 and VUHDO_CONFIG["IS_PALLY_POWER_COMMS"]) then
-		VUHDO_parsePallyPowerMessage(anArg2, anArg3, anArg4);
-		-- CTRaidAssistMessage?
-	elseif ("CTRA" == anArg1) then
+	if "CTRA" == anArg1 then
 		local tNick = anArg4;
 		local tMessage = anArg2;
-		if (strfind(tMessage, "#")) then
+		if strfind(tMessage, "#") then
 			local tFragments = VUHDO_splitString(tMessage, "#");
 			local tCommand;
 			for _, tCommand in pairs(tFragments) do
@@ -86,12 +80,12 @@ end
 
 function VUHDO_initFuBar()
 	-- libDataBroker
-	if (VUHDO_LibDataBroker ~= nil) then
+	if VUHDO_LibDataBroker then
 		VuhDoLauncher = VUHDO_LibDataBroker:NewDataObject("VuhDo", {
 			type = "launcher",
 			icon = "Interface\\AddOns\\VuhDo\\Images\\VuhDo",
 			OnClick = function(aClickedFrame, aButton)
-				if (aButton == "RightButton") then
+				if aButton == "RightButton" then
 					ToggleDropDownMenu(1, nil, VuhDoMinimapDropDown, aClickedFrame:GetName(), 0, -5);
 				else
 					VUHDO_slashCmd("opt");
@@ -106,10 +100,10 @@ function VUHDO_initFuBar()
 	end
 
 	-- Native FuBar
-	if (LibStub:GetLibrary("LibFuBarPlugin-3.0", true)
+	if LibStub:GetLibrary("LibFuBarPlugin-3.0", true)
 		and IsAddOnLoaded("FuBar")
 		and not IsAddOnLoaded("FuBar2Broker")
-		and not IsAddOnLoaded("Broker2FuBar")) then
+		and not IsAddOnLoaded("Broker2FuBar") then
 
 		local tLibFuBarPlugin = LibStub:GetLibrary("LibFuBarPlugin-3.0");
 		LibStub("AceAddon-3.0"):EmbedLibrary(VuhDo, "LibFuBarPlugin-3.0");
@@ -132,9 +126,9 @@ function VUHDO_initFuBar()
 		end
 		VuhDo:Show();
 		function VuhDo:OnFuBarClick(aButton)
-			if ("LeftButton" == aButton) then
+			if "LeftButton" == aButton then
 				VUHDO_slashCmd("opt");
-			elseif ("RightButton" == aButton) then
+			elseif "RightButton" == aButton then
 				ToggleDropDownMenu(1, nil, VuhDoMinimapDropDown, VuhDo:GetFrame():GetName(), 0, -5);
 			end
 		end
@@ -142,38 +136,32 @@ function VUHDO_initFuBar()
 end
 
 function VUHDO_initSharedMedia()
-	local tIndex, tValue;
-
 	-- fonts
-	local tFonts = VUHDO_LibSharedMedia:List('font');
-	for tIndex, tValue in ipairs(tFonts) do
-		VUHDO_FONTS[tIndex] = {VUHDO_LibSharedMedia:Fetch('font', tValue), tValue};
+	for tIndex, tValue in ipairs(VUHDO_LibSharedMedia:List("font")) do
+		VUHDO_FONTS[tIndex] = {VUHDO_LibSharedMedia:Fetch("font", tValue), tValue};
 	end
 
 	-- status bars
-	local tBars = VUHDO_LibSharedMedia:List('statusbar');
-	for tIndex, tValue in ipairs(tBars) do
+	for tIndex, tValue in ipairs(VUHDO_LibSharedMedia:List("statusbar")) do
 		VUHDO_STATUS_BARS[tIndex] = {tValue, tValue};
 	end
 
 	-- sounds
-	local tSounds = VUHDO_LibSharedMedia:List('sound');
-	for tIndex, tValue in ipairs(tSounds) do
-		VUHDO_SOUNDS[tIndex] = {VUHDO_LibSharedMedia:Fetch('sound', tValue), tValue};
+	for tIndex, tValue in ipairs(VUHDO_LibSharedMedia:List("sound")) do
+		VUHDO_SOUNDS[tIndex] = {VUHDO_LibSharedMedia:Fetch("sound", tValue), tValue};
 	end
-	tinsert(VUHDO_SOUNDS, 1, {nil, VUHDO_I18N_OFF});
+	tinsert(VUHDO_SOUNDS, 1, {nil, "-- " .. VUHDO_I18N_OFF .. " --" });
 
 	-- borders
-	local tBorders = VUHDO_LibSharedMedia:List('border');
-	for tIndex, tValue in ipairs(tBorders) do
-		VUHDO_BORDERS[tIndex] = {VUHDO_LibSharedMedia:Fetch('border', tValue), tValue};
+	for tIndex, tValue in ipairs(VUHDO_LibSharedMedia:List("border")) do
+		VUHDO_BORDERS[tIndex] = {VUHDO_LibSharedMedia:Fetch("border", tValue) or "", tValue};
 	end
 end
 
 local tPanelNum, tButtonNum;
 local tEmptyButton = {};
-function VUHDO_initCliqueSupport(bool) -- фикс
-	if (not VUHDO_CONFIG["IS_CLIQUE_COMPAT_MODE"]) then
+function VUHDO_initCliqueSupport(bool) -- С„РёРєСЃ
+	if not VUHDO_CONFIG["IS_CLIQUE_COMPAT_MODE"] then
 		return;
 	end
 
@@ -181,10 +169,10 @@ function VUHDO_initCliqueSupport(bool) -- фикс
 
 	for tPanelNum = 1, 10 do -- VUHDO_MAX_PANELS
 		for tButtonNum = 1, 51 do -- VUHDO_MAX_BUTTONS_PANEL
-			if (VUHDO_GLOBAL["VdAc" .. tPanelNum .. "HlU" .. tButtonNum] ~= nil) then
-				ClickCastFrames[VUHDO_GLOBAL["VdAc" .. tPanelNum .. "HlU" .. tButtonNum]] = true;
-				ClickCastFrames[VUHDO_GLOBAL["VdAc" .. tPanelNum .. "HlU" .. tButtonNum .. "Tg"]] = true;
-				ClickCastFrames[VUHDO_GLOBAL["VdAc" .. tPanelNum .. "HlU" .. tButtonNum .. "Tot"]] = true;
+			if (_G["VdAc" .. tPanelNum .. "HlU" .. tButtonNum] ~= nil) then
+				ClickCastFrames[_G["VdAc" .. tPanelNum .. "HlU" .. tButtonNum]] = true;
+				ClickCastFrames[_G["VdAc" .. tPanelNum .. "HlU" .. tButtonNum .. "Tg"]] = true;
+				ClickCastFrames[_G["VdAc" .. tPanelNum .. "HlU" .. tButtonNum .. "Tot"]] = true;
 			end
 		end
 	end

@@ -1,3 +1,4 @@
+local _;
 VUHDO_HOT_MODELS = {};
 VUHDO_HOT_BAR_MODELS = {};
 
@@ -58,7 +59,7 @@ end
 local tNum;
 function VUHDO_squareDemoOnShow(aTexture)
 	tNum = VUHDO_getNumbersFromString(aTexture:GetName(), 1);
-	VUHDO_GLOBAL[aTexture:GetName() .. "Label"]:SetText("" .. tNum[1]);
+	_G[aTexture:GetName() .. "Label"]:SetText("" .. tNum[1]);
 end
 
 local tMineBox, tOthersBox, tEditButton, tNumber;
@@ -67,9 +68,9 @@ function VUHDO_notifyHotSelect(aComboBox, aValue)
 	tFrameName = aComboBox:GetParent():GetParent():GetName();
 
 	tNumber = VUHDO_getNumbersFromString(aComboBox:GetName(), 1)[1];
-	tMineBox = VUHDO_GLOBAL[tFrameName .. "HotOrderPanelSlot" .. tNumber .. "Mine"];
-	tOthersBox = VUHDO_GLOBAL[tFrameName .. "HotOrderPanelSlot" .. tNumber .. "Others"];
-	tEditButton = VUHDO_GLOBAL[tFrameName .. "HotOrderPanelSlot" .. tNumber .. "EditButton"];
+	tMineBox = _G[tFrameName .. "HotOrderPanelSlot" .. tNumber .. "Mine"];
+	tOthersBox = _G[tFrameName .. "HotOrderPanelSlot" .. tNumber .. "Others"];
+	tEditButton = _G[tFrameName .. "HotOrderPanelSlot" .. tNumber .. "EditButton"];
 	if (aValue == nil or aValue == "CLUSTER" or aValue == "OTHER" or strsub(aValue, 1, 8) == "BOUQUET_") then
 		tMineBox:Hide();
 		tOthersBox:Hide();
@@ -93,7 +94,7 @@ end
 local tNum, tCombo;
 function VUHDO_panelsHotsEditButtonClicked(aButton)
 	tNum = VUHDO_getNumbersFromString(aButton:GetName(), 1)[1];
-	tCombo = VUHDO_GLOBAL[aButton:GetParent():GetName() .. "Slot" .. tNum .. "ComboBox"];
+	tCombo = _G[aButton:GetParent():GetName() .. "Slot" .. tNum .. "ComboBox"];
 	VUHDO_BOUQUETS["SELECTED"] = strsub(VUHDO_lnfGetValueFromModel(tCombo), 9);
 
 	VUHDO_MENU_RETURN_FUNC = nil;

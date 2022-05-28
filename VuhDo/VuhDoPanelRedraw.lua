@@ -1,4 +1,4 @@
-local VUHDO_GLOBAL = getfenv();
+local _G = _G;
 
 local VUHDO_STD_BACKDROP = nil;
 local VUHDO_DESIGN_BACKDROP = nil;
@@ -9,6 +9,7 @@ local ipairs = ipairs;
 local strfind = strfind;
 local twipe = table.wipe;
 local InCombatLockdown = InCombatLockdown;
+local _;
 
 local sBarScaling;
 local sHeaderColSetup;
@@ -72,11 +73,11 @@ end
 local VUHDO_initLocalVars = VUHDO_initLocalVars;
 
 function VUHDO_isPanelVisible(aPanelNum)
-	if (not VUHDO_CONFIG["SHOW_PANELS"] or VUHDO_PANEL_MODELS[aPanelNum] == nil or not VUHDO_IS_SHOWN_BY_GROUP) then
+	if not VUHDO_CONFIG["SHOW_PANELS"] or not VUHDO_PANEL_MODELS[aPanelNum] or not VUHDO_IS_SHOWN_BY_GROUP then
 		return false;
 	end
 
-	if (VUHDO_CONFIG["HIDE_EMPTY_PANELS"] and not VUHDO_isConfigPanelShowing() and #VUHDO_PANEL_UNITS[aPanelNum] == 0) then
+	if VUHDO_CONFIG["HIDE_EMPTY_PANELS"] and not VUHDO_isConfigPanelShowing() and #VUHDO_PANEL_UNITS[aPanelNum] == 0 then
 		return false;
 	end
 
@@ -85,7 +86,7 @@ end
 local VUHDO_isPanelVisible = VUHDO_isPanelVisible;
 
 function VUHDO_isPanelPopulated(aPanelNum)
-	return VUHDO_CONFIG["SHOW_PANELS"] and VUHDO_PANEL_MODELS[aPanelNum] ~= nil and VUHDO_IS_SHOWN_BY_GROUP;
+	return VUHDO_CONFIG["SHOW_PANELS"] and VUHDO_PANEL_MODELS[aPanelNum] and VUHDO_IS_SHOWN_BY_GROUP;
 end
 local VUHDO_isPanelPopulated = VUHDO_isPanelPopulated;
 
@@ -115,10 +116,10 @@ local function VUHDO_positionTableHeaders(aPanel, aPanelNum)
 	tWidth = VUHDO_getHeaderWidth(aPanelNum);
 	tHeight = VUHDO_getHeaderHeight(aPanelNum);
 
-	if (VUHDO_isTableHeaderOrFooter(aPanelNum)) then
+	if VUHDO_isTableHeaderOrFooter(aPanelNum) then
 		tAnzCols = #tModel;
 
-		if (tAnzCols > 15) then -- VUHDO_MAX_GROUPS_PER_PANEL
+		if tAnzCols > 15 then -- VUHDO_MAX_GROUPS_PER_PANEL
 			tAnzCols = 15; -- VUHDO_MAX_GROUPS_PER_PANEL
 		end
 	else
@@ -138,7 +139,7 @@ local function VUHDO_positionTableHeaders(aPanel, aPanelNum)
 		tHealthBar:SetValue(100);
 		tHealthBar:SetHeight(tHeight);
 
-		if (tStatusFile ~= nil) then
+		if tStatusFile then
 			tHealthBar:SetStatusBarTexture(tStatusFile);
 		end
 
@@ -177,7 +178,7 @@ local tBackdrop, tBorderCol;
 local function VUHDO_initPlayerTargetBorder(aButton, aBorderFrame)
 	aBorderFrame:SetPoint("TOPLEFT", aButton:GetName(), "TOPLEFT", -VUHDO_INDICATOR_CONFIG["CUSTOM"]["BAR_BORDER"]["WIDTH"], VUHDO_INDICATOR_CONFIG["CUSTOM"]["BAR_BORDER"]["WIDTH"]);
 	aBorderFrame:SetPoint("BOTTOMRIGHT", aButton:GetName(), "BOTTOMRIGHT", VUHDO_INDICATOR_CONFIG["CUSTOM"]["BAR_BORDER"]["WIDTH"], -VUHDO_INDICATOR_CONFIG["CUSTOM"]["BAR_BORDER"]["WIDTH"]);
-	if (tBackdrop == nil) then
+	if not tBackdrop then
 		tBackdrop = aBorderFrame:GetBackdrop();
 		tBackdrop["edgeSize"] = VUHDO_INDICATOR_CONFIG["CUSTOM"]["BAR_BORDER"]["WIDTH"];
 	end
@@ -192,7 +193,7 @@ local function VUHDO_initClusterBorder(aButton)
 	tClusterFrame = VUHDO_getClusterBorderFrame(aButton);
 	tClusterFrame:SetPoint("TOPLEFT", aButton:GetName(), "TOPLEFT", 0, 0);
 	tClusterFrame:SetPoint("BOTTOMRIGHT", aButton:GetName(), "BOTTOMRIGHT", 0, 0);
-	if (tBackdropCluster == nil) then
+	if not tBackdropCluster then
 		tBackdropCluster = tClusterFrame:GetBackdrop();
 		tBackdropCluster["edgeSize"] = VUHDO_INDICATOR_CONFIG["CUSTOM"]["CLUSTER_BORDER"]["WIDTH"];
 	end
@@ -289,7 +290,7 @@ local function VUHDO_initManaBar(aButton, aManaBar, aWidth, anIsForceBar)
 	VUHDO_setLlcStatusBarTexture(aManaBar, VUHDO_INDICATOR_CONFIG["CUSTOM"]["MANA_BAR"]["TEXTURE"]);
 
 	tInfo = VUHDO_RAID[aButton["raidid"]];
-	if (anIsForceBar or tInfo == nil or sIsManaBouquet) then
+	if anIsForceBar or not tInfo or sIsManaBouquet then
 		tManaHeight = sManaBarHeight;
 	else
 		tManaHeight = 0;
@@ -297,7 +298,7 @@ local function VUHDO_initManaBar(aButton, aManaBar, aWidth, anIsForceBar)
 
 	aManaBar:SetWidth(aWidth);
 	aButton["regularHeight"] = sBarScaling["barHeight"];
-	if (sIsManaBouquet) then
+	if sIsManaBouquet then
 		aManaBar:Show();
 		aManaBar:SetHeight(tManaHeight);
 		if (VUHDO_getHealthBar(aButton, 1):GetHeight(sBarHeight) == 0) then
@@ -340,7 +341,7 @@ local function VUHDO_initBarTexts(aButton, aHealthBar, aWidth)
 	tNameText = VUHDO_getBarText(aHealthBar);
 	tLifeText = VUHDO_getLifeText(aHealthBar);
 
-	if (sIsOutline) then
+	if sIsOutline then
 		tShadowAlpha = 0;
 		tOutlineText = "OUTLINE";
 	else
@@ -385,10 +386,10 @@ local function VUHDO_initBarTexts(aButton, aHealthBar, aWidth)
 
 	sPanelSetup["ID_TEXT"]["_spacing"] = tTextPanel:GetHeight(); -- internal marker
 
-	if (strfind(sTextAnchors[1], "LEFT", 1, true)) then
+	if strfind(sTextAnchors[1], "LEFT", 1, true) then
 		tNameText:SetJustifyH("LEFT");
 		tLifeText:SetJustifyH("LEFT");
-	elseif (strfind(sTextAnchors[1], "RIGHT", 1, true)) then
+	elseif strfind(sTextAnchors[1], "RIGHT", 1, true) then
 		tNameText:SetJustifyH("RIGHT");
 		tLifeText:SetJustifyH("RIGHT");
 	else
@@ -460,15 +461,15 @@ local function VUHDO_initHotBars()
 		tHotBar:SetStatusBarColor(tHotBarColor["R"], tHotBarColor["G"], tHotBarColor["B"], tHotBarColor["O"]);
 	end
 
-	if (sHotConfig["BARS"]["radioValue"] == 1) then -- edges
+	if sHotConfig["BARS"]["radioValue"] == 1 then -- edges
 		VUHDO_getHealthBar(sButton, 9):SetPoint("TOP", sHealthBar:GetName(), "TOP", 0, 0);
 		VUHDO_getHealthBar(sButton, 10):SetPoint("CENTER", sHealthBar:GetName(), "CENTER", 0, 0);
 		VUHDO_getHealthBar(sButton, 11):SetPoint("BOTTOM", sHealthBar:GetName(), "BOTTOM", 0, 0);
-	elseif (sHotConfig["BARS"]["radioValue"] == 2) then -- center
+	elseif sHotConfig["BARS"]["radioValue"] == 2 then -- center
 		VUHDO_getHealthBar(sButton, 9):SetPoint("CENTER", sHealthBar:GetName(), "CENTER", 0, tHotBarHeight);
 		VUHDO_getHealthBar(sButton, 10):SetPoint("CENTER", sHealthBar:GetName(), "CENTER", 0, 0);
 		VUHDO_getHealthBar(sButton, 11):SetPoint("CENTER", sHealthBar:GetName(), "CENTER", 0, -tHotBarHeight);
-	elseif (sHotConfig["BARS"]["radioValue"] == 3) then -- top
+	elseif sHotConfig["BARS"]["radioValue"] == 3 then -- top
 		VUHDO_getHealthBar(sButton, 9):SetPoint("TOP", sHealthBar:GetName(), "TOP", 0, 0);
 		VUHDO_getHealthBar(sButton, 10):SetPoint("TOP", sHealthBar:GetName(), "TOP", 0, -tHotBarHeight);
 		VUHDO_getHealthBar(sButton, 11):SetPoint("TOP", sHealthBar:GetName(), "TOP", 0, -2 * tHotBarHeight);
@@ -501,13 +502,13 @@ local function VUHDO_initHotIcon(tCnt)
 
 	tHotColor = VUHDO_PANEL_SETUP["BAR_COLORS"]["HOT" .. tCnt];
 
-	if (sHotConfig["iconRadioValue"] ~= 1) then
+	if sHotConfig["iconRadioValue"] ~= 1 then
 		tHotIcon:SetVertexColor(tHotColor["R"], tHotColor["G"], tHotColor["B"]);
 	else
 		tHotIcon:SetVertexColor(1, 1, 1);
 	end
 
-	if (sHotConfig["radioValue"] >= 20) then
+	if sHotConfig["radioValue"] >= 20 then
 		tHotIcon:SetWidth(sHotIconSize * 0.5);
 		tHotIcon:SetHeight(sHotIconSize * 0.5);
 	else
@@ -515,87 +516,87 @@ local function VUHDO_initHotIcon(tCnt)
 		tHotIcon:SetHeight(sHotIconSize);
 	end
 
-	if (tCnt < 9) then
+	if tCnt < 9 then
 		tOffset = (tCnt - 1) * sHotIconSize;
 	else
 		tOffset = (tCnt - 4) * sHotIconSize;
 	end
 
-	if (sHotPos == 2) then
+	if sHotPos == 2 then
 		tHotIcon:SetPoint("LEFT", sHealthBar:GetName(), "LEFT", tOffset, 0); -- li
-	elseif (sHotPos == 3) then
+	elseif sHotPos == 3 then
 		tHotIcon:SetPoint("RIGHT", sHealthBar:GetName(), "RIGHT", -tOffset, 0); -- ri
-	elseif (sHotPos == 1) then
+	elseif sHotPos == 1 then
 		tHotIcon:SetPoint("RIGHT", sHealthBar:GetName(), "LEFT", -tOffset, 0); -- lo
-	elseif (sHotPos == 4) then
+	elseif sHotPos == 4 then
 		tHotIcon:SetPoint("LEFT", sHealthBar:GetName(), "RIGHT", tOffset, 0); -- ro
-	elseif (sHotPos == 5) then
+	elseif sHotPos == 5 then
 		tHotIcon:SetPoint("TOPLEFT", sHealthBar:GetName(), "BOTTOMLEFT", tOffset, sHotIconSize / 2); -- lb
-	elseif (sHotPos == 6) then
+	elseif sHotPos == 6 then
 		tHotIcon:SetPoint("TOPRIGHT", sHealthBar:GetName(), "BOTTOMRIGHT", -tOffset, sHotIconSize / 2); -- rb
-	elseif (sHotPos == 7) then
+	elseif sHotPos == 7 then
 		tHotIcon:SetPoint("TOPLEFT", sButton:GetName(), "BOTTOMLEFT", tOffset, 0); -- lu
-	elseif (sHotPos == 8) then
+	elseif sHotPos == 8 then
 		tHotIcon:SetPoint("TOPRIGHT", sButton:GetName(), "BOTTOMRIGHT", -tOffset, 0); -- ru
-	elseif (sHotPos == 9) then
+	elseif sHotPos == 9 then
 		tHotIcon:SetPoint("TOPLEFT", sHealthBar:GetName(), "TOPLEFT", tOffset, sBarScaling["barHeight"] / 3); -- la
 
-	elseif (sHotPos == 10) then
+	elseif sHotPos == 10 then
 		tHotIcon:SetPoint("TOPLEFT", sButton:GetName(), "TOPLEFT", tOffset, 0); -- lu corner
-	elseif (sHotPos == 12) then
+	elseif sHotPos == 12 then
 		tHotIcon:SetPoint("BOTTOMLEFT", sHealthBar:GetName(), "BOTTOMLEFT", tOffset, 0); -- lb corner
-	elseif (sHotPos == 11) then
+	elseif sHotPos == 11 then
 		tHotIcon:SetPoint("BOTTOMRIGHT", sHealthBar:GetName(), "BOTTOMRIGHT", -tOffset, 0); -- rb corner
-	elseif (sHotPos == 13) then
+	elseif sHotPos == 13 then
 		tHotIcon:SetPoint("BOTTOMLEFT", sButton:GetName(), "BOTTOMLEFT", tOffset, 0); -- lb
-	elseif (sHotPos == 14) then
+	elseif sHotPos == 14 then
 		tHotIcon:SetPoint("BOTTOMRIGHT", sButton:GetName(), "BOTTOMRIGHT", -tOffset, 0); -- rb
 
-	elseif (sHotPos == 20) then
+	elseif sHotPos == 20 then
 		tIsBothBottom = sHotConfig["SLOTS"][4] ~= nil and sHotConfig["SLOTS"][5] ~= nil;
 		tIsBothTop = sHotConfig["SLOTS"][2] ~= nil and sHotConfig["SLOTS"][9] ~= nil;
 
-		if (tCnt == 1) then
+		if tCnt == 1 then
 			tHotIcon:SetPoint("LEFT", sHealthBar:GetName(), "LEFT", 0, 0);
-		elseif (tCnt == 2) then
-			if (tIsBothTop) then
+		elseif tCnt == 2 then
+			if tIsBothTop then
 				tHotIcon:SetPoint("TOP", sHealthBar:GetName(), "TOP", -sBarScaling["barWidth"] * 0.2, 0);
 			else
 				tHotIcon:SetPoint("TOP", sHealthBar:GetName(), "TOP", 0, 0);
 			end
-		elseif (tCnt == 9) then
-			if (tIsBothTop) then
+		elseif tCnt == 9 then
+			if tIsBothTop then
 				tHotIcon:SetPoint("TOP", sHealthBar:GetName(), "TOP", sBarScaling["barWidth"] * 0.2, 0);
 			else
 				tHotIcon:SetPoint("TOP", sHealthBar:GetName(), "TOP", 0, 0);
 			end
-		elseif (tCnt == 3) then
+		elseif tCnt == 3 then
 			tHotIcon:SetPoint("RIGHT", sHealthBar:GetName(), "RIGHT", 0, 0);
-		elseif (tCnt == 4) then
-			if (tIsBothBottom) then
+		elseif tCnt == 4 then
+			if tIsBothBottom then
 				tHotIcon:SetPoint("BOTTOM", sHealthBar:GetName(), "BOTTOM", sBarScaling["barWidth"] * 0.2, 0);
 			else
 				tHotIcon:SetPoint("BOTTOM", sHealthBar:GetName(), "BOTTOM", 0, 0);
 			end
-		elseif (tCnt == 5) then
-			if (tIsBothBottom) then
+		elseif tCnt == 5 then
+			if tIsBothBottom then
 				tHotIcon:SetPoint("BOTTOM", sHealthBar:GetName(), "BOTTOM", -sBarScaling["barWidth"] * 0.2, 0);
 			else
 				tHotIcon:SetPoint("BOTTOM", sHealthBar:GetName(), "BOTTOM", 0, 0);
 			end
 		end
-	elseif (sHotPos == 21) then
-		if (tCnt == 1) then
+	elseif sHotPos == 21 then
+		if tCnt == 1 then
 			tHotIcon:SetPoint("TOPLEFT", sHealthBar:GetName(), "TOPLEFT", 0, 0);
-		elseif (tCnt == 2) then
+		elseif tCnt == 2 then
 			tHotIcon:SetPoint("TOPRIGHT", sHealthBar:GetName(), "TOPRIGHT", 0, 0);
-		elseif (tCnt == 3) then
+		elseif tCnt == 3 then
 			tHotIcon:SetPoint("BOTTOMLEFT", sHealthBar:GetName(), "BOTTOMLEFT", 0, 0);
-		elseif (tCnt == 4) then
+		elseif tCnt == 4 then
 			tHotIcon:SetPoint("BOTTOMRIGHT", sHealthBar:GetName(), "BOTTOMRIGHT", 0, 0);
-		elseif (tCnt == 5) then
+		elseif tCnt == 5 then
 			tHotIcon:SetPoint("BOTTOM", sHealthBar:GetName(), "BOTTOM", 0, 0);
-		elseif (tCnt == 9) then
+		elseif tCnt == 9 then
 			tHotIcon:SetPoint("TOP", sHealthBar:GetName(), "TOP", 0, 0);
 		end
 	end
@@ -614,26 +615,26 @@ local function VUHDO_initHotIcon(tCnt)
 	tHotName = sHotConfig["SLOTS"][tCnt];
 	tTimer:ClearAllPoints();
 
-	if (sHotColSetup["TEXT"]["outline"]) then
+	if sHotColSetup["TEXT"]["outline"] then
 		tOutlineText = "OUTLINE";
 	else
 		tOutlineText = "";
 	end
 
-	if (sHotColSetup["TEXT"]["shadow"]) then
+	if sHotColSetup["TEXT"]["shadow"] then
 		tShadowAlpha = 1;
 	else
 		tShadowAlpha = 0;
 	end
 
-	if (tHotName ~= nil) then
+	if tHotName then
 		tTimer:SetShadowOffset(1, -0.5);
 		tTimer:SetShadowColor(0, 0, 0, tShadowAlpha);
 
-		if (sHotConfig["stacksRadioValue"] == 2 or "CLUSTER" == tHotName) then -- Counter text
+		if sHotConfig["stacksRadioValue"] == 2 or "CLUSTER" == tHotName then -- Counter text
 			tHotIcon:SetVertexColor(1, 1, 1);
 			tTimer:SetPoint("BOTTOMRIGHT", tHotIcon:GetName(), "BOTTOMRIGHT", 2, 0);
-			if (sHotIconSize > 1) then
+			if sHotIconSize > 1 then
 				tTimer:SetFont(VUHDO_FONT_HOTS, tHotIcon:GetHeight() / 1.7 * sHotFontRatio, tOutlineText);
 			else
 				tTimer:Hide();
@@ -642,7 +643,7 @@ local function VUHDO_initHotIcon(tCnt)
 		else
 			tTimer:SetPoint("CENTER", tHotIcon:GetName(), "CENTER", 1, 0);
 			tTimer:SetTextColor(tHotColor["TR"], tHotColor["TG"], tHotColor["TB"], tHotColor["TO"]);
-			if (sHotIconSize > 1) then
+			if sHotIconSize > 1 then
 				tTimer:SetFont(VUHDO_FONT_HOTS, tHotIcon:GetHeight() / 1.2 * sHotFontRatio, tOutlineText);
 			else
 				tTimer:Hide();
@@ -650,16 +651,16 @@ local function VUHDO_initHotIcon(tCnt)
 			tCounter:Hide();
 		end
 
-		if ("CLUSTER" == tHotName) then
+		if "CLUSTER" == tHotName then
 			tHotIcon:SetTexture("Interface\\AddOns\\VuhDo\\Images\\cluster2");
-		elseif (sHotConfig["iconRadioValue"] == 3) then -- Flat
+		elseif sHotConfig["iconRadioValue"] == 3 then -- Flat
 			tHotIcon:SetTexture("Interface\\AddOns\\VuhDo\\Images\\hot_flat_16_16");
-		elseif (sHotConfig["iconRadioValue"] == 2) then -- Glossy
+		elseif sHotConfig["iconRadioValue"] == 2 then -- Glossy
 			tHotIcon:SetTexture("Interface\\AddOns\\VuhDo\\Images\\icon_white_square");
 		else
-			if (VUHDO_CAST_ICON_DIFF[tHotName] ~= nil and VUHDO_CAST_ICON_DIFF[tHotName] ~= "*") then
+			if VUHDO_CAST_ICON_DIFF[tHotName] and VUHDO_CAST_ICON_DIFF[tHotName] ~= "*" then
 				tHotIcon:SetTexture(VUHDO_CAST_ICON_DIFF[tHotName]);
-			elseif (VUHDO_SPELLS[tHotName] ~= nil) then
+			elseif VUHDO_SPELLS[tHotName] then
 				tHotIcon:SetTexture(VUHDO_SPELLS[tHotName]["icon"]);
 			end
 		end
@@ -671,7 +672,7 @@ local function VUHDO_initHotIcon(tCnt)
 		tChargeIcon:Hide();
 		tChargeIcon:SetPoint("TOPLEFT", tHotIcon:GetName(), "TOPLEFT", -2, 2);
 
-		if (VUHDO_PANEL_SETUP["BAR_COLORS"]["HOT" .. tCnt]["countdownMode"] == 0 or sHotIconSize < 1) then
+		if VUHDO_PANEL_SETUP["BAR_COLORS"]["HOT" .. tCnt]["countdownMode"] == 0 or sHotIconSize < 1 then
 			tTimer:Hide();
 		else
 			tTimer:Show();
@@ -680,7 +681,7 @@ local function VUHDO_initHotIcon(tCnt)
 
 	tCounter:SetPoint("TOPLEFT", tHotIcon:GetName(), "TOPLEFT", -2, 0);
 
-	if (sHotIconSize > 1) then
+	if sHotIconSize > 1 then
 		tCounter:SetFont(VUHDO_FONT_HOTS, tHotIcon:GetHeight() / 1.5 * sHotFontRatio, tOutlineText);
 	else
 		tCounter:Hide();
@@ -784,12 +785,12 @@ local tTgButton;
 local tTgHealthBar;
 local tBackgroundBar;
 local function VUHDO_initTargetBar()
-	if (sBarScaling["showTarget"]) then
+	if sBarScaling["showTarget"] then
 		tTgButton = VUHDO_getTargetButton(sButton);
 		tTgButton:SetAlpha(0);
 		tTgButton:ClearAllPoints();
 
-		if (sBarScaling["targetOrientation"] == 1) then
+		if sBarScaling["targetOrientation"] == 1 then
 			tTgButton:SetPoint("TOPLEFT", sHealthBar:GetName(), "TOPRIGHT", sBarScaling["targetSpacing"], 0);
 		else
 			tTgButton:SetPoint("TOPRIGHT", sHealthBar:GetName(), "TOPLEFT", -sBarScaling["targetSpacing"], 0);
@@ -812,7 +813,7 @@ local function VUHDO_initTargetBar()
 		VUHDO_initBarTexts(tTgButton, tTgHealthBar, sBarScaling["targetWidth"]);
 		VUHDO_initOverhealText(tTgHealthBar, sBarScaling["targetWidth"]);
 		tBackgroundBar = VUHDO_getHealthBar(tTgButton, 3);
-		if (VUHDO_INDICATOR_CONFIG["BOUQUETS"]["BACKGROUND_BAR"] ~= "") then
+		if VUHDO_INDICATOR_CONFIG["BOUQUETS"]["BACKGROUND_BAR"] ~= "" then
 			tBackgroundBar:SetStatusBarColor(0, 0, 0, 0.4);
 		else
 			tBackgroundBar:SetStatusBarColor(0, 0, 0, 0);
@@ -824,20 +825,20 @@ end
 
 local tTotButton;
 local function VUHDO_initTotBar()
-	if (sBarScaling["showTot"]) then
+	if sBarScaling["showTot"] then
 		tTotButton = VUHDO_getTotButton(sButton);
 		tTotButton:SetAlpha(0);
 		tTotButton:ClearAllPoints();
 
-		if (sBarScaling["targetOrientation"] == 1) then
-			if (sBarScaling["showTarget"]) then
+		if sBarScaling["targetOrientation"] == 1 then
+			if sBarScaling["showTarget"] then
 				tTgButton = VUHDO_getTargetButton(sButton);
 				tTotButton:SetPoint("TOPLEFT", tTgButton:GetName(), "TOPRIGHT", sBarScaling["totSpacing"], 0);
 			else
 				tTotButton:SetPoint("TOPLEFT", sHealthBar:GetName(), "TOPRIGHT", sBarScaling["totSpacing"], 0);
 			end
 		else
-			if (sBarScaling["showTarget"]) then
+			if sBarScaling["showTarget"] then
 				tTgButton = VUHDO_getTargetButton(sButton);
 				tTotButton:SetPoint("TOPRIGHT", tTgButton:GetName(), "TOPLEFT", -sBarScaling["totSpacing"], 0);
 			else
@@ -863,7 +864,7 @@ local function VUHDO_initTotBar()
 		VUHDO_initOverhealText(tTgHealthBar, sBarScaling["totWidth"]);
 
 		tBackgroundBar = VUHDO_getHealthBar(tTotButton, 3);
-		if (VUHDO_INDICATOR_CONFIG["BOUQUETS"]["BACKGROUND_BAR"] ~= "") then
+		if VUHDO_INDICATOR_CONFIG["BOUQUETS"]["BACKGROUND_BAR"] ~= "" then
 			tBackgroundBar:SetStatusBarColor(0, 0, 0, 0.4);
 		else
 			tBackgroundBar:SetStatusBarColor(0, 0, 0, 0);
@@ -875,7 +876,7 @@ end
 
 local tFlashBar;
 local function VUHDO_initFlashBar()
-	tFlashBar = VUHDO_GLOBAL[sButton:GetName() .. "BgBarIcBarHlBarFlBar"];
+	tFlashBar = _G[sButton:GetName() .. "BgBarIcBarHlBarFlBar"];
 	tFlashBar:SetStatusBarTexture("Interface\\AddOns\\VuhDo\\Images\\white_square_16_16");
 	tFlashBar:SetStatusBarColor(1, 0.8, 0.8, 1);
 	tFlashBar:Hide();
@@ -905,7 +906,7 @@ local tCnt;
 local tHealthBar, tIsInverted, tIsTurned, tIsVertical, tOrientation;
 
 function VUHDO_initHealButton(aButton, aPanelNum)
-	if (VUHDO_CONFIG["ON_MOUSE_UP"]) then
+	if VUHDO_CONFIG["ON_MOUSE_UP"] then
 		aButton:RegisterForClicks("AnyUp");
 	else
 		aButton:RegisterForClicks("AnyDown");
@@ -915,7 +916,7 @@ function VUHDO_initHealButton(aButton, aPanelNum)
 	for tCnt = 1, 16 do
 		tHealthBar = VUHDO_getHealthBar(aButton, tCnt);
 
-		if (sStatusTexture ~= nil) then
+		if sStatusTexture then
 			tHealthBar:SetStatusBarTexture(sStatusTexture);
 		end
 	end
@@ -939,14 +940,14 @@ function VUHDO_initHealButton(aButton, aPanelNum)
 	-- Orient Health
 	tIsTurned = VUHDO_INDICATOR_CONFIG["CUSTOM"]["HEALTH_BAR"]["turnAxis"];
 	tIsVertical = VUHDO_INDICATOR_CONFIG["CUSTOM"]["HEALTH_BAR"]["vertical"]
-	if (tIsVertical) then
-		if (tIsTurned) then
+	if tIsVertical then
+		if tIsTurned then
 			tOrientation = "VERTICAL_INV";
 		else
 			tOrientation = "VERTICAL";
 		end
 	else
-		if (tIsTurned) then
+		if tIsTurned then
 			tOrientation = "HORIZONTAL_INV";
 		else
 			tOrientation = "HORIZONTAL";
@@ -960,7 +961,7 @@ function VUHDO_initHealButton(aButton, aPanelNum)
 
 	-- Orient Mana
 	tIsTurned = VUHDO_INDICATOR_CONFIG["CUSTOM"]["MANA_BAR"]["turnAxis"];
-	if (tIsTurned) then
+	if tIsTurned then
 		tOrientation = "HORIZONTAL_INV";
 	else
 		tOrientation = "HORIZONTAL";
@@ -999,11 +1000,11 @@ function VUHDO_initHealButton(aButton, aPanelNum)
 	VUHDO_initFlashBar();
 	VUHDO_initReadyCheckIcon(aButton);
 
-	if (VUHDO_CONFIG["IS_CLIQUE_COMPAT_MODE"]) then
+	if VUHDO_CONFIG["IS_CLIQUE_COMPAT_MODE"] then
 		ClickCastFrames = ClickCastFrames or {};
 		ClickCastFrames[aButton] = true;
-		ClickCastFrames[VUHDO_GLOBAL[aButton:GetName() .. "Tg"]] = true;
-		ClickCastFrames[VUHDO_GLOBAL[aButton:GetName() .. "Tot"]] = true;
+		ClickCastFrames[_G[aButton:GetName() .. "Tg"]] = true;
+		ClickCastFrames[_G[aButton:GetName() .. "Tot"]] = true;
 	end
 end
 
@@ -1021,7 +1022,7 @@ local function VUHDO_initAllHealButtons(aPanel, aPanelNum)
 
 	for tCnt = tNumButtons + 1, 51 do -- VUHDO_MAX_BUTTONS_PANEL
 		tHealButton = VUHDO_getHealButton(tCnt, aPanelNum);
-		if (tHealButton ~= nil) then
+		if tHealButton then
 			tHealButton["raidid"] = nil;
 			tHealButton["target"] = nil;
 			tHealButton:SetAttribute("unit", nil);
@@ -1070,10 +1071,10 @@ local function VUHDO_initPanel(aPanel, aPanelNum)
 	aPanel:SetPoint(tPosition["orientation"], "UIParent", tPosition["relativePoint"], tPosition["x"], tPosition["y"]);
 	aPanel:EnableMouseWheel(1);
 
-	if (aPanel:IsShown()) then
+	if aPanel:IsShown() then
 		tX, tY = VUHDO_getAnchorCoords(aPanel, tGrowth, tFactor);
 		aPanel:ClearAllPoints();
-		if (VUHDO_PROHIBIT_REPOS) then
+		if VUHDO_PROHIBIT_REPOS then
 			aPanel:SetPoint(tGrowth, "UIParent", "BOTTOMLEFT", tX, tY);
 		else
 			aPanel:SetPoint(tGrowth, "UIParent", "BOTTOMLEFT", tX * tFactor, tY * tFactor);
@@ -1085,7 +1086,7 @@ local function VUHDO_initPanel(aPanel, aPanelNum)
 	tWidth = VUHDO_getHealPanelWidth(aPanelNum);
 	tHeight = VUHDO_getHealPanelHeight(aPanelNum);
 
-	if (tHeight < 30) then
+	if tHeight < 30 then
 		tHeight = 30;
 	end
 
@@ -1112,15 +1113,14 @@ local function VUHDO_initPanel(aPanel, aPanelNum)
 		tPanelColor["BORDER"]["O"]
 	);
 
-	if (VUHDO_IS_PANEL_CONFIG) then
+	if VUHDO_IS_PANEL_CONFIG then
 		tLabel:SetText("[PANEL " .. aPanelNum .. "]");
 		tLabel:GetParent():ClearAllPoints();
 		tLabel:GetParent():SetPoint("BOTTOM", aPanel:GetName(), "TOP", 0, 3);
 		tLabel:GetParent():Show();
 
-		if (DESIGN_MISC_PANEL_NUM ~= nil and DESIGN_MISC_PANEL_NUM == aPanelNum
-			and VuhDoNewOptionsPanelPanel ~= nil
-			and VuhDoNewOptionsPanelPanel:IsVisible()) then
+		if DESIGN_MISC_PANEL_NUM and DESIGN_MISC_PANEL_NUM == aPanelNum and VuhDoNewOptionsPanelPanel and VuhDoNewOptionsPanelPanel:IsVisible() then
+
 			VUHDO_DESIGN_BACKDROP = VUHDO_deepCopyTable(VUHDO_STD_BACKDROP);
 			tLabel:SetTextColor(0, 1, 0, 1);
 			UIFrameFlash(tLabel, 0.6, 0.6, 10000, true, 0.7, 0);
@@ -1139,7 +1139,7 @@ local function VUHDO_initPanel(aPanel, aPanelNum)
 			);
 		end
 
-		if (DESIGN_MISC_PANEL_NUM ~= nil) then
+		if DESIGN_MISC_PANEL_NUM then
 			VuhDoNewOptionsTabbedFramePanelNumLabelLabel:SetText(VUHDO_I18N_PANEL .. " #" .. DESIGN_MISC_PANEL_NUM);
 			VuhDoNewOptionsTabbedFramePanelNumLabelLabel:Show();
 		else
@@ -1147,18 +1147,18 @@ local function VUHDO_initPanel(aPanel, aPanelNum)
 		end
 
 		if (not VUHDO_CONFIG_SHOW_RAID) then
-			VUHDO_GLOBAL[aPanel:GetName() .. "NewTxu"]:Show();
-			VUHDO_GLOBAL[aPanel:GetName() .. "ClrTxu"]:Show();
+			_G[aPanel:GetName() .. "NewTxu"]:Show();
+			_G[aPanel:GetName() .. "ClrTxu"]:Show();
 		else
-			VUHDO_GLOBAL[aPanel:GetName() .. "NewTxu"]:Hide();
-			VUHDO_GLOBAL[aPanel:GetName() .. "ClrTxu"]:Hide();
+			_G[aPanel:GetName() .. "NewTxu"]:Hide();
+			_G[aPanel:GetName() .. "ClrTxu"]:Hide();
 		end
 	else
-		VUHDO_GLOBAL[aPanel:GetName() .. "NewTxu"]:Hide();
-		VUHDO_GLOBAL[aPanel:GetName() .. "ClrTxu"]:Hide();
+		_G[aPanel:GetName() .. "NewTxu"]:Hide();
+		_G[aPanel:GetName() .. "ClrTxu"]:Hide();
 		tLabel:GetParent():Hide();
 		tLabel:GetParent():ClearAllPoints();
-		if (VuhDoNewOptionsTabbedFrame ~= nil) then
+		if VuhDoNewOptionsTabbedFrame then
 			VuhDoNewOptionsTabbedFramePanelNumLabelLabel:Hide();
 		end
 	end
@@ -1170,7 +1170,7 @@ local function VUHDO_initPanel(aPanel, aPanelNum)
 		tPanelColor["BACK"]["O"]
 	);
 
-	if (VUHDO_CONFIG["LOCK_CLICKS_THROUGH"]) then
+	if VUHDO_CONFIG["LOCK_CLICKS_THROUGH"] then
 		aPanel:EnableMouse(false);
 	else
 		aPanel:EnableMouse(true);
@@ -1183,12 +1183,12 @@ end
 local tPanel;
 function VUHDO_redrawPanel(aPanelNum)
 
-	if (VUHDO_isPanelPopulated(aPanelNum)) then
+	if VUHDO_isPanelPopulated(aPanelNum) then
 		tPanel = VUHDO_getActionPanel(aPanelNum);
 		VUHDO_initLocalVars(aPanelNum);
 		VUHDO_initAllHealButtons(tPanel, aPanelNum);
 
-		if (VUHDO_isConfigPanelShowing()) then
+		if VUHDO_isConfigPanelShowing() then
 			VUHDO_positionAllGroupConfigPanels(aPanelNum);
 		else
 			VUHDO_positionAllHealButtons(tPanel, aPanelNum);
@@ -1196,7 +1196,7 @@ function VUHDO_redrawPanel(aPanelNum)
 
 		VUHDO_positionTableHeaders(tPanel, aPanelNum);
 		VUHDO_initPanel(tPanel, aPanelNum);
-		if (VUHDO_isPanelVisible(aPanelNum)) then
+		if VUHDO_isPanelVisible(aPanelNum) then
 			tPanel:Show();
 		else
 			tPanel:Hide();
@@ -1239,9 +1239,7 @@ end
 local VUHDO_redrawAllPanels = VUHDO_redrawAllPanels;
 
 function VUHDO_reloadUI()
-	if (InCombatLockdown()) then
-		return;
-	end
+	if InCombatLockdown() then return; end
 
 	VUHDO_IS_RELOADING = true;
 
@@ -1259,9 +1257,8 @@ function VUHDO_reloadUI()
 end
 
 function VUHDO_lnfReloadUI()
-	if (InCombatLockdown()) then
-		return;
-	end
+	if InCombatLockdown() then return; end
+
 	VUHDO_IS_RELOADING = true;
 
 	VUHDO_initAllBurstCaches();

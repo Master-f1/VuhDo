@@ -19,9 +19,9 @@ function VUHDO_setPickerColor(aPanel)
 		VuhDoColorPickerColorSwatchOld:SetTexture(VUHDO_COLOR.TR, VUHDO_COLOR.TG, VUHDO_COLOR.TB);
 
 		if (VUHDO_COLOR.TO ~= nil and not strfind(VUHDO_PROHIBIT, "O")) then
-			VUHDO_GLOBAL[aPanel:GetName() .. "OpacitySliderFrame"]:Show();
+			_G[aPanel:GetName() .. "OpacitySliderFrame"]:Show();
 		else
-			VUHDO_GLOBAL[aPanel:GetName() .. "OpacitySliderFrame"]:Hide();
+			_G[aPanel:GetName() .. "OpacitySliderFrame"]:Hide();
 		end
 
 	else
@@ -29,16 +29,16 @@ function VUHDO_setPickerColor(aPanel)
 		VuhDoColorPickerColorSwatchOld:SetTexture(VUHDO_COLOR.R, VUHDO_COLOR.G, VUHDO_COLOR.B);
 
 		if (VUHDO_COLOR.O ~= nil and not strfind(VUHDO_PROHIBIT, "O")) then
-			VUHDO_GLOBAL[aPanel:GetName() .. "OpacitySliderFrame"]:Show();
+			_G[aPanel:GetName() .. "OpacitySliderFrame"]:Show();
 		else
-			VUHDO_GLOBAL[aPanel:GetName() .. "OpacitySliderFrame"]:Hide();
+			_G[aPanel:GetName() .. "OpacitySliderFrame"]:Hide();
 		end
 	end
 
 	if (VUHDO_isTextEdit) then
-		VUHDO_GLOBAL[aPanel:GetName() .. "OpacitySliderFrameSlider"]:SetValue(floor(VUHDO_COLOR.TO * 100));
+		_G[aPanel:GetName() .. "OpacitySliderFrameSlider"]:SetValue(floor(VUHDO_COLOR.TO * 100));
 	else
-		VUHDO_GLOBAL[aPanel:GetName() .. "OpacitySliderFrameSlider"]:SetValue(floor(VUHDO_COLOR.O * 100));
+		_G[aPanel:GetName() .. "OpacitySliderFrameSlider"]:SetValue(floor(VUHDO_COLOR.O * 100));
 	end
 end
 
@@ -63,20 +63,20 @@ function VUHDO_newColorPickerOnShow(aPanel)
 	end
 
 	if (tDescription ~= nil) then
-		VUHDO_GLOBAL[aPanel:GetName() .. "TitleLabelLabel"]:SetText(VUHDO_I18N_SELECTED .. " " .. tDescription);
+		_G[aPanel:GetName() .. "TitleLabelLabel"]:SetText(VUHDO_I18N_SELECTED .. " " .. tDescription);
 	else
-		VUHDO_GLOBAL[aPanel:GetName() .. "TitleLabelLabel"]:SetText("Color Select");
+		_G[aPanel:GetName() .. "TitleLabelLabel"]:SetText("Color Select");
 	end
 
 	if (VUHDO_mayEditBackground() and VUHDO_mayEditText()) then
-		VUHDO_GLOBAL[aPanel:GetName() .. "BackgroundRadioButton"]:SetChecked(true);
-		VUHDO_lnfRadioButtonClicked(VUHDO_GLOBAL[aPanel:GetName() .. "BackgroundRadioButton"]);
-		VUHDO_GLOBAL[aPanel:GetName() .. "TextRadioButton"]:Show();
-		VUHDO_GLOBAL[aPanel:GetName() .. "BackgroundRadioButton"]:Show();
+		_G[aPanel:GetName() .. "BackgroundRadioButton"]:SetChecked(true);
+		VUHDO_lnfRadioButtonClicked(_G[aPanel:GetName() .. "BackgroundRadioButton"]);
+		_G[aPanel:GetName() .. "TextRadioButton"]:Show();
+		_G[aPanel:GetName() .. "BackgroundRadioButton"]:Show();
 		VUHDO_isTextEdit = false;
 	else
-		VUHDO_GLOBAL[aPanel:GetName() .. "TextRadioButton"]:Hide();
-		VUHDO_GLOBAL[aPanel:GetName() .. "BackgroundRadioButton"]:Hide();
+		_G[aPanel:GetName() .. "TextRadioButton"]:Hide();
+		_G[aPanel:GetName() .. "BackgroundRadioButton"]:Hide();
 		VUHDO_isTextEdit = VUHDO_mayEditText();
 	end
 
@@ -120,7 +120,7 @@ end
 function VUHDO_colorPickerOpacityValueChanged(aSlider)
 	local tValue;
 	if (VUHDO_COLOR ~= nil) then
-		tValue = VUHDO_GLOBAL[aSlider:GetName() .. "Slider"]:GetValue() / 100;
+		tValue = _G[aSlider:GetName() .. "Slider"]:GetValue() / 100;
 		if (VUHDO_isTextEdit) then
 			VUHDO_COLOR.TO = tValue;
 		else

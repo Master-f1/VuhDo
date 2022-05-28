@@ -1,4 +1,5 @@
 local pairs = pairs;
+local _;
 
 local VUHDO_CURR_PLAYER_TARGET = nil;
 local tTargetUnit, tUnit;

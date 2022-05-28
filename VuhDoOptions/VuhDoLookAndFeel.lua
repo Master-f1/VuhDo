@@ -1,6 +1,7 @@
+local _;
 VUHDO_RESET_SIZES = false;
 
-local VUHDO_GLOBAL = getfenv();
+local _G = _G;
 local strfind = strfind;
 local floor = floor;
 local type = type;
@@ -45,22 +46,22 @@ local VUHDO_NORMAL_LABEL_COLOR_DISA = {
 
 function VUHDO_lnfCheckButtonOnLoad(aCheckButton)
 	if (aCheckButton:GetText() ~= nil) then
-		VUHDO_GLOBAL[aCheckButton:GetName() .. "Label"]:SetText(aCheckButton:GetText());
+		_G[aCheckButton:GetName() .. "Label"]:SetText(aCheckButton:GetText());
 	end
 end
 
 function VUHDO_lnfTabCheckButtonOnLoad(aCheckButton)
 	if (aCheckButton:GetText() ~= nil) then
-		VUHDO_GLOBAL[aCheckButton:GetName() .. "TextureCheckMarkLabel"]:SetText(aCheckButton:GetText());
-		VUHDO_GLOBAL[aCheckButton:GetName() .. "Label"]:SetText(aCheckButton:GetText());
+		_G[aCheckButton:GetName() .. "TextureCheckMarkLabel"]:SetText(aCheckButton:GetText());
+		_G[aCheckButton:GetName() .. "Label"]:SetText(aCheckButton:GetText());
 	end
 end
 
 function VUHDO_lnfCheckButtonClicked(aCheckButton)
 	if (aCheckButton:GetChecked()) then
-		VUHDO_GLOBAL[aCheckButton:GetName() .. "TextureCheckMark"]:Show();
+		_G[aCheckButton:GetName() .. "TextureCheckMark"]:Show();
 	else
-		VUHDO_GLOBAL[aCheckButton:GetName() .. "TextureCheckMark"]:Hide();
+		_G[aCheckButton:GetName() .. "TextureCheckMark"]:Hide();
 	end
 end
 local VUHDO_lnfCheckButtonClicked = VUHDO_lnfCheckButtonClicked;
@@ -108,10 +109,17 @@ end
 local tName;
 function VUHDO_lnfCheckButtonOnEnter(aCheckButton)
 	tName = aCheckButton:GetName();
+<<<<<<< Updated upstream
 	VUHDO_GLOBAL[tName .. "TextureActiveSwatch"]:Show();
 
 	if (VUHDO_GLOBAL[tName .. "Label"] ~= nil) then
 		VUHDO_GLOBAL[tName .. "Label"]:SetTextColor(
+=======
+	_G[tName .. "TextureActiveSwatch"]:Show();
+
+	if _G[tName .. "Label"] then
+		_G[tName .. "Label"]:SetTextColor(
+>>>>>>> Stashed changes
 			VUHDO_ACTIVE_LABEL_COLOR["TR"],
 			VUHDO_ACTIVE_LABEL_COLOR["TG"],
 			VUHDO_ACTIVE_LABEL_COLOR["TB"],
@@ -123,10 +131,17 @@ end
 local tName;
 function VUHDO_lnfCheckButtonOnLeave(aCheckButton)
 	tName = aCheckButton:GetName();
+<<<<<<< Updated upstream
 	VUHDO_GLOBAL[tName .. "TextureActiveSwatch"]:Hide();
 
 	if (VUHDO_GLOBAL[tName .. "Label"] ~= nil) then
 		VUHDO_GLOBAL[tName .. "Label"]:SetTextColor(
+=======
+	_G[tName .. "TextureActiveSwatch"]:Hide();
+
+	if _G[tName .. "Label"] then
+		_G[tName .. "Label"]:SetTextColor(
+>>>>>>> Stashed changes
 			VUHDO_NORMAL_LABEL_COLOR["TR"],
 			VUHDO_NORMAL_LABEL_COLOR["TG"],
 			VUHDO_NORMAL_LABEL_COLOR["TB"],
@@ -136,27 +151,27 @@ function VUHDO_lnfCheckButtonOnLeave(aCheckButton)
 end
 
 function VUHDO_lnfRadioBoxOnEnter(aCheckButton)
-	VUHDO_GLOBAL[aCheckButton:GetName() .. "TextureActiveSwatch"]:Show();
+	_G[aCheckButton:GetName() .. "TextureActiveSwatch"]:Show();
 end
 
 function VUHDO_lnfRadioBoxOnLeave(aCheckButton)
-	VUHDO_GLOBAL[aCheckButton:GetName() .. "TextureActiveSwatch"]:Hide();
+	_G[aCheckButton:GetName() .. "TextureActiveSwatch"]:Hide();
 end
 
 local tName;
 function VUHDO_lnfTabCheckButtonOnEnter(aCheckButton)
 	tName = aCheckButton:GetName();
-	VUHDO_GLOBAL[tName .. "TextureActiveSwatch"]:Show();
+	_G[tName .. "TextureActiveSwatch"]:Show();
 
 	if (aCheckButton:GetChecked()) then
-		VUHDO_GLOBAL[tName .. "TextureCheckMarkLabel"]:SetTextColor(
+		_G[tName .. "TextureCheckMarkLabel"]:SetTextColor(
 			VUHDO_ACTIVE_LABEL_COLOR.TR,
 			VUHDO_ACTIVE_LABEL_COLOR.TG,
 			VUHDO_ACTIVE_LABEL_COLOR.TB,
 			VUHDO_ACTIVE_LABEL_COLOR.TO
 		);
 	else
-		VUHDO_GLOBAL[tName .. "Label"]:SetTextColor(
+		_G[tName .. "Label"]:SetTextColor(
 			VUHDO_ACTIVE_LABEL_COLOR_DISA.TR,
 			VUHDO_ACTIVE_LABEL_COLOR_DISA.TG,
 			VUHDO_ACTIVE_LABEL_COLOR_DISA.TB,
@@ -166,17 +181,17 @@ function VUHDO_lnfTabCheckButtonOnEnter(aCheckButton)
 end
 
 function VUHDO_lnfTabCheckButtonOnLeave(aCheckButton)
-	VUHDO_GLOBAL[tName .. "TextureActiveSwatch"]:Hide();
+	_G[tName .. "TextureActiveSwatch"]:Hide();
 
 	if (aCheckButton:GetChecked()) then
-		VUHDO_GLOBAL[aCheckButton:GetName() .. "TextureCheckMarkLabel"]:SetTextColor(
+		_G[aCheckButton:GetName() .. "TextureCheckMarkLabel"]:SetTextColor(
 			VUHDO_NORMAL_LABEL_COLOR.TR,
 			VUHDO_NORMAL_LABEL_COLOR.TG,
 			VUHDO_NORMAL_LABEL_COLOR.TB,
 			VUHDO_NORMAL_LABEL_COLOR.TO
 		);
 	else
-		VUHDO_GLOBAL[aCheckButton:GetName() .. "Label"]:SetTextColor(
+		_G[aCheckButton:GetName() .. "Label"]:SetTextColor(
 			VUHDO_NORMAL_LABEL_COLOR_DISA.TR,
 			VUHDO_NORMAL_LABEL_COLOR_DISA.TG,
 			VUHDO_NORMAL_LABEL_COLOR_DISA.TB,
@@ -188,22 +203,22 @@ end
 local tText;
 local tUnit;
 function VUHDO_lnfSliderOnValueChanged(aSlider)
-	if (VUHDO_GLOBAL[aSlider:GetName() .. "SliderValue"] ~= nil) then
-		tText = "" .. floor((VUHDO_GLOBAL[aSlider:GetName() .. "Slider"]:GetValue() + 0.005) * 100) / 100;
+	if _G[aSlider:GetName() .. "SliderValue"] then
+		tText = "" .. floor((_G[aSlider:GetName() .. "Slider"]:GetValue() + 0.005) * 100) / 100;
 		tUnit = aSlider:GetAttribute("unit");
 		if (tUnit ~= nil) then
 			tText = tText .. tUnit;
 		end
 
-		VUHDO_GLOBAL[aSlider:GetName() .. "SliderValue"]:SetText(tText);
+		_G[aSlider:GetName() .. "SliderValue"]:SetText(tText);
 	end
 end
 
 function VUHDO_lnfSliderOnLoad(aSlider, aText, aMinValue, aMaxValue, aUnitName, aValueStep)
-	VUHDO_GLOBAL[aSlider:GetName() .. "SliderTitle"]:SetText(aText);
+	_G[aSlider:GetName() .. "SliderTitle"]:SetText(aText);
 	aSlider:SetAttribute("unit", aUnitName);
-	VUHDO_GLOBAL[aSlider:GetName() .. "Slider"]:SetMinMaxValues(aMinValue, aMaxValue);
-	VUHDO_GLOBAL[aSlider:GetName() .. "Slider"]:SetValueStep(aValueStep or 1);
+	_G[aSlider:GetName() .. "Slider"]:SetMinMaxValues(aMinValue, aMaxValue);
+	_G[aSlider:GetName() .. "Slider"]:SetValueStep(aValueStep or 1);
 	VUHDO_lnfSliderOnValueChanged(aSlider);
 end
 
@@ -248,9 +263,9 @@ local tSelectPanel;
 function VUHDO_lnfComboButtonClicked(aButton)
 	tComboBox = aButton:GetParent();
 	if (tComboBox.isScrollable) then
-		tSelectPanel = VUHDO_GLOBAL[tComboBox:GetName() .. "ScrollPanel"];
+		tSelectPanel = _G[tComboBox:GetName() .. "ScrollPanel"];
 	else
-		tSelectPanel = VUHDO_GLOBAL[tComboBox:GetName() .. "SelectPanel"];
+		tSelectPanel = _G[tComboBox:GetName() .. "SelectPanel"];
 	end
 
 	if (tSelectPanel:IsShown()) then
@@ -262,9 +277,9 @@ end
 
 function VUHDO_lnfComboSelectHide(aComboBox)
 	if (aComboBox.isScrollable) then
-		VUHDO_GLOBAL[aComboBox:GetName() .. "ScrollPanel"]:Hide();
+		_G[aComboBox:GetName() .. "ScrollPanel"]:Hide();
 	else
-		VUHDO_GLOBAL[aComboBox:GetName() .. "SelectPanel"]:Hide();
+		_G[aComboBox:GetName() .. "SelectPanel"]:Hide();
 	end
 end
 
@@ -287,8 +302,8 @@ function VUHDO_setComboModel(aComponent, aModel, anEntryTable, aTitle)
 	aComponent:SetAttribute("combo_table", anEntryTable);
 	aComponent:SetAttribute("title", aTitle);
 
-	if (VUHDO_GLOBAL[aComponent:GetName() .. "EditBox"] ~= nil) then
-		VUHDO_lnfSetModel(VUHDO_GLOBAL[aComponent:GetName() .. "EditBox"], aModel);
+	if (_G[aComponent:GetName() .. "EditBox"] ~= nil) then
+		VUHDO_lnfSetModel(_G[aComponent:GetName() .. "EditBox"], aModel);
 	end
 end
 
@@ -347,7 +362,7 @@ function VUHDO_lnfUpdateVar(aModel, aValue, aPanelNum)
 
 	if (VUHDO_isVariablesLoaded() and aModel ~= nil) then
 		tTableIndices = VUHDO_splitString(aModel, ".");
-		tGlobal = VUHDO_GLOBAL[tTableIndices[1]];
+		tGlobal = _G[tTableIndices[1]];
 		tLastField = tGlobal;
 		tEnd = #tTableIndices - 1;
 
@@ -373,7 +388,7 @@ function VUHDO_lnfUpdateVar(aModel, aValue, aPanelNum)
 		if ("table" == type(tLastField)) then
 			tLastField[tLastIndex] = aValue;
 		else
-			VUHDO_GLOBAL[tTableIndices[1]] = aValue;
+			_G[tTableIndices[1]] = aValue;
 		end
 
 		if (not InCombatLockdown()) then
@@ -434,7 +449,7 @@ local tLastIndex;
 function VUHDO_lnfGetValueFrom(aModel)
 	if (VUHDO_isVariablesLoaded() and aModel ~= nil) then
 		tTableIndices = VUHDO_splitString(aModel, ".");
-		tGlobal = VUHDO_GLOBAL[tTableIndices[1]];
+		tGlobal = _G[tTableIndices[1]];
 		tLastField = tGlobal;
 
 		for tCnt = 2, #tTableIndices - 1 do
@@ -640,11 +655,11 @@ function VUHDO_lnfComboInitItems(aComboBox)
 	tMaxY = 0;
 
 	if (aComboBox.isScrollable) then
-		tDropdownBox = VUHDO_GLOBAL[aComboBox:GetName() .. "ScrollPanel"];
-		tItemContainer = VUHDO_GLOBAL[aComboBox:GetName() .. "ScrollPanelSelectPanel"];
+		tDropdownBox = _G[aComboBox:GetName() .. "ScrollPanel"];
+		tItemContainer = _G[aComboBox:GetName() .. "ScrollPanelSelectPanel"];
 	else
-		tDropdownBox = VUHDO_GLOBAL[aComboBox:GetName() .. "SelectPanel"];
-		tItemContainer = VUHDO_GLOBAL[aComboBox:GetName() .. "SelectPanel"];
+		tDropdownBox = _G[aComboBox:GetName() .. "SelectPanel"];
+		tItemContainer = _G[aComboBox:GetName() .. "SelectPanel"];
 	end
 
 	tCnt = 1;
@@ -655,33 +670,33 @@ function VUHDO_lnfComboInitItems(aComboBox)
 			tItemName = aComboBox:GetName() .. "SelectPanelItem" .. tIndex;
 		end
 
-		if (VUHDO_GLOBAL[tItemName] == nil) then
+		if (_G[tItemName] == nil) then
 			tItemPanel = CreateFrame("Frame", tItemName, tItemContainer, "VuhdoComboItemTemplate");
 			if (aComboBox.isMulti) then
-				VUHDO_GLOBAL[tItemName .. "CheckTextureTexture"]:SetTexture("Interface\\AddOns\\VuhDoOptions\\Images\\icon_check");
+				_G[tItemName .. "CheckTextureTexture"]:SetTexture("Interface\\AddOns\\VuhDoOptions\\Images\\icon_check");
 			else
-				VUHDO_GLOBAL[tItemName .. "CheckTextureTexture"]:SetTexture("Interface\\AddOns\\VuhDo\\Images\\icon_red");
+				_G[tItemName .. "CheckTextureTexture"]:SetTexture("Interface\\AddOns\\VuhDo\\Images\\icon_red");
 			end
 
 			tItemPanel.parentCombo = aComboBox;
 			tItemPanel.dropwdownBox = tDropdownBox;
 		else
-			tItemPanel = VUHDO_GLOBAL[tItemName];
+			tItemPanel = _G[tItemName];
 		end
 
 		tItemPanel:ClearAllPoints();
 		if (type(tInfo[2]) == "string") then
-			VUHDO_GLOBAL[tItemPanel:GetName() .. "LabelLabel"]:SetText(tInfo[2]);
-			VUHDO_GLOBAL[tItemPanel:GetName() .. "Icon"]:Hide();
+			_G[tItemPanel:GetName() .. "LabelLabel"]:SetText(tInfo[2]);
+			_G[tItemPanel:GetName() .. "Icon"]:Hide();
 			VUHDO_COMBO_ITEM_HEIGHT = 16;
 			VUHDO_COMBO_ITEM_WIDTH = 160;
 			VUHDO_COMBO_ITEMS_PER_COL = 25;
 		else
-			VUHDO_GLOBAL[tItemPanel:GetName() .. "IconTexture"]:SetTexture(VUHDO_GLOBAL[tInfo[2]:GetName() .. "I"]:GetTexture());
-			VUHDO_GLOBAL[tItemPanel:GetName() .. "IconTexture"]:SetTexCoord(VUHDO_GLOBAL[tInfo[2]:GetName() .. "I"]:GetTexCoord());
-			VUHDO_GLOBAL[tItemPanel:GetName() .. "Icon"]:SetWidth(30);
-			VUHDO_GLOBAL[tItemPanel:GetName() .. "Icon"]:SetHeight(30);
-			VUHDO_GLOBAL[tItemPanel:GetName() .. "Icon"]:Show();
+			_G[tItemPanel:GetName() .. "IconTexture"]:SetTexture(_G[tInfo[2]:GetName() .. "I"]:GetTexture());
+			_G[tItemPanel:GetName() .. "IconTexture"]:SetTexCoord(_G[tInfo[2]:GetName() .. "I"]:GetTexCoord());
+			_G[tItemPanel:GetName() .. "Icon"]:SetWidth(30);
+			_G[tItemPanel:GetName() .. "Icon"]:SetHeight(30);
+			_G[tItemPanel:GetName() .. "Icon"]:Show();
 			VUHDO_COMBO_ITEM_HEIGHT = 34;
 			VUHDO_COMBO_ITEM_WIDTH = 50;
 			VUHDO_COMBO_ITEMS_PER_COL = 3;
@@ -722,8 +737,8 @@ function VUHDO_lnfComboInitItems(aComboBox)
 			tItemName = aComboBox:GetName() .. "SelectPanelItem" .. tCnt2;
 		end
 
-		if (VUHDO_GLOBAL[tItemName] ~= nil) then
-			VUHDO_GLOBAL[tItemName]:Hide();
+		if (_G[tItemName] ~= nil) then
+			_G[tItemName]:Hide();
 		else
 			break;
 		end
@@ -773,21 +788,21 @@ function VUHDO_lnfComboSetSelectedValue(aComboBox, aValue, anIsEditBox)
 		tArrayModel = nil;
 	end
 
-	if (tArrayModel == nil and VUHDO_GLOBAL[aComboBox:GetName() .. "EditBox"] ~= nil and aValue ~= nil and not anIsEditBox) then
-		VUHDO_GLOBAL[aComboBox:GetName() .. "EditBox"]:SetText(aValue);
+	if (tArrayModel == nil and _G[aComboBox:GetName() .. "EditBox"] ~= nil and aValue ~= nil and not anIsEditBox) then
+		_G[aComboBox:GetName() .. "EditBox"]:SetText(aValue);
 	end
 
-	if (VUHDO_GLOBAL[aComboBox:GetName() .. "EditBox"] == nil) then
-		VUHDO_GLOBAL[aComboBox:GetName() .. "Text"]:SetText(VUHDO_I18N_SELECT);
+	if (_G[aComboBox:GetName() .. "EditBox"] == nil) then
+		_G[aComboBox:GetName() .. "Text"]:SetText(VUHDO_I18N_SELECT);
 	end
 
 	for tIndex, tInfo in ipairs(tTable) do
 		if (aComboBox.isScrollable) then
-			tTexture = VUHDO_GLOBAL[aComboBox:GetName() .. "ScrollPanelSelectPanelItem" .. tIndex .. "CheckTexture"];
+			tTexture = _G[aComboBox:GetName() .. "ScrollPanelSelectPanelItem" .. tIndex .. "CheckTexture"];
 		elseif (tIndex > 100) then
 			break;
 		else
-			tTexture = VUHDO_GLOBAL[aComboBox:GetName() .. "SelectPanelItem" .. tIndex .. "CheckTexture"];
+			tTexture = _G[aComboBox:GetName() .. "SelectPanelItem" .. tIndex .. "CheckTexture"];
 		end
 
 		if (tArrayModel ~= nil) then
@@ -798,10 +813,10 @@ function VUHDO_lnfComboSetSelectedValue(aComboBox, aValue, anIsEditBox)
 			end
 		else
 			if (aValue == tInfo[1]) then
-				if (VUHDO_GLOBAL[aComboBox:GetName() .. "EditBox"] ~= nil) then
-					VUHDO_GLOBAL[aComboBox:GetName() .. "EditBox"]:SetText(tInfo[2]);
+				if (_G[aComboBox:GetName() .. "EditBox"] ~= nil) then
+					_G[aComboBox:GetName() .. "EditBox"]:SetText(tInfo[2]);
 				else
-					VUHDO_GLOBAL[aComboBox:GetName() .. "Text"]:SetText(tInfo[2]);
+					_G[aComboBox:GetName() .. "Text"]:SetText(tInfo[2]);
 				end
 				tTexture:Show();
 			else
@@ -831,7 +846,7 @@ end
 local tValue;
 local tTitle;
 function VUHDO_lnfComboBoxInitFromModel(aComboBox)
-	aComboBox.isScrollable = VUHDO_GLOBAL[aComboBox:GetName() .. "ScrollPanel"] ~= nil;
+	aComboBox.isScrollable = _G[aComboBox:GetName() .. "ScrollPanel"] ~= nil;
 
 	if (aComboBox:GetAttribute("model") == nil) then
 		return;
@@ -843,7 +858,7 @@ function VUHDO_lnfComboBoxInitFromModel(aComboBox)
 
 	tTitle = aComboBox:GetAttribute("title");
 	if (tTitle ~= nil) then
-		VUHDO_GLOBAL[aComboBox:GetName() .. "Text"]:SetText(tTitle);
+		_G[aComboBox:GetName() .. "Text"]:SetText(tTitle);
 	end
 
 
@@ -866,32 +881,52 @@ function VUHDO_lnfColorSwatchInitFromModel(aColorSwatch)
 	end
 
 	if (tValue.R ~= nil and tValue.useBackground) then
+<<<<<<< Updated upstream
 		VUHDO_GLOBAL[aColorSwatch:GetName() .. "Texture"]:SetVertexColor(tValue["R"], tValue["G"], tValue["B"]);
+=======
+		_G[aColorSwatch:GetName() .. "Texture"]:SetVertexColor(tValue["R"], tValue["G"], tValue["B"]);
+>>>>>>> Stashed changes
 	else
-		VUHDO_GLOBAL[aColorSwatch:GetName() .. "Texture"]:SetVertexColor(1, 1, 1);
+		_G[aColorSwatch:GetName() .. "Texture"]:SetVertexColor(1, 1, 1);
 	end
 
 	if (tValue.O ~= nil and tValue.useOpacity) then
+<<<<<<< Updated upstream
 		VUHDO_GLOBAL[aColorSwatch:GetName() .. "Texture"]:SetAlpha(tValue["O"]);
+=======
+		_G[aColorSwatch:GetName() .. "Texture"]:SetAlpha(tValue["O"]);
+>>>>>>> Stashed changes
 	else
-		VUHDO_GLOBAL[aColorSwatch:GetName() .. "Texture"]:SetAlpha(1);
+		_G[aColorSwatch:GetName() .. "Texture"]:SetAlpha(1);
 	end
 
 	if (tValue.TR ~= nil and tValue.useText) then
+<<<<<<< Updated upstream
 		VUHDO_GLOBAL[aColorSwatch:GetName() .. "TitleString"]:SetTextColor(tValue["TR"], tValue["TG"], tValue["TB"]);
+=======
+		_G[aColorSwatch:GetName() .. "TitleString"]:SetTextColor(tValue["TR"], tValue["TG"], tValue["TB"]);
+>>>>>>> Stashed changes
 	else
-		VUHDO_GLOBAL[aColorSwatch:GetName() .. "TitleString"]:SetTextColor(1, 1, 1);
+		_G[aColorSwatch:GetName() .. "TitleString"]:SetTextColor(1, 1, 1);
 	end
 
 	if (tValue.TO ~= nil and tValue.useOpacity) then
+<<<<<<< Updated upstream
 		VUHDO_GLOBAL[aColorSwatch:GetName() .. "TitleString"]:SetAlpha(tValue["TO"]);
+=======
+		_G[aColorSwatch:GetName() .. "TitleString"]:SetAlpha(tValue["TO"]);
+>>>>>>> Stashed changes
 	else
-		VUHDO_GLOBAL[aColorSwatch:GetName() .. "TitleString"]:SetAlpha(1);
+		_G[aColorSwatch:GetName() .. "TitleString"]:SetAlpha(1);
 	end
 
 	if (tValue.textSize ~= nil and tValue.font ~= nil) then
 		local tFont = VUHDO_getFont(tValue["font"]);
+<<<<<<< Updated upstream
 		VUHDO_GLOBAL[aColorSwatch:GetName() .. "TitleString"]:SetFont(tFont, tValue["textSize"]);
+=======
+		_G[aColorSwatch:GetName() .. "TitleString"]:SetFont(tFont, tValue["textSize"]);
+>>>>>>> Stashed changes
 	end
 end
 
@@ -903,13 +938,13 @@ function VUHDO_lnfTextureSwatchInitFromModel(aTexture)
 	if (tValue ~= nil) then
 		tStatusFile = VUHDO_LibSharedMedia:Fetch('statusbar', tValue);
 		if (tStatusFile ~= nil) then
-			VUHDO_GLOBAL[aTexture:GetName() .. "Texture"]:SetTexture(tStatusFile);
+			_G[aTexture:GetName() .. "Texture"]:SetTexture(tStatusFile);
 		end
 	end
 end
 
 function VUHDO_lnfInitColorSwatch(aColorSwatch, aText, aDescription, aProhibitColors)
-	VUHDO_GLOBAL[aColorSwatch:GetName() .. "TitleString"]:SetText(aText);
+	_G[aColorSwatch:GetName() .. "TitleString"]:SetText(aText);
 	aColorSwatch:SetAttribute("description", aDescription);
 	aColorSwatch:SetAttribute("prohibit", aProhibitColors);
 end
@@ -961,12 +996,12 @@ function VUHDO_lnfEditboxReceivedDrag(anEditBox)
 end
 
 function VUHDO_lnfScrollFrameOnLoad(aFrame)
-	local tScrollBar = VUHDO_GLOBAL[aFrame:GetName() .. "ScrollBar"];
-	local tUpButton = VUHDO_GLOBAL[tScrollBar:GetName() .. "ScrollUpButton"];
+	local tScrollBar = _G[aFrame:GetName() .. "ScrollBar"];
+	local tUpButton = _G[tScrollBar:GetName() .. "ScrollUpButton"];
 	tUpButton:Hide();
-	local tDownButton = VUHDO_GLOBAL[tScrollBar:GetName() .. "ScrollDownButton"];
+	local tDownButton = _G[tScrollBar:GetName() .. "ScrollDownButton"];
 	tDownButton:Hide();
-	local tThumbTexture = VUHDO_GLOBAL[tScrollBar:GetName() .. "ThumbTexture"];
+	local tThumbTexture = _G[tScrollBar:GetName() .. "ThumbTexture"];
 	tThumbTexture:SetTexture("Interface\\AddOns\\VuhDoOptions\\Images\\slider_thumb_v");
 	tThumbTexture:SetWidth(18);
 	tThumbTexture:SetHeight(18);
