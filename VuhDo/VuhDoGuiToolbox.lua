@@ -1,3 +1,5 @@
+local _;
+
 VUHDO_COMBO_MAX_ENTRIES = 10000;
 
 local floor = floor;
@@ -16,11 +18,11 @@ local VUHDO_CONFIG = {};
 local VUHDO_PANEL_SETUP = {};
 local VUHDO_USER_CLASS_COLORS = {};
 function VUHDO_guiToolboxInitBurst()
-	VUHDO_getNumbersFromString = VUHDO_GLOBAL["VUHDO_getNumbersFromString"];
+	VUHDO_getNumbersFromString = _G["VUHDO_getNumbersFromString"];
 
-	VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
-	VUHDO_PANEL_SETUP = VUHDO_GLOBAL["VUHDO_PANEL_SETUP"];
-	VUHDO_USER_CLASS_COLORS = VUHDO_GLOBAL["VUHDO_USER_CLASS_COLORS"];
+	VUHDO_CONFIG = _G["VUHDO_CONFIG"];
+	VUHDO_PANEL_SETUP = _G["VUHDO_PANEL_SETUP"];
+	VUHDO_USER_CLASS_COLORS = _G["VUHDO_USER_CLASS_COLORS"];
 
 	sIsManaBar = VUHDO_INDICATOR_CONFIG["BOUQUETS"]["MANA_BAR"] ~= "";
 end
@@ -40,25 +42,25 @@ end
 local tX, tY;
 function VUHDO_getAnchorCoords(aPanel, anOrientation, aScaleDiff)
 
-	if (anOrientation == "TOP") then
+	if anOrientation == "TOP" then
 		tX = (aPanel:GetRight() + aPanel:GetLeft()) * 0.5;
 		tY = aPanel:GetTop();
-	elseif (anOrientation == "BOTTOM") then
+	elseif anOrientation == "BOTTOM" then
 		tX = (aPanel:GetRight() + aPanel:GetLeft()) * 0.5;
 		tY = aPanel:GetBottom();
-	elseif (anOrientation == "LEFT") then
+	elseif anOrientation == "LEFT" then
 		tX = aPanel:GetLeft();
 		tY = (aPanel:GetBottom() + aPanel:GetTop()) * 0.5;
-	elseif (anOrientation == "RIGHT") then
+	elseif anOrientation == "RIGHT" then
 		tX = aPanel:GetRight();
 		tY = (aPanel:GetBottom() + aPanel:GetTop()) * 0.5;
-	elseif (anOrientation == "TOPRIGHT") then
+	elseif anOrientation == "TOPRIGHT" then
 		tX = aPanel:GetRight();
 		tY = aPanel:GetTop();
-	elseif (anOrientation == "BOTTOMLEFT") then
+	elseif anOrientation == "BOTTOMLEFT" then
 		tX = aPanel:GetLeft();
 		tY = aPanel:GetBottom();
-	elseif (anOrientation == "BOTTOMRIGHT") then
+	elseif anOrientation == "BOTTOMRIGHT" then
 		tX = aPanel:GetRight();
 		tY = aPanel:GetBottom();
 	else -- TOPLEFT
@@ -90,7 +92,7 @@ function VUHDO_isTableHeaderOrFooter(aPanelNum)
 end
 
 function VUHDO_toggleMenu(aPanel)
-	if (aPanel:IsShown()) then
+	if aPanel:IsShown() then
 		aPanel:Hide();
 	else
 		aPanel:Show();
@@ -125,17 +127,17 @@ function VUHDO_getHealthBarHeight(aPanelNum)
 end
 
 function VUHDO_getDiffColor(aBaseColor, aModColor)
-	if (aModColor["useText"]) then
+	if aModColor["useText"] then
 		aBaseColor["useText"] = true;
 		aBaseColor["TR"], aBaseColor["TG"], aBaseColor["TB"], aBaseColor["TO"] = aModColor["TR"], aModColor["TG"], aModColor["TB"], aModColor["TO"];
 	end
 
-	if (aModColor["useBackground"]) then
+	if aModColor["useBackground"] then
 		aBaseColor["useBackground"] = true;
 		aBaseColor["R"], aBaseColor["G"], aBaseColor["B"] = aModColor["R"], aModColor["G"], aModColor["B"];
 	end
 
-	if (aModColor["useOpacity"]) then
+	if aModColor["useOpacity"] then
 		aBaseColor["useOpacity"] = true;
 		aBaseColor["O"], aBaseColor["TO"] = aModColor["O"], aModColor["TO"];
 	end
@@ -167,11 +169,9 @@ end
 -- in Asian country will return the default font. Likewise if nil was supplied as argument
 local tFontInfo;
 function VUHDO_getFont(aFont)
-	if (strlen(aFont or "") > 0 and sIsNotInChina) then
+	if strlen(aFont or "") > 0 and sIsNotInChina then
 		for _, tFontInfo in pairs(VUHDO_FONTS) do
-			if (aFont == tFontInfo[1]) then
-				return aFont;
-			end
+			if aFont == tFontInfo[1] then return aFont; end
 		end
 	end
 
@@ -182,21 +182,23 @@ local function VUHDO_hidePartyFrame()
 	local tCnt;
 	HIDE_PARTY_INTERFACE = "1";
 
-	hooksecurefunc("ShowPartyFrame", function()
-		if (not InCombatLockdown()) then
-			for tCnt = 1, 4 do
-				VUHDO_GLOBAL["PartyMemberFrame" .. tCnt]:Hide();
+	hooksecurefunc("ShowPartyFrame",
+		function()
+			if not InCombatLockdown() then
+				for tCnt = 1, 4 do
+					_G["PartyMemberFrame" .. tCnt]:Hide();
+				end
 			end
 		end
-	end);
+	);
 
 	local tPartyFrame;
 	for tCnt = 1, 4 do
-		tPartyFrame = VUHDO_GLOBAL["PartyMemberFrame" .. tCnt];
+		tPartyFrame = _G["PartyMemberFrame" .. tCnt];
 		tPartyFrame:Hide();
 		tPartyFrame:UnregisterAllEvents();
-		VUHDO_GLOBAL["PartyMemberFrame" .. tCnt .. "HealthBar"]:UnregisterAllEvents();
-		VUHDO_GLOBAL["PartyMemberFrame" .. tCnt .. "ManaBar"]:UnregisterAllEvents();
+		_G["PartyMemberFrame" .. tCnt .. "HealthBar"]:UnregisterAllEvents();
+		_G["PartyMemberFrame" .. tCnt .. "ManaBar"]:UnregisterAllEvents();
 	end
 end
 
@@ -205,23 +207,23 @@ local function VUHDO_showPartyFrame()
 	HIDE_PARTY_INTERFACE = "0";
 
 	hooksecurefunc("ShowPartyFrame", function()
-		if (not InCombatLockdown()) then
+		if not InCombatLockdown() then
 			for tCnt = 1, 4 do
-				VUHDO_GLOBAL["PartyMemberFrame" .. tCnt]:Show();
+				_G["PartyMemberFrame" .. tCnt]:Show();
 			end
 		end
 	end);
 
 	local tPartyFrame;
 	for tCnt = 1, 4 do
-		tPartyFrame = VUHDO_GLOBAL["PartyMemberFrame" .. tCnt];
+		tPartyFrame = _G["PartyMemberFrame" .. tCnt];
 		if GetPartyMember(tCnt) then
 			tPartyFrame:Show();
 		end
 
 		tPartyFrame:RegisterAllEvents();
-		VUHDO_GLOBAL["PartyMemberFrame" .. tCnt .. "HealthBar"]:RegisterAllEvents();
-		VUHDO_GLOBAL["PartyMemberFrame" .. tCnt .. "ManaBar"]:RegisterAllEvents();
+		_G["PartyMemberFrame" .. tCnt .. "HealthBar"]:RegisterAllEvents();
+		_G["PartyMemberFrame" .. tCnt .. "ManaBar"]:RegisterAllEvents();
 	end
 end
 
@@ -361,23 +363,23 @@ function VUHDO_initHideBlizzFrames()
 		return;
 	end
 
-	if (VUHDO_CONFIG["BLIZZ_UI_HIDE_PARTY"]) then
+	if VUHDO_CONFIG["BLIZZ_UI_HIDE_PARTY"] then
 		VUHDO_hideBlizzParty();
 	end
 
-	if (VUHDO_CONFIG["BLIZZ_UI_HIDE_PLAYER"]) then
+	if VUHDO_CONFIG["BLIZZ_UI_HIDE_PLAYER"] then
 		VUHDO_hideBlizzPlayer();
 	end
 
-	if (VUHDO_CONFIG["BLIZZ_UI_HIDE_TARGET"]) then
+	if VUHDO_CONFIG["BLIZZ_UI_HIDE_TARGET"] then
 		VUHDO_hideBlizzTarget();
 	end
 
-	if (VUHDO_CONFIG["BLIZZ_UI_HIDE_PET"]) then
+	if VUHDO_CONFIG["BLIZZ_UI_HIDE_PET"] then
 		VUHDO_hideBlizzPet();
 	end
 
-	if (VUHDO_CONFIG["BLIZZ_UI_HIDE_FOCUS"]) then
+	if VUHDO_CONFIG["BLIZZ_UI_HIDE_FOCUS"] then
 		VUHDO_hideBlizzFocus();
 	end
 end
@@ -385,7 +387,7 @@ end
 local tOldX, tOldY;
 function VUHDO_isDifferentButtonPoint(aRegion, aPointX, aPointY)
 	_, _, _, tOldX, tOldY = aRegion:GetPoint();
-	if (tOldX ~= nil) then
+	if tOldX then
 		tOldX = floor(tOldX + 0.5);
 		tOldY = floor(tOldY + 0.5);
 	end
@@ -394,8 +396,8 @@ end
 
 local tFontHeight;
 function VUHDO_lnfPatchFont(aComponent, aLabelName)
-	if (not sIsNotInChina) then
-		VUHDO_GLOBAL[aComponent:GetName() .. aLabelName]:SetFont(VUHDO_OPTIONS_FONT_NAME, 12);
+	if not sIsNotInChina then
+		_G[aComponent:GetName() .. aLabelName]:SetFont(VUHDO_OPTIONS_FONT_NAME, 12);
 	end
 end
 
@@ -406,7 +408,5 @@ end
 local tFile;
 function VUHDO_setLlcStatusBarTexture(aStatusBar, aTextureName)
 	tFile = VUHDO_LibSharedMedia:Fetch('statusbar', aTextureName);
-	if (tFile ~= nil) then
-		aStatusBar:SetStatusBarTexture(tFile);
-	end
+	if tFile then aStatusBar:SetStatusBarTexture(tFile); end
 end

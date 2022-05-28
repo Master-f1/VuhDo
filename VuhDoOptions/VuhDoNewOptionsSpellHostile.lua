@@ -1,3 +1,4 @@
+local _;
 local tComponents = {};
 local tNum;
 local tModel;
@@ -61,7 +62,7 @@ end
 local tText, tLabel, tR, tG, tB;
 function VUHDO_newOptionsSpellEditBoxCheckHostileSpell(anEditBox)
 	tText, tR, tG, tB = VUHDO_isHostileActionValid(anEditBox:GetText());
-	tLabel = VUHDO_GLOBAL[anEditBox:GetName() .. "Hint"];
+	tLabel = _G[anEditBox:GetName() .. "Hint"];
 	if (tText ~= nil) then
 		anEditBox:SetTextColor(1, 1, 1, 1);
 		tLabel:SetText(tText);

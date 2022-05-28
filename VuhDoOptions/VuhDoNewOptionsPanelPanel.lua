@@ -1,3 +1,5 @@
+local _;
+
 local function VUHDO_hideAllPanel()
 	VuhDoNewOptionsPanelBasic:Hide();
 	VuhDoNewOptionsPanelSize:Hide();
@@ -93,7 +95,7 @@ local tValue;
 function VUHDO_newOptionsApplyToAllOnClick()
 	tActivePanel = nil;
 	tRefreshModels = {};
-	tContentPane = VUHDO_GLOBAL["VuhDoNewOptionsPanelPanelContentPanel"];
+	tContentPane = _G["VuhDoNewOptionsPanelPanelContentPanel"];
 	tAllPanels = {tContentPane:GetChildren()};
 
 	for _, tAktPanel in pairs(tAllPanels) do

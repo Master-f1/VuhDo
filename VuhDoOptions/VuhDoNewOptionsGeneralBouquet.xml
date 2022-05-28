@@ -443,7 +443,7 @@
 				</Frames>
 				<Scripts>
 					<OnShow>
-						VUHDO_bouquetItemsOnShow(VUHDO_GLOBAL[this:GetName() .. "ScrollPanelChild"]);
+						VUHDO_bouquetItemsOnShow(_G[this:GetName() .. "ScrollPanelChild"]);
 					</OnShow>
 				</Scripts>
 			</Frame>
@@ -1003,9 +1003,9 @@
 			<OnShow>
 				VUHDO_bouquetsUpdateDefaultColors();
 				if (VUHDO_MENU_RETURN_TARGET ~= nil or VUHDO_MENU_RETURN_TARGET_MAIN ~= nil) then
-					VUHDO_GLOBAL[self:GetName() .. "BackButton"]:Show();
+					_G[self:GetName() .. "BackButton"]:Show();
 				else
-					VUHDO_GLOBAL[self:GetName() .. "BackButton"]:Hide();
+					_G[self:GetName() .. "BackButton"]:Hide();
 				end
 			</OnShow>
 			<OnHide>

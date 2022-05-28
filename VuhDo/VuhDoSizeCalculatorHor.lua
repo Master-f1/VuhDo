@@ -16,15 +16,15 @@ local strfind = strfind;
 local ipairs = ipairs;
 
 function VUHDO_sizeCalculatorInitBurstHor()
-	VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
-	VUHDO_PANEL_SETUP = VUHDO_GLOBAL["VUHDO_PANEL_SETUP"];
+	VUHDO_CONFIG = _G["VUHDO_CONFIG"];
+	VUHDO_PANEL_SETUP = _G["VUHDO_PANEL_SETUP"];
 
-	VUHDO_splitString = VUHDO_GLOBAL["VUHDO_splitString"];
-	VUHDO_isTableHeadersShowing = VUHDO_GLOBAL["VUHDO_isTableHeadersShowing"];
-	VUHDO_isTableFootersShowing = VUHDO_GLOBAL["VUHDO_isTableFootersShowing"];
-	VUHDO_isLooseOrderingShowing = VUHDO_GLOBAL["VUHDO_isLooseOrderingShowing"];
-	VUHDO_isConfigPanelShowing = VUHDO_GLOBAL["VUHDO_isConfigPanelShowing"];
-	VUHDO_isTableHeaderOrFooter = VUHDO_GLOBAL["VUHDO_isTableHeaderOrFooter"];
+	VUHDO_splitString = _G["VUHDO_splitString"];
+	VUHDO_isTableHeadersShowing = _G["VUHDO_isTableHeadersShowing"];
+	VUHDO_isTableFootersShowing = _G["VUHDO_isTableFootersShowing"];
+	VUHDO_isLooseOrderingShowing = _G["VUHDO_isLooseOrderingShowing"];
+	VUHDO_isConfigPanelShowing = _G["VUHDO_isConfigPanelShowing"];
+	VUHDO_isTableHeaderOrFooter = _G["VUHDO_isTableHeaderOrFooter"];
 end
 
 -- BURST CACHE

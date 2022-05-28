@@ -217,52 +217,52 @@ if not MyMinimapButton or MyMinimapButton.Version < version then
 		return position
 	end,
 
-	OnMouseDown = function()
-		getglobal(this:GetName() .. "Icon"):SetTexCoord(.1, .9, .1, .9)
+	OnMouseDown = function(self)
+		getglobal(self:GetName() .. "Icon"):SetTexCoord(.1, .9, .1, .9)
 	end,
 
-	OnMouseUp = function()
-		getglobal(this:GetName() .. "Icon"):SetTexCoord(0, 1, 0, 1)
+	OnMouseUp = function(self)
+		getglobal(self:GetName() .. "Icon"):SetTexCoord(0, 1, 0, 1)
 	end,
 
-	OnEnter = function()
+	OnEnter = function(self)
 		GameTooltip_SetDefaultAnchor(GameTooltip, UIParent)
-		GameTooltip:AddLine(this.tooltipTitle)
-		GameTooltip:AddLine(this.tooltipText, .8, .8, .8, 1)
+		GameTooltip:AddLine(self.tooltipTitle)
+		GameTooltip:AddLine(self.tooltipText, .8, .8, .8, 1)
 		GameTooltip:Show()
 	end,
 
-	OnLeave = function()
+	OnLeave = function(self)
 		GameTooltip:Hide()
 	end,
 
-	OnDragStart = function()
-		MyMinimapButton:OnMouseDown()
-		this:LockHighlight()
-		this:SetScript("OnUpdate", MyMinimapButton.OnUpdate)
+	OnDragStart = function(self)
+		--MyMinimapButton:OnMouseDown()
+		self:LockHighlight()
+		self:SetScript("OnUpdate", MyMinimapButton.OnUpdate)
 	end,
 
-	OnDragStop = function()
-		this:SetScript("OnUpdate", nil)
-		this:UnlockHighlight()
-		MyMinimapButton:OnMouseUp()
+	OnDragStop = function(self)
+		self:SetScript("OnUpdate", nil)
+		self:UnlockHighlight()
+		--MyMinimapButton:OnMouseUp()
 	end,
 
-	OnUpdate = function()
+	OnUpdate = function(self)
 		local xpos, ypos = GetCursorPosition()
 		local xmin, ymin = Minimap:GetLeft(), Minimap:GetBottom()
 		xpos = xmin - xpos / Minimap:GetEffectiveScale() + 70
 		ypos = ypos / Minimap:GetEffectiveScale() - ymin - 70
-		this.modSettings.position = math.deg(math.atan2(ypos, xpos))
-		local modName = string.gsub(this:GetName() or "", "MinimapButton$", "")
+		self.modSettings.position = math.deg(math.atan2(ypos, xpos))
+		local modName = string.gsub(self:GetName() or "", "MinimapButton$", "")
 		MyMinimapButton:Move(modName)
 	end,
 
-	OnClick = function()
-		if arg1 == "LeftButton" and this.leftClick then
-			this.leftClick()
-		elseif arg1 == "RightButton" and this.rightClick then
-			this.rightClick()
+	OnClick = function(self, arg1)
+		if arg1 == "LeftButton" and self.leftClick then
+			self.leftClick()
+		elseif arg1 == "RightButton" and self.rightClick then
+			self.rightClick()
 		end
 	end
 

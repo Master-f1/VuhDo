@@ -1,7 +1,8 @@
 ## Interface: 30300
+
 ## Title: VuhDo
 ## Author: Iza@Gilneas
-## Version: 2.23.5
+## Version: 2.23.6
 ## Notes: Raid Frames providing click-heal functionality, buff and debuff control, main tank management and much more
 ## Notes-ruRU: Аддон создает панели с фреймами союзников, танков, питомцев с отображением на них хп, мп, бафов, дебафов, хотов и прочего.
 ## SavedVariablesPerCharacter: VUHDO_CONFIG, VUHDO_PANEL_SETUP, VUHDO_SPELL_ASSIGNMENTS, VUHDO_HOSTILE_SPELL_ASSIGNMENTS, VUHDO_MM_SETTINGS, VUHDO_PLAYER_TARGETS, VUHDO_MAINTANK_NAMES, VUHDO_BUFF_SETTINGS, VUHDO_POWER_TYPE_COLORS, VUHDO_SPELLS_KEYBOARD, VUHDO_SPELL_CONFIG, VUHDO_BUFF_ORDER, VUHDO_SPEC_LAYOUTS, VUHDO_LAST_AUTO_ARRANG, VUHDO_RAID, VUHDO_FAST_ACCESS_ACTIONS, VUHDO_INDICATOR_CONFIG, VUHDO_EVENT_TIMES
@@ -11,12 +12,10 @@
 ## LoadOnDemand: 0
 
 MyMinimapButton.lua
+Libs\Libs.xml
 
 VuhDo.xml
 
-Libs\AceAddon-3.0\AceAddon-3.0.xml
-Libs\AceGUI-3.0\AceGUI-3.0.xml
-Libs\AceConfig-3.0\AceConfig-3.0.xml
-
 VuhDoPanel.xml
 VuhDoBuffWatch.xml
+

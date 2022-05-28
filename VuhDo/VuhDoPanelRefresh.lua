@@ -1,4 +1,5 @@
 -- BURST CACHE
+local _G = _G;
 local table = table;
 local floor = floor;
 local ipairs = ipairs;
@@ -30,30 +31,30 @@ local VUHDO_updateAllRaidBars;
 local VUHDO_isTableHeaderOrFooter;
 
 function VUHDO_panelRefreshInitBurst()
-	VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
-	VUHDO_PANEL_SETUP = VUHDO_GLOBAL["VUHDO_PANEL_SETUP"];
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
+	VUHDO_CONFIG = _G["VUHDO_CONFIG"];
+	VUHDO_PANEL_SETUP = _G["VUHDO_PANEL_SETUP"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
 
-	VUHDO_getHeader = VUHDO_GLOBAL["VUHDO_getHeader"];
-	VUHDO_getHeaderPos = VUHDO_GLOBAL["VUHDO_getHeaderPos"];
-	VUHDO_customizeHeader = VUHDO_GLOBAL["VUHDO_customizeHeader"];
-	VUHDO_getDynamicModelArray = VUHDO_GLOBAL["VUHDO_getDynamicModelArray"];
-	VUHDO_getGroupMembersSorted = VUHDO_GLOBAL["VUHDO_getGroupMembersSorted"];
-	VUHDO_getHealButton = VUHDO_GLOBAL["VUHDO_getHealButton"];
-	VUHDO_getHealButtonPos = VUHDO_GLOBAL["VUHDO_getHealButtonPos"];
-	VUHDO_setupAllHealButtonAttributes = VUHDO_GLOBAL["VUHDO_setupAllHealButtonAttributes"];
-	VUHDO_isDifferentButtonPoint = VUHDO_GLOBAL["VUHDO_isDifferentButtonPoint"];
-	VUHDO_addUnitButton = VUHDO_GLOBAL["VUHDO_addUnitButton"];
-	VUHDO_getTargetButton = VUHDO_GLOBAL["VUHDO_getTargetButton"];
-	VUHDO_getTotButton = VUHDO_GLOBAL["VUHDO_getTotButton"];
-	VUHDO_getOrCreateHealButton = VUHDO_GLOBAL["VUHDO_getOrCreateHealButton"];
-	VUHDO_updateAllCustomDebuffs = VUHDO_GLOBAL["VUHDO_updateAllCustomDebuffs"];
-	VUHDO_getHeaderWidth = VUHDO_GLOBAL["VUHDO_getHeaderWidth"];
-	VUHDO_initAllEventBouquets = VUHDO_GLOBAL["VUHDO_initAllEventBouquets"];
-	VUHDO_getActionPanel = VUHDO_GLOBAL["VUHDO_getActionPanel"];
-	VUHDO_isPanelPopulated = VUHDO_GLOBAL["VUHDO_isPanelPopulated"];
-	VUHDO_updateAllRaidBars = VUHDO_GLOBAL["VUHDO_updateAllRaidBars"];
-	VUHDO_isTableHeaderOrFooter = VUHDO_GLOBAL["VUHDO_isTableHeaderOrFooter"];
+	VUHDO_getHeader = _G["VUHDO_getHeader"];
+	VUHDO_getHeaderPos = _G["VUHDO_getHeaderPos"];
+	VUHDO_customizeHeader = _G["VUHDO_customizeHeader"];
+	VUHDO_getDynamicModelArray = _G["VUHDO_getDynamicModelArray"];
+	VUHDO_getGroupMembersSorted = _G["VUHDO_getGroupMembersSorted"];
+	VUHDO_getHealButton = _G["VUHDO_getHealButton"];
+	VUHDO_getHealButtonPos = _G["VUHDO_getHealButtonPos"];
+	VUHDO_setupAllHealButtonAttributes = _G["VUHDO_setupAllHealButtonAttributes"];
+	VUHDO_isDifferentButtonPoint = _G["VUHDO_isDifferentButtonPoint"];
+	VUHDO_addUnitButton = _G["VUHDO_addUnitButton"];
+	VUHDO_getTargetButton = _G["VUHDO_getTargetButton"];
+	VUHDO_getTotButton = _G["VUHDO_getTotButton"];
+	VUHDO_getOrCreateHealButton = _G["VUHDO_getOrCreateHealButton"];
+	VUHDO_updateAllCustomDebuffs = _G["VUHDO_updateAllCustomDebuffs"];
+	VUHDO_getHeaderWidth = _G["VUHDO_getHeaderWidth"];
+	VUHDO_initAllEventBouquets = _G["VUHDO_initAllEventBouquets"];
+	VUHDO_getActionPanel = _G["VUHDO_getActionPanel"];
+	VUHDO_isPanelPopulated = _G["VUHDO_isPanelPopulated"];
+	VUHDO_updateAllRaidBars = _G["VUHDO_updateAllRaidBars"];
+	VUHDO_isTableHeaderOrFooter = _G["VUHDO_isTableHeaderOrFooter"];
 end
 
 -- BURST CACHE

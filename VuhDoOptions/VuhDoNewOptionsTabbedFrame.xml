@@ -33,7 +33,7 @@
 					</Layer>
 				</Layers>
 				<Scripts>
-					<OnShow>VUHDO_GLOBAL[self:GetName() .. "Label"]:SetText(VUHDO_I18N_VUHDO_OPTIONS .. " " .. VUHDO_VERSION)</OnShow>
+					<OnShow>_G[self:GetName() .. "Label"]:SetText(VUHDO_I18N_VUHDO_OPTIONS .. " " .. VUHDO_VERSION)</OnShow>
 				</Scripts>
 			</Frame>
 

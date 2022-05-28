@@ -1,3 +1,4 @@
+local _;
 local strlen = strlen;
 local strsub = strsub;
 local InCombatLockdown = InCombatLockdown;
@@ -19,7 +20,6 @@ local GetRealZoneText = GetRealZoneText;
 local GetMapInfo = GetMapInfo;
 local GetSpellInfo = GetSpellInfo;
 local pairs = pairs;
-local _ = _;
 
 -- returns an array of numbers sequentially found in a string
 local tCnt;
@@ -35,14 +35,14 @@ function VUHDO_getNumbersFromString(aName, aMaxAnz)
 	tIsInNumber = false;
 
 	for tCnt = 1, tStrlen do
-		tDigit = strbyte(aName, tCnt) - 48;
-		if (tDigit >= 0 and tDigit <= 9) then
+		tDigit = strbyte(aName, tCnt);
+		if (tDigit >= 48 and tDigit <= 57) then
 			if (tIsInNumber) then
-				tNumbers[tIndex] = tNumbers[tIndex] * 10 + tDigit;
+				tNumbers[tIndex] = tNumbers[tIndex] * 10 + tDigit - 48;
 			else
 				tIsInNumber = true;
 				tIndex = tIndex + 1;
-				tNumbers[tIndex] = tDigit;
+				tNumbers[tIndex] = tDigit - 48;
 			end
 		else
 			if (tIndex >= aMaxAnz) then
@@ -79,12 +79,12 @@ local sScanRange;
 
 local VUHDO_updateBouquetsForEvent;
 function VUHDO_toolboxInitBurst()
-	VUHDO_RAID_NAMES = VUHDO_GLOBAL["VUHDO_RAID_NAMES"];
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
-	VUHDO_UNIT_BUTTONS = VUHDO_GLOBAL["VUHDO_UNIT_BUTTONS"];
-	VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
-	VUHDO_GROUPS_BUFFS = VUHDO_GLOBAL["VUHDO_GROUPS_BUFFS"];
-	VUHDO_updateBouquetsForEvent = VUHDO_GLOBAL["VUHDO_updateBouquetsForEvent"];
+	VUHDO_RAID_NAMES = _G["VUHDO_RAID_NAMES"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
+	VUHDO_UNIT_BUTTONS = _G["VUHDO_UNIT_BUTTONS"];
+	VUHDO_CONFIG = _G["VUHDO_CONFIG"];
+	VUHDO_GROUPS_BUFFS = _G["VUHDO_GROUPS_BUFFS"];
+	VUHDO_updateBouquetsForEvent = _G["VUHDO_updateBouquetsForEvent"];
 	sScanRange = tonumber(VUHDO_CONFIG["SCAN_RANGE"]);
 	sRangeSpell = VUHDO_CONFIG["RANGE_SPELL"];
 	sIsGuessRange = VUHDO_CONFIG["RANGE_PESSIMISTIC"] or GetSpellInfo(VUHDO_CONFIG["RANGE_SPELL"]) == nil;

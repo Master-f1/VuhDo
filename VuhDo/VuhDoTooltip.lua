@@ -1,3 +1,4 @@
+local _;
 local UnitLevel = UnitLevel;
 local UnitRace = UnitRace;
 local UnitCreatureType = UnitCreatureType;
@@ -56,9 +57,9 @@ end
 local tLabel;
 local function VUHDO_setTooltipLine(aText, anIsLeft, aLineNum, aColor, aTextSize)
 	if (anIsLeft) then
-		tLabel = VUHDO_GLOBAL["VuhDoTooltipTextL" .. aLineNum];
+		tLabel = _G["VuhDoTooltipTextL" .. aLineNum];
 	else
-		tLabel = VUHDO_GLOBAL["VuhDoTooltipTextR" .. aLineNum];
+		tLabel = _G["VuhDoTooltipTextR" .. aLineNum];
 	end
 
 	tLabel:SetText(aText);
@@ -369,13 +370,6 @@ end
 
 function VUHDO_demoTooltip(aPanelNum)
 	if (not VUHDO_PANEL_SETUP[aPanelNum]["TOOLTIP"]["show"]) then
-		return;
-	end
-
-	tUnit = VUHDO_getPlayerRaidUnit();
-
-	if (VUHDO_RAID[tUnit] == nil) then
-		-- Must not happen
 		return;
 	end
 

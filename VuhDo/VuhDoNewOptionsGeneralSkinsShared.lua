@@ -17,43 +17,43 @@ function VUHDO_getAutoProfile()
 	if (GetNumRaidMembers() > 0 or VUHDO_IS_CONFIG) then
 		tNumMembers = GetNumRaidMembers();
 
-		if (not VUHDO_IS_SHOWN_BY_GROUP and VUHDO_CONFIG["SHOW_PANELS"]) then
+		if not VUHDO_IS_SHOWN_BY_GROUP and VUHDO_CONFIG["SHOW_PANELS"] then
 			VUHDO_IS_SHOWN_BY_GROUP = true;
 			VUHDO_timeReloadUI(0.1);
 		end
 	elseif (GetNumPartyMembers() > 0) then
 		tNumMembers = GetNumPartyMembers() + 1;
 
-		if (not VUHDO_IS_SHOWN_BY_GROUP) then
-			if (not VUHDO_CONFIG["HIDE_PANELS_PARTY"] and VUHDO_CONFIG["SHOW_PANELS"]) then
+		if not VUHDO_IS_SHOWN_BY_GROUP then
+			if not VUHDO_CONFIG["HIDE_PANELS_PARTY"] and VUHDO_CONFIG["SHOW_PANELS"] then
 				VUHDO_IS_SHOWN_BY_GROUP = true;
 				VUHDO_timeReloadUI(0.1);
 			end
 		else
-			if (VUHDO_CONFIG["HIDE_PANELS_PARTY"]) then
+			if VUHDO_CONFIG["HIDE_PANELS_PARTY"] then
 				VUHDO_IS_SHOWN_BY_GROUP = false;
 				VUHDO_timeReloadUI(0.1);
 			end
 		end
 	else
-		if (not VUHDO_IS_SHOWN_BY_GROUP) then
-			if (not VUHDO_CONFIG["HIDE_PANELS_SOLO"] and VUHDO_CONFIG["SHOW_PANELS"]) then
+		if not VUHDO_IS_SHOWN_BY_GROUP then
+			if not VUHDO_CONFIG["HIDE_PANELS_SOLO"] and VUHDO_CONFIG["SHOW_PANELS"] then
 				VUHDO_IS_SHOWN_BY_GROUP = true;
 				VUHDO_timeReloadUI(0.1);
 			end
 		else
-			if (VUHDO_CONFIG["HIDE_PANELS_SOLO"]) then
+			if VUHDO_CONFIG["HIDE_PANELS_SOLO"] then
 				VUHDO_IS_SHOWN_BY_GROUP = false;
 				VUHDO_timeReloadUI(0.1);
 			end
 		end
 	end
 
-	if (VUHDO_DEBUG_AUTO_ARRANG ~= nil) then
+	if VUHDO_DEBUG_AUTO_ARRANG then
 		tNumMembers = VUHDO_DEBUG_AUTO_ARRANG;
 	end
 
-	if (tNumMembers == 1) then
+	if tNumMembers == 1 then
 		table.wipe(VUHDO_MAINTANK_NAMES);
 	end
 
@@ -105,7 +105,7 @@ local function VUHDO_createNewProfileName(aName)
 	local tProfile = {};
 	local tPrefix = VUHDO_PLAYER_NAME .. ": ";
 
-	while (tProfile ~= nil) do
+	while tProfile do
 		tNewName = tPrefix .. aName;
 		_, tProfile = VUHDO_getProfileNamed(tNewName);
 
@@ -118,30 +118,30 @@ end
 local VUHDO_TARGET_PROFILE_NAME = nil;
 
 local function VUHDO_askSaveProfileCallback(aButtonNum)
-	if (1 == aButtonNum) then -- Copy
+	if 1 == aButtonNum then -- Copy
 		VUHDO_TARGET_PROFILE_NAME = VUHDO_createNewProfileName(VUHDO_TARGET_PROFILE_NAME);
 		VUHDO_CONFIG["CURRENT_PROFILE"] = VUHDO_TARGET_PROFILE_NAME;
-	elseif (2 == aButtonNum) then -- Overwrite
-	elseif (3 == aButtonNum) then -- Discard
+	elseif 2 == aButtonNum then -- Overwrite
+	elseif 3 == aButtonNum then -- Discard
 		return;
 	end
 
 	local tIndex = VUHDO_getProfileNamed(VUHDO_TARGET_PROFILE_NAME);
-	if (tIndex == nil) then
+	if not tIndex then
 		tIndex = #VUHDO_PROFILES + 1;
 	end
 
 	VUHDO_PROFILES[tIndex] = VUHDO_createNewProfile(VUHDO_TARGET_PROFILE_NAME);
-	VUHDO_Msg(VUHDO_I18N_PROFILE_SAVED .. "\"" .. VUHDO_TARGET_PROFILE_NAME .. "\"");
+	VUHDO_Msg(VUHDO_I18N_PROFILE_SAVED .. "\"" .. VUHDO_TARGET_PROFILE_NAME .. "\".");
 	VUHDO_updateProfileSelectCombo();
 end
 
 function VUHDO_saveProfile(aName)
 	local tExistingIndex, tExistingProfile = VUHDO_getProfileNamed(aName);
-	if (tExistingProfile ~= nil) then
+	if tExistingProfile then
 		VUHDO_TARGET_PROFILE_NAME = aName;
 
-		if (tExistingProfile["ORIGINATOR_TOON"] ~= VUHDO_PLAYER_NAME and not VUHDO_CONFIG["IS_ALWAYS_OVERWRITE_PROFILE"]) then
+		if tExistingProfile["ORIGINATOR_TOON"] ~= VUHDO_PLAYER_NAME and not VUHDO_CONFIG["IS_ALWAYS_OVERWRITE_PROFILE"] then
 
 			VuhDoThreeSelectFrameText:SetText(VUHDO_I18N_PROFILE_OVERWRITE_1 .. " \"" .. aName .. "\" " .. VUHDO_I18N_PROFILE_OVERWRITE_2 .. " (" .. tExistingProfile["ORIGINATOR_TOON"] .. ")." .. VUHDO_I18N_PROFILE_OVERWRITE_3);
 			VuhDoThreeSelectFrameButton1:SetText(VUHDO_I18N_COPY);
@@ -160,26 +160,26 @@ end
 
 function VUHDO_saveCurrentProfile()
 	local _, tProfile = VUHDO_getProfileNamed(VUHDO_CONFIG["CURRENT_PROFILE"]);
-	if (tProfile ~= nil and not tProfile["LOCKED"]) then
+	if tProfile and not tProfile["LOCKED"] then
 		VUHDO_saveProfile(VUHDO_CONFIG["CURRENT_PROFILE"]);
 	end
 end
 
 function VUHDO_saveCurrentProfilePanelPosition(aPanelNum)
 	local _, tProfile = VUHDO_getProfileNamed(VUHDO_CONFIG["CURRENT_PROFILE"]);
-	if (tProfile ~= nil and tProfile["PANEL_SETUP"] ~= nil) then
+	if tProfile and tProfile["PANEL_SETUP"] then
 		tProfile["PANEL_SETUP"][aPanelNum]["POSITION"] = VUHDO_deepCopyTable(VUHDO_PANEL_SETUP[aPanelNum]["POSITION"]);
 	end
 end
 
 local function VUHDO_isProfileRuleAllowed(tRule, aClass, aToon)
-	if (VUHDO_PROFILE_MODEL_MATCH_ALL == tRule) then
+	if VUHDO_PROFILE_MODEL_MATCH_ALL == tRule then
 		return true;
-	elseif (VUHDO_PROFILE_MODEL_MATCH_CLASS == tRule) then
+	elseif VUHDO_PROFILE_MODEL_MATCH_CLASS == tRule then
 		return VUHDO_PLAYER_CLASS == aClass;
-	elseif (VUHDO_PROFILE_MODEL_MATCH_TOON == tRule) then
+	elseif VUHDO_PROFILE_MODEL_MATCH_TOON == tRule then
 		return VUHDO_PLAYER_NAME == aToon;
-	elseif (VUHDO_PROFILE_MODEL_MATCH_NEVER == tRule) then
+	elseif VUHDO_PROFILE_MODEL_MATCH_NEVER == tRule then
 		return false;
 	else
 		return true;
@@ -260,20 +260,20 @@ local VUHDO_PROFILE_MODEL = {
 local tOriginatorClass = nil;
 local tOriginatorToon = nil;
 local function VUHDO_smartLoadFromProfile(aDestArray, aSourceArray, aProfileModel, aDerivedRule)
-	if (aSourceArray == nil) then
+	if not aSourceArray then
 		return aDestArray;
 	end
 
-	if (aSourceArray["ORIGINATOR_CLASS"] ~= nil) then
+	if aSourceArray["ORIGINATOR_CLASS"] then
 		tOriginatorClass = aSourceArray["ORIGINATOR_CLASS"];
 	end
 
-	if (aSourceArray["ORIGINATOR_TOON"] ~= nil) then
+	if aSourceArray["ORIGINATOR_TOON"] then
 		tOriginatorToon = aSourceArray["ORIGINATOR_TOON"];
 	end
 
 	local tRootRule;
-	if (aProfileModel ~= nil) then
+	if aProfileModel then
 		tRootRule = aProfileModel["-root-"];
 	else
 		tRootRule = nil;
@@ -287,16 +287,16 @@ local function VUHDO_smartLoadFromProfile(aDestArray, aSourceArray, aProfileMode
 		if (tSourceValue ~= nil) then
 			local tSubModel = (aProfileModel or {})[tKey];
 
-			if ("table" == type(tSourceValue)) then
+			if "table" == type(tSourceValue) then
 
-				if ("table" == type(tDestValue)) then
+				if "table" == type(tDestValue) then
 					aDestArray[tKey] = VUHDO_smartLoadFromProfile(aDestArray[tKey], aSourceArray[tKey], tSubModel, tRootRule or aDerivedRule);
 					-- else
 					-- VUHDO_Msg("Data structures incompatible in field: " .. tKey);
 				end
 			else -- Flacher Wert
 				local tRule = tSubModel or tRootRule or aDerivedRule;
-				if (VUHDO_isProfileRuleAllowed(tRule, tOriginatorClass, tOriginatorToon)) then
+				if VUHDO_isProfileRuleAllowed(tRule, tOriginatorClass, tOriginatorToon) then
 					aDestArray[tKey] = aSourceArray[tKey];
 					-- else
 					-- VUHDO_Msg("Prohibit: " .. tKey);
@@ -322,7 +322,7 @@ end
 
 function VUHDO_loadProfileNoInit(aName)
 	local tIndex, tProfile = VUHDO_getProfileNamed(aName);
-	if (tIndex == nil) then
+	if not tIndex then
 		VUHDO_Msg(VUHDO_I18N_ERROR_NO_PROFILE .. "\"" .. aName .. "\" !", 1, 0.4, 0.4);
 		return;
 	end

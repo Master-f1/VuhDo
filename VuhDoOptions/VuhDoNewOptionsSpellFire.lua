@@ -23,10 +23,10 @@ function VUHDO_keyLayoutComboChanged(aComboBox, aValue)
 		VUHDO_CURR_LAYOUT = aValue;
 	end
 
-	VUHDO_GLOBAL[aComboBox:GetParent():GetName() .. "Spec1CheckButton"]:SetChecked(aValue == VUHDO_SPEC_LAYOUTS["1"]);
-	VUHDO_GLOBAL[aComboBox:GetParent():GetName() .. "Spec2CheckButton"]:SetChecked(aValue == VUHDO_SPEC_LAYOUTS["2"]);
-	VUHDO_lnfCheckButtonClicked(VUHDO_GLOBAL[aComboBox:GetParent():GetName() .. "Spec1CheckButton"]);
-	VUHDO_lnfCheckButtonClicked(VUHDO_GLOBAL[aComboBox:GetParent():GetName() .. "Spec2CheckButton"]);
+	_G[aComboBox:GetParent():GetName() .. "Spec1CheckButton"]:SetChecked(aValue == VUHDO_SPEC_LAYOUTS["1"]);
+	_G[aComboBox:GetParent():GetName() .. "Spec2CheckButton"]:SetChecked(aValue == VUHDO_SPEC_LAYOUTS["2"]);
+	VUHDO_lnfCheckButtonClicked(_G[aComboBox:GetParent():GetName() .. "Spec1CheckButton"]);
+	VUHDO_lnfCheckButtonClicked(_G[aComboBox:GetParent():GetName() .. "Spec2CheckButton"]);
 end
 
 function VUHDO_keyLayoutSpecOnClick(aCheckButton, aSpecId)
@@ -111,7 +111,7 @@ function VUHDO_saveKeyLayoutCallback(aDecision)
 end
 
 function VUHDO_saveKeyLayoutOnClick(aButton)
-	local tEditBox = VUHDO_GLOBAL[aButton:GetParent():GetName() .. "SaveAsEditBox"];
+	local tEditBox = _G[aButton:GetParent():GetName() .. "SaveAsEditBox"];
 	VUHDO_CURR_LAYOUT = strtrim(tEditBox:GetText());
 
 	if (strlen(VUHDO_CURR_LAYOUT) == 0) then

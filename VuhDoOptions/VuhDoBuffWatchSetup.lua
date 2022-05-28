@@ -1,3 +1,4 @@
+local _;
 local pairs = pairs;
 
 local VUHDO_BUFF_PANEL_X, VUHDO_BUFF_PANEL_Y;
@@ -10,11 +11,11 @@ local VUHDO_PANEL_MAX_HEIGHT = 430;
 local BUFF_PANEL_BASE_HEIGHT = nil;
 
 local function VUHDO_getGenericPanel(aCategoryName)
-	return VUHDO_GLOBAL["VuhDoBuffSetupPanel" .. aCategoryName .. "GenericPanel"];
+	return _G["VuhDoBuffSetupPanel" .. aCategoryName .. "GenericPanel"];
 end
 
 local function VUHDO_getBuffPanelCheckBox(aCategoryName)
-	return VUHDO_GLOBAL["VuhDoBuffSetupPanel" .. aCategoryName .. "EnableCheckButton"];
+	return _G["VuhDoBuffSetupPanel" .. aCategoryName .. "EnableCheckButton"];
 end
 
 local function VUHDO_buffSetupOkayOnClick()
@@ -49,23 +50,23 @@ local function VUHDO_buffSetupOkayOnClick()
 
 		if (VUHDO_BUFF_TARGET_CLASS == tBuffTarget) then
 					tSettings["classes"] = {
-						["WARRIOR"] = VUHDO_comboGetSelectedBuff(VUHDO_GLOBAL[tGenericPanel:GetName() .. "WarriorsCombo"]),
-						["ROGUE"] = VUHDO_comboGetSelectedBuff(VUHDO_GLOBAL[tGenericPanel:GetName() .. "RoguesCombo"]),
-						["HUNTER"] = VUHDO_comboGetSelectedBuff(VUHDO_GLOBAL[tGenericPanel:GetName() .. "HuntersCombo"]),
-						["PALADIN"] = VUHDO_comboGetSelectedBuff(VUHDO_GLOBAL[tGenericPanel:GetName() .. "PaladinsCombo"]),
-						["MAGE"] = VUHDO_comboGetSelectedBuff(VUHDO_GLOBAL[tGenericPanel:GetName() .. "MagesCombo"]),
-						["WARLOCK"] = VUHDO_comboGetSelectedBuff(VUHDO_GLOBAL[tGenericPanel:GetName() .. "WarlocksCombo"]),
-						["SHAMAN"] = VUHDO_comboGetSelectedBuff(VUHDO_GLOBAL[tGenericPanel:GetName() .. "ShamansCombo"]),
-						["DRUID"] = VUHDO_comboGetSelectedBuff(VUHDO_GLOBAL[tGenericPanel:GetName() .. "DruidsCombo"]),
-						["PRIEST"] = VUHDO_comboGetSelectedBuff(VUHDO_GLOBAL[tGenericPanel:GetName() .. "PriestsCombo"]),
-						["DEATHKNIGHT"] = VUHDO_comboGetSelectedBuff(VUHDO_GLOBAL[tGenericPanel:GetName() .. "DeathKnightsCombo"])
+						["WARRIOR"] = VUHDO_comboGetSelectedBuff(_G[tGenericPanel:GetName() .. "WarriorsCombo"]),
+						["ROGUE"] = VUHDO_comboGetSelectedBuff(_G[tGenericPanel:GetName() .. "RoguesCombo"]),
+						["HUNTER"] = VUHDO_comboGetSelectedBuff(_G[tGenericPanel:GetName() .. "HuntersCombo"]),
+						["PALADIN"] = VUHDO_comboGetSelectedBuff(_G[tGenericPanel:GetName() .. "PaladinsCombo"]),
+						["MAGE"] = VUHDO_comboGetSelectedBuff(_G[tGenericPanel:GetName() .. "MagesCombo"]),
+						["WARLOCK"] = VUHDO_comboGetSelectedBuff(_G[tGenericPanel:GetName() .. "WarlocksCombo"]),
+						["SHAMAN"] = VUHDO_comboGetSelectedBuff(_G[tGenericPanel:GetName() .. "ShamansCombo"]),
+						["DRUID"] = VUHDO_comboGetSelectedBuff(_G[tGenericPanel:GetName() .. "DruidsCombo"]),
+						["PRIEST"] = VUHDO_comboGetSelectedBuff(_G[tGenericPanel:GetName() .. "PriestsCombo"]),
+						["DEATHKNIGHT"] = VUHDO_comboGetSelectedBuff(_G[tGenericPanel:GetName() .. "DeathKnightsCombo"])
 					};
 			elseif (VUHDO_BUFF_TARGET_UNIQUE == tBuffTarget) then
-					local tEditBox = VUHDO_GLOBAL[tGenericPanel:GetName() .. "PlayerNameEditBox"];
+					local tEditBox = _G[tGenericPanel:GetName() .. "PlayerNameEditBox"];
 					tSettings["name"] = tEditBox:GetText();
 			else -- Aura, Totem, own group, self
 				if (#tCategoryBuffs > 1) then
-					local tCombo = VUHDO_GLOBAL[tGenericPanel:GetName() .. "DedicatedComboBox"];
+					local tCombo = _G[tGenericPanel:GetName() .. "DedicatedComboBox"];
 					tSettings["buff"] = VUHDO_comboGetSelectedBuff(tCombo);
 					end
 				end
@@ -103,23 +104,23 @@ local function VUHDO_addGenericBuffFrame(aBuffVariant, aFrameTemplateName, aCate
 
 	-- main panel
 	local tFrameName = "VuhDoBuffSetupPanel" .. aCategoryName;
-	tBuffPanel = VUHDO_GLOBAL[tFrameName];
+	tBuffPanel = _G[tFrameName];
 	if (tBuffPanel == nil) then
 		tBuffPanel = CreateFrame("Frame", tFrameName, VuhDoNewOptionsBuffsGeneric, "VuhDoBuffSetupPanelTemplate");
 		BUFF_PANEL_BASE_HEIGHT = tBuffPanel:GetHeight();
 	end
 
-	VUHDO_GLOBAL[tBuffPanel:GetName() .. "BuffNameLabelLabel"]:SetText(aCategoryName);
+	_G[tBuffPanel:GetName() .. "BuffNameLabelLabel"]:SetText(aCategoryName);
 
 	if (anIsPresent) then
-		VUHDO_GLOBAL[tBuffPanel:GetName() .. "BuffTextureTexture"]:SetTexture(VUHDO_BUFFS[aBuffVariant[1]].icon);
+		_G[tBuffPanel:GetName() .. "BuffTextureTexture"]:SetTexture(VUHDO_BUFFS[aBuffVariant[1]].icon);
 	else
-		VUHDO_GLOBAL[tBuffPanel:GetName() .. "BuffTextureTexture"]:SetTexture("interface\\icons\\spell_chargenegative");
+		_G[tBuffPanel:GetName() .. "BuffTextureTexture"]:SetTexture("interface\\icons\\spell_chargenegative");
 	end
 	local tInFrameY = BUFF_PANEL_BASE_HEIGHT;
 
 	if (aFrameTemplateName ~= nil) then
-		tGenericFrame = VUHDO_GLOBAL[tFrameName .. "GenericPanel"];
+		tGenericFrame = _G[tFrameName .. "GenericPanel"];
 		if (tGenericFrame == nil) then
 			tGenericFrame = CreateFrame("Frame", "$parentGenericPanel", tBuffPanel, aFrameTemplateName);
 		end
@@ -146,8 +147,8 @@ local function VUHDO_setupStaticBuffPanel(aCategoryName, aBuffPanel, anIsPresent
 		VUHDO_BUFF_SETTINGS[aCategoryName] = {["enabled"] = anIsPresent};
 	end
 
-	if (VUHDO_BUFF_SETTINGS[aCategoryName].missingColor == nil) then
-		VUHDO_BUFF_SETTINGS[aCategoryName].missingColor = {
+	if (VUHDO_BUFF_SETTINGS[aCategoryName]["missingColor"] == nil) then
+		VUHDO_BUFF_SETTINGS[aCategoryName]["missingColor"] = {
 			["show"] = false,
 			["R"] = 1, ["G"] = 1, ["B"] = 1, ["O"] = 1,
 			["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
@@ -157,8 +158,8 @@ local function VUHDO_setupStaticBuffPanel(aCategoryName, aBuffPanel, anIsPresent
 
 	tBuffSettings = VUHDO_BUFF_SETTINGS[aCategoryName];
 
-	local tEnableCheckButton = VUHDO_GLOBAL[aBuffPanel:GetName() .. "EnableCheckButton"];
-	tEnableCheckButton:SetChecked(tBuffSettings.enabled and anIsPresent);
+	local tEnableCheckButton = _G[aBuffPanel:GetName() .. "EnableCheckButton"];
+	tEnableCheckButton:SetChecked(tBuffSettings["enabled"] and anIsPresent);
 	if (anIsPresent) then
 		tEnableCheckButton:Show();
 	else
@@ -166,13 +167,13 @@ local function VUHDO_setupStaticBuffPanel(aCategoryName, aBuffPanel, anIsPresent
 	end
 	VUHDO_lnfCheckButtonClicked(tEnableCheckButton);
 
-	local tMissButton = VUHDO_GLOBAL[aBuffPanel:GetName() .. "MissingCheckButton"];
+	local tMissButton = _G[aBuffPanel:GetName() .. "MissingCheckButton"];
 	VUHDO_lnfSetModel(tMissButton, "VUHDO_BUFF_SETTINGS." .. aCategoryName .. ".missingColor.show");
 	VUHDO_lnfSetTooltip(tMissButton, VUHDO_I18N_TT.K386);
 	tMissButton:Hide();
 	tMissButton:Show();
 
-	local tMissTexture = VUHDO_GLOBAL[aBuffPanel:GetName() .. "MissingTexture"];
+	local tMissTexture = _G[aBuffPanel:GetName() .. "MissingTexture"];
 	VUHDO_lnfSetModel(tMissTexture, "VUHDO_BUFF_SETTINGS." .. aCategoryName .. ".missingColor");
 	VUHDO_lnfSetTooltip(tMissTexture, VUHDO_I18N_TT.K385);
 	tMissTexture:Hide();
@@ -203,7 +204,7 @@ local function VUHDO_getAllBuffNamesAvail(someCategoryBuffs)
 end
 
 local function VUHDO_setBuffBoxIcon(aGenericPanel, aTexture)
-	local tTexture = VUHDO_GLOBAL[aGenericPanel:GetParent():GetName() .. "BuffTextureTexture"];
+	local tTexture = _G[aGenericPanel:GetParent():GetName() .. "BuffTextureTexture"];
 	tTexture:SetTexture(aTexture);
 end
 
@@ -230,7 +231,7 @@ local function VUHDO_setupGenericBuffPanel(aBuffVariant, aGenericPanel, someCate
 	local tSettings = VUHDO_BUFF_SETTINGS[aCategoryName];
 
 	if (VUHDO_BUFF_TARGET_RAID == tBuffTarget or VUHDO_BUFF_TARGET_SINGLE == tBuffTarget) then
-		local tComboBox = VUHDO_GLOBAL[aGenericPanel:GetName() .. "ComboBox"];
+		local tComboBox = _G[aGenericPanel:GetName() .. "ComboBox"];
 		VUHDO_setComboModel(tComboBox, "VUHDO_BUFF_SETTINGS." .. aCategoryName .. ".filter", VUHDO_BUFF_FILTER_COMBO_TABLE, VUHDO_I18N_TRACK_BUFFS_FOR);
 		VUHDO_lnfComboBoxInitFromModel(tComboBox);
 	elseif (VUHDO_BUFF_TARGET_CLASS == tBuffTarget) then
@@ -253,23 +254,23 @@ local function VUHDO_setupGenericBuffPanel(aBuffVariant, aGenericPanel, someCate
 
 		local tClassSettings = tSettings["classes"];
 
-		VUHDO_addBuffsToCombo(VUHDO_GLOBAL[aGenericPanel:GetName() .. "WarriorsCombo"], tClassBuffs, tClassSettings["WARRIOR"], true);
-		VUHDO_addBuffsToCombo(VUHDO_GLOBAL[aGenericPanel:GetName() .. "DeathKnightsCombo"], tClassBuffs, tClassSettings["DEATHKNIGHT"], true);
-		VUHDO_addBuffsToCombo(VUHDO_GLOBAL[aGenericPanel:GetName() .. "DruidsCombo"], tClassBuffs, tClassSettings["DRUID"], true);
-		VUHDO_addBuffsToCombo(VUHDO_GLOBAL[aGenericPanel:GetName() .. "PriestsCombo"], tClassBuffs, tClassSettings["PRIEST"], true);
-		VUHDO_addBuffsToCombo(VUHDO_GLOBAL[aGenericPanel:GetName() .. "ShamansCombo"], tClassBuffs, tClassSettings["SHAMAN"], true);
-		VUHDO_addBuffsToCombo(VUHDO_GLOBAL[aGenericPanel:GetName() .. "PaladinsCombo"], tClassBuffs, tClassSettings["PALADIN"], true);
-		VUHDO_addBuffsToCombo(VUHDO_GLOBAL[aGenericPanel:GetName() .. "WarlocksCombo"], tClassBuffs, tClassSettings["WARLOCK"], true);
-		VUHDO_addBuffsToCombo(VUHDO_GLOBAL[aGenericPanel:GetName() .. "MagesCombo"], tClassBuffs, tClassSettings["MAGE"], true);
-		VUHDO_addBuffsToCombo(VUHDO_GLOBAL[aGenericPanel:GetName() .. "HuntersCombo"], tClassBuffs, tClassSettings["HUNTER"], true);
-		VUHDO_addBuffsToCombo(VUHDO_GLOBAL[aGenericPanel:GetName() .. "RoguesCombo"], tClassBuffs, tClassSettings["ROGUE"], true);
+		VUHDO_addBuffsToCombo(_G[aGenericPanel:GetName() .. "WarriorsCombo"], tClassBuffs, tClassSettings["WARRIOR"], true);
+		VUHDO_addBuffsToCombo(_G[aGenericPanel:GetName() .. "DeathKnightsCombo"], tClassBuffs, tClassSettings["DEATHKNIGHT"], true);
+		VUHDO_addBuffsToCombo(_G[aGenericPanel:GetName() .. "DruidsCombo"], tClassBuffs, tClassSettings["DRUID"], true);
+		VUHDO_addBuffsToCombo(_G[aGenericPanel:GetName() .. "PriestsCombo"], tClassBuffs, tClassSettings["PRIEST"], true);
+		VUHDO_addBuffsToCombo(_G[aGenericPanel:GetName() .. "ShamansCombo"], tClassBuffs, tClassSettings["SHAMAN"], true);
+		VUHDO_addBuffsToCombo(_G[aGenericPanel:GetName() .. "PaladinsCombo"], tClassBuffs, tClassSettings["PALADIN"], true);
+		VUHDO_addBuffsToCombo(_G[aGenericPanel:GetName() .. "WarlocksCombo"], tClassBuffs, tClassSettings["WARLOCK"], true);
+		VUHDO_addBuffsToCombo(_G[aGenericPanel:GetName() .. "MagesCombo"], tClassBuffs, tClassSettings["MAGE"], true);
+		VUHDO_addBuffsToCombo(_G[aGenericPanel:GetName() .. "HuntersCombo"], tClassBuffs, tClassSettings["HUNTER"], true);
+		VUHDO_addBuffsToCombo(_G[aGenericPanel:GetName() .. "RoguesCombo"], tClassBuffs, tClassSettings["ROGUE"], true);
 
 	elseif (VUHDO_BUFF_TARGET_UNIQUE == tBuffTarget) then
 		if (tSettings["name"] == nil) then
 			tSettings["name"] = VUHDO_PLAYER_NAME;
 		end
 
-		local tEditBox = VUHDO_GLOBAL[aGenericPanel:GetName() .. "PlayerNameEditBox"];
+		local tEditBox = _G[aGenericPanel:GetName() .. "PlayerNameEditBox"];
 		tEditBox:SetText(tSettings["name"]);
 	else -- Aura, Totem, own group, self
 		if (tSettings["buff"] == nil) then
@@ -279,7 +280,7 @@ local function VUHDO_setupGenericBuffPanel(aBuffVariant, aGenericPanel, someCate
 		if (#someCategoryBuffs > 1) then
 			--VUHDO_Msg(aCategoryName);
 			local tCategBuffNames = VUHDO_getAllBuffNamesAvail(someCategoryBuffs);
-			local tCombo = VUHDO_GLOBAL[aGenericPanel:GetName() .. "DedicatedComboBox"];
+			local tCombo = _G[aGenericPanel:GetName() .. "DedicatedComboBox"];
 			VUHDO_addBuffsToCombo(tCombo, tCategBuffNames, tSettings["buff"], true);
 			VUHDO_setBuffBoxIcon(aGenericPanel, VUHDO_comboGetSelectedBuff(tCombo));
 		end
@@ -299,8 +300,8 @@ local function VUHDO_buildBuffSetupGenericPanel(aCategoryName, someCategoryBuffs
 
 	tMaxVariant = VUHDO_getBuffVariantMaxTarget(someCategoryBuffs[1]);
 	tSingleVariant = VUHDO_getBuffVariantSingleTarget(someCategoryBuffs[1]);
-	tIsMaxPresent = VUHDO_BUFFS[tMaxVariant[1]].present;
-	tIsSinglePresent = VUHDO_BUFFS[tSingleVariant[1]].present;
+	tIsMaxPresent = VUHDO_BUFFS[tMaxVariant[1]]["present"];
+	tIsSinglePresent = VUHDO_BUFFS[tSingleVariant[1]]["present"];
 
 	if (tIsMaxPresent) then
 		tMaxTarget = tMaxVariant[2];
