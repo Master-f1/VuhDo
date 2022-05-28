@@ -1632,7 +1632,7 @@ function HealComm:UNIT_AURA(unit)
 	local id = 1
 	while(true) do
 		local name, rank, icon, stack, _, _, _, _, _, _, spellID = UnitAura(unit, id, "HELPFUL")
-		if (not name) then break end
+		if (not name) then break; end
 		-- Prevent buffs like Tree of Life that have the same name for the shapeshift/healing increase from being calculated twice
 		if (not alreadyAdded[name]) then
 			alreadyAdded[name] = true
@@ -1657,7 +1657,7 @@ function HealComm:UNIT_AURA(unit)
 	id = 1
 	while(true) do
 		local name, rank, icon, stack, _, _, _, _, _, _, spellID = UnitAura(unit, id, "HARMFUL")
-		if (not name) then break end
+		if (not name) then break; end
 
 		if (healingModifiers[spellID]) then
 			decrease = math.min(decrease, healingModifiers[spellID])
@@ -1865,7 +1865,7 @@ local function findAura(casterGUID, spellName, spellRank, inc, ...)
 			local id = 1
 			while(true) do
 				local name, rank, _, stack, _, duration, endTime, caster = UnitBuff(unit, id)
-				if (not name) then break end
+				if (not name) then break; end
 
 				if (name == spellName and spellRank == rank and caster and UnitGUID(caster) == casterGUID) then
 					return (stack and stack > 0 and stack or 1), duration, endTime

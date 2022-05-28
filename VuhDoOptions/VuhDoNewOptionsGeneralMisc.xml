@@ -27,7 +27,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.BLIZZ_UI_HIDE_FOCUS");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_405);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K405);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -43,7 +43,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.BLIZZ_UI_HIDE_PARTY");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_169);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K169);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -59,7 +59,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.BLIZZ_UI_HIDE_PET");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_289);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K289);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -75,7 +75,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.BLIZZ_UI_HIDE_PLAYER");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_170);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K170);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -91,7 +91,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.BLIZZ_UI_HIDE_TARGET");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_290);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K290);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -141,7 +141,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.ON_MOUSE_UP");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_291);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K291);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -191,7 +191,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.IS_DC_SHIELD_DISABLED");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_492);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K492);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -260,7 +260,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.RES_IS_SHOW_TEXT");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_211);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K211);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -279,7 +279,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.RES_ANNOUNCE_TEXT");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_210);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K210);
 							</OnLoad>
 						</Scripts>
 					</EditBox>
@@ -311,7 +311,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.IS_SHOW_GCD");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_436);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K436);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -361,7 +361,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.IS_CLIQUE_COMPAT_MODE");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_465);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K465);
 							</OnLoad>
 							<OnClick>
 								VUHDO_lnfCheckButtonUpdateModel(self);

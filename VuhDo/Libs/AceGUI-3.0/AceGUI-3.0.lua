@@ -228,7 +228,7 @@ end
 			AceGUI already sets a handler to the event
 		:LayoutFinished(width, height) - called after a layout has finished, the width and height will be the width and height of the
 			area used for controls. These can be nil if the layout used the existing size to layout the controls.
-]]
+--]]
 
 --------------------------
 -- Widget Base Template --
@@ -355,7 +355,7 @@ do
 		this:SetScript("OnUpdate",nil)
 		this.obj:PerformLayout()
 	end
-]]
+--]]
 
 	local WidgetContainerBase = AceGUI.WidgetContainerBase
 
@@ -377,9 +377,11 @@ do
 	-- call this function to layout, makes sure layed out objects get a frame to get sizes etc
 	WidgetContainerBase.DoLayout = function(self)
 		self:PerformLayout()
-		--[[ if not self.parent then
+--[[
+		if not self.parent then
 			self.frame:SetScript("OnUpdate", LayoutOnUpdate)
-		end ]]
+		end
+--]]
 	end
 
 	WidgetContainerBase.AddChild = function(self, child)
@@ -501,7 +503,7 @@ end
 	A Layout is a func that takes 2 parameters
 		content - the frame that widgets will be placed inside
 		children - a table containing the widgets to layout
-]]
+--]]
 
 -- Very simple Layout, Children are stacked on top of each other down the left side
 AceGUI:RegisterLayout("List",
@@ -644,7 +646,7 @@ AceGUI:RegisterLayout("Flow",
 			if child.height == "fill" then
 				frame:SetPoint("BOTTOM", content, "BOTTOM")
 				isfullheight = true
-				break
+				break;
 			end
 		end
 

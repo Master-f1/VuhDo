@@ -1028,7 +1028,7 @@ local function VUHDO_initAllHealButtons(aPanel, aPanelNum)
 			tHealButton:ClearAllPoints();
 			tHealButton:Hide();
 		else
-			break
+			break;
 		end
 	end
 
@@ -1105,7 +1105,12 @@ local function VUHDO_initPanel(aPanel, aPanelNum)
 	VUHDO_STD_BACKDROP["insets"]["bottom"] = tPanelColor["BORDER"]["insets"];
 
 	aPanel:SetBackdrop(VUHDO_STD_BACKDROP);
-	aPanel:SetBackdropBorderColor(tPanelColor["BORDER"]["R"], tPanelColor["BORDER"]["G"], tPanelColor["BORDER"]["B"], tPanelColor["BORDER"]["O"]);
+	aPanel:SetBackdropBorderColor(
+		tPanelColor["BORDER"]["R"],
+		tPanelColor["BORDER"]["G"],
+		tPanelColor["BORDER"]["B"],
+		tPanelColor["BORDER"]["O"]
+	);
 
 	if (VUHDO_IS_PANEL_CONFIG) then
 		tLabel:SetText("[PANEL " .. aPanelNum .. "]");
@@ -1113,8 +1118,9 @@ local function VUHDO_initPanel(aPanel, aPanelNum)
 		tLabel:GetParent():SetPoint("BOTTOM", aPanel:GetName(), "TOP", 0, 3);
 		tLabel:GetParent():Show();
 
-		if (DESIGN_MISC_PANEL_NUM ~= nil and DESIGN_MISC_PANEL_NUM == aPanelNum and VuhDoNewOptionsPanelPanel ~= nil and
-			VuhDoNewOptionsPanelPanel:IsVisible()) then
+		if (DESIGN_MISC_PANEL_NUM ~= nil and DESIGN_MISC_PANEL_NUM == aPanelNum
+			and VuhDoNewOptionsPanelPanel ~= nil
+			and VuhDoNewOptionsPanelPanel:IsVisible()) then
 			VUHDO_DESIGN_BACKDROP = VUHDO_deepCopyTable(VUHDO_STD_BACKDROP);
 			tLabel:SetTextColor(0, 1, 0, 1);
 			UIFrameFlash(tLabel, 0.6, 0.6, 10000, true, 0.7, 0);
@@ -1125,7 +1131,12 @@ local function VUHDO_initPanel(aPanel, aPanelNum)
 			aPanel:SetBackdrop(VUHDO_STD_BACKDROP);
 			tLabel:SetTextColor(0.4, 0.4, 0.4, 1);
 			UIFrameFlashRemoveFrame(tLabel);
-			aPanel:SetBackdropBorderColor(tPanelColor["BORDER"]["R"], tPanelColor["BORDER"]["G"], tPanelColor["BORDER"]["B"], tPanelColor["BORDER"]["O"]);
+			aPanel:SetBackdropBorderColor(
+				tPanelColor["BORDER"]["R"],
+				tPanelColor["BORDER"]["G"],
+				tPanelColor["BORDER"]["B"],
+				tPanelColor["BORDER"]["O"]
+			);
 		end
 
 		if (DESIGN_MISC_PANEL_NUM ~= nil) then
@@ -1152,7 +1163,12 @@ local function VUHDO_initPanel(aPanel, aPanelNum)
 		end
 	end
 
-	aPanel:SetBackdropColor(tPanelColor["BACK"]["R"], tPanelColor["BACK"]["G"], tPanelColor["BACK"]["B"], tPanelColor["BACK"]["O"]);
+	aPanel:SetBackdropColor(
+		tPanelColor["BACK"]["R"],
+		tPanelColor["BACK"]["G"],
+		tPanelColor["BACK"]["B"],
+		tPanelColor["BACK"]["O"]
+	);
 
 	if (VUHDO_CONFIG["LOCK_CLICKS_THROUGH"]) then
 		aPanel:EnableMouse(false);
@@ -1250,10 +1266,7 @@ function VUHDO_lnfReloadUI()
 
 	VUHDO_initAllBurstCaches();
 	VUHDO_refreshRaidMembers();
-	-- VUHDO_reloadRaidMembers();
 	VUHDO_redrawAllPanels();
-	-- VUHDO_updateAllCustomDebuffs(false);
-	-- VUHDO_rebuildTargets();
 	VUHDO_buildGenericHealthBarBouquet();
 	VUHDO_bouqetsChanged();
 	VUHDO_initAllBurstCaches();

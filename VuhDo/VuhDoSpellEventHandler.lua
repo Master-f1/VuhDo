@@ -151,4 +151,3 @@ function VUHDO_spellcastSent(aUnit, aSpellName, aSpellRank, aTargetName)
 		end
 	end
 end
-

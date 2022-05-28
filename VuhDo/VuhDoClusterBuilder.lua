@@ -188,7 +188,6 @@ end
 local tCnt, tDistance;
 local tEmptyUnit = {};
 local function VUHDO_calibrateMapScale(aUnit, aDeltaX, aDeltaY)
-	-- Pythagoras, y range is alwyay x range / 1.5 in all current maps. (mul is faster than div in lua)
 	tDistance = sqrt((aDeltaX * aDeltaX) + ((aDeltaY * 0.6666666666666) ^ 2));
 
 	for tCnt = 1, 3 do
@@ -291,7 +290,7 @@ function VUHDO_updateAllClusters() -- Carbonite workaround
 	if ((WorldMapFrame ~= nil and WorldMapFrame:IsShown()) or (GetMouseFocus() ~= nil and GetMouseFocus():GetName() == nil)) then
 		return;
 	end
-	tX, tX = GetPlayerMapPosition("player");
+	tX, tY = GetPlayerMapPosition("player");
 	if ((tX or 0) + (tY or 0) <= 0) then
 		VUHDO_setMapToCurrentZone();
 	end
@@ -313,12 +312,12 @@ function VUHDO_updateAllClusters() -- Carbonite workaround
 		tIndex = tIndex + 1;
 		if (tIndex > tNumRaid) then
 			tIndex = 0;
-			break
+			break;
 		end
 
 		tInfo = VUHDO_CLUSTER_BASE_RAID[tIndex];
 		if (tInfo == nil) then
-			break
+			break;
 		end
 
 		tUnit = tInfo["unit"];
@@ -331,7 +330,7 @@ function VUHDO_updateAllClusters() -- Carbonite workaround
 			for tCnt = tIndex + 1, tNumRaid do
 				tAnotherInfo = VUHDO_CLUSTER_BASE_RAID[tCnt];
 				if (tAnotherInfo == nil) then
-					break
+					break;
 				end
 				tAnotherUnit = tAnotherInfo["unit"];
 
@@ -358,27 +357,27 @@ function VUHDO_updateAllClusters() -- Carbonite workaround
 
 						tNumSamples = tNumSamples + 1;
 						if (tNumSamples > 50) then -- VUHDO_MAX_SAMPLES
-							break
+							break;
 						end
 					end
 				end
 				tNumIterations = tNumIterations + 1;
 				if (tNumIterations > 120) then -- VUHDO_MAX_ITERATIONS
-					break
+					break;
 				end
 			end -- for
 		else -- Blacklist updaten
 			for tCnt = tIndex + 1, tNumRaid do
 				tAnotherInfo = VUHDO_CLUSTER_BASE_RAID[tCnt];
 				if (tAnotherInfo == nil) then
-					break
+					break;
 				end
 				VUHDO_isValidClusterUnit(tAnotherInfo);
 			end
 		end
 
 		if (tNumSamples > 50 or tNumIterations > 120) then -- VUHDO_MAX_SAMPLES -- VUHDO_MAX_ITERATIONS
-			break
+			break;
 		end
 	end
 
@@ -445,8 +444,7 @@ function VUHDO_getUnitsInRadialClusterWith(aUnit, aYards, anArray)
 	end
 
 	for tOtherUnit, tDeltas in pairs(VUHDO_COORD_DELTAS[aUnit]) do
-		tDistance =
-			sqrt((((tDeltas[1] or 0) * VUHDO_MAP_WIDTH) ^ 2) + (((tDeltas[2] or 0) * VUHDO_MAP_WIDTH / 1.5) ^ 2));
+		tDistance = sqrt((((tDeltas[1] or 0) * VUHDO_MAP_WIDTH) ^ 2) + (((tDeltas[2] or 0) * VUHDO_MAP_WIDTH / 1.5) ^ 2));
 		if (tDistance <= aYards and not VUHDO_CLUSTER_BLACKLIST[tOtherUnit]) then
 			tinsert(anArray, tOtherUnit);
 		end
@@ -485,7 +483,7 @@ function VUHDO_getUnitsInChainClusterWith(aUnit, aYards, anArray, aMaxJumps)
 		VUHDO_getUnitsInRadialClusterWith(aUnit, aYards, tNextJumps);
 		aUnit = VUHDO_getMostDeficitUnitOutOf(tNextJumps, tExcludeList);
 		if (aUnit == nil) then
-			break
+			break;
 		end
 	end
 	return anArray;

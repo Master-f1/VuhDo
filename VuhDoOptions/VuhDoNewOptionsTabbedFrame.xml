@@ -220,7 +220,7 @@
 						<Scripts>
 							<OnClick>VUHDO_tabbedPanelOkayClicked(self)</OnClick>
 							<OnLoad>
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_154);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K154);
 							</OnLoad>
 						</Scripts>
 					</Button>
@@ -236,7 +236,7 @@
 						<Scripts>
 							<OnClick>VUHDO_tabbedPanelCancelClicked(self)</OnClick>
 						<OnLoad>
-							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_155);
+							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K155);
 						</OnLoad>
 						</Scripts>
 					</Button>
@@ -359,7 +359,7 @@
 			<OnLoad>
 				VUHDO_lnfSetModel(self, "VUHDO_OPTIONS_SETTINGS.scale");
 				VUHDO_lnfSliderOnLoad(self, "", 0.5, 2, "", 0.05);
-				VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_480);
+				VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K480);
 			</OnLoad>
 		</Scripts>
 	</Frame>

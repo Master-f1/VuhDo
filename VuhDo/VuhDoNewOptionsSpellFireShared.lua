@@ -21,7 +21,7 @@ function VUHDO_activateLayout(aName)
 	end
 
 	VUHDO_SPEC_LAYOUTS["selected"] = aName;
-	VUHDO_Msg("Key layout \"" .. aName .. "\" successfully loaded.");
+	VUHDO_Msg(format(VUHDO_I18N_KEY_LAYOUT_SAVED, aName));
 
 	VUHDO_loadVariables();
 	VUHDO_keySetupInitBurst();

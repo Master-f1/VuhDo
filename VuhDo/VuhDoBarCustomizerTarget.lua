@@ -215,7 +215,7 @@ function VUHDO_updateTargetBars(aUnit)
 	end
 
 	tTargetOfTarget = tTarget .. "target";
-	
+
 	for _, tButton in pairs(tAllButtons) do
 		VUHDO_forgetTargetButton(tTarget, VUHDO_getTargetButton(tButton));
 		VUHDO_forgetTargetButton(tTargetOfTarget, VUHDO_getTotButton(tButton));
@@ -232,8 +232,8 @@ function VUHDO_updateTargetBars(aUnit)
 			tTotButton = VUHDO_getTotButton(tButton);
 			tTotButton:SetAlpha(0);
 		end
-		return;
-	end
+	return;
+end
 
 	-- Target
 	tIsFriend = UnitIsFriend(aUnit, tTarget);

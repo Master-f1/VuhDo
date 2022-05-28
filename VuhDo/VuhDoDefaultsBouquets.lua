@@ -1,4 +1,3 @@
-
 VUHDO_DEFAULT_BOUQUETS = {
 	["VERSION"] = 1,
 	["SELECTED"] = nil,
@@ -1470,7 +1469,7 @@ local function VUHDO_createBouquetItem(anEvent, aColor)
 	if (aColor ~= nil) then
 		tItem["color"] = VUHDO_deepCopyColor(aColor);
 	end
-	tItem["color"].isManuallySet = true;
+	tItem["color"]["isManuallySet"] = true;
 	return tItem;
 end
 
@@ -1487,7 +1486,7 @@ local function _VUHDO_buildGenericHealthBarBouquet(aType, aName)
 
 	-- Out of Range
 	tColor = VUHDO_PANEL_SETUP["BAR_COLORS"]["OUTRANGED"];
-	if (tColor.useText or tColor.useBackground or tColor.useOpacity) then
+	if (tColor["useText"] or tColor["useBackground"] or tColor["useOpacity"]) then
 		tItem = VUHDO_createBouquetItem("NO_RANGE", tColor);
 		tinsert(tBouquet, tItem);
 	end
@@ -1511,7 +1510,7 @@ local function _VUHDO_buildGenericHealthBarBouquet(aType, aName)
 	tinsert(tBouquet, tItem);
 
 	-- Raid Icon color
-	if (VUHDO_PANEL_SETUP["BAR_COLORS"]["RAID_ICONS"].enable and VUHDO_PANEL_SETUP["BAR_COLORS"]["RAID_ICONS"].enable) then
+	if (VUHDO_PANEL_SETUP["BAR_COLORS"]["RAID_ICONS"]["enable"] and VUHDO_PANEL_SETUP["BAR_COLORS"]["RAID_ICONS"]["enable"]) then
 		tItem = VUHDO_createBouquetItem("RAID_ICON_COLOR", nil);
 		tinsert(tBouquet, tItem);
 	end
@@ -1526,44 +1525,44 @@ local function _VUHDO_buildGenericHealthBarBouquet(aType, aName)
 		end
 
 		-- Health Bar Texts
-		if (VUHDO_PANEL_SETUP["PANEL_COLOR"].classColorsName) then
+		if (VUHDO_PANEL_SETUP["PANEL_COLOR"]["classColorsName"]) then
 			tItem = VUHDO_createBouquetItem("CLASS_COLOR", nil);
-			tItem["color"].useBackground = false;
-			tItem["color"].useOpacity = false;
+			tItem["color"]["useBackground"] = false;
+			tItem["color"]["useOpacity"] = false;
 			tinsert(tBouquet, tItem);
 		else
 			tTextColor = VUHDO_PANEL_SETUP["PANEL_COLOR"]["TEXT"];
 			tItem = VUHDO_createBouquetItem("ALWAYS", tTextColor);
-			tItem["color"].useBackground = false;
-			tItem["color"].useOpacity = false;
+			tItem["color"]["useBackground"] = false;
+			tItem["color"]["useOpacity"] = false;
 			tinsert(tBouquet, tItem);
 		end
 
 		-- Health Bar
 		if (aType == 0) then
 			tItem = VUHDO_createBouquetItem("STATUS_HEALTH", VUHDO_PANEL_SETUP["BAR_COLORS"]["LIFE_LEFT"]["GOOD"]);
-			tItem["color"].useOpacity = true;
-			tItem["custom"].grad_med = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["LIFE_LEFT"]["FAIR"]);
-			tItem["custom"].grad_med.useOpacity = true;
-			tItem["custom"].grad_low = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["LIFE_LEFT"]["LOW"]);
-			tItem["custom"].grad_low.useOpacity = true;
-			tItem["custom"].radio = 3; -- gradient
+			tItem["color"]["useOpacity"] = true;
+			tItem["custom"]["grad_med"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["LIFE_LEFT"]["FAIR"]);
+			tItem["custom"]["grad_med"]["useOpacity"] = true;
+			tItem["custom"]["grad_low"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["LIFE_LEFT"]["LOW"]);
+			tItem["custom"]["grad_low"]["useOpacity"] = true;
+			tItem["custom"]["radio"] = 3; -- gradient
 		elseif (aType == 1) then
 			tItem = VUHDO_createBouquetItem("STATUS_HEALTH", VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"]);
-			tItem["custom"].radio = 2; -- class color
-		else -- Solid == 2
+			tItem["custom"]["radio"] = 2; -- class color
+		else -- Solid == 2, Chimaeron == 3
 			tItem = VUHDO_createBouquetItem("STATUS_HEALTH", VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"]);
-			tItem["custom"].radio = 1; -- solid
+			tItem["custom"]["radio"] = 1; -- solid
 		end
 
-		tItem.color.mode = nil;
+		tItem["color"]["mode"] = nil;
 		tinsert(tBouquet, tItem);
 
 	else
-		if (VUHDO_PANEL_SETUP["PANEL_COLOR"].classColorsName) then
+		if (VUHDO_PANEL_SETUP["PANEL_COLOR"]["classColorsName"]) then
 			tItem = VUHDO_createBouquetItem("CLASS_COLOR", nil);
-			tItem["color"].useBackground = false;
-			tItem["color"].useOpacity = false;
+			tItem["color"]["useBackground"] = false;
+			tItem["color"]["useOpacity"] = false;
 			tinsert(tBouquet, tItem);
 		end
 
@@ -1574,7 +1573,7 @@ local function _VUHDO_buildGenericHealthBarBouquet(aType, aName)
 
 		-- No Emergency Bar
 		tItem = VUHDO_createBouquetItem("STATUS_HEALTH", VUHDO_PANEL_SETUP["BAR_COLORS"]["NO_EMERGENCY"]);
-		tItem["custom"].radio = 1; -- solid
+		tItem["custom"]["radio"] = 1; -- solid
 		tinsert(tBouquet, tItem);
 	end
 
@@ -1645,6 +1644,5 @@ function VUHDO_loadDefaultBouquets()
 			);
 		end
 	end
-
-	VUHDO_transferOldSettingsToBouquets();
 end
+

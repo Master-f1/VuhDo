@@ -369,7 +369,7 @@ local function VUHDO_updateHotIcons(aUnit, aHotName, aRest, aTimes, anIcon, aDur
 			else
 				tSlotCfg = sHotSlotCfgs[tostring(tIndex)];
 				tIsMatch = (aMode == 1 and tSlotCfg["mine"] and not tSlotCfg["others"])
-						or (aMode == 2 and not tSlotCfg["mine"] and tSlotCfg["others"])
+					or (aMode == 2 and not tSlotCfg["mine"] and tSlotCfg["others"])
 						or (aMode == 3 and tSlotCfg["mine"] and tSlotCfg["others"]);
 			end
 
@@ -467,9 +467,6 @@ end
 local VUHDO_IGNORE_HOT_IDS = {
 	[67358] = true, -- "Rejuvenating" proc has same name in russian and spanish as rejuvenation
 }
-
-
-
 
 function VUHDO_hotBouquetCallback(aUnit, anIsActive, anIcon, aTimer, aCounter, aDuration, aColor, aBuffName, aBouquetName)
 	VUHDO_updateHotIcons(aUnit, "BOUQUET_" .. (aBouquetName or ""), aTimer, aCounter, anIcon, aDuration, 0, aColor, aBuffName);

@@ -467,11 +467,11 @@ function VUHDO_getDurationTextSince(aStartTime)
 	tDeltaSecs = GetTime() - aStartTime;
 
 	if (tDeltaSecs >= 3600) then
-		return "(|cffffffff" .. floor(tDeltaSecs / 360) * 0.1 .. ", VUHDO_I18N_HOURS)";
+		return format("(|cffffffff%.0f:%02d %s|r)", tDeltaSecs / 3600, floor(tDeltaSecs / 60) % 60, VUHDO_I18N_HOURS);
 	elseif (tDeltaSecs >= 60) then
-		return "(|cffffffff" .. floor(tDeltaSecs / 60) .. ", VUHDO_I18N_MINS)";
+		return format("(|cffffffff%d %s|r)", tDeltaSecs / 60, VUHDO_I18N_MINS);
 	else
-		return "(|cffffffff" .. floor(tDeltaSecs) .. ", VUHDO_I18N_SECS)";
+		return format("(|cffffffff%d %s|r)", tDeltaSecs, VUHDO_I18N_SECS);
 	end
 end
 

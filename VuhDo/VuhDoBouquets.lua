@@ -1,4 +1,3 @@
-
 local table = table;
 local floor = floor;
 local select = select;
@@ -31,7 +30,15 @@ end
 
 local tValue;
 local function VUHDO_getColorHash(aColor)
-	tValue = (aColor["R"] or 0) * 0.0001 + (aColor["G"] or 0) * 0.001 + (aColor["B"] or 0) * 0.01 + (aColor["O"] or 0) * 0.1 + (aColor["TR"] or 0) + (aColor["TG"] or 0) * 10 + (aColor["TB"] or 0) * 100 + (aColor["TO"] or 0) * 1000;
+	tValue =
+		  (aColor["R"] or 0) * 0.0001
+		+ (aColor["G"] or 0) * 0.001
+		+ (aColor["B"] or 0) * 0.01
+		+ (aColor["O"] or 0) * 0.1
+		+ (aColor["TR"] or 0)
+		+ (aColor["TG"] or 0) * 10
+		+ (aColor["TB"] or 0) * 100
+		+ (aColor["TO"] or 0) * 1000;
 
 	if (aColor["useText"]) then
 		tValue = tValue + 10000;
@@ -347,7 +354,7 @@ local function VUHDO_registerForBouquet(aBouquetName, anOwnerName, aFunction)
 	end
 
 	if (VUHDO_BOUQUETS["STORED"][aBouquetName] == nil) then
-		VUHDO_Msg("\"" .. anOwnerName .. "\"" .. VUHDO_I18N_HOOK .. "\"" .. aBouquetName .. "\"" .. VUHDO_I18N_HOOK2, 1, 0.4, 0.4);
+		VUHDO_Msg(format(VUHDO_I18N_ERR_NO_BOUQUET, anOwnerName, aBouquetName), 1, 0.4, 0.4);
 		return;
 	end
 

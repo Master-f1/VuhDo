@@ -40,7 +40,7 @@ local VUHDO_INIT_UNIT_DEBUFF_SCHOOLS = {
 local VUHDO_CONFIG;
 local VUHDO_RAID;
 local VUHDO_PANEL_SETUP;
-local VUHDO_DEBUFF_COLORS = {}
+local VUHDO_DEBUFF_COLORS = {};
 
 local VUHDO_shouldScanUnit;
 local VUHDO_DEBUFF_BLACKLIST = {};
@@ -142,7 +142,7 @@ local function _VUHDO_getDebuffColor(anInfo, aNewColor)
 	if ((tDebuff or 6) ~= 6 and VUHDO_DEBUFF_COLORS[tDebuff] ~= nil) then -- VUHDO_DEBUFF_TYPE_CUSTOM
 		return VUHDO_copyColorTo(VUHDO_DEBUFF_COLORS[tDebuff], aNewColor);
 	elseif (tDebuff == 6 and tDebuffSettings ~= nil -- VUHDO_DEBUFF_TYPE_CUSTOM
-	and tDebuffSettings["isColor"] and tDebuffSettings["color"] ~= nil) then
+		and tDebuffSettings["isColor"] and tDebuffSettings["color"] ~= nil) then
 		tSourceColor = tDebuffSettings["color"];
 
 		if (VUHDO_DEBUFF_COLORS[6]["useBackground"]) then
@@ -262,7 +262,7 @@ function VUHDO_determineDebuff(aUnit, aClassName)
 			tName, _, tIcon, tStacks, tType, tDuration, tExpiry = UnitDebuff(aUnit, tCnt, false);
 
 			if (tIcon == nil) then
-				break
+				break;
 			end
 
 			-- Custom Debuff?
@@ -309,7 +309,7 @@ function VUHDO_determineDebuff(aUnit, aClassName)
 			tName, _, tIcon, tStacks, _, _, tExpiry = UnitBuff(aUnit, tCnt);
 
 			if (tIcon == nil) then
-				break
+				break;
 			end
 
 			if (not VUHDO_CUSTOM_BUFF_BLACKLIST[tName]) then
@@ -346,8 +346,9 @@ function VUHDO_determineDebuff(aUnit, aClassName)
 					end
 				end
 				-- update number of stacks?
-			elseif (VUHDO_UNIT_CUSTOM_DEBUFFS[aUnit][tName][1] ~= tDebuffInfo[2] or
-				VUHDO_UNIT_CUSTOM_DEBUFFS[aUnit][tName][2] ~= tDebuffInfo[3]) then
+			elseif (VUHDO_UNIT_CUSTOM_DEBUFFS[aUnit][tName][1] ~= tDebuffInfo[2]
+				or VUHDO_UNIT_CUSTOM_DEBUFFS[aUnit][tName][2] ~= tDebuffInfo[3]) then
+
 				twipe(VUHDO_UNIT_CUSTOM_DEBUFFS[aUnit][tName]);
 				VUHDO_UNIT_CUSTOM_DEBUFFS[aUnit][tName] = {tDebuffInfo[2], tDebuffInfo[3]};
 				VUHDO_updateDebuffIcon(aUnit, tDebuffInfo[1], tName, tDebuffInfo[2], tDebuffInfo[3]);
@@ -355,12 +356,14 @@ function VUHDO_determineDebuff(aUnit, aClassName)
 		end
 
 		-- Play standard debuff sound?
-		if (sStdDebuffSound ~= nil and (tChosen ~= 0 or tIsStandardDebuff) -- VUHDO_DEBUFF_TYPE_NONE
-		and tChosen ~= 6 and tChosen ~= 7 -- VUHDO_DEBUFF_TYPE_CUSTOM || VUHDO_DEBUFF_TYPE_MISSING_BUFF
-		and VUHDO_LAST_UNIT_DEBUFFS[aUnit] ~= tChosen and tInfo["range"]) then
+		if (sStdDebuffSound ~= nil
+			and (tChosen ~= 0 or tIsStandardDebuff) -- VUHDO_DEBUFF_TYPE_NONE
+			and tChosen ~= 6 and tChosen ~= 7 -- VUHDO_DEBUFF_TYPE_CUSTOM || VUHDO_DEBUFF_TYPE_MISSING_BUFF
+			and VUHDO_LAST_UNIT_DEBUFFS[aUnit] ~= tChosen
+			and tInfo["range"]) then
 
-			VUHDO_playDebuffSound(sStdDebuffSound);
-			VUHDO_LAST_UNIT_DEBUFFS[aUnit] = tChosen;
+				VUHDO_playDebuffSound(sStdDebuffSound);
+				VUHDO_LAST_UNIT_DEBUFFS[aUnit] = tChosen;
 		end
 	end -- shouldScanUnit
 

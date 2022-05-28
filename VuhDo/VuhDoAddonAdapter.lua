@@ -106,7 +106,10 @@ function VUHDO_initFuBar()
 	end
 
 	-- Native FuBar
-	if (LibStub:GetLibrary("LibFuBarPlugin-3.0", true) and IsAddOnLoaded("FuBar") and not IsAddOnLoaded("FuBar2Broker") and not IsAddOnLoaded("Broker2FuBar")) then
+	if (LibStub:GetLibrary("LibFuBarPlugin-3.0", true)
+		and IsAddOnLoaded("FuBar")
+		and not IsAddOnLoaded("FuBar2Broker")
+		and not IsAddOnLoaded("Broker2FuBar")) then
 
 		local tLibFuBarPlugin = LibStub:GetLibrary("LibFuBarPlugin-3.0");
 		LibStub("AceAddon-3.0"):EmbedLibrary(VuhDo, "LibFuBarPlugin-3.0");

@@ -85,7 +85,7 @@
 								<Scripts>
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.TOOLTIP.position", 1);
-										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_138);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K138);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -101,7 +101,7 @@
 								<Scripts>
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.TOOLTIP.position", 3);
-										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_139);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K139);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -117,7 +117,7 @@
 								<Scripts>
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.TOOLTIP.position", 2);
-										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_140);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K140);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -346,7 +346,7 @@
 								<Scripts>
 									<OnLoad>
 										VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.#PNUM#.TOOLTIP.show");
-										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_141);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K141);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -362,7 +362,7 @@
 								<Scripts>
 									<OnLoad>
 										VUHDO_lnfSetModel(self, "VUHDO_CONFIG.STANDARD_TOOLTIP");
-										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_292);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K292);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -378,7 +378,7 @@
 								<Scripts>
 									<OnLoad>
 										VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.#PNUM#.TOOLTIP.inFight");
-										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_142);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K142);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -394,7 +394,7 @@
 								<Scripts>
 									<OnLoad>
 										VUHDO_lnfSetModel(self, "VUHDO_SPELL_CONFIG.IS_TOOLTIP_INFO");
-										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_346);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K346);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -415,7 +415,7 @@
 									<OnLoad>
 										VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.#PNUM#.TOOLTIP.SCALE");
 										VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_SCALE, 0.5, 2, "", 0.05)
-										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_143);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K143);
 									</OnLoad>
 								</Scripts>
 							</Frame>
@@ -448,7 +448,7 @@
 									<OnLoad>
 										VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.#PNUM#.TOOLTIP.BACKGROUND");
 										VUHDO_lnfInitColorSwatch(self, VUHDO_I18N_BACKGROUND);
-										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_144);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K144);
 									</OnLoad>
 								</Scripts>
 							</Frame>
@@ -483,7 +483,7 @@
 									<OnLoad>
 										VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.#PNUM#.TOOLTIP.BORDER");
 										VUHDO_lnfInitColorSwatch(self, VUHDO_I18N_BORDER);
-										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_145);
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K145);
 									</OnLoad>
 								</Scripts>
 							</Frame>

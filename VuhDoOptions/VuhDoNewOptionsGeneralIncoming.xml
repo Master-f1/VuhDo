@@ -27,7 +27,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.SHOW_OWN_INCOMING");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_063);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K063);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -43,7 +43,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.SHOW_INCOMING");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_216);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K216);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -59,7 +59,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.SHOW_TEXT_OVERHEAL");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_217);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K217);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -75,7 +75,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.SHOW_OVERHEAL");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_062);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K062);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -113,7 +113,7 @@
 					</Anchor>
 				</Anchors>
 				<Frames>
-
+<!--VUHDO_I18N_EVENT_HORIZON, VUHDO_I18N_TT.K368, нету в актуале-->
 					<Frame name="$parentEventHorizonSlider" inherits="VuhDoHSliderTemplate">
 						<Size>
 							<AbsDimension x="215" y="32" />
@@ -129,11 +129,11 @@
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.INC_CASTED_SECS");
 								VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_EVENT_HORIZON, 0.1, 3.5, " " .. VUHDO_I18N_SECS, 0.1);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_368);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K368);
 							</OnLoad>
 						</Scripts>
 					</Frame>
-
+<!--VUHDO_I18N_TT.K369, нету в актуале-->
 					<CheckButton name="$parentEnableCheckButton" text="VUHDO_I18N_ENABLE" inherits="VuhDoCheckButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
@@ -145,11 +145,11 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.SHOW_INC_CASTED");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_369);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K369);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
-
+<!--VUHDO_I18N_CASTED, нету в актуале-->
 					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
 						<Size>
 							<AbsDimension x="100" y="18" />
@@ -183,7 +183,7 @@
 					</Anchor>
 				</Anchors>
 				<Frames>
-
+<!--VUHDO_I18N_EVENT_HORIZON, VUHDO_I18N_TT.K370, нету в актуале-->
 					<Frame name="$parentEventHorizonSlider" inherits="VuhDoHSliderTemplate">
 						<Size>
 							<AbsDimension x="215" y="32" />
@@ -199,11 +199,11 @@
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.INC_CHANNELLED_SECS");
 								VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_EVENT_HORIZON, 0.2, 15, " " .. VUHDO_I18N_SECS, 0.2);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_370);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K370);
 							</OnLoad>
 						</Scripts>
 					</Frame>
-
+<!--VUHDO_I18N_TT.K371, нету в актуале-->
 					<CheckButton name="$parentEnableCheckButton" text="VUHDO_I18N_ENABLE" inherits="VuhDoCheckButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
@@ -215,11 +215,11 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.SHOW_INC_CHANNELLED");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_371);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K371);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
-
+<!--VUHDO_I18N_CHANNELLED, нету в актуале-->
 					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
 						<Size>
 							<AbsDimension x="100" y="18" />
@@ -253,7 +253,7 @@
 					</Anchor>
 				</Anchors>
 				<Frames>
-
+<!--VUHDO_I18N_EVENT_HORIZON, VUHDO_I18N_TT.K372, нету в актуале-->
 					<Frame name="$parentEventHorizonSlider" inherits="VuhDoHSliderTemplate">
 						<Size>
 							<AbsDimension x="215" y="32" />
@@ -269,11 +269,11 @@
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.INC_HOTS_SECS");
 								VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_EVENT_HORIZON, 0.2, 15, " " .. VUHDO_I18N_SECS, 0.2);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_372);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K372);
 							</OnLoad>
 						</Scripts>
 					</Frame>
-
+<!--VUHDO_I18N_TT.K373, нету в актуале-->
 					<CheckButton name="$parentEnableCheckButton" text="VUHDO_I18N_ENABLE" inherits="VuhDoCheckButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
@@ -285,7 +285,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.SHOW_INC_HOTS");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_373);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K373);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -323,7 +323,7 @@
 					</Anchor>
 				</Anchors>
 				<Frames>
-
+<!--VUHDO_I18N_EVENT_HORIZON, VUHDO_I18N_TT.K374, нету в актуале-->
 					<Frame name="$parentEventHorizonSlider" inherits="VuhDoHSliderTemplate">
 						<Size>
 							<AbsDimension x="215" y="32" />
@@ -339,11 +339,11 @@
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.INC_BOMBED_SECS");
 								VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_EVENT_HORIZON, 0.2, 15, VUHDO_I18N_SECS, 0.2);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_374);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K374);
 							</OnLoad>
 						</Scripts>
 					</Frame>
-
+<!--VUHDO_I18N_TT.K375, нету в актуале-->
 					<CheckButton name="$parentEnableCheckButton" text="VUHDO_I18N_ENABLE" inherits="VuhDoCheckButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
@@ -355,11 +355,11 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.SHOW_INC_BOMBED");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_375);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K375);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
-
+<!--VUHDO_I18N_BOMBED, нету в актуале-->
 					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
 						<Size>
 							<AbsDimension x="100" y="18" />

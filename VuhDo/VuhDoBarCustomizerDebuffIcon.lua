@@ -125,7 +125,6 @@ local function VUHDO_animateDebuffIcon(aButton, someIconInfos, aNow)
 	end
 end
 
---
 local tUnit, tIcon;
 local tAllButtons, tButton;
 local tNow;
