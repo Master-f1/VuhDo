@@ -1,3 +1,5 @@
+local _;
+
 local VUHDO_INDICATORS = {
 	{ -- Outer Border
 		["name"] = VUHDO_I18N_OUTER_BORDER,
@@ -54,7 +56,7 @@ local VUHDO_INDICATORS = {
 				["type"] = VUHDO_ENUMERATOR_CONSTRAINTS,
 				["enumerator"] = VUHDO_STATUS_BARS,
 				["model"] = "VUHDO_INDICATOR_CONFIG.CUSTOM.MOUSEOVER_HIGHLIGHT.TEXTURE",
-				["tooltip"] = VUHDO_I18N_TT_076,
+				["tooltip"] = VUHDO_I18N_TT.K076,
 			},
 		},
 	},
@@ -69,7 +71,7 @@ local VUHDO_INDICATORS = {
 				["type"] = VUHDO_ENUMERATOR_CONSTRAINTS,
 				["enumerator"] = VUHDO_STATUS_BARS,
 				["model"] = "VUHDO_INDICATOR_CONFIG.CUSTOM.AGGRO_BAR.TEXTURE",
-				["tooltip"] = VUHDO_I18N_TT_076,
+				["tooltip"] = VUHDO_I18N_TT.K076,
 			},
 		},
 	},
@@ -91,26 +93,26 @@ local VUHDO_INDICATORS = {
 				["type"] = VUHDO_MIN_MAX_CONSTRAINTS,
 				["min"] = 1, ["max"] = 20, ["step"] = 1, ["unit"] = "",
 				["model"] = "VUHDO_INDICATOR_CONFIG.CUSTOM.THREAT_BAR.HEIGHT",
-				["tooltip"] = VUHDO_I18N_TT_179,
+				["tooltip"] = VUHDO_I18N_TT.K179,
 			},
 			{
 				["name"] = VUHDO_I18N_BAR_TEXTURE,
 				["type"] = VUHDO_ENUMERATOR_CONSTRAINTS,
 				["enumerator"] = VUHDO_STATUS_BARS,
 				["model"] = "VUHDO_INDICATOR_CONFIG.CUSTOM.THREAT_BAR.TEXTURE",
-				["tooltip"] = VUHDO_I18N_TT_076,
+				["tooltip"] = VUHDO_I18N_TT.K076,
 			},
 			{
 				["name"] = VUHDO_I18N_INV_GROWTH,
 				["type"] = VUHDO_BOOLEAN_CONSTRAINTS,
 				["model"] = "VUHDO_INDICATOR_CONFIG.CUSTOM.THREAT_BAR.invertGrowth",
-				["tooltip"] = VUHDO_I18N_TT_307,
+				["tooltip"] = VUHDO_I18N_TT.K307,
 			},
 			{
 				["name"] = VUHDO_I18N_TURN_AXIS,
 				["type"] = VUHDO_BOOLEAN_CONSTRAINTS,
 				["model"] = "VUHDO_INDICATOR_CONFIG.CUSTOM.THREAT_BAR.turnAxis",
-				["tooltip"] = VUHDO_I18N_TT_471,
+				["tooltip"] = VUHDO_I18N_TT.K471,
 			},
 		},
 	},
@@ -125,19 +127,19 @@ local VUHDO_INDICATORS = {
 				["type"] = VUHDO_ENUMERATOR_CONSTRAINTS,
 				["enumerator"] = VUHDO_STATUS_BARS,
 				["model"] = "VUHDO_INDICATOR_CONFIG.CUSTOM.MANA_BAR.TEXTURE",
-				["tooltip"] = VUHDO_I18N_TT_076,
+				["tooltip"] = VUHDO_I18N_TT.K076,
 			},
 			{
 				["name"] = VUHDO_I18N_INV_GROWTH,
 				["type"] = VUHDO_BOOLEAN_CONSTRAINTS,
 				["model"] = "VUHDO_INDICATOR_CONFIG.CUSTOM.MANA_BAR.invertGrowth",
-				["tooltip"] = VUHDO_I18N_TT_307,
+				["tooltip"] = VUHDO_I18N_TT.K307,
 			},
 			{
 				["name"] = VUHDO_I18N_TURN_AXIS,
 				["type"] = VUHDO_BOOLEAN_CONSTRAINTS,
 				["model"] = "VUHDO_INDICATOR_CONFIG.CUSTOM.MANA_BAR.turnAxis",
-				["tooltip"] = VUHDO_I18N_TT_471,
+				["tooltip"] = VUHDO_I18N_TT.K471,
 			},
 		},
 	},
@@ -152,7 +154,7 @@ local VUHDO_INDICATORS = {
 				["type"] = VUHDO_ENUMERATOR_CONSTRAINTS,
 				["enumerator"] = VUHDO_STATUS_BARS,
 				["model"] = "VUHDO_INDICATOR_CONFIG.CUSTOM.BACKGROUND_BAR.TEXTURE",
-				["tooltip"] = VUHDO_I18N_TT_076,
+				["tooltip"] = VUHDO_I18N_TT.K076,
 			},
 		},
 	},
@@ -166,19 +168,19 @@ local VUHDO_INDICATORS = {
 				["name"] = VUHDO_I18N_INV_GROWTH,
 				["type"] = VUHDO_BOOLEAN_CONSTRAINTS,
 				["model"] = "VUHDO_INDICATOR_CONFIG.CUSTOM.HEALTH_BAR.invertGrowth",
-				["tooltip"] = VUHDO_I18N_TT_307,
+				["tooltip"] = VUHDO_I18N_TT.K307,
 			},
 			{
 				["name"] = VUHDO_I18N_VERTICAL,
 				["type"] = VUHDO_BOOLEAN_CONSTRAINTS,
 				["model"] = "VUHDO_INDICATOR_CONFIG.CUSTOM.HEALTH_BAR.vertical",
-				["tooltip"] = VUHDO_I18N_TT_308,
+				["tooltip"] = VUHDO_I18N_TT.K308,
 			},
 			{
 				["name"] = VUHDO_I18N_TURN_AXIS,
 				["type"] = VUHDO_BOOLEAN_CONSTRAINTS,
 				["model"] = "VUHDO_INDICATOR_CONFIG.CUSTOM.HEALTH_BAR.turnAxis",
-				["tooltip"] = VUHDO_I18N_TT_471,
+				["tooltip"] = VUHDO_I18N_TT.K471,
 			},
 		},
 	},
@@ -204,10 +206,10 @@ end
 
 local tCombo;
 local function VUHDO_setBouquetSelectorModel(aPanel, aText, aModel, aTexture)
-	VUHDO_GLOBAL[aPanel:GetName() .. "SelectLabelLabel"]:SetText(aText);
+	_G[aPanel:GetName() .. "SelectLabelLabel"]:SetText(aText);
 
-	VUHDO_GLOBAL[aPanel:GetName() .. "SchemaTexture"]:SetTexture("Interface\\AddOns\\VuhDoOptions\\Images\\" .. aTexture);
-	tCombo = VUHDO_GLOBAL[aPanel:GetName() .. "SelectComboBox"];
+	_G[aPanel:GetName() .. "SchemaTexture"]:SetTexture("Interface\\AddOns\\VuhDoOptions\\Images\\" .. aTexture);
+	tCombo = _G[aPanel:GetName() .. "SelectComboBox"];
 	VUHDO_setComboModel(tCombo, aModel, VUHDO_BOUQUET_SLOTS_COMBO_MODEL);
 	VUHDO_lnfComboBoxInitFromModel(tCombo);
 end
@@ -219,7 +221,7 @@ end
 
 local tCombo;
 function VUHDO_generalIndicatorsEditButtonClicked(aButton)
-	tCombo = VUHDO_GLOBAL[aButton:GetParent():GetName() .. "SelectComboBox"];
+	tCombo = _G[aButton:GetParent():GetName() .. "SelectComboBox"];
 	VUHDO_BOUQUETS["SELECTED"] = VUHDO_lnfGetValueFromModel(tCombo);
 
 	VUHDO_MENU_RETURN_FUNC = VUHDO_newOptionsGeneralIndicatorsClicked;
@@ -234,7 +236,7 @@ local tName;
 local tSlider;
 local function VUHDO_createSliderForComponent(anIndex, tElement, aParent)
 	tName = "VuhDoIndicatorOptionsSlider" .. aParent:GetName() .. anIndex;
-	tSlider = VUHDO_GLOBAL[tName];
+	tSlider = _G[tName];
 	if (tSlider == nil) then
 		tSlider = CreateFrame("Frame", tName, aParent, "VuhDoHSliderTemplate");
 	end
@@ -254,7 +256,7 @@ local tName;
 local tCheckButton;
 local function VUHDO_createCheckBoxForComponent(anIndex, tElement, aParent)
 	tName = "VuhDoIndicatorOptions" .. aParent:GetName() .. anIndex .. "CheckButton";
-	tCheckButton = VUHDO_GLOBAL[tName];
+	tCheckButton = _G[tName];
 	if (tCheckButton == nil) then
 		tCheckButton = CreateFrame("CheckButton", tName, aParent, "VuhDoCheckButtonTemplate");
 	end
@@ -271,7 +273,7 @@ local tName;
 local tPanel, tCombo, tTexture;
 local function VUHDO_createComboBoxForComponent(anIndex, tElement, aParent)
 	tName = "VuhDoIndicatorOptionsComboPanel" .. aParent:GetName() .. anIndex;
-	tPanel = VUHDO_GLOBAL[tName];
+	tPanel = _G[tName];
 	if (tPanel == nil) then
 		tPanel = CreateFrame("Frame", tName, aParent, "VuhDoMoreButtonsTexturePanel");
 	end
@@ -279,15 +281,15 @@ local function VUHDO_createComboBoxForComponent(anIndex, tElement, aParent)
 	tPanel:SetWidth(150);
 	tPanel:SetHeight(70);
 
-	tCombo = VUHDO_GLOBAL[tName .. "Combo"];
+	tCombo = _G[tName .. "Combo"];
 	VUHDO_setComboModel(tCombo, tElement["model"], tElement["enumerator"]);
 	VUHDO_lnfComboBoxInitFromModel(tCombo);
 	VUHDO_lnfSetTooltip(tCombo, tElement["tooltip"]);
 
-	tTexture = VUHDO_GLOBAL[tName .. "Texture"];
+	tTexture = _G[tName .. "Texture"];
 	VUHDO_lnfSetModel(tTexture, tElement["model"]);
 	VUHDO_lnfTextureSwatchInitFromModel(tTexture);
-	VUHDO_GLOBAL[tTexture:GetName() .. "TitleString"]:SetText(tElement["name"]);
+	_G[tTexture:GetName() .. "TitleString"]:SetText(tElement["name"]);
 	return tPanel;
 end
 
@@ -325,10 +327,10 @@ function VUHDO_newOptionsIndicatorsBuildScrollChild(aScrollChild)
 	for tIndex, tIndicator in ipairs(VUHDO_INDICATORS) do
 		tBouqetSlotName = "VuhDoBouqetSlotItem" .. tIndex;
 
-		if (VUHDO_GLOBAL[tBouqetSlotName] == nil) then
+		if (_G[tBouqetSlotName] == nil) then
 			tBouquetSlot = CreateFrame("ScrollFrame", tBouqetSlotName, aScrollChild, "VuhDoBouquetSlotTemplate");
 		else
-			tBouquetSlot = VUHDO_GLOBAL[tBouqetSlotName];
+			tBouquetSlot = _G[tBouqetSlotName];
 		end
 
 		tBouquetSlot:ClearAllPoints();
@@ -336,11 +338,11 @@ function VUHDO_newOptionsIndicatorsBuildScrollChild(aScrollChild)
 		VUHDO_setBouquetSelectorModel(tBouquetSlot, tIndicator["name"], tIndicator["model"], tIndicator["icon"]);
 
 		if (#tIndicator["custom"] > 0) then
-			tMorePanel = VUHDO_GLOBAL[tBouqetSlotName .. "MorePanel"];
+			tMorePanel = _G[tBouqetSlotName .. "MorePanel"];
 			tHeight = VUHDO_buildCustomComponents(tMorePanel, tIndicator["custom"]);
 			tMorePanel:SetHeight(tHeight + 30);
 		else
-			VUHDO_GLOBAL[tBouqetSlotName .. "MoreButton"]:Hide();
+			_G[tBouqetSlotName .. "MoreButton"]:Hide();
 		end
 
 		tYIndex = tYIndex + 1;

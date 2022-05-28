@@ -48,7 +48,7 @@
 						<Scripts>
 							<OnLoad>
 							VUHDO_lnfSetModel(self, "VUHDO_SPEC_LAYOUTS.selected");
-							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_403);
+							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K403);
 							</OnLoad>
 						</Scripts>
 					</EditBox>
@@ -68,7 +68,7 @@
 							<OnLoad>
 						VUHDO_setComboModel(self, "VUHDO_SPEC_LAYOUTS.selected", VUHDO_KEY_LAYOUT_COMBO_MODEL);
 						self:SetAttribute("custom_function", VUHDO_keyLayoutComboChanged);
-						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_404);
+						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K404);
 							</OnLoad>
 							<OnShow>
 								VUHDO_lnfPatchFont(self, "Text");
@@ -173,7 +173,7 @@
 						<Scripts>
 							<OnLoad>
 						VUHDO_lnfSetModel(self, "VUHDO_SPELL_CONFIG.IS_LOAD_HOTS");
-						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_365);
+						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K365);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -226,7 +226,7 @@
 						<Scripts>
 							<OnLoad>
 						VUHDO_lnfSetModel(self, "VUHDO_SPELL_CONFIG.FIRE_CUSTOM_2_SPELL");
-						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_201);
+						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K201);
 							</OnLoad>
 							<OnTextChanged>
 							VUHDO_lnfEditBoxUpdateModel(self);
@@ -249,7 +249,7 @@
 						<Scripts>
 							<OnLoad>
 						VUHDO_lnfSetModel(self, "VUHDO_SPELL_CONFIG.FIRE_CUSTOM_1_SPELL");
-						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_202);
+						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K202);
 							</OnLoad>
 							<OnTextChanged>
 							VUHDO_lnfEditBoxUpdateModel(self);
@@ -269,7 +269,7 @@
 						<Scripts>
 							<OnLoad>
 						VUHDO_lnfSetModel(self, "VUHDO_SPELL_CONFIG.IS_FIRE_CUSTOM_2");
-						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_203);
+						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K203);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -285,7 +285,7 @@
 						<Scripts>
 							<OnLoad>
 						VUHDO_lnfSetModel(self, "VUHDO_SPELL_CONFIG.IS_FIRE_CUSTOM_1");
-						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_204);
+						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K204);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -301,7 +301,7 @@
 						<Scripts>
 							<OnLoad>
 						VUHDO_lnfSetModel(self, "VUHDO_SPELL_CONFIG.IS_FIRE_TRINKET_2");
-						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_205);
+						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K205);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -317,7 +317,7 @@
 						<Scripts>
 							<OnLoad>
 						VUHDO_lnfSetModel(self, "VUHDO_SPELL_CONFIG.IS_FIRE_TRINKET_1");
-						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_206);
+						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K206);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -368,7 +368,7 @@
 						<Scripts>
 							<OnLoad>
 						VUHDO_lnfSetModel(self, "VUHDO_SPELL_CONFIG.IS_FIRE_OUT_FIGHT");
-						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_207);
+						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K207);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -384,7 +384,7 @@
 						<Scripts>
 							<OnLoad>
 						VUHDO_lnfSetModel(self, "VUHDO_SPELL_CONFIG.IS_FIRE_HOT");
-						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_208);
+						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K208);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -400,7 +400,7 @@
 						<Scripts>
 							<OnLoad>
 						VUHDO_lnfSetModel(self, "VUHDO_SPELL_CONFIG.IS_AUTO_FIRE");
-						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_209);
+						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K209);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -416,7 +416,7 @@
 						<Scripts>
 							<OnLoad>
 						VUHDO_lnfSetModel(self, "VUHDO_SPELL_CONFIG.IS_KEEP_STANCE");
-						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_345);
+						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K345);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -432,7 +432,7 @@
 						<Scripts>
 							<OnLoad>
 						VUHDO_lnfSetModel(self, "VUHDO_SPELL_CONFIG.IS_AUTO_TARGET");
-						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_366);
+						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K366);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -448,7 +448,7 @@
 						<Scripts>
 							<OnLoad>
 						VUHDO_lnfSetModel(self, "VUHDO_SPELL_CONFIG.IS_CANCEL_CURRENT");
-						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_498);
+						VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K498);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>

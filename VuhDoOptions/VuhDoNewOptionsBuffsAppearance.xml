@@ -31,7 +31,7 @@
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_BUFF_SETTINGS.CONFIG.SCALE");
 								VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_SCALE, 0.5, 2, "", 0.05);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_005);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K005);
 							</OnLoad>
 						</Scripts>
 					</Frame>
@@ -54,7 +54,7 @@
 							</Layer>
 						</Layers>
 					</Frame>
-
+<!--VUHDO_I18N_MAX_SWATCHES_PER_LINE, VUHDO_I18N_TT.K006 нету в актуале-->
 					<Frame name="$parentSwatchesPerLineSlider" inherits="VuhDoHSliderTemplate">
 						<Size>
 							<AbsDimension x="128" y="32" />
@@ -70,7 +70,7 @@
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_BUFF_SETTINGS.CONFIG.SWATCH_MAX_ROWS");
 								VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_MAX_SWATCHES_PER_LINE, 1, 12, "", 1);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_006);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K006);
 							</OnLoad>
 						</Scripts>
 					</Frame>
@@ -90,7 +90,7 @@
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_BUFF_SETTINGS.CONFIG.PANEL_MAX_BUFFS");
 								VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_MAX_BUFFS_PER_ROW, 1, 12, "", 1);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_007);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K007);
 							</OnLoad>
 						</Scripts>
 					</Frame>
@@ -109,7 +109,7 @@
 					</Anchor>
 				</Anchors>
 				<Frames>
-
+<!--VUHDO_I18N_TT.K484 нету в актуале-->
 			<CheckButton name="$parentEnableButton" text="VUHDO_I18N_ENABLE" inherits="VuhDoCheckButtonTemplate">
 					<Anchors>
 					<Anchor point="TOPLEFT">
@@ -121,7 +121,7 @@
 					<Scripts>
 						<OnLoad>
 							VUHDO_lnfSetModel(self, "VUHDO_CONFIG.IS_PALLY_POWER_COMMS");
-							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_484);
+							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K484);
 						</OnLoad>
 						<OnClick>
 							VUHDO_lnfCheckButtonUpdateModel(self);
@@ -142,15 +142,15 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
-					<Layers>
-						<Layer>
-							<FontString name="$parentLabel" text="PallyPower" inherits="VuDoDefaultTitleFontTemplate">
-							</FontString>
-						</Layer>
-					</Layers>
-				</Frame>
-			</Frames>
-		</Frame>
+				<Layers>
+					<Layer>
+						<FontString name="$parentLabel" text="PallyPower" inherits="VuDoDefaultTitleFontTemplate">
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+		</Frames>
+	</Frame>
 
 			<Frame name="$parentGeneralPanel" inherits="VuhDoPanelTemplate">
 				<Size>
@@ -180,7 +180,7 @@
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_BUFF_SETTINGS.CONFIG.REFRESH_SECS");
 								VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_REFRESH_RATE, 0.1, 3, " " .. VUHDO_I18N_SECS, 0.1);
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_008);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K008);
 							</OnLoad>
 						</Scripts>
 					</Frame>
@@ -196,7 +196,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_BUFF_SETTINGS.CONFIG.IGNORE_PETS");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_383);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K383);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -212,7 +212,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_BUFF_SETTINGS.CONFIG.HIDE_CHARGES");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_156);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K156);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -228,11 +228,11 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_BUFF_SETTINGS.CONFIG.SHOW_LABEL");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_009);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K009);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
-
+<!--VUHDO_I18N_EMPTY_GROUPS, VUHDO_I18N_TT.K010, нету в актуале-->
 					<CheckButton name="$parentShowEmptyCheckButton" text="VUHDO_I18N_EMPTY_GROUPS" inherits="VuhDoCheckButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
@@ -244,7 +244,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_BUFF_SETTINGS.CONFIG.SHOW_EMPTY");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_010);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K010);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -260,7 +260,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_BUFF_SETTINGS.CONFIG.COMPACT");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_458);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K458);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
@@ -276,7 +276,7 @@
 						<Scripts>
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_BUFF_SETTINGS.CONFIG.SHOW");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_011);
+								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K011);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>

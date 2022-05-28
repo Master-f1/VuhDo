@@ -31,7 +31,7 @@
 						<OnLoad>
 							VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.#PNUM#.SCALING.targetSpacing");
 							VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_SPACING, 0, 50);
-							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_118);
+							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K118);
 						</OnLoad>
 					</Scripts>
 			</Frame>
@@ -47,7 +47,7 @@
 					<Scripts>
 						<OnLoad>
 							VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.#PNUM#.SCALING.showTarget");
-							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_119);
+							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K119);
 						</OnLoad>
 					</Scripts>
 			</CheckButton>
@@ -64,7 +64,7 @@
 						<OnLoad>
 							VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.#PNUM#.PANEL_COLOR.TARGET");
 							VUHDO_lnfInitColorSwatch(self, VUHDO_I18N_TARGET_NAME, VUHDO_I18N_TARGET_NAME);
-							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_197);
+							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K197);
 						</OnLoad>
 					</Scripts>
 			</Frame>
@@ -103,7 +103,7 @@
 						<OnLoad>
 							VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.#PNUM#.SCALING.targetWidth");
 							VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_WIDTH, 1, 200);
-							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_120);
+							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K120);
 						</OnLoad>
 					</Scripts>
 			</Frame>
@@ -138,7 +138,7 @@
 						<OnLoad>
 							VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.#PNUM#.SCALING.totSpacing");
 							VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_SPACING, 0, 50);
-							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_118);
+							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K118);
 						</OnLoad>
 					</Scripts>
 			</Frame>
@@ -154,7 +154,7 @@
 					<Scripts>
 						<OnLoad>
 							VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.#PNUM#.SCALING.showTot");
-							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_119);
+							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K119);
 						</OnLoad>
 					</Scripts>
 			</CheckButton>
@@ -171,7 +171,7 @@
 						<OnLoad>
 							VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.#PNUM#.PANEL_COLOR.TOT");
 							VUHDO_lnfInitColorSwatch(self, VUHDO_I18N_TARGET_NAME, VUHDO_I18N_TARGET_NAME);
-							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_197);
+							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K197);
 						</OnLoad>
 					</Scripts>
 			</Frame>
@@ -210,7 +210,7 @@
 						<OnLoad>
 							VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.#PNUM#.SCALING.totWidth");
 							VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_WIDTH, 1, 200);
-							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_120);
+							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K120);
 						</OnLoad>
 					</Scripts>
 			</Frame>
@@ -241,7 +241,7 @@
 					<Scripts>
 						<OnLoad>
 							VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.SCALING.targetOrientation", 1);
-							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_362);
+							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K362);
 						</OnLoad>
 					</Scripts>
 			</CheckButton>
@@ -257,7 +257,7 @@
 					<Scripts>
 						<OnLoad>
 							VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.SCALING.targetOrientation", 2);
-							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT_361);
+							VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K361);
 						</OnLoad>
 					</Scripts>
 			</CheckButton>

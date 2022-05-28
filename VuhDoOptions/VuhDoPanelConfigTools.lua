@@ -1,3 +1,4 @@
+local _;
 local VUHDO_GROUP_ORDER_BARS_LEFT = {};
 local VUHDO_GROUP_ORDER_BARS_RIGHT = {};
 
@@ -34,27 +35,27 @@ end
 
 function VUHDO_getOrCreateGroupOrderPanel(aParentPanelNum, aPanelNum)
 	local tName = "VdAc" .. aParentPanelNum .. "GrpOrd" .. aPanelNum;
-	if (VUHDO_GLOBAL[tName] == nil) then
-		CreateFrame("Frame", tName, VUHDO_GLOBAL["VdAc" .. aParentPanelNum], "VuhDoGrpOrdTemplate");
+	if (_G[tName] == nil) then
+		CreateFrame("Frame", tName, _G["VdAc" .. aParentPanelNum], "VuhDoGrpOrdTemplate");
 	end
 
-	return VUHDO_GLOBAL[tName];
+	return _G[tName];
 end
 
 function VUHDO_getOrCreateGroupSelectPanel(aParentPanelNum, aPanelNum)
 	local tName = "VdAc" .. aParentPanelNum .. "GrpSel" .. aPanelNum;
-	if (VUHDO_GLOBAL[tName] == nil) then
-		CreateFrame("Frame", tName, VUHDO_GLOBAL["VdAc" .. aParentPanelNum], "VuhDoGrpSelTemplate");
+	if (_G[tName] == nil) then
+		CreateFrame("Frame", tName, _G["VdAc" .. aParentPanelNum], "VuhDoGrpSelTemplate");
 	end
 
-	return VUHDO_GLOBAL[tName];
+	return _G[tName];
 end
 
 function VUHDO_getConfigOrderBarRight(aPanelNum, anOrderNum)
 	local tIndex = aPanelNum * 100 + anOrderNum;
 	if (VUHDO_GROUP_ORDER_BARS_RIGHT[tIndex] == nil) then
 		local tPanel = VUHDO_getOrCreateGroupOrderPanel(aPanelNum, anOrderNum);
-		VUHDO_GROUP_ORDER_BARS_RIGHT[tIndex] = VUHDO_GLOBAL[tPanel:GetName() .. "InsTxuR"];
+		VUHDO_GROUP_ORDER_BARS_RIGHT[tIndex] = _G[tPanel:GetName() .. "InsTxuR"];
 	end
 
 	return VUHDO_GROUP_ORDER_BARS_RIGHT[tIndex];
@@ -64,7 +65,7 @@ function VUHDO_getConfigOrderBarLeft(aPanelNum, anOrderNum)
 	local tIndex = aPanelNum * 100 + anOrderNum;
 	if (VUHDO_GROUP_ORDER_BARS_LEFT[tIndex] == nil) then
 		local tPanel = VUHDO_getOrCreateGroupOrderPanel(aPanelNum, anOrderNum);
-		VUHDO_GROUP_ORDER_BARS_LEFT[tIndex] = VUHDO_GLOBAL[tPanel:GetName() .. "InsTxuL"];
+		VUHDO_GROUP_ORDER_BARS_LEFT[tIndex] = _G[tPanel:GetName() .. "InsTxuL"];
 	end
 
 	return VUHDO_GROUP_ORDER_BARS_LEFT[tIndex];

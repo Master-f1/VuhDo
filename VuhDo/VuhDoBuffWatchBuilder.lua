@@ -1,3 +1,6 @@
+local _;
+local _G = _G;
+
 local pairs = pairs;
 local ipairs = ipairs;
 local InCombatLockdown = InCombatLockdown;
@@ -28,9 +31,7 @@ local tIsSingle;
 local tTarget;
 local tBuff;
 local function VUHDO_addBuffSwatch(aBuffPanel, aGroupName, someVariants, aBuffTarget, aCategSpec)
-	if (someVariants == nil) then
-		return nil;
-	end
+	if not someVariants then return nil; end
 	tMaxVariant = VUHDO_getBuffVariantMaxTarget(someVariants);
 	tMaxTargetName = tMaxVariant[1];
 
@@ -41,43 +42,42 @@ local function VUHDO_addBuffSwatch(aBuffPanel, aGroupName, someVariants, aBuffTa
 	tSwatch:SetAttribute("target", aBuffTarget);
 	tSwatch:SetAttribute("buffname", aCategSpec);
 
-	VUHDO_GLOBAL[tSwatch:GetName() .. "GroupLabelLabel"]:SetText(aGroupName);
+	_G[tSwatch:GetName() .. "GroupLabelLabel"]:SetText(aGroupName);
 
-	tIcon = VUHDO_GLOBAL[tSwatch:GetName() .. "BuffIconTexture"];
-	if (VUHDO_BUFF_TARGET_CLASS == tMaxVariant[2]) then
-		VUHDO_GLOBAL[tIcon:GetName() .. "Texture"]:SetTexture(VUHDO_BUFFS[tMaxTargetName].icon);
+	tIcon = _G[tSwatch:GetName() .. "BuffIconTexture"];
+	if VUHDO_BUFF_TARGET_CLASS == tMaxVariant[2] then
+		_G[tIcon:GetName() .. "Texture"]:SetTexture(VUHDO_BUFFS[tMaxTargetName]["icon"]);
 		tIcon:SetAlpha(0.5);
 		tIcon:Show();
 	else
 		tIcon:Hide();
 	end
 
-	tSwatch:ClearAllPoints();
 	tSwatch:SetPoint("TOPLEFT", aBuffPanel:GetName(), "TOPLEFT", VUHDO_IN_PANEL_X, -VUHDO_IN_PANEL_Y);
 
 	tColor = VUHDO_BUFF_SETTINGS["CONFIG"]["SWATCH_BORDER_COLOR"];
-	tSwatch:SetBackdropBorderColor(tColor.R, tColor.G, tColor.B, tColor.O);
+	tSwatch:SetBackdropBorderColor(tColor["R"], tColor["G"], tColor["B"], tColor["O"]);
 	tSwatch:Show();
 
-	tButton = VUHDO_GLOBAL[tSwatch:GetName() .. "GlassButton"];
-	if (tButton:GetAttribute("unit") == nil) then
+	tButton = _G[tSwatch:GetName() .. "GlassButton"];
+	if not tButton:GetAttribute("unit") then
 		VUHDO_setupAllBuffButtonsTo(tButton, tMaxTargetName, "player", tMaxTargetName);
 	end
 
-	if (VUHDO_IN_PANEL_X > VUHDO_IN_PANEL_WIDTH) then
+	if VUHDO_IN_PANEL_X > VUHDO_IN_PANEL_WIDTH then
 		VUHDO_IN_PANEL_WIDTH = VUHDO_IN_PANEL_X;
 	end
 
-	if (VUHDO_IN_PANEL_Y + tSwatch:GetHeight() > VUHDO_IN_PANEL_HEIGHT) then
+	if VUHDO_IN_PANEL_Y + tSwatch:GetHeight() > VUHDO_IN_PANEL_HEIGHT then
 		VUHDO_IN_PANEL_HEIGHT = VUHDO_IN_PANEL_Y + tSwatch:GetHeight();
 	end
 
-	if (VUHDO_IN_GRID_X > VUHDO_IN_GRID_MAX_X) then
+	if VUHDO_IN_GRID_X > VUHDO_IN_GRID_MAX_X then
 		VUHDO_IN_GRID_MAX_X = VUHDO_IN_GRID_X;
 	end
 
 	VUHDO_IN_GRID_X = VUHDO_IN_GRID_X + 1;
-	if (VUHDO_IN_GRID_X > VUHDO_BUFF_SETTINGS["CONFIG"]["SWATCH_MAX_ROWS"]) then
+	if VUHDO_IN_GRID_X > VUHDO_BUFF_SETTINGS["CONFIG"]["SWATCH_MAX_ROWS"] then
 		VUHDO_IN_GRID_X = 1;
 		VUHDO_IN_PANEL_X = VUHDO_BUFF_PANEL_BASE_WIDTH;
 		VUHDO_IN_PANEL_Y = VUHDO_IN_PANEL_Y + tSwatch:GetHeight();
@@ -87,8 +87,8 @@ local function VUHDO_addBuffSwatch(aBuffPanel, aGroupName, someVariants, aBuffTa
 
 	VUHDO_updateBuffSwatch(tSwatch);
 	tIsSingle = VUHDO_isUseSingleBuff(tSwatch);
-	if (tIsSingle ~= 2) then
-		if (tIsSingle) then
+	if tIsSingle ~= 2 then
+		if tIsSingle then
 			tTarget = tSwatch:GetAttribute("lowtarget");
 			tBuff = VUHDO_getBuffVariantSingleTarget(someVariants)[1];
 			VUHDO_setupAllBuffButtonsTo(tButton, tBuff, tTarget, VUHDO_getBuffVariantMaxTarget(someVariants)[1]);
@@ -106,12 +106,12 @@ local tGroups = {};
 local function VUHDO_getValidBuffClasses(someSettings)
 	table.wipe(tGroups);
 
-	if (someSettings["classes"] == nil) then
+	if not someSettings["classes"] then
 		someSettings["classes"] = {};
 	end
 
 	for _, tClassName in ipairs(VUHDO_CLASS_NAMES_ORDERED) do
-		if (someSettings["classes"][tClassName] ~= nil) then
+		if someSettings["classes"][tClassName] then
 			tinsert(tGroups, VUHDO_CLASS_IDS[tClassName]);
 		end
 	end
@@ -127,7 +127,7 @@ local function VUHDO_getBuffVariants(aBuffName)
 	for _, tCategBuffs in pairs(tClassBuffs) do
 		for _, tBuffVariants in pairs(tCategBuffs) do
 			for _, tVariant in pairs(tBuffVariants) do
-				if (aBuffName == tVariant[1]) then
+				if aBuffName == tVariant[1] then
 					return tBuffVariants;
 				end
 			end
@@ -153,21 +153,18 @@ local function VUHDO_addBuffPanel(aCategorySpec)
 	local tNewSwatch;
 
 	-- Happens on emergency login
-	if (VUHDO_BUFFS[tMaxVariant[1]] == nil) then
-		return nil;
-	end
+	if not VUHDO_BUFFS[tMaxVariant[1]] then return nil; end
 
-	if (VUHDO_BUFFS[tMaxVariant[1]]["present"]) then
+	if VUHDO_BUFFS[tMaxVariant[1]]["present"] then
 		tBuffTarget = tMaxVariant[2];
 	else
 		tBuffTarget = tSingleVariant[2];
 	end
 
 	local tLabelText;
-	if (VUHDO_BUFF_TARGET_CLASS == tBuffTarget) then
-		-- or VUHDO_BUFF_TARGET_GROUP == tBuffTarget
+	if VUHDO_BUFF_TARGET_CLASS == tBuffTarget then
 		tLabelText = tCategName;
-	elseif (VUHDO_BUFF_SETTINGS[tCategName].buff ~= nil) then
+	elseif VUHDO_BUFF_SETTINGS[tCategName]["buff"]then
 		tLabelText = VUHDO_BUFF_SETTINGS[tCategName]["buff"];
 	else
 		tLabelText = tMaxVariant[1];
@@ -175,7 +172,7 @@ local function VUHDO_addBuffPanel(aCategorySpec)
 
 	tBuffPanel = VUHDO_getOrCreateBuffPanel("VuhDoBuffPanel" .. tLabelText);
 
-	if (VUHDO_BUFF_SETTINGS["CONFIG"]["COMPACT"]) then
+	if VUHDO_BUFF_SETTINGS["CONFIG"]["COMPACT"] then
 		VUHDO_BUFF_PANEL_BASE_WIDTH = 24;
 		VUHDO_BUFF_PANEL_BASE_HEIGHT = 0;
 	else
@@ -186,29 +183,27 @@ local function VUHDO_addBuffPanel(aCategorySpec)
 	if (VUHDO_BUFFS[tLabelText] ~= nil and VUHDO_BUFFS[tLabelText]["icon"] ~= nil) then
 		tIcon = VUHDO_BUFFS[tLabelText]["icon"];
 	else
-		if (VUHDO_BUFFS[tMaxVariant[1]].present) then
+		if (VUHDO_BUFFS[tMaxVariant[1]]["present"]) then
 			tIcon = VUHDO_BUFFS[tMaxVariant[1]]["icon"];
 		else
 			tIcon = VUHDO_BUFFS[tSingleVariant[1]]["icon"];
 		end
 	end
 
-	if (tIcon == nil) then
-		return nil;
-	end
+	if not tIcon then return nil; end
 
-	local tLabel = VUHDO_GLOBAL[tBuffPanel:GetName() .. "BuffNameLabelLabel"];
-	if (VUHDO_BUFF_SETTINGS["CONFIG"]["SHOW_LABEL"] and not VUHDO_BUFF_SETTINGS["CONFIG"]["COMPACT"]) then
+	local tLabel = _G[tBuffPanel:GetName() .. "BuffNameLabelLabel"];
+	if VUHDO_BUFF_SETTINGS["CONFIG"]["SHOW_LABEL"] and not VUHDO_BUFF_SETTINGS["CONFIG"]["COMPACT"] then
 		tLabel:SetText(tLabelText);
 		tLabel:Show();
 	else
 		tLabel:Hide();
 	end
-	VUHDO_GLOBAL[tBuffPanel:GetName() .. "IconTextureTexture"]:SetTexture(tIcon);
+	_G[tBuffPanel:GetName() .. "IconTextureTexture"]:SetTexture(tIcon);
 
-	tIconFrame = VUHDO_GLOBAL[tBuffPanel:GetName() .. "IconTexture"];
+	tIconFrame = _G[tBuffPanel:GetName() .. "IconTexture"];
 	tIconFrame:ClearAllPoints();
-	if (VUHDO_BUFF_SETTINGS["CONFIG"]["COMPACT"]) then
+	if VUHDO_BUFF_SETTINGS["CONFIG"]["COMPACT"] then
 		tIconFrame:SetPoint("TOPLEFT", tBuffPanel:GetName(), "TOPLEFT", 0, 0);
 	else
 		tIconFrame:SetPoint("TOPLEFT", tBuffPanel:GetName(), "TOPLEFT", 3, -3);
@@ -224,56 +219,45 @@ local function VUHDO_addBuffPanel(aCategorySpec)
 
 	tSwatch = nil;
 
-	if (VUHDO_BUFF_TARGET_SINGLE == tBuffTarget) then
+	if VUHDO_BUFF_TARGET_SINGLE == tBuffTarget then
 		local tVariants = VUHDO_getBuffVariants(tSettings["buff"]) or VUHDO_getBuffVariants(tMaxVariant[1]);
-		if (tVariants ~= nil) then
+		if tVariants then
 			tSwatch = VUHDO_addBuffSwatch(tBuffPanel, VUHDO_I18N_PLAYER, tVariants, "S", aCategorySpec);
 		end
 
---[[
-	elseif (VUHDO_BUFF_TARGET_GROUP == tBuffTarget) then
-		local tGroups = VUHDO_getValidBuffGroups(tSettings);
-		local tGroupNo;
-		for _, tGroupNo in ipairs(tGroups) do
-			if (VUHDO_BUFF_SETTINGS["CONFIG"]["SHOW_EMPTY"] or VUHDO_getNumGroupMembers(tGroupNo) > 0) then
-				tNewSwatch = VUHDO_addBuffSwatch(tBuffPanel, VUHDO_HEADER_TEXTS[tGroupNo], tCategBuffs[1], "G" .. tGroupNo, aCategorySpec);
-				if (tSwatch == nil) then
-					tSwatch = tNewSwatch;
-				end
-			end
-		end
---]]
-
-	elseif (VUHDO_BUFF_TARGET_CLASS == tBuffTarget) then
+	elseif VUHDO_BUFF_TARGET_CLASS == tBuffTarget then
 		local tGroups = VUHDO_getValidBuffClasses(tSettings);
 		local tGroupId;
 		for _, tGroupId in ipairs(tGroups) do
-			if (VUHDO_BUFF_SETTINGS["CONFIG"]["SHOW_EMPTY"] or VUHDO_getNumGroupMembers(tGroupId) > 0) then
+			if VUHDO_BUFF_SETTINGS["CONFIG"]["SHOW_EMPTY"] or VUHDO_getNumGroupMembers(tGroupId) > 0 then
 				local tClassName = VUHDO_ID_CLASSES[tGroupId];
 				local tClassText = VUHDO_HEADER_TEXTS[tGroupId];
 				local tBuffName = tSettings["classes"][tClassName];
 				local tBuffVariants = VUHDO_getBuffVariants(tBuffName);
 				tNewSwatch = VUHDO_addBuffSwatch(tBuffPanel, tClassText, tBuffVariants, "C" .. tClassName, aCategorySpec);
-				if (tSwatch == nil) then
+				if not tSwatch then
 					tSwatch = tNewSwatch;
 				end
 			end
 		end
-	elseif (VUHDO_BUFF_TARGET_UNIQUE == tBuffTarget) then
+	elseif VUHDO_BUFF_TARGET_UNIQUE == tBuffTarget then
 		tSwatch = VUHDO_addBuffSwatch(tBuffPanel, tSettings["name"], tCategBuffs[1], "N" .. tSettings["name"], aCategorySpec);
 	else
 		local tVariants = VUHDO_getBuffVariants(tSettings["buff"]) or VUHDO_getBuffVariants(tMaxVariant[1]);
-		if (tVariants ~= nil) then
+		if tVariants then
 			tSwatch = VUHDO_addBuffSwatch(tBuffPanel, VUHDO_I18N_PLAYER, tVariants, "S", aCategorySpec);
 		end
 	end
 
+<<<<<<< Updated upstream
 	if (tSwatch ~= nil) then
-		tBuffPanel:ClearAllPoints();
+=======
+	if tSwatch then
+>>>>>>> Stashed changes
 		tBuffPanel:SetPoint("TOPLEFT", "VuhDoBuffWatchMainFrame", "TOPLEFT", VUHDO_PANEL_OFFSET_X, -VUHDO_PANEL_OFFSET_Y);
 		tBuffPanel:SetWidth(tSwatch:GetWidth() * VUHDO_IN_GRID_MAX_X + VUHDO_BUFF_PANEL_BASE_WIDTH);
 		tBuffPanel:SetHeight(VUHDO_IN_PANEL_HEIGHT);
-		VUHDO_GLOBAL[tBuffPanel:GetName() .. "BuffNameLabel"]:SetWidth(tBuffPanel:GetWidth() - 30);
+		_G[tBuffPanel:GetName() .. "BuffNameLabel"]:SetWidth(tBuffPanel:GetWidth() - 30);
 		tBuffPanel:Show();
 	end
 
@@ -296,47 +280,51 @@ local function VUHDO_addAllBuffPanels()
 	local tIndex = 0;
 
 	for _, _ in pairs(tAllClassBuffs) do
-	for tCategSepc, _ in pairs(tAllClassBuffs) do
-		tCategName = strsub(tCategSepc, 3);
-		local tNumber;
-		if (VUHDO_BUFF_ORDER[tCategSepc] == nil) then
-			tNumber = tonumber(strsub(tCategSepc, 1, 2));
-		else
-			tNumber = VUHDO_BUFF_ORDER[tCategSepc];
-		end
-		local tCategSettings = VUHDO_BUFF_SETTINGS[tCategName];
+		for tCategSepc, _ in pairs(tAllClassBuffs) do
+			tCategName = strsub(tCategSepc, 3);
+			local tNumber;
+			if not VUHDO_BUFF_ORDER[tCategSepc] then
+				tNumber = tonumber(strsub(tCategSepc, 1, 2));
+			else
+				tNumber = VUHDO_BUFF_ORDER[tCategSepc];
+			end
+			local tCategSettings = VUHDO_BUFF_SETTINGS[tCategName];
 			if (tNumber == tIndex + 1) then
-			tIndex = tIndex + 1;
-			if (tCategSettings ~= nil and tCategSettings.enabled) then
+				tIndex = tIndex + 1;
+				if tCategSettings and tCategSettings["enabled"] then
 
-				tBuffPanel = VUHDO_addBuffPanel(tCategSepc);
-				if (tBuffPanel ~= nil) then
-					tColPanels = tColPanels + 1;
+					tBuffPanel = VUHDO_addBuffPanel(tCategSepc);
+					if tBuffPanel then
+						tColPanels = tColPanels + 1;
 
-					VUHDO_PANEL_OFFSET_Y = VUHDO_PANEL_OFFSET_Y + VUHDO_IN_PANEL_HEIGHT;
+						VUHDO_PANEL_OFFSET_Y = VUHDO_PANEL_OFFSET_Y + VUHDO_IN_PANEL_HEIGHT;
 
-					if (VUHDO_PANEL_OFFSET_Y > VUHDO_PANEL_HEIGHT) then
-						VUHDO_PANEL_HEIGHT = VUHDO_PANEL_OFFSET_Y;
-					end
+						if VUHDO_PANEL_OFFSET_Y > VUHDO_PANEL_HEIGHT then
+							VUHDO_PANEL_HEIGHT = VUHDO_PANEL_OFFSET_Y;
+						end
+<<<<<<< Updated upstream
+						if (VUHDO_PANEL_OFFSET_X > VUHDO_PANEL_WIDTH) then
+=======
 
-					if (VUHDO_PANEL_OFFSET_X > VUHDO_PANEL_WIDTH) then
-						VUHDO_PANEL_WIDTH = VUHDO_PANEL_OFFSET_X;
-					end
+						if VUHDO_PANEL_OFFSET_X > VUHDO_PANEL_WIDTH then
+>>>>>>> Stashed changes
+							VUHDO_PANEL_WIDTH = VUHDO_PANEL_OFFSET_X;
+						end
 
-					if (tColPanels >= VUHDO_BUFF_SETTINGS["CONFIG"]["PANEL_MAX_BUFFS"]) then
-						VUHDO_PANEL_OFFSET_Y = VUHDO_BUFF_PANEL_GAP_TOP;
-						VUHDO_PANEL_OFFSET_X = VUHDO_PANEL_OFFSET_X + tBuffPanel:GetWidth();
-						VUHDO_IN_GRID_MAX_X = 0;
+						if tColPanels >= VUHDO_BUFF_SETTINGS["CONFIG"]["PANEL_MAX_BUFFS"] then
+							VUHDO_PANEL_OFFSET_Y = VUHDO_BUFF_PANEL_GAP_TOP;
+							VUHDO_PANEL_OFFSET_X = VUHDO_PANEL_OFFSET_X + tBuffPanel:GetWidth();
+							VUHDO_IN_GRID_MAX_X = 0;
 
-						tColPanels = 0;
+							tColPanels = 0;
+						end
 					end
 				end
 			end
 		end
 	end
-end
 
-	if (tBuffPanel ~= nil) then
+	if tBuffPanel then
 		VUHDO_PANEL_WIDTH = VUHDO_PANEL_WIDTH + tBuffPanel:GetWidth();
 	end
 
@@ -344,14 +332,12 @@ end
 end
 
 function VUHDO_reloadBuffPanel()
-	if (InCombatLockdown()) then
+	if InCombatLockdown() then
 		return;
 	end
 
-	if (VUHDO_BUFF_SETTINGS["CONFIG"] == nil) then
-		if (VuhDoBuffWatchMainFrame ~= nil) then
-			VuhDoBuffWatchMainFrame:Hide();
-		end
+	if not VUHDO_BUFF_SETTINGS["CONFIG"] then
+		if VuhDoBuffWatchMainFrame then VuhDoBuffWatchMainFrame:Hide(); end
 		return;
 	end
 
@@ -359,17 +345,15 @@ function VUHDO_reloadBuffPanel()
 	VUHDO_resetBuffSwatchInfos();
 	VUHDO_resetAllBuffPanels();
 
-	if (VUHDO_CLASS_BUFFS[VUHDO_PLAYER_CLASS] == nil) then
-		return;
-	end
+	if not VUHDO_CLASS_BUFFS[VUHDO_PLAYER_CLASS] then return; end
 
-	if (VuhDoBuffWatchMainFrame == nil) then
+	if not VuhDoBuffWatchMainFrame then
 		CreateFrame("Frame", "VuhDoBuffWatchMainFrame", UIParent, "VuhDoBuffWatchMainFrameTemplate");
 	end
 
 	local tBuffPanel = VUHDO_addAllBuffPanels();
 
-	if (VUHDO_PANEL_HEIGHT < 10) then
+	if VUHDO_PANEL_HEIGHT < 10 then
 		VUHDO_PANEL_HEIGHT = 24;
 		VUHDO_PANEL_WIDTH = 150;
 		VuhDoBuffWatchMainFrameInfoLabel:Show();
@@ -390,7 +374,7 @@ function VUHDO_reloadBuffPanel()
 	VuhDoBuffWatchMainFrame:SetBackdropBorderColor(tColor["R"], tColor["G"], tColor["B"], tColor["O"]);
 	VuhDoBuffWatchMainFrame:SetScale(VUHDO_BUFF_SETTINGS["CONFIG"]["SCALE"]);
 
-	if (VUHDO_BUFF_SETTINGS["CONFIG"]["SHOW"]) then
+	if VUHDO_BUFF_SETTINGS["CONFIG"]["SHOW"] then
 		VuhDoBuffWatchMainFrame:Show();
 	else
 		VuhDoBuffWatchMainFrame:Hide();

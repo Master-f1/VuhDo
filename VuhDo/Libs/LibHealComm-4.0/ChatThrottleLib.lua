@@ -17,7 +17,7 @@
 		add it to the .toc, and it's done.
 
 	Can run as a standalone addon also, but, really, just embed it! :-)
-]]
+--]]
 
 local CTL_VERSION = 21
 
@@ -171,7 +171,7 @@ end
 	Initialize queues, set up frame for OnUpdate, etc
 ]]
 
-function ChatThrottleLib:Init()	
+function ChatThrottleLib:Init()
 
 	-- Set up queues
 	if not self.Prio then
@@ -420,7 +420,7 @@ function ChatThrottleLib:SendChatMessage(prio, prefix, text, chattype, language,
 		bMyTraffic = false
 		self.Prio[prio].nTotalSent = self.Prio[prio].nTotalSent + nSize
 		if callbackFn then
-			callbackFn (callbackArg)
+			callbackFn (callbackArg, true)
 		end
 		return
 	end
@@ -465,7 +465,7 @@ function ChatThrottleLib:SendAddonMessage(prio, prefix, text, chattype, target, 
 		bMyTraffic = false
 		self.Prio[prio].nTotalSent = self.Prio[prio].nTotalSent + nSize
 		if callbackFn then
-			callbackFn (callbackArg)
+			callbackFn (callbackArg, true)
 		end
 		return
 	end

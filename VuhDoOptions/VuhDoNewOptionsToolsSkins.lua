@@ -1,3 +1,5 @@
+local _;
+
 VUHDO_PROFILE_TABLE_MODEL = {};
 VUHDO_CUSTOM_DEBUFF_PROFILE = nil;
 VUHDO_EXPORT_CUDE_TO_RADIO_VALUE = 3;
@@ -55,7 +57,7 @@ local function VUHDO_deleteAutoProfile(tName)
 end
 
 function VUHDO_skinsInitAutoCheckButton(aButton, anIndex)
-	local tEditBox = VUHDO_GLOBAL[aButton:GetParent():GetParent():GetName() .. "LoadSavePanelEnterProfileNameEditBox"];
+	local tEditBox = _G[aButton:GetParent():GetParent():GetName() .. "LoadSavePanelEnterProfileNameEditBox"];
 	local tSelected = strtrim(tEditBox:GetText());
 
 	aButton:SetChecked(VUHDO_CONFIG["AUTO_PROFILES"][anIndex] == tSelected);
@@ -83,19 +85,19 @@ local tCnt;
 local tButton;
 local function VUHDO_updateAllAutoProfiles(aComponent)
 	for tCnt = 1, 40 do
-		tButton = VUHDO_GLOBAL[aComponent:GetParent():GetParent():GetName() .. "AutoEnablePanel" .. tCnt .. "CheckButton"];
+		tButton = _G[aComponent:GetParent():GetParent():GetName() .. "AutoEnablePanel" .. tCnt .. "CheckButton"];
 		if (tButton ~= nil) then
 			VUHDO_skinsInitAutoCheckButton(tButton, "" .. tCnt);
 		end
 	end
 
-	tButton = VUHDO_GLOBAL[aComponent:GetParent():GetParent():GetName() .. "AutoEnablePanelSpec1CheckButton"];
+	tButton = _G[aComponent:GetParent():GetParent():GetName() .. "AutoEnablePanelSpec1CheckButton"];
 	VUHDO_skinsInitAutoCheckButton(tButton, "SPEC_1");
 
-	tButton = VUHDO_GLOBAL[aComponent:GetParent():GetParent():GetName() .. "AutoEnablePanelSpec2CheckButton"];
+	tButton = _G[aComponent:GetParent():GetParent():GetName() .. "AutoEnablePanelSpec2CheckButton"];
 	VUHDO_skinsInitAutoCheckButton(tButton, "SPEC_2");
 
-	tButton = VUHDO_GLOBAL[aComponent:GetParent():GetParent():GetName() .. "SettingsPanelLockCheckButton"];
+	tButton = _G[aComponent:GetParent():GetParent():GetName() .. "SettingsPanelLockCheckButton"];
 	VUHDO_skinsInitLockCheckButton(tButton);
 end
 
@@ -104,7 +106,7 @@ function VUHDO_profileComboValueChanged(aComboBox, aValue)
 end
 
 function VUHDO_skinsAutoCheckButtonClicked(aButton, anIndex)
-	local tEditBox = VUHDO_GLOBAL[aButton:GetParent():GetParent():GetName() .. "LoadSavePanelEnterProfileNameEditBox"];
+	local tEditBox = _G[aButton:GetParent():GetParent():GetName() .. "LoadSavePanelEnterProfileNameEditBox"];
 	local tSelected = strtrim(tEditBox:GetText());
 
 	local tExistIndex, _ = VUHDO_getProfileNamed(tSelected);
@@ -144,7 +146,7 @@ function VUHDO_yesNoDeleteProfileCallback(aDecision)
 end
 
 function VUHDO_deleteProfileClicked(aButton)
-	local tEditBox = VUHDO_GLOBAL[aButton:GetParent():GetName() .. "EnterProfileNameEditBox"];
+	local tEditBox = _G[aButton:GetParent():GetName() .. "EnterProfileNameEditBox"];
 	local tName = tEditBox:GetText();
 
 	if (tName == nil or strlen(tName) == 0) then
@@ -165,7 +167,7 @@ function VUHDO_deleteProfileClicked(aButton)
 end
 
 function VUHDO_saveProfileClicked(aButton)
-	local tEditBox = VUHDO_GLOBAL[aButton:GetParent():GetName() .. "EnterProfileNameEditBox"];
+	local tEditBox = _G[aButton:GetParent():GetName() .. "EnterProfileNameEditBox"];
 	local tName = tEditBox:GetText();
 
 	if (tName == nil or strlen(tName) == 0) then
@@ -183,7 +185,7 @@ function VUHDO_saveProfileClicked(aButton)
 end
 
 function VUHDO_loadProfileClicked(aButton)
-	local tEditBox = VUHDO_GLOBAL[aButton:GetParent():GetName() .. "EnterProfileNameEditBox"];
+	local tEditBox = _G[aButton:GetParent():GetName() .. "EnterProfileNameEditBox"];
 	local tName = tEditBox:GetText();
 
 	if (tName == nil or strlen(tName) == 0) then

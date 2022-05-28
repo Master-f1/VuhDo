@@ -1,3 +1,4 @@
+local _;
 VUHDO_CURR_SPELL_MODIFIER = "";
 
 local tComponents = {};
@@ -70,7 +71,7 @@ end
 local tText, tLabel, tR, tG, tB;
 function VUHDO_newOptionsSpellEditBoxCheckSpell(anEditBox)
 	tText, tR, tG, tB = VUHDO_isActionValid(anEditBox:GetText());
-	tLabel = VUHDO_GLOBAL[anEditBox:GetName() .. "Hint"];
+	tLabel = _G[anEditBox:GetName() .. "Hint"];
 	if (tText ~= nil) then
 		anEditBox:SetTextColor(1, 1, 1, 1);
 		tLabel:SetText(tText);

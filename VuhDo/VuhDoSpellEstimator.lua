@@ -131,12 +131,14 @@ VUHDO_SPELLS = {
 		["nohelp"] = true,
 		["noselftarget"] = true
 	},
+
 	[VUHDO_SPELL_ID_ABOLISH_DISEASE] = {
 		["target"] = VUHDO_SPELL_TARGET_TARGET,
 		["type"] = VUHDO_SPELL_TYPE_HOT,
 		["nohelp"] = true,
 		["noselftarget"] = true
 	},
+
 	[VUHDO_SPELL_ID_RENEWED_HOPE] = {
 		["target"] = VUHDO_SPELL_TARGET_TARGET,
 		["type"] = VUHDO_SPELL_TYPE_HOT,
@@ -232,12 +234,12 @@ VUHDO_SPELLS = {
 	},
 
 	-- custom
-	[VUHDO_SPELL_ID_POAK] = {-- Weapon proc
+	[VUHDO_SPELL_ID_POAK] = { -- Weapon proc
 		["target"] = VUHDO_SPELL_TARGET_TARGET,
 		["type"] = VUHDO_SPELL_TYPE_HOT,
 		["nodefault"] = true
 	},
-	[VUHDO_SPELL_ID_FOUNTAIN_OF_LIGHT] = {-- Weapon proc
+	[VUHDO_SPELL_ID_FOUNTAIN_OF_LIGHT] = { -- Weapon proc
 		["target"] = VUHDO_SPELL_TARGET_TARGET,
 		["type"] = VUHDO_SPELL_TYPE_HOT,
 		["nodefault"] = true
@@ -291,7 +293,7 @@ function VUHDO_initFromSpellbook()
 	while (true) do
 		tSpellName, tSpellRank = GetSpellName(tIndex, BOOKTYPE_SPELL);
 		if (tSpellName == nil) then
-			break
+			break;
 		end
 
 		if (VUHDO_SPELLS[tSpellName] ~= nil) then
@@ -328,7 +330,7 @@ function VUHDO_initFromSpellbook()
 					tinsert(tHotSlots, VUHDO_PLAYER_HOTS[tCnt2]);
 					tSlotsUsed = tSlotsUsed + 1;
 					if (tSlotsUsed == 9) then
-						break
+						break;
 					end
 				end
 			end
