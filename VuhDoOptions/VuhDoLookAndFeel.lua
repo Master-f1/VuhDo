@@ -109,17 +109,10 @@ end
 local tName;
 function VUHDO_lnfCheckButtonOnEnter(aCheckButton)
 	tName = aCheckButton:GetName();
-<<<<<<< Updated upstream
-	VUHDO_GLOBAL[tName .. "TextureActiveSwatch"]:Show();
-
-	if (VUHDO_GLOBAL[tName .. "Label"] ~= nil) then
-		VUHDO_GLOBAL[tName .. "Label"]:SetTextColor(
-=======
 	_G[tName .. "TextureActiveSwatch"]:Show();
 
 	if _G[tName .. "Label"] then
 		_G[tName .. "Label"]:SetTextColor(
->>>>>>> Stashed changes
 			VUHDO_ACTIVE_LABEL_COLOR["TR"],
 			VUHDO_ACTIVE_LABEL_COLOR["TG"],
 			VUHDO_ACTIVE_LABEL_COLOR["TB"],
@@ -131,17 +124,10 @@ end
 local tName;
 function VUHDO_lnfCheckButtonOnLeave(aCheckButton)
 	tName = aCheckButton:GetName();
-<<<<<<< Updated upstream
-	VUHDO_GLOBAL[tName .. "TextureActiveSwatch"]:Hide();
-
-	if (VUHDO_GLOBAL[tName .. "Label"] ~= nil) then
-		VUHDO_GLOBAL[tName .. "Label"]:SetTextColor(
-=======
 	_G[tName .. "TextureActiveSwatch"]:Hide();
 
 	if _G[tName .. "Label"] then
 		_G[tName .. "Label"]:SetTextColor(
->>>>>>> Stashed changes
 			VUHDO_NORMAL_LABEL_COLOR["TR"],
 			VUHDO_NORMAL_LABEL_COLOR["TG"],
 			VUHDO_NORMAL_LABEL_COLOR["TB"],
@@ -881,52 +867,32 @@ function VUHDO_lnfColorSwatchInitFromModel(aColorSwatch)
 	end
 
 	if (tValue.R ~= nil and tValue.useBackground) then
-<<<<<<< Updated upstream
-		VUHDO_GLOBAL[aColorSwatch:GetName() .. "Texture"]:SetVertexColor(tValue["R"], tValue["G"], tValue["B"]);
-=======
 		_G[aColorSwatch:GetName() .. "Texture"]:SetVertexColor(tValue["R"], tValue["G"], tValue["B"]);
->>>>>>> Stashed changes
 	else
 		_G[aColorSwatch:GetName() .. "Texture"]:SetVertexColor(1, 1, 1);
 	end
 
 	if (tValue.O ~= nil and tValue.useOpacity) then
-<<<<<<< Updated upstream
-		VUHDO_GLOBAL[aColorSwatch:GetName() .. "Texture"]:SetAlpha(tValue["O"]);
-=======
 		_G[aColorSwatch:GetName() .. "Texture"]:SetAlpha(tValue["O"]);
->>>>>>> Stashed changes
 	else
 		_G[aColorSwatch:GetName() .. "Texture"]:SetAlpha(1);
 	end
 
 	if (tValue.TR ~= nil and tValue.useText) then
-<<<<<<< Updated upstream
-		VUHDO_GLOBAL[aColorSwatch:GetName() .. "TitleString"]:SetTextColor(tValue["TR"], tValue["TG"], tValue["TB"]);
-=======
 		_G[aColorSwatch:GetName() .. "TitleString"]:SetTextColor(tValue["TR"], tValue["TG"], tValue["TB"]);
->>>>>>> Stashed changes
 	else
 		_G[aColorSwatch:GetName() .. "TitleString"]:SetTextColor(1, 1, 1);
 	end
 
 	if (tValue.TO ~= nil and tValue.useOpacity) then
-<<<<<<< Updated upstream
-		VUHDO_GLOBAL[aColorSwatch:GetName() .. "TitleString"]:SetAlpha(tValue["TO"]);
-=======
 		_G[aColorSwatch:GetName() .. "TitleString"]:SetAlpha(tValue["TO"]);
->>>>>>> Stashed changes
 	else
 		_G[aColorSwatch:GetName() .. "TitleString"]:SetAlpha(1);
 	end
 
 	if (tValue.textSize ~= nil and tValue.font ~= nil) then
 		local tFont = VUHDO_getFont(tValue["font"]);
-<<<<<<< Updated upstream
-		VUHDO_GLOBAL[aColorSwatch:GetName() .. "TitleString"]:SetFont(tFont, tValue["textSize"]);
-=======
 		_G[aColorSwatch:GetName() .. "TitleString"]:SetFont(tFont, tValue["textSize"]);
->>>>>>> Stashed changes
 	end
 end
 

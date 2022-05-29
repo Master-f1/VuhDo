@@ -279,11 +279,7 @@ local function VUHDO_addAllBuffPanels()
 		for tCategSepc, _ in pairs(tAllClassBuffs) do
 			tCategName = strsub(tCategSepc, 3);
 			local tNumber;
-<<<<<<< HEAD
-			if (VUHDO_BUFF_ORDER[tCategSepc] == nil) then
-=======
 			if not VUHDO_BUFF_ORDER[tCategSepc] then
->>>>>>> 4ff76d12c6f841bb092d3f8750238aa16b088286
 				tNumber = tonumber(strsub(tCategSepc, 1, 2));
 			else
 				tNumber = VUHDO_BUFF_ORDER[tCategSepc];
@@ -291,46 +287,23 @@ local function VUHDO_addAllBuffPanels()
 			local tCategSettings = VUHDO_BUFF_SETTINGS[tCategName];
 			if (tNumber == tIndex + 1) then
 				tIndex = tIndex + 1;
-<<<<<<< HEAD
-				if (tCategSettings ~= nil and tCategSettings.enabled) then
-
-					tBuffPanel = VUHDO_addBuffPanel(tCategSepc);
-					if (tBuffPanel ~= nil) then
-=======
 				if tCategSettings and tCategSettings["enabled"] then
 
 					tBuffPanel = VUHDO_addBuffPanel(tCategSepc);
 					if tBuffPanel then
->>>>>>> 4ff76d12c6f841bb092d3f8750238aa16b088286
 						tColPanels = tColPanels + 1;
 
 						VUHDO_PANEL_OFFSET_Y = VUHDO_PANEL_OFFSET_Y + VUHDO_IN_PANEL_HEIGHT;
 
-<<<<<<< HEAD
-						if (VUHDO_PANEL_OFFSET_Y > VUHDO_PANEL_HEIGHT) then
-							VUHDO_PANEL_HEIGHT = VUHDO_PANEL_OFFSET_Y;
-						end
-
-						if (VUHDO_PANEL_OFFSET_X > VUHDO_PANEL_WIDTH) then
-							VUHDO_PANEL_WIDTH = VUHDO_PANEL_OFFSET_X;
-						end
-
-						if (tColPanels >= VUHDO_BUFF_SETTINGS["CONFIG"]["PANEL_MAX_BUFFS"]) then
-=======
 						if VUHDO_PANEL_OFFSET_Y > VUHDO_PANEL_HEIGHT then
 							VUHDO_PANEL_HEIGHT = VUHDO_PANEL_OFFSET_Y;
 						end
-<<<<<<< Updated upstream
-						if (VUHDO_PANEL_OFFSET_X > VUHDO_PANEL_WIDTH) then
-=======
 
 						if VUHDO_PANEL_OFFSET_X > VUHDO_PANEL_WIDTH then
->>>>>>> Stashed changes
 							VUHDO_PANEL_WIDTH = VUHDO_PANEL_OFFSET_X;
 						end
 
 						if tColPanels >= VUHDO_BUFF_SETTINGS["CONFIG"]["PANEL_MAX_BUFFS"] then
->>>>>>> 4ff76d12c6f841bb092d3f8750238aa16b088286
 							VUHDO_PANEL_OFFSET_Y = VUHDO_BUFF_PANEL_GAP_TOP;
 							VUHDO_PANEL_OFFSET_X = VUHDO_PANEL_OFFSET_X + tBuffPanel:GetWidth();
 							VUHDO_IN_GRID_MAX_X = 0;

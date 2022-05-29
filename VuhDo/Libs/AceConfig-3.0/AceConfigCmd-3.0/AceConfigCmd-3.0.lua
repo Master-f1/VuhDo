@@ -278,7 +278,7 @@ local function keybindingValidateFunc(text)
 	local modifier
 	while true do
 		if text == "-" then
-			break;
+			break
 		end
 		modifier, text = strsplit('-', text, 2)
 		if text then
@@ -305,7 +305,7 @@ local function keybindingValidateFunc(text)
 			end
 		else
 			text = modifier
-			break;
+			break
 		end
 	end
 	if text == "" then
@@ -488,6 +488,7 @@ local function handle(info, inputpos, tab, depth, retfalse)
 	elseif tab.type=="select" then
 		------------ select ------------------------------------
 		local str = strtrim(strlower(str))
+
 		local values = tab.values
 		if type(values) == "function" or type(values) == "string" then
 			info.values = values
@@ -515,7 +516,7 @@ local function handle(info, inputpos, tab, depth, retfalse)
 			if strlower(k)==str then
 				str = k -- overwrite with key (in case of case mismatches)
 				ok = true
-				break;
+				break
 			end
 		end
 		if not ok then
@@ -528,6 +529,7 @@ local function handle(info, inputpos, tab, depth, retfalse)
 	elseif tab.type=="multiselect" then
 		------------ multiselect -------------------------------------------
 		local str = strtrim(strlower(str))
+
 		local values = tab.values
 		if type(values) == "function" or type(values) == "string" then
 			info.values = values
@@ -567,7 +569,7 @@ local function handle(info, inputpos, tab, depth, retfalse)
 				if strlower(k)==opt then
 					opt = k -- overwrite with key (in case of case mismatches)
 					ok = true
-					break;
+					break
 				end
 			end
 
