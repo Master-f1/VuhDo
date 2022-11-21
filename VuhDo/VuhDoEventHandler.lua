@@ -554,7 +554,7 @@ function VUHDO_slashCmd(aCommand)
 	if (strfind(tCommandWord, "opt")) then
 		if (VuhDoNewOptionsTabbedFrame ~= nil) then
 			if (InCombatLockdown() and not VuhDoNewOptionsTabbedFrame:IsShown()) then
-				VUHDO_Msg("Вы в бою!", 1, 0.4, 0.4);
+				VUHDO_Msg("Настройка невозможна в режиме боя!", 1, 0.4, 0.4);
 			else
 				VUHDO_toggleMenu(VuhDoNewOptionsTabbedFrame);
 			end

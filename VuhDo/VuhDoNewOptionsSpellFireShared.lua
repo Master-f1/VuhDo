@@ -22,7 +22,7 @@ function VUHDO_activateLayout(aName)
 	end
 
 	VUHDO_SPEC_LAYOUTS["selected"] = aName;
-	VUHDO_Msg("Key layout \"" .. aName .. "\" successfully loaded.");
+	VUHDO_Msg("Набор клавиш успешно загружен: \"" .. aName .. "\"");
 
 	VUHDO_loadVariables();
 	VUHDO_keySetupInitBurst();

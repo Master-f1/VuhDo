@@ -40,10 +40,10 @@ VUHDO_I18N_PLAYER = "Игрок";
 -- VuhDoTooltip.lua
 -- @EXACT = false
 VUHDO_I18N_TT_POSITION = "|cffffb233Позиция:|r";
-VUHDO_I18N_TT_GHOST = "<ПРИЗРАК>";
-VUHDO_I18N_TT_DEAD = "<МЁРТВ>";
-VUHDO_I18N_TT_AFK = "<AFK>";
-VUHDO_I18N_TT_DND = "<DND>";
+VUHDO_I18N_TT_GHOST = "|cffff0000Дух|r-";
+VUHDO_I18N_TT_DEAD = "|cffff0000Труп|r-";
+VUHDO_I18N_TT_AFK = "Афк-";
+VUHDO_I18N_TT_DND = "d/s";
 VUHDO_I18N_TT_LIFE = "|cffffb233Здоровье:|r ";
 VUHDO_I18N_TT_MANA = "|cffffb233Мана:|r ";
 VUHDO_I18N_TT_LEVEL = "Уровень ";
