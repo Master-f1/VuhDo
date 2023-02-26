@@ -1,4 +1,4 @@
--- BURST CACHE ---------------------------------------------------
+-- BURST CACHE
 local VUHDO_CONFIG;
 local VUHDO_PANEL_SETUP;
 
@@ -27,7 +27,7 @@ function VUHDO_sizeCalculatorInitBurstHor()
 	VUHDO_isTableHeaderOrFooter = VUHDO_GLOBAL["VUHDO_isTableHeaderOrFooter"];
 end
 
--- BURST CACHE ---------------------------------------------------
+-- BURST CACHE
 
 local sTopHeightCache = {};
 local sBottomHeightCache = {};
@@ -63,7 +63,6 @@ local function VUHDO_getAdditionalTopHeight(aPanelNum)
 	return sTopHeightCache[aPanelNum];
 end
 
---
 local tHotCfg;
 local tBottomSpace;
 local function VUHDO_getAdditionalBottomHeight(aPanelNum)
@@ -74,8 +73,7 @@ local function VUHDO_getAdditionalBottomHeight(aPanelNum)
 		tHotCfg = VUHDO_PANEL_SETUP["HOTS"];
 
 		if (tHotCfg["radioValue"] == 7 or tHotCfg["radioValue"] == 8) then
-			tBottomSpace = VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barHeight"] *
-			VUHDO_PANEL_SETUP[aPanelNum]["HOTS"]["size"] * 0.01;
+		tBottomSpace = VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barHeight"] * VUHDO_PANEL_SETUP[aPanelNum]["HOTS"]["size"] * 0.01;
 		end
 
 		tNamePos = VUHDO_splitString(VUHDO_PANEL_SETUP[aPanelNum]["ID_TEXT"]["position"], "+");
@@ -125,10 +123,8 @@ function VUHDO_getHeaderWidthHor(aPanelNum)
 	end
 end
 
---
 local function VUHDO_getHealButtonHeight(aPanelNum)
-	return VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barHeight"] + VUHDO_getAdditionalTopHeight(aPanelNum) +
-	VUHDO_getAdditionalBottomHeight(aPanelNum);
+	return VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barHeight"] + VUHDO_getAdditionalTopHeight(aPanelNum) + VUHDO_getAdditionalBottomHeight(aPanelNum);
 end
 
 -- Returns total header height
@@ -291,7 +287,6 @@ local function VUHDO_getRowPos(aPlaceNum, aPanelNum, aRowNo)
 	return tColX;
 end
 
---
 local tX, tY, tOffset;
 local tColumnNum, tBarScaling;
 function VUHDO_getHeaderPosHor(aHeaderPlace, aPanelNum)
@@ -307,7 +302,6 @@ function VUHDO_getHeaderPosHor(aHeaderPlace, aPanelNum)
 	return tX, tY;
 end
 
---
 local tButtonX;
 local tButtonY;
 local tHots;
@@ -327,8 +321,7 @@ function VUHDO_getHealButtonPosHor(aPlaceNum, aRowNo, aPanelNum)
 	tHots = VUHDO_PANEL_SETUP["HOTS"];
 	if (tHots["radioValue"] == 1) then
 		tHotslots = VUHDO_getNumHotSlots(aPanelNum);
-		tButtonX = tButtonX + VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barHeight"] *
-		VUHDO_PANEL_SETUP[aPanelNum]["HOTS"]["size"] * 0.01 * tHotslots;
+		tButtonX = tButtonX + VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barHeight"] * VUHDO_PANEL_SETUP[aPanelNum]["HOTS"]["size"] * 0.01 * tHotslots;
 	end
 
 	tScaling = VUHDO_PANEL_SETUP[aPanelNum]["SCALING"];
@@ -358,7 +351,6 @@ function VUHDO_getHealButtonPosHor(aPlaceNum, aRowNo, aPanelNum)
 	return tButtonX, tButtonY;
 end
 
---
 local tBarScaling;
 local tAnzPlaces;
 local tRows;
@@ -396,7 +388,6 @@ function VUHDO_getHealPanelWidthHor(aPanelNum)
 	end
 end
 
---
 local tBarScaling;
 local tAnzCols;
 local tAnzPlaces;

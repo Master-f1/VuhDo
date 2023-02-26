@@ -1,11 +1,10 @@
 local pairs = pairs;
 
---
 local VUHDO_CURR_PLAYER_TARGET = nil;
 local tTargetUnit, tUnit;
 local tOldTarget;
 local tInfo;
-local tEmptyInfo = { };
+local tEmptyInfo = {};
 function VUHDO_updatePlayerTarget()
 	tTargetUnit = nil;
 	for tUnit, tInfo in pairs(VUHDO_RAID) do
@@ -34,17 +33,16 @@ function VUHDO_updatePlayerTarget()
 			VUHDO_RAID["target"] = nil;
 		end
 
-	  VUHDO_updateHealthBarsFor("target", VUHDO_UPDATE_ALL);
+		VUHDO_updateHealthBarsFor("target", VUHDO_UPDATE_ALL);
 		VUHDO_REMOVE_HOTS = false;
-	  VUHDO_updateAllRaidBars();
+		VUHDO_updateAllRaidBars();
 		VUHDO_initAllEventBouquets();
 	end
 end
 
---
 local tAllButtons, tButton, tBorder;
 function VUHDO_barBorderBouquetCallback(aUnit, anIsActive, anIcon, aTimer, aCounter, aDuration, aColor, aBuffName, aBouquetName, anImpact)
-	tAllButtons =  VUHDO_getUnitButtons(aUnit);
+	tAllButtons = VUHDO_getUnitButtons(aUnit);
 	if (tAllButtons ~= nil) then
 		for _, tButton in pairs(tAllButtons) do
 			tBorder = VUHDO_getPlayerTargetFrame(tButton);
@@ -59,7 +57,6 @@ function VUHDO_barBorderBouquetCallback(aUnit, anIsActive, anIcon, aTimer, aCoun
 	end
 end
 
---
 function VUHDO_getCurrentPlayerTarget()
 	return VUHDO_CURR_PLAYER_TARGET;
 end

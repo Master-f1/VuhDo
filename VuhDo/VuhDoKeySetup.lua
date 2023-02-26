@@ -1,6 +1,6 @@
 VUHDO_FAST_ACCESS_ACTIONS = {};
 
--- BURST CACHE ---------------------------------------------------
+-- BURST CACHE
 
 local VUHDO_RAID_NAMES;
 local VUHDO_RAID;
@@ -44,7 +44,6 @@ function VUHDO_keySetupInitBurst()
 	VUHDO_buildAssistMacroText = VUHDO_GLOBAL["VUHDO_buildAssistMacroText"];
 	VUHDO_getDebuffAbilities = VUHDO_GLOBAL["VUHDO_getDebuffAbilities"];
 end
-----------------------------------------------------
 
 local VUHDO_REZ_SPELLS_NAMES = {
 	[VUHDO_SPELL_ID_REDEMPTION] = true,
@@ -54,7 +53,6 @@ local VUHDO_REZ_SPELLS_NAMES = {
 	[VUHDO_SPELL_ID_RESURRECTION] = true
 };
 
---
 function VUHDO_replaceMacroTemplates(aText, aUnit)
 	if (VUHDO_RAID_NAMES[aUnit] ~= nil) then
 		aUnit = VUHDO_RAID_NAMES[aUnit];
@@ -83,7 +81,6 @@ function VUHDO_replaceMacroTemplates(aText, aUnit)
 end
 local VUHDO_replaceMacroTemplates = VUHDO_replaceMacroTemplates;
 
---
 local sDropdown;
 local sUnit, sInfo, sIdent;
 local tButtonName;
@@ -266,29 +263,29 @@ function VUHDO_setupAllHealButtonAttributes(aButton, aUnit, anIsDisable, aForceT
 		if (tIsWheel) then
 			aButton:SetAttribute("_onenter", [=[
 					self:ClearBindings();
-					self:SetBindingClick(0, "MOUSEWHEELUP" , self:GetName(), "w1");
-					self:SetBindingClick(0, "MOUSEWHEELDOWN" , self:GetName(), "w2");
+					self:SetBindingClick(0, "MOUSEWHEELUP", self:GetName(), "w1");
+					self:SetBindingClick(0, "MOUSEWHEELDOWN", self:GetName(), "w2");
 
-					self:SetBindingClick(0, "ALT-MOUSEWHEELUP" , self:GetName(), "w3");
-					self:SetBindingClick(0, "ALT-MOUSEWHEELDOWN" , self:GetName(), "w4");
+					self:SetBindingClick(0, "ALT-MOUSEWHEELUP", self:GetName(), "w3");
+					self:SetBindingClick(0, "ALT-MOUSEWHEELDOWN", self:GetName(), "w4");
 
-					self:SetBindingClick(0, "CTRL-MOUSEWHEELUP" , self:GetName(), "w5");
-					self:SetBindingClick(0, "CTRL-MOUSEWHEELDOWN" , self:GetName(), "w6");
+					self:SetBindingClick(0, "CTRL-MOUSEWHEELUP", self:GetName(), "w5");
+					self:SetBindingClick(0, "CTRL-MOUSEWHEELDOWN", self:GetName(), "w6");
 
-					self:SetBindingClick(0, "SHIFT-MOUSEWHEELUP" , self:GetName(), "w7");
-					self:SetBindingClick(0, "SHIFT-MOUSEWHEELDOWN" , self:GetName(), "w8");
+					self:SetBindingClick(0, "SHIFT-MOUSEWHEELUP", self:GetName(), "w7");
+					self:SetBindingClick(0, "SHIFT-MOUSEWHEELDOWN", self:GetName(), "w8");
 
-					self:SetBindingClick(0, "ALT-CTRL-MOUSEWHEELUP" , self:GetName(), "w9");
-					self:SetBindingClick(0, "ALT-CTRL-MOUSEWHEELDOWN" , self:GetName(), "w10");
+					self:SetBindingClick(0, "ALT-CTRL-MOUSEWHEELUP", self:GetName(), "w9");
+					self:SetBindingClick(0, "ALT-CTRL-MOUSEWHEELDOWN", self:GetName(), "w10");
 
-					self:SetBindingClick(0, "ALT-SHIFT-MOUSEWHEELUP" , self:GetName(), "w11");
-					self:SetBindingClick(0, "ALT-SHIFT-MOUSEWHEELDOWN" , self:GetName(), "w12");
+					self:SetBindingClick(0, "ALT-SHIFT-MOUSEWHEELUP", self:GetName(), "w11");
+					self:SetBindingClick(0, "ALT-SHIFT-MOUSEWHEELDOWN", self:GetName(), "w12");
 
-					self:SetBindingClick(0, "CTRL-SHIFT-MOUSEWHEELUP" , self:GetName(), "w13");
-					self:SetBindingClick(0, "CTRL-SHIFT-MOUSEWHEELDOWN" , self:GetName(), "w14");
+					self:SetBindingClick(0, "CTRL-SHIFT-MOUSEWHEELUP", self:GetName(), "w13");
+					self:SetBindingClick(0, "CTRL-SHIFT-MOUSEWHEELDOWN", self:GetName(), "w14");
 
-					self:SetBindingClick(0, "ALT-CTRL-SHIFT-MOUSEWHEELUP" , self:GetName(), "w15");
-					self:SetBindingClick(0, "ALT-CTRL-SHIFT-MOUSEWHEELDOWN" , self:GetName(), "w16");
+					self:SetBindingClick(0, "ALT-CTRL-SHIFT-MOUSEWHEELUP", self:GetName(), "w15");
+					self:SetBindingClick(0, "ALT-CTRL-SHIFT-MOUSEWHEELDOWN", self:GetName(), "w16");
 			]=]);
 		else
 			aButton:SetAttribute("_onenter", [=[
@@ -311,7 +308,6 @@ function VUHDO_setupAllHealButtonAttributes(aButton, aUnit, anIsDisable, aForceT
 end
 local VUHDO_setupAllHealButtonAttributes = VUHDO_setupAllHealButtonAttributes;
 
---
 local tSpellDescr;
 local tModiKey, tButtonId, tAction;
 local function VUHDO_setupAllButtonsTo(aButton, aSpellName)
@@ -328,24 +324,20 @@ local function VUHDO_setupAllButtonsTo(aButton, aSpellName)
 	end
 end
 
---
 function VUHDO_setupAllTargetButtonAttributes(aButton, aUnit)
 	VUHDO_setupAllHealButtonAttributes(aButton, aUnit .. "target", false, false, true);
 end
 
---
 function VUHDO_setupAllTotButtonAttributes(aButton, aUnit)
 	VUHDO_setupAllHealButtonAttributes(aButton, aUnit .. "targettarget", false, false, true);
 end
 
---
 function VUHDO_disableActions(aButton)
 	VUHDO_setupAllHealButtonAttributes(aButton, nil, true, false, false);
 	aButton:Hide(); -- For clearing mouse-wheel click bindings
 	aButton:Show();
 end
 
---
 local tIsShadowFrom, tIsImproved;
 local function VUHDO_isShadowForm()
 	_, _, tIsShadowFrom = UnitBuff("player", VUHDO_SPELL_ID_SHADOWFORM);
@@ -353,7 +345,6 @@ local function VUHDO_isShadowForm()
 	return tIsShadowFrom or tIsImproved;
 end
 
---
 local tCursorItemType;
 local tAbilities;
 local tUnit;
@@ -388,8 +379,7 @@ function VUHDO_setupSmartCast(aButton)
 				VUHDO_setupAllButtonsTo(aButton, tMainRes);
 				return true;
 			else
-				UIErrorsFrame:AddMessage(VUHDO_I18N_RESS_ERR_1 .. UnitName(tUnit) .. VUHDO_I18N_RESS_ERR_2, 1, 0.1, 0.1,
-					1);
+				UIErrorsFrame:AddMessage(VUHDO_I18N_RESS_ERR_1 .. UnitName(tUnit) .. VUHDO_I18N_RESS_ERR_2, 1, 0.1, 0.1, 1);
 				return false;
 			end
 		end
@@ -411,9 +401,7 @@ function VUHDO_setupSmartCast(aButton)
 		tVariants = tInfo["mibuvariants"];
 		VUHDO_setupAllButtonsTo(aButton, VUHDO_getBuffVariantSingleTarget(tVariants)[1]);
 		tMaxVariant = VUHDO_getBuffVariantMaxTarget(tVariants)[1];
-		if ((VUHDO_buffWatchGetNumLow(tMaxVariant) >= VUHDO_BUFF_SETTINGS["CONFIG"]["AT_LEAST_MISSING"] and "smart" ==
-			VUHDO_BUFF_SETTINGS["CONFIG"]["GROUP_SPELL_VERSION"]) or "always" ==
-			VUHDO_BUFF_SETTINGS["CONFIG"]["GROUP_SPELL_VERSION"]) then
+		if ((VUHDO_buffWatchGetNumLow(tMaxVariant) >= VUHDO_BUFF_SETTINGS["CONFIG"]["AT_LEAST_MISSING"] and "smart" == VUHDO_BUFF_SETTINGS["CONFIG"]["GROUP_SPELL_VERSION"]) or "always" == VUHDO_BUFF_SETTINGS["CONFIG"]["GROUP_SPELL_VERSION"]) then
 
 			VUHDO_setupHealButtonAttributes("", "2", tMaxVariant, aButton, false);
 		else

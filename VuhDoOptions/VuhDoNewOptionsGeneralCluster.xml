@@ -1,7 +1,8 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<Ui xmlns="http://www.blizzard.com/wow/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
 	<Frame name="VuhDoNewOptionsGeneralClusterTemplate" virtual="true">
 		<Frames>
+
 			<Frame name="$parentClusterPanel" inherits="VuhDoPanelTemplate">
 				<Size>
 					<AbsDimension x="235" y="308" />
@@ -74,6 +75,7 @@
 						</Scripts>
 					</Frame>
 
+
 					<Frame name="$parentModeRadioGroup">
 						<Size>
 							<AbsDimension x="106" y="70" />
@@ -85,8 +87,8 @@
 								</Offset>
 							</Anchor>
 						</Anchors>
-						<Frames>
 
+						<Frames>
 							<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
 								<Size>
 									<AbsDimension x="75" y="18" />

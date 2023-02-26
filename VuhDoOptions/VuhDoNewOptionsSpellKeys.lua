@@ -1,7 +1,3 @@
-
-
-
---
 function VUHDO_newOptionsSpellEditBoxSpellId(anEditBox)
 	if (VUHDO_isSpellKnown(anEditBox:GetText())) then
 		anEditBox:SetTextColor(1, 1, 1, 1);

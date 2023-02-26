@@ -1,6 +1,5 @@
---
 function VUHDO_activateLayout(aName)
-  local tCnt;
+	local tCnt;
 	VUHDO_SPELL_ASSIGNMENTS = VUHDO_deepCopyTable(VUHDO_SPELL_LAYOUTS[aName]["MOUSE"]);
 	if (VUHDO_SPELL_LAYOUTS[aName]["HOSTILE_MOUSE"] ~= nil) then
 		VUHDO_HOSTILE_SPELL_ASSIGNMENTS = VUHDO_deepCopyTable(VUHDO_SPELL_LAYOUTS[aName]["HOSTILE_MOUSE"]);
@@ -22,7 +21,7 @@ function VUHDO_activateLayout(aName)
 	end
 
 	VUHDO_SPEC_LAYOUTS["selected"] = aName;
-	VUHDO_Msg("Набор клавиш успешно загружен: \"" .. aName .. "\"");
+	VUHDO_Msg("Key layout \"" .. aName .. "\" successfully loaded.");
 
 	VUHDO_loadVariables();
 	VUHDO_keySetupInitBurst();

@@ -1,6 +1,5 @@
 local pairs = pairs;
 
---
 local tHotCfg, tHotSlots, tCnt2, tHasFixed;
 function VUHDO_fixHotSettings()
 	tHasFixed = false;
@@ -20,7 +19,6 @@ function VUHDO_fixHotSettings()
 	return tHasFixed;
 end
 
---
 local function VUHDO_getVarDescription(aVar)
 	local tMessage = "";
 	if (aVar == nil) then
@@ -40,7 +38,6 @@ local function VUHDO_getVarDescription(aVar)
 	return tMessage;
 end
 
---
 local tCreated, tRepaired;
 local function _VUHDO_ensureSanity(aName, aValue, aSaneValue)
 	if (aSaneValue ~= nil) then
@@ -53,8 +50,7 @@ local function _VUHDO_ensureSanity(aName, aValue, aSaneValue)
 			else
 
 				if (aValue ~= nil) then
-					VUHDO_Msg("AUTO MODEL SANITY: " .. aName .. " repaired table (was flat value): " ..
-								  VUHDO_getVarDescription(aValue));
+					VUHDO_Msg("AUTO MODEL SANITY: " .. aName .. " repaired table (was flat value): " .. VUHDO_getVarDescription(aValue));
 					tRepaired = tRepaired + 1;
 				else
 					tCreated = tCreated + 1;
@@ -69,8 +65,7 @@ local function _VUHDO_ensureSanity(aName, aValue, aSaneValue)
 
 					if (aValue ~= nil) then
 						tRepaired = tRepaired + 1;
-						VUHDO_Msg("AUTO MODEL SANITY: " .. aName .. " repaired a flat value: " ..
-									  VUHDO_getVarDescription(aValue) .. " to " .. VUHDO_getVarDescription(aSaneValue));
+						VUHDO_Msg("AUTO MODEL SANITY: " .. aName .. " repaired a flat value: " .. VUHDO_getVarDescription(aValue) .. " to " .. VUHDO_getVarDescription(aSaneValue));
 					else
 						tCreated = tCreated + 1;
 					end
@@ -84,7 +79,6 @@ local function _VUHDO_ensureSanity(aName, aValue, aSaneValue)
 	return aValue
 end
 
---
 local tRepairedArray;
 function VUHDO_ensureSanity(aName, aValue, aSaneValue)
 	tCreated = 0;
@@ -98,9 +92,12 @@ function VUHDO_ensureSanity(aName, aValue, aSaneValue)
 	return tRepairedArray;
 end
 
-local VUHDO_DEFAULT_MODELS = {{VUHDO_ID_GROUP_1, VUHDO_ID_GROUP_2, VUHDO_ID_GROUP_3, VUHDO_ID_GROUP_4, VUHDO_ID_GROUP_5,
-							   VUHDO_ID_GROUP_6, VUHDO_ID_GROUP_7, VUHDO_ID_GROUP_8}, {VUHDO_ID_MAINTANKS},
-							  {VUHDO_ID_PETS}, {VUHDO_ID_PRIVATE_TANKS}};
+local VUHDO_DEFAULT_MODELS = {
+	{VUHDO_ID_GROUP_1, VUHDO_ID_GROUP_2, VUHDO_ID_GROUP_3, VUHDO_ID_GROUP_4, VUHDO_ID_GROUP_5, VUHDO_ID_GROUP_6, VUHDO_ID_GROUP_7, VUHDO_ID_GROUP_8},
+	{VUHDO_ID_MAINTANKS},
+	{VUHDO_ID_PETS},
+	{VUHDO_ID_PRIVATE_TANKS}
+};
 
 local VUHDO_DEFAULT_RANGE_SPELLS = {
 	["WARRIOR"] = nil,
@@ -113,7 +110,7 @@ local VUHDO_DEFAULT_RANGE_SPELLS = {
 	["DRUID"] = VUHDO_SPELL_ID_HEALING_TOUCH,
 	["PRIEST"] = VUHDO_SPELL_ID_LESSER_HEAL,
 	["DEATHKNIGHT"] = nil
-}
+};
 
 local VUHDO_DEFAULT_SPELL_ASSIGNMENT = {
 	["1"] = {"", "1", "target"},
@@ -419,10 +416,10 @@ local VUHDO_DEFAULT_SPELLS_KEYBOARD = {
 		["ctrlshift1"] = {"CTRL-SHIFT-", "-w13", ""},
 		["ctrlshift2"] = {"CTRL-SHIFT-", "-w14", ""},
 
-		["altctrlshift1"] = {"ALT-CTRL-SHIFT-", "w15", ""},
-		["altctrlshift2"] = {"ALT-CTRL-SHIFT-", "w16", ""}
+		["altctrlshift1"] = {"ALT-CTRL-SHIFT-", "-w15", ""},
+		["altctrlshift2"] = {"ALT-CTRL-SHIFT-", "-w16", ""}
 	}
-}
+};
 
 local VUHDO_DEFAULT_SPELL_CONFIG = {
 	["IS_AUTO_FIRE"] = true,
@@ -441,31 +438,33 @@ local VUHDO_DEFAULT_SPELL_CONFIG = {
 	["IS_LOAD_HOTS"] = false,
 	["smartCastModi"] = "all",
 	["autoBattleRez"] = true
-}
+};
 
---
 function VUHDO_loadSpellArray()
+	-- Maus freundlich
 	if (VUHDO_SPELL_ASSIGNMENTS == nil) then
 		VUHDO_assignDefaultSpells();
 	end
-	VUHDO_SPELL_ASSIGNMENTS = VUHDO_ensureSanity("VUHDO_SPELL_ASSIGNMENTS", VUHDO_SPELL_ASSIGNMENTS,
-		VUHDO_DEFAULT_SPELL_ASSIGNMENT);
 
+	VUHDO_SPELL_ASSIGNMENTS = VUHDO_ensureSanity("VUHDO_SPELL_ASSIGNMENTS", VUHDO_SPELL_ASSIGNMENTS, VUHDO_DEFAULT_SPELL_ASSIGNMENT);
+
+	-- Maus gegnerisch
 	if (VUHDO_HOSTILE_SPELL_ASSIGNMENTS == nil) then
 		VUHDO_HOSTILE_SPELL_ASSIGNMENTS = VUHDO_deepCopyTable(VUHDO_DEFAULT_SPELL_ASSIGNMENT);
 	end
-	VUHDO_HOSTILE_SPELL_ASSIGNMENTS = VUHDO_ensureSanity("VUHDO_HOSTILE_SPELL_ASSIGNMENTS",
-		VUHDO_HOSTILE_SPELL_ASSIGNMENTS, VUHDO_DEFAULT_SPELL_ASSIGNMENT);
+	-- Tastatur
+	VUHDO_HOSTILE_SPELL_ASSIGNMENTS = VUHDO_ensureSanity("VUHDO_HOSTILE_SPELL_ASSIGNMENTS", VUHDO_HOSTILE_SPELL_ASSIGNMENTS, VUHDO_DEFAULT_SPELL_ASSIGNMENT);
 
 	if (VUHDO_SPELLS_KEYBOARD == nil) then
 		VUHDO_SPELLS_KEYBOARD = VUHDO_deepCopyTable(VUHDO_DEFAULT_SPELLS_KEYBOARD);
 	end
-	VUHDO_SPELLS_KEYBOARD = VUHDO_ensureSanity("VUHDO_SPELLS_KEYBOARD", VUHDO_SPELLS_KEYBOARD,
-		VUHDO_DEFAULT_SPELLS_KEYBOARD);
 
+	VUHDO_SPELLS_KEYBOARD = VUHDO_ensureSanity("VUHDO_SPELLS_KEYBOARD", VUHDO_SPELLS_KEYBOARD, VUHDO_DEFAULT_SPELLS_KEYBOARD);
+	-- Konfiguration
 	if (VUHDO_SPELL_CONFIG == nil) then
 		VUHDO_SPELL_CONFIG = VUHDO_deepCopyTable(VUHDO_DEFAULT_SPELL_CONFIG);
 	end
+
 	VUHDO_SPELL_CONFIG = VUHDO_ensureSanity("VUHDO_SPELL_CONFIG", VUHDO_SPELL_CONFIG, VUHDO_DEFAULT_SPELL_CONFIG);
 
 	if (VUHDO_SPELL_LAYOUTS == nil) then
@@ -477,15 +476,12 @@ function VUHDO_loadSpellArray()
 			["selected"] = "",
 			["1"] = "",
 			["2"] = ""
-		}
+		};
 	end
-
 end
 
---
 function VUHDO_assignDefaultSpells()
 	local tClass;
-
 	_, tClass = UnitClass("player");
 
 	VUHDO_SPELL_ASSIGNMENTS = VUHDO_deepCopyTable(VUHDO_DEFAULT_SPELL_ASSIGNMENT);
@@ -502,7 +498,6 @@ function VUHDO_assignDefaultSpells()
 	end
 end
 
---
 local tIsToggle;
 local function VUHDO_customDebuffsAddDefaultSettings(aBuffName)
 	if (VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"] == nil) then
@@ -518,7 +513,7 @@ local function VUHDO_customDebuffsAddDefaultSettings(aBuffName)
 			["animate"] = VUHDO_CONFIG["CUSTOM_DEBUFF"].animate,
 			["timer"] = VUHDO_CONFIG["CUSTOM_DEBUFF"].timer,
 			["isStacks"] = VUHDO_CONFIG["CUSTOM_DEBUFF"].isStacks
-		}
+		};
 	end
 
 	if (not VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][aBuffName].isColor) then
@@ -540,7 +535,6 @@ local function VUHDO_customDebuffsAddDefaultSettings(aBuffName)
 	end
 end
 
---
 local tArgNum, tArg;
 local tCnt;
 local tBuffName;
@@ -554,7 +548,6 @@ local function VUHDO_addCustomSpellIds(...)
 	end
 end
 
---
 local VUHDO_DEFAULT_CONFIG = {
 	["SHOW_PANELS"] = true,
 	["HIDE_PANELS_SOLO"] = false,
@@ -688,25 +681,28 @@ local VUHDO_DEFAULT_CONFIG = {
 local VUHDO_DEFAULT_CU_DE_STORED_SETTINGS = {
 	["isIcon"] = true,
 	["isColor"] = false,
-	--	["SOUND"] = "",
+--	["SOUND"] = "",
 	["animate"] = true,
 	["timer"] = true,
 	["isStacks"] = true
 
-	--	["color"] = {
-	--		["R"] = 0.6,
-	--		["G"] = 0.3,
-	--		["B"] = 0,
-	--		["O"] = 1,
-	--		["TR"] = 0.8,
-	--		["TG"] = 0.5,
-	--		["TB"] = 0,
-	--		["TO"] = 1,
-	--		["useText"] = true,
-	--		["useBackground"] = true,
-	--		["useOpacity"] = true,
-	--	},
+--[[
+	["color"] = {
+		["R"] = 0.6,
+		["G"] = 0.3,
+		["B"] = 0,
+		["O"] = 1,
+		["TR"] = 0.8,
+		["TG"] = 0.5,
+		["TB"] = 0,
+		["TO"] = 1,
+		["useText"] = true,
+		["useBackground"] = true,
+		["useOpacity"] = true,
+	},
+--]]
 };
+
 
 VUHDO_DEFAULT_POWER_TYPE_COLORS = {
 	[VUHDO_UNIT_POWER_MANA] = {
@@ -789,7 +785,6 @@ VUHDO_DEFAULT_POWER_TYPE_COLORS = {
 	}
 };
 
---
 function VUHDO_loadDefaultConfig()
 	local tClass;
 	_, tClass = UnitClass("player");
@@ -807,136 +802,139 @@ function VUHDO_loadDefaultConfig()
 
 	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version == nil or VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 2) then
 		VUHDO_CONFIG["CUSTOM_DEBUFF"].version = 2;
-		VUHDO_addCustomSpellIds( -- WotLK
-		48920, -- Болезненный укус
-		23965, -- Мгновенное исцеление
-		48261, -- Прокалывание
-		-- Накс
-		28622, -- Кокон
-		55550, -- Зазубренный нож
-		27808, -- Ледяной взрыв
-		-- Ульда
-		63477, -- Шлаковый ковш
-		64234, -- Гравитационная бомба
-		63018, -- Опаляющий свет
-		64292, -- Каменная хватка
-		64669, -- Дикий прыжок
-		63666 -- Заряд напалма
-	);
+		VUHDO_addCustomSpellIds(
+			-- WotLK
+			48920, -- Болезненный укус
+			23965, -- Мгновенное исцеление
+			48261, -- Прокалывание
+			-- Накс
+			28622, -- Кокон
+			55550, -- Зазубренный нож
+			27808, -- Ледяной взрыв
+			-- Ульда
+			63477, -- Шлаковый ковш
+			64234, -- Гравитационная бомба
+			63018, -- Опаляющий свет
+			64292, -- Каменная хватка
+			64669, -- Дикий прыжок
+			63666 -- Заряд напалма
+		);
 	end
 
 	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 6) then
 		VUHDO_CONFIG["CUSTOM_DEBUFF"].version = 6;
 
-		VUHDO_addCustomSpellIds( -- ИК
-		67478, -- Прокалывание
-		66406, -- Получи снобольда!
-		66869, -- Горящая желчь
-		67618, -- Паралитический токсин
-		67049, -- Испепеление плоти
-		67297, -- Касание Света
-		66001, -- Касание тьмы
-		66013, -- Пронизывающий холод
-		67861 -- Ядовитые жвалы
-	);
+		VUHDO_addCustomSpellIds(
+			-- ИК
+			67478, -- Прокалывание
+			66406, -- Получи снобольда!
+			66869, -- Горящая желчь
+			67618, -- Паралитический токсин
+			67049, -- Испепеление плоти
+			67297, -- Касание Света
+			66001, -- Касание тьмы
+			66013, -- Пронизывающий холод
+			67861 -- Ядовитые жвалы
+		);
 	end
 
 	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 7) then
 		VUHDO_CONFIG["CUSTOM_DEBUFF"].version = 7;
 
-		VUHDO_addCustomSpellIds( -- Ульда
-		62283, -- Железные корни
-		63134, -- Благословение Сары
-		-- ИК
-		67475, -- Огненная бомба
-		68123, -- Пламя Легиона
-		67078, -- Поцелуй Госпожи
-		66283, -- Крутящийся шип боли
-		67847, -- Выявление слабости
-		-- ЦЛК
-		69065, -- Прокалывание
-		70659, -- Некротический удар
-		72293, -- Метка падшего воителя
-		72385, -- Кипящая кровь
-		72409 -- Руна крови
-	);
+		VUHDO_addCustomSpellIds(
+			-- Ulduar
+			62283, -- Железные корни
+			63134, -- Благословение Сары
+			-- ИК
+			67475, -- Огненная бомба
+			68123, -- Пламя Легиона
+			67078, -- Поцелуй Госпожи
+			66283, -- Крутящийся шип боли
+			67847, -- Выявление слабости
+			-- ЦЛК
+			69065, -- Прокалывание
+			70659, -- Некротический удар
+			72293, -- Метка падшего воителя
+			72385, -- Кипящая кровь
+			72409 -- Руна крови
+		);
 	end
 
 	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 9) then
 		VUHDO_CONFIG["CUSTOM_DEBUFF"].version = 9;
 
-		VUHDO_addCustomSpellIds( -- ICC
-		72273, -- Губительный газ
-		72219, -- Желудочное вздутие
-		69278, -- Газообразные споры
-		--72103, -- Невосприимчивость к гнили
-		71224, -- Мутировавшая инфекция
-		72455, -- Газовое вздутие
-		70447, -- Выделения неустойчивого слизнюка
-		72745 -- Мутировавшая чума
-	);
+		VUHDO_addCustomSpellIds(
+			-- ICC
+			72273, -- Губительный газ
+			72219, -- Желудочное вздутие
+			69278, -- Газообразные споры
+			-- 72103, -- Невосприимчивость к гнили
+			71224, -- Мутировавшая инфекция
+			72455, -- Газовое вздутие
+			70447, -- Выделения неустойчивого слизнюка
+			72745 -- Мутировавшая чума
+		);
 	end
 
 	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 10) then
 		VUHDO_CONFIG["CUSTOM_DEBUFF"].version = 10;
 
-		VUHDO_addCustomSpellIds( -- ICC
-		72999, -- Темница Тьмы
-		72796, -- Ослепительные искры
-		71624, -- Безумный выпад
-		72638, -- Роящиеся тени
-		70986, -- Покров скорби
-		71340 -- Пакт Омраченных
-	);
+		VUHDO_addCustomSpellIds(
+			-- ICC
+			72999, -- Темница Тьмы
+			72796, -- Ослепительные искры
+			71624, -- Безумный выпад
+			72638, -- Роящиеся тени
+			70986, -- Покров скорби
+			71340 -- Пакт Омраченных
+		);
 	end
 
 	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 11) then
 		VUHDO_CONFIG["CUSTOM_DEBUFF"].version = 11;
 
-		VUHDO_addCustomSpellIds( -- ICC
-		70867 -- Essence of the Blood Queen
+		VUHDO_addCustomSpellIds(
+			-- ICC
+			70867 -- Сущность Кровавой королевы
 		);
 	end
 
 	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 12) then
 		VUHDO_CONFIG["CUSTOM_DEBUFF"].version = 12;
 
-		VUHDO_addCustomSpellIds( -- ICC
-		70751, -- Коррозия
-		70633, -- Выброс внутренностей
-		70157, -- Ледяной склеп
-		70106, -- Обморожение
-		69766, -- Неустойчивость
-		69649, -- Ледяное дыхание
-		70126, -- Ледяная метка
-		70541, -- Заражение
-		72754, -- Осквернение
-		68980 -- Жатва душ
-
-	);
+		VUHDO_addCustomSpellIds(
+			-- ICC
+			70751, -- Коррозия
+			70633, -- Выброс внутренностей
+			70157, -- Ледяной склеп
+			70106, -- Обморожение
+			69766, -- Неустойчивость
+			69649, -- Ледяное дыхание
+			70126, -- Ледяная метка
+			70541, -- Заражение
+			72754, -- Осквернение
+			68980 -- Жатва душ
+		);
 	end
 
 	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 13) then
 		VUHDO_CONFIG["CUSTOM_DEBUFF"].version = 13;
 
-		VUHDO_addCustomSpellIds( -- ICC
-		73912 -- Necrotic plague, Lich King
+		VUHDO_addCustomSpellIds(
+			-- ICC
+			73912 -- Мертвящая чума
 		);
-	end
+end
 
 	local tName;
 	for _, tName in pairs(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"]) do
 		VUHDO_customDebuffsAddDefaultSettings(tName);
-		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tName] =
-			VUHDO_ensureSanity("CUSTOM_DEBUFF.STORED_SETTINGS", VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tName],
-				VUHDO_DEFAULT_CU_DE_STORED_SETTINGS);
+		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tName] = VUHDO_ensureSanity("CUSTOM_DEBUFF.STORED_SETTINGS", VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tName], VUHDO_DEFAULT_CU_DE_STORED_SETTINGS);
 	end
 
-	if (VUHDO_POWER_TYPE_COLORS == nil) then
-		VUHDO_POWER_TYPE_COLORS = VUHDO_deepCopyTable(VUHDO_DEFAULT_POWER_TYPE_COLORS);
+	if (VUHDO_POWER_TYPE_COLORS == nil) then VUHDO_POWER_TYPE_COLORS = VUHDO_deepCopyTable(VUHDO_DEFAULT_POWER_TYPE_COLORS);
 	end
-	VUHDO_POWER_TYPE_COLORS = VUHDO_ensureSanity("VUHDO_POWER_TYPE_COLORS", VUHDO_POWER_TYPE_COLORS,
-		VUHDO_DEFAULT_POWER_TYPE_COLORS);
+	VUHDO_POWER_TYPE_COLORS = VUHDO_ensureSanity("VUHDO_POWER_TYPE_COLORS", VUHDO_POWER_TYPE_COLORS, VUHDO_DEFAULT_POWER_TYPE_COLORS);
 end
 
 local VUHDO_DEFAULT_PANEL_SETUP = {
@@ -963,42 +961,15 @@ local VUHDO_DEFAULT_PANEL_SETUP = {
 
 		["SLOTCFG"] = {
 			["firstFlood"] = true,
-			["1"] = {
-				["mine"] = true,
-				["others"] = false
-			},
-			["2"] = {
-				["mine"] = true,
-				["others"] = false
-			},
-			["3"] = {
-				["mine"] = true,
-				["others"] = false
-			},
-			["4"] = {
-				["mine"] = true,
-				["others"] = false
-			},
-			["5"] = {
-				["mine"] = true,
-				["others"] = false
-			},
-			["6"] = {
-				["mine"] = true,
-				["others"] = false
-			},
-			["7"] = {
-				["mine"] = true,
-				["others"] = false
-			},
-			["8"] = {
-				["mine"] = true,
-				["others"] = false
-			},
-			["9"] = {
-				["mine"] = true,
-				["others"] = false
-			}
+			["1"] = {["mine"] = true, ["others"] = false},
+			["2"] = {["mine"] = true, ["others"] = false},
+			["3"] = {["mine"] = true, ["others"] = false},
+			["4"] = {["mine"] = true, ["others"] = false},
+			["5"] = {["mine"] = true, ["others"] = false},
+			["6"] = {["mine"] = true, ["others"] = false},
+			["7"] = {["mine"] = true, ["others"] = false},
+			["8"] = {["mine"] = true, ["others"] = false},
+			["9"] = {["mine"] = true, ["others"] = false}
 		},
 
 		["BARS"] = {
@@ -1015,6 +986,7 @@ local VUHDO_DEFAULT_PANEL_SETUP = {
 			["TO"] = 1,
 			["useText"] = true
 		},
+				
 		["BARS"] = {
 			["R"] = 0.7,
 			["G"] = 0.7,
@@ -1023,11 +995,11 @@ local VUHDO_DEFAULT_PANEL_SETUP = {
 			["useBackground"] = true,
 			["useOpacity"] = true
 		},
+
 		["classColorsName"] = false
 	},
 
 	["BAR_COLORS"] = {
-
 		["IRRELEVANT"] = {
 			["R"] = 0,
 			["G"] = 0,
@@ -1786,9 +1758,8 @@ local VUHDO_DEFAULT_PER_PANEL_SETUP = {
 		["xAdjust"] = 0,
 		["yAdjust"] = 0
 	}
-}
+};
 
---
 function VUHDO_loadDefaultPanelSetup()
 	local tPanelNum;
 	local tAktPanel;
@@ -1811,8 +1782,7 @@ function VUHDO_loadDefaultPanelSetup()
 			else
 				if (VUHDO_DEFAULT_MODELS[tPanelNum] ~= nil and VUHDO_ID_PETS == VUHDO_DEFAULT_MODELS[tPanelNum][1]) then
 					tAktPanel["MODEL"].ordering = VUHDO_ORDERING_LOOSE;
-				elseif (VUHDO_DEFAULT_MODELS[tPanelNum] ~= nil and VUHDO_ID_PRIVATE_TANKS ==
-					VUHDO_DEFAULT_MODELS[tPanelNum][1]) then
+				elseif (VUHDO_DEFAULT_MODELS[tPanelNum] ~= nil and VUHDO_ID_PRIVATE_TANKS == VUHDO_DEFAULT_MODELS[tPanelNum][1]) then
 					tAktPanel["SCALING"].showTarget = true;
 				else
 					tAktPanel["SCALING"].ommitEmptyWhenStructured = true;
@@ -1847,8 +1817,7 @@ function VUHDO_loadDefaultPanelSetup()
 			};
 		end
 
-		VUHDO_PANEL_SETUP[tPanelNum] = VUHDO_ensureSanity("VUHDO_PANEL_SETUP[" .. tPanelNum .. "]",
-			VUHDO_PANEL_SETUP[tPanelNum], VUHDO_DEFAULT_PER_PANEL_SETUP);
+		VUHDO_PANEL_SETUP[tPanelNum] = VUHDO_ensureSanity("VUHDO_PANEL_SETUP[" .. tPanelNum .. "]", VUHDO_PANEL_SETUP[tPanelNum], VUHDO_DEFAULT_PER_PANEL_SETUP);
 	end
 
 	VUHDO_PANEL_SETUP = VUHDO_ensureSanity("VUHDO_PANEL_SETUP", VUHDO_PANEL_SETUP, VUHDO_DEFAULT_PANEL_SETUP);
@@ -1995,7 +1964,7 @@ local VUHDO_DEFAULT_BUFF_CONFIG = {
 		["useBackground"] = true,
 		["useOpacity"] = true
 	}
-}
+};
 
 VUHDO_DEFAULT_USER_CLASS_COLORS = {
 	[VUHDO_ID_DRUIDS] = {
@@ -2153,25 +2122,21 @@ VUHDO_DEFAULT_USER_CLASS_COLORS = {
 	},
 
 	["petClassColor"] = false
-}
+};
 
---
 function VUHDO_initClassColors()
 	if (VUHDO_USER_CLASS_COLORS == nil) then
 		VUHDO_USER_CLASS_COLORS = VUHDO_deepCopyTable(VUHDO_DEFAULT_USER_CLASS_COLORS);
 	end
-	VUHDO_USER_CLASS_COLORS = VUHDO_ensureSanity("VUHDO_USER_CLASS_COLORS", VUHDO_USER_CLASS_COLORS,
-		VUHDO_DEFAULT_USER_CLASS_COLORS);
+	VUHDO_USER_CLASS_COLORS = VUHDO_ensureSanity("VUHDO_USER_CLASS_COLORS", VUHDO_USER_CLASS_COLORS, VUHDO_DEFAULT_USER_CLASS_COLORS);
 end
 
---
 function VUHDO_initBuffSettings()
 
 	if (VUHDO_BUFF_SETTINGS["CONFIG"] == nil) then
 		VUHDO_BUFF_SETTINGS["CONFIG"] = VUHDO_deepCopyTable(VUHDO_DEFAULT_BUFF_CONFIG);
 	end
-	VUHDO_BUFF_SETTINGS["CONFIG"] = VUHDO_ensureSanity("VUHDO_BUFF_SETTINGS.CONFIG", VUHDO_BUFF_SETTINGS["CONFIG"],
-		VUHDO_DEFAULT_BUFF_CONFIG);
+	VUHDO_BUFF_SETTINGS["CONFIG"] = VUHDO_ensureSanity("VUHDO_BUFF_SETTINGS.CONFIG", VUHDO_BUFF_SETTINGS["CONFIG"], VUHDO_DEFAULT_BUFF_CONFIG);
 
 	local _, tPlayerClass = UnitClass("player");
 	local tAllClassBuffs = VUHDO_CLASS_BUFFS[tPlayerClass];

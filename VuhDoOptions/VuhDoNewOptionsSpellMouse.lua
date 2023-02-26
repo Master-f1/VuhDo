@@ -1,14 +1,13 @@
 VUHDO_CURR_SPELL_MODIFIER = "";
 
-
-local tComponents = { };
+local tComponents = {};
 local tNum;
 local tModel;
 function VUHDO_newOptionsSpellSetModifier(aModifier)
 	VUHDO_CURR_SPELL_MODIFIER = aModifier;
 
 	table.wipe(tComponents);
-	tComponents = { VuhDoNewOptionsSpellMouseKeyPanelScrollPanelChild:GetChildren() };
+	tComponents = {VuhDoNewOptionsSpellMouseKeyPanelScrollPanelChild:GetChildren()};
 
 	for _, tComp in pairs(tComponents) do
 		if (tComp:IsObjectType("EditBox")) then
@@ -21,7 +20,7 @@ function VUHDO_newOptionsSpellSetModifier(aModifier)
 	end
 
 	table.wipe(tComponents);
-	tComponents = { VuhDoNewOptionsSpellMouseWheelPanel:GetChildren() };
+	tComponents = {VuhDoNewOptionsSpellMouseWheelPanel:GetChildren()};
 
 	for _, tComp in pairs(tComponents) do
 		if (tComp:IsObjectType("EditBox")) then
@@ -35,9 +34,6 @@ function VUHDO_newOptionsSpellSetModifier(aModifier)
 
 end
 
-
-
---
 local tActionLowerName;
 local function VUHDO_isActionValid(anActionName)
 
@@ -47,13 +43,13 @@ local function VUHDO_isActionValid(anActionName)
 
 	tActionLowerName = strlower(anActionName);
 
-  if (VUHDO_SPELL_KEY_ASSIST == tActionLowerName
-   or VUHDO_SPELL_KEY_FOCUS == tActionLowerName
-   or VUHDO_SPELL_KEY_MENU == tActionLowerName
-   or VUHDO_SPELL_KEY_TELL == tActionLowerName
-	 or VUHDO_SPELL_KEY_TARGET == tActionLowerName
-	 or VUHDO_SPELL_KEY_DROPDOWN == tActionLowerName) then
-	 	return "Command", 0.8, 1, 0.8;
+	if (VUHDO_SPELL_KEY_ASSIST == tActionLowerName
+		or VUHDO_SPELL_KEY_FOCUS == tActionLowerName
+		or VUHDO_SPELL_KEY_MENU == tActionLowerName
+		or VUHDO_SPELL_KEY_TELL == tActionLowerName
+		or VUHDO_SPELL_KEY_TARGET == tActionLowerName
+		or VUHDO_SPELL_KEY_DROPDOWN == tActionLowerName) then
+			return "Command", 0.8, 1, 0.8;
 	end
 
 	if (GetMacroIndexByName(anActionName) ~= 0) then
@@ -71,9 +67,6 @@ local function VUHDO_isActionValid(anActionName)
 	return nil;
 end
 
-
-
---
 local tText, tLabel, tR, tG, tB;
 function VUHDO_newOptionsSpellEditBoxCheckSpell(anEditBox)
 	tText, tR, tG, tB = VUHDO_isActionValid(anEditBox:GetText());

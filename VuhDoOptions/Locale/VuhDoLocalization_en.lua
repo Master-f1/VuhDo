@@ -1,164 +1,155 @@
-if (GetLocale() ~= "esES") then
-	return;
-end
-
-
--- New Options
+﻿-- New Options
 -- @EXACT = false
 VUHDO_I18N_SCANNERS = "Scanners";
-VUHDO_I18N_RESURRECT_SHORT = "Resucitar";
+VUHDO_I18N_RESURRECT_SHORT = "Resurrect";
 VUHDO_I18N_GENERAL = "General";
-VUHDO_I18N_CONFIG = "Configuracion";
+VUHDO_I18N_CONFIG = "Config";
 VUHDO_I18N_REBUFF = "Rebuff";
-VUHDO_I18N_FORMAT = "Formato";
-VUHDO_I18N_BUFF_NAMES = "Nombre de bufos";
-VUHDO_I18N_EMPTY_GROUPS = "Grupos vacios";
-VUHDO_I18N_STATES = "Estados";
-VUHDO_I18N_CD_FLASHING = "CD-Frascos";
-VUHDO_I18N_TIMERS = "Temporizadores";
-VUHDO_I18N_WHATEVER_FIRST = "... O... (lo que venga primero)";
+VUHDO_I18N_FORMAT = "Format";
+VUHDO_I18N_BUFF_NAMES = "Buff Names";
+VUHDO_I18N_EMPTY_GROUPS = "Empty Groups";
+VUHDO_I18N_STATES = "States";
+VUHDO_I18N_CD_FLASHING = "CD-Flashing";
+VUHDO_I18N_TIMERS = "Timers";
+VUHDO_I18N_WHATEVER_FIRST = "... OR... (whatever comes first)";
 VUHDO_I18N_SMART_DOTS = "Smart...";
-VUHDO_I18N_GROUP_BUFFS = "Bufos de grupo";
-VUHDO_I18N_MODES = "Modos";
-VUHDO_I18N_EMERGENCY_MODE = "Modo Urgencia";
-VUHDO_I18N_NORMAL_MODE = "Modo Normal";
-VUHDO_I18N_DETECT = "Deteccion";
-VUHDO_I18N_RANGE = "Rango";
-VUHDO_I18N_ADD_NEW_PANEL = "Insertar nuevo panel";
-VUHDO_I18N_HOLD_TO_TEST = "Mantener los test";
-VUHDO_I18N_OWN_HOTS = "HoTs personales";
-VUHDO_I18N_BAR_TEXTURE = "Textura de barras";
-VUHDO_I18N_OTHER_POWERS = "Otros";
-VUHDO_I18N_MANA_BARS = "Barras de Mana";
-VUHDO_I18N_LOSE = "Perder";
-VUHDO_I18N_ORDERING = "Ordenados";
-VUHDO_I18N_HIDE_EMPTY = "Ocultar vacios";
-VUHDO_I18N_ANCHOR = "Fijar";
+VUHDO_I18N_GROUP_BUFFS = "Group Buffs";
+VUHDO_I18N_MODES = "Modes";
+VUHDO_I18N_EMERGENCY_MODE = "Emergency Mode";
+VUHDO_I18N_NORMAL_MODE = "Normal Mode";
+VUHDO_I18N_DETECT = "Detect";
+VUHDO_I18N_RANGE = "Range";
+VUHDO_I18N_ADD_NEW_PANEL = "Add new Panel";
+VUHDO_I18N_HOLD_TO_TEST = "Hold to Test";
+VUHDO_I18N_OWN_HOTS = "Own HoTs";
+VUHDO_I18N_BAR_TEXTURE = "Bar Texture";
+VUHDO_I18N_OTHER_POWERS = "Other";
+VUHDO_I18N_MANA_BARS = "Mana Bars";
+VUHDO_I18N_LOSE = "Loose";
+VUHDO_I18N_ORDERING = "Ordering";
+VUHDO_I18N_HIDE_EMPTY = "Hide empty";
+VUHDO_I18N_ANCHOR = "Anchor";
 VUHDO_I18N_UNIT_ID = "Unit ID";
-VUHDO_I18N_HEADER_TEXT = "Texto de la cabecera";
-VUHDO_I18N_TOOLTIPS = "Ayuda contextual";
-VUHDO_I18N_SIZING = "Dimensiones";
-VUHDO_I18N_BUTTON_SIZE = "Tama\195\177o del boton";
-VUHDO_I18N_TARGET_NAME = "Nombre del objetivo";
-VUHDO_I18N_PERCENT = "Porcentaje";
-VUHDO_I18N_MISSING = "Desaparecido";
-VUHDO_I18N_REMAINING = "Restante";
+VUHDO_I18N_HEADER_TEXT = "Header Text";
+VUHDO_I18N_TOOLTIPS = "Tooltips";
+VUHDO_I18N_SIZING = "Sizing";
+VUHDO_I18N_BUTTON_SIZE = "Button Size";
+VUHDO_I18N_TARGET_NAME = "Target Name";
+VUHDO_I18N_PERCENT = "Percent";
+VUHDO_I18N_MISSING = "Missing";
+VUHDO_I18N_REMAINING = "Remaining";
 VUHDO_I18N_HITPOINTS = "Hitpoints";
-VUHDO_I18N_BAR_TEXT = "Texto de barras";
-VUHDO_I18N_MAX_SWATCHES_PER_LINE = "Max.Indicador por Linea";
-VUHDO_I18N_MAX_BUFFS_PER_ROW = "Max.Buffs por Fila";
-VUHDO_I18N_REFRESH_RATE = "Frecuencia de refresco";
-VUHDO_I18N_INDICATE_REBUFF_BELOW = "Indica rebuff a continuacion";
-VUHDO_I18N_IF_AT_LEAST = "... si por lo menos";
-VUHDO_I18N_PLAYERS_LOW = " jugadores bajos.";
-VUHDO_I18N_SIZE = "Tama\195\177o";
-VUHDO_I18N_TEXTURE_NUM = "Textura #";
-VUHDO_I18N_TEXT_SIZE = "Tama\195\177o de textura";
-VUHDO_I18N_X_SPACING = "X-Espaciado";
-VUHDO_I18N_Y_SPACING = "Y-Espaciado";
-VUHDO_I18N_X_GAP = "X-Diferencia";
-VUHDO_I18N_Y_GAP = "Y-Diferencia";
+VUHDO_I18N_BAR_TEXT = "Bar Text";
+VUHDO_I18N_MAX_SWATCHES_PER_LINE = "Max.Swatches per Line";
+VUHDO_I18N_MAX_BUFFS_PER_ROW = "Max.Buffs per Row";
+VUHDO_I18N_REFRESH_RATE = "Refresh rate";
+VUHDO_I18N_INDICATE_REBUFF_BELOW = "Indicate Rebuff below";
+VUHDO_I18N_IF_AT_LEAST = "... if at least";
+VUHDO_I18N_PLAYERS_LOW = " players low.";
+VUHDO_I18N_SIZE = "Size";
+VUHDO_I18N_TEXTURE_NUM = "Texture #";
+VUHDO_I18N_TEXT_SIZE = "Text Size";
+VUHDO_I18N_X_SPACING = "X-Spacing";
+VUHDO_I18N_Y_SPACING = "Y-Spacing";
+VUHDO_I18N_X_GAP = "X-Gap";
+VUHDO_I18N_Y_GAP = "Y-Gap";
 
 -- General Labels
 -- @EXACT = false
-VUHDO_I18N_CANCEL = "Cancelar";
-VUHDO_I18N_SHOW = "Apariencia";
-VUHDO_I18N_BARS = "Barras"
+VUHDO_I18N_CANCEL = "Cancel";
+VUHDO_I18N_SHOW = "Show";
+VUHDO_I18N_BARS = "Bars"
 VUHDO_I18N_COLOR = "Color";
-VUHDO_I18N_COLORS = "Colores";
+VUHDO_I18N_COLORS = "Colors";
 VUHDO_I18N_GENERAL_SHORT = "General";
-VUHDO_I18N_CUSTOM = "Personalizacion";
-VUHDO_I18N_MOUSE = "Raton";
+VUHDO_I18N_CUSTOM = "Custom";
+VUHDO_I18N_MOUSE = "Mouse";
 VUHDO_I18N_STANDARD = "Standard";
-VUHDO_I18N_POSITION = "Posicion";
-VUHDO_I18N_SCALE = "Escala";
-VUHDO_I18N_ENABLE = "Activo";
-VUHDO_I18N_BACKGROUND = "Fondo";
-VUHDO_I18N_GROUPED = "Agrupados";
-VUHDO_I18N_SORT_BY = "Lanzado por...";
-VUHDO_I18N_NAME = "Nombre";
+VUHDO_I18N_POSITION = "Position";
+VUHDO_I18N_SCALE = "Scale";
+VUHDO_I18N_ENABLE = "Enable";
+VUHDO_I18N_BACKGROUND = "Background";
+VUHDO_I18N_GROUPED = "Grouped";
+VUHDO_I18N_SORT_BY = "Sort by...";
+VUHDO_I18N_NAME = "Name";
 VUHDO_I18N_MAX_HP = "Max. HP";
-VUHDO_I18N_MAX_COLUMNS = "max. Columnas";
-VUHDO_I18N_MAX_ROWS = "max. Lineas";
-VUHDO_I18N_CLEAR_PANELS_CONFIRM = "Suprimir el modelo de panel?!";
-VUHDO_I18N_BUFF_NAME = "Nombre del buffo";
-VUHDO_I18N_BUFF_ON_PLAYER = "en el nombre del jugador:";
-VUHDO_I18N_ALWAYS = "Siempre";
-VUHDO_I18N_NEVER = "Nunca";
+VUHDO_I18N_MAX_COLUMNS = "max. Columns";
+VUHDO_I18N_MAX_ROWS = "max. Rows";
+VUHDO_I18N_CLEAR_PANELS_CONFIRM = "Clear Panel Models?!\nYA'RLY?";
+VUHDO_I18N_BUFF_NAME = "Buff Name";
+VUHDO_I18N_BUFF_ON_PLAYER = "on Player Name:";
+VUHDO_I18N_ALWAYS = "Always";
+VUHDO_I18N_NEVER = "Never";
 VUHDO_I18N_BUFF_PANEL_BG = "Panel";
-
-
-
 
 
 -- VuhDoOptionsGeneral.lua
 -- @EXACT = false
-VUHDO_I18N_CLEANSE = "Dispeleador";
-VUHDO_I18N_RESURRECT = "Resucitar";
-VUHDO_I18N_SMART_CAST_OO_COMBAT = "Seleccion automatica hechizo";
-VUHDO_I18N_IGNORE_IRRELEVANT = "Ignorar lo irrelevante...";
-VUHDO_I18N_BY_CLASS = "Clase";
-VUHDO_I18N_MOVEMENT_IMPAIRING = "Movimiento";
-VUHDO_I18N_BY_DURATION = "Duracion";
-VUHDO_I18N_BY_NON_HARMFUL = "Inofensiva";
-VUHDO_I18N_REMOVABLE_ONLY = "Borrable";
-VUHDO_I18N_ESTIMATE = "Estimado";
-VUHOD_I18N_BY_SPELL = "por hechizo";
-VUHDO_I18N_SHOW_INC = "Curacion entrante";
-VUHDO_I18N_SHOW_OWN_HEAL = "personal";
-VUHDO_I18N_SHOW_OVERHEAL = "Sobrecuracion";
-VUHDO_I18N_OPERATION_MODE = "Modo de operar";
-VUHDO_I18N_MAX_EMERGENCIES = "max. Urgencia";
-VUHDO_I18N_RELVEVANCE = "Inutil si superior";
+VUHDO_I18N_CLEANSE = "Cleanse";
+VUHDO_I18N_RESURRECT = "Resurrect";
+VUHDO_I18N_SMART_CAST_OO_COMBAT = "Smart Cast";
+VUHDO_I18N_IGNORE_IRRELEVANT = "Ignore irrelevant ...";
+VUHDO_I18N_BY_CLASS = "Class";
+VUHDO_I18N_MOVEMENT_IMPAIRING = "Movement";
+VUHDO_I18N_BY_DURATION = "Duration";
+VUHDO_I18N_BY_NON_HARMFUL = "non-harmful";
+VUHDO_I18N_REMOVABLE_ONLY = "removable";
+VUHDO_I18N_ESTIMATE = "Guess";
+VUHOD_I18N_BY_SPELL = "by Spell";
+VUHDO_I18N_SHOW_INC = "Incoming Heal";
+VUHDO_I18N_SHOW_OWN_HEAL = "own";
+VUHDO_I18N_SHOW_OVERHEAL = "Overheal";
+VUHDO_I18N_OPERATION_MODE = "Operation mode";
+VUHDO_I18N_MAX_EMERGENCIES = "max. Emergencies";
+VUHDO_I18N_RELVEVANCE = "irrelevant if more";
 VUHDO_I18N_NEUTRAL_HEALBOT = "Neutral";
-VUHDO_I18N_EMERGENCY_PERCENT = "Urgencia - Vida %";
-VUHDO_I18N_EMERGENCY_MOST_MISSING = "Mucha vida perdida";
-VUHDO_I18N_EMERGENCY_LEAST_LEFT = "Menos vida perdida";
+VUHDO_I18N_EMERGENCY_PERCENT = "Emergency - HP %";
+VUHDO_I18N_EMERGENCY_MOST_MISSING = "Most HP missing";
+VUHDO_I18N_EMERGENCY_LEAST_LEFT = "Least HP left";
 
 
 
 -- VuhDoFormButtonColor.lua
 -- @EXACT = false
 -- Labels
-VUHDO_I18N_TEXT = "Texto";
+VUHDO_I18N_TEXT = "Text";
 VUHDO_I18N_DEBUFFS = "Debuffs";
-VUHDO_I18N_ANOMALIES = "Anomalias";
-VUHDO_I18N_OPACITY = "Opacidad";
-
+VUHDO_I18N_ANOMALIES = "Anomalies";
+VUHDO_I18N_OPACITY = "Opacity";
 
 
 -- VuhDoFormButtonSize.lua
 -- @EXACT = false
 VUHDO_I18N_PANEL = "Panel";
-VUHDO_I18N_SPACING = "Espaciado";
-VUHDO_I18N_BAR_HEIGHT = "Anchura de barras";
-VUHDO_I18N_TARGETS = "Objetivos";
-VUHDO_I18N_BAR_TEXTURE = "Textura de barras";
-VUHDO_I18N_HEIGHT = "Anchura";
-VUHDO_I18N_BAR_WIDTH = "Largura de barras";
-VUHDO_I18N_WIDTH = "Largura";
-VUHDO_I18N_HEADERS = "Cabeceras";
-VUHDO_I18N_CLASS_COL = "Col. de clase";
+VUHDO_I18N_SPACING = "Spacing";
+VUHDO_I18N_BAR_HEIGHT = "Bar Height";
+VUHDO_I18N_TARGETS = "Targets";
+VUHDO_I18N_BAR_TEXTURE = "Bar Texure";
+VUHDO_I18N_HEIGHT = "Height";
+VUHDO_I18N_BAR_WIDTH = "Bar Width";
+VUHDO_I18N_WIDTH = "Width";
+VUHDO_I18N_HEADERS = "Headers";
+VUHDO_I18N_CLASS_COL = "Class Col.";
 --
 
 
 
 -- VuhDoOptionsSpell.lua
 -- @EXACT = false
-VUHDO_I18N_KEY_MODIFIES = "Modificar Tecla";
-VUHDO_I18N_KEY_NONE = "Ninguna";
+VUHDO_I18N_KEY_MODIFIES = "Modifier Key";
+VUHDO_I18N_KEY_NONE = "None";
 VUHDO_I18N_ALT = "Alt";
 VUHDO_I18N_CTRL = "Ctrl";
 VUHDO_I18N_SHIFT = "Shift";
-VUHDO_I18N_LEFT_BUTTON = "Boton Izquierdo";
-VUHDO_I18N_RIGHT_BUTTON = "Boton Derecho";
-VUHDO_I18N_MIDDLE_BUTTON = "Boton Medio";
-VUHDO_I18N_BUTTON_4 = "Boton 4";
-VUHDO_I18N_BUTTON_5 = "Boton 5";
-VUHDO_I18N_MOUSE_KEY = "Boton del raton";
-VUHDO_I18N_IN_MACROS_USE = "(para usar macros \"vuhdo\" en lugar del nombre del objetivo)";
-VUHDO_I18N_SPELL_STATIC = "en target/focus/assist/menu/tell/dropdown";
-VUHDO_I18N_NAME_TIP = "Nombre de Hechizo, Macro o Item,";
+VUHDO_I18N_LEFT_BUTTON = "Left Button";
+VUHDO_I18N_RIGHT_BUTTON = "Right Button";
+VUHDO_I18N_MIDDLE_BUTTON = "Middle Button";
+VUHDO_I18N_BUTTON_4 = "Button 4";
+VUHDO_I18N_BUTTON_5 = "Button 5";
+VUHDO_I18N_MOUSE_KEY = "Mouse Key";
+VUHDO_I18N_IN_MACROS_USE = "(in macros use \"vuhdo\" instead of target name)";
+VUHDO_I18N_SPELL_STATIC = "or target/focus/assist/menu/tell/dropdown";
+VUHDO_I18N_NAME_TIP = "Name of Spell, Macro or Item,";
 VUHDO_I18N_PLUS_SHIFT = "+Shift";
 VUHDO_I18N_PLUS_CTRL_SHIFT = "+Ctrl+Shift";
 VUHDO_I18N_PLUS_CTRL = "+Ctrl";
@@ -167,10 +158,11 @@ VUHDO_I18N_PLUS_CTRL = "+Ctrl";
 
 -- VuhDoTooltipConfig.lua
 -- @EXACT = false
-VUHDO_I18N_AROUND_PANEL = "Creador de panel";
-VUHDO_I18N_SHOW_IN_FIGHT = "en combate";
+VUHDO_I18N_AROUND_PANEL = "Around Panel";
+VUHDO_I18N_SHOW_IN_FIGHT = "in Fight";
 
-
+-- New Options - Tooltips
+-- @EXACT = false
 VUHDO_I18N_TT_001 = "Setup which of your buffs you want VuhDo to handle.";
 VUHDO_I18N_TT_002 = "Select the general appearance of your buff watch panel.";
 VUHDO_I18N_TT_003 = "Chose colors for buff swatches and different timer situations.";
@@ -364,7 +356,7 @@ VUHDO_I18N_TT_172 = "Select this to show multi-target HoTs on all persons affect
 VUHDO_I18N_TT_173 = "Select refresh rate for HoT updates" -- 173
 VUHDO_I18N_TT_174 = "Enter the name of an existing skin to load, overwrite or delete, or enter a new name to save current skin as."
 VUHDO_I18N_TT_175 = "Select a Skin. Skins are all settings which are just visual effects, like Colors, Textures etc."
-VUHDO_I18N_TT_176 = "Enter the name of an existing skin to load, overwrite or delete, or enter a new name to save current skin as."
+VUHDO_I18N_TT_176 = "Enter the name of an existing arrangement to load, overwrite or delete, or enter a new name to save current skin as."
 VUHDO_I18N_TT_177 = "Select an Arrangement. These are all settings where sizes / forms / arrangements are involved."
 VUHDO_I18N_TT_178 = "Select at what percentage of the current aggro holders threat, the players threat bar will turn from cyan to magenta"
 VUHDO_I18N_TT_179 = "Setup the Height of threat bars"
@@ -553,7 +545,7 @@ VUHDO_I18N_TT_361 = "Select to show target bars left of health bars."
 VUHDO_I18N_TT_362 = "Select to show target bars right of health bars."
 VUHDO_I18N_TT_363 = "Select damage flash sensivity. A bigger value means more flashing (on lower damage).";
 VUHDO_I18N_TT_364 = "Check to hide life text if life is above irrelevance trigger.";
-VUHDO_I18N_TT_365 = "Check to apply HoT setup (Options=>Panels=>HoTs) when spell layout changes.";
+VUHDO_I18N_TT_365 = "Check to also apply HoT setup (Panels => HoTs) when spell layout is being loaded.";
 VUHDO_I18N_TT_366 = "Check this to target the unit you are healing at the same time.";
 VUHDO_I18N_TT_367 = "This menu will let you select what kind of incoming heals will be detected.";
 VUHDO_I18N_TT_368 = "Select the latest point in the future you want to see direct casts from.";
@@ -573,7 +565,6 @@ VUHDO_I18N_TT_381 = "Check to apply background bar brightness setting to health 
 VUHDO_I18N_TT_382 = "Check to show an outline around name and life text instead of a shadow.";
 VUHDO_I18N_TT_383 = "Ignore Pets in buff tracking.";
 VUHDO_I18N_TT_384 = "Sorts raid by the order given in \"Move!\". Selecting this will only work if order is set to \"loose\" above.";
-
 VUHDO_I18N_TT_385 = "Select a health bar color that will be applied if this buff is missing on the player.";
 VUHDO_I18N_TT_386 = "Enable to change bar color if this buff is missing.";
 VUHDO_I18N_TT_387 = "Increase priority for this buff.";
@@ -610,7 +601,6 @@ VUHDO_I18N_TT_417 = "Check to only show raid icons by color that are enabled in 
 VUHDO_I18N_TT_418 = "Select a color for this raid icon.";
 VUHDO_I18N_TT_419 = "Tank mode will only watch the threat situation for aggro detection. Enemies occasionally targeting players will be ignored";
 VUHDO_I18N_TT_420 = "Priest only option: Show remaining capacity icon of shields. This is EXPERIMENTAL.";
-
 VUHDO_I18N_TT_421 = "Select color if unit is at full health.";
 VUHDO_I18N_TT_422 = "Select color if unit life is medium.";
 VUHDO_I18N_TT_423 = "Select color if unit life is low."
@@ -645,7 +635,7 @@ VUHDO_I18N_TT_451 = "Enable to auto-rebuff all missing buffs using the mouse-whe
 VUHDO_I18N_TT_452 = "Select a saved bouquet or type in a new name.";
 VUHDO_I18N_TT_453 = "Select a special trigger or enter the name of a buff or debuff.";
 VUHDO_I18N_TT_454 = "Select a color for this event/trigger.";
-VUHDO_I18N_TT_455 = "Select a default icon for this event. If this is needed or not depends on the type of bouquet indicator.";
+VUHDO_I18N_TT_455 = "Select a default icon for this event. Select \"- none / Default -\" to show a buff's/debuff's own icon.";
 VUHDO_I18N_TT_456 = "Setup the bars indicators like icons and status bars.";
 VUHDO_I18N_TT_457 = "Setup Bouquets. Bouquets are groups of Buffs, Debuffs and other occasions in a priorization order. You can setup a bouquet e.g. as a HoT icon";
 VUHDO_I18N_TT_458 = "Will display buffs in a more screen estate saving way.";
@@ -669,7 +659,7 @@ VUHDO_I18N_TT_475 = "Auto-Enable profile whenever switching to primary specc";
 VUHDO_I18N_TT_476 = "Auto-Enable profile whenever switching to secondaray specc";
 VUHDO_I18N_TT_477 = "In this Menu you can reset several aspects of your configuration to factory defaults";
 VUHDO_I18N_TT_478 = "Click to return to where you came from.";
-VUHDO_I18N_TT_479 = "Only if the spell in this edit box has no cooldown clusters will be shown. Clear for to show always.";
+VUHDO_I18N_TT_479 = "Only if the spell in this edit box has no cooldown clusters will be shown. Clear for to show clusters always.";
 VUHDO_I18N_TT_480 = "Move to change options screen scale";
 VUHDO_I18N_TT_481 = "Setup HoT counter / timer font";
 VUHDO_I18N_TT_482 = "Adjust HoT text size";
@@ -690,6 +680,11 @@ VUHDO_I18N_TT_494 = "Select destination profile";
 VUHDO_I18N_TT_495 = "Exports all custom debuffs of current profile to all profiles of this toon.";
 VUHDO_I18N_TT_496 = "Exports all custom debuffs of current profile to selected profile.";
 VUHDO_I18N_TT_497 = "Exports all custom debuffs of current profile to ALL other profiles.";
+VUHDO_I18N_TT_498 = "Check this to abort spell casts currently in progress to start a new cast on repeated click."
+VUHDO_I18N_TT_499 = "Show HoTs right above power bars.";
+VUHDO_I18N_TT_501 = "Show HoTs left above power bars.";
+VUHDO_I18N_TT_502 = "Show HoTs right at the bottom of heal button, overlapping power bars.";
+VUHDO_I18N_TT_503 = "Show HoTs left at the bottom of heal button, overlapping power bars.";
 
 VUHDO_I18N_APPLY_TO_ALL = "apply all";
 VUHDO_I18N_TEST = "Test";
@@ -703,7 +698,7 @@ VUHDO_I18N_HOTS = "HoTs";
 VUHDO_I18N_HOT_COLORS = "HoT Colors";
 VUHDO_I18N_ICONS = "Icons";
 VUHDO_I18N_COUNTDOWN = "Countdown";
-VUHDO_I18N_APPLIANCES = "Appliances";
+VUHDO_I18N_APPLIANCES = "Stacks";
 VUHDO_I18N_FADE_OUT = "Fade out";
 VUHDO_I18N_POWER_TYPES = "Power Types";
 VUHDO_I18N_THREAT = "Threat";
@@ -732,7 +727,7 @@ VUHDO_I18N_HIDE_STANDARD = "Hide standard";
 VUHDO_I18N_PLAYER_TARGET = "Player Target";
 VUHDO_I18N_SINGLE = "Single";
 VUHDO_I18N_MULTI = "Multi";
-VUHDO_I18N_HOT_TARGETING = "HoT scanner";
+VUHDO_I18N_HOT_TARGETING = "Global scanner";
 VUHDO_I18N_COLORS_FONTS = "(Colors/Fonts)";
 VUHDO_I18N_ARRANGEMENT = "Arrangement";
 VUHDO_I18N_SELECT_AN_ARRANGEMENT = "Select an Arrangement";
@@ -839,7 +834,6 @@ VUHDO_I18N_RUNES = "Runes";
 VUHDO_I18N_DEAD = "Dead";
 VUHDO_I18N_OFFLINE = "Offline";
 VUHDO_I18N_CHARMED = "Charmed";
-VUHDO_I18N_AGGRO_BAR = "Aggro Bar";
 VUHDO_I18N_BAR_FRAME = "Bar Frame";
 VUHDO_I18N_POISON = "Poison";
 VUHDO_I18N_DISEASE = "Disease";
@@ -907,7 +901,7 @@ VUHDO_I18N_HORIZONTAL = "horizontal";
 VUHDO_I18N_SLOT_1_2 = "Slot 1";
 VUHDO_I18N_INVERT_X = "Invert X";
 VUHDO_I18N_INVERT_Y = "Invert Y";
-VUHDO_I18N_FLAT_TEXTURE = "Flat Texture";
+VUHDO_I18N_FLAT_TEXTURE = "Flat";
 VUHDO_I18N_HOT_ICONS = "HoT Icons";
 VUHDO_I18N_TARGET_OF_TARGET = "Target of target";
 VUHDO_I18N_VERBOSE = "Verbose";
@@ -989,7 +983,6 @@ VUHDO_I18N_BUTTON_15 = "Button 15";
 VUHDO_I18N_BUTTON_16 = "Button 16";
 VUHDO_I18N_TANK_MODE = "Tank Mode";
 
-
 -- #+1.237
 VUHDO_I18N_CLUSTER_SCANNER = "Cluster scanner";
 VUHDO_I18N_CLUSTER_PARAMS = "Cluster parameters";
@@ -1021,9 +1014,7 @@ VUHDO_I18N_CHAINED = "Chained";
 VUHDO_I18N_CHAINED_MAX_JUMP = "Chained max jumps";
 VUHDO_I18N_TIMES = " times";
 VUHDO_I18N_SOURCE_DESTINATION = "Source/Destination";
-
 VUHDO_I18N_HIGH = "High";
-
 
 -- #+1.251
 VUHDO_I18N_15 = " 15";
@@ -1071,10 +1062,8 @@ VUHDO_I18N_COMPACT = "Compact";
 VUHDO_I18N_REALLY_DELETE_PROFILE = "Really delete profile";
 VUHDO_I18N_MUST_ENTER_SELECT_PROFILE = "You must enter/select a name first.";
 VUHDO_I18N_DELETED_PROFILE = "Successfully deleted profile";
-
 VUHDO_I18N_TURN_AXIS = "Turn Axis";
 VUHDO_I18N_DO_NOT_EDIT_BOUQUET = "Generic: DO NOT CHANGE DETAILS !";
-
 VUHDO_I18N_OR_NEW_BOUQUET_NAME = "... or new Bouquet name";
 VUHDO_I18N_OR_ENTER_DEBUFF_HOT = "... or enter Buff / Debuff / HoT name";
 VUHDO_I18N_TALENT_TREES = "Talent trees";
@@ -1085,7 +1074,6 @@ VUHDO_I18N_100_YARDS = "100 yards";
 VUHDO_I18N_40_YARDS = "40 yards";
 VUHDO_I18N_LIFE_TEXT = "Life Text";
 VUHDO_I18N_BACK = "Back";
-
 VUHDO_I18N_CLIQUE_COMPAT_MODE = "Clique support";
 VUHDO_I18N_RESET = "Reset";
 VUHDO_I18N_DEBUFF_COLORS = "Debuff Colors";
@@ -1111,7 +1099,6 @@ VUHDO_I18N_RESET_ALL = "!!!WARNING: This will RESET THE WHOLE\nADDON to factory 
 VUHDO_I18N_RESET_LANGUAGE = "This will reset all settings after client\nlanguage change (Heavy STUFF!!!). Proceed?";
 VUHDO_I18N_RESET_PANEL_POSITIONS = "This will reset your\npanel positions. Proceed?";
 VUHDO_I18N_RESET_PER_PANEL_SETTINGS = "This will reset your\nper-panel setup. Proceed?";
-
 -- 2.17
 VUHDO_I18N_LOCK = "Lock";
 VUHDO_I18N_QUIET_MODE = "Quiet Mode";
@@ -1133,3 +1120,12 @@ VUHDO_I18N_THIS_TOONS = "This Toon's";
 VUHDO_I18N_SELECTED = "Selected";
 VUHDO_I18N_ALL = "All";
 VUHDO_I18N_REPLACE = "Replace";
+-- edit 29.03.2021
+VUHDO_I18N_DISCARD_CHANGES_CONFIRM = "You have made a total of %d setup changes.\nYou really wanna DISCARD them?";
+VUHDO_I18N_STOP_CAST = "Stop Cast";
+VUHDO_I18N_OVERWRITE_CURR_KEY_LAYOUT_QUESTION = "This will overwrite current\nkey layout. Continue?";
+VUHDO_I18N_MANA_BAR_HEIGHT = "Mana Bar Height";
+VUHDO_I18N_REALLY_EXPORT_CUDES = "Really export to profile(s)?";
+VUHDO_I18N_KEY_SAVED = "Key layout successfully saved:"
+VUHDO_I18N_KEY_DELETE = "Really delete key layout:"
+VUHDO_I18N_KEY_DELETED = "Deleted key layout:"

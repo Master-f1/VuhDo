@@ -10,7 +10,6 @@ local InCombatLockdown = InCombatLockdown;
 local sIsNotInChina = GetLocale() ~= "zhCN" and GetLocale() ~= "zhTW" and GetLocale() ~= "koKR";
 local sIsManaBar;
 
------------------------------------------------------------------------
 local VUHDO_getNumbersFromString;
 
 local VUHDO_CONFIG = {};
@@ -25,24 +24,19 @@ function VUHDO_guiToolboxInitBurst()
 
 	sIsManaBar = VUHDO_INDICATOR_CONFIG["BOUQUETS"]["MANA_BAR"] ~= "";
 end
-------------------------------------------------------------------------
 
---
 function VUHDO_mayMoveHealPanels()
 	return VUHDO_IS_PANEL_CONFIG or not VUHDO_CONFIG["LOCK_PANELS"];
 end
 
---
 function VUHDO_isConfigPanelShowing()
 	return VUHDO_IS_PANEL_CONFIG and not VUHDO_CONFIG_SHOW_RAID;
 end
 
---
 function VUHDO_getComponentPanelNum(aComponent)
 	return VUHDO_getNumbersFromString(aComponent:GetName(), 1)[1];
 end
 
---
 local tX, tY;
 function VUHDO_getAnchorCoords(aPanel, anOrientation, aScaleDiff)
 
@@ -75,31 +69,26 @@ function VUHDO_getAnchorCoords(aPanel, anOrientation, aScaleDiff)
 	return (tX or 0) / aScaleDiff, (tY or 0) / aScaleDiff;
 end
 
---
 function VUHDO_isLooseOrderingShowing(aPanelNum)
 	return VUHDO_PANEL_SETUP[aPanelNum]["MODEL"]["ordering"] ~= 0 -- VUHDO_ORDERING_STRICT
 	and (not VUHDO_IS_PANEL_CONFIG or VUHDO_CONFIG_SHOW_RAID);
 end
 local VUHDO_isLooseOrderingShowing = VUHDO_isLooseOrderingShowing;
 
---
 function VUHDO_isTableHeadersShowing(aPanelNum)
 	return not VUHDO_isLooseOrderingShowing(aPanelNum) and VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["showHeaders"] and
 	not VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["alignBottom"];
 end
 
---
 function VUHDO_isTableFootersShowing(aPanelNum)
 	return not VUHDO_isLooseOrderingShowing(aPanelNum) and VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["showHeaders"] and
 	VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["alignBottom"];
 end
 
---
 function VUHDO_isTableHeaderOrFooter(aPanelNum)
 	return not VUHDO_isLooseOrderingShowing(aPanelNum) and VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["showHeaders"];
 end
 
----
 function VUHDO_toggleMenu(aPanel)
 	if (aPanel:IsShown()) then
 		aPanel:Hide();
@@ -108,24 +97,20 @@ function VUHDO_toggleMenu(aPanel)
 	end
 end
 
---
 local tPanelName;
 function VUHDO_getPanelNum(aPanel)
 	tPanelName = aPanel:GetName();
 	return tonumber(strsub(tPanelName, -2)) or tonumber(strsub(tPanelName, -1)) or 1;
 end
 
---
 function VUHDO_getClassColor(anInfo)
 	return VUHDO_USER_CLASS_COLORS[anInfo["classId"]];
 end
 
---
 function VUHDO_getClassColorByModelId(aModelId)
 	return VUHDO_USER_CLASS_COLORS[aModelId];
 end
 
---
 function VUHDO_getManaBarHeight(aPanelNum)
 	if (sIsManaBar) then
 		return VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["manaBarHeight"];
@@ -135,17 +120,14 @@ function VUHDO_getManaBarHeight(aPanelNum)
 end
 local VUHDO_getManaBarHeight = VUHDO_getManaBarHeight;
 
---
 function VUHDO_getHealthBarHeight(aPanelNum)
 	return VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barHeight"] - VUHDO_getManaBarHeight(aPanelNum);
 end
 
---
 function VUHDO_getDiffColor(aBaseColor, aModColor)
 	if (aModColor["useText"]) then
 		aBaseColor["useText"] = true;
-		aBaseColor["TR"], aBaseColor["TG"], aBaseColor["TB"], aBaseColor["TO"] = aModColor["TR"], aModColor["TG"],
-			aModColor["TB"], aModColor["TO"];
+		aBaseColor["TR"], aBaseColor["TG"], aBaseColor["TB"], aBaseColor["TO"] = aModColor["TR"], aModColor["TG"], aModColor["TB"], aModColor["TO"];
 	end
 
 	if (aModColor["useBackground"]) then
@@ -161,7 +143,6 @@ function VUHDO_getDiffColor(aBaseColor, aModColor)
 	return aBaseColor;
 end
 
---
 function VUHDO_brightenTextColor(aColor, aSummand)
 	aColor["TR"], aColor["TG"], aColor["TB"] = aColor["TR"] + aSummand, aColor["TG"] + aSummand, aColor["TB"] + aSummand;
 	return aColor;
@@ -176,15 +157,14 @@ function VUHDO_setRaidTargetIconTexture(aTexture, anIndex)
 	aTexture:SetTexCoord(tLeft, tLeft + 0.25, tTop, tTop + 0.25);
 end
 
---
 local tMX, tMY;
 function VUHDO_getMouseCoords()
 	tMX, tMY = GetCursorPosition();
 	return tMX / UIParent:GetEffectiveScale(), tMY / UIParent:GetEffectiveScale();
 end
 
--- Liefert sicheren Fontnamen. Falls in LSM nicht (mehr) vorhanden oder
--- in asiatischem Land den Standard-Font zur�ckliefern. Genauso wenn als Argument nil geliefert wurde
+-- Returns safe font name. If not (anymore) available in LSM or if
+-- in Asian country will return the default font. Likewise if nil was supplied as argument
 local tFontInfo;
 function VUHDO_getFont(aFont)
 	if (strlen(aFont or "") > 0 and sIsNotInChina) then
@@ -198,7 +178,6 @@ function VUHDO_getFont(aFont)
 	return GameFontNormal:GetFont();
 end
 
---
 local function VUHDO_hidePartyFrame()
 	local tCnt;
 	HIDE_PARTY_INTERFACE = "1";
@@ -221,7 +200,6 @@ local function VUHDO_hidePartyFrame()
 	end
 end
 
---
 local function VUHDO_showPartyFrame()
 	local tCnt;
 	HIDE_PARTY_INTERFACE = "0";
@@ -247,7 +225,6 @@ local function VUHDO_showPartyFrame()
 	end
 end
 
---
 local function VUHDO_hidePlayerFrame()
 	PlayerFrame:UnregisterAllEvents();
 	PlayerFrameHealthBar:UnregisterAllEvents();
@@ -255,7 +232,6 @@ local function VUHDO_hidePlayerFrame()
 	PlayerFrame:Hide();
 end
 
---
 local function VUHDO_showPlayerFrame()
 	PlayerFrame:RegisterAllEvents();
 	PlayerFrameHealthBar:RegisterAllEvents();
@@ -263,31 +239,26 @@ local function VUHDO_showPlayerFrame()
 	PlayerFrame:Show();
 end
 
---
 local function VUHDO_hidePetFrame()
 	PetFrame:UnregisterAllEvents();
 	PetFrame:Hide();
 end
 
---
 local function VUHDO_showPetFrame()
 	PetFrame:RegisterAllEvents();
 	PetFrame:Show();
 end
 
---
 local function VUHDO_hideFocusFrame()
 	FocusFrame:UnregisterAllEvents();
 	FocusFrame:Hide();
 end
 
---
 local function VUHDO_showFocusFrame()
 	FocusFrame:RegisterAllEvents();
 	TargetFrame_OnLoad(FocusFrame, "focus", FocusFrameDropDown_Initialize);
 end
 
---
 local function VUHDO_hideTargetFrame()
 	TargetFrame:UnregisterAllEvents();
 	TargetFrameHealthBar:UnregisterAllEvents();
@@ -303,7 +274,6 @@ local function VUHDO_hideTargetFrame()
 	ComboFrame:ClearAllPoints();
 end
 
---
 local function VUHDO_showTargetFrame()
 	TargetFrame:RegisterAllEvents();
 	TargetFrameHealthBar:RegisterAllEvents();
@@ -314,57 +284,46 @@ local function VUHDO_showTargetFrame()
 	ComboFrame:SetPoint("TOPRIGHT", "TargetFrame", "TOPRIGHT", -44, -9);
 end
 
---
 local function VUHDO_hideBlizzParty()
 	VUHDO_hidePartyFrame();
 end
 
---
 local function VUHDO_showBlizzParty()
 	VUHDO_showPartyFrame();
 end
 
---
 local function VUHDO_hideBlizzPlayer()
 	VUHDO_hidePlayerFrame();
 end
 
---
 local function VUHDO_showBlizzPlayer()
 	VUHDO_showPlayerFrame();
 end
 
---
 local function VUHDO_hideBlizzTarget()
 	VUHDO_hideTargetFrame();
 end
 
---
 local function VUHDO_showBlizzTarget()
 	VUHDO_showTargetFrame();
 end
 
---
 local function VUHDO_hideBlizzPet()
 	VUHDO_hidePetFrame();
 end
 
---
 local function VUHDO_showBlizzPet()
 	VUHDO_showPetFrame();
 end
 
---
 local function VUHDO_hideBlizzFocus()
 	VUHDO_hideFocusFrame();
 end
 
---
 local function VUHDO_showBlizzFocus()
 	VUHDO_showFocusFrame();
 end
 
---
 function VUHDO_initBlizzFrames()
 	if (VUHDO_CONFIG["BLIZZ_UI_HIDE_PARTY"]) then
 		VUHDO_hideBlizzParty();
@@ -397,7 +356,6 @@ function VUHDO_initBlizzFrames()
 	end
 end
 
---
 function VUHDO_initHideBlizzFrames()
 	if (InCombatLockdown()) then
 		return;
@@ -424,7 +382,6 @@ function VUHDO_initHideBlizzFrames()
 	end
 end
 
---
 local tOldX, tOldY;
 function VUHDO_isDifferentButtonPoint(aRegion, aPointX, aPointY)
 	_, _, _, tOldX, tOldY = aRegion:GetPoint();
@@ -435,7 +392,6 @@ function VUHDO_isDifferentButtonPoint(aRegion, aPointX, aPointY)
 	return aPointX ~= tOldX or aPointY ~= tOldY;
 end
 
---
 local tFontHeight;
 function VUHDO_lnfPatchFont(aComponent, aLabelName)
 	if (not sIsNotInChina) then
@@ -443,12 +399,10 @@ function VUHDO_lnfPatchFont(aComponent, aLabelName)
 	end
 end
 
---
 function VUHDO_isConfigDemoUsers()
 	return VUHDO_IS_PANEL_CONFIG and VUHDO_CONFIG_SHOW_RAID and VUHDO_CONFIG_TEST_USERS > 0;
 end
 
---
 local tFile;
 function VUHDO_setLlcStatusBarTexture(aStatusBar, aTextureName)
 	tFile = VUHDO_LibSharedMedia:Fetch('statusbar', aTextureName);

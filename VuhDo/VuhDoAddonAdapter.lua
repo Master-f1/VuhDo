@@ -26,12 +26,12 @@ VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - Bar Highlighter", "Interface
 VUHDO_LibSharedMedia:Register("statusbar", "LiteStepLite", "Interface\\AddOns\\VuhDo\\Images\\LiteStepLite.tga");
 
 VUHDO_LibSharedMedia:Register("sound", "Tribal Bass Drum", "Sound\\Doodad\\BellTollTribal.wav");
-VUHDO_LibSharedMedia:Register("sound", "Thorns", "Sound\\Spells\\Thorns.wav	");
+VUHDO_LibSharedMedia:Register("sound", "Thorns", "Sound\\Spells\\Thorns.wav");
 VUHDO_LibSharedMedia:Register("sound", "Elf Bell Toll", "Sound\\Doodad\\BellTollNightElf.wav");
 
 LoadAddOn("FuBarPlugin-3.0");
 
---
+
 function VUHDO_parseAddonMessage(anArg1, anArg2, anArg3, anArg4)
 	-- PallyPower?
 	if ("PLPWR" == anArg1 and VUHDO_CONFIG["IS_PALLY_POWER_COMMS"]) then
@@ -52,7 +52,6 @@ function VUHDO_parseAddonMessage(anArg1, anArg2, anArg3, anArg4)
 	end
 end
 
---
 function VUHDO_setLhcEnabled()
 	local tHealComm = LibStub("LibHealComm-4.0");
 	if (VUHDO_CONFIG["SHOW_INCOMING"] or VUHDO_CONFIG["SHOW_OWN_INCOMING"]) then
@@ -68,7 +67,6 @@ function VUHDO_setLhcEnabled()
 	end
 end
 
---
 function VUHDO_setShieldCommEnabled()
 	local tShieldLeft = LibStub("LibShieldLeft-1.0");
 	if (VUHDO_PANEL_SETUP["BAR_COLORS"]["HOTS"]["showShieldAbsorb"]) then
@@ -86,7 +84,6 @@ function VUHDO_setShieldCommEnabled()
 	tShieldLeft:SetAegisTolerance(1.2);
 end
 
---
 function VUHDO_initFuBar()
 	-- libDataBroker
 	if (VUHDO_LibDataBroker ~= nil) then
@@ -105,12 +102,11 @@ function VUHDO_initFuBar()
 				aTooltip:AddLine(VUHDO_I18N_BROKER_TOOLTIP_1)
 				aTooltip:AddLine(VUHDO_I18N_BROKER_TOOLTIP_2)
 			end
-		})
+		});
 	end
 
 	-- Native FuBar
-	if (LibStub:GetLibrary("LibFuBarPlugin-3.0", true) and IsAddOnLoaded("FuBar") and not IsAddOnLoaded("FuBar2Broker") and
-		not IsAddOnLoaded("Broker2FuBar")) then
+	if (LibStub:GetLibrary("LibFuBarPlugin-3.0", true) and IsAddOnLoaded("FuBar") and not IsAddOnLoaded("FuBar2Broker") and not IsAddOnLoaded("Broker2FuBar")) then
 
 		local tLibFuBarPlugin = LibStub:GetLibrary("LibFuBarPlugin-3.0");
 		LibStub("AceAddon-3.0"):EmbedLibrary(VuhDo, "LibFuBarPlugin-3.0");
@@ -118,7 +114,7 @@ function VUHDO_initFuBar()
 		VuhDo:SetFuBarOption("hasNoColor", true);
 		VuhDo:SetFuBarOption("cannotDetachTooltip", true);
 		VuhDo:SetFuBarOption("hideWithoutStandby", true);
-		VuhDo:SetFuBarOption("iconPath", [[Interface\AddOns\VuhDo\Images\VuhDo]]);
+		VuhDo:SetFuBarOption("iconPath", "Interface\AddOns\VuhDo\Images\VuhDo");
 		VuhDo:SetFuBarOption("hasIcon", true);
 		VuhDo:SetFuBarOption("defaultPosition", "RIGHT");
 		VuhDo:SetFuBarOption("tooltipHiddenWhenEmpty", true);
@@ -142,7 +138,6 @@ function VUHDO_initFuBar()
 	end
 end
 
---
 function VUHDO_initSharedMedia()
 	local tIndex, tValue;
 
@@ -163,7 +158,7 @@ function VUHDO_initSharedMedia()
 	for tIndex, tValue in ipairs(tSounds) do
 		VUHDO_SOUNDS[tIndex] = {VUHDO_LibSharedMedia:Fetch('sound', tValue), tValue};
 	end
-	tinsert(VUHDO_SOUNDS, 1, {nil, "Без звука"});
+	tinsert(VUHDO_SOUNDS, 1, {nil, VUHDO_I18N_OFF});
 
 	-- borders
 	local tBorders = VUHDO_LibSharedMedia:List('border');
@@ -172,11 +167,9 @@ function VUHDO_initSharedMedia()
 	end
 end
 
---
 local tPanelNum, tButtonNum;
 local tEmptyButton = {};
---function VUHDO_initCliqueSupport()--фикс
-function VUHDO_initCliqueSupport(bool)
+function VUHDO_initCliqueSupport(bool) -- ����
 	if (not VUHDO_CONFIG["IS_CLIQUE_COMPAT_MODE"]) then
 		return;
 	end

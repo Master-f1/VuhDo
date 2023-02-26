@@ -27,7 +27,6 @@ local VUHDO_MAX_ITERATIONS = 120; -- For a 40 man raid there is a total of +800 
 
 local sCdSpell;
 
---
 local VUHDO_CLUSTER_BASE_RAID = {};
 function VUHDO_clusterBuilderInitBurst()
 	VUHDO_CLUSTER_BASE_RAID = VUHDO_GLOBAL["VUHDO_CLUSTER_BASE_RAID"];
@@ -37,7 +36,6 @@ function VUHDO_clusterBuilderInitBurst()
 	end
 end
 
---
 local tLastTime = 0;
 local function VUHDO_setMapToCurrentZone()
 	if (tLastTime + 2 < GetTime()) then
@@ -46,7 +44,6 @@ local function VUHDO_setMapToCurrentZone()
 	end
 end
 
---
 local VUHDO_MAP_FIX_WIDTH = {
 
 	["VaultofArchavon"] = {
@@ -168,13 +165,10 @@ local VUHDO_MAP_FIX_WIDTH = {
 };
 
 -- Inspect, Trade, Duel, UnitInRange(, UnitIsVisible? => doesn't seem to be reliable)
-local VUHDO_INTERACT_MAX_DISTANCES =
-	{VUHDO_MIN_TICK_UNIT, VUHDO_MIN_TICK_UNIT, VUHDO_MIN_TICK_UNIT, VUHDO_MIN_TICK_UNIT};
-local VUHDO_INTERACT_FAIL_MIN_DISTANCES = {VUHDO_MAX_TICK_UNIT, VUHDO_MAX_TICK_UNIT, VUHDO_MAX_TICK_UNIT,
-										   VUHDO_MAX_TICK_UNIT};
+local VUHDO_INTERACT_MAX_DISTANCES = {VUHDO_MIN_TICK_UNIT, VUHDO_MIN_TICK_UNIT, VUHDO_MIN_TICK_UNIT, VUHDO_MIN_TICK_UNIT};
+local VUHDO_INTERACT_FAIL_MIN_DISTANCES = {VUHDO_MAX_TICK_UNIT, VUHDO_MAX_TICK_UNIT, VUHDO_MAX_TICK_UNIT, VUHDO_MAX_TICK_UNIT};
 local VUHDO_INTERACT_YARDS = {28, 11.11, 9.9, 40};
 
---
 local function VUHDO_clusterBuilderStoreZone(aZone)
 	if (aZone ~= nil) then
 		VUHDO_STORED_ZONES[aZone] = {};
@@ -183,7 +177,6 @@ local function VUHDO_clusterBuilderStoreZone(aZone)
 	end
 end
 
---
 local tIsValid;
 local function VUHDO_isValidClusterUnit(anInfo)
 	tIsValid = not anInfo["dead"] and anInfo["connected"] and anInfo["visible"]; -- Marks the max. line of 100 yards
@@ -192,7 +185,6 @@ local function VUHDO_isValidClusterUnit(anInfo)
 	return tIsValid;
 end
 
---
 local tCnt, tDistance;
 local tEmptyUnit = {};
 local function VUHDO_calibrateMapScale(aUnit, aDeltaX, aDeltaY)
@@ -221,7 +213,6 @@ local function VUHDO_calibrateMapScale(aUnit, aDeltaX, aDeltaY)
 	end
 end
 
---
 local tIndex, tNormFactor;
 local tCurrWorldSize, tMinWorldSize, tUpperBoundary;
 local function VUHDO_getHeuristicMapWidth()
@@ -245,7 +236,6 @@ local function VUHDO_getHeuristicMapWidth()
 	end
 end
 
---
 local tX1, tY1, tX2, tY2;
 local tIsValid;
 local function VUHDO_determineDistanceBetween(aUnit, anotherUnit)
@@ -270,7 +260,6 @@ local function VUHDO_determineDistanceBetween(aUnit, anotherUnit)
 	return tX1 - tX2, tY1 - tY2;
 end
 
---
 local function VUHDO_clusterBuilderNewZone(anOldZone, aNewZone)
 	VUHDO_clusterBuilderStoreZone(anOldZone);
 
@@ -289,7 +278,6 @@ local function VUHDO_clusterBuilderNewZone(anOldZone, aNewZone)
 	end
 end
 
---
 local tUnit, tInfo, tCnt;
 local tAnotherUnit, tAnotherInfo;
 local tX, tY, tDeltaX, tDeltaY, tDeltas;
@@ -300,8 +288,7 @@ local tNumRaid;
 local tIndex = 0;
 local tNumSamples, tNumIterations;
 function VUHDO_updateAllClusters() -- Carbonite workaround
-	if ((WorldMapFrame ~= nil and WorldMapFrame:IsShown()) or
-		(GetMouseFocus() ~= nil and GetMouseFocus():GetName() == nil)) then
+	if ((WorldMapFrame ~= nil and WorldMapFrame:IsShown()) or (GetMouseFocus() ~= nil and GetMouseFocus():GetName() == nil)) then
 		return;
 	end
 	tX, tX = GetPlayerMapPosition("player");
@@ -428,12 +415,10 @@ function VUHDO_updateAllClusters() -- Carbonite workaround
 	VUHDO_MAP_WIDTH = tMaxX;
 end
 
---
 function VUHDO_resetClusterCoordDeltas()
 	twipe(VUHDO_COORD_DELTAS);
 end
 
---
 local tDeltas, tDistance, tNumber, tOtherUnit, tInfo;
 local tStart, tDuration;
 function VUHDO_getUnitsInRadialClusterWith(aUnit, aYards, anArray)
@@ -469,7 +454,6 @@ function VUHDO_getUnitsInRadialClusterWith(aUnit, aYards, anArray)
 	return anArray;
 end
 
---
 local tUnit, tWinnerUnit, tInfo, tWinnerInfo;
 local function VUHDO_getMostDeficitUnitOutOf(anIncludeList, anExcludeList)
 	tWinnerUnit = nil;
@@ -479,8 +463,7 @@ local function VUHDO_getMostDeficitUnitOutOf(anIncludeList, anExcludeList)
 			tInfo = VUHDO_RAID[tUnit];
 
 			if (tWinnerUnit == nil or
-				(tInfo ~= nil and tInfo["healthmax"] - tInfo["health"] > tWinnerInfo["healthmax"] -
-					tWinnerInfo["health"])) then
+				(tInfo ~= nil and tInfo["healthmax"] - tInfo["health"] > tWinnerInfo["healthmax"] - tWinnerInfo["health"])) then
 				tWinnerUnit = tUnit;
 				tWinnerInfo = tInfo;
 			end
@@ -489,7 +472,6 @@ local function VUHDO_getMostDeficitUnitOutOf(anIncludeList, anExcludeList)
 	return tWinnerUnit;
 end
 
---
 local tNextJumps = {};
 local tExcludeList = {};
 local tNumJumps = 0;
@@ -509,7 +491,6 @@ function VUHDO_getUnitsInChainClusterWith(aUnit, aYards, anArray, aMaxJumps)
 	return anArray;
 end
 
---
 local tDeltas, tDistance;
 function VUHDO_getDistanceBetween(aUnit, anotherUnit)
 	if (VUHDO_CLUSTER_BLACKLIST[aUnit] or VUHDO_CLUSTER_BLACKLIST[anotherUnit]) then
@@ -523,4 +504,3 @@ function VUHDO_getDistanceBetween(aUnit, anotherUnit)
 
 	return nil;
 end
-

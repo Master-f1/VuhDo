@@ -135,7 +135,6 @@ VUHDO_I18N_BAR_WIDTH = "Largueur";
 VUHDO_I18N_WIDTH = "Largueur";
 VUHDO_I18N_HEADERS = "Ent\195\170tes";
 VUHDO_I18N_CLASS_COL = "Col. de classe";
---
 
 
 

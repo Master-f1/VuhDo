@@ -7,9 +7,9 @@ if not MyMinimapButton or MyMinimapButton.Version < version then
 		Version = version, -- for version checking
 
 		-- Dynamically create a button
-		--   modName = name of the button (mandatory)
-		--   modSettings = table where SavedVariables are stored for the button (optional)
-		--   initSettings = table of default settings (optional)
+		-- modName = name of the button (mandatory)
+		-- modSettings = table where SavedVariables are stored for the button (optional)
+		-- initSettings = table of default settings (optional)
 		Create = function(self, modName, modSettings, initSettings)
 			if not modName or getglobal(modName .. "MinimapButton") then
 				return
@@ -72,7 +72,7 @@ if not MyMinimapButton or MyMinimapButton.Version < version then
 		end,
 
 		-- Changes the icon of the button.
-		--   value = texture path, ie: "Interface\\AddOn\\MyMod\\MyModIcon"
+		-- value = texture path, ie: "Interface\\AddOn\\MyMod\\MyModIcon"
 		SetIcon = function(self, modName, value)
 			if value and getglobal(modName .. "MinimapButton") then
 				getglobal(modName .. "MinimapButtonIcon"):SetTexture(value)
@@ -80,7 +80,7 @@ if not MyMinimapButton or MyMinimapButton.Version < version then
 		end,
 
 		-- Sets the left-click function.
-		--   value = function
+		-- value = function
 		SetLeftClick = function(self, modName, value)
 			if value and getglobal(modName .. "MinimapButton") then
 				getglobal(modName .. "MinimapButton").leftClick = value
@@ -88,7 +88,7 @@ if not MyMinimapButton or MyMinimapButton.Version < version then
 		end,
 
 		-- Sets the right-click function.
-		--  value = function
+		-- value = function
 		SetRightClick = function(self, modName, value)
 			if value and getglobal(modName .. "MinimapButton") then
 				getglobal(modName .. "MinimapButton").rightClick = value
@@ -96,7 +96,7 @@ if not MyMinimapButton or MyMinimapButton.Version < version then
 		end,
 
 		-- Sets the drag route.
-		--   value = "CIRCLE" or "SQUARE"
+		-- value = "CIRCLE" or "SQUARE"
 		SetDrag = function(self, modName, value)
 			local button = getglobal(modName .. "MinimapButton")
 			if button and (value == "CIRCLE" or value == "SQUARE") then
@@ -106,7 +106,7 @@ if not MyMinimapButton or MyMinimapButton.Version < version then
 		end,
 
 		-- Locks minimap button from moving
-		--   value = 0/nil/false or 1/non-nil/true
+		-- value = 0/nil/false or 1/non-nil/true
 		SetLock = function(self, modName, value)
 			local button = getglobal(modName .. "MinimapButton")
 			if value == 0 then
@@ -118,7 +118,7 @@ if not MyMinimapButton or MyMinimapButton.Version < version then
 		end,
 
 		-- Enables or disables the minimap button
-		--    value = 0/nil/false or 1/non-nil/true
+		-- value = 0/nil/false or 1/non-nil/true
 		SetEnable = function(self, modName, value)
 			local button = getglobal(modName .. "MinimapButton")
 			if value == 0 then
@@ -136,7 +136,7 @@ if not MyMinimapButton or MyMinimapButton.Version < version then
 		end,
 
 		-- Returns a setting of this minimap button
-		--   setting = "LOCKED", "ENABLED", "DRAG" or "POSITION"
+		-- setting = "LOCKED", "ENABLED", "DRAG" or "POSITION"
 		GetSetting = function(self, modName, setting)
 			local button = getglobal(modName .. "MinimapButton")
 			setting = string.lower(setting or "")
@@ -146,7 +146,7 @@ if not MyMinimapButton or MyMinimapButton.Version < version then
 		end,
 
 		-- Sets the tooltip text.
-		--   value = string (can include \n)
+		-- value = string (can include \n)
 		SetTooltip = function(self, modName, value)
 			local button = getglobal(modName .. "MinimapButton")
 			if button and value then
@@ -155,8 +155,8 @@ if not MyMinimapButton or MyMinimapButton.Version < version then
 		end,
 
 		-- Moves the button.
-		--  newPosition = degree angle to display the button (optional)
-		--  force = force move irregardless of locked status
+		-- newPosition = degree angle to display the button (optional)
+		-- force = force move irregardless of locked status
 		Move = function(self, modName, newPosition, force)
 			local button = getglobal(modName .. "MinimapButton")
 			if button and (not button.modSettings.locked or force) then
@@ -198,7 +198,7 @@ if not MyMinimapButton or MyMinimapButton.Version < version then
 			end
 		end,
 
-		--[[ Internal functions: do not call anything below here ]]
+		-- Internal functions: do not call anything below here
 
 		-- this gets a new default position by increments of 20 degrees
 		GetDefaultPosition = function(self)

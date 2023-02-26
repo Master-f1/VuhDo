@@ -1,43 +1,60 @@
-ï»¿
+if (GetLocale() ~= "esES") then
+	return;
+end
+
+-- á = \195\161
+-- é = \195\169
+-- í = \195\173
+-- ó = \195\179
+-- ú = \195\186
+-- ñ = \195\177
+-- ê = \195\170
+-- ï = \195\175
+-- ô = \195\180
+-- ù = \195\185
+-- Œ = \197\146
+-- œ = \197\147
+
 -- @EXACT = true: Translation has to be the exact(!) match in the clients language,
---                beacause it carries technical semantics
+-- beacause it carries technical semantics
 -- @EXACT = false: Translation can be done freely, because text is only descriptive
 
 
 -- Class Names
 -- @EXACT = false
-VUHDO_I18N_WARRIORS="Warriors"
-VUHDO_I18N_ROGUES = "Rogues";
-VUHDO_I18N_HUNTERS = "Hunters";
-VUHDO_I18N_PALADINS = "Paladins";
-VUHDO_I18N_MAGES = "Mages";
-VUHDO_I18N_WARLOCKS = "Warlocks";
-VUHDO_I18N_SHAMANS = "Shamans";
-VUHDO_I18N_DRUIDS = "Druids";
-VUHDO_I18N_PRIESTS = "Priests";
-VUHDO_I18N_DEATH_KNIGHT = "Death Knights";
+VUHDO_I18N_WARRIORS="Guerreros"
+VUHDO_I18N_ROGUES = "Pícaros";
+VUHDO_I18N_HUNTERS = "Cazadores";
+VUHDO_I18N_PALADINS = "Paladines";
+VUHDO_I18N_MAGES = "Magos";
+VUHDO_I18N_WARLOCKS = "Brujos";
+VUHDO_I18N_SHAMANS = "Chamanes";
+VUHDO_I18N_DRUIDS = "Druidas";
+VUHDO_I18N_PRIESTS = "Sacerdotes";
+VUHDO_I18N_DEATH_KNIGHT = "Caballeros de la Muerte";
 
 
 -- Group Model Names
 -- @EXACT = false
-VUHDO_I18N_GROUP = "Group";
-VUHDO_I18N_OWN_GROUP = "Own Group";
+VUHDO_I18N_GROUP = "Grupo";
+VUHDO_I18N_OWN_GROUP = "Mi Grupo";
 
 
 -- Special Model Names
 -- @EXACT = false
-VUHDO_I18N_PETS = "Pets";
-VUHDO_I18N_MAINTANKS = "Main Tanks";
-VUHDO_I18N_PRIVATE_TANKS = "Private Tanks";
+VUHDO_I18N_PETS = "Mascotas";
+VUHDO_I18N_MAINTANKS = "Tanques principales";
+VUHDO_I18N_PRIVATE_TANKS = "Mis objetivos";
 
 
 
 -- General Labels
 -- @EXACT = false
-VUHDO_I18N_OKAY = "Okay";
-VUHDO_I18N_CLASS = "Class";
+VUHDO_I18N_OKAY = "Aceptar";
+VUHDO_I18N_CLASS = "Clase";
 VUHDO_I18N_UNDEFINED = "<n/a>";
-VUHDO_I18N_PLAYER = "Player";
+VUHDO_I18N_PLAYER = "Jugador";
+
 
 
 -- VuhDoTooltip.lua
@@ -47,145 +64,144 @@ VUHDO_I18N_TT_GHOST = "<GHOST>";
 VUHDO_I18N_TT_DEAD = "<DEAD>";
 VUHDO_I18N_TT_AFK = "<AFK>";
 VUHDO_I18N_TT_DND = "<DND>";
-VUHDO_I18N_TT_LIFE = "|cffffb233Life:|r ";
+VUHDO_I18N_TT_LIFE = "|cffffb233Vida:|r ";
 VUHDO_I18N_TT_MANA = "|cffffb233Mana:|r ";
-VUHDO_I18N_TT_LEVEL = "Level ";
+VUHDO_I18N_TT_LEVEL = "Nivel ";
 
 
 -- VuhDoPanel.lua
 -- @EXACT = false
-VUHDO_I18N_CHOOSE = "Choose";
-VUHDO_I18N_DRAG = "Drag";
-VUHDO_I18N_REMOVE = "Remove";
-VUHDO_I18N_ME = "me!";
-VUHDO_I18N_TYPE = "Type";
-VUHDO_I18N_VALUE = "Value";
-VUHDO_I18N_SPECIAL = "Special";
-VUHDO_I18N_BUFF_ALL = "All";
-VUHDO_I18N_SHOW_BUFF_WATCH = "Show Buff Watch";
+VUHDO_I18N_CHOOSE = "Seleccionar";
+VUHDO_I18N_DRAG = "Arrastrar";
+VUHDO_I18N_REMOVE = "Suprimir";
+VUHDO_I18N_ME = "mi!";
+VUHDO_I18N_TYPE = "Tipo";
+VUHDO_I18N_VALUE = "Valor";
+VUHDO_I18N_SPECIAL = "Especial";
+VUHDO_I18N_BUFF_ALL = "todos";
+VUHDO_I18N_SHOW_BUFF_WATCH = "Muestra buscador de buffs";
+
 
 -- @EXACT = true
---
-VUHDO_I18N_RANK = "Rank";
 
+VUHDO_I18N_RANK = "Rango";
 
 -- Chat messages
 -- @EXACT = false
-VUHDO_I18N_COMMAND_LIST = "\n|cffffe566 - [ VuhDo Commands ] -|r\n";
-VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "Â§|cffffe566opt|r[ions] - VuhDo Options\n";
-VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "Â§|cffffe566res|r[et] - Reset Panel Positions\n";
-VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "Â§|cffffe566lock|r - Toggle Panel Lock\n";
-VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "Â§|cffffe566mm, map, minimap|r - Toggle Minimap Icon\n";
-VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "Â§|cffffe566show, hide, toggle|r - Turn Panels on/off\n";
-VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "Â§|cffffe566load|r - [Profile],[Key Layout]\n";
-VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "Â§[broad]|cffffe566cast, mt|r[s] - Broadcast maintanks\n";
-VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "Â§|cffffe566role|r - Reset player roles\n";
-VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "Â§|cffffe566aegis x|r - Set Divine Aegis detection sensivity\n";
-VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "Â§|cffffe566help,?|r - This command list\n";
+VUHDO_I18N_COMMAND_LIST = "\n|cffffe566 - [ Commandes VuhDo] -|r";
+VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566opt|r[ions] - Opciones de VuhDo";
+VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566res|r[et] - Resetear la posicion del panel";
+VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566lock|r - Cambiar Panel Bloqueado";
+VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566mm, map, minimap|r - Activar Icono de minimapa";
+VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566show, hide, toggle|r - Girar paneles";
+VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566load|r - [Profile],[Key Layout]";
+VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§[broad]|cffffe566cast, mt|r[s] - Configurar tanques principales";
+VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566role|r - Restablecer rol de jugadores";
+VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566aegis x|r - Set Divine Aegis detection sensivity";
+VUHDO_I18N_COMMAND_LIST = VUHDO_I18N_COMMAND_LIST .. "§|cffffe566help,?|r - Lista de comandos\n";
 
-VUHDO_I18N_BAD_COMMAND = "Bad argument! Type '/vuhdo help' or '/vd ?' for command list.";
-VUHDO_I18N_CHAT_SHOWN = "|cffffe566shown|r.";
-VUHDO_I18N_CHAT_HIDDEN = "|cffffe566hidden|r.";
-VUHDO_I18N_MM_ICON = "Minimap Icon is now ";
-VUHDO_I18N_MTS_BROADCASTED = "Main tanks were broadcastet to the raid";
-VUHDO_I18N_PANELS_SHOWN = "Heal Panels are now |cffffe566shown|r.";
-VUHDO_I18N_PANELS_HIDDEN = "Heal Panels are now |cffffe566hidden|r.";
-VUHDO_I18N_LOCK_PANELS_PRE = "Panel Positions are now ";
-VUHDO_I18N_LOCK_PANELS_LOCKED = "|cffffe566locked|r.";
-VUHDO_I18N_LOCK_PANELS_UNLOCKED = "|cffffe566unlocked|r.";
-VUHDO_I18N_PANELS_RESET = "Panel Positions are now reset.";
+VUHDO_I18N_BAD_COMMAND = "Comando invalido! Teclea '/vuhdo help' or '/vd ?' para ver la lista de comandos.";
+VUHDO_I18N_CHAT_SHOWN = "|cffffe566visible|r.";
+VUHDO_I18N_CHAT_HIDDEN = "|cffffe566cach\195\169|r.";
+VUHDO_I18N_MM_ICON = "El icono del minimapa esta activo ";
+VUHDO_I18N_MTS_BROADCASTED = "Tanques principales incorporados a la raid";
+VUHDO_I18N_PANELS_SHOWN = "Paneles de healers estan ahora |cffffe566shown|r.";
+VUHDO_I18N_PANELS_HIDDEN = "Paneles de healers estan ahora |cffffe566hidden|r.";
+VUHDO_I18N_LOCK_PANELS_PRE = "La posicion de los paneles esta bloqueada ";
+VUHDO_I18N_LOCK_PANELS_LOCKED = "|cffffe566v\195\169rouill\195\169|r.";
+VUHDO_I18N_LOCK_PANELS_UNLOCKED = "|cffffe566d\195\169v\195\169rouill\195\169|r.";
+VUHDO_I18N_PANELS_RESET = "La posicion de los paneles ha sido reseteado.";
 
 
 -- Config Pop-Up
 -- @EXACT = false
-VUHDO_I18N_ROLE = "Role";
-VUHDO_I18N_PRIVATE_TANK = "Private Tank";
-VUHDO_I18N_SET_BUFF = "Set Buff";
+VUHDO_I18N_ROLE = "Roll";
+VUHDO_I18N_PRIVATE_TANK = "Tanques personalizados";
+VUHDO_I18N_SET_BUFF = "Definir los buffos";
 
 
 -- Minimap
 -- @EXACT = false
-VUHDO_I18N_VUHDO_OPTIONS = "VuhDo Options";
-VUHDO_I18N_PANEL_SETUP = "Options";
-VUHDO_I18N_MM_TOOLTIP = "Left: Panel Setup\nRight: Menu";
-VUHDO_I18N_TOGGLES = "Toggles";
-VUHDO_I18N_LOCK_PANELS = "Lock Panels";
-VUHDO_I18N_SHOW_PANELS = "Show Panels";
-VUHDO_I18N_MM_BUTTON = "Minimap Button";
-VUHDO_I18N_CLOSE = "Close";
-VUHDO_I18N_BROADCAST_MTS = "Broadcast MTs";
+VUHDO_I18N_VUHDO_OPTIONS = "Opciones de VuhDo";
+VUHDO_I18N_PANEL_SETUP = "Opciones";
+VUHDO_I18N_MM_TOOLTIP = "Izquierda: Configuracion del panel\nDerecha: Menu";
+VUHDO_I18N_TOGGLES = "Posicion";
+VUHDO_I18N_LOCK_PANELS = "Bloquear Paneles";
+VUHDO_I18N_SHOW_PANELS = "Mostrar Paneles";
+VUHDO_I18N_MM_BUTTON = "Boton del Minimapa";
+VUHDO_I18N_CLOSE = "Cerrar";
+VUHDO_I18N_BROADCAST_MTS = "Sincronizar MTS";
 
 
 -- Buff categories
 -- @EXACT = false
 -- Priest
-VUHDO_I18N_BUFFC_FORTITUDE = "01Fortitude";
-VUHDO_I18N_BUFFC_SPIRIT = "02Spirit";
-VUHDO_I18N_BUFFC_SHADOW_PROTECTION = "03Shadow Protection";
+VUHDO_I18N_BUFFC_FORTITUDE = "01Entereza";
+VUHDO_I18N_BUFFC_SPIRIT = "02Espiritu";
+VUHDO_I18N_BUFFC_SHADOW_PROTECTION = "03Proteccion contra las sombras";
 
 -- Shaman
-VUHDO_I18N_BUFFC_FIRE_TOTEM = "01Fire Totem";
-VUHDO_I18N_BUFFC_AIR_TOTEM = "02Air Totem";
-VUHDO_I18N_BUFFC_EARTH_TOTEM = "03Earth Totem";
-VUHDO_I18N_BUFFC_WATER_TOTEM = "04Water Totem";
-VUHDO_I18N_BUFFC_WEAPON_ENCHANT = "08Weapon Enchant";
-VUHDO_I18N_BUFFC_WEAPON_ENCHANT_2 = "132nd Weapon Enchant";
-VUHDO_I18N_BUFFC_SHIELDS = "09Shields";
+VUHDO_I18N_BUFFC_FIRE_TOTEM = "01Totem de fuego";
+VUHDO_I18N_BUFFC_AIR_TOTEM = "02Totem de aire";
+VUHDO_I18N_BUFFC_EARTH_TOTEM = "03Totem de tierra";
+VUHDO_I18N_BUFFC_WATER_TOTEM = "04Totem de agua";
+VUHDO_I18N_BUFFC_WEAPON_ENCHANT = "08Armas encantadas";
+VUHDO_I18N_BUFFC_WEAPON_ENCHANT_2 = "13Armas encantadas 2";
+VUHDO_I18N_BUFFC_SHIELDS = "09Escudos";
 
 -- Paladin
-VUHDO_I18N_BUFFC_BLESSING = "01Blessing";
+VUHDO_I18N_BUFFC_BLESSING = "01Bendicion";
 VUHDO_I18N_BUFFC_AURA = "02Aura";
-VUHDO_I18N_BUFFC_SEAL = "03Seal";
+VUHDO_I18N_BUFFC_SEAL = "03Sello";
 
 -- Druids
 
 -- Warlock
-VUHDO_I18N_BUFFC_SKIN = "01Skin";
+VUHDO_I18N_BUFFC_SKIN = "01Piel de demonio";
 
 -- Mage
-VUHDO_I18N_BUFFC_ARMOR_MAGE = "03Armor";
+VUHDO_I18N_BUFFC_ARMOR_MAGE = "03Armadura";
 
 -- Death Knight
-VUHDO_SPELL_ID_BUFFC_PRESENCE    = "03Presence";
+VUHDO_SPELL_ID_BUFFC_PRESENCE	= "03Presencia";
 
 -- Warrior
-VUHDO_I18N_BUFFC_SHOUT = "01Shout";
+VUHDO_I18N_BUFFC_SHOUT = "01Grito";
 
 -- Hunter
-VUHDO_I18N_BUFFC_ASPECT = "02Aspect";
+VUHDO_I18N_BUFFC_ASPECT = "02Aspecto";
 
 
 -- Key Binding Headers/Names
 -- @EXACT = false
 BINDING_HEADER_VUHDO_TITLE = "VuhDo - Raid Frames";
-BINDING_NAME_VUHDO_KEY_ASSIGN_1 = "Mouse over Spell 1";
-BINDING_NAME_VUHDO_KEY_ASSIGN_2 = "Mouse over Spell 2";
-BINDING_NAME_VUHDO_KEY_ASSIGN_3 = "Mouse over Spell 3";
-BINDING_NAME_VUHDO_KEY_ASSIGN_4 = "Mouse over Spell 4";
-BINDING_NAME_VUHDO_KEY_ASSIGN_5 = "Mouse over Spell 5";
-BINDING_NAME_VUHDO_KEY_ASSIGN_6 = "Mouse over Spell 6";
-BINDING_NAME_VUHDO_KEY_ASSIGN_7 = "Mouse over Spell 7";
-BINDING_NAME_VUHDO_KEY_ASSIGN_8 = "Mouse over Spell 8";
-BINDING_NAME_VUHDO_KEY_ASSIGN_9 = "Mouse over Spell 9";
-BINDING_NAME_VUHDO_KEY_ASSIGN_10 = "Mouse over Spell 10";
-BINDING_NAME_VUHDO_KEY_ASSIGN_11 = "Mouse over Spell 11";
-BINDING_NAME_VUHDO_KEY_ASSIGN_12 = "Mouse over Spell 12";
-BINDING_NAME_VUHDO_KEY_ASSIGN_13 = "Mouse over Spell 13";
-BINDING_NAME_VUHDO_KEY_ASSIGN_14 = "Mouse over Spell 14";
-BINDING_NAME_VUHDO_KEY_ASSIGN_15 = "Mouse over Spell 15";
-BINDING_NAME_VUHDO_KEY_ASSIGN_16 = "Mouse over Spell 16";
+BINDING_NAME_VUHDO_KEY_ASSIGN_1 = "Mouse over - Sort 1";
+BINDING_NAME_VUHDO_KEY_ASSIGN_2 = "Mouse over - Sort 2";
+BINDING_NAME_VUHDO_KEY_ASSIGN_3 = "Mouse over - Sort 3";
+BINDING_NAME_VUHDO_KEY_ASSIGN_4 = "Mouse over - Sort 4";
+BINDING_NAME_VUHDO_KEY_ASSIGN_5 = "Mouse over - Sort 5";
+BINDING_NAME_VUHDO_KEY_ASSIGN_6 = "Mouse over - Sort 6";
+BINDING_NAME_VUHDO_KEY_ASSIGN_7 = "Mouse over - Sort 7";
+BINDING_NAME_VUHDO_KEY_ASSIGN_8 = "Mouse over - Sort 8";
+BINDING_NAME_VUHDO_KEY_ASSIGN_9 = "Mouse over - Sort 9";
+BINDING_NAME_VUHDO_KEY_ASSIGN_10 = "Mouse over - Sort 10";
+BINDING_NAME_VUHDO_KEY_ASSIGN_11 = "Mouse over - Sort 11";
+BINDING_NAME_VUHDO_KEY_ASSIGN_12 = "Mouse over - Sort 12";
+BINDING_NAME_VUHDO_KEY_ASSIGN_13 = "Mouse over - Sort 13";
+BINDING_NAME_VUHDO_KEY_ASSIGN_14 = "Mouse over - Sort 14";
+BINDING_NAME_VUHDO_KEY_ASSIGN_15 = "Mouse over - Sort 15";
+BINDING_NAME_VUHDO_KEY_ASSIGN_16 = "Mouse over - Sort 16";
 
-BINDING_NAME_VUHDO_KEY_ASSIGN_SMART_BUFF = "Smart Buff";
+BINDING_NAME_VUHDO_KEY_ASSIGN_SMART_BUFF = "Buff Intelligent";
 
-VUHDO_I18N_MOUSE_OVER_BINDING = "Keyboard spell";
-VUHDO_I18N_UNASSIGNED = "(unassigned)";
-
+VUHDO_I18N_MOUSE_OVER_BINDING = "Raccourcis clavier";
+VUHDO_I18N_UNASSIGNED = "(non assign\195\169)";
 
 -- #+V1.89
 VUHDO_I18N_YES = "Yes";
 VUHDO_I18N_NO = "No";
-VUHDO_I18N_UP = "Up";
-VUHDO_I18N_DOWN = "Down";
+VUHDO_I18N_UP = "up";
+VUHDO_I18N_DOWN = "down";
 VUHDO_I18N_VEHICLES = "Vehicles";
 
 
@@ -195,11 +211,8 @@ VUHDO_I18N_DEFAULT_RES_ANNOUNCE = "Come to life, vuhdo, you b00n!";
 -- #v+1.151
 VUHDO_I18N_MAIN_ASSISTS = "Main Assists";
 
-VUHDO_OPTIONS_FONT_NAME = "Interface\\AddOns\\VuhDo\\Fonts\\ariblk.ttf";
-
 -- #v+1.169
 VUHDO_I18N_O_REALLY = "O'RLY?";
-
 
 -- #+v1.184
 VUHDO_I18N_BW_CD = "CD";
@@ -216,10 +229,10 @@ VUHDO_I18N_DEMOTE_ASSISTANT = "Demote from Assistant";
 VUHDO_I18N_PROMOTE_MASTER_LOOTER = "Promote to Master Looter";
 VUHDO_I18N_MT_NUMBER = "MT #";
 VUHDO_I18N_ROLE_OVERRIDE = "Role override";
-VUHDO_I18N_MELEE_TANK = "Melee-Tank";
-VUHDO_I18N_MELEE_DPS = "Melee-DPS";
-VUHDO_I18N_RANGED_DPS = "Ranged-DPS";
-VUHDO_I18N_RANGED_HEALERS = "Ranged-Healer";
+VUHDO_I18N_MELEE_TANK = "Melee - Tank";
+VUHDO_I18N_MELEE_DPS = "Melee - DPS";
+VUHDO_I18N_RANGED_DPS = "Ranged - DPS";
+VUHDO_I18N_RANGED_HEALERS = "Ranged - Healer";
 VUHDO_I18N_AUTO_DETECT = "<auto detect>";
 VUHDO_I18N_PROMOTE_ASSIST_MSG_1 = "Promoted |cffffe566";
 VUHDO_I18N_PROMOTE_ASSIST_MSG_2 = "|r to assistant.";
@@ -245,14 +258,13 @@ VUHDO_I18N_SET_BUFF_TARGET_1 = "Setting buff target for ";
 VUHDO_I18N_SET_BUFF_TARGET_2 = " to ";
 
 
+
 -- #+v1.189
 VUHDO_I18N_UNKNOWN = "unknown";
 VUHDO_I18N_SELF = "self";
 VUHDO_I18N_MELEES = "Melees";
 VUHDO_I18N_RANGED = "Ranged";
 
-
--- #+1.196
 VUHDO_I18N_OPTIONS_NOT_LOADED = ">>> VuhDo Options plugin not loaded! <<<";
 VUHDO_I18N_SPELL_LAYOUT_NOT_EXIST_1 = "Error: Spell layout \"";
 VUHDO_I18N_SPELL_LAYOUT_NOT_EXIST_2 = "\" doesn't exist.";
@@ -260,9 +272,8 @@ VUHDO_I18N_AUTO_ARRANG_1 = "Number of Party members has changed to ";
 VUHDO_I18N_AUTO_ARRANG_2 = ". Auto-engaging arrangement: \"";
 
 -- #+1.209
-VUHDO_I18N_OWN_GROUP_LONG = "Own Group";
 VUHDO_I18N_TRACK_BUFFS_FOR = "Track buff for ...";
-
+VUHDO_I18N_OWN_GROUP_LONG = "Own Group";
 VUHDO_I18N_NO_FOCUS = "[no focus]";
 VUHDO_I18N_NOT_AVAILABLE = "[ N/A ]";
 VUHDO_I18N_SHIELD_ABSORPTION = "Shield Status";
@@ -369,7 +380,7 @@ VUHDO_I18N_BACKGROUND_BAR = "Bar Background";
 
 -- 2.0 alpha #11
 VUHDO_I18N_HEALTH_BAR = "Health Bar";
-VUHDO_I18N_DEF_BOUQUET_BAR_HEALTH = "Health Bar: (generic, gradient)";
+VUHDO_I18N_DEF_BOUQUET_BAR_HEALTH = "Health Bar: (auto)";
 VUHDO_I18N_UPDATE_RAID_TARGET = "Flag: Raid target color";
 VUHDO_I18N_BOUQUET_OVERHEAL_HIGHLIGHT = "Color: Overheal Highlighter";
 VUHDO_I18N_BOUQUET_EMERGENCY_COLOR = "Color: Emergency";
@@ -378,8 +389,8 @@ VUHDO_I18N_BOUQUET_RESURRECTION = "Flag: Resurrection";
 VUHDO_I18N_BOUQUET_STACKS_COLOR = "Color: #Stacks";
 
 -- 2.1
-VUHDO_I18N_DEF_BOUQUET_BAR_HEALTH_SOLID = "Health (generic, solid)";
-VUHDO_I18N_DEF_BOUQUET_BAR_HEALTH_CLASS_COLOR = "Health (generic, class col)";
+VUHDO_I18N_DEF_BOUQUET_BAR_HEALTH_SOLID = "Health: (generic, solid)";
+VUHDO_I18N_DEF_BOUQUET_BAR_HEALTH_CLASS_COLOR = "Health: (generic, class col)";
 
 -- 2.9
 VUHDO_I18N_NO_TARGET = "[no target]";

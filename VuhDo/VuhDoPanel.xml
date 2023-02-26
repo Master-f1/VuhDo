@@ -1,6 +1,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
-	..\FrameXML\UI.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
 
 	<Script file="VuhDoToolbox.lua" />
 	<Script file="VuhDoBarCustomizerClusters.lua" />
@@ -110,7 +110,7 @@
 								<Anchors>
 									<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT">
 										<Offset>
-											<AbsDimension x="0" y="0"/>
+											<AbsDimension x="0" y="0" />
 										</Offset>
 									</Anchor>
 								</Anchors>
@@ -120,7 +120,7 @@
 								<Anchors>
 									<Anchor point="CENTER" relativePoint="CENTER">
 										<Offset>
-											<AbsDimension x="0" y="0"/>
+											<AbsDimension x="0" y="0" />
 										</Offset>
 									</Anchor>
 								</Anchors>
@@ -148,7 +148,7 @@
 								<Anchors>
 									<Anchor point="CENTER" relativePoint="CENTER">
 										<Offset>
-											<AbsDimension x="0" y="0"/>
+											<AbsDimension x="0" y="0" />
 										</Offset>
 									</Anchor>
 								</Anchors>
@@ -208,12 +208,12 @@
 				<Anchors>
 					<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
 						<Offset>
-							<AbsDimension x="0" y="0"/>
+							<AbsDimension x="0" y="0" />
 						</Offset>
 					</Anchor>
 					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
 						<Offset>
-							<AbsDimension x="0" y="0"/>
+							<AbsDimension x="0" y="0" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -223,12 +223,12 @@
 						<Anchors>
 							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
 								<Offset>
-									<AbsDimension x="0" y="0"/>
+									<AbsDimension x="0" y="0" />
 								</Offset>
 							</Anchor>
 							<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
 								<Offset>
-									<AbsDimension x="0" y="0"/>
+									<AbsDimension x="0" y="0" />
 								</Offset>
 							</Anchor>
 						</Anchors>
@@ -238,12 +238,12 @@
 								<Anchors>
 									<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
 										<Offset>
-											<AbsDimension x="0" y="0"/>
+											<AbsDimension x="0" y="0" />
 										</Offset>
 									</Anchor>
 									<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
 										<Offset>
-											<AbsDimension x="0" y="0"/>
+											<AbsDimension x="0" y="0" />
 										</Offset>
 									</Anchor>
 								</Anchors>
@@ -266,12 +266,12 @@
 										<Anchors>
 											<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT">
 												<Offset>
-													<AbsDimension x="0" y="0"/>
+													<AbsDimension x="0" y="0" />
 												</Offset>
 											</Anchor>
 											<Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT">
 												<Offset>
-													<AbsDimension x="0" y="0"/>
+													<AbsDimension x="0" y="0" />
 												</Offset>
 											</Anchor>
 										</Anchors>
@@ -284,7 +284,7 @@
 										<Anchors>
 											<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT">
 												<Offset>
-													<AbsDimension x="0" y="0"/>
+													<AbsDimension x="0" y="0" />
 												</Offset>
 											</Anchor>
 										</Anchors>
@@ -306,7 +306,7 @@
 										<Anchors>
 											<Anchor point="CENTER" relativePoint="CENTER">
 												<Offset>
-													<AbsDimension x="0" y="0"/>
+													<AbsDimension x="0" y="0" />
 												</Offset>
 											</Anchor>
 										</Anchors>
@@ -346,7 +346,7 @@
 										<Anchors>
 											<Anchor point="CENTER" relativePoint="CENTER">
 												<Offset>
-													<AbsDimension x="0" y="0"/>
+													<AbsDimension x="0" y="0" />
 												</Offset>
 											</Anchor>
 										</Anchors>
@@ -418,12 +418,12 @@
 				<Anchors>
 					<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
 						<Offset>
-							<AbsDimension x="0" y="0"/>
+							<AbsDimension x="0" y="0" />
 						</Offset>
 					</Anchor>
 					<Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT">
 						<Offset>
-							<AbsDimension x="0" y="0"/>
+							<AbsDimension x="0" y="0" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -445,12 +445,12 @@
 				<Anchors>
 					<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
 						<Offset>
-							<AbsDimension x="0" y="0"/>
+							<AbsDimension x="0" y="0" />
 						</Offset>
 					</Anchor>
 					<Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT">
 						<Offset>
-							<AbsDimension x="0" y="0"/>
+							<AbsDimension x="0" y="0" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -945,24 +945,24 @@
 
 	<Frame name="VuhDoActionTemplate" toplevel="true" frameStrata="BACKGROUND" parent="UIParent" movable="true" enableMouse="true" enableKeyboard="true" virtual="true" hidden="true" inherits="SecureFrameTemplate">
 		<Size>
-			<AbsDimension x="350" y="350"/>
+			<AbsDimension x="350" y="350" />
 		</Size>
 		<Anchors>
 			<Anchor point="RIGHT">
 				<Offset>
-					<AbsDimension x="0" y="0"/>
+					<AbsDimension x="0" y="0" />
 				</Offset>
 			</Anchor>
 		</Anchors>
 		<Backdrop tile="true" bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border">
 			<EdgeSize>
-				<AbsValue val="8"/>
+				<AbsValue val="8" />
 			</EdgeSize>
 			<TileSize>
-				<AbsValue val="8"/>
+				<AbsValue val="8" />
 			</TileSize>
 			<BackgroundInsets>
-				<AbsInset left="1" right="1" top="1" bottom="1"/>
+				<AbsInset left="1" right="1" top="1" bottom="1" />
 			</BackgroundInsets>
 		</Backdrop>
 		<Frames>
@@ -1055,21 +1055,21 @@
 				</Scripts>
 			</Frame>
 
-			<Button name="$parentHd1" inherits="VuhDoButtonTemplateHeader"/>
-			<Button name="$parentHd2" inherits="VuhDoButtonTemplateHeader"/>
-			<Button name="$parentHd3" inherits="VuhDoButtonTemplateHeader"/>
-			<Button name="$parentHd4" inherits="VuhDoButtonTemplateHeader"/>
-			<Button name="$parentHd5" inherits="VuhDoButtonTemplateHeader"/>
-			<Button name="$parentHd6" inherits="VuhDoButtonTemplateHeader"/>
-			<Button name="$parentHd7" inherits="VuhDoButtonTemplateHeader"/>
-			<Button name="$parentHd8" inherits="VuhDoButtonTemplateHeader"/>
-			<Button name="$parentHd9" inherits="VuhDoButtonTemplateHeader"/>
-			<Button name="$parentHd10" inherits="VuhDoButtonTemplateHeader"/>
-			<Button name="$parentHd11" inherits="VuhDoButtonTemplateHeader"/>
-			<Button name="$parentHd12" inherits="VuhDoButtonTemplateHeader"/>
-			<Button name="$parentHd13" inherits="VuhDoButtonTemplateHeader"/>
-			<Button name="$parentHd14" inherits="VuhDoButtonTemplateHeader"/>
-			<Button name="$parentHd15" inherits="VuhDoButtonTemplateHeader"/>
+			<Button name="$parentHd1" inherits="VuhDoButtonTemplateHeader" />
+			<Button name="$parentHd2" inherits="VuhDoButtonTemplateHeader" />
+			<Button name="$parentHd3" inherits="VuhDoButtonTemplateHeader" />
+			<Button name="$parentHd4" inherits="VuhDoButtonTemplateHeader" />
+			<Button name="$parentHd5" inherits="VuhDoButtonTemplateHeader" />
+			<Button name="$parentHd6" inherits="VuhDoButtonTemplateHeader" />
+			<Button name="$parentHd7" inherits="VuhDoButtonTemplateHeader" />
+			<Button name="$parentHd8" inherits="VuhDoButtonTemplateHeader" />
+			<Button name="$parentHd9" inherits="VuhDoButtonTemplateHeader" />
+			<Button name="$parentHd10" inherits="VuhDoButtonTemplateHeader" />
+			<Button name="$parentHd11" inherits="VuhDoButtonTemplateHeader" />
+			<Button name="$parentHd12" inherits="VuhDoButtonTemplateHeader" />
+			<Button name="$parentHd13" inherits="VuhDoButtonTemplateHeader" />
+			<Button name="$parentHd14" inherits="VuhDoButtonTemplateHeader" />
+			<Button name="$parentHd15" inherits="VuhDoButtonTemplateHeader" />
 		</Frames>
 		<Scripts>
 			<OnMouseDown>

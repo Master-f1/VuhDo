@@ -1,20 +1,21 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
 
 	<Script file="Libs\LibStub\LibStub.lua" />
 	<Script file="Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua" />
 	<Script file="Libs\LibShieldLeft-1.0\LibShieldLeft.lua" />
-	<Script file="Libs\libdatabroker-1-1\LibDataBroker-1.1.lua" />
+	<Script file="Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua" />
 	<Include file="Libs\LibHealComm-4.0\LibHealComm-4.0.xml" />
 
 	<Script file="Libs\LibSharedMedia-3.0\LibSharedMedia-3.0.lua" />
-	<Script file="VuhDoLocalization_en.lua" />
-	<Script file="VuhDoLocalization_de.lua" />
-	<Script file="VuhDoLocalization_fr.lua" />
-	<Script file="VuhDoLocalization_es.lua" />
-	<Script file="VuhDoLocalization_ru.lua" />
-	<Script file="VuhDoLocalization_zhCN.lua" />
-	<Script file="VuhDoLocalization_zhTW.lua" />
+	<Script file="Locale\VuhDoLocalization_en.lua" />
+	<Script file="Locale\VuhDoLocalization_de.lua" />
+	<Script file="Locale\VuhDoLocalization_fr.lua" />
+	<Script file="Locale\VuhDoLocalization_es.lua" />
+	<Script file="Locale\VuhDoLocalization_ru.lua" />
+	<Script file="Locale\VuhDoLocalization_zhCN.lua" />
+	<Script file="Locale\VuhDoLocalization_zhTW.lua" />
 
 	<Script file="VuhDoConstSpells.lua" />
 	<Script file="VuhDoConst.lua" />
@@ -36,7 +37,6 @@
 	<Script file="VuhDoReadyCheck.lua" />
 	<Script file="VuhDoEventHandler.lua" />
 	<Script file="VuhDoDebuffs.lua" />
-	<Script file="VuhDoDeBuffBroker.lua" />
 	<Script file="VuhDoBouquetValidators.lua" />
 	<Script file="VuhDoBouquets.lua" />
 	<Script file="VuhDoTooltip.lua" />
@@ -102,7 +102,7 @@
 					<Anchors>
 						<Anchor point="TOPLEFT">
 							<Offset>
-								<AbsDimension x="10" y="-10"/>
+								<AbsDimension x="10" y="-10" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -111,7 +111,7 @@
 					<Anchors>
 						<Anchor point="TOPRIGHT">
 							<Offset>
-								<AbsDimension x="-10" y="-10"/>
+								<AbsDimension x="-10" y="-10" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -120,7 +120,7 @@
 					<Anchors>
 						<Anchor point="TOPLEFT" relativeTo="$parentTextL1" relativePoint="BOTTOMLEFT">
 							<Offset>
-								<AbsDimension x="0" y="-2"/>
+								<AbsDimension x="0" y="-2" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -129,7 +129,7 @@
 					<Anchors>
 						<Anchor point="TOPRIGHT" relativeTo="$parentTextR1" relativePoint="BOTTOMRIGHT">
 							<Offset>
-								<AbsDimension x="0" y="-2"/>
+								<AbsDimension x="0" y="-2" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -138,7 +138,7 @@
 					<Anchors>
 						<Anchor point="TOPLEFT" relativeTo="$parentTextL2" relativePoint="BOTTOMLEFT">
 							<Offset>
-								<AbsDimension x="0" y="-2"/>
+								<AbsDimension x="0" y="-2" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -147,7 +147,7 @@
 					<Anchors>
 						<Anchor point="TOPRIGHT" relativeTo="$parentTextR2" relativePoint="BOTTOMRIGHT">
 							<Offset>
-								<AbsDimension x="0" y="-2"/>
+								<AbsDimension x="0" y="-2" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -156,7 +156,7 @@
 					<Anchors>
 						<Anchor point="TOPLEFT" relativeTo="$parentTextL3" relativePoint="BOTTOMLEFT">
 							<Offset>
-								<AbsDimension x="0" y="-2"/>
+								<AbsDimension x="0" y="-2" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -165,7 +165,7 @@
 					<Anchors>
 						<Anchor point="TOPRIGHT" relativeTo="$parentTextR3" relativePoint="BOTTOMRIGHT">
 							<Offset>
-								<AbsDimension x="0" y="-2"/>
+								<AbsDimension x="0" y="-2" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -174,7 +174,7 @@
 					<Anchors>
 						<Anchor point="TOPLEFT" relativeTo="$parentTextL4" relativePoint="BOTTOMLEFT">
 							<Offset>
-								<AbsDimension x="0" y="-2"/>
+								<AbsDimension x="0" y="-2" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -183,7 +183,7 @@
 					<Anchors>
 						<Anchor point="TOPRIGHT" relativeTo="$parentTextR4" relativePoint="BOTTOMRIGHT">
 							<Offset>
-								<AbsDimension x="0" y="-2"/>
+								<AbsDimension x="0" y="-2" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -192,7 +192,7 @@
 					<Anchors>
 						<Anchor point="TOPLEFT" relativeTo="$parentTextL5" relativePoint="BOTTOMLEFT">
 							<Offset>
-								<AbsDimension x="0" y="-2"/>
+								<AbsDimension x="0" y="-2" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -201,7 +201,7 @@
 					<Anchors>
 						<Anchor point="TOPRIGHT" relativeTo="$parentTextR5" relativePoint="BOTTOMRIGHT">
 							<Offset>
-								<AbsDimension x="0" y="-2"/>
+								<AbsDimension x="0" y="-2" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -210,7 +210,7 @@
 					<Anchors>
 						<Anchor point="TOPLEFT" relativeTo="$parentTextL6" relativePoint="BOTTOMLEFT">
 							<Offset>
-								<AbsDimension x="0" y="-2"/>
+								<AbsDimension x="0" y="-2" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -219,7 +219,7 @@
 					<Anchors>
 						<Anchor point="TOPRIGHT" relativeTo="$parentTextR6" relativePoint="BOTTOMRIGHT">
 							<Offset>
-								<AbsDimension x="0" y="-2"/>
+								<AbsDimension x="0" y="-2" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -228,7 +228,7 @@
 					<Anchors>
 						<Anchor point="TOPLEFT" relativeTo="$parentTextL7" relativePoint="BOTTOMLEFT">
 							<Offset>
-								<AbsDimension x="0" y="-2"/>
+								<AbsDimension x="0" y="-2" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -237,7 +237,7 @@
 					<Anchors>
 						<Anchor point="TOPRIGHT" relativeTo="$parentTextR6" relativePoint="BOTTOMRIGHT">
 							<Offset>
-								<AbsDimension x="0" y="-2"/>
+								<AbsDimension x="0" y="-2" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -246,7 +246,7 @@
 					<Anchors>
 						<Anchor point="TOPLEFT" relativeTo="$parentTextL8" relativePoint="BOTTOMLEFT">
 							<Offset>
-								<AbsDimension x="0" y="-2"/>
+								<AbsDimension x="0" y="-2" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -255,7 +255,7 @@
 					<Anchors>
 						<Anchor point="TOPLEFT" relativeTo="$parentTextL9" relativePoint="BOTTOMLEFT">
 							<Offset>
-								<AbsDimension x="0" y="-2"/>
+								<AbsDimension x="0" y="-2" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -264,7 +264,7 @@
 					<Anchors>
 						<Anchor point="TOPLEFT" relativeTo="$parentTextL10" relativePoint="BOTTOMLEFT">
 							<Offset>
-								<AbsDimension x="0" y="-2"/>
+								<AbsDimension x="0" y="-2" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -273,7 +273,7 @@
 					<Anchors>
 						<Anchor point="TOPLEFT" relativeTo="$parentTextL11" relativePoint="BOTTOMLEFT">
 							<Offset>
-								<AbsDimension x="0" y="-2"/>
+								<AbsDimension x="0" y="-2" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -282,7 +282,7 @@
 					<Anchors>
 						<Anchor point="TOPLEFT" relativeTo="$parentTextL12" relativePoint="BOTTOMLEFT">
 							<Offset>
-								<AbsDimension x="0" y="-2"/>
+								<AbsDimension x="0" y="-2" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -291,7 +291,7 @@
 					<Anchors>
 						<Anchor point="TOPLEFT" relativeTo="$parentTextL13" relativePoint="BOTTOMLEFT">
 							<Offset>
-								<AbsDimension x="0" y="-2"/>
+								<AbsDimension x="0" y="-2" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -300,7 +300,7 @@
 					<Anchors>
 						<Anchor point="TOPLEFT" relativeTo="$parentTextL14" relativePoint="BOTTOMLEFT">
 							<Offset>
-								<AbsDimension x="0" y="-2"/>
+								<AbsDimension x="0" y="-2" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -309,7 +309,7 @@
 					<Anchors>
 						<Anchor point="TOPLEFT" relativeTo="$parentTextL14" relativePoint="BOTTOMLEFT">
 							<Offset>
-								<AbsDimension x="0" y="-2"/>
+								<AbsDimension x="0" y="-2" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -318,13 +318,13 @@
 		</Layers>
 		<Backdrop tile="true" bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border">
 			<EdgeSize>
-				<AbsValue val="8"/>
+				<AbsValue val="8" />
 			</EdgeSize>
 			<TileSize>
-				<AbsValue val="8"/>
+				<AbsValue val="8" />
 			</TileSize>
 			<BackgroundInsets>
-				<AbsInset left="3" right="3" top="3" bottom="3"/>
+				<AbsInset left="3" right="3" top="3" bottom="3" />
 			</BackgroundInsets>
 		</Backdrop>
 		<Scripts>

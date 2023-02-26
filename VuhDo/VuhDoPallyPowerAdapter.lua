@@ -64,7 +64,6 @@ local VUHDO_AURA_MAPPINGS_REV = {
 	[VUHDO_SPELL_ID_BUFF_CRUSADER_AURA] = "7"
 };
 
---
 function VUHDO_parsePallyPowerMessage(anArg2, anArg3, anArg4)
 	if ("PALADIN" ~= VUHDO_PLAYER_CLASS) then
 		return;
@@ -141,12 +140,10 @@ function VUHDO_parsePallyPowerMessage(anArg2, anArg3, anArg4)
 	VUHDO_updateBuffPanel();
 end
 
---
 local function VUHDO_sendPallyPowerMessage(aMessage)
 	SendAddonMessage("PLPWR", aMessage, VUHDO_getAddOnDistribution());
 end
 
---
 function VUHDO_sendPallyPowerAuraUpdate(aNewAuraName)
 	if (not VUHDO_CONFIG["IS_PALLY_POWER_COMMS"]) then
 		return;
@@ -160,7 +157,6 @@ function VUHDO_sendPallyPowerAuraUpdate(aNewAuraName)
 	VUHDO_sendPallyPowerMessage(tMessage);
 end
 
---
 function VUHDO_sendPallyPowerBlessingUpdate(aNewBlessingName, aTargetClass)
 	if (not VUHDO_CONFIG["IS_PALLY_POWER_COMMS"]) then
 		return;
@@ -175,7 +171,6 @@ function VUHDO_sendPallyPowerBlessingUpdate(aNewBlessingName, aTargetClass)
 	VUHDO_sendPallyPowerMessage(tMessage);
 end
 
---
 function VUHDO_sendPallyPowerRequest()
 	VUHDO_sendPallyPowerMessage("REQ");
 end

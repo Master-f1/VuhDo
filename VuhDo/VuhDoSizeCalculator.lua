@@ -1,4 +1,4 @@
--- BURST CACHE ---------------------------------------------------
+-- BURST CACHE
 local VUHDO_PANEL_SETUP;
 local VUHDO_getHeaderWidthHor;
 local VUHDO_getHeaderWidthVer;
@@ -30,7 +30,7 @@ function VUHDO_sizeCalculatorInitBurst()
 	VUHDO_resetSizeCalcCachesVer = VUHDO_GLOBAL["VUHDO_resetSizeCalcCachesVer"];
 end
 
--- BURST CACHE ---------------------------------------------------
+-- BURST CACHE
 
 local sHealButtonWidthCache = {};
 
@@ -40,7 +40,6 @@ function resetSizeCalcCaches()
 	VUHDO_resetSizeCalcCachesVer();
 end
 
---
 local tBarScaling;
 local tTargetWidth;
 local function VUHDO_getTargetBarWidth(aPanelNum)
@@ -58,7 +57,6 @@ local function VUHDO_getTargetBarWidth(aPanelNum)
 	return tTargetWidth;
 end
 
---
 local tHotSlots, tCnt;
 function VUHDO_getNumHotSlots(aPanelNum)
 	tHotSlots = 0;
@@ -78,7 +76,6 @@ end
 
 local VUHDO_getNumHotSlots = VUHDO_getNumHotSlots;
 
---
 local tHotCfg;
 local tHotSlots;
 local function VUHDO_getHotIconWidth(aPanelNum)
@@ -86,29 +83,24 @@ local function VUHDO_getHotIconWidth(aPanelNum)
 
 	if (tHotCfg["radioValue"] == 1 or tHotCfg["radioValue"] == 4) then
 		tHotSlots = VUHDO_getNumHotSlots(aPanelNum);
-		return VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barHeight"] * VUHDO_PANEL_SETUP[aPanelNum]["HOTS"]["size"] *
-				   tHotSlots * 0.01;
+		return VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barHeight"] * VUHDO_PANEL_SETUP[aPanelNum]["HOTS"]["size"] * tHotSlots * 0.01;
 	end
 
 	return 0;
 end
 
---
 function VUHDO_getHealButtonWidth(aPanelNum)
 	if (VUHDO_IS_PANEL_CONFIG and not VUHDO_CONFIG_SHOW_RAID) then
 		return VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barWidth"];
 	elseif (sHealButtonWidthCache[aPanelNum] == nil) then
-		sHealButtonWidthCache[aPanelNum] = VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barWidth"] +
-											   VUHDO_getTargetBarWidth(aPanelNum) + VUHDO_getHotIconWidth(aPanelNum);
+		sHealButtonWidthCache[aPanelNum] = VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barWidth"] + VUHDO_getTargetBarWidth(aPanelNum) + VUHDO_getHotIconWidth(aPanelNum);
 	end
 
 	return sHealButtonWidthCache[aPanelNum];
 end
 
---
 local function VUHDO_isPanelHorizontal(aPanelNum)
-	return VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["arrangeHorizontal"] and
-			   (not VUHDO_IS_PANEL_CONFIG or VUHDO_CONFIG_SHOW_RAID);
+	return VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["arrangeHorizontal"] and (not VUHDO_IS_PANEL_CONFIG or VUHDO_CONFIG_SHOW_RAID);
 end
 
 -- Returns total header width
@@ -129,7 +121,6 @@ function VUHDO_getHeaderHeight(aPanelNum)
 	end
 end
 
---
 function VUHDO_getHeaderPos(aHeaderPlace, aPanelNum)
 	if (VUHDO_isPanelHorizontal(aPanelNum)) then
 		return VUHDO_getHeaderPosHor(aHeaderPlace, aPanelNum);
@@ -138,9 +129,8 @@ function VUHDO_getHeaderPos(aHeaderPlace, aPanelNum)
 	end
 end
 
---
 function VUHDO_getHealButtonPos(aPlaceNum, aRowNo, aPanelNum)
-	-- Achtung: Positionen nicht cachen, da z.T. von dynamischen Models abh�ngig
+	-- Attention: Do not cache positions, as they partly depend on dynamic models.
 	if (VUHDO_isPanelHorizontal(aPanelNum)) then
 		return VUHDO_getHealButtonPosHor(aPlaceNum, aRowNo, aPanelNum);
 	else
@@ -148,7 +138,6 @@ function VUHDO_getHealButtonPos(aPlaceNum, aRowNo, aPanelNum)
 	end
 end
 
---
 function VUHDO_getHealPanelWidth(aPanelNum)
 	if (VUHDO_isPanelHorizontal(aPanelNum)) then
 		return VUHDO_getHealPanelWidthHor(aPanelNum);
@@ -157,7 +146,6 @@ function VUHDO_getHealPanelWidth(aPanelNum)
 	end
 end
 
---
 function VUHDO_getHealPanelHeight(aPanelNum)
 	if (VUHDO_isPanelHorizontal(aPanelNum)) then
 		return VUHDO_getHealPanelHeightHor(aPanelNum);

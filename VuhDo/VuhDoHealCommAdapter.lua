@@ -1,6 +1,7 @@
 VuhDoHealComms = {};
 
--- BURST CACHE ---------------------------------------------------
+-- BURST CACHE
+
 local floor = floor;
 local select = select;
 local pairs = pairs;
@@ -31,18 +32,14 @@ function VUHDO_healCommAdapterInitBurst()
 	sBombedSecs = VUHDO_CONFIG["INC_BOMBED_SECS"]
 end
 
-----------------------------------------------------
-
 local VUHDO_INC_HEAL = {};
 local VUHDO_INC_END = {};
 
---
 local tInfo;
 function VUHDO_getIncHealOnUnit(aName)
 	return VUHDO_INC_HEAL[aName] or 0;
 end
 
---
 local function VUHDO_setIncHeal(aTargetName, anAmount, anEndTime)
 	VUHDO_INC_HEAL[aTargetName] = anAmount;
 	if (anEndTime ~= nil and (VUHDO_INC_END[aTargetName] == nil or VUHDO_INC_END[aTargetName] < anEndTime)) then
@@ -51,7 +48,6 @@ local function VUHDO_setIncHeal(aTargetName, anAmount, anEndTime)
 	VUHDO_updateHealthBarsFor(VUHDO_RAID_NAMES[aTargetName], 9); -- VUHDO_UPDATE_INC
 end
 
---
 local tName, tTime, tNow;
 function VUHDO_clearObsoleteInc()
 	tNow = GetTime();
@@ -70,7 +66,6 @@ local VUHDO_CHANNEL_HEALS = sHealComm.CHANNEL_HEALS;
 local VUHDO_HOT_HEALS = sHealComm.HOT_HEALS;
 local VUHDO_BOMB_HEALS = sHealComm.BOMB_HEALS;
 
---
 local tArgNum, tTargetGUID;
 local tAmount;
 local tCasterName;
@@ -116,7 +111,6 @@ function VuhDoHealComms:HealComm_HealStarted(_, aCasterGUID, _, aHealType, anEnd
 	end
 end
 
---
 function VuhDoHealComms:HealComm_HealStopped(_, aCasterGUID, _, aHealType, anIsInterrupted, ...)
 	VuhDoHealComms:HealComm_HealStarted(nil, aCasterGUID, aSpellID, aHealType, nil, ...);
 end

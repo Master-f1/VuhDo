@@ -7,21 +7,15 @@ local twipe = table.wipe;
 local pairs = pairs;
 local _ = _;
 
-local VUHDO_MY_AND_OTHERS_HOTS = { };
-local VUHDO_MY_HOTS = { };
-local VUHDO_OTHER_HOTS = { };
-local VUHDO_BOUQUETS = { };
-local VUHDO_RAID = { };
-local VUHDO_CONFIG = { };
-local VUHDO_BOUQUET_BUFFS_SPECIAL = { };
+local VUHDO_MY_AND_OTHERS_HOTS = {};
+local VUHDO_MY_HOTS = {};
+local VUHDO_OTHER_HOTS = {};
+local VUHDO_BOUQUETS = {};
+local VUHDO_RAID = {};
+local VUHDO_CONFIG = {};
+local VUHDO_BOUQUET_BUFFS_SPECIAL = {};
 local VUHDO_CUSTOM_ICONS;
 local VUHDO_CUSTOM_INFO;
-
-
-
-----------------------------------------------------------
-
-
 
 function VUHDO_bouquetsInitBurst()
 	VUHDO_MY_AND_OTHERS_HOTS = VUHDO_GLOBAL["VUHDO_MY_AND_OTHERS_HOTS"];
@@ -35,22 +29,9 @@ function VUHDO_bouquetsInitBurst()
 	VUHDO_CUSTOM_INFO = VUHDO_GLOBAL["VUHDO_CUSTOM_INFO"];
 end
 
-----------------------------------------------------------
-
-
-
---
 local tValue;
 local function VUHDO_getColorHash(aColor)
-	tValue =
-		  (aColor["R"] or 0) * 0.0001
-		+ (aColor["G"] or 0) * 0.001
-		+ (aColor["B"] or 0) * 0.01
-		+ (aColor["O"] or 0) * 0.1
-		+ (aColor["TR"] or 0)
-		+ (aColor["TG"] or 0) * 10
-		+ (aColor["TB"] or 0) * 100
-		+ (aColor["TO"] or 0) * 1000;
+	tValue = (aColor["R"] or 0) * 0.0001 + (aColor["G"] or 0) * 0.001 + (aColor["B"] or 0) * 0.01 + (aColor["O"] or 0) * 0.1 + (aColor["TR"] or 0) + (aColor["TG"] or 0) * 10 + (aColor["TB"] or 0) * 100 + (aColor["TO"] or 0) * 1000;
 
 	if (aColor["useText"]) then
 		tValue = tValue + 10000;
@@ -65,19 +46,16 @@ local function VUHDO_getColorHash(aColor)
 	return tValue;
 end
 
-
-
---
-local VUHDO_LAST_EVALUATED_BOUQUETS = { };
+local VUHDO_LAST_EVALUATED_BOUQUETS = {};
 local tHasChanged, tCnt, tLastTime, tArg;
 local function VUHDO_hasBouquetChanged(aUnit, aBouquetName, ...)
 	if (VUHDO_LAST_EVALUATED_BOUQUETS[aBouquetName] == nil) then
-		VUHDO_LAST_EVALUATED_BOUQUETS[aBouquetName] = { };
+		VUHDO_LAST_EVALUATED_BOUQUETS[aBouquetName] = {};
 	end
 
 	tLastTime = VUHDO_LAST_EVALUATED_BOUQUETS[aBouquetName][aUnit];
 	if (tLastTime == nil) then
-		VUHDO_LAST_EVALUATED_BOUQUETS[aBouquetName][aUnit] = { };
+		VUHDO_LAST_EVALUATED_BOUQUETS[aBouquetName][aUnit] = {};
 		return true;
 	end
 
@@ -94,9 +72,6 @@ local function VUHDO_hasBouquetChanged(aUnit, aBouquetName, ...)
 	return tHasChanged;
 end
 
-
-
---
 local tColor, tMode;
 local tModi, tInvModi;
 local tR1, tG1, tB1;
@@ -104,7 +79,7 @@ local tR2, tG2, tB2;
 local tTR1, tTG1, tTB1, tO1;
 local tTR2, tTG2, tTB2, tO2;
 local tGood, tFair, tLow;
-local tDestColor = { ["useBackground"] = true, ["useOpacity"] = true };
+local tDestColor = {["useBackground"] = true, ["useOpacity"] = true};
 local tRadio;
 local function VUHDO_getBouquetStatusBarColor(anEntry, aSpecialInfo, aUnit, aValue, aMaxValue)
 	tRadio = anEntry["custom"]["radio"];
@@ -148,16 +123,13 @@ local tDefaultBouquetColor = {
 	["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
 };
 
-
-
---
 local tBouquet, tInfos, tName, tSpecial;
 local tIsActive, tIcon, tTimer, tCounter, tDuration, tBuffInfo, tHasChanged, tColor, tTimer2;
 local tType, tBuffTimer, tBuffDuration, tBuffIsActive;
 local tCnt, tAnzInfos;
 local tColor, tIcon;
-local tEmptyColor = { };
-local tEmpty = { };
+local tEmptyColor = {};
+local tEmpty = {};
 local txActive;
 local txIcon;
 local txColor;
@@ -165,28 +137,19 @@ local txCounter, txTimer, txDuration;
 local txName;
 local txLevel;
 local txTimer2;
-local tDestColor = { };
+local tDestColor = {};
 local tFactor;
 
-
-
---
 function VUHDO_getCurrentBouquetColor()
 	return txColor;
 end
 
-
-
---
 function VUHDO_getCurrentBouquetStacks()
-  return txCounter;
+	return txCounter;
 end
 
-
-
---
 local tInfo, tUnit;
-local tEmptyInfo = { };
+local tEmptyInfo = {};
 local function VUHDO_evaluateBouquet(aUnit, aBouquetName)
 
 	if ((VUHDO_RAID[aUnit] or tEmptyInfo)["isVehicle"]) then
@@ -208,7 +171,7 @@ local function VUHDO_evaluateBouquet(aUnit, aBouquetName)
 	tBouquet = VUHDO_BOUQUETS["STORED"][aBouquetName];
 	tAnzInfos = #tBouquet;
 
-	for tCnt = tAnzInfos, 1, -1  do
+	for tCnt = tAnzInfos, 1, -1 do
 		tInfos = tBouquet[tCnt];
 		tSpecial = VUHDO_BOUQUET_BUFFS_SPECIAL[tInfos["name"]];
 		if (tSpecial ~= nil) then
@@ -255,18 +218,19 @@ local function VUHDO_evaluateBouquet(aUnit, aBouquetName)
 			else
 				tBuffInfo = nil;
 			end
+
 			tIsActive = tBuffInfo ~= nil;
 			if (tIsActive) then
 				tIcon, tTimer, tCounter, tDuration = tBuffInfo[3], tBuffInfo[1], tBuffInfo[2], tBuffInfo[4];
 				if (tTimer ~= nil) then
 					tTimer = floor(tTimer * 10) * 0.1;
 				end
-        tColor = tInfos["color"];
-        if (tInfos["icon"] ~= 1) then
-          tIcon = VUHDO_CUSTOM_ICONS[tInfos["icon"]][2];
-        else
-        	tColor["isDefault"] = true;
-        end
+			tColor = tInfos["color"];
+				if (tInfos["icon"] ~= 1) then
+					tIcon = VUHDO_CUSTOM_ICONS[tInfos["icon"]][2];
+				else
+					tColor["isDefault"] = true;
+				end
 			end
 		end
 
@@ -351,21 +315,13 @@ local function VUHDO_evaluateBouquet(aUnit, aBouquetName)
 
 end
 
+local VUHDO_REGISTERED_BOUQUETS = {};
+local VUHDO_ACTIVE_BOUQUETS = {};
 
-
-local VUHDO_REGISTERED_BOUQUETS = { };
-local VUHDO_ACTIVE_BOUQUETS = { };
-
-
-
---
 local function VUHDO_unregisterAllBouquetListeners()
 	twipe(VUHDO_REGISTERED_BOUQUETS);
 end
 
-
-
---
 local tBouquet;
 local tInfos;
 local tName;
@@ -384,9 +340,6 @@ local function VUHDO_activateBuffsInScanner(aBouquetName)
 	end
 end
 
-
-
---
 local tUnit;
 local function VUHDO_registerForBouquet(aBouquetName, anOwnerName, aFunction)
 	if (aBouquetName == nil or strlen(aBouquetName) == 0) then
@@ -394,12 +347,12 @@ local function VUHDO_registerForBouquet(aBouquetName, anOwnerName, aFunction)
 	end
 
 	if (VUHDO_BOUQUETS["STORED"][aBouquetName] == nil) then
-		VUHDO_Msg("\"" .. anOwnerName .. "\" tries to hook to bouquet \"" .. aBouquetName .. "\" which doesn't exist!", 1, 0.4, 0.4);
+		VUHDO_Msg("\"" .. anOwnerName .. "\"" .. VUHDO_I18N_HOOK .. "\"" .. aBouquetName .. "\"" .. VUHDO_I18N_HOOK2, 1, 0.4, 0.4);
 		return;
 	end
 
 	if (VUHDO_REGISTERED_BOUQUETS[aBouquetName] == nil) then
-		VUHDO_REGISTERED_BOUQUETS[aBouquetName] = { };
+		VUHDO_REGISTERED_BOUQUETS[aBouquetName] = {};
 	end
 	VUHDO_REGISTERED_BOUQUETS[aBouquetName][anOwnerName] = aFunction;
 	VUHDO_activateBuffsInScanner(aBouquetName);
@@ -410,11 +363,8 @@ local function VUHDO_registerForBouquet(aBouquetName, anOwnerName, aFunction)
 
 end
 
-
-
---
 local tCnt, tHotName, tHotSlots, tIndex, tBouquetName;
-local tAlreadyRegistered = { };
+local tAlreadyRegistered = {};
 function VUHDO_registerAllBouquets()
 	VUHDO_unregisterAllBouquetListeners();
 
@@ -465,14 +415,11 @@ function VUHDO_registerAllBouquets()
 	VUHDO_initAllEventBouquets();
 end
 
-
-
---
-local VUHDO_EVENT_BOUQUETS = { };
+local VUHDO_EVENT_BOUQUETS = {};
 local tItem, tName, tInterest;
 local function VUHDO_isBouquetInterestedInEvent(aBouquetName, anEventType)
 	if (VUHDO_EVENT_BOUQUETS[aBouquetName] == nil) then
-		VUHDO_EVENT_BOUQUETS[aBouquetName] = { };
+		VUHDO_EVENT_BOUQUETS[aBouquetName] = {};
 	end
 
 	if (VUHDO_EVENT_BOUQUETS[aBouquetName][anEventType] == nil) then
@@ -482,12 +429,12 @@ local function VUHDO_isBouquetInterestedInEvent(aBouquetName, anEventType)
 			tName = tItem["name"];
 			if (VUHDO_BOUQUET_BUFFS_SPECIAL[tName] ~= nil) then
 
-		 		for _, tInterest in pairs(VUHDO_BOUQUET_BUFFS_SPECIAL[tName]["interests"]) do
-		 			if (tInterest == anEventType) then
-		 				VUHDO_EVENT_BOUQUETS[aBouquetName][anEventType] = 1;
-		 				break;
-		 			end
-		 		end
+				for _, tInterest in pairs(VUHDO_BOUQUET_BUFFS_SPECIAL[tName]["interests"]) do
+					if (tInterest == anEventType) then
+						VUHDO_EVENT_BOUQUETS[aBouquetName][anEventType] = 1;
+						break;
+					end
+				end
 
 			end
 		end
@@ -496,9 +443,6 @@ local function VUHDO_isBouquetInterestedInEvent(aBouquetName, anEventType)
 	return 1 == VUHDO_EVENT_BOUQUETS[aBouquetName][anEventType] or 1 == anEventType; -- VUHDO_UPDATE_ALL
 end
 
-
-
---
 local tAllListeners;
 local tOwner, tDelegate, tInfo;
 local tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, tHasChanged, tImpact, tTimer2;
@@ -510,7 +454,7 @@ local function VUHDO_updateEventBouquet(aUnit, aBouquetName)
 	end
 
 	if (VUHDO_ACTIVE_BOUQUETS[aUnit] == nil) then
-		VUHDO_ACTIVE_BOUQUETS[aUnit] = { };
+		VUHDO_ACTIVE_BOUQUETS[aUnit] = {};
 	end
 
 	if (tIsActive) then
@@ -530,9 +474,6 @@ local function VUHDO_updateEventBouquet(aUnit, aBouquetName)
 	end
 end
 
-
-
---
 local tName;
 local function VUHDO_isAnyBouquetInterstedIn(anUpdateMode)
 	for tName, _ in pairs(VUHDO_REGISTERED_BOUQUETS) do
@@ -544,9 +485,6 @@ local function VUHDO_isAnyBouquetInterstedIn(anUpdateMode)
 	return false;
 end
 
-
-
---
 local tInfo;
 local tAllListeners;
 local tOwner, tDelegate;
@@ -569,8 +507,6 @@ function VUHDO_updateBouquetsForEvent(aUnit, anEventType)
 end
 local VUHDO_updateBouquetsForEvent = VUHDO_updateBouquetsForEvent;
 
-
-
 -- Bei Panel-Redraw aufzurufen
 local tUnit;
 function VUHDO_initAllEventBouquets()
@@ -583,10 +519,7 @@ function VUHDO_initAllEventBouquets()
 	VUHDO_updateBouquetsForEvent("target", 19); -- VUHDO_UPDATE_DC
 end
 
-
-
---
-local VUHDO_CYCLIC_BOUQUETS = { };
+local VUHDO_CYCLIC_BOUQUETS = {};
 local tItem, tName;
 local function VUHDO_hasCyclic(aBouquetName)
 	if (VUHDO_CYCLIC_BOUQUETS[aBouquetName] == nil) then
@@ -605,9 +538,6 @@ local function VUHDO_hasCyclic(aBouquetName)
 	return VUHDO_CYCLIC_BOUQUETS[aBouquetName] == 1;
 end
 
-
-
---
 local tAllListeners, tUnit, tOwner, tDelegate;
 local tIsActive, tIcon, tTimer, tCounter, tDuration, tBuffName, tInfo, tHasChanged, tImpact;
 local function VUHDO_updateCyclicBouquet(aBouquetName, aUnit)
@@ -616,7 +546,7 @@ local function VUHDO_updateCyclicBouquet(aBouquetName, aUnit)
 	if (aUnit == nil) then
 		for tUnit, tInfo in pairs(VUHDO_RAID) do
 			if (VUHDO_ACTIVE_BOUQUETS[tUnit] == nil) then
-				VUHDO_ACTIVE_BOUQUETS[tUnit] = { };
+				VUHDO_ACTIVE_BOUQUETS[tUnit] = {};
 			end
 
 			tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, tHasChanged, tImpact, tTimer2 = VUHDO_evaluateBouquet(tUnit, aBouquetName);
@@ -640,7 +570,7 @@ local function VUHDO_updateCyclicBouquet(aBouquetName, aUnit)
 	else
 
 		if (VUHDO_ACTIVE_BOUQUETS[aUnit] == nil) then
-			VUHDO_ACTIVE_BOUQUETS[aUnit] = { };
+			VUHDO_ACTIVE_BOUQUETS[aUnit] = {};
 		end
 
 		tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, tHasChanged, tImpact, tTimer2 = VUHDO_evaluateBouquet(aUnit, aBouquetName);
@@ -663,9 +593,6 @@ local function VUHDO_updateCyclicBouquet(aBouquetName, aUnit)
 	end
 end
 
-
-
---
 local tName;
 function VUHDO_updateAllCyclicBouquets(aUnit)
 	for tName, _ in pairs(VUHDO_REGISTERED_BOUQUETS) do
@@ -675,9 +602,6 @@ function VUHDO_updateAllCyclicBouquets(aUnit)
 	end
 end
 
-
-
---
 function VUHDO_bouqetsChanged()
 	twipe(VUHDO_EVENT_BOUQUETS);
 	twipe(VUHDO_CYCLIC_BOUQUETS);
@@ -687,9 +611,6 @@ function VUHDO_bouqetsChanged()
 	VUHDO_resetHotBuffCache();
 end
 
-
-
---
 local tSlotNum;
 local function VUHDO_isInAnyHotSlot(aHotName)
 	for tSlotNum = 1, 9 do
@@ -701,9 +622,6 @@ local function VUHDO_isInAnyHotSlot(aHotName)
 	return false;
 end
 
-
-
---
 local tIsInterested, tColor, tCnt;
 function VUHDO_isAnyoneInterstedIn(anUpdateMode)
 	tIsInterested = VUHDO_isAnyBouquetInterstedIn(anUpdateMode);
